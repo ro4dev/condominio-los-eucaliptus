@@ -84,6 +84,17 @@ function doGet() {
   <script>
     const DATA = ${dataJson};
 
+    function formatMoney(v) {
+      return v.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    function formatPeriodo(p) {
+      if (!p) return '';
+      const parts = String(p).split('-');
+      if (parts.length === 2) return parts[1] + '/' + parts[0];
+      return p;
+    }
+
     function fillFilters() {
       const periodos = [...new Set(DATA.map(r => r.periodo).filter(Boolean))].sort().reverse();
       const parcelas = [...new Set(DATA.map(r => r.parcela).filter(Boolean))].sort();
@@ -118,7 +129,7 @@ function doGet() {
 
       document.getElementById('stats').innerHTML =
         '<div class="stat-card"><div class="label">Total recaudado</div><div class="value blue">$' +
-        total.toFixed(0) + '</div></div>' +
+        formatMoney(total) + '</div></div>' +
         '<div class="stat-card"><div class="label">Registros</div><div class="value">' +
         data.length + '</div></div>' +
         '<div class="stat-card"><div class="label">Periodos</div><div class="value">' +
@@ -137,9 +148,9 @@ function doGet() {
         '<tr>' +
         '<td>' + (r.parcela || '') + '</td>' +
         '<td>' + (r.nombre || '') + '</td>' +
-        '<td>' + (r.periodo || '') + '</td>' +
+        '<td>' + formatPeriodo(r.periodo) + '</td>' +
         '<td>' + (r.concepto || '') + '</td>' +
-        '<td>$' + parseFloat(r.monto || 0).toFixed(0) + '</td>' +
+        '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
         '<td>' + (r.fecha || '') + '</td>' +
         '</tr>'
       ).join('');
@@ -158,7 +169,7 @@ function doGet() {
         const p = r.periodo || 'Sin periodo';
         groups[p] = (groups[p] || 0) + parseFloat(r.monto || 0);
       });
-      const labels = Object.keys(groups);
+      const labels = Object.keys(groups).map(formatPeriodo);
       const values = Object.values(groups);
 
       const ctx = document.getElementById('chartPeriodos').getContext('2d');
@@ -183,7 +194,7 @@ function doGet() {
           scales: {
             y: {
               beginAtZero: true,
-              ticks: { callback: function(v) { return '$' + v; } }
+              ticks: { callback: function(v) { return '$' + formatMoney(v); } }
             }
           }
         }
