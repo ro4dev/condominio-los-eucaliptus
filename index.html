@@ -98,13 +98,11 @@
   </div>
 
   <script>
-    const API_URL = 'URL_DEL_APPS_SCRIPT';
-
     let allData = [];
 
     async function loadData() {
       try {
-        const res = await fetch(API_URL);
+        const res = await fetch('?action=getData');
         if (!res.ok) throw new Error('HTTP ' + res.status);
         allData = await res.json();
         if (!Array.isArray(allData) || allData.length === 0) throw new Error('Sin datos');
@@ -115,7 +113,7 @@
         document.getElementById('loading').style.display = 'none';
         const err = document.getElementById('error');
         err.style.display = 'block';
-        err.innerHTML = 'No se pudieron cargar los datos. Asegurate de:<br>1. Desplegar el Apps Script como web app<br>2. Copiar la URL en <code>API_URL</code> en index.html<br><br><b>Error:</b> ' + e.message;
+        err.innerHTML = '<b>Error:</b> ' + e.message;
       }
     }
 
