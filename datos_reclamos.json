@@ -1,0 +1,37 @@
+[
+  {
+    "fecha": "5/07/2026",
+    "tipo": "Reclamo",
+    "parcela": "Parcela 3",
+    "asunto": "Fuga de agua en zona común",
+    "descripcion": "Se está filtrando agua cerca del tanque de reserva. El caño parece viejo."
+  },
+  {
+    "fecha": "10/07/2026",
+    "tipo": "Sugerencia",
+    "parcela": "",
+    "asunto": "Mejorar iluminación del camino",
+    "descripcion": "Sería bueno colocar luces LED en todo el camino principal."
+  },
+  {
+    "fecha": "12/07/2026",
+    "tipo": "Reclamo",
+    "parcela": "Parcela 7",
+    "asunto": "Ruido excesivo nocturno",
+    "descripcion": "Los vecinos de al lado hacen fiesta todos los viernes hasta la madrugada."
+  },
+  {
+    "fecha": "14/07/2026",
+    "tipo": "Sugerencia",
+    "parcela": "",
+    "asunto": "Árboles en zona verde",
+    "descripcion": "Podríamos plantar más árboles en la entrada del barrio."
+  },
+  {
+    "fecha": "15/07/2026",
+    "tipo": "Reclamo",
+    "parcela": "",
+    "asunto": "Problema con reja de seguridad",
+    "descripcion": "La reja principal no cierra bien y queda abierta por la noche."
+  }
+]

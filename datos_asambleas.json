@@ -1,0 +1,23 @@
+[
+  {
+    "fecha": "15/06/2026",
+    "tipo": "Ordinaria",
+    "temario": "1. Presupuesto trimestral\\n2. Mantenimiento pileta\\n3. Seguridad nocturna\\n4. Preguntas varias",
+    "acuerdos": "Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras.",
+    "asistentes": "12"
+  },
+  {
+    "fecha": "20/07/2026",
+    "tipo": "Ordinaria",
+    "temario": "1. Revisión gastos junio-julio\\n2. Reparación bomba agua\\n3. Próximos proyectos\\n4. Preguntas varias",
+    "acuerdos": "Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común.",
+    "asistentes": "10"
+  },
+  {
+    "fecha": "15/08/2025",
+    "tipo": "Extraordinaria",
+    "temario": "1. Emergencia filtración techo salón\\n2. Votación pintura fachada",
+    "acuerdos": "Se aprobó reparación urgente $180.000. Se votó pintura fachada aprobada.",
+    "asistentes": "14"
+  }
+]

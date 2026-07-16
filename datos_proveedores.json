@@ -1,0 +1,58 @@
+[
+  {
+    "rubro": "Plomería",
+    "nombre": "Agua & Sol",
+    "telefono": "+54 9 11 5555-1111",
+    "email": "contacto@aguasol.com",
+    "contacto": "Roberto",
+    "observaciones": "Trabaja lunes a viernes 8-18"
+  },
+  {
+    "rubro": "Electricidad",
+    "nombre": "Electro Barrio",
+    "telefono": "+54 9 11 5555-2222",
+    "email": "info@electrobarrio.com",
+    "contacto": "Martín",
+    "observaciones": "Emergencias 24hs"
+  },
+  {
+    "rubro": "Jardinería",
+    "nombre": "Verde Total",
+    "telefono": "+54 9 11 5555-3333",
+    "email": "jardin@verdetotal.com",
+    "contacto": "Carlos",
+    "observaciones": "Viernes y sábados"
+  },
+  {
+    "rubro": "Limpieza",
+    "nombre": "Limpia Hogar",
+    "telefono": "+54 9 11 5555-4444",
+    "email": "service@limpiahogar.com",
+    "contacto": "Ana",
+    "observaciones": "Lunes miércoles y viernes"
+  },
+  {
+    "rubro": "Seguridad",
+    "nombre": "Guardia Total",
+    "telefono": "+54 9 11 5555-5555",
+    "email": "contacto@guardiatotal.com",
+    "contacto": "Pablo",
+    "observaciones": "Monitoreo 24hs"
+  },
+  {
+    "rubro": "Construcción",
+    "nombre": "Edifica Plus",
+    "telefono": "+54 9 11 5555-6662",
+    "email": "obras@edifcaplus.com",
+    "contacto": "Luis",
+    "observaciones": "Presupuestos sin cargo"
+  },
+  {
+    "rubro": "Pintura",
+    "nombre": "Color Express",
+    "telefono": "+54 9 11 5555-7777",
+    "email": "info@colorexpress.com",
+    "contacto": "Gustavo",
+    "observaciones": "Trabajos exteriores e interiores"
+  }
+]

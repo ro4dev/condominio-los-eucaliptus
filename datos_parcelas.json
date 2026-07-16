@@ -1,0 +1,80 @@
+[
+  {
+    "numero": "Parcela 1",
+    "nomenclatura": "Lote 1-A",
+    "metros2": "450",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 2",
+    "nomenclatura": "Lote 1-B",
+    "metros2": "520",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 3",
+    "nomenclatura": "Lote 2-A",
+    "metros2": "380",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 4",
+    "nomenclatura": "Lote 2-B",
+    "metros2": "600",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 5",
+    "nomenclatura": "Lote 3-A",
+    "metros2": "420",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 6",
+    "nomenclatura": "Lote 3-B",
+    "metros2": "350",
+    "estado": "En construcción"
+  },
+  {
+    "numero": "Parcela 7",
+    "nomenclatura": "Lote 4-A",
+    "metros2": "480",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 8",
+    "nomenclatura": "Lote 4-B",
+    "metros2": "550",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 9",
+    "nomenclatura": "Lote 5-A",
+    "metros2": "400",
+    "estado": "Baldío"
+  },
+  {
+    "numero": "Parcela 10",
+    "nomenclatura": "Lote 5-B",
+    "metros2": "510",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 11",
+    "nomenclatura": "Lote 6-A",
+    "metros2": "470",
+    "estado": "Habitada"
+  },
+  {
+    "numero": "Parcela 12",
+    "nomenclatura": "Lote 6-B",
+    "metros2": "390",
+    "estado": "En construcción"
+  },
+  {
+    "numero": "Parcela 13",
+    "nomenclatura": "Lote 7-A",
+    "metros2": "430",
+    "estado": "Habitada"
+  }
+]
