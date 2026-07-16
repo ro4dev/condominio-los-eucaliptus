@@ -479,8 +479,8 @@
     function renderFlujo() {
       var ingresos = FLUJO.filter(function(f) { return f.tipo === 'Ingreso'; });
       var egresos = FLUJO.filter(function(f) { return f.tipo === 'Egreso'; });
-      var totalIngresos = ingresos.reduce(function(s, f) { return s + f.monto; }, 0);
-      var totalEgresos = egresos.reduce(function(s, f) { return s + f.monto; }, 0);
+      var totalIngresos = ingresos.reduce(function(s, f) { return s + parseFloat(f.monto); }, 0);
+      var totalEgresos = egresos.reduce(function(s, f) { return s + parseFloat(f.monto); }, 0);
       var balance = totalIngresos - totalEgresos;
 
       document.getElementById('flujoStats').innerHTML =
@@ -496,7 +496,7 @@
           '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
           '<td>' + f.concepto + '</td>' +
           '<td>' + f.descripcion + '</td>' +
-          '<td style="font-weight:600;color:' + (f.tipo === 'Ingreso' ? '#059669' : '#dc2626') + '">$' + formatMoney(f.monto) + '</td>' +
+          '<td style="font-weight:600;color:' + (f.tipo === 'Ingreso' ? '#059669' : '#dc2626') + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
           '<td>' + f.registradoPor + '</td>' +
           '</tr>';
       }).join('');
