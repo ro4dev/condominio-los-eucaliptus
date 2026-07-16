@@ -220,35 +220,36 @@
   </div>
 
   <script>
-    let GASTOS = [];
-    let PARCELAS = [];
-    let PROPIETARIOS = [];
-    let NOTICIAS = [];
-    let FLUJO = [];
-    let DOCUMENTOS = [];
-    let RECLAMOS = [];
-    let PROVEEDORES = [];
-    let ASAMBLEAS = [];
+    var GASTOS = [];
+    var PARCELAS = [];
+    var PROPIETARIOS = [];
+    var NOTICIAS = [];
+    var FLUJO = [];
+    var DOCUMENTOS = [];
+    var RECLAMOS = [];
+    var PROVEEDORES = [];
+    var ASAMBLEAS = [];
 
     async function loadData() {
-      const files = [
-        { name: 'GASTOS', file: 'datos_gastos.json' },
-        { name: 'PARCELAS', file: 'datos_parcelas.json' },
-        { name: 'PROPIETARIOS', file: 'datos_propietarios.json' },
-        { name: 'NOTICIAS', file: 'datos_noticias.json' },
-        { name: 'FLUJO', file: 'datos_ingresos_egresos.json' },
-        { name: 'DOCUMENTOS', file: 'datos_documentos.json' },
-        { name: 'RECLAMOS', file: 'datos_reclamos.json' },
-        { name: 'PROVEEDORES', file: 'datos_proveedores.json' },
-        { name: 'ASAMBLEAS', file: 'datos_asambleas.json' }
+      var files = [
+        { target: 'GASTOS', file: 'datos_gastos.json' },
+        { target: 'PARCELAS', file: 'datos_parcelas.json' },
+        { target: 'PROPIETARIOS', file: 'datos_propietarios.json' },
+        { target: 'NOTICIAS', file: 'datos_noticias.json' },
+        { target: 'FLUJO', file: 'datos_ingresos_egresos.json' },
+        { target: 'DOCUMENTOS', file: 'datos_documentos.json' },
+        { target: 'RECLAMOS', file: 'datos_reclamos.json' },
+        { target: 'PROVEEDORES', file: 'datos_proveedores.json' },
+        { target: 'ASAMBLEAS', file: 'datos_asambleas.json' }
       ];
 
-      for (const f of files) {
+      for (var i = 0; i < files.length; i++) {
         try {
-          const res = await fetch(f.file);
-          window[f.name] = await res.json();
+          var res = await fetch(files[i].file);
+          var data = await res.json();
+          window[files[i].target] = data;
         } catch (e) {
-          console.error('Error cargando ' + f.file, e);
+          console.error('Error cargando ' + files[i].file, e);
         }
       }
 
