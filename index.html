@@ -15,6 +15,14 @@
     header { background: #1a1a2e; color: #fff; padding: 1.5rem; text-align: center; border-radius: 12px; margin-bottom: 1.5rem; }
     header h1 { font-size: 1.8rem; font-weight: 600; letter-spacing: 1px; }
     header p { color: #a0a0b8; margin-top: 0.3rem; font-size: 0.9rem; }
+
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tab-btn { padding: 0.7rem 1.5rem; border: none; background: #e5e7eb; color: #374151; font-size: 0.9rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .tab-btn:hover { background: #d1d5db; }
+    .tab-btn.active { background: #1a1a2e; color: #fff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
     .stat-card { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
     .stat-card .label { font-size: 0.8rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -33,6 +41,16 @@
     th { background: #f9fafb; text-align: left; padding: 0.6rem 0.8rem; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb; }
     td { padding: 0.5rem 0.8rem; border-bottom: 1px solid #f3f4f6; }
     tr:hover td { background: #f9fafb; }
+
+    .parcelas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .parcela-card { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .parcela-card h4 { font-size: 1rem; color: #1a1a2e; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e7eb; }
+    .parcela-card .residente { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; }
+    .parcela-card .avatar { width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+    .parcela-card .info { flex: 1; }
+    .parcela-card .nombre { font-weight: 600; font-size: 0.9rem; }
+    .parcela-card .concepto { font-size: 0.75rem; color: #6b7280; }
+
     @media (max-width: 700px) { .charts { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -42,7 +60,13 @@
       <h1>CONDOMINIO EUCALIPTUS</h1>
       <p>Control de gastos comunes</p>
     </header>
-    <div id="content">
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('cuenta')">Estado de Cuenta</button>
+      <button class="tab-btn" onclick="switchTab('parcelas')">Parcelas</button>
+    </div>
+
+    <div id="tab-cuenta" class="tab-content active">
       <section class="stats" id="stats"></section>
       <div class="filters">
         <label>Periodo:</label>
@@ -77,6 +101,10 @@
         </table>
       </div>
     </div>
+
+    <div id="tab-parcelas" class="tab-content">
+      <div class="parcelas-grid" id="parcelasGrid"></div>
+    </div>
   </div>
 
   <script>
@@ -110,6 +138,13 @@
       {"parcela":"Parcela 13","nombre":"Pablo Castillo","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"}
     ];
 
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector('[onclick="switchTab(\'' + tab + '\')"]').classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+    }
+
     function formatMoney(v) {
       var s = Math.round(v).toString();
       var result = '';
@@ -129,6 +164,10 @@
       var parts = s.split('-');
       if (parts.length === 2) return parts[1] + '/' + parts[0];
       return s;
+    }
+
+    function getInitials(name) {
+      return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
     }
 
     function fillFilters() {
@@ -271,8 +310,35 @@
       });
     }
 
+    function renderParcelas() {
+      const parcelas = {};
+      DATA.forEach(r => {
+        if (!parcelas[r.parcela]) parcelas[r.parcela] = [];
+        if (!parcelas[r.parcela].find(x => x.nombre === r.nombre)) {
+          parcelas[r.parcela].push({ nombre: r.nombre, concepto: r.concepto });
+        }
+      });
+
+      const grid = document.getElementById('parcelasGrid');
+      grid.innerHTML = Object.keys(parcelas).sort().map(p =>
+        '<div class="parcela-card">' +
+          '<h4>' + p + '</h4>' +
+          parcelas[p].map(r =>
+            '<div class="residente">' +
+              '<div class="avatar">' + getInitials(r.nombre) + '</div>' +
+              '<div class="info">' +
+                '<div class="nombre">' + r.nombre + '</div>' +
+                '<div class="concepto">' + r.concepto + '</div>' +
+              '</div>' +
+            '</div>'
+          ).join('') +
+        '</div>'
+      ).join('');
+    }
+
     fillFilters();
     applyFilters();
+    renderParcelas();
   </script>
 </body>
 </html>
