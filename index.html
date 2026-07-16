@@ -220,122 +220,49 @@
   </div>
 
   <script>
-    const GASTOS = [
-      {"parcela":"Parcela 1","nombre":"Juan Pérez","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
-      {"parcela":"Parcela 2","nombre":"María López","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
-      {"parcela":"Parcela 3","nombre":"Carlos Silva","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"2/07/2026"},
-      {"parcela":"Parcela 4","nombre":"Ana Martínez","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
-      {"parcela":"Parcela 5","nombre":"Pedro Rojas","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"1/07/2026"},
-      {"parcela":"Parcela 6","nombre":"Laura Torres","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
-      {"parcela":"Parcela 7","nombre":"Diego Ramírez","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
-      {"parcela":"Parcela 8","nombre":"Sofía Herrera","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"4/07/2026"},
-      {"parcela":"Parcela 9","nombre":"Miguel Ángel Ruiz","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"4/07/2026"},
-      {"parcela":"Parcela 10","nombre":"Valentina Muñoz","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"4/07/2026"},
-      {"parcela":"Parcela 11","nombre":"Santiago Vega","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"4/07/2026"},
-      {"parcela":"Parcela 12","nombre":"Isabel Guerrero","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"4/07/2026"},
-      {"parcela":"Parcela 13","nombre":"Pablo Castillo","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"4/07/2026"},
-      {"parcela":"Parcela 1","nombre":"Juan Pérez","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 2","nombre":"María López","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 3","nombre":"Carlos Silva","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 4","nombre":"Ana Martínez","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 5","nombre":"Pedro Rojas","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"30/06/2026"},
-      {"parcela":"Parcela 8","nombre":"Sofía Herrera","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 10","nombre":"Valentina Muñoz","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 12","nombre":"Isabel Guerrero","periodo":"2026-06","concepto":"Gasto común","monto":50000,"fecha":"5/07/2026"},
-      {"parcela":"Parcela 1","nombre":"Juan Pérez","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"},
-      {"parcela":"Parcela 3","nombre":"Carlos Silva","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"},
-      {"parcela":"Parcela 6","nombre":"Laura Torres","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"},
-      {"parcela":"Parcela 9","nombre":"Miguel Ángel Ruiz","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"},
-      {"parcela":"Parcela 11","nombre":"Santiago Vega","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"},
-      {"parcela":"Parcela 13","nombre":"Pablo Castillo","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"}
-    ];
+    let GASTOS = [];
+    let PARCELAS = [];
+    let PROPIETARIOS = [];
+    let NOTICIAS = [];
+    let FLUJO = [];
+    let DOCUMENTOS = [];
+    let RECLAMOS = [];
+    let PROVEEDORES = [];
+    let ASAMBLEAS = [];
 
-    const PARCELAS = [
-      {"numero":"Parcela 1","nomenclatura":"Lote 1-A","metros2":450,"estado":"Habitada"},
-      {"numero":"Parcela 2","nomenclatura":"Lote 1-B","metros2":520,"estado":"Habitada"},
-      {"numero":"Parcela 3","nomenclatura":"Lote 2-A","metros2":380,"estado":"Habitada"},
-      {"numero":"Parcela 4","nomenclatura":"Lote 2-B","metros2":600,"estado":"Habitada"},
-      {"numero":"Parcela 5","nomenclatura":"Lote 3-A","metros2":420,"estado":"Habitada"},
-      {"numero":"Parcela 6","nomenclatura":"Lote 3-B","metros2":350,"estado":"En construcción"},
-      {"numero":"Parcela 7","nomenclatura":"Lote 4-A","metros2":480,"estado":"Habitada"},
-      {"numero":"Parcela 8","nomenclatura":"Lote 4-B","metros2":550,"estado":"Habitada"},
-      {"numero":"Parcela 9","nomenclatura":"Lote 5-A","metros2":400,"estado":"Baldío"},
-      {"numero":"Parcela 10","nomenclatura":"Lote 5-B","metros2":510,"estado":"Habitada"},
-      {"numero":"Parcela 11","nomenclatura":"Lote 6-A","metros2":470,"estado":"Habitada"},
-      {"numero":"Parcela 12","nomenclatura":"Lote 6-B","metros2":390,"estado":"En construcción"},
-      {"numero":"Parcela 13","nomenclatura":"Lote 7-A","metros2":430,"estado":"Habitada"}
-    ];
+    async function loadData() {
+      const files = [
+        { name: 'GASTOS', file: 'datos_gastos.json' },
+        { name: 'PARCELAS', file: 'datos_parcelas.json' },
+        { name: 'PROPIETARIOS', file: 'datos_propietarios.json' },
+        { name: 'NOTICIAS', file: 'datos_noticias.json' },
+        { name: 'FLUJO', file: 'datos_ingresos_egresos.json' },
+        { name: 'DOCUMENTOS', file: 'datos_documentos.json' },
+        { name: 'RECLAMOS', file: 'datos_reclamos.json' },
+        { name: 'PROVEEDORES', file: 'datos_proveedores.json' },
+        { name: 'ASAMBLEAS', file: 'datos_asambleas.json' }
+      ];
 
-    const PROPIETARIOS = [
-      {"nombre":"Juan Pérez","dni":"30123456","parcela":"Parcela 1","telefono":"+54 9 11 1234-5678","email":"juan.perez@mail.com","tipo":"Propietario"},
-      {"nombre":"María López","dni":"27654321","parcela":"Parcela 2","telefono":"+54 9 11 2345-6789","email":"maria.lopez@mail.com","tipo":"Propietario"},
-      {"nombre":"Carlos Silva","dni":"32987654","parcela":"Parcela 3","telefono":"+54 9 11 3456-7890","email":"carlos.silva@mail.com","tipo":"Propietario"},
-      {"nombre":"Ana Martínez","dni":"28765432","parcela":"Parcela 4","telefono":"+54 9 11 4567-8901","email":"ana.martinez@mail.com","tipo":"Propietario"},
-      {"nombre":"Pedro Rojas","dni":"31234567","parcela":"Parcela 5","telefono":"+54 9 11 5678-9012","email":"pedro.rojas@mail.com","tipo":"Propietario"},
-      {"nombre":"Laura Torres","dni":"29876543","parcela":"Parcela 6","telefono":"+54 9 11 6789-0123","email":"laura.torres@mail.com","tipo":"Inquilino"},
-      {"nombre":"Diego Ramírez","dni":"33456789","parcela":"Parcela 7","telefono":"+54 9 11 7890-1234","email":"diego.ramirez@mail.com","tipo":"Propietario"},
-      {"nombre":"Sofía Herrera","dni":"26543210","parcela":"Parcela 8","telefono":"+54 9 11 8901-2345","email":"sofia.herrera@mail.com","tipo":"Propietario"},
-      {"nombre":"Miguel Ángel Ruiz","dni":"34567890","parcela":"Parcela 9","telefono":"+54 9 11 9012-3456","email":"miguel.ruiz@mail.com","tipo":"Propietario"},
-      {"nombre":"Valentina Muñoz","dni":"25432109","parcela":"Parcela 10","telefono":"+54 9 11 0123-4567","email":"valentina.munoz@mail.com","tipo":"Propietario"},
-      {"nombre":"Santiago Vega","dni":"35678901","parcela":"Parcela 11","telefono":"+54 9 11 1234-5678","email":"santiago.vega@mail.com","tipo":"Inquilino"},
-      {"nombre":"Isabel Guerrero","dni":"24321098","parcela":"Parcela 12","telefono":"+54 9 11 2345-6789","email":"isabel.guerrero@mail.com","tipo":"Propietario"},
-      {"nombre":"Pablo Castillo","dni":"36789012","parcela":"Parcela 13","telefono":"+54 9 11 3456-7890","email":"pablo.castillo@mail.com","tipo":"Propietario"}
-    ];
+      for (const f of files) {
+        try {
+          const res = await fetch(f.file);
+          window[f.name] = await res.json();
+        } catch (e) {
+          console.error('Error cargando ' + f.file, e);
+        }
+      }
 
-    const NOTICIAS = [
-      {"titulo":"Asamblea mensual","descripcion":"Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto, mantenimiento y nuevos proyectos.","fechaPublicacion":"16/07/2026","fechaHasta":"25/07/2026"},
-      {"titulo":"Corte de agua programado","descripcion":"El martes 22 de julio no habrá agua de 8 a 16hs por trabajos en la red principal.","fechaPublicacion":"18/07/2026","fechaHasta":"22/07/2026"},
-      {"titulo":"Nueva seguridad nocturna","descripcion":"Se instalaron 4 cámaras de seguridad en las entradas del barrio.","fechaPublicacion":"10/07/2026","fechaHasta":"31/12/2026"},
-      {"titulo":"Reparación iluminación","descripcion":"Se repararán las luces del camino principal la próxima semana.","fechaPublicacion":"15/07/2026","fechaHasta":"20/07/2026"}
-    ];
-
-    const FLUJO = [
-      {"fecha":"1/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Cobro expensas julio","monto":650000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"3/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Pago Juan Pérez","monto":50000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"3/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Pago María López","monto":50000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"5/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Pago junio (varios)","monto":250000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"6/07/2026","tipo":"Ingreso","concepto":"Fondo reserva","descripcion":"Cobro fondo reserva junio","monto":90000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"10/07/2026","tipo":"Egreso","concepto":"Mantenimiento","descripcion":"Reparación bomba de agua","monto":35000,"comprobante":"https://drive.google.com/file/d/abc123","registradoPor":"Admin"},
-      {"fecha":"12/07/2026","tipo":"Egreso","concepto":"Servicios","descripcion":"Factura electricidad junio","monto":28000,"comprobante":"https://drive.google.com/file/d/def456","registradoPor":"Admin"},
-      {"fecha":"14/07/2026","tipo":"Egreso","concepto":"Jardinería","descripcion":"Poda de árboles mes julio","monto":15000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"15/07/2026","tipo":"Egreso","concepto":"Limpieza","descripcion":"Service limpieza común","monto":12000,"comprobante":"","registradoPor":"Admin"},
-      {"fecha":"16/07/2026","tipo":"Egreso","concepto":"Seguros","descripcion":"Seguro anual condominio","monto":85000,"comprobante":"https://drive.google.com/file/d/ghi789","registradoPor":"Admin"},
-      {"fecha":"5/07/2026","tipo":"Ingreso","concepto":"Multa","descripcion":"Multa ruido excesivo Pedro Rojas","monto":5000,"comprobante":"","registradoPor":"Admin"}
-    ];
-
-    const DOCUMENTOS = [
-      {"nombre":"Reglamento interno 2026","categoria":"Estatuto","fecha":"1/01/2026","descripcion":"Reglamento aprobado en asamblea ordinaria"},
-      {"nombre":"Acta asamblea junio 2026","categoria":"Actas","fecha":"15/06/2026","descripcion":"Acta de la asamblea mensual de junio"},
-      {"nombre":"Acta asamblea julio 2026","categoria":"Actas","fecha":"20/07/2026","descripcion":"Acta de la asamblea mensual de julio"},
-      {"nombre":"Contrato mantenimiento jardines","categoria":"Contratos","fecha":"1/03/2026","descripcion":"Contrato anual con jardinería Verde Total"},
-      {"nombre":"Póliza seguro 2026","categoria":"Seguros","fecha":"1/01/2026","descripcion":"Póliza de seguro contra incendio y robo"},
-      {"nombre":"Plano domicilio original","categoria":"Planos","fecha":"1/01/2020","descripcion":"Plano de loteo aprobado por municipio"},
-      {"nombre":"Convenio cooperative eléctrica","categoria":"Contratos","fecha":"15/02/2024","descripcion":"Convenio suministro eléctrico común"}
-    ];
-
-    const RECLAMOS = [
-      {"fecha":"5/07/2026","tipo":"Reclamo","parcela":"Parcela 3","asunto":"Fuga de agua en zona común","descripcion":"Se está filtrando agua cerca del tanque de reserva. El caño parece viejo."},
-      {"fecha":"10/07/2026","tipo":"Sugerencia","parcela":"","asunto":"Mejorar iluminación del camino","descripcion":"Sería bueno colocar luces LED en todo el camino principal."},
-      {"fecha":"12/07/2026","tipo":"Reclamo","parcela":"Parcela 7","asunto":"Ruido excesivo nocturno","descripcion":"Los vecinos de al lado hacen fiesta todos los viernes hasta la madrugada."},
-      {"fecha":"14/07/2026","tipo":"Sugerencia","parcela":"","asunto":"Árboles en zona verde","descripcion":"Podríamos plantar más árboles en la entrada del barrio."},
-      {"fecha":"15/07/2026","tipo":"Reclamo","parcela":"","asunto":"Problema con reja de seguridad","descripcion":"La reja principal no cierra bien y queda abierta por la noche."}
-    ];
-
-    const PROVEEDORES = [
-      {"rubro":"Plomería","nombre":"Agua & Sol","telefono":"+54 9 11 5555-1111","email":"contacto@aguasol.com","contacto":"Roberto","observaciones":"Trabaja lunes a viernes 8-18"},
-      {"rubro":"Electricidad","nombre":"Electro Barrio","telefono":"+54 9 11 5555-2222","email":"info@electrobarrio.com","contacto":"Martín","observaciones":"Emergencias 24hs"},
-      {"rubro":"Jardinería","nombre":"Verde Total","telefono":"+54 9 11 5555-3333","email":"jardin@verdetotal.com","contacto":"Carlos","observaciones":"Viernes y sábados"},
-      {"rubro":"Limpieza","nombre":"Limpia Hogar","telefono":"+54 9 11 5555-4444","email":"service@limpiahogar.com","contacto":"Ana","observaciones":"Lunes miércoles y viernes"},
-      {"rubro":"Seguridad","nombre":"Guardia Total","telefono":"+54 9 11 5555-5555","email":"contacto@guardiatotal.com","contacto":"Pablo","observaciones":"Monitoreo 24hs"},
-      {"rubro":"Construcción","nombre":"Edifica Plus","telefono":"+54 9 11 5555-6662","email":"obras@edifcaplus.com","contacto":"Luis","observaciones":"Presupuestos sin cargo"},
-      {"rubro":"Pintura","nombre":"Color Express","telefono":"+54 9 11 5555-7777","email":"info@colorexpress.com","contacto":"Gustavo","observaciones":"Trabajos exteriores e interiores"}
-    ];
-
-    const ASAMBLEAS = [
-      {"fecha":"15/06/2026","tipo":"Ordinaria","temario":"1. Presupuesto trimestral\n2. Mantenimiento pileta\n3. Seguridad nocturna\n4. Preguntas varias","acuerdos":"Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras.","asistentes":12},
-      {"fecha":"20/07/2026","tipo":"Ordinaria","temario":"1. Revisión gastos junio-julio\n2. Reparación bomba agua\n3. Próximos proyectos\n4. Preguntas varias","acuerdos":"Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común.","asistentes":10},
-      {"fecha":"15/08/2025","tipo":"Extraordinaria","temario":"1. Emergencia filtración techo salón\n2. Votación pintura fachada","acuerdos":"Se aprobó reparación urgente $180.000. Se votó pintura fachada aprobada.","asistentes":14}
-    ];
+      fillFilters();
+      applyFilters();
+      renderParcelas();
+      renderPropietarios();
+      renderNoticias();
+      renderFlujo();
+      renderDocumentos();
+      renderReclamos();
+      renderProveedores();
+      renderAsambleas();
+    }
 
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
@@ -641,17 +568,7 @@
       }).join('');
     }
 
-    // INIT
-    fillFilters();
-    applyFilters();
-    renderParcelas();
-    renderPropietarios();
-    renderNoticias();
-    renderFlujo();
-    renderDocumentos();
-    renderReclamos();
-    renderProveedores();
-    renderAsambleas();
+    loadData();
   </script>
 </body>
 </html>
