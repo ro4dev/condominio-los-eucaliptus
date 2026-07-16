@@ -16,7 +16,7 @@
     header h1 { font-size: 1.8rem; font-weight: 600; letter-spacing: 1px; }
     header p { color: #a0a0b8; margin-top: 0.3rem; font-size: 0.9rem; }
 
-    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
     .tab-btn { padding: 0.7rem 1.5rem; border: none; background: #e5e7eb; color: #374151; font-size: 0.9rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
     .tab-btn:hover { background: #d1d5db; }
     .tab-btn.active { background: #1a1a2e; color: #fff; }
@@ -28,6 +28,8 @@
     .stat-card .label { font-size: 0.8rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; }
     .stat-card .value { font-size: 1.6rem; font-weight: 700; margin-top: 0.3rem; }
     .stat-card .value.blue { color: #2563eb; }
+    .stat-card .value.green { color: #059669; }
+    .stat-card .value.red { color: #dc2626; }
     .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
     .chart-box { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .chart-box h3 { font-size: 0.95rem; margin-bottom: 0.8rem; color: #374151; }
@@ -35,23 +37,73 @@
     .filters { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
     .filters label { font-size: 0.85rem; font-weight: 600; color: #374151; }
     .filters select { padding: 0.4rem 0.7rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.85rem; background: #fff; }
-    .table-wrap { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; }
+    .table-wrap { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; margin-bottom: 1.5rem; }
     .table-wrap h3 { font-size: 0.95rem; margin-bottom: 0.8rem; color: #374151; }
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     th { background: #f9fafb; text-align: left; padding: 0.6rem 0.8rem; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb; }
     td { padding: 0.5rem 0.8rem; border-bottom: 1px solid #f3f4f6; }
     tr:hover td { background: #f9fafb; }
 
-    .parcelas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-    .parcela-card { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .parcela-card h4 { font-size: 1rem; color: #1a1a2e; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e7eb; }
-    .parcela-card .residente { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; }
-    .parcela-card .avatar { width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
-    .parcela-card .info { flex: 1; }
-    .parcela-card .nombre { font-weight: 600; font-size: 0.9rem; }
-    .parcela-card .concepto { font-size: 0.75rem; color: #6b7280; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .card { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .card h4 { font-size: 1rem; color: #1a1a2e; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e7eb; }
+    .card .field { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.85rem; }
+    .card .field-label { color: #6b7280; }
+    .card .field-value { font-weight: 500; }
 
-    @media (max-width: 700px) { .charts { grid-template-columns: 1fr; } }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: #3b82f6; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
+    .avatar.green { background: #10b981; }
+    .avatar.purple { background: #8b5cf6; }
+    .avatar.orange { background: #f97316; }
+    .avatar.pink { background: #ec4899; }
+
+    .news-card { background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-left: 4px solid #3b82f6; }
+    .news-card h4 { font-size: 1rem; color: #1a1a2e; margin-bottom: 0.5rem; }
+    .news-card .dates { font-size: 0.8rem; color: #6b7280; margin-bottom: 0.5rem; }
+    .news-card .desc { font-size: 0.9rem; color: #374151; line-height: 1.5; }
+
+    .doc-item { display: flex; align-items: center; gap: 1rem; background: #fff; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; }
+    .doc-icon { width: 40px; height: 40px; border-radius: 8px; background: #dbeafe; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .doc-info { flex: 1; }
+    .doc-name { font-weight: 600; font-size: 0.9rem; }
+    .doc-meta { font-size: 0.8rem; color: #6b7280; }
+    .doc-link { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+
+    .reclamo-item { background: #fff; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; border-left: 4px solid #f59e0b; }
+    .reclamo-item.reclamo { border-left-color: #ef4444; }
+    .reclamo-item.sugerencia { border-left-color: #10b981; }
+    .reclamo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .reclamo-tipo { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; }
+    .reclamo-tipo.reclamo { background: #fee2e2; color: #991b1b; }
+    .reclamo-tipo.sugerencia { background: #d1fae5; color: #065f46; }
+    .reclamo-fecha { font-size: 0.8rem; color: #6b7280; }
+    .reclamo-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .reclamo-desc { font-size: 0.85rem; color: #374151; line-height: 1.4; }
+    .reclamo-parcela { font-size: 0.8rem; color: #6b7280; margin-top: 0.3rem; }
+
+    .proveedor-card { background: #fff; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .proveedor-rubro { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; background: #dbeafe; color: #1e40af; display: inline-block; margin-bottom: 0.5rem; }
+    .proveedor-nombre { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+    .proveedor-contacto { font-size: 0.85rem; color: #374151; }
+    .proveedor-contacto div { padding: 0.2rem 0; }
+
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #e5e7eb; }
+    .timeline-item { position: relative; margin-bottom: 1.5rem; background: #fff; border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .timeline-item::before { content: ''; position: absolute; left: -1.65rem; top: 1.5rem; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; border: 2px solid #fff; }
+    .timeline-item.extra::before { background: #f59e0b; }
+    .timeline-date { font-size: 0.8rem; color: #6b7280; margin-bottom: 0.3rem; }
+    .timeline-tipo { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 600; background: #dbeafe; color: #1e40af; display: inline-block; margin-bottom: 0.5rem; }
+    .timeline-tipo.extra { background: #fef3c7; color: #92400e; }
+    .timeline-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+    .timeline-section { font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .timeline-section strong { color: #374151; }
+    .timeline-section p { color: #4b5563; line-height: 1.4; white-space: pre-line; }
+    .timeline-asistentes { font-size: 0.8rem; color: #6b7280; }
+
+    .section-title { font-size: 1.1rem; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; }
+
+    @media (max-width: 700px) { .charts { grid-template-columns: 1fr; } .tabs { gap: 0.3rem; } .tab-btn { padding: 0.5rem 1rem; font-size: 0.8rem; } }
   </style>
 </head>
 <body>
@@ -64,8 +116,16 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('cuenta')">Estado de Cuenta</button>
       <button class="tab-btn" onclick="switchTab('parcelas')">Parcelas</button>
+      <button class="tab-btn" onclick="switchTab('propietarios')">Propietarios</button>
+      <button class="tab-btn" onclick="switchTab('noticias')">Noticias</button>
+      <button class="tab-btn" onclick="switchTab('flujo')">Ingresos/Egresos</button>
+      <button class="tab-btn" onclick="switchTab('documentos')">Documentos</button>
+      <button class="tab-btn" onclick="switchTab('reclamos')">Reclamos</button>
+      <button class="tab-btn" onclick="switchTab('proveedores')">Proveedores</button>
+      <button class="tab-btn" onclick="switchTab('asambleas')">Asambleas</button>
     </div>
 
+    <!-- ESTADO DE CUENTA -->
     <div id="tab-cuenta" class="tab-content active">
       <section class="stats" id="stats"></section>
       <div class="filters">
@@ -102,13 +162,65 @@
       </div>
     </div>
 
+    <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
-      <div class="parcelas-grid" id="parcelasGrid"></div>
+      <div class="cards-grid" id="parcelasGrid"></div>
+    </div>
+
+    <!-- PROPIETARIOS -->
+    <div id="tab-propietarios" class="tab-content">
+      <div class="cards-grid" id="propietariosGrid"></div>
+    </div>
+
+    <!-- NOTICIAS -->
+    <div id="tab-noticias" class="tab-content">
+      <div id="noticiasList"></div>
+    </div>
+
+    <!-- INGRESOS/EGRESOS -->
+    <div id="tab-flujo" class="tab-content">
+      <section class="stats" id="flujoStats"></section>
+      <div class="table-wrap">
+        <h3>Movimientos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Concepto</th>
+              <th>Descripción</th>
+              <th>Monto</th>
+              <th>Registrado por</th>
+            </tr>
+          </thead>
+          <tbody id="flujoBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DOCUMENTOS -->
+    <div id="tab-documentos" class="tab-content">
+      <div class="cards-grid" id="documentosList"></div>
+    </div>
+
+    <!-- RECLAMOS -->
+    <div id="tab-reclamos" class="tab-content">
+      <div id="reclamosList"></div>
+    </div>
+
+    <!-- PROVEEDORES -->
+    <div id="tab-proveedores" class="tab-content">
+      <div class="cards-grid" id="proveedoresGrid"></div>
+    </div>
+
+    <!-- ASAMBLEAS -->
+    <div id="tab-asambleas" class="tab-content">
+      <div class="timeline" id="asambleasTimeline"></div>
     </div>
   </div>
 
   <script>
-    const DATA = [
+    const GASTOS = [
       {"parcela":"Parcela 1","nombre":"Juan Pérez","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
       {"parcela":"Parcela 2","nombre":"María López","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"3/07/2026"},
       {"parcela":"Parcela 3","nombre":"Carlos Silva","periodo":"2026-07","concepto":"Gasto común","monto":50000,"fecha":"2/07/2026"},
@@ -138,9 +250,96 @@
       {"parcela":"Parcela 13","nombre":"Pablo Castillo","periodo":"2026-06","concepto":"Fondo reserva","monto":15000,"fecha":"6/07/2026"}
     ];
 
+    const PARCELAS = [
+      {"numero":"Parcela 1","nomenclatura":"Lote 1-A","metros2":450,"estado":"Habitada"},
+      {"numero":"Parcela 2","nomenclatura":"Lote 1-B","metros2":520,"estado":"Habitada"},
+      {"numero":"Parcela 3","nomenclatura":"Lote 2-A","metros2":380,"estado":"Habitada"},
+      {"numero":"Parcela 4","nomenclatura":"Lote 2-B","metros2":600,"estado":"Habitada"},
+      {"numero":"Parcela 5","nomenclatura":"Lote 3-A","metros2":420,"estado":"Habitada"},
+      {"numero":"Parcela 6","nomenclatura":"Lote 3-B","metros2":350,"estado":"En construcción"},
+      {"numero":"Parcela 7","nomenclatura":"Lote 4-A","metros2":480,"estado":"Habitada"},
+      {"numero":"Parcela 8","nomenclatura":"Lote 4-B","metros2":550,"estado":"Habitada"},
+      {"numero":"Parcela 9","nomenclatura":"Lote 5-A","metros2":400,"estado":"Baldío"},
+      {"numero":"Parcela 10","nomenclatura":"Lote 5-B","metros2":510,"estado":"Habitada"},
+      {"numero":"Parcela 11","nomenclatura":"Lote 6-A","metros2":470,"estado":"Habitada"},
+      {"numero":"Parcela 12","nomenclatura":"Lote 6-B","metros2":390,"estado":"En construcción"},
+      {"numero":"Parcela 13","nomenclatura":"Lote 7-A","metros2":430,"estado":"Habitada"}
+    ];
+
+    const PROPIETARIOS = [
+      {"nombre":"Juan Pérez","dni":"30123456","parcela":"Parcela 1","telefono":"+54 9 11 1234-5678","email":"juan.perez@mail.com","tipo":"Propietario"},
+      {"nombre":"María López","dni":"27654321","parcela":"Parcela 2","telefono":"+54 9 11 2345-6789","email":"maria.lopez@mail.com","tipo":"Propietario"},
+      {"nombre":"Carlos Silva","dni":"32987654","parcela":"Parcela 3","telefono":"+54 9 11 3456-7890","email":"carlos.silva@mail.com","tipo":"Propietario"},
+      {"nombre":"Ana Martínez","dni":"28765432","parcela":"Parcela 4","telefono":"+54 9 11 4567-8901","email":"ana.martinez@mail.com","tipo":"Propietario"},
+      {"nombre":"Pedro Rojas","dni":"31234567","parcela":"Parcela 5","telefono":"+54 9 11 5678-9012","email":"pedro.rojas@mail.com","tipo":"Propietario"},
+      {"nombre":"Laura Torres","dni":"29876543","parcela":"Parcela 6","telefono":"+54 9 11 6789-0123","email":"laura.torres@mail.com","tipo":"Inquilino"},
+      {"nombre":"Diego Ramírez","dni":"33456789","parcela":"Parcela 7","telefono":"+54 9 11 7890-1234","email":"diego.ramirez@mail.com","tipo":"Propietario"},
+      {"nombre":"Sofía Herrera","dni":"26543210","parcela":"Parcela 8","telefono":"+54 9 11 8901-2345","email":"sofia.herrera@mail.com","tipo":"Propietario"},
+      {"nombre":"Miguel Ángel Ruiz","dni":"34567890","parcela":"Parcela 9","telefono":"+54 9 11 9012-3456","email":"miguel.ruiz@mail.com","tipo":"Propietario"},
+      {"nombre":"Valentina Muñoz","dni":"25432109","parcela":"Parcela 10","telefono":"+54 9 11 0123-4567","email":"valentina.munoz@mail.com","tipo":"Propietario"},
+      {"nombre":"Santiago Vega","dni":"35678901","parcela":"Parcela 11","telefono":"+54 9 11 1234-5678","email":"santiago.vega@mail.com","tipo":"Inquilino"},
+      {"nombre":"Isabel Guerrero","dni":"24321098","parcela":"Parcela 12","telefono":"+54 9 11 2345-6789","email":"isabel.guerrero@mail.com","tipo":"Propietario"},
+      {"nombre":"Pablo Castillo","dni":"36789012","parcela":"Parcela 13","telefono":"+54 9 11 3456-7890","email":"pablo.castillo@mail.com","tipo":"Propietario"}
+    ];
+
+    const NOTICIAS = [
+      {"titulo":"Asamblea mensual","descripcion":"Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto, mantenimiento y nuevos proyectos.","fechaPublicacion":"16/07/2026","fechaHasta":"25/07/2026"},
+      {"titulo":"Corte de agua programado","descripcion":"El martes 22 de julio no habrá agua de 8 a 16hs por trabajos en la red principal.","fechaPublicacion":"18/07/2026","fechaHasta":"22/07/2026"},
+      {"titulo":"Nueva seguridad nocturna","descripcion":"Se instalaron 4 cámaras de seguridad en las entradas del barrio.","fechaPublicacion":"10/07/2026","fechaHasta":"31/12/2026"},
+      {"titulo":"Reparación iluminación","descripcion":"Se repararán las luces del camino principal la próxima semana.","fechaPublicacion":"15/07/2026","fechaHasta":"20/07/2026"}
+    ];
+
+    const FLUJO = [
+      {"fecha":"1/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Cobro expensas julio","monto":650000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"3/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Pago Juan Pérez","monto":50000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"3/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Pago María López","monto":50000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"5/07/2026","tipo":"Ingreso","concepto":"Cuotas","descripcion":"Pago junio (varios)","monto":250000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"6/07/2026","tipo":"Ingreso","concepto":"Fondo reserva","descripcion":"Cobro fondo reserva junio","monto":90000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"10/07/2026","tipo":"Egreso","concepto":"Mantenimiento","descripcion":"Reparación bomba de agua","monto":35000,"comprobante":"https://drive.google.com/file/d/abc123","registradoPor":"Admin"},
+      {"fecha":"12/07/2026","tipo":"Egreso","concepto":"Servicios","descripcion":"Factura electricidad junio","monto":28000,"comprobante":"https://drive.google.com/file/d/def456","registradoPor":"Admin"},
+      {"fecha":"14/07/2026","tipo":"Egreso","concepto":"Jardinería","descripcion":"Poda de árboles mes julio","monto":15000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"15/07/2026","tipo":"Egreso","concepto":"Limpieza","descripcion":"Service limpieza común","monto":12000,"comprobante":"","registradoPor":"Admin"},
+      {"fecha":"16/07/2026","tipo":"Egreso","concepto":"Seguros","descripcion":"Seguro anual condominio","monto":85000,"comprobante":"https://drive.google.com/file/d/ghi789","registradoPor":"Admin"},
+      {"fecha":"5/07/2026","tipo":"Ingreso","concepto":"Multa","descripcion":"Multa ruido excesivo Pedro Rojas","monto":5000,"comprobante":"","registradoPor":"Admin"}
+    ];
+
+    const DOCUMENTOS = [
+      {"nombre":"Reglamento interno 2026","categoria":"Estatuto","fecha":"1/01/2026","descripcion":"Reglamento aprobado en asamblea ordinaria"},
+      {"nombre":"Acta asamblea junio 2026","categoria":"Actas","fecha":"15/06/2026","descripcion":"Acta de la asamblea mensual de junio"},
+      {"nombre":"Acta asamblea julio 2026","categoria":"Actas","fecha":"20/07/2026","descripcion":"Acta de la asamblea mensual de julio"},
+      {"nombre":"Contrato mantenimiento jardines","categoria":"Contratos","fecha":"1/03/2026","descripcion":"Contrato anual con jardinería Verde Total"},
+      {"nombre":"Póliza seguro 2026","categoria":"Seguros","fecha":"1/01/2026","descripcion":"Póliza de seguro contra incendio y robo"},
+      {"nombre":"Plano domicilio original","categoria":"Planos","fecha":"1/01/2020","descripcion":"Plano de loteo aprobado por municipio"},
+      {"nombre":"Convenio cooperative eléctrica","categoria":"Contratos","fecha":"15/02/2024","descripcion":"Convenio suministro eléctrico común"}
+    ];
+
+    const RECLAMOS = [
+      {"fecha":"5/07/2026","tipo":"Reclamo","parcela":"Parcela 3","asunto":"Fuga de agua en zona común","descripcion":"Se está filtrando agua cerca del tanque de reserva. El caño parece viejo."},
+      {"fecha":"10/07/2026","tipo":"Sugerencia","parcela":"","asunto":"Mejorar iluminación del camino","descripcion":"Sería bueno colocar luces LED en todo el camino principal."},
+      {"fecha":"12/07/2026","tipo":"Reclamo","parcela":"Parcela 7","asunto":"Ruido excesivo nocturno","descripcion":"Los vecinos de al lado hacen fiesta todos los viernes hasta la madrugada."},
+      {"fecha":"14/07/2026","tipo":"Sugerencia","parcela":"","asunto":"Árboles en zona verde","descripcion":"Podríamos plantar más árboles en la entrada del barrio."},
+      {"fecha":"15/07/2026","tipo":"Reclamo","parcela":"","asunto":"Problema con reja de seguridad","descripcion":"La reja principal no cierra bien y queda abierta por la noche."}
+    ];
+
+    const PROVEEDORES = [
+      {"rubro":"Plomería","nombre":"Agua & Sol","telefono":"+54 9 11 5555-1111","email":"contacto@aguasol.com","contacto":"Roberto","observaciones":"Trabaja lunes a viernes 8-18"},
+      {"rubro":"Electricidad","nombre":"Electro Barrio","telefono":"+54 9 11 5555-2222","email":"info@electrobarrio.com","contacto":"Martín","observaciones":"Emergencias 24hs"},
+      {"rubro":"Jardinería","nombre":"Verde Total","telefono":"+54 9 11 5555-3333","email":"jardin@verdetotal.com","contacto":"Carlos","observaciones":"Viernes y sábados"},
+      {"rubro":"Limpieza","nombre":"Limpia Hogar","telefono":"+54 9 11 5555-4444","email":"service@limpiahogar.com","contacto":"Ana","observaciones":"Lunes miércoles y viernes"},
+      {"rubro":"Seguridad","nombre":"Guardia Total","telefono":"+54 9 11 5555-5555","email":"contacto@guardiatotal.com","contacto":"Pablo","observaciones":"Monitoreo 24hs"},
+      {"rubro":"Construcción","nombre":"Edifica Plus","telefono":"+54 9 11 5555-6662","email":"obras@edifcaplus.com","contacto":"Luis","observaciones":"Presupuestos sin cargo"},
+      {"rubro":"Pintura","nombre":"Color Express","telefono":"+54 9 11 5555-7777","email":"info@colorexpress.com","contacto":"Gustavo","observaciones":"Trabajos exteriores e interiores"}
+    ];
+
+    const ASAMBLEAS = [
+      {"fecha":"15/06/2026","tipo":"Ordinaria","temario":"1. Presupuesto trimestral\n2. Mantenimiento pileta\n3. Seguridad nocturna\n4. Preguntas varias","acuerdos":"Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras.","asistentes":12},
+      {"fecha":"20/07/2026","tipo":"Ordinaria","temario":"1. Revisión gastos junio-julio\n2. Reparación bomba agua\n3. Próximos proyectos\n4. Preguntas varias","acuerdos":"Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común.","asistentes":10},
+      {"fecha":"15/08/2025","tipo":"Extraordinaria","temario":"1. Emergencia filtración techo salón\n2. Votación pintura fachada","acuerdos":"Se aprobó reparación urgente $180.000. Se votó pintura fachada aprobada.","asistentes":14}
+    ];
+
     function switchTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
       document.querySelector('[onclick="switchTab(\'' + tab + '\')"]').classList.add('active');
       document.getElementById('tab-' + tab).classList.add('active');
     }
@@ -167,71 +366,78 @@
     }
 
     function getInitials(name) {
-      return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+      return name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
     }
 
+    // ESTADO DE CUENTA
     function fillFilters() {
-      const periodos = [...new Set(DATA.map(r => r.periodo).filter(Boolean))].sort().reverse();
-      const parcelas = [...new Set(DATA.map(r => r.parcela).filter(Boolean))].sort();
+      var periodos = [];
+      var parcelas = [];
+      GASTOS.forEach(function(r) {
+        if (r.periodo && periodos.indexOf(r.periodo) === -1) periodos.push(r.periodo);
+        if (r.parcela && parcelas.indexOf(r.parcela) === -1) parcelas.push(r.parcela);
+      });
+      periodos.sort().reverse();
+      parcelas.sort();
 
-      const pf = document.getElementById('periodFilter');
-      pf.innerHTML = '<option value="">Todos</option>' + periodos.map(p => '<option>' + p + '</option>').join('');
+      var pf = document.getElementById('periodFilter');
+      pf.innerHTML = '<option value="">Todos</option>' + periodos.map(function(p) { return '<option>' + p + '</option>'; }).join('');
 
-      const paf = document.getElementById('parcelaFilter');
-      paf.innerHTML = '<option value="">Todas</option>' + parcelas.map(p => '<option>' + p + '</option>').join('');
+      var paf = document.getElementById('parcelaFilter');
+      paf.innerHTML = '<option value="">Todas</option>' + parcelas.map(function(p) { return '<option>' + p + '</option>'; }).join('');
 
       pf.onchange = applyFilters;
       paf.onchange = applyFilters;
     }
 
     function filteredData() {
-      const p = document.getElementById('periodFilter').value;
-      const pa = document.getElementById('parcelaFilter').value;
-      return DATA.filter(r => (!p || r.periodo == p) && (!pa || r.parcela == pa));
+      var p = document.getElementById('periodFilter').value;
+      var pa = document.getElementById('parcelaFilter').value;
+      return GASTOS.filter(function(r) { return (!p || r.periodo == p) && (!pa || r.parcela == pa); });
     }
 
     function applyFilters() {
-      const data = filteredData();
+      var data = filteredData();
       renderStats(data);
       renderTable(data);
       renderCharts(data);
     }
 
     function renderStats(data) {
-      const total = data.reduce((s, r) => s + parseFloat(r.monto || 0), 0);
-      const periodos = new Set(data.map(r => r.periodo)).size;
-      const parcelas = new Set(data.map(r => r.parcela)).size;
+      var total = data.reduce(function(s, r) { return s + parseFloat(r.monto || 0); }, 0);
+      var periodos = [];
+      var parcelas = [];
+      data.forEach(function(r) {
+        if (periodos.indexOf(r.periodo) === -1) periodos.push(r.periodo);
+        if (parcelas.indexOf(r.parcela) === -1) parcelas.push(r.parcela);
+      });
 
       document.getElementById('stats').innerHTML =
-        '<div class="stat-card"><div class="label">Total recaudado</div><div class="value blue">$' +
-        formatMoney(total) + '</div></div>' +
-        '<div class="stat-card"><div class="label">Registros</div><div class="value">' +
-        data.length + '</div></div>' +
-        '<div class="stat-card"><div class="label">Periodos</div><div class="value">' +
-        periodos + '</div></div>' +
-        '<div class="stat-card"><div class="label">Parcelas</div><div class="value">' +
-        parcelas + '</div></div>';
+        '<div class="stat-card"><div class="label">Total recaudado</div><div class="value blue">$' + formatMoney(total) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Registros</div><div class="value">' + data.length + '</div></div>' +
+        '<div class="stat-card"><div class="label">Periodos</div><div class="value">' + periodos.length + '</div></div>' +
+        '<div class="stat-card"><div class="label">Parcelas</div><div class="value">' + parcelas.length + '</div></div>';
     }
 
     function renderTable(data) {
-      const tbody = document.getElementById('tableBody');
+      var tbody = document.getElementById('tableBody');
       if (data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
         return;
       }
-      tbody.innerHTML = data.map(r =>
-        '<tr>' +
-        '<td>' + (r.parcela || '') + '</td>' +
-        '<td>' + (r.nombre || '') + '</td>' +
-        '<td>' + formatPeriodo(r.periodo) + '</td>' +
-        '<td>' + (r.concepto || '') + '</td>' +
-        '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
-        '<td>' + (r.fecha || '') + '</td>' +
-        '</tr>'
-      ).join('');
+      tbody.innerHTML = data.map(function(r) {
+        return '<tr>' +
+          '<td>' + (r.parcela || '') + '</td>' +
+          '<td>' + (r.nombre || '') + '</td>' +
+          '<td>' + formatPeriodo(r.periodo) + '</td>' +
+          '<td>' + (r.concepto || '') + '</td>' +
+          '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
+          '<td>' + (r.fecha || '') + '</td>' +
+          '</tr>';
+      }).join('');
     }
 
-    let chartPeriodos, chartParcelas;
+    var chartPeriodos, chartParcelas;
 
     function renderCharts(data) {
       renderPeriodChart(data);
@@ -239,106 +445,213 @@
     }
 
     function renderPeriodChart(data) {
-      const groups = {};
-      data.forEach(r => {
-        const p = r.periodo || 'Sin periodo';
+      var groups = {};
+      data.forEach(function(r) {
+        var p = r.periodo || 'Sin periodo';
         groups[p] = (groups[p] || 0) + parseFloat(r.monto || 0);
       });
-      const labels = Object.keys(groups).map(formatPeriodo);
-      const values = Object.values(groups);
+      var labels = Object.keys(groups).map(formatPeriodo);
+      var values = Object.values(groups);
 
-      const ctx = document.getElementById('chartPeriodos').getContext('2d');
+      var ctx = document.getElementById('chartPeriodos').getContext('2d');
       if (chartPeriodos) chartPeriodos.destroy();
       chartPeriodos = new Chart(ctx, {
         type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Monto',
-            data: values,
-            backgroundColor: '#3b82f6',
-            borderRadius: 4
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: { display: false }
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-              ticks: { callback: function(v) { return '$' + formatMoney(v); } }
-            }
-          }
-        }
+        data: { labels: labels, datasets: [{ label: 'Monto', data: values, backgroundColor: '#3b82f6', borderRadius: 4 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: function(v) { return '$' + formatMoney(v); } } } } }
       });
     }
 
     function renderParcelaChart(data) {
-      const groups = {};
-      data.forEach(r => {
-        const p = r.parcela || 'Sin parcela';
+      var groups = {};
+      data.forEach(function(r) {
+        var p = r.parcela || 'Sin parcela';
         groups[p] = (groups[p] || 0) + parseFloat(r.monto || 0);
       });
-      const labels = Object.keys(groups);
-      const values = Object.values(groups);
-      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
+      var labels = Object.keys(groups);
+      var values = Object.values(groups);
+      var colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
 
-      const ctx = document.getElementById('chartParcelas').getContext('2d');
+      var ctx = document.getElementById('chartParcelas').getContext('2d');
       if (chartParcelas) chartParcelas.destroy();
       chartParcelas = new Chart(ctx, {
         type: 'doughnut',
-        data: {
-          labels: labels,
-          datasets: [{
-            data: values,
-            backgroundColor: colors.slice(0, labels.length)
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { boxWidth: 12, padding: 12, font: { size: 11 } }
-            }
-          }
-        }
+        data: { labels: labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length) }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, font: { size: 11 } } } } }
       });
     }
 
+    // PARCELAS
     function renderParcelas() {
-      const parcelas = {};
-      DATA.forEach(r => {
-        if (!parcelas[r.parcela]) parcelas[r.parcela] = [];
-        if (!parcelas[r.parcela].find(x => x.nombre === r.nombre)) {
-          parcelas[r.parcela].push({ nombre: r.nombre, concepto: r.concepto });
-        }
-      });
+      var grid = document.getElementById('parcelasGrid');
+      var colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
 
-      const grid = document.getElementById('parcelasGrid');
-      grid.innerHTML = Object.keys(parcelas).sort().map(p =>
-        '<div class="parcela-card">' +
-          '<h4>' + p + '</h4>' +
-          parcelas[p].map(r =>
-            '<div class="residente">' +
-              '<div class="avatar">' + getInitials(r.nombre) + '</div>' +
-              '<div class="info">' +
-                '<div class="nombre">' + r.nombre + '</div>' +
-                '<div class="concepto">' + r.concepto + '</div>' +
-              '</div>' +
-            '</div>'
-          ).join('') +
-        '</div>'
-      ).join('');
+      grid.innerHTML = PARCELAS.map(function(p, i) {
+        var propietario = PROPIETARIOS.find(function(pr) { return pr.parcela === p.numero; });
+        var colorClass = ['green', 'purple', 'orange', 'pink'][i % 4];
+
+        return '<div class="card">' +
+          '<h4>' + p.numero + '</h4>' +
+          '<div class="field"><span class="field-label">Nomenclatura</span><span class="field-value">' + p.nomenclatura + '</span></div>' +
+          '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + p.metros2 + ' m²</span></div>' +
+          '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
+          (propietario ?
+            '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6;display:flex;align-items:center;gap:0.6rem">' +
+              '<div class="avatar ' + colorClass + '">' + getInitials(propietario.nombre) + '</div>' +
+              '<div><div style="font-weight:600;font-size:0.9rem">' + propietario.nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + propietario.tipo + '</div></div>' +
+            '</div>' : '') +
+          '</div>';
+      }).join('');
     }
 
+    // PROPIETARIOS
+    function renderPropietarios() {
+      var grid = document.getElementById('propietariosGrid');
+      var colorClasses = ['green', 'purple', 'orange', 'pink'];
+
+      grid.innerHTML = PROPIETARIOS.map(function(p, i) {
+        var colorClass = colorClasses[i % 4];
+        return '<div class="card">' +
+          '<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem">' +
+            '<div class="avatar ' + colorClass + '">' + getInitials(p.nombre) + '</div>' +
+            '<div><div style="font-weight:600">' + p.nombre + '</div><div style="font-size:0.8rem;color:#6b7280">' + p.parcela + ' · ' + p.tipo + '</div></div>' +
+          '</div>' +
+          '<div class="field"><span class="field-label">DNI</span><span class="field-value">' + p.dni + '</span></div>' +
+          '<div class="field"><span class="field-label">Teléfono</span><span class="field-value">' + p.telefono + '</span></div>' +
+          '<div class="field"><span class="field-label">Email</span><span class="field-value">' + p.email + '</span></div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // NOTICIAS
+    function renderNoticias() {
+      var list = document.getElementById('noticiasList');
+      var hoy = new Date();
+      var activas = NOTICIAS.filter(function(n) {
+        var partes = n.fechaHasta.split('/');
+        var hasta = new Date(partes[2], partes[1] - 1, partes[0]);
+        return hasta >= hoy;
+      });
+
+      if (activas.length === 0) {
+        list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:2rem">No hay noticias activas</div>';
+        return;
+      }
+
+      list.innerHTML = activas.map(function(n) {
+        return '<div class="news-card" style="margin-bottom:1rem">' +
+          '<h4>' + n.titulo + '</h4>' +
+          '<div class="dates">Publicado: ' + n.fechaPublicacion + ' · Vigente hasta: ' + n.fechaHasta + '</div>' +
+          '<div class="desc">' + n.descripcion + '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // INGRESOS/EGRESOS
+    function renderFlujo() {
+      var ingresos = FLUJO.filter(function(f) { return f.tipo === 'Ingreso'; });
+      var egresos = FLUJO.filter(function(f) { return f.tipo === 'Egreso'; });
+      var totalIngresos = ingresos.reduce(function(s, f) { return s + f.monto; }, 0);
+      var totalEgresos = egresos.reduce(function(s, f) { return s + f.monto; }, 0);
+      var balance = totalIngresos - totalEgresos;
+
+      document.getElementById('flujoStats').innerHTML =
+        '<div class="stat-card"><div class="label">Ingresos</div><div class="value green">$' + formatMoney(totalIngresos) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Egresos</div><div class="value red">$' + formatMoney(totalEgresos) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Balance</div><div class="value ' + (balance >= 0 ? 'green' : 'red') + '">$' + formatMoney(balance) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Movimientos</div><div class="value">' + FLUJO.length + '</div></div>';
+
+      var tbody = document.getElementById('flujoBody');
+      tbody.innerHTML = FLUJO.map(function(f) {
+        return '<tr>' +
+          '<td>' + f.fecha + '</td>' +
+          '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
+          '<td>' + f.concepto + '</td>' +
+          '<td>' + f.descripcion + '</td>' +
+          '<td style="font-weight:600;color:' + (f.tipo === 'Ingreso' ? '#059669' : '#dc2626') + '">$' + formatMoney(f.monto) + '</td>' +
+          '<td>' + f.registradoPor + '</td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    // DOCUMENTOS
+    function renderDocumentos() {
+      var list = document.getElementById('documentosList');
+      var icons = { 'Estatuto': '&#128220;', 'Actas': '&#128196;', 'Contratos': '&#128221;', 'Seguros': '&#128737;', 'Planos': '&#128208;' };
+
+      list.innerHTML = DOCUMENTOS.map(function(d) {
+        var icon = icons[d.categoria] || '&#128196;';
+        return '<div class="doc-item">' +
+          '<div class="doc-icon">' + icon + '</div>' +
+          '<div class="doc-info">' +
+            '<div class="doc-name">' + d.nombre + '</div>' +
+            '<div class="doc-meta">' + d.categoria + ' · ' + d.fecha + '</div>' +
+          '</div>' +
+          '<a href="#" class="doc-link">Ver</a>' +
+          '</div>';
+      }).join('');
+    }
+
+    // RECLAMOS
+    function renderReclamos() {
+      var list = document.getElementById('reclamosList');
+      list.innerHTML = RECLAMOS.map(function(r) {
+        var tipoClass = r.tipo.toLowerCase();
+        return '<div class="reclamo-item ' + tipoClass + '">' +
+          '<div class="reclamo-header">' +
+            '<span class="reclamo-tipo ' + tipoClass + '">' + r.tipo + '</span>' +
+            '<span class="reclamo-fecha">' + r.fecha + '</span>' +
+          '</div>' +
+          '<div class="reclamo-title">' + r.asunto + '</div>' +
+          '<div class="reclamo-desc">' + r.descripcion + '</div>' +
+          (r.parcela ? '<div class="reclamo-parcela">' + r.parcela + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
+          '</div>';
+      }).join('');
+    }
+
+    // PROVEEDORES
+    function renderProveedores() {
+      var grid = document.getElementById('proveedoresGrid');
+      grid.innerHTML = PROVEEDORES.map(function(p) {
+        return '<div class="proveedor-card">' +
+          '<div class="proveedor-rubro">' + p.rubro + '</div>' +
+          '<div class="proveedor-nombre">' + p.nombre + '</div>' +
+          '<div class="proveedor-contacto">' +
+            '<div>&#128205; ' + p.contacto + '</div>' +
+            '<div>&#128222; ' + p.telefono + '</div>' +
+            '<div>&#9993; ' + p.email + '</div>' +
+            '<div style="color:#6b7280;font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // ASAMBLEAS
+    function renderAsambleas() {
+      var timeline = document.getElementById('asambleasTimeline');
+      timeline.innerHTML = ASAMBLEAS.map(function(a) {
+        var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
+        return '<div class="timeline-item' + extraClass + '">' +
+          '<div class="timeline-date">' + a.fecha + '</div>' +
+          '<span class="timeline-tipo' + extraClass + '">' + a.tipo + '</span>' +
+          '<div class="timeline-section"><strong>Temario:</strong><p>' + a.temario + '</p></div>' +
+          '<div class="timeline-section"><strong>Acuerdos:</strong><p>' + a.acuerdos + '</p></div>' +
+          '<div class="timeline-asistentes">Asistentes: ' + a.asistentes + '</div>' +
+          '</div>';
+      }).join('');
+    }
+
+    // INIT
     fillFilters();
     applyFilters();
     renderParcelas();
+    renderPropietarios();
+    renderNoticias();
+    renderFlujo();
+    renderDocumentos();
+    renderReclamos();
+    renderProveedores();
+    renderAsambleas();
   </script>
 </body>
 </html>
