@@ -116,7 +116,6 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('cuenta')">Estado de Cuenta</button>
       <button class="tab-btn" onclick="switchTab('parcelas')">Parcelas</button>
-      <button class="tab-btn" onclick="switchTab('propietarios')">Propietarios</button>
       <button class="tab-btn" onclick="switchTab('noticias')">Noticias</button>
       <button class="tab-btn" onclick="switchTab('flujo')">Ingresos/Egresos</button>
       <button class="tab-btn" onclick="switchTab('documentos')">Documentos</button>
@@ -165,11 +164,6 @@
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
       <div class="cards-grid" id="parcelasGrid"></div>
-    </div>
-
-    <!-- PROPIETARIOS -->
-    <div id="tab-propietarios" class="tab-content">
-      <div class="cards-grid" id="propietariosGrid"></div>
     </div>
 
     <!-- NOTICIAS -->
@@ -256,7 +250,6 @@
       fillFilters();
       applyFilters();
       renderParcelas();
-      renderPropietarios();
       renderNoticias();
       renderFlujo();
       renderDocumentos();
@@ -412,41 +405,32 @@
     // PARCELAS
     function renderParcelas() {
       var grid = document.getElementById('parcelasGrid');
-      var colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316'];
+      var colorClasses = ['green', 'purple', 'orange', 'pink'];
 
       grid.innerHTML = PARCELAS.map(function(p, i) {
-        var propietario = PROPIETARIOS.find(function(pr) { return pr.parcela === p.numero; });
-        var colorClass = ['green', 'purple', 'orange', 'pink'][i % 4];
+        var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p.numero; });
+        var colorClass = colorClasses[i % 4];
+
+        var propietariosHtml = propietarios.map(function(prop, j) {
+          var propColor = colorClasses[(i + j) % 4];
+          return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6">' +
+            '<div style="display:flex;align-items:center;gap:0.6rem">' +
+              '<div class="avatar ' + propColor + '">' + getInitials(prop.nombre) + '</div>' +
+              '<div><div style="font-weight:600;font-size:0.9rem">' + prop.nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + prop.tipo + '</div></div>' +
+            '</div>' +
+            '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:#374151">' +
+              '<div>📱 ' + prop.telefono + '</div>' +
+              '<div>✉️ ' + prop.email + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
 
         return '<div class="card">' +
           '<h4>' + p.numero + '</h4>' +
           '<div class="field"><span class="field-label">Nomenclatura</span><span class="field-value">' + p.nomenclatura + '</span></div>' +
           '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + p.metros2 + ' m²</span></div>' +
           '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
-          (propietario ?
-            '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6;display:flex;align-items:center;gap:0.6rem">' +
-              '<div class="avatar ' + colorClass + '">' + getInitials(propietario.nombre) + '</div>' +
-              '<div><div style="font-weight:600;font-size:0.9rem">' + propietario.nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + propietario.tipo + '</div></div>' +
-            '</div>' : '') +
-          '</div>';
-      }).join('');
-    }
-
-    // PROPIETARIOS
-    function renderPropietarios() {
-      var grid = document.getElementById('propietariosGrid');
-      var colorClasses = ['green', 'purple', 'orange', 'pink'];
-
-      grid.innerHTML = PROPIETARIOS.map(function(p, i) {
-        var colorClass = colorClasses[i % 4];
-        return '<div class="card">' +
-          '<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.8rem">' +
-            '<div class="avatar ' + colorClass + '">' + getInitials(p.nombre) + '</div>' +
-            '<div><div style="font-weight:600">' + p.nombre + '</div><div style="font-size:0.8rem;color:#6b7280">' + p.parcela + ' · ' + p.tipo + '</div></div>' +
-          '</div>' +
-          '<div class="field"><span class="field-label">DNI</span><span class="field-value">' + p.dni + '</span></div>' +
-          '<div class="field"><span class="field-label">Teléfono</span><span class="field-value">' + p.telefono + '</span></div>' +
-          '<div class="field"><span class="field-label">Email</span><span class="field-value">' + p.email + '</span></div>' +
+          propietariosHtml +
           '</div>';
       }).join('');
     }
