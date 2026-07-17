@@ -104,6 +104,10 @@
     .section-title { font-size: 1.1rem; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; }
     .form-link { display: inline-flex; align-items: center; gap: 0.4rem; background: #2563eb; color: #fff; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 500; margin-bottom: 1rem; transition: background 0.2s; }
     .form-link:hover { background: #1d4ed8; }
+    .demo-toggle { background: #10b981; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .demo-toggle:hover { opacity: 0.9; }
+    .demo-toggle.active { background: #10b981; }
+    .demo-toggle:not(.active) { background: #6b7280; }
 
     .skeleton { background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton 1.5s infinite; border-radius: 8px; }
     .skeleton-card { height: 200px; margin-bottom: 1rem; }
@@ -120,8 +124,13 @@
 <body>
   <div class="container">
     <header>
-      <h1>CONDOMINIO EUCALIPTUS</h1>
-      <p>Control de gastos comunes</p>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <h1>CONDOMINIO EUCALIPTUS</h1>
+          <p>Control de gastos comunes</p>
+        </div>
+        <button id="demoToggle" onclick="toggleDemoMode()" class="demo-toggle active">Modo Demo</button>
+      </div>
     </header>
 
     <div class="tabs">
@@ -256,6 +265,9 @@
   </div>
 
   <script>
+    var DEMO_MODE = true;
+    var API_URL = ''; // Reemplazar con tu URL de Apps Script
+
     var GASTOS = [];
     var PARCELAS = [];
     var PROPIETARIOS = [];
@@ -268,31 +280,68 @@
 
     var loaded = { GASTOS: false };
 
-    async function loadJson(target, file) {
+    var DEMO_FILES = {
+      GASTOS: 'datos_gastos.json',
+      PARCELAS: 'datos_parcelas.json',
+      PROPIETARIOS: 'datos_propietarios.json',
+      NOTICIAS: 'datos_noticias.json',
+      FLUJO: 'datos_ingresos_egresos.json',
+      DOCUMENTOS: 'datos_documentos.json',
+      RECLAMOS: 'datos_reclamos.json',
+      PROVEEDORES: 'datos_proveedores.json',
+      ASAMBLEAS: 'datos_asambleas.json'
+    };
+
+    var SHEET_NAMES = {
+      GASTOS: 'gastos',
+      PARCELAS: 'parcelas',
+      PROPIETARIOS: 'propietarios',
+      NOTICIAS: 'noticias',
+      FLUJO: 'ingresos_egresos',
+      DOCUMENTOS: 'documentos',
+      RECLAMOS: 'reclamos',
+      PROVEEDORES: 'proveedores',
+      ASAMBLEAS: 'asambleas'
+    };
+
+    function toggleDemoMode() {
+      DEMO_MODE = !DEMO_MODE;
+      document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Modo Demo' : 'Modo Producción';
+      document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
+      location.reload();
+    }
+
+    async function loadJson(target) {
       try {
-        var res = await fetch(file, { cache: 'no-store' });
+        var url;
+        if (DEMO_MODE) {
+          url = DEMO_FILES[target];
+        } else {
+          url = API_URL + '?sheet=' + SHEET_NAMES[target];
+        }
+        var res = await fetch(url, { cache: 'no-store' });
         window[target] = await res.json();
         loaded[target] = true;
       } catch (e) {
-        console.error('Error cargando ' + file, e);
+        console.error('Error cargando ' + target, e);
       }
     }
 
     async function loadInitialData() {
-      await loadJson('GASTOS', 'datos_gastos.json');
+      await loadJson('GASTOS');
       fillFilters();
       applyFilters();
     }
 
     async function loadTabData(tab) {
       var configs = {
-        parcelas: function() { return Promise.all([loadJson('PARCELAS', 'datos_parcelas.json'), loadJson('PROPIETARIOS', 'datos_propietarios.json')]).then(function() { renderParcelas(); }); },
-        noticias: function() { return loadJson('NOTICIAS', 'datos_noticias.json').then(function() { renderNoticias(); }); },
-        flujo: function() { return loadJson('FLUJO', 'datos_ingresos_egresos.json').then(function() { renderFlujo(); }); },
-        documentos: function() { return loadJson('DOCUMENTOS', 'datos_documentos.json').then(function() { renderDocumentos(); }); },
-        reclamos: function() { return loadJson('RECLAMOS', 'datos_reclamos.json').then(function() { renderReclamos(); }); },
-        proveedores: function() { return loadJson('PROVEEDORES', 'datos_proveedores.json').then(function() { renderProveedores(); }); },
-        asambleas: function() { return loadJson('ASAMBLEAS', 'datos_asambleas.json').then(function() { renderAsambleas(); }); }
+        parcelas: function() { return Promise.all([loadJson('PARCELAS'), loadJson('PROPIETARIOS')]).then(function() { renderParcelas(); }); },
+        noticias: function() { return loadJson('NOTICIAS').then(function() { renderNoticias(); }); },
+        flujo: function() { return loadJson('FLUJO').then(function() { renderFlujo(); }); },
+        documentos: function() { return loadJson('DOCUMENTOS').then(function() { renderDocumentos(); }); },
+        reclamos: function() { return loadJson('RECLAMOS').then(function() { renderReclamos(); }); },
+        proveedores: function() { return loadJson('PROVEEDORES').then(function() { renderProveedores(); }); },
+        asambleas: function() { return loadJson('ASAMBLEAS').then(function() { renderAsambleas(); }); }
       };
 
       if (configs[tab]) await configs[tab]();
