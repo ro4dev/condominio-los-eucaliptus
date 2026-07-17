@@ -507,7 +507,7 @@
       });
 
       grid.innerHTML = sorted.map(function(p, i) {
-        var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p['número']; });
+        var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p.numero; });
         var colorClass = colorClasses[i % 4];
 
         var propietariosHtml = propietarios.map(function(prop, j) {
@@ -527,7 +527,7 @@
         }).join('');
 
         return '<div class="card">' +
-          '<h4>' + (p['número'] || '') + '</h4>' +
+          '<h4>' + (p.numero || '') + '</h4>' +
           (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
           '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || p.metros2 || '') + ' m²</span></div>' +
           '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
