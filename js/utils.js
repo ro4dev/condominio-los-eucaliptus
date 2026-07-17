@@ -15,7 +15,7 @@ function formatPeriodo(p) {
   var s = String(p);
   if (s.indexOf('T') !== -1) s = s.slice(0, 7);
   var parts = s.split('-');
-  if (parts.length === 2) return parts[1] + '/' + parts[0];
+  if (parts.length >= 2) return parts[1] + '/' + parts[0];
   return s;
 }
 
