@@ -622,7 +622,7 @@
         return '<div class="reclamo-item ' + tipoClass + '">' +
           '<div class="reclamo-header">' +
             '<span class="reclamo-tipo ' + tipoClass + '">' + r.tipo + '</span>' +
-            '<span class="reclamo-fecha">' + r.fecha + '</span>' +
+            '<span class="reclamo-fecha">' + (r.marca_temporal ? r.marca_temporal.split('T')[0] : '') + '</span>' +
           '</div>' +
           '<div class="reclamo-title">' + r.asunto + '</div>' +
           '<div class="reclamo-desc">' + r.descripcion + '</div>' +
