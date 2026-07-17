@@ -611,7 +611,7 @@
             '<span class="reclamo-fecha">' + r.fecha + '</span>' +
           '</div>' +
           '<div class="reclamo-title">' + r.asunto + '</div>' +
-          '<div class="reclamo-desc">' + r.descripcion + '</div>' +
+          '<div class="reclamo-desc">' + r['descripción'] + '</div>' +
           (r.parcela ? '<div class="reclamo-parcela">' + r.parcela + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
           '</div>';
       }).join('');
