@@ -588,14 +588,15 @@
       var icons = { 'Estatuto': '&#128220;', 'Actas': '&#128196;', 'Contratos': '&#128221;', 'Seguros': '&#128737;', 'Planos': '&#128208;' };
 
       list.innerHTML = DOCUMENTOS.map(function(d) {
-        var icon = icons[d.categoria] || '&#128196;';
+        var icon = icons[d['categoría']] || '&#128196;';
+        var fecha = d['marca temporal'] ? d['marca temporal'].split('T')[0] : '';
         return '<div class="doc-item">' +
           '<div class="doc-icon">' + icon + '</div>' +
           '<div class="doc-info">' +
             '<div class="doc-name">' + d.nombre + '</div>' +
-            '<div class="doc-meta">' + d.categoria + ' · ' + d.fecha + '</div>' +
+            '<div class="doc-meta">' + d['categoría'] + ' · ' + fecha + '</div>' +
           '</div>' +
-          '<a href="#" class="doc-link">Ver</a>' +
+          (d['archivo'] ? '<a href="' + d['archivo'] + '" class="doc-link" target="_blank">Ver</a>' : '') +
           '</div>';
       }).join('');
     }
