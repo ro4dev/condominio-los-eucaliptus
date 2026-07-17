@@ -259,7 +259,7 @@
 
     async function loadJson(target, file) {
       try {
-        var res = await fetch(file);
+        var res = await fetch(file, { cache: 'no-store' });
         window[target] = await res.json();
         loaded[target] = true;
       } catch (e) {
