@@ -129,7 +129,7 @@
           <h1>CONDOMINIO EUCALIPTUS</h1>
           <p>Control de gastos comunes</p>
         </div>
-        <button id="demoToggle" onclick="toggleDemoMode()" class="demo-toggle active">Modo Demo</button>
+        <button id="demoToggle" onclick="toggleDemoMode()" class="demo-toggle active">Salir de modo demo</button>
       </div>
     </header>
 
@@ -266,7 +266,7 @@
 
   <script>
     var DEMO_MODE = localStorage.getItem('demoMode') !== 'false';
-    document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Modo Demo' : 'Modo Producción';
+    document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Salir de modo demo' : 'Ir a modo demo';
     document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
     var API_URL = 'https://script.google.com/macros/s/AKfycbzWg6tKSIfr3OsFVrllprgY_VxyWanRTisJET05SIJycElEISf_laDPWIZiHYBbptZlOA/exec';
 
@@ -309,7 +309,7 @@
     function toggleDemoMode() {
       DEMO_MODE = !DEMO_MODE;
       localStorage.setItem('demoMode', DEMO_MODE);
-      document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Modo Demo' : 'Modo Producción';
+      document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Salir de modo demo' : 'Ir a modo demo';
       document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
       location.reload();
     }
