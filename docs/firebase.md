@@ -10,13 +10,13 @@ Mismo que en `supabase.md`: Sheets no es DB real, Apps Script tiene límites, no
 
 ## Qué resuelve Firebase
 
-| Necesidad  | Solución Firebase                     |
-|------------|---------------------------------------|
-| Base de datos | Firestore (NoSQL)                  |
-| API        | SDK nativo (no hay REST automático)   |
-| Auth       | Login con Google, email, etc.         |
-| Storage    | Cloud Storage con URLs permanentes    |
-| Hosting    | Deploy del frontend HTML              |
+| Necesidad     | Solución Firebase                      |
+|---------------|----------------------------------------|
+| Base de datos | Firestore (NoSQL)                      |
+| API           | SDK nativo (no hay REST automático)    |
+| Auth          | Login con Google, email, etc.          |
+| Storage       | Cloud Storage con URLs permanentes     |
+| Hosting       | Deploy del frontend HTML               |
 
 ## Arquitectura propuesta
 

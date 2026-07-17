@@ -182,7 +182,7 @@ Supabase Storage Free tiene solo 1GB. Para archivos pesados (documentos, comprob
 | Servicio        | Uso                | Free tier                  | Tarjeta |
 |-----------------|--------------------|----------------------------|---------|
 | **Supabase**    | DB + Auth + API    | 500MB DB, 50k usuarios     | No      |
-| **Backblaze B2**| Archivos grandes   | 10GB + egress gratis       | No      |
+| **Backblaze B2** | Archivos grandes   | 10GB + egress gratis       | No      |
 
 ### Arquitectura combinada
 
