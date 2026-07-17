@@ -13,13 +13,27 @@ Mover el almacenamiento de archivos (documentos, comprobantes, adjuntos) de Goog
 
 ## Opciones de proveedor
 
-| Proveedor | Free tier | Egress | API requests |
-|-----------|-----------|--------|--------------|
-| **Cloudflare R2** | 10GB + 1M req/mes | $0 (sin egress) | 1M gratis |
-| **Backblaze B2** | 10GB + ilimitados uploads | $0.01/GB después de 1GB | 2500 Class A/día |
-| **IDrive e2** | 10GB | $0.01/GB | 10,000 gratis |
+| Proveedor | Free tier | Egress | Tarjeta crédito |
+|-----------|-----------|--------|-----------------|
+| **Backblaze B2** | 10GB + egress gratis hasta 3x | Gratis hasta 3x storage | **No** |
+| **Cloudflare R2** | 10GB + 1M Class A + 10M Class B | Siempre gratis | **Sí** |
+| **IDrive e2** | 10GB | $0.01/GB | Sí |
 
-**Recomendación**: Cloudflare R2 por no tener cargos de egress.
+### Backblaze B2 (recomendado)
+
+- **10GB gratis para siempre**
+- **Sin tarjeta de crédito** para empezar
+- Egress gratis hasta 3x lo que almacenás
+- API compatible con S3 (mismos SDKs y comandos de AWS)
+- Si crece: $6/TB/mes (muy barato)
+
+### Cloudflare R2
+
+- Free tier generoso (10GB, 1M writes, 10M reads)
+- **Egress siempre gratis** (ni en free ni en pago)
+- Pero **pide tarjeta de crédito** para activar el servicio
+
+**Recomendación**: Backblaze B2 por no pedir tarjeta y ser suficiente para este proyecto.
 
 ## Arquitectura propuesta
 
