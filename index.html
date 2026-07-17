@@ -500,7 +500,13 @@
       var grid = document.getElementById('parcelasGrid');
       var colorClasses = ['green', 'purple', 'orange', 'pink'];
 
-      grid.innerHTML = PARCELAS.map(function(p, i) {
+      var sorted = PARCELAS.slice().sort(function(a, b) {
+        var numA = parseInt((a['número'] || '').replace(/\D/g, '')) || 0;
+        var numB = parseInt((b['número'] || '').replace(/\D/g, '')) || 0;
+        return numA - numB;
+      });
+
+      grid.innerHTML = sorted.map(function(p, i) {
         var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p['número']; });
         var colorClass = colorClasses[i % 4];
 
