@@ -9,6 +9,14 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+function normalizeHeader(header) {
+  return header
+    .toLowerCase()
+    .trim()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '_');
+}
+
 function getSheetData(sheetName) {
   var folder = DriveApp.getFolderById(FOLDER_ID);
   if (!folder) return [];
@@ -25,7 +33,7 @@ function getSheetData(sheetName) {
   if (data.length < 2) return [];
 
   var headers = data[0].map(function(h) {
-    return h.toString().toLowerCase().trim();
+    return normalizeHeader(h.toString());
   });
 
   var records = [];

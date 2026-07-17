@@ -512,14 +512,14 @@
 
         var propietariosHtml = propietarios.map(function(prop, j) {
           var propColor = colorClasses[(i + j) % 4];
-          var nombre = prop['nombre completo'] || prop.nombre || '';
+          var nombre = prop.nombre_completo || prop.nombre || '';
           return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6">' +
             '<div style="display:flex;align-items:center;gap:0.6rem">' +
               '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
               '<div><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + prop.tipo + '</div></div>' +
             '</div>' +
             '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:#374151">' +
-              (prop['teléfono'] ? '<div>📱 ' + prop['teléfono'] + '</div>' : '') +
+              (prop.telefono ? '<div>📱 ' + prop.telefono + '</div>' : '') +
               (prop.email ? '<div>✉️ ' + prop.email + '</div>' : '') +
               (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
             '</div>' +
@@ -541,8 +541,8 @@
       var list = document.getElementById('noticiasList');
       var hoy = new Date();
       var activas = NOTICIAS.filter(function(n) {
-        if (!n['fecha hasta']) return true;
-        return new Date(n['fecha hasta']) >= hoy;
+        if (!n.fecha_hasta) return true;
+        return new Date(n.fecha_hasta) >= hoy;
       });
 
       if (activas.length === 0) {
@@ -551,13 +551,13 @@
       }
 
       list.innerHTML = activas.map(function(n) {
-        var fecha = n['marca temporal'] ? n['marca temporal'].split('T')[0] : '';
-        var hasta = n['fecha hasta'] ? n['fecha hasta'].split('T')[0] : '';
+        var fecha = n.marca_temporal ? n.marca_temporal.split('T')[0] : '';
+        var hasta = n.fecha_hasta ? n.fecha_hasta.split('T')[0] : '';
         return '<div class="news-card" style="margin-bottom:1rem">' +
-          '<h4>' + (n['título'] || '') + '</h4>' +
+          '<h4>' + (n.titulo || '') + '</h4>' +
           '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
-          '<div class="desc">' + (n['descripción'] || '') + '</div>' +
-          (n['archivo'] ? '<a href="' + n['archivo'] + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
+          '<div class="desc">' + (n.descripcion || '') + '</div>' +
+          (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
           '</div>';
       }).join('');
     }
@@ -583,12 +583,12 @@
 
       var tbody = document.getElementById('flujoBody');
       tbody.innerHTML = FLUJO.map(function(f) {
-        var fecha = f['marca temporal'] ? f['marca temporal'].split('T')[0] : '';
+        var fecha = f.marca_temporal ? f.marca_temporal.split('T')[0] : '';
         return '<tr>' +
           '<td>' + fecha + '</td>' +
           '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
           '<td>' + f.concepto + '</td>' +
-          '<td>' + (f['descripción'] || '') + '</td>' +
+          '<td>' + (f.descripcion || '') + '</td>' +
           '<td style="font-weight:600;color:' + (f.tipo === 'Ingreso' ? '#059669' : '#dc2626') + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
           '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank">Ver</a>' : '') + '</td>' +
           '</tr>';
@@ -601,15 +601,15 @@
       var icons = { 'Estatuto': '&#128220;', 'Actas': '&#128196;', 'Contratos': '&#128221;', 'Seguros': '&#128737;', 'Planos': '&#128208;' };
 
       list.innerHTML = DOCUMENTOS.map(function(d) {
-        var icon = icons[d['categoría']] || '&#128196;';
-        var fecha = d['marca temporal'] ? d['marca temporal'].split('T')[0] : '';
+        var icon = icons[d.categoria] || '&#128196;';
+        var fecha = d.marca_temporal ? d.marca_temporal.split('T')[0] : '';
         return '<div class="doc-item">' +
           '<div class="doc-icon">' + icon + '</div>' +
           '<div class="doc-info">' +
             '<div class="doc-name">' + d.nombre + '</div>' +
-            '<div class="doc-meta">' + d['categoría'] + ' · ' + fecha + '</div>' +
+            '<div class="doc-meta">' + d.categoria + ' · ' + fecha + '</div>' +
           '</div>' +
-          (d['archivo'] ? '<a href="' + d['archivo'] + '" class="doc-link" target="_blank">Ver</a>' : '') +
+          (d.archivo ? '<a href="' + d.archivo + '" class="doc-link" target="_blank">Ver</a>' : '') +
           '</div>';
       }).join('');
     }
@@ -625,7 +625,7 @@
             '<span class="reclamo-fecha">' + r.fecha + '</span>' +
           '</div>' +
           '<div class="reclamo-title">' + r.asunto + '</div>' +
-          '<div class="reclamo-desc">' + r['descripción'] + '</div>' +
+          '<div class="reclamo-desc">' + r.descripcion + '</div>' +
           (r.parcela ? '<div class="reclamo-parcela">' + r.parcela + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
           '</div>';
       }).join('');
@@ -640,7 +640,7 @@
           '<div class="proveedor-nombre">' + p.nombre + '</div>' +
           '<div class="proveedor-contacto">' +
             '<div>&#128205; ' + p.contacto + '</div>' +
-            '<div>&#128222; ' + p['teléfono'] + '</div>' +
+            '<div>&#128222; ' + p.telefono + '</div>' +
             '<div>&#9993; ' + p.email + '</div>' +
             (p['web/instagram'] ? '<div>&#127760; ' + p['web/instagram'] + '</div>' : '') +
             '<div style="color:#6b7280;font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +

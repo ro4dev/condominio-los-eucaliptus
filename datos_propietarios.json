@@ -1,127 +1,127 @@
 [
   {
-    "nombre": "Juan Pérez",
-    "dni": "30123456",
+    "nombre_completo": "Juan Pérez",
+    "rut": "30123456",
     "parcela": "Parcela 1",
     "telefono": "+54 9 11 1234-5678",
     "email": "juan.perez@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "María García",
-    "dni": "27654321",
+    "nombre_completo": "María García",
+    "rut": "27654321",
     "parcela": "Parcela 1",
     "telefono": "+54 9 11 1234-9999",
     "email": "maria.garcia@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "María López",
-    "dni": "28765432",
+    "nombre_completo": "María López",
+    "rut": "28765432",
     "parcela": "Parcela 2",
     "telefono": "+54 9 11 2345-6789",
     "email": "maria.lopez@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Carlos Silva",
-    "dni": "32987654",
+    "nombre_completo": "Carlos Silva",
+    "rut": "32987654",
     "parcela": "Parcela 3",
     "telefono": "+54 9 11 3456-7890",
     "email": "carlos.silva@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Laura Díaz",
-    "dni": "31234567",
+    "nombre_completo": "Laura Díaz",
+    "rut": "31234567",
     "parcela": "Parcela 3",
     "telefono": "+54 9 11 3456-1111",
     "email": "laura.diaz@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Ana Martínez",
-    "dni": "29876543",
+    "nombre_completo": "Ana Martínez",
+    "rut": "29876543",
     "parcela": "Parcela 4",
     "telefono": "+54 9 11 4567-8901",
     "email": "ana.martinez@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Pedro Rojas",
-    "dni": "33456789",
+    "nombre_completo": "Pedro Rojas",
+    "rut": "33456789",
     "parcela": "Parcela 5",
     "telefono": "+54 9 11 5678-9012",
     "email": "pedro.rojas@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Laura Torres",
-    "dni": "26543210",
+    "nombre_completo": "Laura Torres",
+    "rut": "26543210",
     "parcela": "Parcela 6",
     "telefono": "+54 9 11 6789-0123",
     "email": "laura.torres@mail.com",
-    "tipo": "Inquilino"
+    "tipo": "Arrendataria"
   },
   {
-    "nombre": "Diego Ramírez",
-    "dni": "34567890",
+    "nombre_completo": "Diego Ramírez",
+    "rut": "34567890",
     "parcela": "Parcela 7",
     "telefono": "+54 9 11 7890-1234",
     "email": "diego.ramirez@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Sofía Herrera",
-    "dni": "25432109",
+    "nombre_completo": "Sofía Herrera",
+    "rut": "25432109",
     "parcela": "Parcela 8",
     "telefono": "+54 9 11 8901-2345",
     "email": "sofia.herrera@mail.com",
-    "tipo": "Propietario"
+    "tipo": "Propietaria"
   },
   {
-    "nombre": "Miguel Ángel Ruiz",
-    "dni": "35678901",
+    "nombre_completo": "Miguel Ángel Ruiz",
+    "rut": "35678901",
     "parcela": "Parcela 9",
     "telefono": "+54 9 11 9012-3456",
     "email": "miguel.ruiz@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Valentina Muñoz",
-    "dni": "24321098",
+    "nombre_completo": "Valentina Muñoz",
+    "rut": "24321098",
     "parcela": "Parcela 10",
     "telefono": "+54 9 11 0123-4567",
     "email": "valentina.munoz@mail.com",
-    "tipo": "Propietario"
+    "tipo": "Propietaria"
   },
   {
-    "nombre": "Santiago Vega",
-    "dni": "36789012",
+    "nombre_completo": "Santiago Vega",
+    "rut": "36789012",
     "parcela": "Parcela 11",
     "telefono": "+54 9 11 1234-5678",
     "email": "santiago.vega@mail.com",
-    "tipo": "Inquilino"
+    "tipo": "Arrendatario"
   },
   {
-    "nombre": "Isabel Guerrero",
-    "dni": "30123456",
+    "nombre_completo": "Isabel Guerrero",
+    "rut": "30123456",
     "parcela": "Parcela 12",
     "telefono": "+54 9 11 2345-6789",
     "email": "isabel.guerrero@mail.com",
-    "tipo": "Propietario"
+    "tipo": "Propietaria"
   },
   {
-    "nombre": "Roberto Sánchez",
-    "dni": "32987654",
+    "nombre_completo": "Roberto Sánchez",
+    "rut": "32987654",
     "parcela": "Parcela 12",
     "telefono": "+54 9 11 2345-2222",
     "email": "roberto.sanchez@mail.com",
     "tipo": "Propietario"
   },
   {
-    "nombre": "Pablo Castillo",
-    "dni": "31234567",
+    "nombre_completo": "Pablo Castillo",
+    "rut": "31234567",
     "parcela": "Parcela 13",
     "telefono": "+54 9 11 3456-7890",
     "email": "pablo.castillo@mail.com",
