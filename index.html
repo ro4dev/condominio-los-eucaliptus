@@ -266,6 +266,8 @@
 
   <script>
     var DEMO_MODE = localStorage.getItem('demoMode') !== 'false';
+    document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Modo Demo' : 'Modo Producción';
+    document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
     var API_URL = 'https://script.google.com/macros/s/AKfycbzWg6tKSIfr3OsFVrllprgY_VxyWanRTisJET05SIJycElEISf_laDPWIZiHYBbptZlOA/exec';
 
     var GASTOS = [];
@@ -499,27 +501,29 @@
       var colorClasses = ['green', 'purple', 'orange', 'pink'];
 
       grid.innerHTML = PARCELAS.map(function(p, i) {
-        var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p.numero; });
+        var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p['número']; });
         var colorClass = colorClasses[i % 4];
 
         var propietariosHtml = propietarios.map(function(prop, j) {
           var propColor = colorClasses[(i + j) % 4];
+          var nombre = prop['nombre completo'] || prop.nombre || '';
           return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6">' +
             '<div style="display:flex;align-items:center;gap:0.6rem">' +
-              '<div class="avatar ' + propColor + '">' + getInitials(prop.nombre) + '</div>' +
-              '<div><div style="font-weight:600;font-size:0.9rem">' + prop.nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + prop.tipo + '</div></div>' +
+              '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
+              '<div><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + prop.tipo + '</div></div>' +
             '</div>' +
             '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:#374151">' +
-              '<div>📱 ' + prop.telefono + '</div>' +
-              '<div>✉️ ' + prop.email + '</div>' +
+              (prop['teléfono'] ? '<div>📱 ' + prop['teléfono'] + '</div>' : '') +
+              (prop.email ? '<div>✉️ ' + prop.email + '</div>' : '') +
+              (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
             '</div>' +
           '</div>';
         }).join('');
 
         return '<div class="card">' +
-          '<h4>' + p.numero + '</h4>' +
-          '<div class="field"><span class="field-label">Nomenclatura</span><span class="field-value">' + p.nomenclatura + '</span></div>' +
-          '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + p.metros2 + ' m²</span></div>' +
+          '<h4>' + (p['número'] || '') + '</h4>' +
+          (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
+          '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || p.metros2 || '') + ' m²</span></div>' +
           '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
           propietariosHtml +
           '</div>';
@@ -531,9 +535,8 @@
       var list = document.getElementById('noticiasList');
       var hoy = new Date();
       var activas = NOTICIAS.filter(function(n) {
-        var partes = n.fechaHasta.split('/');
-        var hasta = new Date(partes[2], partes[1] - 1, partes[0]);
-        return hasta >= hoy;
+        if (!n['fecha hasta']) return true;
+        return new Date(n['fecha hasta']) >= hoy;
       });
 
       if (activas.length === 0) {
@@ -542,10 +545,13 @@
       }
 
       list.innerHTML = activas.map(function(n) {
+        var fecha = n['marca temporal'] ? n['marca temporal'].split('T')[0] : '';
+        var hasta = n['fecha hasta'] ? n['fecha hasta'].split('T')[0] : '';
         return '<div class="news-card" style="margin-bottom:1rem">' +
-          '<h4>' + n.titulo + '</h4>' +
-          '<div class="dates">Publicado: ' + n.fechaPublicacion + ' · Vigente hasta: ' + n.fechaHasta + '</div>' +
-          '<div class="desc">' + n.descripcion + '</div>' +
+          '<h4>' + (n['título'] || '') + '</h4>' +
+          '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
+          '<div class="desc">' + (n['descripción'] || '') + '</div>' +
+          (n['archivo'] ? '<a href="' + n['archivo'] + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
           '</div>';
       }).join('');
     }
@@ -566,18 +572,19 @@
 
       var tableWrap = document.querySelector('#tab-flujo .table-wrap');
       tableWrap.innerHTML = '<h3>Movimientos</h3>' +
-        '<table><thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Descripción</th><th>Monto</th><th>Registrado por</th></tr></thead>' +
+        '<table><thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Descripción</th><th>Monto</th><th>Comprobante</th></tr></thead>' +
         '<tbody id="flujoBody"></tbody></table>';
 
       var tbody = document.getElementById('flujoBody');
       tbody.innerHTML = FLUJO.map(function(f) {
+        var fecha = f['marca temporal'] ? f['marca temporal'].split('T')[0] : '';
         return '<tr>' +
-          '<td>' + f.fecha + '</td>' +
+          '<td>' + fecha + '</td>' +
           '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
           '<td>' + f.concepto + '</td>' +
-          '<td>' + f.descripcion + '</td>' +
+          '<td>' + (f['descripción'] || '') + '</td>' +
           '<td style="font-weight:600;color:' + (f.tipo === 'Ingreso' ? '#059669' : '#dc2626') + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
-          '<td>' + f.registradoPor + '</td>' +
+          '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank">Ver</a>' : '') + '</td>' +
           '</tr>';
       }).join('');
     }
