@@ -265,7 +265,7 @@
   </div>
 
   <script>
-    var DEMO_MODE = true;
+    var DEMO_MODE = localStorage.getItem('demoMode') !== 'false';
     var API_URL = 'https://script.google.com/macros/s/AKfycbzWg6tKSIfr3OsFVrllprgY_VxyWanRTisJET05SIJycElEISf_laDPWIZiHYBbptZlOA/exec';
 
     var GASTOS = [];
@@ -306,6 +306,7 @@
 
     function toggleDemoMode() {
       DEMO_MODE = !DEMO_MODE;
+      localStorage.setItem('demoMode', DEMO_MODE);
       document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Modo Demo' : 'Modo Producción';
       document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
       location.reload();
