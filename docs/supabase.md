@@ -170,6 +170,30 @@ CREATE TABLE asambleas (
 - Si se migra a Supabase, el auth viene incluido
 - Combina bien con la idea de eliminar Google Forms
 
+## Requisitos
+
+- **No requiere tarjeta de crédito** para el plan Free
+- Solo la pide si se hace upgrade a Pro ($25/mes)
+
+## Storage: Supabase vs Backblaze B2
+
+Supabase Storage Free tiene solo 1GB. Para archivos pesados (documentos, comprobantes), conviene combinar con Backblaze B2:
+
+| Servicio | Uso | Free tier | Tarjeta |
+|----------|-----|-----------|---------|
+| **Supabase** | DB + Auth + API | 500MB DB, 50k usuarios | No |
+| **Backblaze B2** | Archivos grandes | 10GB + egress gratis | No |
+
+### Arquitectura combinada
+
+```
+Usuario → Frontend (HTML/JS) → Supabase API (DB + Auth)
+                                    ↓
+                              PostgreSQL
+                                    ↓
+                         Backblaze B2 (archivos)
+```
+
 ## Pricing (si se crece)
 
 | Plan | Precio | DB | Storage |
@@ -183,3 +207,4 @@ CREATE TABLE asambleas (
 - [Supabase Docs](https://supabase.com/docs)
 - [Supabase Auth](https://supabase.com/docs/guides/auth)
 - [Supabase Storage](https://supabase.com/docs/guides/storage)
+- [Backblaze B2 Docs](https://www.backblaze.com/docs/cloud-storage)
