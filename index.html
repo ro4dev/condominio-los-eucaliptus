@@ -646,9 +646,9 @@
           '<div class="proveedor-nombre">' + p.nombre + '</div>' +
           '<div class="proveedor-contacto">' +
             '<div>&#128205; ' + p.contacto + '</div>' +
-            '<div>&#128222; ' + p.telefono + '</div>' +
-            '<div>&#9993; ' + p.email + '</div>' +
-            (p['web/instagram'] ? '<div>&#127760; ' + p['web/instagram'] + '</div>' : '') +
+            (p.telefono ? '<div>&#128222; <a href="tel:' + p.telefono + '" style="color:#2563eb;text-decoration:none">' + p.telefono + '</a></div>' : '') +
+            (p.email ? '<div>&#9993; <a href="mailto:' + p.email + '" style="color:#2563eb;text-decoration:none">' + p.email + '</a></div>' : '') +
+            (p['web/instagram'] ? '<div>&#127760; <a href="' + p['web/instagram'] + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p['web/instagram'] + '</a></div>' : '') +
             '<div style="color:#6b7280;font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
           '</div>' +
           '</div>';
