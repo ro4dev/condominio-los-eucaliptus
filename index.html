@@ -526,8 +526,8 @@
               '<div><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + prop.tipo + '</div></div>' +
             '</div>' +
             '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:#374151">' +
-              (prop.telefono ? '<div>📱 ' + prop.telefono + '</div>' : '') +
-              (prop.email ? '<div>✉️ ' + prop.email + '</div>' : '') +
+              (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:#2563eb;text-decoration:none">' + prop.telefono + '</a></div>' : '') +
+              (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:#2563eb;text-decoration:none">' + prop.email + '</a></div>' : '') +
               (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
             '</div>' +
           '</div>';
