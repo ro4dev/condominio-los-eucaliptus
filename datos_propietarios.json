@@ -8,8 +8,16 @@
     "tipo": "Propietario"
   },
   {
-    "nombre": "María López",
+    "nombre": "María García",
     "dni": "27654321",
+    "parcela": "Parcela 1",
+    "telefono": "+54 9 11 1234-9999",
+    "email": "maria.garcia@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "nombre": "María López",
+    "dni": "28765432",
     "parcela": "Parcela 2",
     "telefono": "+54 9 11 2345-6789",
     "email": "maria.lopez@mail.com",
@@ -24,8 +32,16 @@
     "tipo": "Propietario"
   },
   {
+    "nombre": "Laura Díaz",
+    "dni": "31234567",
+    "parcela": "Parcela 3",
+    "telefono": "+54 9 11 3456-1111",
+    "email": "laura.diaz@mail.com",
+    "tipo": "Propietario"
+  },
+  {
     "nombre": "Ana Martínez",
-    "dni": "28765432",
+    "dni": "29876543",
     "parcela": "Parcela 4",
     "telefono": "+54 9 11 4567-8901",
     "email": "ana.martinez@mail.com",
@@ -33,7 +49,7 @@
   },
   {
     "nombre": "Pedro Rojas",
-    "dni": "31234567",
+    "dni": "33456789",
     "parcela": "Parcela 5",
     "telefono": "+54 9 11 5678-9012",
     "email": "pedro.rojas@mail.com",
@@ -41,7 +57,7 @@
   },
   {
     "nombre": "Laura Torres",
-    "dni": "29876543",
+    "dni": "26543210",
     "parcela": "Parcela 6",
     "telefono": "+54 9 11 6789-0123",
     "email": "laura.torres@mail.com",
@@ -49,7 +65,7 @@
   },
   {
     "nombre": "Diego Ramírez",
-    "dni": "33456789",
+    "dni": "34567890",
     "parcela": "Parcela 7",
     "telefono": "+54 9 11 7890-1234",
     "email": "diego.ramirez@mail.com",
@@ -57,7 +73,7 @@
   },
   {
     "nombre": "Sofía Herrera",
-    "dni": "26543210",
+    "dni": "25432109",
     "parcela": "Parcela 8",
     "telefono": "+54 9 11 8901-2345",
     "email": "sofia.herrera@mail.com",
@@ -65,7 +81,7 @@
   },
   {
     "nombre": "Miguel Ángel Ruiz",
-    "dni": "34567890",
+    "dni": "35678901",
     "parcela": "Parcela 9",
     "telefono": "+54 9 11 9012-3456",
     "email": "miguel.ruiz@mail.com",
@@ -73,7 +89,7 @@
   },
   {
     "nombre": "Valentina Muñoz",
-    "dni": "25432109",
+    "dni": "24321098",
     "parcela": "Parcela 10",
     "telefono": "+54 9 11 0123-4567",
     "email": "valentina.munoz@mail.com",
@@ -81,7 +97,7 @@
   },
   {
     "nombre": "Santiago Vega",
-    "dni": "35678901",
+    "dni": "36789012",
     "parcela": "Parcela 11",
     "telefono": "+54 9 11 1234-5678",
     "email": "santiago.vega@mail.com",
@@ -89,15 +105,23 @@
   },
   {
     "nombre": "Isabel Guerrero",
-    "dni": "24321098",
+    "dni": "30123456",
     "parcela": "Parcela 12",
     "telefono": "+54 9 11 2345-6789",
     "email": "isabel.guerrero@mail.com",
     "tipo": "Propietario"
   },
   {
+    "nombre": "Roberto Sánchez",
+    "dni": "32987654",
+    "parcela": "Parcela 12",
+    "telefono": "+54 9 11 2345-2222",
+    "email": "roberto.sanchez@mail.com",
+    "tipo": "Propietario"
+  },
+  {
     "nombre": "Pablo Castillo",
-    "dni": "36789012",
+    "dni": "31234567",
     "parcela": "Parcela 13",
     "telefono": "+54 9 11 3456-7890",
     "email": "pablo.castillo@mail.com",
