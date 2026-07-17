@@ -147,12 +147,7 @@
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgXlG76-2GAlQFXakRq8vuYHqaitCMZ_mfvxgCYULqyi9v3Q/viewform?usp=dialog" class="form-link" id="formGastos" target="_blank">+ Agregar Gasto</a>
-      <section class="stats" id="stats">
-        <div class="skeleton skeleton-stat"></div>
-        <div class="skeleton skeleton-stat"></div>
-        <div class="skeleton skeleton-stat"></div>
-        <div class="skeleton skeleton-stat"></div>
-      </section>
+      <section class="stats" id="stats"></section>
       <div class="filters">
         <label>Periodo:</label>
         <select id="periodFilter"></select>
@@ -162,20 +157,26 @@
       <section class="charts">
         <div class="chart-box">
           <h3>Monto por período</h3>
-          <div class="skeleton skeleton-chart"></div>
+          <canvas id="chartPeriodos"></canvas>
         </div>
         <div class="chart-box">
           <h3>Por parcela</h3>
-          <div class="skeleton skeleton-chart"></div>
+          <canvas id="chartParcelas"></canvas>
         </div>
       </section>
       <div class="table-wrap">
         <h3>Registros</h3>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>Parcela</th>
+              <th>Periodo</th>
+              <th>Concepto</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
       </div>
     </div>
 
