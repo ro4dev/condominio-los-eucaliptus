@@ -179,9 +179,9 @@ CREATE TABLE asambleas (
 
 Supabase Storage Free tiene solo 1GB. Para archivos pesados (documentos, comprobantes), conviene combinar con Backblaze B2:
 
-| Servicio        | Uso                | Free tier                  | Tarjeta |
-|-----------------|--------------------|----------------------------|---------|
-| **Supabase**    | DB + Auth + API    | 500MB DB, 50k usuarios     | No      |
+| Servicio         | Uso                | Free tier                  | Tarjeta |
+|------------------|--------------------|----------------------------|---------|
+| **Supabase**     | DB + Auth + API    | 500MB DB, 50k usuarios     | No      |
 | **Backblaze B2** | Archivos grandes   | 10GB + egress gratis       | No      |
 
 ### Arquitectura combinada

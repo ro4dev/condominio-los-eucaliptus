@@ -28,13 +28,13 @@ Usuario → Frontend (HTML/JS) → PocketBase API
 
 ### Deploy options
 
-| Opción           | Free tier              | Persistencia    |
-|------------------|------------------------|-----------------|
-| **Railway**      | $5 crédito/mes         | Sí (volume)     |
-| **Fly.io**       | 3 VMs compartidas      | Sí (volumes)    |
-| **Render**       | Free tier con sleep    | No (efímero)    |
-| **VPS (Hetzner)**| ~€4/mes               | Sí              |
-| **Docker local** | Gratis                 | Sí              |
+| Opción            | Free tier              | Persistencia    |
+|-------------------|------------------------|-----------------|
+| **Railway**       | $5 crédito/mes         | Sí (volume)     |
+| **Fly.io**        | 3 VMs compartidas      | Sí (volumes)    |
+| **Render**        | Free tier con sleep    | No (efímero)    |
+| **VPS (Hetzner)** | ~€4/mes               | Sí              |
+| **Docker local**  | Gratis                 | Sí              |
 
 **Recomendación**: Hetzner VPS por €4/mes o Railway con volume.
 
