@@ -103,6 +103,15 @@
 
     .section-title { font-size: 1.1rem; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; }
 
+    .skeleton { background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton 1.5s infinite; border-radius: 8px; }
+    .skeleton-card { height: 200px; margin-bottom: 1rem; }
+    .skeleton-row { height: 40px; margin-bottom: 0.5rem; }
+    .skeleton-stat { height: 100px; }
+    .skeleton-news { height: 120px; margin-bottom: 1rem; }
+    .skeleton-doc { height: 60px; margin-bottom: 0.5rem; }
+    .skeleton-timeline { height: 150px; margin-bottom: 1.5rem; }
+    @keyframes skeleton { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
     @media (max-width: 700px) { .charts { grid-template-columns: 1fr; } .tabs { gap: 0.3rem; } .tab-btn { padding: 0.5rem 1rem; font-size: 0.8rem; } }
   </style>
 </head>
@@ -163,53 +172,75 @@
 
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
-      <div class="cards-grid" id="parcelasGrid"></div>
+      <div class="cards-grid" id="parcelasGrid">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
     </div>
 
     <!-- NOTICIAS -->
     <div id="tab-noticias" class="tab-content">
-      <div id="noticiasList"></div>
+      <div id="noticiasList">
+        <div class="skeleton skeleton-news"></div>
+        <div class="skeleton skeleton-news"></div>
+        <div class="skeleton skeleton-news"></div>
+      </div>
     </div>
 
     <!-- INGRESOS/EGRESOS -->
     <div id="tab-flujo" class="tab-content">
-      <section class="stats" id="flujoStats"></section>
+      <section class="stats" id="flujoStats">
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+      </section>
       <div class="table-wrap">
         <h3>Movimientos</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Tipo</th>
-              <th>Concepto</th>
-              <th>Descripción</th>
-              <th>Monto</th>
-              <th>Registrado por</th>
-            </tr>
-          </thead>
-          <tbody id="flujoBody"></tbody>
-        </table>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
       </div>
     </div>
 
     <!-- DOCUMENTOS -->
     <div id="tab-documentos" class="tab-content">
-      <div class="cards-grid" id="documentosList"></div>
+      <div class="cards-grid" id="documentosList">
+        <div class="skeleton skeleton-doc"></div>
+        <div class="skeleton skeleton-doc"></div>
+        <div class="skeleton skeleton-doc"></div>
+        <div class="skeleton skeleton-doc"></div>
+      </div>
     </div>
 
     <!-- RECLAMOS -->
     <div id="tab-reclamos" class="tab-content">
-      <div id="reclamosList"></div>
+      <div id="reclamosList">
+        <div class="skeleton skeleton-doc"></div>
+        <div class="skeleton skeleton-doc"></div>
+        <div class="skeleton skeleton-doc"></div>
+      </div>
     </div>
 
     <!-- PROVEEDORES -->
     <div id="tab-proveedores" class="tab-content">
-      <div class="cards-grid" id="proveedoresGrid"></div>
+      <div class="cards-grid" id="proveedoresGrid">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
     </div>
 
     <!-- ASAMBLEAS -->
     <div id="tab-asambleas" class="tab-content">
-      <div class="timeline" id="asambleasTimeline"></div>
+      <div class="timeline" id="asambleasTimeline">
+        <div class="skeleton skeleton-timeline"></div>
+        <div class="skeleton skeleton-timeline"></div>
+      </div>
     </div>
   </div>
 
@@ -224,45 +255,44 @@
     var PROVEEDORES = [];
     var ASAMBLEAS = [];
 
-    async function loadData() {
-      var files = [
-        { target: 'GASTOS', file: 'datos_gastos.json' },
-        { target: 'PARCELAS', file: 'datos_parcelas.json' },
-        { target: 'PROPIETARIOS', file: 'datos_propietarios.json' },
-        { target: 'NOTICIAS', file: 'datos_noticias.json' },
-        { target: 'FLUJO', file: 'datos_ingresos_egresos.json' },
-        { target: 'DOCUMENTOS', file: 'datos_documentos.json' },
-        { target: 'RECLAMOS', file: 'datos_reclamos.json' },
-        { target: 'PROVEEDORES', file: 'datos_proveedores.json' },
-        { target: 'ASAMBLEAS', file: 'datos_asambleas.json' }
-      ];
+    var loaded = { GASTOS: false };
 
-      for (var i = 0; i < files.length; i++) {
-        try {
-          var res = await fetch(files[i].file);
-          var data = await res.json();
-          window[files[i].target] = data;
-        } catch (e) {
-          console.error('Error cargando ' + files[i].file, e);
-        }
+    async function loadJson(target, file) {
+      try {
+        var res = await fetch(file);
+        window[target] = await res.json();
+        loaded[target] = true;
+      } catch (e) {
+        console.error('Error cargando ' + file, e);
       }
-
-      fillFilters();
-      applyFilters();
-      renderParcelas();
-      renderNoticias();
-      renderFlujo();
-      renderDocumentos();
-      renderReclamos();
-      renderProveedores();
-      renderAsambleas();
     }
 
-    function switchTab(tab) {
+    async function loadInitialData() {
+      await loadJson('GASTOS', 'datos_gastos.json');
+      fillFilters();
+      applyFilters();
+    }
+
+    async function loadTabData(tab) {
+      var configs = {
+        parcelas: function() { return Promise.all([loadJson('PARCELAS', 'datos_parcelas.json'), loadJson('PROPIETARIOS', 'datos_propietarios.json')]).then(function() { renderParcelas(); }); },
+        noticias: function() { return loadJson('NOTICIAS', 'datos_noticias.json').then(function() { renderNoticias(); }); },
+        flujo: function() { return loadJson('FLUJO', 'datos_ingresos_egresos.json').then(function() { renderFlujo(); }); },
+        documentos: function() { return loadJson('DOCUMENTOS', 'datos_documentos.json').then(function() { renderDocumentos(); }); },
+        reclamos: function() { return loadJson('RECLAMOS', 'datos_reclamos.json').then(function() { renderReclamos(); }); },
+        proveedores: function() { return loadJson('PROVEEDORES', 'datos_proveedores.json').then(function() { renderProveedores(); }); },
+        asambleas: function() { return loadJson('ASAMBLEAS', 'datos_asambleas.json').then(function() { renderAsambleas(); }); }
+      };
+
+      if (configs[tab]) await configs[tab]();
+    }
+
+    async function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
       document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
       document.querySelector('[onclick="switchTab(\'' + tab + '\')"]').classList.add('active');
       document.getElementById('tab-' + tab).classList.add('active');
+      await loadTabData(tab);
     }
 
     function formatMoney(v) {
@@ -473,6 +503,11 @@
         '<div class="stat-card"><div class="label">Balance</div><div class="value ' + (balance >= 0 ? 'green' : 'red') + '">$' + formatMoney(balance) + '</div></div>' +
         '<div class="stat-card"><div class="label">Movimientos</div><div class="value">' + FLUJO.length + '</div></div>';
 
+      var tableWrap = document.querySelector('#tab-flujo .table-wrap');
+      tableWrap.innerHTML = '<h3>Movimientos</h3>' +
+        '<table><thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Descripción</th><th>Monto</th><th>Registrado por</th></tr></thead>' +
+        '<tbody id="flujoBody"></tbody></table>';
+
       var tbody = document.getElementById('flujoBody');
       tbody.innerHTML = FLUJO.map(function(f) {
         return '<tr>' +
@@ -553,7 +588,7 @@
       }).join('');
     }
 
-    loadData();
+    loadInitialData();
   </script>
 </body>
 </html>
