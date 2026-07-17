@@ -1,15 +1,3 @@
-var SPREADSHEET_IDS = {
-  'Asambleas (respuestas)': 'ID_AQUI',
-  'Documentos (respuestas)': 'ID_AQUI',
-  'Gastos Comunes (respuestas)': 'ID_AQUI',
-  'Ingresos/Egresos (respuestas)': 'ID_AQUI',
-  'Noticias (respuestas)': 'ID_AQUI',
-  'Parcelas (respuestas)': 'ID_AQUI',
-  'Propietarios (respuestas)': 'ID_AQUI',
-  'Proveedores (respuestas)': 'ID_AQUI',
-  'Reclamos/Sugerencias (respuestas)': 'ID_AQUI'
-};
-
 function doGet(e) {
   var sheet = (e && e.parameter && e.parameter.sheet) ? e.parameter.sheet : 'Gastos Comunes (respuestas)';
   var data = getSheetData(sheet);
@@ -20,10 +8,14 @@ function doGet(e) {
 }
 
 function getSheetData(sheetName) {
-  var ssId = SPREADSHEET_IDS[sheetName];
-  if (!ssId || ssId === 'ID_AQUI') return [];
+  var folder = getFolder();
+  if (!folder) return [];
 
-  var ss = SpreadsheetApp.openById(ssId);
+  var files = folder.getFilesByName(sheetName);
+  if (!files.hasNext()) return [];
+
+  var file = files.next();
+  var ss = SpreadsheetApp.openById(file.getId());
   var sheet = ss.getSheets()[0];
   if (!sheet) return [];
 
@@ -45,4 +37,10 @@ function getSheetData(sheetName) {
     records.push(record);
   }
   return records;
+}
+
+function getFolder() {
+  var folders = DriveApp.getFoldersByName('Condominio Eucaliptus');
+  if (!folders.hasNext()) return null;
+  return folders.next();
 }
