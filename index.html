@@ -147,7 +147,12 @@
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgXlG76-2GAlQFXakRq8vuYHqaitCMZ_mfvxgCYULqyi9v3Q/viewform?usp=dialog" class="form-link" id="formGastos" target="_blank">+ Agregar Gasto</a>
-      <section class="stats" id="stats"></section>
+      <section class="stats" id="stats">
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+      </section>
       <div class="filters">
         <label>Periodo:</label>
         <select id="periodFilter"></select>
@@ -157,26 +162,20 @@
       <section class="charts">
         <div class="chart-box">
           <h3>Monto por período</h3>
-          <canvas id="chartPeriodos"></canvas>
+          <div class="skeleton skeleton-chart"></div>
         </div>
         <div class="chart-box">
           <h3>Por parcela</h3>
-          <canvas id="chartParcelas"></canvas>
+          <div class="skeleton skeleton-chart"></div>
         </div>
       </section>
       <div class="table-wrap">
         <h3>Registros</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Parcela</th>
-              <th>Periodo</th>
-              <th>Concepto</th>
-              <th>Monto</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
+        <div class="skeleton skeleton-row"></div>
       </div>
     </div>
 
@@ -404,7 +403,7 @@
       parcelas.sort();
 
       var pf = document.getElementById('periodFilter');
-      pf.innerHTML = '<option value="">Todos</option>' + periodos.map(function(p) { return '<option>' + p + '</option>'; }).join('');
+      pf.innerHTML = '<option value="">Todos</option>' + periodos.map(function(p) { return '<option value="' + p + '">' + formatPeriodo(p) + '</option>'; }).join('');
 
       var paf = document.getElementById('parcelaFilter');
       paf.innerHTML = '<option value="">Todas</option>' + parcelas.map(function(p) { return '<option>' + p + '</option>'; }).join('');
