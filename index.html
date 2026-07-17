@@ -38,7 +38,7 @@
 
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgXlG76-2GAlQFXakRq8vuYHqaitCMZ_mfvxgCYULqyi9v3Q/viewform?usp=dialog" class="form-link" id="formGastos" target="_blank">+ Agregar Gasto</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgXlG76-2GAlQFXakRq8vuYHqaitCMZ_mfvxgCYULqyi9v3Q/viewform?usp=dialog" class="form-link" id="formGastos" onclick="if(DEMO_MODE){formGastos();return false;}">+ Agregar Gasto</a>
       <button class="reload-btn" onclick="reloadTab('cuenta')">↻ Recargar</button>
       <section class="stats" id="stats">
         <div class="skeleton skeleton-stat"></div>
@@ -87,8 +87,8 @@
 
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeu0-ZciUIlXyeQmq4c0YrpeWATI4fyZ8Kb-Pw2seARnx9J8w/viewform?usp=dialog" class="form-link" id="formParcelas" target="_blank">+ Agregar Parcela</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfHrdD51xMF-rs5cJMw6XYi8ei9DjnDExZPku1WdicPgmjuDA/viewform?usp=dialog" class="form-link" id="formPropietarios" target="_blank">+ Agregar Propietario</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeu0-ZciUIlXyeQmq4c0YrpeWATI4fyZ8Kb-Pw2seARnx9J8w/viewform?usp=dialog" class="form-link" id="formParcelas" onclick="if(DEMO_MODE){formParcelas();return false;}">+ Agregar Parcela</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfHrdD51xMF-rs5cJMw6XYi8ei9DjnDExZPku1WdicPgmjuDA/viewform?usp=dialog" class="form-link" id="formPropietarios" onclick="if(DEMO_MODE){formPropietarios();return false;}">+ Agregar Propietario</a>
       <button class="reload-btn" onclick="reloadTab('parcelas')">↻ Recargar</button>
       <div class="cards-grid" id="parcelasGrid">
         <div class="skeleton skeleton-card"></div>
@@ -100,7 +100,7 @@
 
     <!-- NOTICIAS -->
     <div id="tab-noticias" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7ujwg4BnJMNPK0aj_por5hVU4L6bt2z6fMHq_1CshqEWbFw/viewform?usp=dialog" class="form-link" id="formNoticias" target="_blank">+ Agregar Noticia</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7ujwg4BnJMNPK0aj_por5hVU4L6bt2z6fMHq_1CshqEWbFw/viewform?usp=dialog" class="form-link" id="formNoticias" onclick="if(DEMO_MODE){formNoticias();return false;}">+ Agregar Noticia</a>
       <button class="reload-btn" onclick="reloadTab('noticias')">↻ Recargar</button>
       <div id="noticiasList">
         <div class="skeleton skeleton-news"></div>
@@ -111,7 +111,7 @@
 
     <!-- INGRESOS/EGRESOS -->
     <div id="tab-flujo" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfzL9OSPG-FfzrKU0hF_q_Bo4rgy7DoHbzz_dDKwx6MTQM7Rg/viewform?usp=dialog" class="form-link" id="formFlujo" target="_blank">+ Agregar Movimiento</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfzL9OSPG-FfzrKU0hF_q_Bo4rgy7DoHbzz_dDKwx6MTQM7Rg/viewform?usp=dialog" class="form-link" id="formFlujo" onclick="if(DEMO_MODE){formFlujo();return false;}">+ Agregar Movimiento</a>
       <button class="reload-btn" onclick="reloadTab('flujo')">↻ Recargar</button>
       <section class="stats" id="flujoStats">
         <div class="skeleton skeleton-stat"></div>
@@ -131,7 +131,7 @@
 
     <!-- DOCUMENTOS -->
     <div id="tab-documentos" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSczA-s1wrZTXTeWWYlqxr9Zqvqwcti0Jo-PkAF_7YkjS5xH4w/viewform?usp=dialog" class="form-link" id="formDocumentos" target="_blank">+ Agregar Documento</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSczA-s1wrZTXTeWWYlqxr9Zqvqwcti0Jo-PkAF_7YkjS5xH4w/viewform?usp=dialog" class="form-link" id="formDocumentos" onclick="if(DEMO_MODE){formDocumentos();return false;}">+ Agregar Documento</a>
       <button class="reload-btn" onclick="reloadTab('documentos')">↻ Recargar</button>
       <div class="cards-grid" id="documentosList">
         <div class="skeleton skeleton-doc"></div>
@@ -143,7 +143,7 @@
 
     <!-- RECLAMOS/SUGERENCIAS -->
     <div id="tab-reclamos" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4Otwz7K7SnGxGrnhu8lM-Ikyg8mAekDb2xTutXqif3IcYtg/viewform?usp=dialog" class="form-link" id="formReclamos" target="_blank">+ Agregar Reclamo/Sugerencia</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4Otwz7K7SnGxGrnhu8lM-Ikyg8mAekDb2xTutXqif3IcYtg/viewform?usp=dialog" class="form-link" id="formReclamos" onclick="if(DEMO_MODE){formReclamos();return false;}">+ Agregar Reclamo/Sugerencia</a>
       <button class="reload-btn" onclick="reloadTab('reclamos')">↻ Recargar</button>
       <div id="reclamosList">
         <div class="skeleton skeleton-doc"></div>
@@ -154,7 +154,7 @@
 
     <!-- PROVEEDORES -->
     <div id="tab-proveedores" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSejI9qlN4CZZJi_NaJIkLoS11ASV3_2t-fS93NOTCms3TTNzA/viewform?usp=dialog" class="form-link" id="formProveedores" target="_blank">+ Agregar Proveedor</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSejI9qlN4CZZJi_NaJIkLoS11ASV3_2t-fS93NOTCms3TTNzA/viewform?usp=dialog" class="form-link" id="formProveedores" onclick="if(DEMO_MODE){formProveedores();return false;}">+ Agregar Proveedor</a>
       <button class="reload-btn" onclick="reloadTab('proveedores')">↻ Recargar</button>
       <div class="cards-grid" id="proveedoresGrid">
         <div class="skeleton skeleton-card"></div>
@@ -165,7 +165,7 @@
 
     <!-- ASAMBLEAS -->
     <div id="tab-asambleas" class="tab-content">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3WJtmBRJiyFyG7KVSVelLRofSdUN5QWAakSKK3UX7K8lP8w/viewform?usp=dialog" class="form-link" id="formAsambleas" target="_blank">+ Agregar Asamblea</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3WJtmBRJiyFyG7KVSVelLRofSdUN5QWAakSKK3UX7K8lP8w/viewform?usp=dialog" class="form-link" id="formAsambleas" onclick="if(DEMO_MODE){formAsambleas();return false;}">+ Agregar Asamblea</a>
       <button class="reload-btn" onclick="reloadTab('asambleas')">↻ Recargar</button>
       <div class="timeline" id="asambleasTimeline">
         <div class="skeleton skeleton-timeline"></div>
@@ -174,10 +174,21 @@
     </div>
   </div>
 
+  <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
   <script src="js/config.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/data.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/renderers.js"></script>
+  <script src="js/modals.js"></script>
 </body>
 </html>
