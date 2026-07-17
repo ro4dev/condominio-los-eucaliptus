@@ -654,12 +654,16 @@
       var timeline = document.getElementById('asambleasTimeline');
       timeline.innerHTML = ASAMBLEAS.map(function(a) {
         var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
+        var fecha = a['marca temporal'] ? a['marca temporal'].split('T')[0] : '';
+        var asistentes = a.asistentes ? a.asistentes.split(',').map(function(item) {
+          return '<span style="display:inline-block;background:#e5e7eb;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
+        }).join('') : '';
         return '<div class="timeline-item' + extraClass + '">' +
-          '<div class="timeline-date">' + a.fecha + '</div>' +
+          '<div class="timeline-date">' + fecha + '</div>' +
           '<span class="timeline-tipo' + extraClass + '">' + a.tipo + '</span>' +
-          '<div class="timeline-section"><strong>Temario:</strong><p>' + a.temario + '</p></div>' +
-          '<div class="timeline-section"><strong>Acuerdos:</strong><p>' + a.acuerdos + '</p></div>' +
-          '<div class="timeline-asistentes">Asistentes: ' + a.asistentes + '</div>' +
+          '<div class="timeline-section"><strong>Temario:</strong><p>' + (a.temario || '') + '</p></div>' +
+          '<div class="timeline-section"><strong>Acuerdos:</strong><p>' + (a.acuerdos || '') + '</p></div>' +
+          '<div class="timeline-section"><strong>Asistentes:</strong><p>' + asistentes + '</p></div>' +
           '</div>';
       }).join('');
     }
