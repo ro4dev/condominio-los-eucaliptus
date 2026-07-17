@@ -147,7 +147,7 @@
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgXlG76-2GAlQFXakRq8vuYHqaitCMZ_mfvxgCYULqyi9v3Q/viewform?usp=dialog" class="form-link" id="formGastos" target="_blank">+ Agregar Gasto</a>
-      <section class="stats" id="stats"></section>
+      <section class="stats" id="stats"><div style="text-align:center;color:#9ca3af;padding:1rem">Cargando...</div></section>
       <div class="filters">
         <label>Periodo:</label>
         <select id="periodFilter"></select>
@@ -166,7 +166,8 @@
       </section>
       <div class="table-wrap">
         <h3>Registros</h3>
-        <table>
+        <div id="tableLoading" style="text-align:center;color:#9ca3af;padding:1rem">Cargando...</div>
+        <table style="display:none" id="tableGastos">
           <thead>
             <tr>
               <th>Parcela</th>
@@ -443,6 +444,8 @@
     }
 
     function renderTable(data) {
+      document.getElementById('tableLoading').style.display = 'none';
+      document.getElementById('tableGastos').style.display = 'table';
       var tbody = document.getElementById('tableBody');
       if (data.length === 0) {
         tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
