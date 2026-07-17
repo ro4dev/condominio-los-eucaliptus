@@ -1,5 +1,5 @@
 function doGet(e) {
-  var sheet = e.parameter.sheet || 'gastos';
+  var sheet = (e && e.parameter && e.parameter.sheet) ? e.parameter.sheet : 'Gastos Comunes (respuestas)';
   var data = getSheetData(sheet);
 
   return ContentService
