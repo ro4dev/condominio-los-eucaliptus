@@ -170,11 +170,9 @@
           <thead>
             <tr>
               <th>Parcela</th>
-              <th>Nombre</th>
               <th>Periodo</th>
               <th>Concepto</th>
               <th>Monto</th>
-              <th>Fecha</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -379,6 +377,17 @@
       return s;
     }
 
+    function formatDate(d) {
+      if (!d) return '';
+      var s = String(d);
+      if (s.indexOf('T') !== -1) s = s.split('T')[0];
+      var parts = s.split('-');
+      if (parts.length === 3) return parts[2] + '/' + parts[1] + '/' + parts[0];
+      parts = s.split('/');
+      if (parts.length === 3) return parts[0] + '/' + parts[1] + '/' + parts[2];
+      return s;
+    }
+
     function getInitials(name) {
       return name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
     }
@@ -436,17 +445,15 @@
     function renderTable(data) {
       var tbody = document.getElementById('tableBody');
       if (data.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
         return;
       }
       tbody.innerHTML = data.map(function(r) {
         return '<tr>' +
           '<td>' + (r.parcela || '') + '</td>' +
-          '<td>' + (r.nombre || '') + '</td>' +
           '<td>' + formatPeriodo(r.periodo) + '</td>' +
           '<td>' + (r.concepto || '') + '</td>' +
           '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
-          '<td>' + (r.fecha || '') + '</td>' +
           '</tr>';
       }).join('');
     }
@@ -551,8 +558,8 @@
       }
 
       list.innerHTML = activas.map(function(n) {
-        var fecha = n.marca_temporal ? n.marca_temporal.split('T')[0] : '';
-        var hasta = n.fecha_hasta ? n.fecha_hasta.split('T')[0] : '';
+        var fecha = formatDate(n.marca_temporal);
+        var hasta = formatDate(n.fecha_hasta);
         return '<div class="news-card" style="margin-bottom:1rem">' +
           '<h4>' + (n.titulo || '') + '</h4>' +
           '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
@@ -583,7 +590,7 @@
 
       var tbody = document.getElementById('flujoBody');
       tbody.innerHTML = FLUJO.map(function(f) {
-        var fecha = f.marca_temporal ? f.marca_temporal.split('T')[0] : '';
+        var fecha = formatDate(f.marca_temporal);
         return '<tr>' +
           '<td>' + fecha + '</td>' +
           '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
@@ -602,7 +609,7 @@
 
       list.innerHTML = DOCUMENTOS.map(function(d) {
         var icon = icons[d.categoria] || '&#128196;';
-        var fecha = d.marca_temporal ? d.marca_temporal.split('T')[0] : '';
+        var fecha = formatDate(d.marca_temporal);
         return '<div class="doc-item">' +
           '<div class="doc-icon">' + icon + '</div>' +
           '<div class="doc-info">' +
@@ -622,7 +629,7 @@
         return '<div class="reclamo-item ' + tipoClass + '">' +
           '<div class="reclamo-header">' +
             '<span class="reclamo-tipo ' + tipoClass + '">' + r.tipo + '</span>' +
-            '<span class="reclamo-fecha">' + (r.marca_temporal ? r.marca_temporal.split('T')[0] : '') + '</span>' +
+            '<span class="reclamo-fecha">' + formatDate(r.marca_temporal) + '</span>' +
           '</div>' +
           '<div class="reclamo-title">' + r.asunto + '</div>' +
           '<div class="reclamo-desc">' + r.descripcion + '</div>' +
@@ -654,7 +661,7 @@
       var timeline = document.getElementById('asambleasTimeline');
       timeline.innerHTML = ASAMBLEAS.map(function(a) {
         var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
-        var fecha = a['marca temporal'] ? a['marca temporal'].split('T')[0] : '';
+        var fecha = formatDate(a.marca_temporal);
         var asistentes = a.asistentes ? a.asistentes.split(',').map(function(item) {
           return '<span style="display:inline-block;background:#e5e7eb;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
         }).join('') : '';
