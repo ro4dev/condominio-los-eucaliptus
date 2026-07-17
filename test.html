@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tests - Condominio Eucaliptus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: monospace; background: #1a1a2e; color: #e5e7eb; padding: 2rem; }
+    h1 { color: #fff; margin-bottom: 1rem; }
+    .test { padding: 0.4rem 0; border-bottom: 1px solid #374151; }
+    .pass { color: #10b981; }
+    .fail { color: #ef4444; }
+    .summary { margin-top: 1.5rem; padding: 1rem; border-radius: 8px; font-size: 1.1rem; }
+    .summary.all-pass { background: #065f46; color: #d1fae5; }
+    .summary.has-fail { background: #991b1b; color: #fee2e2; }
+  </style>
+</head>
+<body>
+  <h1>Tests</h1>
+  <div id="results"></div>
+  <div id="summary" class="summary"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/renderers.js"></script>
+
+  <script>
+    var results = document.getElementById('results');
+    var passed = 0, failed = 0;
+
+    function assert(name, got, expected) {
+      var ok = got === expected;
+      if (ok) passed++; else failed++;
+      var div = document.createElement('div');
+      div.className = 'test ' + (ok ? 'pass' : 'fail');
+      div.textContent = (ok ? '✓' : '✗') + ' ' + name + (ok ? '' : ' — got ' + JSON.stringify(got) + ', expected ' + JSON.stringify(expected));
+      results.appendChild(div);
+    }
+
+    function assertClose(name, got, expected, tolerance) {
+      var ok = Math.abs(got - expected) <= tolerance;
+      if (ok) passed++; else failed++;
+      var div = document.createElement('div');
+      div.className = 'test ' + (ok ? 'pass' : 'fail');
+      div.textContent = (ok ? '✓' : '✗') + ' ' + name + (ok ? '' : ' — got ' + JSON.stringify(got) + ', expected ~' + JSON.stringify(expected));
+      results.appendChild(div);
+    }
+
+    function assertThrows(name, fn) {
+      try { fn(); failed++; var div = document.createElement('div'); div.className = 'test fail'; div.textContent = '✗ ' + name + ' — expected error, none thrown'; results.appendChild(div); }
+      catch (e) { passed++; var div = document.createElement('div'); div.className = 'test pass'; div.textContent = '✓ ' + name + ' — threw: ' + e.message; results.appendChild(div); }
+    }
+
+    // ── formatMoney ──
+    assert('formatMoney(0)', formatMoney(0), '0');
+    assert('formatMoney(100)', formatMoney(100), '100');
+    assert('formatMoney(1000)', formatMoney(1000), '1.000');
+    assert('formatMoney(1234567)', formatMoney(1234567), '1.234.567');
+    assert('formatMoney(999)', formatMoney(999), '999');
+    assert('formatMoney(1000000)', formatMoney(1000000), '1.000.000');
+    assert('formatMoney(1500)', formatMoney(1500), '1.500');
+    assert('formatMoney(1234567890)', formatMoney(1234567890), '1.234.567.890');
+    assert('formatMoney(1500.4)', formatMoney(1500.4), '1.500');
+    assert('formatMoney(1500.5)', formatMoney(1500.5), '1.501');
+
+    // ── formatPeriodo ──
+    assert('formatPeriodo("2025-07")', formatPeriodo('2025-07'), '07/2025');
+    assert('formatPeriodo("2025-12")', formatPeriodo('2025-12'), '12/2025');
+    assert('formatPeriodo("2025-01")', formatPeriodo('2025-01'), '01/2025');
+    assert('formatPeriodo(null)', formatPeriodo(null), '');
+    assert('formatPeriodo("")', formatPeriodo(''), '');
+    assert('formatPeriodo("2025-07-15")', formatPeriodo('2025-07-15'), '07/2025');
+    assert('formatPeriodo("abc")', formatPeriodo('abc'), 'abc');
+
+    // ── formatDate ──
+    assert('formatDate("2025-07-15")', formatDate('2025-07-15'), '15/07/2025');
+    assert('formatDate("2025-12-01")', formatDate('2025-12-01'), '01/12/2025');
+    assert('formatDate("2025-01-05T12:00:00")', formatDate('2025-01-05T12:00:00'), '05/01/2025');
+    assert('formatDate(null)', formatDate(null), '');
+    assert('formatDate("")', formatDate(''), '');
+    assert('formatDate("15/07/2025")', formatDate('15/07/2025'), '15/07/2025');
+
+    // ── getInitials ──
+    assert('getInitials("Juan Perez")', getInitials('Juan Perez'), 'JP');
+    assert('getInitials("Maria Jose")', getInitials('Maria Jose'), 'MJ');
+    assert('getInitials("Ana")', getInitials('Ana'), 'A');
+    assert('getInitials("Carlos Alberto Lopez")', getInitials('Carlos Alberto Lopez'), 'CA');
+
+    // ── toggleDemoMode ──
+    var prev = DEMO_MODE;
+    toggleDemoMode();
+    assert('toggleDemoMode() cambia estado', DEMO_MODE !== prev, true);
+    toggleDemoMode();
+    assert('toggleDemoMode() vuelve al original', DEMO_MODE, prev);
+
+    // ── DEMO_FILES keys ──
+    assert('DEMO_FILES tiene GASTOS', typeof DEMO_FILES.GASTOS, 'string');
+    assert('DEMO_FILES tiene PARCELAS', typeof DEMO_FILES.PARCELAS, 'string');
+    assert('DEMO_FILES tiene NOTICIAS', typeof DEMO_FILES.NOTICIAS, 'string');
+    assert('DEMO_FILES tiene FLUJO', typeof DEMO_FILES.FLUJO, 'string');
+    assert('DEMO_FILES tiene DOCUMENTOS', typeof DEMO_FILES.DOCUMENTOS, 'string');
+    assert('DEMO_FILES tiene RECLAMOS', typeof DEMO_FILES.RECLAMOS, 'string');
+    assert('DEMO_FILES tiene PROVEEDORES', typeof DEMO_FILES.PROVEEDORES, 'string');
+    assert('DEMO_FILES tiene ASAMBLEAS', typeof DEMO_FILES.ASAMBLEAS, 'string');
+
+    // ── SHEET_NAMES keys ──
+    assert('SHEET_NAMES tiene GASTOS', typeof SHEET_NAMES.GASTOS, 'string');
+    assert('SHEET_NAMES tiene PARCELAS', typeof SHEET_NAMES.PARCELAS, 'string');
+
+    // ── loaded object ──
+    assert('loaded tiene GASTOS', typeof loaded.GASTOS, 'boolean');
+
+    // Summary
+    var summary = document.getElementById('summary');
+    var total = passed + failed;
+    summary.textContent = passed + '/' + total + ' tests passed' + (failed > 0 ? ' (' + failed + ' failed)' : '');
+    summary.className = 'summary ' + (failed === 0 ? 'all-pass' : 'has-fail');
+  </script>
+</body>
+</html>
