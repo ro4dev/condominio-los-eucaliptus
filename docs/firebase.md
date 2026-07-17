@@ -10,13 +10,13 @@ Mismo que en `supabase.md`: Sheets no es DB real, Apps Script tiene límites, no
 
 ## Qué resuelve Firebase
 
-| Necesidad | Solución Firebase |
-|-----------|-------------------|
-| Base de datos | Firestore (NoSQL) |
-| API | SDK nativo (no hay REST automático) |
-| Auth | Login con Google, email, etc. |
-| Storage | Cloud Storage con URLs permanentes |
-| Hosting | Deploy del frontend HTML |
+| Necesidad  | Solución Firebase                     |
+|------------|---------------------------------------|
+| Base de datos | Firestore (NoSQL)                  |
+| API        | SDK nativo (no hay REST automático)   |
+| Auth       | Login con Google, email, etc.         |
+| Storage    | Cloud Storage con URLs permanentes    |
+| Hosting    | Deploy del frontend HTML              |
 
 ## Arquitectura propuesta
 
@@ -136,16 +136,16 @@ Firestore es NoSQL, así que los datos se guardan en colecciones:
 
 ## Comparación con Supabase
 
-| Aspecto | Firebase | Supabase |
-|---------|----------|----------|
-| Tipo DB | NoSQL (Firestore) | SQL (PostgreSQL) |
-| Query language | Firestore queries | SQL |
-| Free tier reads | 50K/día | Ilimitado |
-| Storage free | 5GB | 1GB |
-| Hosting free | 10GB | No |
-| Auth | Excelente | Bueno |
-| Curva aprendizaje | Media | Media-Alta |
-| Costos al crecer | Más caro | Más barato |
+| Aspecto           | Firebase              | Supabase              |
+|-------------------|-----------------------|-----------------------|
+| Tipo DB           | NoSQL (Firestore)     | SQL (PostgreSQL)      |
+| Query language    | Firestore queries     | SQL                   |
+| Free tier reads   | 50K/día               | Ilimitado             |
+| Storage free      | 5GB                   | 1GB                   |
+| Hosting free      | 10GB                  | No                    |
+| Auth              | Excelente             | Bueno                 |
+| Curva aprendizaje | Media                 | Media-Alta            |
+| Costos al crecer  | Más caro              | Más barato            |
 
 ## Nivel de esfuerzo
 
@@ -166,10 +166,10 @@ Firestore es NoSQL, así que los datos se guardan en colecciones:
 
 ## Pricing (si se crece)
 
-| Plan | Precio | Firestore | Storage |
-|------|--------|-----------|---------|
-| Free | $0 | 1GB + 50K reads/día | 5GB |
-| Blaze | Pay-as-you-go | $0.18/100K reads | $0.026/GB |
+| Plan    | Precio          | Firestore            | Storage   |
+|---------|-----------------|----------------------|-----------|
+| Free    | $0              | 1GB + 50K reads/día  | 5GB       |
+| Blaze   | Pay-as-you-go   | $0.18/100K reads     | $0.026/GB |
 
 **Nota**: en Blaze, si hay tráfico inesperado, la factura puede ser alta. Se pueden poner límites de presupuesto.
 

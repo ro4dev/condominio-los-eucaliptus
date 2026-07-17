@@ -14,13 +14,13 @@ Reemplazar Google Sheets (DB) + Google Drive (storage) + Google Apps Script (bac
 
 ## Qué resuelve Supabase
 
-| Necesidad | Solución Supabase |
-|-----------|-------------------|
-| Base de datos | PostgreSQL real |
-| API | REST + GraphQL automático |
-| Auth | Login con Google, email, etc. |
-| Storage | Archivos con URLs permanentes |
-| Dashboard | UI para manage datos |
+| Necesidad      | Solución Supabase                  |
+|----------------|------------------------------------|
+| Base de datos  | PostgreSQL real                    |
+| API            | REST + GraphQL automático          |
+| Auth           | Login con Google, email, etc.      |
+| Storage        | Archivos con URLs permanentes      |
+| Dashboard      | UI para manage datos               |
 
 ## Arquitectura propuesta
 
@@ -179,10 +179,10 @@ CREATE TABLE asambleas (
 
 Supabase Storage Free tiene solo 1GB. Para archivos pesados (documentos, comprobantes), conviene combinar con Backblaze B2:
 
-| Servicio | Uso | Free tier | Tarjeta |
-|----------|-----|-----------|---------|
-| **Supabase** | DB + Auth + API | 500MB DB, 50k usuarios | No |
-| **Backblaze B2** | Archivos grandes | 10GB + egress gratis | No |
+| Servicio        | Uso                | Free tier                  | Tarjeta |
+|-----------------|--------------------|----------------------------|---------|
+| **Supabase**    | DB + Auth + API    | 500MB DB, 50k usuarios     | No      |
+| **Backblaze B2**| Archivos grandes   | 10GB + egress gratis       | No      |
 
 ### Arquitectura combinada
 
@@ -196,11 +196,11 @@ Usuario → Frontend (HTML/JS) → Supabase API (DB + Auth)
 
 ## Pricing (si se crece)
 
-| Plan | Precio | DB | Storage |
-|------|--------|-----|---------|
-| Free | $0 | 500MB | 1GB |
-| Pro | $25/mes | 8GB | 100GB |
-| Team | $599/mes | hasta 64GB | 200GB |
+| Plan    | Precio    | DB          | Storage   |
+|---------|-----------|-------------|-----------|
+| Free    | $0        | 500MB       | 1GB       |
+| Pro     | $25/mes   | 8GB         | 100GB     |
+| Team    | $599/mes  | hasta 64GB  | 200GB     |
 
 ## Referencias
 

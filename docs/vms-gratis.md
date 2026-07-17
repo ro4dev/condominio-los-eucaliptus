@@ -6,12 +6,12 @@ Opción de self-hosting usando la VM gratuita de Google Cloud Compute Engine (e2
 
 ## Google Cloud Always Free Tier
 
-| Recurso | Cuota mensual | Regiones válidas |
-|---------|---------------|------------------|
-| VM e2-micro | 1 instancia | us-west1, us-central1, us-east1 |
-| Persistent Disk | 30 GB standard | — |
-| Egress | 1 GB desde N. América | — |
-| Cloud Storage | 5 GB | — |
+| Recurso         | Cuota mensual                | Regiones válidas                              |
+|-----------------|------------------------------|-----------------------------------------------|
+| VM e2-micro     | 1 instancia                  | us-west1, us-central1, us-east1               |
+| Persistent Disk | 30 GB standard               | —                                             |
+| Egress          | 1 GB desde N. América        | —                                             |
+| Cloud Storage   | 5 GB                         | —                                             |
 
 ### Requisitos
 
@@ -67,15 +67,15 @@ PocketBase es una binaria liviana de Go que corre bien con:
 
 ## Comparación general de opciones
 
-| Opción | Costo | Tarjeta | Control | Pausa |
-|--------|-------|---------|---------|-------|
-| **Supabase Free** | $0 | No | Parcial | Sí (7 días inactividad) |
-| **Backblaze B2** | $0 | No | Total | No |
-| **GCP e2-micro** | $0 | Sí | Total | No |
-| **Cloudflare R2** | $0 | Sí | Total | No |
-| **Firebase Free** | $0 | No | Parcial | No |
-| **PocketBase en VPS** | ~$4+ | Sí | Total | No |
-| **Oracle Cloud Always Free** | $0 | No | Total | No |
+| Opción                     | Costo    | Tarjeta | Control  | Pausa                     |
+|----------------------------|----------|---------|----------|---------------------------|
+| **Supabase Free**          | $0       | No      | Parcial  | Sí (7 días inactividad)   |
+| **Backblaze B2**           | $0       | No      | Total    | No                        |
+| **GCP e2-micro**           | $0       | Sí      | Total    | No                        |
+| **Cloudflare R2**          | $0       | Sí      | Total    | No                        |
+| **Firebase Free**          | $0       | No      | Parcial  | No                        |
+| **PocketBase en VPS**      | ~$4+     | Sí      | Total    | No                        |
+| **Oracle Cloud AF**        | $0       | No      | Total    | No                        |
 
 ### Combinación ganadora (gratis, sin tarjeta)
 

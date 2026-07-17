@@ -28,13 +28,13 @@ Usuario → Frontend (HTML/JS) → PocketBase API
 
 ### Deploy options
 
-| Opción | Free tier | Persistencia |
-|--------|-----------|--------------|
-| **Railway** | $5 crédito/mes | Sí (volume) |
-| **Fly.io** | 3 VMs compartidas | Sí (volumes) |
-| **Render** | Free tier con sleep | No (efímero) |
-| **VPS (Hetzner)** | ~€4/mes | Sí |
-| **Docker local** | Gratis | Sí |
+| Opción           | Free tier              | Persistencia    |
+|------------------|------------------------|-----------------|
+| **Railway**      | $5 crédito/mes         | Sí (volume)     |
+| **Fly.io**       | 3 VMs compartidas      | Sí (volumes)    |
+| **Render**       | Free tier con sleep    | No (efímero)    |
+| **VPS (Hetzner)**| ~€4/mes               | Sí              |
+| **Docker local** | Gratis                 | Sí              |
 
 **Recomendación**: Hetzner VPS por €4/mes o Railway con volume.
 
@@ -119,15 +119,15 @@ await pb.collection('documentos').create(formData);
 
 ## Comparación
 
-| Aspecto | PocketBase | Supabase | Firebase |
-|---------|-----------|----------|----------|
-| Tipo | Self-hosted | Managed | Managed |
-| DB | SQLite | PostgreSQL | Firestore (NoSQL) |
-| Free tier | No (necesita servidor) | Sí | Sí |
-| Control total | Sí | Parcial | No |
-| Complejidad deploy | Media | Baja | Baja |
-| Costo mensual | €4+ | $0 | $0 |
-| Curva aprendizaje | Baja | Media-Alta | Media |
+| Aspecto           | PocketBase                | Supabase              | Firebase              |
+|-------------------|---------------------------|-----------------------|-----------------------|
+| Tipo              | Self-hosted               | Managed               | Managed               |
+| DB                | SQLite                    | PostgreSQL            | Firestore (NoSQL)     |
+| Free tier         | No (necesita servidor)    | Sí                    | Sí                    |
+| Control total     | Sí                        | Parcial               | No                    |
+| Complejidad deploy| Media                     | Baja                  | Baja                  |
+| Costo mensual     | €4+                       | $0                    | $0                    |
+| Curva aprendizaje | Baja                      | Media-Alta            | Media                 |
 
 ## Nivel de esfuerzo
 
