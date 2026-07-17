@@ -40,7 +40,12 @@
     <div id="tab-cuenta" class="tab-content active">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgXlG76-2GAlQFXakRq8vuYHqaitCMZ_mfvxgCYULqyi9v3Q/viewform?usp=dialog" class="form-link" id="formGastos" target="_blank">+ Agregar Gasto</a>
       <button class="reload-btn" onclick="reloadTab('cuenta')">↻ Recargar</button>
-      <section class="stats" id="stats"><div style="text-align:center;color:#9ca3af;padding:1rem">Cargando...</div></section>
+      <section class="stats" id="stats">
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+      </section>
       <div class="filters">
         <label>Periodo:</label>
         <select id="periodFilter"></select>
