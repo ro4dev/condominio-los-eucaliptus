@@ -1,3 +1,5 @@
+var FOLDER_ID = 'TU_FOLDER_ID';
+
 function doGet(e) {
   var sheet = (e && e.parameter && e.parameter.sheet) ? e.parameter.sheet : 'Gastos Comunes (respuestas)';
   var data = getSheetData(sheet);
@@ -8,7 +10,7 @@ function doGet(e) {
 }
 
 function getSheetData(sheetName) {
-  var folder = getFolder();
+  var folder = DriveApp.getFolderById(FOLDER_ID);
   if (!folder) return [];
 
   var files = folder.getFilesByName(sheetName);
@@ -37,10 +39,4 @@ function getSheetData(sheetName) {
     records.push(record);
   }
   return records;
-}
-
-function getFolder() {
-  var folders = DriveApp.getFoldersByName('Condominio Eucaliptus');
-  if (!folders.hasNext()) return null;
-  return folders.next();
 }
