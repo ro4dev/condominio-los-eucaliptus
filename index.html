@@ -102,6 +102,8 @@
     .timeline-asistentes { font-size: 0.8rem; color: #6b7280; }
 
     .section-title { font-size: 1.1rem; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; }
+    .form-link { display: inline-flex; align-items: center; gap: 0.4rem; background: #2563eb; color: #fff; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 500; margin-bottom: 1rem; transition: background 0.2s; }
+    .form-link:hover { background: #1d4ed8; }
 
     .skeleton { background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton 1.5s infinite; border-radius: 8px; }
     .skeleton-card { height: 200px; margin-bottom: 1rem; }
@@ -172,6 +174,7 @@
 
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
+      <a href="#" class="form-link" id="formParcelas" target="_blank">+ Agregar Parcela</a>
       <div class="cards-grid" id="parcelasGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -182,6 +185,7 @@
 
     <!-- NOTICIAS -->
     <div id="tab-noticias" class="tab-content">
+      <a href="#" class="form-link" id="formNoticias" target="_blank">+ Agregar Noticia</a>
       <div id="noticiasList">
         <div class="skeleton skeleton-news"></div>
         <div class="skeleton skeleton-news"></div>
@@ -191,6 +195,7 @@
 
     <!-- INGRESOS/EGRESOS -->
     <div id="tab-flujo" class="tab-content">
+      <a href="#" class="form-link" id="formFlujo" target="_blank">+ Agregar Movimiento</a>
       <section class="stats" id="flujoStats">
         <div class="skeleton skeleton-stat"></div>
         <div class="skeleton skeleton-stat"></div>
@@ -209,6 +214,7 @@
 
     <!-- DOCUMENTOS -->
     <div id="tab-documentos" class="tab-content">
+      <a href="#" class="form-link" id="formDocumentos" target="_blank">+ Agregar Documento</a>
       <div class="cards-grid" id="documentosList">
         <div class="skeleton skeleton-doc"></div>
         <div class="skeleton skeleton-doc"></div>
@@ -219,6 +225,7 @@
 
     <!-- RECLAMOS -->
     <div id="tab-reclamos" class="tab-content">
+      <a href="#" class="form-link" id="formReclamos" target="_blank">+ Agregar Reclamo</a>
       <div id="reclamosList">
         <div class="skeleton skeleton-doc"></div>
         <div class="skeleton skeleton-doc"></div>
@@ -228,6 +235,7 @@
 
     <!-- PROVEEDORES -->
     <div id="tab-proveedores" class="tab-content">
+      <a href="#" class="form-link" id="formProveedores" target="_blank">+ Agregar Proveedor</a>
       <div class="cards-grid" id="proveedoresGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -237,6 +245,7 @@
 
     <!-- ASAMBLEAS -->
     <div id="tab-asambleas" class="tab-content">
+      <a href="#" class="form-link" id="formAsambleas" target="_blank">+ Agregar Asamblea</a>
       <div class="timeline" id="asambleasTimeline">
         <div class="skeleton skeleton-timeline"></div>
         <div class="skeleton skeleton-timeline"></div>
