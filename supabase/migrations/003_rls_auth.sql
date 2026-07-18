@@ -15,68 +15,68 @@ ALTER TABLE proveedores ENABLE ROW LEVEL SECURITY;
 ALTER TABLE asambleas ENABLE ROW LEVEL SECURITY;
 
 -- ============================================
--- POLÍTICAS: Usuarios autenticados pueden leer todo
+-- POLÍTICAS: Lectura pública (cualquier rol)
+-- Se restringirá cuando se implemente auth
 -- ============================================
 
 CREATE POLICY "parcelas_select" ON parcelas
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "propietarios_select" ON propietarios
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "gastos_select" ON gastos
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "flujo_select" ON flujo
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "noticias_select" ON noticias
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "documentos_select" ON documentos
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "reclamos_select" ON reclamos
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "proveedores_select" ON proveedores
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 CREATE POLICY "asambleas_select" ON asambleas
-  FOR SELECT USING (auth.role() = 'authenticated');
+  FOR SELECT USING (true);
 
 -- ============================================
--- POLÍTICAS: Solo admin puede escribir
--- (por ahora, cualquier autenticado puede escribir)
--- Después se puede restringir con un campo "role" en profiles
+-- POLÍTICAS: Escritura pública (cualquier rol)
+-- Se restringirá cuando se implemente auth
 -- ============================================
 
 CREATE POLICY "parcelas_insert" ON parcelas
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "propietarios_insert" ON propietarios
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "gastos_insert" ON gastos
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "flujo_insert" ON flujo
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "noticias_insert" ON noticias
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "documentos_insert" ON documentos
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "reclamos_insert" ON reclamos
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "proveedores_insert" ON proveedores
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 CREATE POLICY "asambleas_insert" ON asambleas
-  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+  FOR INSERT WITH CHECK (true);
 
 -- ============================================
 -- TABLA DE PERFILES (para rol admin/user)
