@@ -13,14 +13,35 @@ function handleForm(e) {
   var form = e.target;
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
-  console.log('Form data:', data);
-  alert('Guardado (demo). En modo real se enviaría a Supabase.');
-  closeModal();
+  if (DEMO_MODE) {
+    console.log('Form data:', data);
+    alert('Guardado (demo). En modo real se enviaría a Supabase.');
+    closeModal();
+  } else {
+    var table = form.dataset.table;
+    if (!table) {
+      alert('Error: no se especificó la tabla.');
+      return;
+    }
+    supabaseInsert(table, data).then(function(result) {
+      if (result) {
+        alert('Guardado correctamente.');
+        closeModal();
+        reloadTab(getCurrentTab());
+      }
+    });
+  }
+}
+
+function getCurrentTab() {
+  var active = document.querySelector('.tab-content.active');
+  if (!active) return 'cuenta';
+  return active.id.replace('tab-', '');
 }
 
 function formGastos() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Gasto', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Gasto', '<form data-table="gastos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Parcela</label><select name="parcela" required>' + parcelas + '</select></div>' +
       '<div class="form-group"><label>Periodo</label><input type="month" name="periodo" required></div>' +
@@ -34,7 +55,7 @@ function formGastos() {
 }
 
 function formParcelas() {
-  openModal('Agregar Parcela', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Parcela', '<form data-table="parcelas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Número</label><input type="text" name="numero" required></div>' +
       '<div class="form-group"><label>Rol</label><input type="text" name="rol"></div>' +
@@ -49,7 +70,7 @@ function formParcelas() {
 
 function formPropietarios() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Propietario', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Propietario', '<form data-table="propietarios" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Nombre completo</label><input type="text" name="nombre_completo" required></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>RUT</label><input type="text" name="rut"></div>' +
@@ -65,7 +86,7 @@ function formPropietarios() {
 }
 
 function formNoticias() {
-  openModal('Agregar Noticia', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Noticia', '<form data-table="noticias" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Título</label><input type="text" name="titulo" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" required></textarea></div>' +
     '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fecha_hasta"></div>' +
@@ -74,7 +95,7 @@ function formNoticias() {
 }
 
 function formFlujo() {
-  openModal('Agregar Movimiento', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Movimiento', '<form data-table="flujo" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Ingreso</option><option>Egreso</option></select></div>' +
       '<div class="form-group"><label>Fecha</label><input type="date" name="fecha" required></div>' +
@@ -88,7 +109,7 @@ function formFlujo() {
 }
 
 function formDocumentos() {
-  openModal('Agregar Documento', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Documento', '<form data-table="documentos" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Nombre</label><input type="text" name="nombre" required></div>' +
     '<div class="form-group"><label>Categoría</label><select name="categoria" required><option>Estatuto</option><option>Actas</option><option>Contratos</option><option>Seguros</option><option>Planos</option></select></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
@@ -99,7 +120,7 @@ function formDocumentos() {
 
 function formReclamos() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Reclamo/Sugerencia', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Reclamo/Sugerencia', '<form data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Reclamo</option><option>Sugerencia</option></select></div>' +
       '<div class="form-group"><label>Parcela</label><select name="parcela"><option value="">Anónimo</option>' + parcelas + '</select></div>' +
@@ -111,7 +132,7 @@ function formReclamos() {
 }
 
 function formProveedores() {
-  openModal('Agregar Proveedor', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Proveedor', '<form data-table="proveedores" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Rubro</label><input type="text" name="rubro" required></div>' +
       '<div class="form-group"><label>Nombre</label><input type="text" name="nombre" required></div>' +
@@ -128,7 +149,7 @@ function formProveedores() {
 }
 
 function formAsambleas() {
-  openModal('Agregar Asamblea', '<form onsubmit="handleForm(event)">' +
+  openModal('Agregar Asamblea', '<form data-table="asambleas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Fecha</label><input type="date" name="fecha" required></div>' +
       '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Ordinaria</option><option>Extraordinaria</option></select></div>' +

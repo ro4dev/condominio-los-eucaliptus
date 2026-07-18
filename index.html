@@ -22,7 +22,11 @@
           <h1>CONDOMINIO EUCALIPTUS</h1>
           <p>Control de gastos comunes</p>
         </div>
-        <button id="demoToggle" onclick="toggleDemoMode()" class="demo-toggle active">Salir de modo demo</button>
+        <div style="display:flex;gap:0.5rem;align-items:center">
+          <button id="loginBtn" onclick="showLoginModal()" class="demo-toggle">Iniciar sesión</button>
+          <button id="logoutBtn" onclick="handleLogout()" class="demo-toggle" style="display:none">Cerrar sesión</button>
+          <button id="demoToggle" onclick="toggleDemoMode()" class="demo-toggle active">Salir de modo demo</button>
+        </div>
       </div>
     </header>
 
@@ -182,6 +186,35 @@
         <button class="modal-close" onclick="closeModal()">&times;</button>
       </div>
       <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="loginModalTitle">Iniciar sesión</h3>
+        <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" name="password" required>
+          </div>
+          <div id="loginError" style="color:#dc2626;font-size:0.85rem;margin-bottom:1rem"></div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="closeLoginModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </div>
+        </form>
+        <div style="text-align:center;margin-top:1rem">
+          <a href="#" onclick="showSignupForm(); return false" style="color:#2563eb;font-size:0.85rem">Crear cuenta</a>
+        </div>
+      </div>
     </div>
   </div>
 
