@@ -6,6 +6,15 @@ function openModal(title, html) {
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('active');
+  hideLoading();
+}
+
+function showLoading() {
+  document.getElementById('modalLoading').style.display = 'flex';
+}
+
+function hideLoading() {
+  document.getElementById('modalLoading').style.display = 'none';
 }
 
 function confirmCloseModal() {
@@ -23,12 +32,13 @@ function confirmCloseModal() {
 
 function handleForm(e) {
   e.preventDefault();
+  showLoading();
   var form = e.target;
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
 
   var table = form.dataset.table;
-  var autoDateTables = ['noticias', 'documentos', 'reclamos'];
+  var autoDateTables = ['noticias', 'documentos'];
   if (autoDateTables.indexOf(table) !== -1 && !data.fecha) {
     data.fecha = new Date().toISOString().slice(0, 10);
   }
@@ -40,11 +50,16 @@ function handleForm(e) {
   var filePromise = Promise.resolve(null);
   if (fileInput && fileInput.files.length > 0) {
     var bucket = form.dataset.bucket || 'gastos_comunes';
-    filePromise = supabaseUpload(fileInput.files[0], bucket);
+    var folder = '';
+    if (table === 'gastos' && data.periodo) folder = data.periodo;
+    else if (table === 'flujo' && data.fecha && data.tipo) folder = data.fecha.slice(0, 7) + '-' + data.tipo;
+    else if (table === 'documentos' && data.categoria) folder = data.categoria;
+    filePromise = supabaseUpload(fileInput.files[0], bucket, folder);
   }
 
   filePromise.then(function(fileUrl) {
     if (fileInput && fileInput.files.length > 0 && !fileUrl) {
+      hideLoading();
       return;
     }
     if (fileUrl) {
@@ -57,9 +72,11 @@ function handleForm(e) {
     } else {
       if (!table) {
         alert('Error: no se especificó la tabla.');
+        hideLoading();
         return;
       }
       supabaseInsert(table, data).then(function(result) {
+        hideLoading();
         if (result) {
           alert('Guardado correctamente.');
           closeModal();

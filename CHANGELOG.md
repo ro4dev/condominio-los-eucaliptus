@@ -72,3 +72,28 @@
 - [x] Indicador de campos obligatorios (*)
 - [x] Validación antes de cerrar modal con datos
 - [x] Header responsive (mobile)
+
+### Bugs - Schema Supabase
+- [x] Tabla `reclamos` no tiene columna `fecha` → eliminado de autoDateTables (usa created_at)
+- [ ] Tabla `flujo` — revisar error al guardar con comprobante (columna archivo existe en schema)
+
+### Gastos Comunes
+- [ ] Quitar campo concepto
+- [ ] Validar que no se repitan parcelas ya agregadas
+
+### Noticias
+- [ ] Ordenar por fecha de publicación
+- [ ] Vista para ver noticias anteriores/vencidas
+
+### Ingresos/Egresos
+- [ ] Revisar que el popup se cierre correctamente al guardar
+
+### Reclamos/Sugerencias
+- [ ] Agregar chips/filtros: Todos, Reclamos, Sugerencias
+
+### Proveedores
+- [ ] Revisar validación de URL (web/instagram) — reclama que no es válida aunque se ingresa una
+
+### Asambleas
+- [ ] Campo asistentes: cambiar a selector múltiple con parcelas disponibles
+- [ ] Ordenar asambleas por fecha

@@ -99,13 +99,14 @@ async function supabaseInsert(table, data) {
   return result.data;
 }
 
-async function supabaseUpload(file, bucket) {
+async function supabaseUpload(file, bucket, folder) {
   if (!currentUser) {
     alert('Debes iniciar sesión para subir archivos.');
     return null;
   }
   var ext = file.name.split('.').pop();
-  var path = currentUser.id + '/' + Date.now() + '.' + ext;
+  var dir = folder || currentUser.id;
+  var path = dir + '/' + Date.now() + '.' + ext;
   var result = await supabaseClient.storage.from(bucket).upload(path, file);
   if (result.error) {
     console.error('Error uploading:', result.error);
