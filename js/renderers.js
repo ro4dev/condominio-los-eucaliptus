@@ -162,6 +162,15 @@ function toggleOldNoticias() {
 }
 
 // INGRESOS/EGRESOS
+var flujoFilter = 'todos';
+
+function filterFlujo(tipo) {
+  flujoFilter = tipo;
+  document.querySelectorAll('#flujoFilter .chip').forEach(function(c) { c.classList.remove('active'); });
+  event.target.classList.add('active');
+  renderFlujo();
+}
+
 function renderFlujo() {
   var ingresos = FLUJO.filter(function(f) { return f.tipo === 'Ingreso'; });
   var egresos = FLUJO.filter(function(f) { return f.tipo === 'Egreso'; });
@@ -175,25 +184,26 @@ function renderFlujo() {
     '<div class="stat-card"><div class="label">Balance</div><div class="value ' + (balance >= 0 ? 'green' : 'red') + '">$' + formatMoney(balance) + '</div></div>' +
     '<div class="stat-card"><div class="label">Movimientos</div><div class="value">' + FLUJO.length + '</div></div>';
 
-  var tableWrap = document.querySelector('#tab-flujo .table-wrap');
-  tableWrap.innerHTML = '<h3>Movimientos</h3>' +
-    '<table><thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Descripción</th><th>Monto</th><th>Comprobante</th></tr></thead>' +
-    '<tbody id="flujoBody"></tbody></table>';
-
-  var tbody = document.getElementById('flujoBody');
-  var sorted = FLUJO.slice().sort(function(a, b) {
+  var filtered = flujoFilter === 'todos' ? FLUJO : FLUJO.filter(function(f) { return f.tipo === flujoFilter; });
+  var list = document.getElementById('flujoList');
+  var sorted = filtered.slice().sort(function(a, b) {
     return new Date(b.fecha) - new Date(a.fecha);
   });
-  tbody.innerHTML = sorted.map(function(f) {
+  list.innerHTML = sorted.map(function(f) {
     var fecha = formatDate(f.fecha);
-    return '<tr>' +
-      '<td>' + fecha + '</td>' +
-      '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
-      '<td>' + f.concepto + '</td>' +
-      '<td>' + (f.descripcion || '') + '</td>' +
-      '<td style="font-weight:600;color:' + (f.tipo === 'Ingreso' ? '#059669' : '#dc2626') + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
-      '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank">Ver</a>' : '') + '</td>' +
-      '</tr>';
+    var color = f.tipo === 'Ingreso' ? '#059669' : '#dc2626';
+    var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2';
+    var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
+    return '<div class="card">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
+        '<span style="font-size:0.8rem;color:#6b7280">' + fecha + '</span>' +
+      '</div>' +
+      '<div style="font-size:1.1rem;font-weight:700;color:' + color + ';margin-bottom:0.4rem">$' + formatMoney(parseFloat(f.monto)) + '</div>' +
+      '<div style="font-weight:500;margin-bottom:0.3rem">' + f.concepto + '</div>' +
+      (f.descripcion ? '<div style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
+      (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver comprobante</a>' : '') +
+      '</div>';
   }).join('');
 }
 

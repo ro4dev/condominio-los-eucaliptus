@@ -69,11 +69,11 @@ function showSkeletons(tab) {
   };
   var tabEl = document.getElementById('tab-' + tab);
   if (!tabEl) return;
-  var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList');
+  var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList, #flujoList');
   if (content) content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
   if (tab === 'flujo') {
-    var tw = tabEl.querySelector('.table-wrap');
-    if (tw) tw.innerHTML = '<h3>Movimientos</h3><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>';
+    var fl = document.getElementById('flujoList');
+    if (fl) fl.innerHTML = '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>';
   }
   if (tab === 'cuenta') {
     var tl = document.getElementById('tableLoading');

@@ -125,13 +125,15 @@
         <div class="skeleton skeleton-stat"></div>
         <div class="skeleton skeleton-stat"></div>
       </section>
-      <div class="table-wrap">
-        <h3>Movimientos</h3>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
+      <div class="filter-chips" id="flujoFilter">
+        <button class="chip active" onclick="filterFlujo('todos')">Todos</button>
+        <button class="chip" onclick="filterFlujo('Ingreso')">Ingresos</button>
+        <button class="chip" onclick="filterFlujo('Egreso')">Egresos</button>
+      </div>
+      <div class="cards-grid" id="flujoList">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
       </div>
     </div>
 
