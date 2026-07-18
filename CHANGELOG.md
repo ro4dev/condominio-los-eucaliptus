@@ -41,10 +41,23 @@
 - **Fixed**: Reload loaders para tabs cuenta y flujo
 - **Fixed**: Gastos comunes muestra columna Parcela en modo prod
 
+### 17/07/2026 - Upload de archivos y validaciones
+- **Added**: Supabase Storage para archivos (3 buckets: gastos_comunes, ingresos_egresos, documentos)
+- **Added**: Upload de fotos en form de gastos (comprobante de transferencia)
+- **Added**: Upload de fotos en form de flujo (comprobantes)
+- **Added**: Upload de archivos en form de documentos
+- **Added**: Campo `archivo` en tabla gastos
+- **Changed**: Campo "pagado" eliminado del form de gastos (queda en "No" por defecto)
+- **Changed**: SQL NOT NULL en parcelas.metros, propietarios.parcela, proveedores.contacto
+- **Fixed**: Form gastos carga parcelas automáticamente si no estaban cargadas
+- **Fixed**: Validación `min="0"` en campos monto y metros (no acepta negativos)
+- **Fixed**: Fecha se autogenera al guardar en noticias, documentos y reclamos
+- **Fixed**: `registrado_por` se autellena con email del usuario en flujo
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)
 - [x] Migrar datos demo a Supabase
 - [x] Implementar auth (email/password)
 - [x] Habilitar INSERT con autenticación
-- [ ] Evaluar storage para archivos (Supabase Storage)
+- [x] Evaluar storage para archivos (Supabase Storage)

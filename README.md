@@ -62,7 +62,11 @@ condominio-los-eucaliptus/
 │       ├── 007_fix_gastos_parcela.sql
 │       ├── 008_gastos_parcela_text.sql
 │       ├── 009_standardize_fields.sql
-│       └── 010_auth_insert_authenticated.sql
+│       ├── 010_auth_insert_authenticated.sql
+│       ├── 011_gastos_add_archivo.sql
+│       ├── 012_storage_comprobantes.sql
+│       ├── 013_storage_flujo_documentos.sql
+│       └── 014_fix_not_null_constraints.sql
 └── test.html                      # Tests unitarios
 ```
 
