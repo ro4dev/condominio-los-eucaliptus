@@ -35,6 +35,7 @@ async function loadInitialData() {
 
 async function loadTabData(tab) {
   var configs = {
+    cuenta: function() { return loadJson('GASTOS').then(function() { fillFilters(); applyFilters(); }); },
     parcelas: function() { return Promise.all([loadJson('PARCELAS'), loadJson('PROPIETARIOS')]).then(function() { renderParcelas(); }); },
     noticias: function() { return loadJson('NOTICIAS').then(function() { renderNoticias(); }); },
     flujo: function() { return loadJson('FLUJO').then(function() { renderFlujo(); }); },
@@ -70,6 +71,16 @@ function showSkeletons(tab) {
   if (!tabEl) return;
   var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList');
   if (content) content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
+  if (tab === 'flujo') {
+    var tw = tabEl.querySelector('.table-wrap');
+    if (tw) tw.innerHTML = '<h3>Movimientos</h3><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>';
+  }
+  if (tab === 'cuenta') {
+    var tl = document.getElementById('tableLoading');
+    var tg = document.getElementById('tableGastos');
+    if (tl) tl.style.display = '';
+    if (tg) tg.style.display = 'none';
+  }
 }
 
 async function reloadTab(tab) {
