@@ -181,7 +181,10 @@ function renderFlujo() {
     '<tbody id="flujoBody"></tbody></table>';
 
   var tbody = document.getElementById('flujoBody');
-  tbody.innerHTML = FLUJO.map(function(f) {
+  var sorted = FLUJO.slice().sort(function(a, b) {
+    return new Date(b.fecha) - new Date(a.fecha);
+  });
+  tbody.innerHTML = sorted.map(function(f) {
     var fecha = formatDate(f.fecha);
     return '<tr>' +
       '<td>' + fecha + '</td>' +
