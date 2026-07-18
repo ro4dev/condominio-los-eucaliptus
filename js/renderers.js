@@ -200,7 +200,10 @@ function renderFlujo() {
         '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>' +
         '<span style="font-size:0.8rem;color:#6b7280">' + fecha + '</span>' +
       '</div>' +
-      '<div style="font-weight:500;margin-bottom:0.3rem">' + f.concepto + '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center">' +
+        '<div style="font-weight:500">' + f.concepto + '</div>' +
+        (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
+      '</div>' +
       (f.descripcion ? '<div style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
       (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver comprobante</a>' : '') +
       '</div>';
