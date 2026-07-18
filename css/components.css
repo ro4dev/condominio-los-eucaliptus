@@ -58,6 +58,7 @@ tr:hover td { background: #f9fafb; }
 .modal-body input, .modal-body select, .modal-body textarea { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.85rem; font-family: inherit; box-sizing: border-box; min-height: 2.75rem; }
 .modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
 .modal-body textarea { resize: vertical; min-height: 80px; }
+.modal-body select { height: 2.75rem; }
 .modal-body .form-actions { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
 .modal-body .btn { padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; cursor: pointer; border: none; transition: background 0.2s; }
 .modal-body .btn-primary { background: #2563eb; color: #fff; }
