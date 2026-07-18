@@ -58,8 +58,18 @@
 - **Added**: Placeholders descriptivos en todos los campos de formulario
 - **Added**: Indicador `*` en labels de campos obligatorios
 - **Added**: confirmCloseModal() advierte si hay datos ingresados al cerrar modal
+- **Added**: Loading spinner al enviar formularios
+- **Added**: Upload de archivos organizado por carpeta (periodo, tipo, categoría)
+- **Added**: Filtros chips en Reclamos/Sugerencias (Todos, Reclamos, Sugerencias)
+- **Added**: Noticias ordenadas por fecha, con vista de noticias anteriores
 - **Changed**: Rubro de proveedores cambiado de input a selector con opciones predefinidas
 - **Changed**: Header responsive: email truncado en desktop, email y botones en filas separadas en mobile
+- **Changed**: Campo concepto eliminado del form de gastos
+- **Changed**: Campo asistentes de asambleas cambiado a selector múltiple con parcelas
+- **Changed**: Campo web/instagram de proveedores cambiado de URL a text (acepta cualquier formato)
+- **Changed**: Asambleas ordenadas por fecha
+- **Fixed**: Gastos valida parcelas duplicadas por periodo
+- **Fixed**: Reclamos no envía columna `fecha` (usa `created_at`)
 
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
@@ -78,22 +88,22 @@
 - [ ] Tabla `flujo` — revisar error al guardar con comprobante (columna archivo existe en schema)
 
 ### Gastos Comunes
-- [ ] Quitar campo concepto
-- [ ] Validar que no se repitan parcelas ya agregadas
+- [x] Campo concepto eliminado
+- [x] Validar parcelas duplicadas por periodo
 
 ### Noticias
-- [ ] Ordenar por fecha de publicación
-- [ ] Vista para ver noticias anteriores/vencidas
+- [x] Ordenar por fecha de publicación
+- [x] Vista para ver noticias anteriores/vencidas
 
 ### Ingresos/Egresos
 - [ ] Revisar que el popup se cierre correctamente al guardar
 
 ### Reclamos/Sugerencias
-- [ ] Agregar chips/filtros: Todos, Reclamos, Sugerencias
+- [x] Chips/filtros: Todos, Reclamos, Sugerencias
 
 ### Proveedores
-- [ ] Revisar validación de URL (web/instagram) — reclama que no es válida aunque se ingresa una
+- [x] Campo web/instagram cambiado a text (accepts any format)
 
 ### Asambleas
-- [ ] Campo asistentes: cambiar a selector múltiple con parcelas disponibles
-- [ ] Ordenar asambleas por fecha
+- [x] Campo asistentes: selector múltiple con parcelas disponibles
+- [x] Ordenar asambleas por fecha

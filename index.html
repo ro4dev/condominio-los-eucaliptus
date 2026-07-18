@@ -82,7 +82,6 @@
             <tr>
               <th>Parcela</th>
               <th>Periodo</th>
-              <th>Concepto</th>
               <th>Monto</th>
               <th>Comprobante</th>
             </tr>
@@ -152,6 +151,11 @@
     <div id="tab-reclamos" class="tab-content">
       <a href="#" class="form-link" id="formReclamos" onclick="formReclamos(); return false;">+ Agregar Reclamo/Sugerencia</a>
       <button class="reload-btn" onclick="reloadTab('reclamos')">↻ Recargar</button>
+      <div class="filter-chips" id="reclamosFilter">
+        <button class="chip active" onclick="filterReclamos('todos')">Todos</button>
+        <button class="chip" onclick="filterReclamos('Reclamo')">Reclamos</button>
+        <button class="chip" onclick="filterReclamos('Sugerencia')">Sugerencias</button>
+      </div>
       <div id="reclamosList">
         <div class="skeleton skeleton-doc"></div>
         <div class="skeleton skeleton-doc"></div>

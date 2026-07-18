@@ -53,14 +53,13 @@ function renderTable(data) {
   document.getElementById('tableGastos').style.display = 'table';
   var tbody = document.getElementById('tableBody');
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(function(r) {
     return '<tr>' +
       '<td>' + (r.parcela || '') + '</td>' +
       '<td>' + formatPeriodo(r.periodo) + '</td>' +
-      '<td>' + (r.concepto || '') + '</td>' +
       '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
       '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank">Ver</a>' : '') + '</td>' +
       '</tr>';
@@ -109,6 +108,8 @@ function renderParcelas() {
 }
 
 // NOTICIAS
+var showOldNoticias = false;
+
 function renderNoticias() {
   var list = document.getElementById('noticiasList');
   var hoy = new Date();
@@ -116,22 +117,48 @@ function renderNoticias() {
     if (!n.fecha_hasta) return true;
     return new Date(n.fecha_hasta) >= hoy;
   });
+  var vencidas = NOTICIAS.filter(function(n) {
+    if (!n.fecha_hasta) return false;
+    return new Date(n.fecha_hasta) < hoy;
+  });
 
-  if (activas.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:2rem">No hay noticias activas</div>';
-    return;
+  activas.sort(function(a, b) {
+    return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
+  });
+  vencidas.sort(function(a, b) {
+    return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
+  });
+
+  var html = '';
+  if (activas.length === 0 && !showOldNoticias) {
+    html = '<div style="text-align:center;color:#9ca3af;padding:2rem">No hay noticias activas</div>';
+  } else {
+    html += activas.map(function(n) { return renderNoticiaCard(n); }).join('');
+    if (vencidas.length > 0) {
+      html += '<div style="text-align:center;margin:1rem 0"><button onclick="toggleOldNoticias()" class="btn-toggle">' + (showOldNoticias ? 'Ocultar anteriores' : 'Ver ' + vencidas.length + ' noticias anteriores') + '</button></div>';
+      if (showOldNoticias) {
+        html += vencidas.map(function(n) { return renderNoticiaCard(n, true); }).join('');
+      }
+    }
   }
+  list.innerHTML = html;
+}
 
-  list.innerHTML = activas.map(function(n) {
-    var fecha = formatDate(n.fecha || n.created_at);
-    var hasta = formatDate(n.fecha_hasta);
-    return '<div class="news-card" style="margin-bottom:1rem">' +
-      '<h4>' + (n.titulo || '') + '</h4>' +
-      '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
-      '<div class="desc">' + (n.descripcion || '') + '</div>' +
-      (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
-      '</div>';
-  }).join('');
+function renderNoticiaCard(n, old) {
+  var fecha = formatDate(n.fecha || n.created_at);
+  var hasta = formatDate(n.fecha_hasta);
+  var style = old ? 'opacity:0.6;' : '';
+  return '<div class="news-card" style="margin-bottom:1rem;' + style + '">' +
+    '<h4>' + (n.titulo || '') + '</h4>' +
+    '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
+    '<div class="desc">' + (n.descripcion || '') + '</div>' +
+    (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
+    '</div>';
+}
+
+function toggleOldNoticias() {
+  showOldNoticias = !showOldNoticias;
+  renderNoticias();
 }
 
 // INGRESOS/EGRESOS
@@ -187,9 +214,19 @@ function renderDocumentos() {
 }
 
 // RECLAMOS
+var reclamosFilter = 'todos';
+
+function filterReclamos(tipo) {
+  reclamosFilter = tipo;
+  document.querySelectorAll('#reclamosFilter .chip').forEach(function(c) { c.classList.remove('active'); });
+  event.target.classList.add('active');
+  renderReclamos();
+}
+
 function renderReclamos() {
   var list = document.getElementById('reclamosList');
-  list.innerHTML = RECLAMOS.map(function(r) {
+  var filtered = reclamosFilter === 'todos' ? RECLAMOS : RECLAMOS.filter(function(r) { return r.tipo === reclamosFilter; });
+  list.innerHTML = filtered.map(function(r) {
     var tipoClass = r.tipo.toLowerCase();
     return '<div class="reclamo-item ' + tipoClass + '">' +
       '<div class="reclamo-header">' +
@@ -201,6 +238,9 @@ function renderReclamos() {
       (r.parcela ? '<div class="reclamo-parcela">' + r.parcela + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
       '</div>';
   }).join('');
+  if (filtered.length === 0) {
+    list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:2rem">Sin registros</div>';
+  }
 }
 
 // PROVEEDORES
@@ -224,7 +264,10 @@ function renderProveedores() {
 // ASAMBLEAS
 function renderAsambleas() {
   var timeline = document.getElementById('asambleasTimeline');
-  timeline.innerHTML = ASAMBLEAS.map(function(a) {
+  var sorted = ASAMBLEAS.slice().sort(function(a, b) {
+    return new Date(b.fecha) - new Date(a.fecha);
+  });
+  timeline.innerHTML = sorted.map(function(a) {
     var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
     var fecha = formatDate(a.fecha);
     var asistentes = a.asistentes ? String(a.asistentes).split(',').map(function(item) {

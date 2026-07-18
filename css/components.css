@@ -35,6 +35,12 @@ tr:hover td { background: #f9fafb; }
 .demo-toggle:hover { opacity: 0.9; }
 .demo-toggle.active { background: #10b981; }
 .demo-toggle:not(.active) { background: #6b7280; }
+.btn-toggle { background: none; border: 1px solid #d1d5db; padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.8rem; color: #6b7280; cursor: pointer; transition: all 0.2s; }
+.btn-toggle:hover { background: #f3f4f6; color: #374151; }
+.filter-chips { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.chip { padding: 0.4rem 1rem; border-radius: 999px; border: 1px solid #d1d5db; background: #fff; color: #6b7280; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.chip:hover { background: #f3f4f6; }
+.chip.active { background: #2563eb; color: #fff; border-color: #2563eb; }
 
 .skeleton { background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: skeleton 1.5s infinite; border-radius: 8px; }
 .skeleton-card { height: 200px; margin-bottom: 1rem; }
