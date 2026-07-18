@@ -122,7 +122,7 @@ function renderNoticias() {
   }
 
   list.innerHTML = activas.map(function(n) {
-    var fecha = formatDate(n.marca_temporal);
+    var fecha = formatDate(n.fecha || n.fechaPublicacion || n.created_at);
     var hasta = formatDate(n.fecha_hasta);
     return '<div class="news-card" style="margin-bottom:1rem">' +
       '<h4>' + (n.titulo || '') + '</h4>' +
@@ -154,7 +154,7 @@ function renderFlujo() {
 
   var tbody = document.getElementById('flujoBody');
   tbody.innerHTML = FLUJO.map(function(f) {
-    var fecha = formatDate(f.marca_temporal);
+    var fecha = formatDate(f.fecha || f.marca_temporal);
     return '<tr>' +
       '<td>' + fecha + '</td>' +
       '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
@@ -173,7 +173,7 @@ function renderDocumentos() {
 
   list.innerHTML = DOCUMENTOS.map(function(d) {
     var icon = icons[d.categoria] || '&#128196;';
-    var fecha = formatDate(d.marca_temporal);
+    var fecha = formatDate(d.fecha || d.marca_temporal || d.created_at);
     return '<div class="doc-item">' +
       '<div class="doc-icon">' + icon + '</div>' +
       '<div class="doc-info">' +
@@ -193,7 +193,7 @@ function renderReclamos() {
     return '<div class="reclamo-item ' + tipoClass + '">' +
       '<div class="reclamo-header">' +
         '<span class="reclamo-tipo ' + tipoClass + '">' + r.tipo + '</span>' +
-        '<span class="reclamo-fecha">' + formatDate(r.marca_temporal) + '</span>' +
+        '<span class="reclamo-fecha">' + formatDate(r.fecha || r.marca_temporal || r.created_at) + '</span>' +
       '</div>' +
       '<div class="reclamo-title">' + r.asunto + '</div>' +
       '<div class="reclamo-desc">' + r.descripcion + '</div>' +
@@ -225,8 +225,8 @@ function renderAsambleas() {
   var timeline = document.getElementById('asambleasTimeline');
   timeline.innerHTML = ASAMBLEAS.map(function(a) {
     var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
-    var fecha = formatDate(a.marca_temporal);
-    var asistentes = a.asistentes ? a.asistentes.split(',').map(function(item) {
+    var fecha = formatDate(a.fecha || a.marca_temporal);
+    var asistentes = a.asistentes ? String(a.asistentes).split(',').map(function(item) {
       return '<span style="display:inline-block;background:#e5e7eb;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
     }).join('') : '';
     return '<div class="timeline-item' + extraClass + '">' +
