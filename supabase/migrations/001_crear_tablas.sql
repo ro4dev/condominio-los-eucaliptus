@@ -27,7 +27,7 @@ CREATE TABLE propietarios (
 -- GASTOS COMUNES
 CREATE TABLE gastos (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  parcela_id UUID REFERENCES parcelas(id) ON DELETE SET NULL,
+  parcela TEXT NOT NULL,
   periodo TEXT NOT NULL,
   concepto TEXT NOT NULL,
   monto NUMERIC NOT NULL,

@@ -24,13 +24,13 @@ INSERT INTO propietarios (nombre_completo, rut, parcela_id, telefono, email, tip
 ('Pedro González', '33456789', (SELECT id FROM parcelas WHERE numero = 'Parcela 8'), '+54 9 11 8888-5555', 'pedro.gonzalez@mail.com', 'Propietario');
 
 -- GASTOS COMUNES
-INSERT INTO gastos (parcela_id, periodo, concepto, monto, descripcion, pagado) VALUES
-(NULL, '2026-07', 'Gasto común', 50000, 'Mensualidad julio', 'Sí'),
-((SELECT id FROM parcelas WHERE numero = 'Parcela 1'), '2026-07', 'Gasto común', 50000, 'Pago Juan Pérez', 'Sí'),
-((SELECT id FROM parcelas WHERE numero = 'Parcela 2'), '2026-07', 'Gasto común', 50000, 'Pago Carlos López', 'Sí'),
-((SELECT id FROM parcelas WHERE numero = 'Parcela 3'), '2026-07', 'Gasto común', 50000, 'Pendiente', 'No'),
-((SELECT id FROM parcelas WHERE numero = 'Parcela 1'), '2026-06', 'Gasto común', 45000, 'Pago junio', 'Sí'),
-((SELECT id FROM parcelas WHERE numero = 'Parcela 2'), '2026-06', 'Gasto común', 45000, 'Pago junio', 'Sí');
+INSERT INTO gastos (parcela, periodo, concepto, monto, descripcion, pagado) VALUES
+('Parcela 6', '2026-07', 'Gasto común', 50000, 'Mensualidad julio', 'Sí'),
+('Parcela 1', '2026-07', 'Gasto común', 50000, 'Pago Juan Pérez', 'Sí'),
+('Parcela 2', '2026-07', 'Gasto común', 50000, 'Pago Carlos López', 'Sí'),
+('Parcela 3', '2026-07', 'Gasto común', 50000, 'Pendiente', 'No'),
+('Parcela 1', '2026-06', 'Gasto común', 45000, 'Pago junio', 'Sí'),
+('Parcela 2', '2026-06', 'Gasto común', 45000, 'Pago junio', 'Sí');
 
 -- INGRESOS/EGRESOS
 INSERT INTO flujo (fecha, tipo, concepto, monto, descripcion, comprobante, registrado_por) VALUES
