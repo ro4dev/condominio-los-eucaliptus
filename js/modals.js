@@ -66,7 +66,7 @@ function handleForm(e) {
       return;
     }
     if (fileUrl) {
-      data.archivo = fileUrl;
+      data[fileInput.name] = fileUrl;
     }
     if (DEMO_MODE) {
       console.log('Form data:', data);
