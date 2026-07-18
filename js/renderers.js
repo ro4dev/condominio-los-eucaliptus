@@ -205,7 +205,6 @@ function renderFlujo() {
         (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
       '</div>' +
       (f.descripcion ? '<div style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
-      (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver comprobante</a>' : '') +
       '</div>';
   }).join('');
 }
