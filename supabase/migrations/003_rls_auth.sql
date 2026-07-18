@@ -19,6 +19,16 @@ ALTER TABLE asambleas ENABLE ROW LEVEL SECURITY;
 -- Se restringirá cuando se implemente auth
 -- ============================================
 
+DROP POLICY IF EXISTS "parcelas_select" ON parcelas;
+DROP POLICY IF EXISTS "propietarios_select" ON propietarios;
+DROP POLICY IF EXISTS "gastos_select" ON gastos;
+DROP POLICY IF EXISTS "flujo_select" ON flujo;
+DROP POLICY IF EXISTS "noticias_select" ON noticias;
+DROP POLICY IF EXISTS "documentos_select" ON documentos;
+DROP POLICY IF EXISTS "reclamos_select" ON reclamos;
+DROP POLICY IF EXISTS "proveedores_select" ON proveedores;
+DROP POLICY IF EXISTS "asambleas_select" ON asambleas;
+
 CREATE POLICY "parcelas_select" ON parcelas
   FOR SELECT USING (true);
 
@@ -50,6 +60,16 @@ CREATE POLICY "asambleas_select" ON asambleas
 -- POLÍTICAS: Escritura pública (cualquier rol)
 -- Se restringirá cuando se implemente auth
 -- ============================================
+
+DROP POLICY IF EXISTS "parcelas_insert" ON parcelas;
+DROP POLICY IF EXISTS "propietarios_insert" ON propietarios;
+DROP POLICY IF EXISTS "gastos_insert" ON gastos;
+DROP POLICY IF EXISTS "flujo_insert" ON flujo;
+DROP POLICY IF EXISTS "noticias_insert" ON noticias;
+DROP POLICY IF EXISTS "documentos_insert" ON documentos;
+DROP POLICY IF EXISTS "reclamos_insert" ON reclamos;
+DROP POLICY IF EXISTS "proveedores_insert" ON proveedores;
+DROP POLICY IF EXISTS "asambleas_insert" ON asambleas;
 
 CREATE POLICY "parcelas_insert" ON parcelas
   FOR INSERT WITH CHECK (true);
