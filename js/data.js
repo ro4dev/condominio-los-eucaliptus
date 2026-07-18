@@ -1,13 +1,29 @@
+var TABLE_MAP = {
+  GASTOS: 'gastos',
+  PARCELAS: 'parcelas',
+  PROPIETARIOS: 'propietarios',
+  NOTICIAS: 'noticias',
+  FLUJO: 'flujo',
+  DOCUMENTOS: 'documentos',
+  RECLAMOS: 'reclamos',
+  PROVEEDORES: 'proveedores',
+  ASAMBLEAS: 'asambleas'
+};
+
 async function loadJson(target) {
   try {
-    var url;
     if (DEMO_MODE) {
-      url = DEMO_FILES[target];
+      var res = await fetch(DEMO_FILES[target], { cache: 'no-store' });
+      window[target] = await res.json();
+    } else if (supabaseClient) {
+      var table = TABLE_MAP[target];
+      var { data, error } = await supabaseClient.from(table).select('*');
+      if (error) throw error;
+      window[target] = data;
     } else {
-      url = API_URL + '?sheet=' + SHEET_NAMES[target];
+      var res = await fetch(API_URL + '?sheet=' + SHEET_NAMES[target], { cache: 'no-store' });
+      window[target] = await res.json();
     }
-    var res = await fetch(url, { cache: 'no-store' });
-    window[target] = await res.json();
     loaded[target] = true;
   } catch (e) {
     console.error('Error cargando ' + target, e);

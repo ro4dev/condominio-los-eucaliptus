@@ -46,3 +46,5 @@ function toggleDemoMode() {
   document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
   location.reload();
 }
+
+initSupabase();
