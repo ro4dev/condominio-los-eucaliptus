@@ -195,11 +195,11 @@ function renderFlujo() {
     var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2';
     var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
     return '<div class="card">' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
+        '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>' +
         '<span style="font-size:0.8rem;color:#6b7280">' + fecha + '</span>' +
       '</div>' +
-      '<div style="font-size:1.1rem;font-weight:700;color:' + color + ';margin-bottom:0.4rem">$' + formatMoney(parseFloat(f.monto)) + '</div>' +
       '<div style="font-weight:500;margin-bottom:0.3rem">' + f.concepto + '</div>' +
       (f.descripcion ? '<div style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
       (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver comprobante</a>' : '') +
