@@ -23,14 +23,17 @@ function initSupabase() {
 function updateAuthUI() {
   var loginBtn = document.getElementById('loginBtn');
   var logoutBtn = document.getElementById('logoutBtn');
+  var userInfo = document.getElementById('userInfo');
   var addBtns = document.querySelectorAll('.form-link');
   if (currentUser) {
     if (loginBtn) loginBtn.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = '';
+    if (userInfo) userInfo.textContent = currentUser.email;
     addBtns.forEach(function(btn) { btn.style.display = ''; });
   } else {
     if (loginBtn) loginBtn.style.display = '';
     if (logoutBtn) logoutBtn.style.display = 'none';
+    if (userInfo) userInfo.textContent = '';
     addBtns.forEach(function(btn) { btn.style.display = 'none'; });
   }
 }
