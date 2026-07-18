@@ -15,8 +15,8 @@ Mover el almacenamiento de archivos (documentos, comprobantes, adjuntos) de Goog
 
 | Proveedor             | Free tier                              | Egress               | Tarjeta crédito |
 |-----------------------|----------------------------------------|----------------------|-----------------|
-| **Backblaze B2**      | 10GB + egress gratis hasta 3x         | Gratis hasta 3x      | **No**          |
-| **Cloudflare R2**     | 10GB + 1M Class A + 10M Class B       | Siempre gratis       | **Sí**          |
+| **Backblaze B2**      | 10GB + egress gratis hasta 3x          | Gratis hasta 3x      | **No**          |
+| **Cloudflare R2**     | 10GB + 1M Class A + 10M Class B        | Siempre gratis       | **Sí**          |
 | **IDrive e2**         | 10GB                                   | $0.01/GB             | Sí              |
 
 ### Backblaze B2 (recomendado)
