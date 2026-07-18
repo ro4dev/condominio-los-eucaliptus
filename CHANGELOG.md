@@ -54,6 +54,13 @@
 - **Fixed**: Fecha se autogenera al guardar en noticias, documentos y reclamos
 - **Fixed**: `registrado_por` se autellena con email del usuario en flujo
 
+### 18/07/2026 - UX de formularios y responsive
+- **Added**: Placeholders descriptivos en todos los campos de formulario
+- **Added**: Indicador `*` en labels de campos obligatorios
+- **Added**: confirmCloseModal() advierte si hay datos ingresados al cerrar modal
+- **Changed**: Rubro de proveedores cambiado de input a selector con opciones predefinidas
+- **Changed**: Header responsive: email truncado en desktop, email y botones en filas separadas en mobile
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)
@@ -61,3 +68,7 @@
 - [x] Implementar auth (email/password)
 - [x] Habilitar INSERT con autenticación
 - [x] Evaluar storage para archivos (Supabase Storage)
+- [x] Placeholders descriptivos en formularios
+- [x] Indicador de campos obligatorios (*)
+- [x] Validación antes de cerrar modal con datos
+- [x] Header responsive (mobile)
