@@ -20,9 +20,6 @@ async function loadJson(target) {
       var { data, error } = await supabaseClient.from(table).select('*');
       if (error) throw error;
       window[target] = data;
-    } else {
-      var res = await fetch(API_URL + '?sheet=' + SHEET_NAMES[target], { cache: 'no-store' });
-      window[target] = await res.json();
     }
     loaded[target] = true;
   } catch (e) {
