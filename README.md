@@ -57,7 +57,12 @@ condominio-los-eucaliptus/
 │       ├── 002_datos_ejemplo.sql
 │       ├── 003_rls_auth.sql
 │       ├── 004_fix_rls_select_policies.sql
-│       └── 005_block_inserts.sql
+│       ├── 005_block_inserts.sql
+│       ├── 006_fix_asistentes_text.sql
+│       ├── 007_fix_gastos_parcela.sql
+│       ├── 008_gastos_parcela_text.sql
+│       ├── 009_standardize_fields.sql
+│       └── 010_auth_insert_authenticated.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -72,7 +77,7 @@ condominio-los-eucaliptus/
 
 ### Modo Demo
 
-Los formularios modales funcionan solo en modo demo. En modo producción se usa Supabase directamente.
+Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON local, en producción envía a Supabase.
 
 ## Funcionalidades
 
@@ -83,10 +88,17 @@ Los formularios modales funcionan solo en modo demo. En modo producción se usa 
 - **Recarga**: botón de recarga por pestaña
 - **Responsive**: diseño adaptable a móviles
 - **Modo demo**: permite probar la interfaz con JSON locales
+- **Auth opcional**: login/logout, usuarios sin login ven datos, con login agregan
 
 ## Seguridad
 
 - RLS (Row Level Security) habilitado en todas las tablas
-- Lectura pública (USING true) - se restringirá con auth
-- Escritura bloqueada hasta implementar autenticación
+- Lectura pública: cualquiera puede ver los datos
+- Escritura: solo usuarios autenticados pueden insertar
+- Auth via Supabase Auth (email/password)
 - Anon key visible (diseño de Supabase, seguro con RLS)
+
+## Notas
+
+- `js/supabase-config.js` contiene las credenciales de Supabase y está commiteado intencionalmente (es la anon key, segura con RLS)
+- Las migraciones SQL se ejecutan manualmente desde el SQL Editor de Supabase

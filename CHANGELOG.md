@@ -28,10 +28,23 @@
 - **Changed**: Frontend usa Supabase JS client para fetch de datos
 - **Security**: RLS habilitado, lectura pública, escritura bloqueada hasta auth
 
+### 17/07/2026 - Auth opcional y estandarización de campos
+- **Added**: Autenticación opcional (email/password) via Supabase Auth
+- **Added**: Login/logout UI con modal de login
+- **Added**: Botones "+ Agregar" visibles solo para usuarios autenticados
+- **Added**: Muestra email del usuario logueado en el header
+- **Changed**: Campos estandarizados a snake_case en todo (JSON, JS, SQL)
+- **Changed**: `parcela_id` (UUID) → `parcela` (texto) en propietarios y reclamos
+- **Changed**: Eliminados fallbacks muertos (marca_temporal, metros2, prop.nombre)
+- **Changed**: `fechaHasta` → `fecha_hasta`, `registradoPor` → `registrado_por`, `web/instagram` → `web_instagram`
+- **Changed**: Form asistentes ahora acepta lista de parcelas (texto), no cantidad
+- **Fixed**: Reload loaders para tabs cuenta y flujo
+- **Fixed**: Gastos comunes muestra columna Parcela en modo prod
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)
 - [x] Migrar datos demo a Supabase
-- [ ] Implementar auth (email/password o magic link)
-- [ ] Habilitar INSERT con autenticación
+- [x] Implementar auth (email/password)
+- [x] Habilitar INSERT con autenticación
 - [ ] Evaluar storage para archivos (Supabase Storage)
