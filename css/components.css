@@ -55,9 +55,7 @@ tr:hover td { background: #f9fafb; }
 .modal-body { padding: 1.2rem; }
 .modal-body .form-group { margin-bottom: 1rem; }
 .modal-body label { display: block; font-size: 0.8rem; font-weight: 600; color: #374151; margin-bottom: 0.3rem; }
-.modal-body input, .modal-body select, .modal-body textarea { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.85rem; font-family: inherit; box-sizing: border-box; }
-.modal-body input[type="date"] { height: 2.5rem; }
-.modal-body input[type="month"] { height: 2.5rem; }
+.modal-body input, .modal-body select, .modal-body textarea { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 0.85rem; font-family: inherit; box-sizing: border-box; min-height: 2.75rem; }
 .modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
 .modal-body textarea { resize: vertical; min-height: 80px; }
 .modal-body .form-actions { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb; }
