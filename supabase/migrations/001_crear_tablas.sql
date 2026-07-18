@@ -98,7 +98,7 @@ CREATE TABLE asambleas (
   tipo TEXT NOT NULL CHECK (tipo IN ('Ordinaria', 'Extraordinaria')),
   temario TEXT NOT NULL,
   acuerdos TEXT,
-  asistentes NUMERIC,
+  asistentes TEXT,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 

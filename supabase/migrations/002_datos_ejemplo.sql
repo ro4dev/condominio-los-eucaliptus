@@ -69,5 +69,5 @@ INSERT INTO proveedores (rubro, nombre, telefono, email, contacto, observaciones
 
 -- ASAMBLEAS
 INSERT INTO asambleas (fecha, tipo, temario, acuerdos, asistentes) VALUES
-('2026-06-15', 'Ordinaria', '1. Presupuesto trimestral\n2. Mantenimiento pileta\n3. Seguridad nocturna\n4. Preguntas varias', 'Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras.', 12),
-('2026-07-20', 'Ordinaria', '1. Revisión gastos junio-julio\n2. Reparación bomba agua\n3. Próximos proyectos\n4. Preguntas varias', 'Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común.', 10);
+('2026-06-15', 'Ordinaria', '1. Presupuesto trimestral\n2. Mantenimiento pileta\n3. Seguridad nocturna\n4. Preguntas varias', 'Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras.', 'Parcela 1, Parcela 2, Parcela 3, Parcela 4, Parcela 5, Parcela 6'),
+('2026-07-20', 'Ordinaria', '1. Revisión gastos junio-julio\n2. Reparación bomba agua\n3. Próximos proyectos\n4. Preguntas varias', 'Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común.', 'Parcela 1, Parcela 2, Parcela 3, Parcela 5, Parcela 7');
