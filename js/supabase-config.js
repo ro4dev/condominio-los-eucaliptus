@@ -99,6 +99,23 @@ async function supabaseInsert(table, data) {
   return result.data;
 }
 
+async function supabaseUpload(file, bucket) {
+  if (!currentUser) {
+    alert('Debes iniciar sesión para subir archivos.');
+    return null;
+  }
+  var ext = file.name.split('.').pop();
+  var path = currentUser.id + '/' + Date.now() + '.' + ext;
+  var result = await supabaseClient.storage.from(bucket).upload(path, file);
+  if (result.error) {
+    console.error('Error uploading:', result.error);
+    alert('Error al subir archivo: ' + result.error.message);
+    return null;
+  }
+  var urlResult = supabaseClient.storage.from(bucket).getPublicUrl(path);
+  return urlResult.data.publicUrl;
+}
+
 function showSignupForm() {
   var title = document.getElementById('loginModalTitle');
   var form = document.getElementById('loginForm');

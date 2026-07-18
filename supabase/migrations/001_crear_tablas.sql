@@ -7,7 +7,7 @@ CREATE TABLE parcelas (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   numero TEXT UNIQUE NOT NULL,
   rol TEXT,
-  metros NUMERIC,
+  metros NUMERIC NOT NULL,
   estado TEXT DEFAULT 'Habitada',
   created_at TIMESTAMPTZ DEFAULT now()
 );
@@ -17,7 +17,7 @@ CREATE TABLE propietarios (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   nombre_completo TEXT NOT NULL,
   rut TEXT,
-  parcela TEXT,
+  parcela TEXT NOT NULL,
   telefono TEXT,
   email TEXT,
   tipo TEXT DEFAULT 'Propietario',
@@ -32,6 +32,7 @@ CREATE TABLE gastos (
   concepto TEXT NOT NULL,
   monto NUMERIC NOT NULL,
   descripcion TEXT,
+  archivo TEXT,
   pagado TEXT DEFAULT 'No',
   created_at TIMESTAMPTZ DEFAULT now()
 );
@@ -85,7 +86,7 @@ CREATE TABLE proveedores (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   rubro TEXT NOT NULL,
   nombre TEXT NOT NULL,
-  contacto TEXT,
+  contacto TEXT NOT NULL,
   telefono TEXT,
   email TEXT,
   web_instagram TEXT,

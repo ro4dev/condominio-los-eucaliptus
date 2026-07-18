@@ -53,7 +53,7 @@ function renderTable(data) {
   document.getElementById('tableGastos').style.display = 'table';
   var tbody = document.getElementById('tableBody');
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(function(r) {
@@ -62,6 +62,7 @@ function renderTable(data) {
       '<td>' + formatPeriodo(r.periodo) + '</td>' +
       '<td>' + (r.concepto || '') + '</td>' +
       '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
+      '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank">Ver</a>' : '') + '</td>' +
       '</tr>';
   }).join('');
 }

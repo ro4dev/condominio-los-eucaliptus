@@ -13,24 +13,48 @@ function handleForm(e) {
   var form = e.target;
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
-  if (DEMO_MODE) {
-    console.log('Form data:', data);
-    alert('Guardado (demo). En modo real se enviaría a Supabase.');
-    closeModal();
-  } else {
-    var table = form.dataset.table;
-    if (!table) {
-      alert('Error: no se especificó la tabla.');
+
+  var table = form.dataset.table;
+  var autoDateTables = ['noticias', 'documentos', 'reclamos'];
+  if (autoDateTables.indexOf(table) !== -1 && !data.fecha) {
+    data.fecha = new Date().toISOString().slice(0, 10);
+  }
+  if (table === 'flujo' && currentUser && !data.registrado_por) {
+    data.registrado_por = currentUser.email;
+  }
+
+  var fileInput = form.querySelector('input[type="file"]');
+  var filePromise = Promise.resolve(null);
+  if (fileInput && fileInput.files.length > 0) {
+    var bucket = form.dataset.bucket || 'gastos_comunes';
+    filePromise = supabaseUpload(fileInput.files[0], bucket);
+  }
+
+  filePromise.then(function(fileUrl) {
+    if (fileInput && fileInput.files.length > 0 && !fileUrl) {
       return;
     }
-    supabaseInsert(table, data).then(function(result) {
-      if (result) {
-        alert('Guardado correctamente.');
-        closeModal();
-        reloadTab(getCurrentTab());
+    if (fileUrl) {
+      data.archivo = fileUrl;
+    }
+    if (DEMO_MODE) {
+      console.log('Form data:', data);
+      alert('Guardado (demo). En modo real se enviaría a Supabase.');
+      closeModal();
+    } else {
+      if (!table) {
+        alert('Error: no se especificó la tabla.');
+        return;
       }
-    });
-  }
+      supabaseInsert(table, data).then(function(result) {
+        if (result) {
+          alert('Guardado correctamente.');
+          closeModal();
+          reloadTab(getCurrentTab());
+        }
+      });
+    }
+  });
 }
 
 function getCurrentTab() {
@@ -40,6 +64,10 @@ function getCurrentTab() {
 }
 
 function formGastos() {
+  if (PARCELAS.length === 0) {
+    loadJson('PARCELAS').then(function() { formGastos(); });
+    return;
+  }
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
   openModal('Agregar Gasto', '<form data-table="gastos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
@@ -47,9 +75,9 @@ function formGastos() {
       '<div class="form-group"><label>Periodo</label><input type="month" name="periodo" required></div>' +
     '</div>' +
     '<div class="form-group"><label>Concepto</label><input type="text" name="concepto" required></div>' +
-    '<div class="form-group"><label>Monto</label><input type="number" name="monto" required></div>' +
+    '<div class="form-group"><label>Monto</label><input type="number" name="monto" min="0" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
-    '<div class="form-group"><label>Pagado</label><select name="pagado"><option>Sí</option><option>No</option></select></div>' +
+    '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
@@ -61,7 +89,7 @@ function formParcelas() {
       '<div class="form-group"><label>Rol</label><input type="text" name="rol"></div>' +
     '</div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Metros²</label><input type="number" name="metros" required></div>' +
+      '<div class="form-group"><label>Metros²</label><input type="number" name="metros" min="0" required></div>' +
       '<div class="form-group"><label>Estado</label><select name="estado"><option>Habitada</option><option>Desocupada</option><option>En construcción</option></select></div>' +
     '</div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
@@ -95,25 +123,25 @@ function formNoticias() {
 }
 
 function formFlujo() {
-  openModal('Agregar Movimiento', '<form data-table="flujo" onsubmit="handleForm(event)">' +
+  openModal('Agregar Movimiento', '<form data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Ingreso</option><option>Egreso</option></select></div>' +
       '<div class="form-group"><label>Fecha</label><input type="date" name="fecha" required></div>' +
     '</div>' +
     '<div class="form-group"><label>Concepto</label><input type="text" name="concepto" required></div>' +
-    '<div class="form-group"><label>Monto</label><input type="number" name="monto" required></div>' +
+    '<div class="form-group"><label>Monto</label><input type="number" name="monto" min="0" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
-    '<div class="form-group"><label>Comprobante (URL)</label><input type="url" name="comprobante"></div>' +
+    '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
 
 function formDocumentos() {
-  openModal('Agregar Documento', '<form data-table="documentos" onsubmit="handleForm(event)">' +
+  openModal('Agregar Documento', '<form data-table="documentos" data-bucket="documentos" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Nombre</label><input type="text" name="nombre" required></div>' +
     '<div class="form-group"><label>Categoría</label><select name="categoria" required><option>Estatuto</option><option>Actas</option><option>Contratos</option><option>Seguros</option><option>Planos</option></select></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
-    '<div class="form-group"><label>Archivo (URL)</label><input type="url" name="archivo"></div>' +
+    '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
