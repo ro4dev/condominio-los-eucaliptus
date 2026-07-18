@@ -9,19 +9,19 @@ INSERT INTO parcelas (numero, rol, metros, estado) VALUES
 ('Parcela 3', '00521-003', 380, 'Habitada'),
 ('Parcela 4', '00521-004', 600, 'Desocupada'),
 ('Parcela 5', '00521-005', 410, 'Habitada'),
-('Parcela 6', '00521-006', 480, 'En construcción'),
+('Parcela 6', '00521-006', 350, 'En construcción'),
 ('Parcela 7', '00521-007', 530, 'Habitada'),
 ('Parcela 8', '00521-008', 420, 'Habitada');
 
 -- PROPIETARIOS
-INSERT INTO propietarios (nombre_completo, rut, parcela_id, telefono, email, tipo) VALUES
-('Juan Pérez', '30123456', (SELECT id FROM parcelas WHERE numero = 'Parcela 1'), '+54 9 11 1234-5678', 'juan.perez@mail.com', 'Propietario'),
-('María García', '27654321', (SELECT id FROM parcelas WHERE numero = 'Parcela 1'), '+54 9 11 1234-9999', 'maria.garcia@mail.com', 'Inquilino'),
-('Carlos López', '32123456', (SELECT id FROM parcelas WHERE numero = 'Parcela 2'), '+54 9 11 5555-1111', 'carlos.lopez@mail.com', 'Propietario'),
-('Ana Martínez', '28987654', (SELECT id FROM parcelas WHERE numero = 'Parcela 3'), '+54 9 11 5555-2222', 'ana.martinez@mail.com', 'Propietario'),
-('Roberto Sánchez', '31567890', (SELECT id FROM parcelas WHERE numero = 'Parcela 5'), '+54 9 11 6666-3333', 'roberto.sanchez@mail.com', 'Propietario'),
-('Laura Fernández', '29123456', (SELECT id FROM parcelas WHERE numero = 'Parcela 7'), '+54 9 11 7777-4444', 'laura.fernandez@mail.com', 'Propietario'),
-('Pedro González', '33456789', (SELECT id FROM parcelas WHERE numero = 'Parcela 8'), '+54 9 11 8888-5555', 'pedro.gonzalez@mail.com', 'Propietario');
+INSERT INTO propietarios (nombre_completo, rut, parcela, telefono, email, tipo) VALUES
+('Juan Pérez', '30123456', 'Parcela 1', '+54 9 11 1234-5678', 'juan.perez@mail.com', 'Propietario'),
+('María García', '27654321', 'Parcela 1', '+54 9 11 1234-9999', 'maria.garcia@mail.com', 'Inquilino'),
+('Carlos López', '32123456', 'Parcela 2', '+54 9 11 5555-1111', 'carlos.lopez@mail.com', 'Propietario'),
+('Ana Martínez', '28987654', 'Parcela 3', '+54 9 11 5555-2222', 'ana.martinez@mail.com', 'Propietario'),
+('Roberto Sánchez', '31567890', 'Parcela 5', '+54 9 11 6666-3333', 'roberto.sanchez@mail.com', 'Propietario'),
+('Laura Fernández', '29123456', 'Parcela 7', '+54 9 11 7777-4444', 'laura.fernandez@mail.com', 'Propietario'),
+('Pedro González', '33456789', 'Parcela 8', '+54 9 11 8888-5555', 'pedro.gonzalez@mail.com', 'Propietario');
 
 -- GASTOS COMUNES
 INSERT INTO gastos (parcela, periodo, concepto, monto, descripcion, pagado) VALUES
@@ -42,10 +42,10 @@ INSERT INTO flujo (fecha, tipo, concepto, monto, descripcion, comprobante, regis
 ('2026-06-15', 'Egreso', 'Seguridad', 150000, 'Pago seguridad junio', NULL, 'Admin');
 
 -- NOTICIAS
-INSERT INTO noticias (titulo, descripcion, fecha_hasta) VALUES
-('Asamblea mensual', 'Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto, mantenimiento y nuevos proyectos.', '2026-07-25'),
-('Corte de agua programado', 'El martes 22 de julio no habrá agua de 8 a 16hs por trabajos en la red principal.', '2026-07-22'),
-('Nueva seguridad nocturna', 'Se implementa sistema de cámaras y警卫 nocturno a partir del 1 de agosto.', '2026-08-15');
+INSERT INTO noticias (titulo, descripcion, fecha, fecha_hasta) VALUES
+('Asamblea mensual', 'Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto, mantenimiento y nuevos proyectos.', '2026-07-18', '2026-07-25'),
+('Corte de agua programado', 'El martes 22 de julio no habrá agua de 8 a 16hs por trabajos en la red principal.', '2026-07-18', '2026-07-22'),
+('Nueva seguridad nocturna', 'Se implementa sistema de cámaras y vigilancia nocturno a partir del 1 de agosto.', '2026-07-18', '2026-08-15');
 
 -- DOCUMENTOS
 INSERT INTO documentos (nombre, categoria, descripcion) VALUES
@@ -55,10 +55,10 @@ INSERT INTO documentos (nombre, categoria, descripcion) VALUES
 ('Seguro edificio', 'Seguros', 'Póliza de seguro contra incendio y robo');
 
 -- RECLAMOS
-INSERT INTO reclamos (tipo, parcela_id, asunto, descripcion) VALUES
-('Reclamo', (SELECT id FROM parcelas WHERE numero = 'Parcela 3'), 'Fuga de agua en zona común', 'Se está filtrando agua cerca del tanque de reserva. El caño parece viejo.'),
+INSERT INTO reclamos (tipo, parcela, asunto, descripcion) VALUES
+('Reclamo', 'Parcela 3', 'Fuga de agua en zona común', 'Se está filtrando agua cerca del tanque de reserva. El caño parece viejo.'),
 ('Sugerencia', NULL, 'Mejorar iluminación del camino', 'Sería bueno colocar luces LED en todo el camino principal.'),
-('Reclamo', (SELECT id FROM parcelas WHERE numero = 'Parcela 5'), 'Ruido excesivo nocturno', 'Los vecinos de al lado hacen fiesta todos los fines de semana hasta tarde.');
+('Reclamo', 'Parcela 5', 'Ruido excesivo nocturno', 'Los vecinos de al lado hacen fiesta todos los fines de semana hasta tarde.');
 
 -- PROVEEDORES
 INSERT INTO proveedores (rubro, nombre, telefono, email, contacto, observaciones) VALUES

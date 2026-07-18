@@ -1,26 +1,26 @@
 [
   {
     "titulo": "Asamblea mensual",
-    "descripcion": "Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto",
-    "fechaPublicacion": " mantenimiento y nuevos proyectos.",
-    "fechaHasta": "16/07/2026"
+    "descripcion": "Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto, mantenimiento y nuevos proyectos.",
+    "fecha": "18/07/2026",
+    "fecha_hasta": "25/07/2026"
   },
   {
     "titulo": "Corte de agua programado",
     "descripcion": "El martes 22 de julio no habrá agua de 8 a 16hs por trabajos en la red principal.",
-    "fechaPublicacion": "18/07/2026",
-    "fechaHasta": "22/07/2026"
+    "fecha": "18/07/2026",
+    "fecha_hasta": "22/07/2026"
   },
   {
     "titulo": "Nueva seguridad nocturna",
     "descripcion": "Se instalaron 4 cámaras de seguridad en las entradas del barrio.",
-    "fechaPublicacion": "10/07/2026",
-    "fechaHasta": "31/12/2026"
+    "fecha": "10/07/2026",
+    "fecha_hasta": "31/12/2026"
   },
   {
     "titulo": "Reparación iluminación",
     "descripcion": "Se repararán las luces del camino principal la próxima semana.",
-    "fechaPublicacion": "15/07/2026",
-    "fechaHasta": "20/07/2026"
+    "fecha": "15/07/2026",
+    "fecha_hasta": "20/07/2026"
   }
 ]

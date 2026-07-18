@@ -83,7 +83,7 @@ function renderParcelas() {
 
     var propietariosHtml = propietarios.map(function(prop, j) {
       var propColor = colorClasses[(i + j) % 4];
-      var nombre = prop.nombre_completo || prop.nombre || '';
+      var nombre = prop.nombre_completo || '';
       return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6">' +
         '<div style="display:flex;align-items:center;gap:0.6rem">' +
           '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
@@ -100,7 +100,7 @@ function renderParcelas() {
     return '<div class="card">' +
       '<h4>' + (p.numero || '') + '</h4>' +
       (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
-      '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || p.metros2 || '') + ' m²</span></div>' +
+      '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
       '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
       propietariosHtml +
       '</div>';
@@ -122,7 +122,7 @@ function renderNoticias() {
   }
 
   list.innerHTML = activas.map(function(n) {
-    var fecha = formatDate(n.fecha || n.fechaPublicacion || n.created_at);
+    var fecha = formatDate(n.fecha || n.created_at);
     var hasta = formatDate(n.fecha_hasta);
     return '<div class="news-card" style="margin-bottom:1rem">' +
       '<h4>' + (n.titulo || '') + '</h4>' +
@@ -154,7 +154,7 @@ function renderFlujo() {
 
   var tbody = document.getElementById('flujoBody');
   tbody.innerHTML = FLUJO.map(function(f) {
-    var fecha = formatDate(f.fecha || f.marca_temporal);
+    var fecha = formatDate(f.fecha);
     return '<tr>' +
       '<td>' + fecha + '</td>' +
       '<td><span style="padding:0.15rem 0.5rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2') + ';color:' + (f.tipo === 'Ingreso' ? '#065f46' : '#991b1b') + '">' + f.tipo + '</span></td>' +
@@ -173,7 +173,7 @@ function renderDocumentos() {
 
   list.innerHTML = DOCUMENTOS.map(function(d) {
     var icon = icons[d.categoria] || '&#128196;';
-    var fecha = formatDate(d.fecha || d.marca_temporal || d.created_at);
+    var fecha = formatDate(d.fecha || d.created_at);
     return '<div class="doc-item">' +
       '<div class="doc-icon">' + icon + '</div>' +
       '<div class="doc-info">' +
@@ -193,7 +193,7 @@ function renderReclamos() {
     return '<div class="reclamo-item ' + tipoClass + '">' +
       '<div class="reclamo-header">' +
         '<span class="reclamo-tipo ' + tipoClass + '">' + r.tipo + '</span>' +
-        '<span class="reclamo-fecha">' + formatDate(r.fecha || r.marca_temporal || r.created_at) + '</span>' +
+        '<span class="reclamo-fecha">' + formatDate(r.fecha || r.created_at) + '</span>' +
       '</div>' +
       '<div class="reclamo-title">' + r.asunto + '</div>' +
       '<div class="reclamo-desc">' + r.descripcion + '</div>' +
@@ -213,7 +213,7 @@ function renderProveedores() {
         '<div>&#128205; ' + p.contacto + '</div>' +
         (p.telefono ? '<div>&#128222; <a href="tel:' + p.telefono + '" style="color:#2563eb;text-decoration:none">' + p.telefono + '</a></div>' : '') +
         (p.email ? '<div>&#9993; <a href="mailto:' + p.email + '" style="color:#2563eb;text-decoration:none">' + p.email + '</a></div>' : '') +
-        (p['web/instagram'] ? '<div>&#127760; <a href="' + p['web/instagram'] + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p['web/instagram'] + '</a></div>' : '') +
+        (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
         '<div style="color:#6b7280;font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
       '</div>' +
       '</div>';
@@ -225,7 +225,7 @@ function renderAsambleas() {
   var timeline = document.getElementById('asambleasTimeline');
   timeline.innerHTML = ASAMBLEAS.map(function(a) {
     var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
-    var fecha = formatDate(a.fecha || a.marca_temporal);
+    var fecha = formatDate(a.fecha);
     var asistentes = a.asistentes ? String(a.asistentes).split(',').map(function(item) {
       return '<span style="display:inline-block;background:#e5e7eb;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
     }).join('') : '';

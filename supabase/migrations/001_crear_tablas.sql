@@ -17,7 +17,7 @@ CREATE TABLE propietarios (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   nombre_completo TEXT NOT NULL,
   rut TEXT,
-  parcela_id UUID REFERENCES parcelas(id) ON DELETE CASCADE,
+  parcela TEXT,
   telefono TEXT,
   email TEXT,
   tipo TEXT DEFAULT 'Propietario',
@@ -54,6 +54,7 @@ CREATE TABLE noticias (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   titulo TEXT NOT NULL,
   descripcion TEXT NOT NULL,
+  fecha DATE,
   fecha_hasta DATE,
   created_at TIMESTAMPTZ DEFAULT now()
 );
@@ -63,6 +64,7 @@ CREATE TABLE documentos (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   nombre TEXT NOT NULL,
   categoria TEXT NOT NULL,
+  fecha DATE,
   descripcion TEXT,
   archivo TEXT,
   created_at TIMESTAMPTZ DEFAULT now()
@@ -72,7 +74,7 @@ CREATE TABLE documentos (
 CREATE TABLE reclamos (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tipo TEXT NOT NULL CHECK (tipo IN ('Reclamo', 'Sugerencia')),
-  parcela_id UUID REFERENCES parcelas(id) ON DELETE SET NULL,
+  parcela TEXT,
   asunto TEXT NOT NULL,
   descripcion TEXT NOT NULL,
   created_at TIMESTAMPTZ DEFAULT now()

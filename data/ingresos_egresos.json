@@ -6,7 +6,7 @@
     "descripcion": "Cobro expensas julio",
     "monto": "650000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "3/07/2026",
@@ -15,7 +15,7 @@
     "descripcion": "Pago Juan Pérez",
     "monto": "50000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "3/07/2026",
@@ -24,7 +24,7 @@
     "descripcion": "Pago María López",
     "monto": "50000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "5/07/2026",
@@ -33,7 +33,7 @@
     "descripcion": "Pago junio (varios)",
     "monto": "250000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "6/07/2026",
@@ -42,7 +42,7 @@
     "descripcion": "Cobro fondo reserva junio",
     "monto": "90000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "10/07/2026",
@@ -51,7 +51,7 @@
     "descripcion": "Reparación bomba de agua",
     "monto": "35000",
     "comprobante": "https://drive.google.com/file/d/abc123",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "12/07/2026",
@@ -60,7 +60,7 @@
     "descripcion": "Factura electricity junio",
     "monto": "28000",
     "comprobante": "https://drive.google.com/file/d/def456",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "14/07/2026",
@@ -69,7 +69,7 @@
     "descripcion": "Poda de árboles mes julio",
     "monto": "15000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "15/07/2026",
@@ -78,7 +78,7 @@
     "descripcion": "Service limpieza común",
     "monto": "12000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "16/07/2026",
@@ -87,7 +87,7 @@
     "descripcion": "Seguro anual condominio",
     "monto": "85000",
     "comprobante": "https://drive.google.com/file/d/ghi789",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   },
   {
     "fecha": "5/07/2026",
@@ -96,6 +96,6 @@
     "descripcion": "Multa ruido excesivo Pedro Rojas",
     "monto": "5000",
     "comprobante": "",
-    "registradoPor": "Admin"
+    "registrado_por": "Admin"
   }
 ]

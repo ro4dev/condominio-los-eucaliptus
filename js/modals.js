@@ -22,7 +22,7 @@ function formGastos() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
   openModal('Agregar Gasto', '<form onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Parcela</label><select name="parcela"><option>Todas</option>' + parcelas + '</select></div>' +
+      '<div class="form-group"><label>Parcela</label><select name="parcela" required>' + parcelas + '</select></div>' +
       '<div class="form-group"><label>Periodo</label><input type="month" name="periodo" required></div>' +
     '</div>' +
     '<div class="form-group"><label>Concepto</label><input type="text" name="concepto" required></div>' +
@@ -68,7 +68,7 @@ function formNoticias() {
   openModal('Agregar Noticia', '<form onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Título</label><input type="text" name="titulo" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" required></textarea></div>' +
-    '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fechaHasta"></div>' +
+    '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fecha_hasta"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
@@ -121,7 +121,7 @@ function formProveedores() {
       '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono"></div>' +
       '<div class="form-group"><label>Email</label><input type="email" name="email"></div>' +
     '</div>' +
-    '<div class="form-group"><label>Web/Instagram</label><input type="url" name="web/instagram"></div>' +
+    '<div class="form-group"><label>Web/Instagram</label><input type="url" name="web_instagram"></div>' +
     '<div class="form-group"><label>Observaciones</label><textarea name="observaciones"></textarea></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
@@ -135,7 +135,7 @@ function formAsambleas() {
     '</div>' +
     '<div class="form-group"><label>Temario</label><textarea name="temario" required></textarea></div>' +
     '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos"></textarea></div>' +
-    '<div class="form-group"><label>Asistentes (cantidad)</label><input type="number" name="asistentes"></div>' +
+    '<div class="form-group"><label>Asistentes (parcelas)</label><input type="text" name="asistentes" placeholder="Parcela 1, Parcela 2, ..."></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
