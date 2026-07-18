@@ -8,6 +8,19 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('active');
 }
 
+function confirmCloseModal() {
+  var body = document.getElementById('modalBody');
+  var inputs = body.querySelectorAll('input:not([type="file"]):not([type="hidden"]), textarea, select');
+  var hasData = false;
+  inputs.forEach(function(el) {
+    if (el.value && el.value.trim() !== '') hasData = true;
+  });
+  if (hasData) {
+    if (!confirm('¿Cerrar? Se perderán los datos ingresados.')) return;
+  }
+  closeModal();
+}
+
 function handleForm(e) {
   e.preventDefault();
   var form = e.target;
@@ -71,12 +84,12 @@ function formGastos() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
   openModal('Agregar Gasto', '<form data-table="gastos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Parcela</label><select name="parcela" required>' + parcelas + '</select></div>' +
-      '<div class="form-group"><label>Periodo</label><input type="month" name="periodo" required></div>' +
+      '<div class="form-group"><label>Parcela *</label><select name="parcela" required>' + parcelas + '</select></div>' +
+      '<div class="form-group"><label>Periodo *</label><input type="month" name="periodo" required></div>' +
     '</div>' +
-    '<div class="form-group"><label>Concepto</label><input type="text" name="concepto" required></div>' +
-    '<div class="form-group"><label>Monto</label><input type="number" name="monto" min="0" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
+    '<div class="form-group"><label>Concepto *</label><input type="text" name="concepto" placeholder="Ej: Aguas, Electricidad, Mantención" required></div>' +
+    '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)"></textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
@@ -85,11 +98,11 @@ function formGastos() {
 function formParcelas() {
   openModal('Agregar Parcela', '<form data-table="parcelas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Número</label><input type="text" name="numero" required></div>' +
-      '<div class="form-group"><label>Rol</label><input type="text" name="rol"></div>' +
+      '<div class="form-group"><label>Número *</label><input type="text" name="numero" placeholder="Ej: 1, 2A, 15" required></div>' +
+      '<div class="form-group"><label>Rol</label><input type="text" name="rol" placeholder="Rol de la propiedad"></div>' +
     '</div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Metros²</label><input type="number" name="metros" min="0" required></div>' +
+      '<div class="form-group"><label>Metros² *</label><input type="number" name="metros" min="0" placeholder="0" required></div>' +
       '<div class="form-group"><label>Estado</label><select name="estado"><option>Habitada</option><option>Desocupada</option><option>En construcción</option></select></div>' +
     '</div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
@@ -99,14 +112,14 @@ function formParcelas() {
 function formPropietarios() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
   openModal('Agregar Propietario', '<form data-table="propietarios" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Nombre completo</label><input type="text" name="nombre_completo" required></div>' +
+    '<div class="form-group"><label>Nombre completo *</label><input type="text" name="nombre_completo" placeholder="Juan Pérez" required></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>RUT</label><input type="text" name="rut"></div>' +
-      '<div class="form-group"><label>Parcela</label><select name="parcela" required>' + parcelas + '</select></div>' +
+      '<div class="form-group"><label>RUT</label><input type="text" name="rut" placeholder="12.345.678-9"></div>' +
+      '<div class="form-group"><label>Parcela *</label><select name="parcela" required>' + parcelas + '</select></div>' +
     '</div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono"></div>' +
-      '<div class="form-group"><label>Email</label><input type="email" name="email"></div>' +
+      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"></div>' +
+      '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"></div>' +
     '</div>' +
     '<div class="form-group"><label>Tipo</label><select name="tipo"><option>Propietario</option><option>Inquilino</option><option>Administrador</option></select></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
@@ -115,8 +128,8 @@ function formPropietarios() {
 
 function formNoticias() {
   openModal('Agregar Noticia', '<form data-table="noticias" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Título</label><input type="text" name="titulo" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" required></textarea></div>' +
+    '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Ej: Corte de agua programado" required></div>' +
+    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required></textarea></div>' +
     '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fecha_hasta"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
@@ -125,12 +138,12 @@ function formNoticias() {
 function formFlujo() {
   openModal('Agregar Movimiento', '<form data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Ingreso</option><option>Egreso</option></select></div>' +
-      '<div class="form-group"><label>Fecha</label><input type="date" name="fecha" required></div>' +
+      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Ingreso</option><option>Egreso</option></select></div>' +
+      '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +
     '</div>' +
-    '<div class="form-group"><label>Concepto</label><input type="text" name="concepto" required></div>' +
-    '<div class="form-group"><label>Monto</label><input type="number" name="monto" min="0" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
+    '<div class="form-group"><label>Concepto *</label><input type="text" name="concepto" placeholder="Ej: Pago de gestión, Luz comunal" required></div>' +
+    '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del movimiento (opcional)"></textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
@@ -138,9 +151,9 @@ function formFlujo() {
 
 function formDocumentos() {
   openModal('Agregar Documento', '<form data-table="documentos" data-bucket="documentos" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Nombre</label><input type="text" name="nombre" required></div>' +
-    '<div class="form-group"><label>Categoría</label><select name="categoria" required><option>Estatuto</option><option>Actas</option><option>Contratos</option><option>Seguros</option><option>Planos</option></select></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion"></textarea></div>' +
+    '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Ej: Acta reunión marzo 2026" required></div>' +
+    '<div class="form-group"><label>Categoría *</label><select name="categoria" required><option>Estatuto</option><option>Actas</option><option>Contratos</option><option>Seguros</option><option>Planos</option></select></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Resumen del documento (opcional)"></textarea></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
@@ -150,11 +163,11 @@ function formReclamos() {
   var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
   openModal('Agregar Reclamo/Sugerencia', '<form data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Reclamo</option><option>Sugerencia</option></select></div>' +
+      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Reclamo</option><option>Sugerencia</option></select></div>' +
       '<div class="form-group"><label>Parcela</label><select name="parcela"><option value="">Anónimo</option>' + parcelas + '</select></div>' +
     '</div>' +
-    '<div class="form-group"><label>Asunto</label><input type="text" name="asunto" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" required></textarea></div>' +
+    '<div class="form-group"><label>Asunto *</label><input type="text" name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required></div>' +
+    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa el problema o sugerencia con el mayor detalle posible" required></textarea></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
@@ -162,16 +175,16 @@ function formReclamos() {
 function formProveedores() {
   openModal('Agregar Proveedor', '<form data-table="proveedores" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Rubro</label><input type="text" name="rubro" required></div>' +
-      '<div class="form-group"><label>Nombre</label><input type="text" name="nombre" required></div>' +
+      '<div class="form-group"><label>Rubro *</label><select name="rubro" required><option value="">Seleccionar...</option><option>Jardinería</option><option>Plomería</option><option>Electricidad</option><option>Albañilería</option><option>Pintura</option><option>Limpieza</option><option>Seguridad</option><option>Carpintería</option><option>Herrería</option><option>Tecnología</option><option>Otro</option></select></div>' +
+      '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Nombre del proveedor o empresa" required></div>' +
     '</div>' +
-    '<div class="form-group"><label>Contacto</label><input type="text" name="contacto" required></div>' +
+    '<div class="form-group"><label>Contacto *</label><input type="text" name="contacto" placeholder="Nombre de la persona de contacto" required></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono"></div>' +
-      '<div class="form-group"><label>Email</label><input type="email" name="email"></div>' +
+      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"></div>' +
+      '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"></div>' +
     '</div>' +
-    '<div class="form-group"><label>Web/Instagram</label><input type="url" name="web_instagram"></div>' +
-    '<div class="form-group"><label>Observaciones</label><textarea name="observaciones"></textarea></div>' +
+    '<div class="form-group"><label>Web/Instagram</label><input type="url" name="web_instagram" placeholder="https://..."></div>' +
+    '<div class="form-group"><label>Observaciones</label><textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)"></textarea></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
@@ -179,14 +192,14 @@ function formProveedores() {
 function formAsambleas() {
   openModal('Agregar Asamblea', '<form data-table="asambleas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Fecha</label><input type="date" name="fecha" required></div>' +
-      '<div class="form-group"><label>Tipo</label><select name="tipo" required><option>Ordinaria</option><option>Extraordinaria</option></select></div>' +
+      '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +
+      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Ordinaria</option><option>Extraordinaria</option></select></div>' +
     '</div>' +
-    '<div class="form-group"><label>Temario</label><textarea name="temario" required></textarea></div>' +
-    '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos"></textarea></div>' +
+    '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required></textarea></div>' +
+    '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)"></textarea></div>' +
     '<div class="form-group"><label>Asistentes (parcelas)</label><input type="text" name="asistentes" placeholder="Parcela 1, Parcela 2, ..."></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
 
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') confirmCloseModal(); });
