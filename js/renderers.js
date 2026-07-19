@@ -1,19 +1,19 @@
 // ESTADO DE CUENTA
 function fillFilters() {
   var periodos = [];
-  var parcelas = [];
   GASTOS.forEach(function(r) {
     if (r.periodo && periodos.indexOf(r.periodo) === -1) periodos.push(r.periodo);
-    if (r.parcela && parcelas.indexOf(r.parcela) === -1) parcelas.push(r.parcela);
   });
   periodos.sort().reverse();
-  parcelas.sort();
 
   var pf = document.getElementById('periodFilter');
   pf.innerHTML = '<option value="">Todos</option>' + periodos.map(function(p) { return '<option value="' + p + '">' + formatPeriodo(p) + '</option>'; }).join('');
 
   var paf = document.getElementById('parcelaFilter');
-  paf.innerHTML = '<option value="">Todas</option>' + parcelas.map(function(p) { return '<option>' + p + '</option>'; }).join('');
+  var sorted = PARCELAS.slice().sort(function(a, b) {
+    return (a.numero || '').localeCompare(b.numero || '', undefined, { numeric: true });
+  });
+  paf.innerHTML = '<option value="">Todas</option>' + sorted.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
 
   pf.onchange = applyFilters;
   paf.onchange = applyFilters;
@@ -22,7 +22,7 @@ function fillFilters() {
 function filteredData() {
   var p = document.getElementById('periodFilter').value;
   var pa = document.getElementById('parcelaFilter').value;
-  return GASTOS.filter(function(r) { return (!p || r.periodo == p) && (!pa || r.parcela == pa); });
+  return GASTOS.filter(function(r) { return (!p || r.periodo == p) && (!pa || r.parcela_id == pa); });
 }
 
 function applyFilters() {
@@ -38,7 +38,7 @@ function renderStats(data) {
   var parcelas = [];
   data.forEach(function(r) {
     if (periodos.indexOf(r.periodo) === -1) periodos.push(r.periodo);
-    if (parcelas.indexOf(r.parcela) === -1) parcelas.push(r.parcela);
+    if (r.parcela_id && parcelas.indexOf(r.parcela_id) === -1) parcelas.push(r.parcela_id);
   });
 
   document.getElementById('stats').innerHTML =
@@ -58,7 +58,7 @@ function renderTable(data) {
   }
   tbody.innerHTML = data.map(function(r) {
     return '<tr>' +
-      '<td>' + (r.parcela || '') + '</td>' +
+      '<td>' + parcelName(r.parcela_id) + '</td>' +
       '<td>' + formatPeriodo(r.periodo) + '</td>' +
       '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
       '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank">Ver</a>' : '') + '</td>' +
@@ -78,7 +78,7 @@ function renderParcelas() {
   });
 
   grid.innerHTML = sorted.map(function(p, i) {
-    var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela === p.numero; });
+    var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela_id === p.id; });
     var colorClass = colorClasses[i % 4];
 
     var propietariosHtml = propietarios.map(function(prop, j) {
@@ -264,7 +264,7 @@ function renderReclamos() {
       '</div>' +
       '<div class="reclamo-title">' + r.asunto + '</div>' +
       '<div class="reclamo-desc">' + r.descripcion + '</div>' +
-      (r.parcela ? '<div class="reclamo-parcela">' + r.parcela + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
+      (r.parcela_id ? '<div class="reclamo-parcela">' + parcelName(r.parcela_id) + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
       '</div>';
   }).join('');
   if (filtered.length === 0) {
@@ -312,8 +312,9 @@ function renderAsambleas() {
   timeline.innerHTML = sorted.map(function(a) {
     var borderColor = a.tipo === 'Extraordinaria' ? '#f59e0b' : '#3b82f6';
     var fecha = formatDate(a.fecha);
-    var asistentes = a.asistentes ? String(a.asistentes).split(',').map(function(item) {
-      return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
+    var asistentesIds = (ASAMBLEA_ASISTENTES || []).filter(function(aa) { return aa.asamblea_id === a.id; }).map(function(aa) { return aa.parcela_id; });
+    var asistentes = asistentesIds.length ? asistentesIds.map(function(pid) {
+      return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + parcelName(pid) + '</span>';
     }).join('') : '';
     return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +

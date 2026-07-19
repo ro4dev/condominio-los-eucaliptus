@@ -7,7 +7,8 @@ var TABLE_MAP = {
   DOCUMENTOS: 'documentos',
   RECLAMOS: 'reclamos',
   PROVEEDORES: 'proveedores',
-  ASAMBLEAS: 'asambleas'
+  ASAMBLEAS: 'asambleas',
+  ASAMBLEA_ASISTENTES: 'asamblea_asistentes'
 };
 
 async function loadJson(target) {
@@ -28,7 +29,7 @@ async function loadJson(target) {
 }
 
 async function loadInitialData() {
-  await Promise.all([loadJson('GASTOS'), loadConfig()]);
+  await Promise.all([loadJson('GASTOS'), loadJson('PARCELAS'), loadConfig()]);
   fillFilters();
   applyFilters();
 }
@@ -42,7 +43,7 @@ async function loadTabData(tab) {
     documentos: function() { return loadJson('DOCUMENTOS').then(function() { renderDocumentos(); }); },
     reclamos: function() { return loadJson('RECLAMOS').then(function() { renderReclamos(); }); },
     proveedores: function() { return loadJson('PROVEEDORES').then(function() { renderProveedores(); }); },
-    asambleas: function() { return loadJson('ASAMBLEAS').then(function() { renderAsambleas(); }); },
+    asambleas: function() { return Promise.all([loadJson('ASAMBLEAS'), loadJson('ASAMBLEA_ASISTENTES')]).then(function() { renderAsambleas(); }); },
     config: function() { return renderConfig(); }
   };
 

@@ -26,7 +26,7 @@ function renderPeriodChart(data) {
 function renderParcelaChart(data) {
   var groups = {};
   data.forEach(function(r) {
-    var p = r.parcela || 'Sin parcela';
+    var p = parcelName(r.parcela_id) || 'Sin parcela';
     groups[p] = (groups[p] || 0) + parseFloat(r.monto || 0);
   });
   var labels = Object.keys(groups);

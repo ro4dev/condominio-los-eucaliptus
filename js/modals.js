@@ -78,14 +78,38 @@ function handleForm(e) {
         hideLoading();
         return;
       }
-      supabaseInsert(table, data).then(function(result) {
-        hideLoading();
-        if (result) {
-          alert('Guardado correctamente.');
-          closeModal();
-          reloadTab(getCurrentTab());
-        }
-      });
+      if (table === 'asambleas') {
+        var asistentesStr = data.asistentes || '';
+        var asistentesIds = asistentesStr ? asistentesStr.split(', ') : [];
+        delete data.asistentes;
+        supabaseInsert(table, data).then(function(result) {
+          if (!result) { hideLoading(); return; }
+          var asambleaId = result.id;
+          if (asistentesIds.length) {
+            var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
+            supabaseClient.from('asamblea_asistentes').insert(rows).then(function() {
+              hideLoading();
+              alert('Guardado correctamente.');
+              closeModal();
+              reloadTab(getCurrentTab());
+            });
+          } else {
+            hideLoading();
+            alert('Guardado correctamente.');
+            closeModal();
+            reloadTab(getCurrentTab());
+          }
+        });
+      } else {
+        supabaseInsert(table, data).then(function(result) {
+          hideLoading();
+          if (result) {
+            alert('Guardado correctamente.');
+            closeModal();
+            reloadTab(getCurrentTab());
+          }
+        });
+      }
     }
   });
 }
@@ -101,11 +125,11 @@ function formGastos() {
     loadJson('PARCELAS').then(function() { formGastos(); });
     return;
   }
-  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.numero + '">' + p.numero + '</option>'; }).join('');
+  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
   openModal('Agregar Gasto', '<form data-table="gastos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Periodo *</label><input type="month" name="periodo" required id="gastoPeriodo"></div>' +
-      '<div class="form-group"><label>Parcela *</label><select name="parcela" required id="gastoParcela">' + parcelas + '</select></div>' +
+      '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required id="gastoParcela">' + parcelas + '</select></div>' +
     '</div>' +
     '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)"></textarea></div>' +
@@ -118,9 +142,9 @@ function formGastos() {
 function updateGastoParcelas() {
   var periodo = document.getElementById('gastoPeriodo').value;
   var select = document.getElementById('gastoParcela');
-  var usadas = GASTOS.filter(function(g) { return g.periodo === periodo; }).map(function(g) { return g.parcela; });
-  select.innerHTML = PARCELAS.filter(function(p) { return usadas.indexOf(p.numero) === -1; })
-    .map(function(p) { return '<option value="' + p.numero + '">' + p.numero + '</option>'; }).join('');
+  var usadas = GASTOS.filter(function(g) { return g.periodo === periodo; }).map(function(g) { return g.parcela_id; });
+  select.innerHTML = PARCELAS.filter(function(p) { return usadas.indexOf(p.id) === -1; })
+    .map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
   if (select.options.length === 0) {
     select.innerHTML = '<option value="">Todas las parcelas ya tienen gasto</option>';
     select.disabled = true;
@@ -144,12 +168,12 @@ function formParcelas() {
 }
 
 function formPropietarios() {
-  var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
+  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
   openModal('Agregar Propietario', '<form data-table="propietarios" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Nombre completo *</label><input type="text" name="nombre_completo" placeholder="Juan Pérez" required></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>RUT</label><input type="text" name="rut" placeholder="12.345.678-9"></div>' +
-      '<div class="form-group"><label>Parcela *</label><select name="parcela" required>' + parcelas + '</select></div>' +
+      '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required>' + parcelas + '</select></div>' +
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"></div>' +
@@ -194,11 +218,11 @@ function formDocumentos() {
 }
 
 function formReclamos() {
-  var parcelas = PARCELAS.map(function(p) { return '<option>' + p.numero + '</option>'; }).join('');
+  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
   openModal('Agregar Reclamo/Sugerencia', '<form data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Reclamo</option><option>Sugerencia</option></select></div>' +
-      '<div class="form-group"><label>Parcela</label><select name="parcela"><option value="">Anónimo</option>' + parcelas + '</select></div>' +
+      '<div class="form-group"><label>Parcela</label><select name="parcela_id"><option value="">Anónimo</option>' + parcelas + '</select></div>' +
     '</div>' +
     '<div class="form-group"><label>Asunto *</label><input type="text" name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required></div>' +
     '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa el problema o sugerencia con el mayor detalle posible" required></textarea></div>' +
@@ -228,7 +252,7 @@ function formAsambleas() {
     loadJson('PARCELAS').then(function() { formAsambleas(); });
     return;
   }
-  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.numero + '">' + p.numero + '</option>'; }).join('');
+  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
   openModal('Agregar Asamblea', '<form data-table="asambleas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +

@@ -2,7 +2,7 @@
   {
     "nombre_completo": "Juan Pérez",
     "rut": "30123456",
-    "parcela": "Parcela 1",
+    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
     "telefono": "+54 9 11 1234-5678",
     "email": "juan.perez@mail.com",
     "tipo": "Propietario"
@@ -10,7 +10,7 @@
   {
     "nombre_completo": "María García",
     "rut": "27654321",
-    "parcela": "Parcela 1",
+    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
     "telefono": "+54 9 11 1234-9999",
     "email": "maria.garcia@mail.com",
     "tipo": "Propietario"
@@ -18,7 +18,7 @@
   {
     "nombre_completo": "María López",
     "rut": "28765432",
-    "parcela": "Parcela 2",
+    "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
     "telefono": "+54 9 11 2345-6789",
     "email": "maria.lopez@mail.com",
     "tipo": "Propietario"
@@ -26,7 +26,7 @@
   {
     "nombre_completo": "Carlos Silva",
     "rut": "32987654",
-    "parcela": "Parcela 3",
+    "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
     "telefono": "+54 9 11 3456-7890",
     "email": "carlos.silva@mail.com",
     "tipo": "Propietario"
@@ -34,7 +34,7 @@
   {
     "nombre_completo": "Laura Díaz",
     "rut": "31234567",
-    "parcela": "Parcela 3",
+    "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
     "telefono": "+54 9 11 3456-1111",
     "email": "laura.diaz@mail.com",
     "tipo": "Propietario"
@@ -42,7 +42,7 @@
   {
     "nombre_completo": "Ana Martínez",
     "rut": "29876543",
-    "parcela": "Parcela 4",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
     "telefono": "+54 9 11 4567-8901",
     "email": "ana.martinez@mail.com",
     "tipo": "Propietario"
@@ -50,7 +50,7 @@
   {
     "nombre_completo": "Pedro Rojas",
     "rut": "33456789",
-    "parcela": "Parcela 5",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
     "telefono": "+54 9 11 5678-9012",
     "email": "pedro.rojas@mail.com",
     "tipo": "Propietario"
@@ -58,7 +58,7 @@
   {
     "nombre_completo": "Laura Torres",
     "rut": "26543210",
-    "parcela": "Parcela 6",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
     "telefono": "+54 9 11 6789-0123",
     "email": "laura.torres@mail.com",
     "tipo": "Arrendataria"
@@ -66,7 +66,7 @@
   {
     "nombre_completo": "Diego Ramírez",
     "rut": "34567890",
-    "parcela": "Parcela 7",
+    "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
     "telefono": "+54 9 11 7890-1234",
     "email": "diego.ramirez@mail.com",
     "tipo": "Propietario"
@@ -74,7 +74,7 @@
   {
     "nombre_completo": "Sofía Herrera",
     "rut": "25432109",
-    "parcela": "Parcela 8",
+    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
     "telefono": "+54 9 11 8901-2345",
     "email": "sofia.herrera@mail.com",
     "tipo": "Propietaria"
@@ -82,7 +82,7 @@
   {
     "nombre_completo": "Miguel Ángel Ruiz",
     "rut": "35678901",
-    "parcela": "Parcela 9",
+    "parcela_id": "781f0a38-011d-4340-b211-6ec61fa714ba",
     "telefono": "+54 9 11 9012-3456",
     "email": "miguel.ruiz@mail.com",
     "tipo": "Propietario"
@@ -90,7 +90,7 @@
   {
     "nombre_completo": "Valentina Muñoz",
     "rut": "24321098",
-    "parcela": "Parcela 10",
+    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
     "telefono": "+54 9 11 0123-4567",
     "email": "valentina.munoz@mail.com",
     "tipo": "Propietaria"
@@ -98,7 +98,7 @@
   {
     "nombre_completo": "Santiago Vega",
     "rut": "36789012",
-    "parcela": "Parcela 11",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
     "telefono": "+54 9 11 1234-5678",
     "email": "santiago.vega@mail.com",
     "tipo": "Arrendatario"
@@ -106,7 +106,7 @@
   {
     "nombre_completo": "Isabel Guerrero",
     "rut": "30123456",
-    "parcela": "Parcela 12",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
     "telefono": "+54 9 11 2345-6789",
     "email": "isabel.guerrero@mail.com",
     "tipo": "Propietaria"
@@ -114,7 +114,7 @@
   {
     "nombre_completo": "Roberto Sánchez",
     "rut": "32987654",
-    "parcela": "Parcela 12",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
     "telefono": "+54 9 11 2345-2222",
     "email": "roberto.sanchez@mail.com",
     "tipo": "Propietario"
@@ -122,7 +122,7 @@
   {
     "nombre_completo": "Pablo Castillo",
     "rut": "31234567",
-    "parcela": "Parcela 13",
+    "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
     "telefono": "+54 9 11 3456-7890",
     "email": "pablo.castillo@mail.com",
     "tipo": "Propietario"

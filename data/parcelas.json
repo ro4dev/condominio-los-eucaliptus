@@ -1,77 +1,90 @@
 [
   {
+    "id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
     "numero": "Parcela 1",
     "rol": "00521-001",
     "metros": "450",
     "estado": "Habitada"
   },
   {
+    "id": "b5a83343-a7e6-4503-8548-1656e473421c",
     "numero": "Parcela 2",
     "rol": "00521-002",
     "metros": "520",
     "estado": "Habitada"
   },
   {
+    "id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
     "numero": "Parcela 3",
     "rol": "00521-003",
     "metros": "380",
     "estado": "Habitada"
   },
   {
+    "id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
     "numero": "Parcela 4",
     "rol": "00521-004",
     "metros": "600",
     "estado": "Habitada"
   },
   {
+    "id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
     "numero": "Parcela 5",
     "rol": "00521-005",
     "metros": "420",
     "estado": "Habitada"
   },
   {
+    "id": "a55aed58-5052-4df1-82a6-e41668167d21",
     "numero": "Parcela 6",
     "rol": "00521-006",
     "metros": "350",
     "estado": "En construcción"
   },
   {
+    "id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
     "numero": "Parcela 7",
     "rol": "00521-007",
     "metros": "480",
     "estado": "Habitada"
   },
   {
+    "id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
     "numero": "Parcela 8",
     "rol": "00521-008",
     "metros": "550",
     "estado": "Habitada"
   },
   {
+    "id": "781f0a38-011d-4340-b211-6ec61fa714ba",
     "numero": "Parcela 9",
     "rol": "00521-009",
     "metros": "400",
     "estado": "Baldío"
   },
   {
+    "id": "91391efe-da6b-423e-9977-53fd2d9266bf",
     "numero": "Parcela 10",
     "rol": "00521-010",
     "metros": "510",
     "estado": "Habitada"
   },
   {
+    "id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
     "numero": "Parcela 11",
     "rol": "00521-011",
     "metros": "470",
     "estado": "Habitada"
   },
   {
+    "id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
     "numero": "Parcela 12",
     "rol": "00521-012",
     "metros": "390",
     "estado": "En construcción"
   },
   {
+    "id": "4846156f-c303-4f8a-99a0-46537c90185a",
     "numero": "Parcela 13",
     "rol": "00521-013",
     "metros": "430",

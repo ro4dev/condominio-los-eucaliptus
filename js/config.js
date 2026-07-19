@@ -11,6 +11,7 @@ var DOCUMENTOS = [];
 var RECLAMOS = [];
 var PROVEEDORES = [];
 var ASAMBLEAS = [];
+var ASAMBLEA_ASISTENTES = [];
 
 var loaded = { GASTOS: false };
 
@@ -24,6 +25,7 @@ var DEMO_FILES = {
   RECLAMOS: 'data/reclamos.json',
   PROVEEDORES: 'data/proveedores.json',
   ASAMBLEAS: 'data/asambleas.json',
+  ASAMBLEA_ASISTENTES: 'data/asamblea_asistentes.json',
   CONFIG: 'data/config.json'
 };
 
@@ -33,6 +35,19 @@ function toggleDemoMode() {
   document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Salir de modo demo' : 'Ir a modo demo';
   document.getElementById('demoToggle').classList.toggle('active', DEMO_MODE);
   location.reload();
+}
+
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
+function parcelName(parcelaId) {
+  if (!parcelaId) return '';
+  var p = PARCELAS.find(function(x) { return x.id === parcelaId; });
+  return p ? p.numero : parcelaId;
 }
 
 var isDark = localStorage.getItem('theme') === 'dark';

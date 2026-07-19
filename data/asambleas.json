@@ -1,23 +1,23 @@
 [
   {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "fecha": "15/06/2026",
     "tipo": "Ordinaria",
-    "temario": "1. Presupuesto trimestral\\n2. Mantenimiento pileta\\n3. Seguridad nocturna\\n4. Preguntas varias",
-    "acuerdos": "Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras.",
-    "asistentes": "Parcela 1, Parcela 2, Parcela 3, Parcela 4, Parcela 5, Parcela 6"
+    "temario": "1. Presupuesto trimestral\n2. Mantenimiento pileta\n3. Seguridad nocturna\n4. Preguntas varias",
+    "acuerdos": "Se aprobó presupuesto $2.500.000. Se reparará pileta. Se instalarán cámaras."
   },
   {
+    "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
     "fecha": "20/07/2026",
     "tipo": "Ordinaria",
-    "temario": "1. Revisión gastos junio-julio\\n2. Reparación bomba agua\\n3. Próximos proyectos\\n4. Preguntas varias",
-    "acuerdos": "Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común.",
-    "asistentes": "Parcela 1, Parcela 2, Parcela 3, Parcela 5, Parcela 7"
+    "temario": "1. Revisión gastos junio-julio\n2. Reparación bomba agua\n3. Próximos proyectos\n4. Preguntas varias",
+    "acuerdos": "Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común."
   },
   {
+    "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
     "fecha": "15/08/2025",
     "tipo": "Extraordinaria",
-    "temario": "1. Emergencia filtración techo salón\\n2. Votación pintura fachada",
-    "acuerdos": "Se aprobó reparación urgente $180.000. Se votó pintura fachada aprobada.",
-    "asistentes": "Parcela 1, Parcela 2, Parcela 3, Parcela 4, Parcela 5, Parcela 6, Parcela 7, Parcela 8"
+    "temario": "1. Emergencia filtración techo salón\n2. Votación pintura fachada",
+    "acuerdos": "Se aprobó reparación urgente $180.000. Se votó pintura fachada aprobada."
   }
 ]

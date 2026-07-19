@@ -184,37 +184,85 @@ function renderParcelasConfig() {
   document.getElementById('cfgParcelasCantidad').value = c;
 }
 
-async function bulkCreateParcelas() {
-  var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
-  var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim() || 'Parcela';
-  if (!cantidad || cantidad < 1) { alert('Ingresá una cantidad válida.'); return; }
-
-  var existentes = PARCELAS.map(function(p) { return p.numero; });
-  var nuevas = [];
-  for (var i = 1; i <= cantidad; i++) {
-    var nombre = prefijo + ' ' + i;
-    if (existentes.indexOf(nombre) === -1) {
-      nuevas.push({ numero: nombre, metros: 0, estado: 'Sin asignar' });
+async function renameParcelas(oldPrefijo, newPrefijo) {
+  PARCELAS.forEach(function(p) {
+    var match = p.numero.match(/^(\D+)\s+(\d+)$/);
+    if (match && match[1] === oldPrefijo) {
+      p.numero = newPrefijo + ' ' + match[2];
     }
+  });
+  if (DEMO_MODE) return;
+  if (!supabaseClient) return;
+
+  for (var i = 0; i < PARCELAS.length; i++) {
+    var match = PARCELAS[i].numero.match(/^(\D+)\s+(\d+)$/);
+    if (!match || match[1] !== newPrefijo) continue;
+    await supabaseClient.from('parcelas').update({ numero: PARCELAS[i].numero }).eq('id', PARCELAS[i].id);
   }
 
-  if (!nuevas.length) { alert('Todas las parcelas ya existen.'); return; }
+  await loadJson('PARCELAS');
+}
+
+async function bulkCreateParcelas() {
+  var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
+  var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim();
+  if (!prefijo) { alert('Ingresá un prefijo.'); return; }
+  if (!cantidad || cantidad < 1) { alert('Ingresá una cantidad válida.'); return; }
+
+  var prefijoAnterior = CONFIG.parcelas_prefijo || '';
+
+  var nuevas = [];
+  for (var i = 1; i <= cantidad; i++) {
+    nuevas.push({ id: generateUUID(), numero: prefijo + ' ' + i, metros: 0, estado: 'Sin asignar' });
+  }
+
+  var nombresNuevos = nuevas.map(function(p) { return p.numero; });
+  var nombresExistentes = PARCELAS.map(function(p) { return p.numero; });
+  var iguales = nombresNuevos.length === nombresExistentes.length && nombresNuevos.every(function(n, i) { return n === nombresExistentes[i]; });
+
+  if (iguales) {
+    await saveConfig('parcelas_cantidad', cantidad);
+    await saveConfig('parcelas_prefijo', prefijo);
+    alert('Sin cambios.');
+    return;
+  }
 
   if (DEMO_MODE) {
-    nuevas.forEach(function(p) { PARCELAS.push(p); });
+    if (prefijo !== prefijoAnterior) {
+      PARCELAS.forEach(function(p) {
+        var match = p.numero.match(/^(\D+)\s+(\d+)$/);
+        if (match && match[1] === prefijoAnterior) {
+          p.numero = prefijo + ' ' + match[2];
+        }
+      });
+    }
+    nuevas.forEach(function(p) {
+      if (!PARCELAS.some(function(x) { return x.numero === p.numero; })) {
+        PARCELAS.push(p);
+      }
+    });
   } else if (supabaseClient) {
     showLoading();
-    var { error } = await supabaseClient.from('parcelas').insert(nuevas);
+    if (prefijo !== prefijoAnterior) {
+      await renameParcelas(prefijoAnterior, prefijo);
+    }
+    var nuevasReales = nuevas.filter(function(p) { return nombresExistentes.indexOf(p.numero) === -1; });
+    if (nuevasReales.length) {
+      var { error } = await supabaseClient.from('parcelas').insert(nuevasReales);
+      if (error) { hideLoading(); alert('Error al crear parcelas: ' + error.message); return; }
+      await loadJson('PARCELAS');
+    }
     hideLoading();
-    if (error) { alert('Error al crear parcelas: ' + error.message); return; }
-    await loadJson('PARCELAS');
   }
 
   await saveConfig('parcelas_cantidad', cantidad);
   await saveConfig('parcelas_prefijo', prefijo);
 
-  alert(nuevas.length + ' parcela(s) creada(s).');
-  document.getElementById('cfgParcelasCantidad').value = '';
+  var msg = prefijo !== prefijoAnterior
+    ? 'Parcelas renombradas a "' + prefijo + '".'
+    : 'Parcelas actualizadas.';
+  alert(msg);
+  renderParcelasConfig();
 }
 
 // --- ADMIN USERS ---
