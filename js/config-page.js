@@ -177,6 +177,13 @@ async function saveConceptosFlujo() {
 }
 
 // --- PARCELAS BULK ---
+function renderParcelasConfig() {
+  var p = CONFIG.parcelas_prefijo || '';
+  var c = CONFIG.parcelas_cantidad || '';
+  document.getElementById('cfgParcelasPrefijo').value = p;
+  document.getElementById('cfgParcelasCantidad').value = c;
+}
+
 async function bulkCreateParcelas() {
   var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
   var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim() || 'Parcela';
@@ -202,6 +209,9 @@ async function bulkCreateParcelas() {
     if (error) { alert('Error al crear parcelas: ' + error.message); return; }
     await loadJson('PARCELAS');
   }
+
+  await saveConfig('parcelas_cantidad', cantidad);
+  await saveConfig('parcelas_prefijo', prefijo);
 
   alert(nuevas.length + ' parcela(s) creada(s).');
   document.getElementById('cfgParcelasCantidad').value = '';
@@ -286,6 +296,7 @@ async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO'), loadAdmins()]);
   renderMontos();
+  renderParcelasConfig();
   renderCategoriasDocs();
   renderRubrosProveedores();
   renderConceptosFlujo();
