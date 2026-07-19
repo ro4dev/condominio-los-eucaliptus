@@ -317,15 +317,27 @@ function formEncuestas() {
       '<div class="form-group"><label>Fecha de término</label><input type="date" name="fecha_termino"></div>' +
       '<div class="form-group"><label>Quorum (mín. votos)</label><input type="number" name="quorum" min="0" placeholder="Sin límite"></div>' +
     '</div>' +
-    '<div class="form-group"><label>Alternativas</label><div id="encuestaAlternativas">' +
-      '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 1" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
-      '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 2" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
-    '</div>' +
-    '<button type="button" class="btn-toggle" onclick="addEncuestaAlt()" style="font-size:0.8rem">+ Agregar alternativa</button>' +
-    '<div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Si no se agregan alternativas, será "A favor" / "En contra"</div>' +
+    '<div class="form-group">' +
+      '<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem">' +
+        '<label style="margin:0;font-size:0.9rem">Con alternativas</label>' +
+        '<label class="toggle"><input type="checkbox" id="encuestaModoAlt" onchange="toggleEncuestaAlternativas()"><span class="toggle-slider"></span></label>' +
+      '</div>' +
+      '<div id="encuestaAlternativas" style="display:none">' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 1" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 2" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
+      '</div>' +
+      '<button type="button" id="btnAddAlt" class="btn-toggle" onclick="addEncuestaAlt()" style="font-size:0.8rem;display:none">+ Agregar alternativa</button>' +
+      '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>' +
     '</div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Crear</button></div>' +
   '</form>');
+}
+
+function toggleEncuestaAlternativas() {
+  var on = document.getElementById('encuestaModoAlt').checked;
+  document.getElementById('encuestaAlternativas').style.display = on ? '' : 'none';
+  document.getElementById('btnAddAlt').style.display = on ? '' : 'none';
+  document.getElementById('encuestaModoInfo').textContent = on ? 'Alternativas personalizadas' : 'Modo simple: "A favor" / "En contra"';
 }
 
 function addEncuestaAlt() {
