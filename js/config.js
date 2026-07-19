@@ -34,4 +34,15 @@ function toggleDemoMode() {
   location.reload();
 }
 
+var isDark = localStorage.getItem('theme') === 'dark';
+if (isDark) document.body.classList.add('dark');
+document.getElementById('themeToggle').textContent = isDark ? '☀️' : '🌙';
+
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle('dark', isDark);
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeToggle').textContent = isDark ? '☀️' : '🌙';
+}
+
 initSupabase();

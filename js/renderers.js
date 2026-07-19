@@ -87,9 +87,9 @@ function renderParcelas() {
       return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6">' +
         '<div style="display:flex;align-items:center;gap:0.6rem">' +
           '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
-          '<div><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:#6b7280">' + prop.tipo + '</div></div>' +
+          '<div><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>' +
         '</div>' +
-        '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:#374151">' +
+        '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
           (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:#2563eb;text-decoration:none">' + prop.telefono + '</a></div>' : '') +
           (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:#2563eb;text-decoration:none">' + prop.email + '</a></div>' : '') +
           (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
@@ -191,21 +191,21 @@ function renderFlujo() {
   });
   list.innerHTML = sorted.map(function(f) {
     var fecha = formatDate(f.fecha);
-    var color = f.tipo === 'Ingreso' ? '#059669' : '#dc2626';
+    var color = f.tipo === 'Ingreso' ? '#059669' : '#b91c1c';
     var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2';
     var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
-    var borderColor = f.tipo === 'Ingreso' ? '#059669' : '#dc2626';
+    var borderColor = f.tipo === 'Ingreso' ? '#059669' : '#b91c1c';
     return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
         '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>' +
-        '<span style="font-size:0.8rem;color:#6b7280">' + fecha + '</span>' +
+        '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
       '</div>' +
       '<div style="display:flex;justify-content:space-between;align-items:center">' +
         '<div style="font-weight:500">' + f.concepto + '</div>' +
         (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
       '</div>' +
-      (f.descripcion ? '<div style="font-size:0.85rem;color:#6b7280;margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
+      (f.descripcion ? '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
       '</div>';
   }).join('');
 }
@@ -284,7 +284,7 @@ function renderProveedores() {
         (p.telefono ? '<div>&#128222; <a href="tel:' + p.telefono + '" style="color:#2563eb;text-decoration:none">' + p.telefono + '</a></div>' : '') +
         (p.email ? '<div>&#9993; <a href="mailto:' + p.email + '" style="color:#2563eb;text-decoration:none">' + p.email + '</a></div>' : '') +
         (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
-        '<div style="color:#6b7280;font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
+        '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
       '</div>' +
       '</div>';
   }).join('');
@@ -313,15 +313,15 @@ function renderAsambleas() {
     var borderColor = a.tipo === 'Extraordinaria' ? '#f59e0b' : '#3b82f6';
     var fecha = formatDate(a.fecha);
     var asistentes = a.asistentes ? String(a.asistentes).split(',').map(function(item) {
-      return '<span style="display:inline-block;background:#e5e7eb;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
+      return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
     }).join('') : '';
     return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
-        '<span style="font-size:0.8rem;color:#6b7280">' + fecha + '</span>' +
+        '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
       '</div>' +
       '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Temario:</strong> ' + (a.temario || '') + '</div>' +
-      (a.acuerdos ? '<div style="font-size:0.85rem;color:#374151;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + a.acuerdos + '</div>' : '') +
+      (a.acuerdos ? '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + a.acuerdos + '</div>' : '') +
       (asistentes ? '<div style="margin-top:0.4rem"><strong style="font-size:0.85rem">Asistentes:</strong><div style="margin-top:0.3rem">' + asistentes + '</div></div>' : '') +
       '</div>';
   }).join('');

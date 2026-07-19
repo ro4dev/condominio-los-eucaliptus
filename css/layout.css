@@ -1,13 +1,13 @@
 .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.tab-btn { padding: 0.7rem 1.5rem; border: none; background: #e5e7eb; color: #374151; font-size: 0.9rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-.tab-btn:hover { background: #d1d5db; }
+.tab-btn { padding: 0.7rem 1.5rem; border: none; background: var(--border); color: var(--text-2); font-size: 0.9rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+.tab-btn:hover { background: var(--surface-hover); }
 .tab-btn.active { background: #1a1a2e; color: #fff; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
 .filters { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
-.filters label { font-size: 0.85rem; font-weight: 600; color: #374151; }
-.filters select { padding: 0.4rem 0.7rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.85rem; background: #fff; }
+.filters label { font-size: 0.85rem; font-weight: 600; color: var(--text-2); }
+.filters select { padding: 0.4rem 0.7rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; background: var(--bg-card); color: var(--text-2); }
 
 header > div { flex-wrap: wrap; }
 header > div > div:last-child { min-width: 0; }
