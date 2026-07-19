@@ -141,6 +141,14 @@
     <div id="tab-documentos" class="tab-content">
       <a href="#" class="form-link" id="formDocumentos" onclick="formDocumentos(); return false;">+ Agregar Documento</a>
       <button class="reload-btn" onclick="reloadTab('documentos')">↻ Recargar</button>
+      <div class="filter-chips" id="documentosChips">
+        <span class="chip active" onclick="filterDocumentos('Todos')">Todos</span>
+        <span class="chip" onclick="filterDocumentos('Estatuto')">Estatuto</span>
+        <span class="chip" onclick="filterDocumentos('Actas')">Actas</span>
+        <span class="chip" onclick="filterDocumentos('Contratos')">Contratos</span>
+        <span class="chip" onclick="filterDocumentos('Seguros')">Seguros</span>
+        <span class="chip" onclick="filterDocumentos('Planos')">Planos</span>
+      </div>
       <div class="cards-grid" id="documentosList">
         <div class="skeleton skeleton-doc"></div>
         <div class="skeleton skeleton-doc"></div>

@@ -211,11 +211,24 @@ function renderFlujo() {
 }
 
 // DOCUMENTOS
+var documentosFilter = 'Todos';
+
+function filterDocumentos(cat) {
+  documentosFilter = cat;
+  document.querySelectorAll('#documentosChips .chip').forEach(function(c) {
+    c.classList.toggle('active', c.textContent === cat);
+  });
+  renderDocumentos();
+}
+
 function renderDocumentos() {
   var list = document.getElementById('documentosList');
   var icons = { 'Estatuto': '&#128220;', 'Actas': '&#128196;', 'Contratos': '&#128221;', 'Seguros': '&#128737;', 'Planos': '&#128208;' };
+  var filtered = DOCUMENTOS.filter(function(d) {
+    return documentosFilter === 'Todos' || d.categoria === documentosFilter;
+  });
 
-  list.innerHTML = DOCUMENTOS.map(function(d) {
+  list.innerHTML = filtered.map(function(d) {
     var icon = icons[d.categoria] || '&#128196;';
     var fecha = formatDate(d.fecha || d.created_at);
     return '<div class="doc-item">' +
