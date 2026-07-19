@@ -80,13 +80,20 @@
 ### 19/07/2026 - Página de configuración admin
 - **Added**: Nueva pestaña "Configuración" visible solo para administradores
 - **Added**: Creación masiva de parcelas (cantidad + prefijo)
-- **Added**: Configuración de datos del condominio (nombre, dirección, contacto)
-- **Added**: Configuración de montos base (mensual, fondo reserva, moneda)
-- **Added**: Gestión de categorías de documentos (agregar/quitar)
-- **Added**: Gestión de rubros de proveedores (agregar/quitar)
+- **Added**: Configuración de montos base (gasto común base, fondo reserva)
+- **Added**: Gestión de categorías de documentos (agregar/quitar via modal)
+- **Added**: Gestión de rubros de proveedores (agregar/quitar via modal)
+- **Added**: Gestión de conceptos de ingreso/egreso (agregar/quitar via modal)
 - **Added**: Gestión de usuarios admin (agregar por email, quitar)
 - **Added**: Tabla `config` (key-value) y `admin_users` en Supabase
 - **Added**: RLS para tablas config y admin_users (solo admins)
+- **Added**: Chips en uso muestran candado (no se pueden eliminar)
+- **Added**: Loader en todas las operaciones de guardado de config
+- **Changed**: Datos del condominio hardcodeados en HTML (no en BD)
+- **Changed**: Botones de config uniformes con estilo `btn-primary`
+- **Changed**: Montos Base y Crear Parcelas lado a lado en desktop, apilados en mobile
+- **Changed**: Estilos form-group, form-row, btn, btn-primary globales (no scopeados a modal-body)
+- **Changed**: Chips se guardan automáticamente al agregar/eliminar (sin botón "Guardar" separado)
 - **Changed**: Tab "Configuración" oculta por defecto, se muestra solo si el usuario es admin
 
 ## Próximos pasos

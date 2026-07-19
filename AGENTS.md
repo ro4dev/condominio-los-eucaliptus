@@ -27,6 +27,7 @@ js/
   renderers.js          # Renderizado de cada módulo (una función por pestaña)
   charts.js             # Gráficos Chart.js
   modals.js             # Formularios modales (una función por formulario)
+  config-page.js        # Pestaña de configuración admin
   utils.js              # formatMoney, formatDate, formatPeriodo, etc.
 data/                   # JSON de demo (solo modo demo)
 supabase/migrations/    # Migraciones SQL
@@ -50,6 +51,13 @@ supabase/migrations/    # Migraciones SQL
 ### Inline styles
 - En renderers.js se usan inline styles para colores dinámicos (tipos, bordes)
 - Para dark mode, usar `var(--text)`, `var(--text-2)`, `var(--text-muted)` en inline styles
+
+### Config page
+- Chips se guardan automáticamente al agregar/eliminar (sin botón "Guardar" separado)
+- Chips en uso muestran candado (no se pueden eliminar)
+- Botones de config usan `btn btn-primary`
+- Datos del condominio hardcodeados en HTML, no en BD
+- Montos y Parcelas en grid 2 columnas en desktop, apilados en mobile (`.config-duo`)
 
 ## Modo Demo vs Producción
 

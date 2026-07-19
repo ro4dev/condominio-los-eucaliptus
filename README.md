@@ -14,7 +14,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
-| **Configuración** | Panel admin: parcelas bulk, montos, categorías, rubros, datos del condominio y gestión de admins. Solo visible para administradores. |
+| **Configuración** | Panel admin: montos base, creación masiva de parcelas, categorías de docs, rubros de proveedores, conceptos de ingreso/egreso y gestión de admins. Solo visible para administradores. |
 
 ## Stack
 
@@ -51,7 +51,8 @@ condominio-los-eucaliptus/
 │   ├── documentos.json
 │   ├── reclamos.json
 │   ├── proveedores.json
-│   └── asambleas.json
+│   ├── asambleas.json
+│   └── config.json
 ├── supabase/
 │   ├── config.toml                # Configuración proyecto Supabase
 │   └── migrations/                # Migraciones SQL
@@ -90,6 +91,7 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 - **Gráficos interactivos**: barras por período, doughnut por parcela
 - **Filtros**: por periodo y parcela en la pestaña de gastos
 - **Chips de filtro**: en Reclamos, Ingresos/Egresos, Documentos y Asambleas
+- **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *
 - **Confirmación de cierre**: advierte antes de cerrar un modal si hay datos ingresados
