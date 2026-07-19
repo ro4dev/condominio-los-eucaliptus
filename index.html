@@ -180,6 +180,11 @@
     <div id="tab-asambleas" class="tab-content">
       <a href="#" class="form-link" id="formAsambleas" onclick="formAsambleas(); return false;">+ Agregar Asamblea</a>
       <button class="reload-btn" onclick="reloadTab('asambleas')">↻ Recargar</button>
+      <div class="filter-chips" id="asambleasChips">
+        <span class="chip active" onclick="filterAsambleas('Todos')">Todos</span>
+        <span class="chip" onclick="filterAsambleas('Ordinaria')">Ordinarias</span>
+        <span class="chip" onclick="filterAsambleas('Extraordinaria')">Extraordinarias</span>
+      </div>
       <div id="asambleasTimeline">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>

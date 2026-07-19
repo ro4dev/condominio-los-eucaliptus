@@ -278,9 +278,22 @@ function renderProveedores() {
 }
 
 // ASAMBLEAS
+var asambleasFilter = 'Todos';
+
+function filterAsambleas(tipo) {
+  asambleasFilter = tipo;
+  document.querySelectorAll('#asambleasChips .chip').forEach(function(c) {
+    c.classList.toggle('active', c.textContent === (tipo === 'Todos' ? 'Todos' : (tipo === 'Ordinaria' ? 'Ordinarias' : 'Extraordinarias')));
+  });
+  renderAsambleas();
+}
+
 function renderAsambleas() {
   var timeline = document.getElementById('asambleasTimeline');
-  var sorted = ASAMBLEAS.slice().sort(function(a, b) {
+  var filtered = ASAMBLEAS.filter(function(a) {
+    return asambleasFilter === 'Todos' || a.tipo === asambleasFilter;
+  });
+  var sorted = filtered.slice().sort(function(a, b) {
     return new Date(b.fecha) - new Date(a.fecha);
   });
   timeline.innerHTML = sorted.map(function(a) {
