@@ -107,10 +107,10 @@
 
 ### 19/07/2026 - Roles con Supabase Auth
 - **Changed**: Rol admin detectado desde JWT (`raw_user_meta_data.role`) en vez de tabla `admin_users`
-- **Added**: RLS UPDATE policies en parcelas, propietarios, gastos, reclamos, asambleas, config
-- **Added**: RLS DELETE policies en reclamos, config
-- **Added**: RLS admin policies con `auth.jwt() ->> 'role' = 'admin'`
-- **Removed**: Tabla `admin_users` y toda su lógica en JS (loadAdmins, renderAdmins, addAdmin, removeAdmin)
+- **Added**: RLS corregido: SELECT autenticado, INSERT/UPDATE/DELETE admin (excepto reclamos INSERT = user)
+- **Removed**: Tabla `admin_users` y toda su lógica en JS
+- **Removed**: Función `is_admin()` (referenciaba admin_users)
+- **Note**: Para asignar admin: `UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'tu-email@ejemplo.com';` (re-loguear después)
 - **Removed**: Sección de gestión de admins en página de configuración
 - **Note**: Admin se asigna manualmente desde Supabase Dashboard → Auth → Users → Edit → user_metadata → `{ "role": "admin" }`
 

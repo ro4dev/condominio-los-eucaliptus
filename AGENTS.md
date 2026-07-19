@@ -93,6 +93,7 @@ supabase/migrations/    # Migraciones SQL
 - Fechas en JSON de demo: formato ISO `YYYY-MM-DD`
 - Supabase: `created_at` se genera solo, no enviar en inserts
 - El usuario testea en iPhone 12 Mini — mobile first
+- **Asignar admin**: `UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';` (re-loguear después)
 
 ## Cómo probar
 

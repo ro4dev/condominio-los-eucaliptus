@@ -113,12 +113,12 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 ## Seguridad
 
 - RLS (Row Level Security) habilitado en todas las tablas
-- Lectura pública: cualquiera puede ver los datos
-- Escritura: solo usuarios autenticados pueden insertar
-- Roles: admin (JWT role) tiene acceso total, user tiene select + inserts
-- Admin asignado manualmente desde Supabase Dashboard
+- SELECT: requiere autenticación
+- INSERT: solo admin (excepto reclamos = usuario autenticado)
+- UPDATE/DELETE: solo admin
+- Roles via JWT: `raw_user_meta_data.role = 'admin'`
+- Asignar admin: `UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';`
 - Auth via Supabase Auth (email/password)
-- Anon key visible (diseño de Supabase, seguro con RLS)
 
 ## Notas
 
