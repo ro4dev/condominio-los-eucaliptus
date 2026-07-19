@@ -125,6 +125,7 @@
 - **Added**: Auto-cierre por fecha_termino
 - **Added**: Admin puede crear encuestas via modal
 - **Note**: RLS: SELECT autenticado, INSERT votos autenticado, INSERT/UPDATE/DELETE encuestas admin
+- **Fixed**: Botones "+ Agregar" ahora son admin-only (excepto Reclamos que es para cualquier user autenticado)
 
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas

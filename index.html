@@ -47,7 +47,7 @@
 
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
-      <a href="#" class="form-link" id="formGastos" onclick="formGastos(); return false;">+ Agregar Gasto</a>
+      <a href="#" class="form-link admin-only" id="formGastos" onclick="formGastos(); return false;">+ Agregar Gasto</a>
       <button class="reload-btn" onclick="reloadTab('cuenta')">↻ Recargar</button>
       <section class="stats" id="stats">
         <div class="skeleton skeleton-stat"></div>
@@ -96,8 +96,8 @@
 
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
-      <a href="#" class="form-link" id="formParcelas" onclick="formParcelas(); return false;">+ Agregar Parcela</a>
-      <a href="#" class="form-link" id="formPropietarios" onclick="formPropietarios(); return false;">+ Agregar Propietario</a>
+      <a href="#" class="form-link admin-only" id="formParcelas" onclick="formParcelas(); return false;">+ Agregar Parcela</a>
+      <a href="#" class="form-link admin-only" id="formPropietarios" onclick="formPropietarios(); return false;">+ Agregar Propietario</a>
       <button class="reload-btn" onclick="reloadTab('parcelas')">↻ Recargar</button>
       <div class="cards-grid" id="parcelasGrid">
         <div class="skeleton skeleton-card"></div>
@@ -109,7 +109,7 @@
 
     <!-- NOTICIAS -->
     <div id="tab-noticias" class="tab-content">
-      <a href="#" class="form-link" id="formNoticias" onclick="formNoticias(); return false;">+ Agregar Noticia</a>
+      <a href="#" class="form-link admin-only" id="formNoticias" onclick="formNoticias(); return false;">+ Agregar Noticia</a>
       <button class="reload-btn" onclick="reloadTab('noticias')">↻ Recargar</button>
       <div id="noticiasList">
         <div class="skeleton skeleton-news"></div>
@@ -120,7 +120,7 @@
 
     <!-- INGRESOS/EGRESOS -->
     <div id="tab-flujo" class="tab-content">
-      <a href="#" class="form-link" id="formFlujo" onclick="formFlujo(); return false;">+ Agregar Movimiento</a>
+      <a href="#" class="form-link admin-only" id="formFlujo" onclick="formFlujo(); return false;">+ Agregar Movimiento</a>
       <button class="reload-btn" onclick="reloadTab('flujo')">↻ Recargar</button>
       <section class="stats" id="flujoStats">
         <div class="skeleton skeleton-stat"></div>
@@ -142,7 +142,7 @@
 
     <!-- DOCUMENTOS -->
     <div id="tab-documentos" class="tab-content">
-      <a href="#" class="form-link" id="formDocumentos" onclick="formDocumentos(); return false;">+ Agregar Documento</a>
+      <a href="#" class="form-link admin-only" id="formDocumentos" onclick="formDocumentos(); return false;">+ Agregar Documento</a>
       <button class="reload-btn" onclick="reloadTab('documentos')">↻ Recargar</button>
       <div class="filter-chips" id="documentosChips">
         <span class="chip active" onclick="filterDocumentos('Todos')">Todos</span>
@@ -178,7 +178,7 @@
 
     <!-- PROVEEDORES -->
     <div id="tab-proveedores" class="tab-content">
-      <a href="#" class="form-link" id="formProveedores" onclick="formProveedores(); return false;">+ Agregar Proveedor</a>
+      <a href="#" class="form-link admin-only" id="formProveedores" onclick="formProveedores(); return false;">+ Agregar Proveedor</a>
       <button class="reload-btn" onclick="reloadTab('proveedores')">↻ Recargar</button>
       <div class="cards-grid" id="proveedoresGrid">
         <div class="skeleton skeleton-card"></div>
@@ -189,7 +189,7 @@
 
     <!-- ASAMBLEAS -->
     <div id="tab-asambleas" class="tab-content">
-      <a href="#" class="form-link" id="formAsambleas" onclick="formAsambleas(); return false;">+ Agregar Asamblea</a>
+      <a href="#" class="form-link admin-only" id="formAsambleas" onclick="formAsambleas(); return false;">+ Agregar Asamblea</a>
       <button class="reload-btn" onclick="reloadTab('asambleas')">↻ Recargar</button>
       <div class="filter-chips" id="asambleasChips">
         <span class="chip active" onclick="filterAsambleas('Todos')">Todos</span>
@@ -204,7 +204,7 @@
 
     <!-- ENCUESTAS -->
     <div id="tab-encuestas" class="tab-content">
-      <a href="#" class="form-link" id="formEncuestas" onclick="formEncuestas(); return false;">+ Nueva Encuesta</a>
+      <a href="#" class="form-link admin-only" id="formEncuestas" onclick="formEncuestas(); return false;">+ Nueva Encuesta</a>
       <button class="reload-btn" onclick="reloadTab('encuestas')">↻ Recargar</button>
       <div class="filter-chips" id="encuestasChips">
         <span class="chip active" onclick="filterEncuestas('Todos')">Todas</span>

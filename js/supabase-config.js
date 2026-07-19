@@ -37,6 +37,7 @@ async function checkAdmin() {
   }
   IS_ADMIN = currentUser.user_metadata && currentUser.user_metadata.role === 'admin';
   if (configTab) configTab.style.display = IS_ADMIN ? '' : 'none';
+  updateAuthUI();
 }
 
 function updateAuthUI() {
@@ -44,11 +45,15 @@ function updateAuthUI() {
   var logoutBtn = document.getElementById('logoutBtn');
   var userInfo = document.getElementById('userInfo');
   var addBtns = document.querySelectorAll('.form-link');
+  var adminBtns = document.querySelectorAll('.form-link.admin-only');
   if (currentUser) {
     if (loginBtn) loginBtn.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = '';
     if (userInfo) userInfo.textContent = currentUser.email;
-    addBtns.forEach(function(btn) { btn.style.display = ''; });
+    addBtns.forEach(function(btn) { btn.style.display = 'none'; });
+    adminBtns.forEach(function(btn) { btn.style.display = IS_ADMIN ? '' : 'none'; });
+    var userBtns = document.querySelectorAll('.form-link:not(.admin-only)');
+    userBtns.forEach(function(btn) { btn.style.display = ''; });
   } else {
     if (loginBtn) loginBtn.style.display = '';
     if (logoutBtn) logoutBtn.style.display = 'none';
