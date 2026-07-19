@@ -1,263 +1,170 @@
 [
   {
-    "fecha": "1/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Mensualidad julio",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 6",
-    "pagado": "Sí"
+    "parcela": "Parcela 6"
   },
   {
-    "fecha": "3/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Juan Pérez",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 1",
-    "pagado": "Sí"
+    "parcela": "Parcela 1"
   },
   {
-    "fecha": "3/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago María López",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 2",
-    "pagado": "Sí"
+    "parcela": "Parcela 2"
   },
   {
-    "fecha": "2/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Carlos Silva",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 3",
-    "pagado": "Sí"
+    "parcela": "Parcela 3"
   },
   {
-    "fecha": "3/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Ana Martínez",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 4",
-    "pagado": "Sí"
+    "parcela": "Parcela 4"
   },
   {
-    "fecha": "1/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Pedro Rojas",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 5",
-    "pagado": "Sí"
+    "parcela": "Parcela 5"
   },
   {
-    "fecha": "3/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Laura Torres",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 6",
-    "pagado": "Sí"
+    "parcela": "Parcela 7"
   },
   {
-    "fecha": "3/07/2026",
-    "concepto": "Gasto común",
-    "descripcion": "Pago Diego Ramírez",
-    "monto": "50000",
     "periodo": "2026-07",
-    "parcela": "Parcela 7",
-    "pagado": "Sí"
-  },
-  {
-    "fecha": "4/07/2026",
-    "concepto": "Gasto común",
+    "monto": "50000",
     "descripcion": "Pago Sofía Herrera",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 8",
-    "pagado": "Sí"
+    "parcela": "Parcela 8"
   },
   {
-    "fecha": "4/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Miguel Ángel Ruiz",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 9",
-    "pagado": "Sí"
+    "parcela": "Parcela 9"
   },
   {
-    "fecha": "4/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Valentina Muñoz",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 10",
-    "pagado": "Sí"
+    "parcela": "Parcela 10"
   },
   {
-    "fecha": "4/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Santiago Vega",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 11",
-    "pagado": "Sí"
+    "parcela": "Parcela 11"
   },
   {
-    "fecha": "4/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pago Isabel Guerrero",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 12",
-    "pagado": "Sí"
+    "parcela": "Parcela 12"
   },
   {
-    "fecha": "4/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-07",
+    "monto": "50000",
     "descripcion": "Pablo Castillo pendiente",
-    "monto": "50000",
-    "periodo": "2026-07",
-    "parcela": "Parcela 13",
-    "pagado": "No"
+    "parcela": "Parcela 13"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Juan Pérez",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 1",
-    "pagado": "Sí"
+    "parcela": "Parcela 1"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio María López",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 2",
-    "pagado": "Sí"
+    "parcela": "Parcela 2"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Carlos Silva",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 3",
-    "pagado": "Sí"
+    "parcela": "Parcela 3"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Ana Martínez",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 4",
-    "pagado": "Sí"
+    "parcela": "Parcela 4"
   },
   {
-    "fecha": "30/06/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Pedro Rojas",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 5",
-    "pagado": "Sí"
+    "parcela": "Parcela 5"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Sofía Herrera",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 8",
-    "pagado": "Sí"
+    "parcela": "Parcela 8"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Valentina Muñoz",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 10",
-    "pagado": "Sí"
+    "parcela": "Parcela 10"
   },
   {
-    "fecha": "5/07/2026",
-    "concepto": "Gasto común",
+    "periodo": "2026-06",
+    "monto": "50000",
     "descripcion": "Pago junio Isabel Guerrero",
-    "monto": "50000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 12",
-    "pagado": "Sí"
+    "parcela": "Parcela 12"
   },
   {
-    "fecha": "6/07/2026",
-    "concepto": "Fondo reserva",
+    "periodo": "2026-06",
+    "monto": "15000",
     "descripcion": "Pago fondo reserva Juan Pérez",
-    "monto": "15000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 1",
-    "pagado": "Sí"
+    "parcela": "Parcela 1"
   },
   {
-    "fecha": "6/07/2026",
-    "concepto": "Fondo reserva",
+    "periodo": "2026-06",
+    "monto": "15000",
     "descripcion": "Pago fondo reserva Carlos Silva",
-    "monto": "15000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 3",
-    "pagado": "Sí"
+    "parcela": "Parcela 3"
   },
   {
-    "fecha": "6/07/2026",
-    "concepto": "Fondo reserva",
+    "periodo": "2026-06",
+    "monto": "15000",
     "descripcion": "Pago fondo reserva Laura Torres",
-    "monto": "15000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 6",
-    "pagado": "Sí"
+    "parcela": "Parcela 6"
   },
   {
-    "fecha": "6/07/2026",
-    "concepto": "Fondo reserva",
+    "periodo": "2026-06",
+    "monto": "15000",
     "descripcion": "Pago fondo reserva Miguel Ángel Ruiz",
-    "monto": "15000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 9",
-    "pagado": "Sí"
+    "parcela": "Parcela 9"
   },
   {
-    "fecha": "6/07/2026",
-    "concepto": "Fondo reserva",
+    "periodo": "2026-06",
+    "monto": "15000",
     "descripcion": "Pago fondo reserva Santiago Vega",
-    "monto": "15000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 11",
-    "pagado": "Sí"
+    "parcela": "Parcela 11"
   },
   {
-    "fecha": "6/07/2026",
-    "concepto": "Fondo reserva",
+    "periodo": "2026-06",
+    "monto": "15000",
     "descripcion": "Pago fondo reserva Pablo Castillo",
-    "monto": "15000",
-    "periodo": "2026-06",
-    "parcela": "Parcela 13",
-    "pagado": "Sí"
+    "parcela": "Parcela 13"
   },
   {
-    "fecha": "10/07/2026",
-    "concepto": "Expensa extraordinaria",
-    "descripcion": "Reparación pileta",
-    "monto": "25000",
     "periodo": "2026-07",
-    "parcela": "Todas",
-    "pagado": "No"
+    "monto": "25000",
+    "descripcion": "Reparación pileta",
+    "parcela": "Todas"
   }
 ]
