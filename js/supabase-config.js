@@ -30,13 +30,12 @@ async function checkAdmin() {
     if (configTab) configTab.style.display = IS_ADMIN ? '' : 'none';
     return;
   }
-  if (!currentUser || !supabaseClient) {
+  if (!currentUser) {
     IS_ADMIN = false;
     if (configTab) configTab.style.display = 'none';
     return;
   }
-  var { data, error } = await supabaseClient.from('admin_users').select('user_id').eq('user_id', currentUser.id).maybeSingle();
-  IS_ADMIN = !error && !!data;
+  IS_ADMIN = currentUser.user_metadata && currentUser.user_metadata.role === 'admin';
   if (configTab) configTab.style.display = IS_ADMIN ? '' : 'none';
 }
 

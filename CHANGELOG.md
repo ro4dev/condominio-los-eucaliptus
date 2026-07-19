@@ -96,6 +96,24 @@
 - **Changed**: Chips se guardan automáticamente al agregar/eliminar (sin botón "Guardar" separado)
 - **Changed**: Tab "Configuración" oculta por defecto, se muestra solo si el usuario es admin
 
+### 19/07/2026 - Foreign keys UUID para parcelas
+- **Changed**: Referencias de parcela migradas de texto a UUID (`parcela_id`)
+- **Added**: Junction table `asamblea_asistentes` (reemplaza string comma-separated)
+- **Added**: Helper `parcelName()` para resolver UUID a nombre
+- **Changed**: Filtros, tablas, modals y charts usan `parcela_id` con UUID
+- **Changed**: `renameParcelas()` solo actualiza `parcelas.numero` (ya no toca otras tablas)
+- **Changed**: Demo JSONs actualizados con UUIDs
+- **Changed**: Config de cantidad/prefijo de parcelas se guarda y carga de BD
+
+### 19/07/2026 - Roles con Supabase Auth
+- **Changed**: Rol admin detectado desde JWT (`raw_user_meta_data.role`) en vez de tabla `admin_users`
+- **Added**: RLS UPDATE policies en parcelas, propietarios, gastos, reclamos, asambleas, config
+- **Added**: RLS DELETE policies en reclamos, config
+- **Added**: RLS admin policies con `auth.jwt() ->> 'role' = 'admin'`
+- **Removed**: Tabla `admin_users` y toda su lógica en JS (loadAdmins, renderAdmins, addAdmin, removeAdmin)
+- **Removed**: Sección de gestión de admins en página de configuración
+- **Note**: Admin se asigna manualmente desde Supabase Dashboard → Auth → Users → Edit → user_metadata → `{ "role": "admin" }`
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)

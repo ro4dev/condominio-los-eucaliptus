@@ -284,88 +284,13 @@ async function bulkCreateParcelas() {
   btn.textContent = 'Aplicar';
 }
 
-// --- ADMIN USERS ---
-var ADMINS = [];
-
-async function loadAdmins() {
-  if (DEMO_MODE) {
-    ADMINS = currentUser ? [{ user_id: currentUser.id, email: currentUser.email }] : [];
-  } else if (supabaseClient) {
-    var { data, error } = await supabaseClient.from('admin_users').select('*');
-    if (!error) ADMINS = data || [];
-  }
-}
-
-function renderAdmins() {
-  var list = document.getElementById('cfgAdminsList');
-  if (!ADMINS.length) { list.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem">No hay administradores configurados.</p>'; return; }
-  list.innerHTML = ADMINS.map(function(a) {
-    var isMe = currentUser && a.user_id === currentUser.id;
-    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border-light)">' +
-      '<span style="font-size:0.9rem">' + a.email + (isMe ? ' (tú)' : '') + '</span>' +
-      (isMe ? '' : '<button class="btn-toggle" onclick="removeAdmin(\'' + a.user_id + '\')" style="color:#ef4444;border-color:#ef4444">Quitar</button>') +
-      '</div>';
-  }).join('');
-}
-
-async function addAdmin() {
-  var input = document.getElementById('cfgNuevoAdmin');
-  var email = input.value.trim();
-  if (!email) return;
-
-  if (DEMO_MODE) {
-    if (ADMINS.some(function(a) { return a.email === email; })) { alert('Ya es admin.'); return; }
-    ADMINS.push({ user_id: 'demo-' + Date.now(), email: email });
-    input.value = '';
-    renderAdmins();
-    alert('Admin agregado (modo demo).');
-    return;
-  }
-
-  if (!supabaseClient) return;
-
-  showLoading();
-  var { data: users, error: searchError } = await supabaseClient.auth.admin.listUsers();
-  if (searchError) { hideLoading(); alert('Error buscando usuarios: ' + searchError.message); return; }
-
-  var user = (users.users || []).find(function(u) { return u.email === email; });
-  if (!user) { hideLoading(); alert('No se encontró usuario con ese email.'); return; }
-
-  var { error } = await supabaseClient.from('admin_users').insert({ user_id: user.id, email: email });
-  hideLoading();
-  if (error) { alert('Error al agregar admin: ' + error.message); return; }
-
-  ADMINS.push({ user_id: user.id, email: email });
-  input.value = '';
-  renderAdmins();
-}
-
-async function removeAdmin(userId) {
-  if (!confirm('¿Quitar este administrador?')) return;
-
-  if (DEMO_MODE) {
-    ADMINS = ADMINS.filter(function(a) { return a.user_id !== userId; });
-    renderAdmins();
-    return;
-  }
-
-  if (!supabaseClient) return;
-  showLoading();
-  var { error } = await supabaseClient.from('admin_users').delete().eq('user_id', userId);
-  hideLoading();
-  if (error) { alert('Error: ' + error.message); return; }
-  ADMINS = ADMINS.filter(function(a) { return a.user_id !== userId; });
-  renderAdmins();
-}
-
 // --- INIT CONFIG TAB ---
 async function renderConfig() {
   showSkeletons('config');
-  await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO'), loadAdmins()]);
+  await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO')]);
   renderMontos();
   renderParcelasConfig();
   renderCategoriasDocs();
   renderRubrosProveedores();
   renderConceptosFlujo();
-  renderAdmins();
 }

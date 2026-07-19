@@ -14,7 +14,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
-| **Configuración** | Panel admin: montos base, creación masiva de parcelas, categorías de docs, rubros de proveedores, conceptos de ingreso/egreso y gestión de admins. Solo visible para administradores. |
+| **Configuración** | Panel admin: montos base, creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
 
 ## Stack
 
@@ -69,7 +69,16 @@ condominio-los-eucaliptus/
 │       ├── 011_gastos_add_archivo.sql
 │       ├── 012_storage_comprobantes.sql
 │       ├── 013_storage_flujo_documentos.sql
-│       └── 014_fix_not_null_constraints.sql
+│       ├── 014_fix_not_null_constraints.sql
+│       ├── 015_gastos_drop_not_null_concepto.sql
+│       ├── 016_config_admin.sql
+│       ├── 017_fix_admin_rls_recursion.sql
+│       ├── 018_grant_admin_tables.sql
+│       ├── 019_revoke_custom_grants.sql
+│       ├── 021_remove_condominio_config.sql
+│       ├── 022_rename_montos_config.sql
+│       ├── 023_parcela_foreign_keys.sql
+│       └── 024_roles_jwt.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -106,6 +115,8 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 - RLS (Row Level Security) habilitado en todas las tablas
 - Lectura pública: cualquiera puede ver los datos
 - Escritura: solo usuarios autenticados pueden insertar
+- Roles: admin (JWT role) tiene acceso total, user tiene select + inserts
+- Admin asignado manualmente desde Supabase Dashboard
 - Auth via Supabase Auth (email/password)
 - Anon key visible (diseño de Supabase, seguro con RLS)
 
