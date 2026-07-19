@@ -14,6 +14,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
+| **Configuración** | Panel admin: parcelas bulk, montos, categorías, rubros, datos del condominio y gestión de admins. Solo visible para administradores. |
 
 ## Stack
 
@@ -34,6 +35,7 @@ condominio-los-eucaliptus/
 │   ├── renderers.js               # Renderizado de cada módulo
 │   ├── charts.js                  # Gráficos Chart.js
 │   ├── modals.js                  # Formularios modales
+│   ├── config-page.js             # Pestaña de configuración admin
 │   └── utils.js                   # Utilidades (formatMoney, etc.)
 ├── css/
 │   ├── base.css                   # Reset y tipografía

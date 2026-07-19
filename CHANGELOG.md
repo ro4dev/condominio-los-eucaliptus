@@ -77,6 +77,18 @@
 - **Fixed**: Reclamos no envía columna `fecha` (usa `created_at`)
 - **Added**: Modo dark/light con toggle, persistencia en localStorage
 
+### 19/07/2026 - Página de configuración admin
+- **Added**: Nueva pestaña "Configuración" visible solo para administradores
+- **Added**: Creación masiva de parcelas (cantidad + prefijo)
+- **Added**: Configuración de datos del condominio (nombre, dirección, contacto)
+- **Added**: Configuración de montos base (mensual, fondo reserva, moneda)
+- **Added**: Gestión de categorías de documentos (agregar/quitar)
+- **Added**: Gestión de rubros de proveedores (agregar/quitar)
+- **Added**: Gestión de usuarios admin (agregar por email, quitar)
+- **Added**: Tabla `config` (key-value) y `admin_users` en Supabase
+- **Added**: RLS para tablas config y admin_users (solo admins)
+- **Changed**: Tab "Configuración" oculta por defecto, se muestra solo si el usuario es admin
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)
