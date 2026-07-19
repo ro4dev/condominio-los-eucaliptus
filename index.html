@@ -205,47 +205,50 @@
     <div id="tab-config" class="tab-content">
       <button class="reload-btn" onclick="reloadTab('config')">↻ Recargar</button>
 
-      <!-- Montos -->
-      <div class="card" style="margin-bottom:1rem">
-        <h4>Montos Base</h4>
-        <div class="form-row">
-          <div class="form-group"><label>Gasto común base</label><input id="cfgGastoComunBase" type="number" min="0" placeholder="50000"></div>
-          <div class="form-group"><label>Fondo reserva</label><input id="cfgFondoReserva" type="number" min="0" placeholder="15000"></div>
+      <!-- Montos + Parcelas -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem" class="config-duo">
+        <!-- Montos -->
+        <div class="card">
+          <h4>Montos Base</h4>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos fijos que se usan para calcular expensas</p>
+          <div class="form-row">
+            <div class="form-group"><label>Gasto común base</label><input id="cfgGastoComunBase" type="number" min="0" placeholder="50000"></div>
+            <div class="form-group"><label>Fondo reserva</label><input id="cfgFondoReserva" type="number" min="0" placeholder="15000"></div>
+          </div>
+          <button class="btn btn-primary" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</button>
         </div>
-        <button class="btn btn-primary" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</button>
-      </div>
 
-      <!-- Parcelas bulk -->
-      <div class="card" style="margin-bottom:1rem">
-        <h4>Parcelas</h4>
-        <div class="form-row" style="margin-bottom:0.8rem">
-          <div class="form-group"><label>Cantidad</label><input id="cfgParcelasCantidad" type="number" min="1" placeholder="20"></div>
-          <div class="form-group"><label>Prefijo</label><input id="cfgParcelasPrefijo" type="text" value="Parcela" placeholder="Parcela"></div>
+        <!-- Parcelas bulk -->
+        <div class="card">
+          <h4>Crear Parcelas</h4>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Setup inicial — genera parcelas en lote</p>
+          <div class="form-row">
+            <div class="form-group"><label>Cantidad</label><input id="cfgParcelasCantidad" type="number" min="1" placeholder="40"></div>
+            <div class="form-group"><label>Prefijo</label><input id="cfgParcelasPrefijo" type="text" value="Terreno" placeholder="Terreno"></div>
+          </div>
+          <button class="btn btn-primary" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Crear</button>
         </div>
-        <button class="btn btn-primary" onclick="bulkCreateParcelas()" style="margin-bottom:1rem">Crear parcelas</button>
-        <div id="cfgParcelasList"></div>
       </div>
 
       <!-- Categorías documentos -->
       <div class="card" style="margin-bottom:1rem">
         <h4>Categorías de Documentos</h4>
-        <div id="cfgCategoriasDocs" style="margin-bottom:0.8rem"></div>
-        <div style="display:flex;gap:0.5rem;align-items:center">
-          <input id="cfgNuevaCategoria" type="text" placeholder="Nueva categoría" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)">
-          <button class="btn-toggle" onclick="addCategoriaDoc()">Agregar</button>
-        </div>
-        <button class="btn btn-primary" onclick="saveCategoriasDocs()" style="margin-top:0.8rem">Guardar</button>
+        <div id="cfgCategoriasDocs"></div>
+        <button class="btn btn-primary" onclick="openModalCategoriaDoc()" style="margin-top:0.8rem">+ Agregar</button>
       </div>
 
       <!-- Rubros proveedores -->
       <div class="card" style="margin-bottom:1rem">
         <h4>Rubros de Proveedores</h4>
-        <div id="cfgRubrosProveedores" style="margin-bottom:0.8rem"></div>
-        <div style="display:flex;gap:0.5rem;align-items:center">
-          <input id="cfgNuevoRubro" type="text" placeholder="Nuevo rubro" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)">
-          <button class="btn-toggle" onclick="addRubroProveedor()">Agregar</button>
-        </div>
-        <button class="btn btn-primary" onclick="saveRubrosProveedores()" style="margin-top:0.8rem">Guardar</button>
+        <div id="cfgRubrosProveedores"></div>
+        <button class="btn btn-primary" onclick="openModalRubroProveedor()" style="margin-top:0.8rem">+ Agregar</button>
+      </div>
+
+      <!-- Conceptos flujo -->
+      <div class="card" style="margin-bottom:1rem">
+        <h4>Conceptos de Ingresos/Egresos</h4>
+        <div id="cfgConceptosFlujo"></div>
+        <button class="btn btn-primary" onclick="openModalConceptoFlujo()" style="margin-top:0.8rem">+ Agregar</button>
       </div>
 
       <!-- Admin users -->
@@ -254,7 +257,7 @@
         <div id="cfgAdminsList" style="margin-bottom:0.8rem"></div>
         <div style="display:flex;gap:0.5rem;align-items:center">
           <input id="cfgNuevoAdmin" type="email" placeholder="email@ejemplo.com" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)">
-          <button class="btn-toggle" onclick="addAdmin()">Agregar</button>
+          <button class="btn btn-primary" onclick="addAdmin()">Agregar</button>
         </div>
       </div>
     </div>

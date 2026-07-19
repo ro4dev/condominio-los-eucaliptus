@@ -17,7 +17,9 @@ async function loadConfig() {
 async function saveConfig(key, value) {
   CONFIG[key] = value;
   if (!DEMO_MODE && supabaseClient) {
+    showLoading();
     var { error } = await supabaseClient.from('config').upsert({ key: key, value: value, updated_at: new Date().toISOString() });
+    hideLoading();
     if (error) { alert('Error al guardar: ' + error.message); return false; }
   }
   return true;
@@ -40,26 +42,62 @@ async function saveMontos() {
   }
 }
 
-// --- CATEGORÍAS DOCUMENTOS ---
-function renderCategoriasDocs() {
-  var cats = CONFIG.categorias_documentos || [];
-  var container = document.getElementById('cfgCategoriasDocs');
-  container.innerHTML = cats.map(function(c, i) {
-    return '<span class="chip" style="display:inline-flex;align-items:center;gap:0.3rem">' + c +
-      ' <button onclick="removeCategoriaDoc(' + i + ')" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:0.9rem;line-height:1" title="Eliminar">&times;</button></span>';
-  }).join('');
+// --- LIST CHIP HELPER ---
+function renderChipList(items, removeFn, usedItems) {
+  if (!items.length) return '<span style="color:var(--text-muted);font-size:0.85rem">Sin elementos</span>';
+  var used = usedItems || [];
+  return '<div style="display:flex;flex-wrap:wrap;gap:0.5rem">' + items.map(function(item, i) {
+    var isInUse = used.indexOf(item) !== -1;
+    var btn = isInUse
+      ? '<span style="color:var(--text-muted);font-size:0.7rem" title="En uso — no se puede eliminar">&#128274;</span>'
+      : '<button onclick="' + removeFn + '(' + i + ')" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:0.9rem;line-height:1" title="Eliminar">&times;</button>';
+    var style = isInUse ? 'opacity:0.6;cursor:default' : '';
+    return '<span class="chip" style="display:inline-flex;align-items:center;gap:0.3rem;' + style + '">' + item + ' ' + btn + '</span>';
+  }).join('') + '</div>';
 }
 
-function addCategoriaDoc() {
-  var input = document.getElementById('cfgNuevaCategoria');
-  var val = input.value.trim();
-  if (!val) return;
-  var cats = CONFIG.categorias_documentos || [];
-  if (cats.indexOf(val) !== -1) { alert('Ya existe esa categoría.'); return; }
-  cats.push(val);
-  CONFIG.categorias_documentos = cats;
-  input.value = '';
-  renderCategoriasDocs();
+// --- MODAL HELPER ---
+function openConfigModal(title, placeholder, onAdd) {
+  var overlay = document.getElementById('modalOverlay');
+  var titleEl = document.getElementById('modalTitle');
+  var body = document.querySelector('.modal-body');
+  titleEl.textContent = title;
+  body.innerHTML =
+    '<div class="form-group"><label>Nombre</label><input id="cfgModalInput" type="text" placeholder="' + placeholder + '" autofocus></div>' +
+    '<div class="form-actions">' +
+      '<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>' +
+      '<button class="btn btn-primary" id="cfgModalAddBtn">Agregar</button>' +
+    '</div>';
+  overlay.classList.add('active');
+  document.getElementById('cfgModalInput').focus();
+  document.getElementById('cfgModalAddBtn').onclick = async function() {
+    var val = document.getElementById('cfgModalInput').value.trim();
+    if (!val) return;
+    showLoading();
+    await onAdd(val);
+    hideLoading();
+    closeModal();
+  };
+  document.getElementById('cfgModalInput').onkeydown = function(e) {
+    if (e.key === 'Enter') document.getElementById('cfgModalAddBtn').click();
+  };
+}
+
+// --- CATEGORÍAS DOCUMENTOS ---
+function renderCategoriasDocs() {
+  var usadas = (DOCUMENTOS || []).map(function(d) { return d.categoria; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
+  document.getElementById('cfgCategoriasDocs').innerHTML = renderChipList(CONFIG.categorias_documentos || [], 'removeCategoriaDoc', usadas);
+}
+
+function openModalCategoriaDoc() {
+  openConfigModal('Agregar categoría de documento', 'Ej: Actas', function(val) {
+    var cats = CONFIG.categorias_documentos || [];
+    if (cats.indexOf(val) !== -1) { alert('Ya existe esa categoría.'); return; }
+    cats.push(val);
+    CONFIG.categorias_documentos = cats;
+    renderCategoriasDocs();
+    saveConfig('categorias_documentos', cats);
+  });
 }
 
 function removeCategoriaDoc(i) {
@@ -67,34 +105,30 @@ function removeCategoriaDoc(i) {
   cats.splice(i, 1);
   CONFIG.categorias_documentos = cats;
   renderCategoriasDocs();
+  saveConfig('categorias_documentos', cats);
 }
 
 async function saveCategoriasDocs() {
   if (await saveConfig('categorias_documentos', CONFIG.categorias_documentos || [])) {
-    alert('Categorías de documentos guardadas.');
+    alert('Categorías guardadas.');
   }
 }
 
 // --- RUBROS PROVEEDORES ---
 function renderRubrosProveedores() {
-  var rubros = CONFIG.rubros_proveedores || [];
-  var container = document.getElementById('cfgRubrosProveedores');
-  container.innerHTML = rubros.map(function(r, i) {
-    return '<span class="chip" style="display:inline-flex;align-items:center;gap:0.3rem">' + r +
-      ' <button onclick="removeRubroProveedor(' + i + ')" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:0.9rem;line-height:1" title="Eliminar">&times;</button></span>';
-  }).join('');
+  var usados = (PROVEEDORES || []).map(function(p) { return p.rubro; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
+  document.getElementById('cfgRubrosProveedores').innerHTML = renderChipList(CONFIG.rubros_proveedores || [], 'removeRubroProveedor', usados);
 }
 
-function addRubroProveedor() {
-  var input = document.getElementById('cfgNuevoRubro');
-  var val = input.value.trim();
-  if (!val) return;
-  var rubros = CONFIG.rubros_proveedores || [];
-  if (rubros.indexOf(val) !== -1) { alert('Ya existe ese rubro.'); return; }
-  rubros.push(val);
-  CONFIG.rubros_proveedores = rubros;
-  input.value = '';
-  renderRubrosProveedores();
+function openModalRubroProveedor() {
+  openConfigModal('Agregar rubro de proveedor', 'Ej: Electricidad', function(val) {
+    var rubros = CONFIG.rubros_proveedores || [];
+    if (rubros.indexOf(val) !== -1) { alert('Ya existe ese rubro.'); return; }
+    rubros.push(val);
+    CONFIG.rubros_proveedores = rubros;
+    renderRubrosProveedores();
+    saveConfig('rubros_proveedores', rubros);
+  });
 }
 
 function removeRubroProveedor(i) {
@@ -102,26 +136,47 @@ function removeRubroProveedor(i) {
   rubros.splice(i, 1);
   CONFIG.rubros_proveedores = rubros;
   renderRubrosProveedores();
+  saveConfig('rubros_proveedores', rubros);
 }
 
 async function saveRubrosProveedores() {
   if (await saveConfig('rubros_proveedores', CONFIG.rubros_proveedores || [])) {
-    alert('Rubros de proveedores guardados.');
+    alert('Rubros guardados.');
+  }
+}
+
+// --- CONCEPTOS FLUJO ---
+function renderConceptosFlujo() {
+  var usados = (FLUJO || []).map(function(f) { return f.concepto; }).filter(function(v, i, a) { return a.indexOf(v) === i; });
+  document.getElementById('cfgConceptosFlujo').innerHTML = renderChipList(CONFIG.conceptos_flujo || [], 'removeConceptoFlujo', usados);
+}
+
+function openModalConceptoFlujo() {
+  openConfigModal('Agregar concepto de ingreso/egreso', 'Ej: Mantenimiento', function(val) {
+    var conceptos = CONFIG.conceptos_flujo || [];
+    if (conceptos.indexOf(val) !== -1) { alert('Ya existe ese concepto.'); return; }
+    conceptos.push(val);
+    CONFIG.conceptos_flujo = conceptos;
+    renderConceptosFlujo();
+    saveConfig('conceptos_flujo', conceptos);
+  });
+}
+
+function removeConceptoFlujo(i) {
+  var conceptos = CONFIG.conceptos_flujo || [];
+  conceptos.splice(i, 1);
+  CONFIG.conceptos_flujo = conceptos;
+  renderConceptosFlujo();
+  saveConfig('conceptos_flujo', conceptos);
+}
+
+async function saveConceptosFlujo() {
+  if (await saveConfig('conceptos_flujo', CONFIG.conceptos_flujo || [])) {
+    alert('Conceptos guardados.');
   }
 }
 
 // --- PARCELAS BULK ---
-function renderParcelasList() {
-  var list = document.getElementById('cfgParcelasList');
-  if (!PARCELAS.length) { list.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem">No hay parcelas cargadas.</p>'; return; }
-  list.innerHTML = PARCELAS.map(function(p) {
-    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--border-light)">' +
-      '<span style="font-size:0.9rem">' + p.numero + '</span>' +
-      '<span style="font-size:0.8rem;color:var(--text-muted)">' + (p.metros || '') + ' m² · ' + (p.estado || '') + '</span>' +
-      '</div>';
-  }).join('');
-}
-
 async function bulkCreateParcelas() {
   var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
   var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim() || 'Parcela';
@@ -141,14 +196,15 @@ async function bulkCreateParcelas() {
   if (DEMO_MODE) {
     nuevas.forEach(function(p) { PARCELAS.push(p); });
   } else if (supabaseClient) {
+    showLoading();
     var { error } = await supabaseClient.from('parcelas').insert(nuevas);
+    hideLoading();
     if (error) { alert('Error al crear parcelas: ' + error.message); return; }
     await loadJson('PARCELAS');
   }
 
   alert(nuevas.length + ' parcela(s) creada(s).');
   document.getElementById('cfgParcelasCantidad').value = '';
-  renderParcelasList();
 }
 
 // --- ADMIN USERS ---
@@ -191,13 +247,15 @@ async function addAdmin() {
 
   if (!supabaseClient) return;
 
+  showLoading();
   var { data: users, error: searchError } = await supabaseClient.auth.admin.listUsers();
-  if (searchError) { alert('Error buscando usuarios: ' + searchError.message); return; }
+  if (searchError) { hideLoading(); alert('Error buscando usuarios: ' + searchError.message); return; }
 
   var user = (users.users || []).find(function(u) { return u.email === email; });
-  if (!user) { alert('No se encontró usuario con ese email.'); return; }
+  if (!user) { hideLoading(); alert('No se encontró usuario con ese email.'); return; }
 
   var { error } = await supabaseClient.from('admin_users').insert({ user_id: user.id, email: email });
+  hideLoading();
   if (error) { alert('Error al agregar admin: ' + error.message); return; }
 
   ADMINS.push({ user_id: user.id, email: email });
@@ -215,7 +273,9 @@ async function removeAdmin(userId) {
   }
 
   if (!supabaseClient) return;
+  showLoading();
   var { error } = await supabaseClient.from('admin_users').delete().eq('user_id', userId);
+  hideLoading();
   if (error) { alert('Error: ' + error.message); return; }
   ADMINS = ADMINS.filter(function(a) { return a.user_id !== userId; });
   renderAdmins();
@@ -224,10 +284,10 @@ async function removeAdmin(userId) {
 // --- INIT CONFIG TAB ---
 async function renderConfig() {
   showSkeletons('config');
-  await Promise.all([loadConfig(), loadJson('PARCELAS'), loadAdmins()]);
+  await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO'), loadAdmins()]);
   renderMontos();
   renderCategoriasDocs();
   renderRubrosProveedores();
-  renderParcelasList();
+  renderConceptosFlujo();
   renderAdmins();
 }

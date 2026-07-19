@@ -19,4 +19,5 @@ header > div > div:last-child { min-width: 0; }
   header > div { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   header > div > div:last-child { width: 100%; display: flex; flex-wrap: wrap; gap: 0.4rem; }
   #userInfo { width: 100%; max-width: 100%; }
+  .config-duo { grid-template-columns: 1fr !important; }
 }

@@ -4,5 +4,6 @@
     "fondo_reserva": 15000
   },
   "categorias_documentos": ["Estatuto", "Actas", "Contratos", "Seguros", "Planos"],
-  "rubros_proveedores": ["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"]
+  "rubros_proveedores": ["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"],
+  "conceptos_flujo": ["Cuotas", "Fondo reserva", "Multa", "Mantenimiento", "Servicios", "Jardinería", "Limpieza", "Seguros"]
 }
