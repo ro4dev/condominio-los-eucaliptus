@@ -205,8 +205,19 @@
     <div id="tab-config" class="tab-content">
       <button class="reload-btn" onclick="reloadTab('config')">↻ Recargar</button>
 
-      <!-- Montos + Parcelas -->
+      <!-- Parcelas + Montos -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem" class="config-duo">
+        <!-- Parcelas bulk -->
+        <div class="card">
+          <h4>Parcelas</h4>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cantidad total y nombre de las parcelas</p>
+          <div class="form-row">
+            <div class="form-group"><label>Cantidad</label><input id="cfgParcelasCantidad" type="number" min="1" placeholder="40"></div>
+            <div class="form-group"><label>Prefijo</label><input id="cfgParcelasPrefijo" type="text" placeholder="Terreno"></div>
+          </div>
+          <button class="btn btn-primary" id="btnAplicarParcelas" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Aplicar</button>
+        </div>
+
         <!-- Montos -->
         <div class="card">
           <h4>Montos Base</h4>
@@ -215,18 +226,7 @@
             <div class="form-group"><label>Gasto común base</label><input id="cfgGastoComunBase" type="number" min="0" placeholder="50000"></div>
             <div class="form-group"><label>Fondo reserva</label><input id="cfgFondoReserva" type="number" min="0" placeholder="15000"></div>
           </div>
-          <button class="btn btn-primary" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</button>
-        </div>
-
-        <!-- Parcelas bulk -->
-        <div class="card">
-          <h4>Crear Parcelas</h4>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Setup inicial — genera parcelas en lote</p>
-          <div class="form-row">
-            <div class="form-group"><label>Cantidad</label><input id="cfgParcelasCantidad" type="number" min="1" placeholder="40"></div>
-            <div class="form-group"><label>Prefijo</label><input id="cfgParcelasPrefijo" type="text" placeholder="Terreno"></div>
-          </div>
-          <button class="btn btn-primary" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Crear</button>
+          <button class="btn btn-primary" id="btnGuardarMontos" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</button>
         </div>
       </div>
 

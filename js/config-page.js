@@ -33,6 +33,9 @@ function renderMontos() {
 }
 
 async function saveMontos() {
+  var btn = document.getElementById('btnGuardarMontos');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
   var value = {
     gasto_comun_base: parseFloat(document.getElementById('cfgGastoComunBase').value) || 0,
     fondo_reserva: parseFloat(document.getElementById('cfgFondoReserva').value) || 0
@@ -40,6 +43,8 @@ async function saveMontos() {
   if (await saveConfig('montos', value)) {
     alert('Montos guardados.');
   }
+  btn.disabled = false;
+  btn.textContent = 'Guardar';
 }
 
 // --- LIST CHIP HELPER ---
@@ -185,29 +190,35 @@ function renderParcelasConfig() {
 }
 
 async function renameParcelas(oldPrefijo, newPrefijo) {
-  PARCELAS.forEach(function(p) {
-    var match = p.numero.match(/^(\D+)\s+(\d+)$/);
-    if (match && match[1] === oldPrefijo) {
-      p.numero = newPrefijo + ' ' + match[2];
-    }
-  });
-  if (DEMO_MODE) return;
-  if (!supabaseClient) return;
+  if (DEMO_MODE || !supabaseClient) {
+    PARCELAS.forEach(function(p) {
+      var match = p.numero.match(/^(\D+)\s+(\d+)$/);
+      if (match && match[1] === oldPrefijo) p.numero = newPrefijo + ' ' + match[2];
+    });
+    return;
+  }
 
   for (var i = 0; i < PARCELAS.length; i++) {
     var match = PARCELAS[i].numero.match(/^(\D+)\s+(\d+)$/);
-    if (!match || match[1] !== newPrefijo) continue;
-    await supabaseClient.from('parcelas').update({ numero: PARCELAS[i].numero }).eq('id', PARCELAS[i].id);
+    if (!match || match[1] !== oldPrefijo) continue;
+    var newName = newPrefijo + ' ' + match[2];
+    var { error } = await supabaseClient.from('parcelas').update({ numero: newName }).eq('id', PARCELAS[i].id);
+    if (error) console.error('Error renaming parcela:', PARCELAS[i].numero, error);
   }
 
   await loadJson('PARCELAS');
+  console.log('Parcelas after rename:', PARCELAS.map(function(p) { return p.numero; }));
 }
 
 async function bulkCreateParcelas() {
+  var btn = document.getElementById('btnAplicarParcelas');
+  btn.disabled = true;
+  btn.textContent = 'Procesando...';
+
   var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
   var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim();
-  if (!prefijo) { alert('Ingresá un prefijo.'); return; }
-  if (!cantidad || cantidad < 1) { alert('Ingresá una cantidad válida.'); return; }
+  if (!prefijo) { alert('Ingresá un prefijo.'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
+  if (!cantidad || cantidad < 1) { alert('Ingresá una cantidad válida.'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
 
   var prefijoAnterior = CONFIG.parcelas_prefijo || '';
 
@@ -224,6 +235,8 @@ async function bulkCreateParcelas() {
     await saveConfig('parcelas_cantidad', cantidad);
     await saveConfig('parcelas_prefijo', prefijo);
     alert('Sin cambios.');
+    btn.disabled = false;
+    btn.textContent = 'Aplicar';
     return;
   }
 
@@ -246,10 +259,14 @@ async function bulkCreateParcelas() {
     if (prefijo !== prefijoAnterior) {
       await renameParcelas(prefijoAnterior, prefijo);
     }
+    nombresExistentes = PARCELAS.map(function(p) { return p.numero; });
+    console.log('Existentes:', nombresExistentes);
+    console.log('Nuevas:', nuevas.map(function(p) { return p.numero; }));
     var nuevasReales = nuevas.filter(function(p) { return nombresExistentes.indexOf(p.numero) === -1; });
+    console.log('Nuevas reales:', nuevasReales.map(function(p) { return p.numero; }));
     if (nuevasReales.length) {
       var { error } = await supabaseClient.from('parcelas').insert(nuevasReales);
-      if (error) { hideLoading(); alert('Error al crear parcelas: ' + error.message); return; }
+      if (error) { hideLoading(); alert('Error al crear parcelas: ' + error.message); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
       await loadJson('PARCELAS');
     }
     hideLoading();
@@ -263,6 +280,8 @@ async function bulkCreateParcelas() {
     : 'Parcelas actualizadas.';
   alert(msg);
   renderParcelasConfig();
+  btn.disabled = false;
+  btn.textContent = 'Aplicar';
 }
 
 // --- ADMIN USERS ---

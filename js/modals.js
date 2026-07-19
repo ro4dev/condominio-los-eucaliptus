@@ -32,8 +32,10 @@ function confirmCloseModal() {
 
 function handleForm(e) {
   e.preventDefault();
-  showLoading();
   var form = e.target;
+  var submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Guardando...'; }
+  showLoading();
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
   form.querySelectorAll('select[multiple]').forEach(function(sel) {
@@ -63,6 +65,7 @@ function handleForm(e) {
   filePromise.then(function(fileUrl) {
     if (fileInput && fileInput.files.length > 0 && !fileUrl) {
       hideLoading();
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
       return;
     }
     if (fileUrl) {
@@ -76,6 +79,7 @@ function handleForm(e) {
       if (!table) {
         alert('Error: no se especificó la tabla.');
         hideLoading();
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
         return;
       }
       if (table === 'asambleas') {
@@ -83,7 +87,7 @@ function handleForm(e) {
         var asistentesIds = asistentesStr ? asistentesStr.split(', ') : [];
         delete data.asistentes;
         supabaseInsert(table, data).then(function(result) {
-          if (!result) { hideLoading(); return; }
+          if (!result) { hideLoading(); if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; } return; }
           var asambleaId = result.id;
           if (asistentesIds.length) {
             var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
@@ -107,6 +111,8 @@ function handleForm(e) {
             alert('Guardado correctamente.');
             closeModal();
             reloadTab(getCurrentTab());
+          } else {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
           }
         });
       }
