@@ -61,15 +61,21 @@
 - **Added**: Loading spinner al enviar formularios
 - **Added**: Upload de archivos organizado por carpeta (periodo, tipo, categoría)
 - **Added**: Filtros chips en Reclamos/Sugerencias (Todos, Reclamos, Sugerencias)
+- **Added**: Filtros chips en Ingresos/Egresos (Todos, Ingresos, Egresos)
+- **Added**: Filtros chips en Documentos (Todos, Estatuto, Actas, Contratos, Seguros, Planos)
+- **Added**: Filtros chips en Asambleas (Todos, Ordinarias, Extraordinarias)
 - **Added**: Noticias ordenadas por fecha, con vista de noticias anteriores
 - **Changed**: Rubro de proveedores cambiado de input a selector con opciones predefinidas
 - **Changed**: Header responsive: email truncado en desktop, email y botones en filas separadas en mobile
 - **Changed**: Campo concepto eliminado del form de gastos
 - **Changed**: Campo asistentes de asambleas cambiado a selector múltiple con parcelas
 - **Changed**: Campo web/instagram de proveedores cambiado de URL a text (acepta cualquier formato)
-- **Changed**: Asambleas ordenadas por fecha
+- **Changed**: Asambleas ordenadas por fecha, cards con borde coloreado por tipo
+- **Changed**: Ingresos/Egresos cards con borde coloreado por tipo
+- **Changed**: JSON demo actualizados con schema actual y formato ISO de fechas
 - **Fixed**: Gastos valida parcelas duplicadas por periodo
 - **Fixed**: Reclamos no envía columna `fecha` (usa `created_at`)
+- **Added**: Modo dark/light con toggle, persistencia en localStorage
 
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas

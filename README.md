@@ -9,11 +9,11 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Gastos Comunes** | Gráficos y tabla de expensas por período y parcela. Filtros por periodo y parcela. |
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
-| **Ingresos/Egresos** | Flujo de caja con tabla de movimientos, comprobantes y balance. |
-| **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. |
+| **Ingresos/Egresos** | Flujo de caja con tabla de movimientos, comprobantes y balance. Filtros por tipo. |
+| **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. Filtros por categoría. |
 | **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
-| **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. |
+| **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 
 ## Stack
 
@@ -87,12 +87,14 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 
 - **Gráficos interactivos**: barras por período, doughnut por parcela
 - **Filtros**: por periodo y parcela en la pestaña de gastos
+- **Chips de filtro**: en Reclamos, Ingresos/Egresos, Documentos y Asambleas
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *
 - **Confirmación de cierre**: advierte antes de cerrar un modal si hay datos ingresados
 - **Recarga**: botón de recarga por pestaña
 - **Responsive**: diseño adaptable a móviles (header, tabs, gráficos)
 - **Modo demo**: permite probar la interfaz con JSON locales
+- **Modo dark/light**: toggle en el header, persiste la preferencia en localStorage
 - **Auth opcional**: login/logout, usuarios sin login ven datos, con login agregan
 
 ## Seguridad
