@@ -36,11 +36,9 @@ function handleForm(e) {
   var form = e.target;
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
-  var checks = form.querySelectorAll('input[type="checkbox"]:checked');
-  if (checks.length > 0) {
-    var firstCheck = checks[0].name;
-    data[firstCheck] = Array.from(checks).map(function(c) { return c.value; }).join(', ');
-  }
+  form.querySelectorAll('select[multiple]').forEach(function(sel) {
+    data[sel.name] = Array.from(sel.selectedOptions).map(function(o) { return o.value; }).join(', ');
+  });
 
   var table = form.dataset.table;
   var autoDateTables = ['noticias', 'documentos'];
@@ -230,9 +228,7 @@ function formAsambleas() {
     loadJson('PARCELAS').then(function() { formAsambleas(); });
     return;
   }
-  var parcelas = PARCELAS.map(function(p) {
-    return '<label class="check-item"><input type="checkbox" name="asistentes" value="' + p.numero + '"> ' + p.numero + '</label>';
-  }).join('');
+  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.numero + '">' + p.numero + '</option>'; }).join('');
   openModal('Agregar Asamblea', '<form data-table="asambleas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +
@@ -240,7 +236,7 @@ function formAsambleas() {
     '</div>' +
     '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required></textarea></div>' +
     '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)"></textarea></div>' +
-    '<div class="form-group"><label>Asistentes</label><div class="check-grid">' + parcelas + '</div></div>' +
+    '<div class="form-group"><label>Asistentes</label><select name="asistentes" multiple style="min-height:6rem">' + parcelas + '</select></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
