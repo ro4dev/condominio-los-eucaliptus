@@ -83,6 +83,7 @@ supabase/migrations/    # Migraciones SQL
 | Documentos | Todos / Estatuto / Actas / Contratos / Seguros / Planos |
 | Reclamos | Todos / Reclamos / Sugerencias |
 | Asambleas | Todos / Ordinarias / Extraordinarias |
+| Encuestas | Todas / Abiertas / Cerradas |
 
 ## Reglas importantes
 

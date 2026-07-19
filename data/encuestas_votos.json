@@ -1,0 +1,44 @@
+[
+  {
+    "id": "v1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "encuesta_id": "e1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
+    "seleccion": "Piscina",
+    "created_at": "2026-07-11T09:00:00Z"
+  },
+  {
+    "id": "v2b3c4d5-e6f7-8901-bcde-f12345678901",
+    "encuesta_id": "e1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
+    "seleccion": "Piscina",
+    "created_at": "2026-07-11T10:30:00Z"
+  },
+  {
+    "id": "v3c4d5e6-f7a8-9012-cdef-123456789012",
+    "encuesta_id": "e1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
+    "seleccion": "Nada",
+    "created_at": "2026-07-12T11:00:00Z"
+  },
+  {
+    "id": "v4d5e6f7-a8b9-0123-defa-234567890123",
+    "encuesta_id": "e1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
+    "seleccion": "Gimnasio",
+    "created_at": "2026-07-12T14:00:00Z"
+  },
+  {
+    "id": "v5e6f7a8-b9c0-1234-efab-345678901234",
+    "encuesta_id": "f2b3c4d5-e6f7-8901-bcde-f12345678901",
+    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
+    "seleccion": "A favor",
+    "created_at": "2026-07-16T08:00:00Z"
+  },
+  {
+    "id": "v6f7a8b9-c0d1-2345-fabc-456789012345",
+    "encuesta_id": "f2b3c4d5-e6f7-8901-bcde-f12345678901",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "seleccion": "A favor",
+    "created_at": "2026-07-16T09:30:00Z"
+  }
+]

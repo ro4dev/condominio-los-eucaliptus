@@ -8,7 +8,9 @@ var TABLE_MAP = {
   RECLAMOS: 'reclamos',
   PROVEEDORES: 'proveedores',
   ASAMBLEAS: 'asambleas',
-  ASAMBLEA_ASISTENTES: 'asamblea_asistentes'
+  ASAMBLEA_ASISTENTES: 'asamblea_asistentes',
+  ENCUESTAS: 'encuestas',
+  ENCUESTAS_VOTOS: 'encuestas_votos'
 };
 
 async function loadJson(target) {
@@ -44,6 +46,7 @@ async function loadTabData(tab) {
     reclamos: function() { return loadJson('RECLAMOS').then(function() { renderReclamos(); }); },
     proveedores: function() { return loadJson('PROVEEDORES').then(function() { renderProveedores(); }); },
     asambleas: function() { return Promise.all([loadJson('ASAMBLEAS'), loadJson('ASAMBLEA_ASISTENTES')]).then(function() { renderAsambleas(); }); },
+    encuestas: function() { return Promise.all([loadJson('ENCUESTAS'), loadJson('ENCUESTAS_VOTOS'), loadJson('PARCELAS')]).then(function() { renderEncuestas(); }); },
     config: function() { return renderConfig(); }
   };
 
@@ -68,6 +71,7 @@ function showSkeletons(tab) {
     reclamos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     proveedores: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
     asambleas: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
+    encuestas: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
     config: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>'
   };
   var tabEl = document.getElementById('tab-' + tab);

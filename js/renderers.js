@@ -328,4 +328,165 @@ function renderAsambleas() {
   }).join('');
 }
 
+// ENCUESTAS
+var encuestasFilter = 'Todos';
+
+function filterEncuestas(filtro) {
+  encuestasFilter = filtro;
+  document.querySelectorAll('#encuestasChips .chip').forEach(function(c) {
+    c.classList.toggle('active', c.textContent === filtro || (filtro === 'Todos' && c.textContent === 'Todos'));
+  });
+  renderEncuestas();
+}
+
+function getOpciones(encuesta) {
+  var alt = encuesta.alternativas;
+  if (!alt || !alt.length || (alt.length === 1 && alt[0] === '')) {
+    return ['A favor', 'En contra'];
+  }
+  return alt;
+}
+
+function renderEncuestas() {
+  var container = document.getElementById('encuestasList');
+  var today = new Date().toISOString().slice(0, 10);
+
+  var data = ENCUESTAS.map(function(e) {
+    var votos = ENCUESTAS_VOTOS.filter(function(v) { return v.encuesta_id === e.id; });
+    var opciones = getOpciones(e);
+    var conteo = {};
+    opciones.forEach(function(op) { conteo[op] = 0; });
+    votos.forEach(function(v) { if (conteo[v.seleccion] !== undefined) conteo[v.seleccion]++; });
+    var total = votos.length;
+    var cerrada = e.fecha_termino && e.fecha_termino < today;
+
+    var miVoto = null;
+    if (currentUser) {
+      var miPropietario = (typeof PROPIETARIOS !== 'undefined') ? PROPIETARIOS.find(function(p) { return p.email === currentUser.email; }) : null;
+      if (miPropietario) {
+        miVoto = votos.find(function(v) { return v.parcela_id === miPropietario.parcela_id; });
+      }
+    }
+
+    return {
+      encuesta: e,
+      opciones: opciones,
+      conteo: conteo,
+      total: total,
+      cerrada: cerrada,
+      miVoto: miVoto
+    };
+  });
+
+  if (encuestasFilter === 'Abiertas') data = data.filter(function(d) { return !d.cerrada; });
+  if (encuestasFilter === 'Cerradas') data = data.filter(function(d) { return d.cerrada; });
+
+  data.sort(function(a, b) { return new Date(b.encuesta.created_at) - new Date(a.encuesta.created_at); });
+
+  if (!data.length) {
+    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem">No hay encuestas para mostrar.</p>';
+    return;
+  }
+
+  var colores = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+
+  container.innerHTML = data.map(function(d) {
+    var e = d.encuesta;
+    var quorumAlcanzado = e.quorum ? d.total >= e.quorum : true;
+    var borderColor = d.cerrada ? '#9ca3af' : '#22c55e';
+    var estadoBg = d.cerrada ? '#f3f4f6' : '#dcfce7';
+    var estadoText = d.cerrada ? '#374151' : '#166534';
+
+    var infoExtra = '';
+    if (e.fecha_termino) {
+      infoExtra += '<span style="font-size:0.8rem;color:var(--text-muted)">Termina: ' + formatDate(e.fecha_termino) + '</span>';
+    }
+    if (e.quorum) {
+      infoExtra += (infoExtra ? ' · ' : '') + '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? '#16a34a' : '#dc2626') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+    }
+
+    var opcionesHtml = d.opciones.map(function(op, i) {
+      var count = d.conteo[op];
+      var pct = d.total > 0 ? Math.round((count / d.total) * 100) : 0;
+      var color = colores[i % colores.length];
+      var esMiVoto = d.miVoto && d.miVoto.seleccion === op;
+
+      var barra = '<div style="display:flex;height:6px;border-radius:3px;overflow:hidden;margin:0.3rem 0;background:var(--skeleton-1)">' +
+        '<div style="width:' + pct + '%;background:' + color + ';transition:width 0.3s"></div>' +
+      '</div>';
+
+      var boton = '';
+      if (!d.cerrada && currentUser && !d.miVoto) {
+        boton = ' <button class="btn btn-primary" onclick="votarEncuesta(\'' + e.id + '\', \'' + op.replace(/'/g, "\\'") + '\')" style="font-size:0.75rem;padding:0.2rem 0.6rem;background:' + color + ';border-color:' + color + '">Votar</button>';
+      }
+
+      return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:4px;' : '') + '">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem">' +
+          '<span' + (esMiVoto ? ' style="font-weight:600"' : '') + '>' + op + (esMiVoto ? ' ✓' : '') + '</span>' +
+          '<span style="color:var(--text-muted)">' + count + ' (' + pct + '%)' + boton + '</span>' +
+        '</div>' +
+        barra +
+      '</div>';
+    }).join('');
+
+    var accion = '';
+    if (!d.cerrada && currentUser && !d.miVoto) {
+      accion = '';
+    } else if (d.miVoto) {
+      accion = '<div style="margin-top:0.4rem;font-size:0.8rem;color:var(--text-muted)">Ya votaste</div>';
+    }
+
+    return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
+        (infoExtra ? '<span>' + infoExtra + '</span>' : '') +
+      '</div>' +
+      '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + e.titulo + '</div>' +
+      (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + e.descripcion + '</div>' : '') +
+      '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">Total: ' + d.total + ' votos</div>' +
+      opcionesHtml + accion +
+    '</div>';
+  }).join('');
+}
+
+async function votarEncuesta(encuestaId, seleccion) {
+  if (!currentUser) { alert('Debes iniciar sesión para votar.'); return; }
+
+  var miPropietario = (typeof PROPIETARIOS !== 'undefined') ? PROPIETARIOS.find(function(p) { return p.email === currentUser.email; }) : null;
+  if (!miPropietario || !miPropietario.parcela_id) {
+    alert('No se encontró una parcela asociada a tu cuenta.');
+    return;
+  }
+
+  if (DEMO_MODE) {
+    ENCUESTAS_VOTOS.push({
+      id: generateUUID(),
+      encuesta_id: encuestaId,
+      parcela_id: miPropietario.parcela_id,
+      seleccion: seleccion,
+      created_at: new Date().toISOString()
+    });
+    renderEncuestas();
+    return;
+  }
+
+  showLoading();
+  var { error } = await supabaseClient.from('encuestas_votos').insert({
+    encuesta_id: encuestaId,
+    parcela_id: miPropietario.parcela_id,
+    seleccion: seleccion
+  });
+  hideLoading();
+  if (error) {
+    if (error.code === '23505') {
+      alert('Ya votaste en esta encuesta.');
+    } else {
+      alert('Error al votar: ' + error.message);
+    }
+    return;
+  }
+  await loadJson('ENCUESTAS_VOTOS');
+  renderEncuestas();
+}
+
 loadInitialData();

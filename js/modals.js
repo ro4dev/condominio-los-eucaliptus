@@ -72,9 +72,27 @@ function handleForm(e) {
       data[fileInput.name] = fileUrl;
     }
     if (DEMO_MODE) {
-      console.log('Form data:', data);
-      alert('Guardado (demo). En modo real se enviaría a Supabase.');
-      closeModal();
+      if (table === 'encuestas') {
+        var altInputs = document.querySelectorAll('.encuesta-alt-input');
+        var alternativas = [];
+        altInputs.forEach(function(inp) {
+          var val = inp.value.trim();
+          if (val) alternativas.push(val);
+        });
+        data.alternativas = alternativas;
+        if (data.quorum) data.quorum = parseInt(data.quorum) || null;
+        if (!data.fecha_termino) delete data.fecha_termino;
+        data.id = generateUUID();
+        data.created_at = new Date().toISOString();
+        ENCUESTAS.push(data);
+        alert('Encuesta creada (demo).');
+        closeModal();
+        renderEncuestas();
+      } else {
+        console.log('Form data:', data);
+        alert('Guardado (demo). En modo real se enviaría a Supabase.');
+        closeModal();
+      }
     } else {
       if (!table) {
         alert('Error: no se especificó la tabla.');
@@ -102,6 +120,26 @@ function handleForm(e) {
             alert('Guardado correctamente.');
             closeModal();
             reloadTab(getCurrentTab());
+          }
+        });
+      } else if (table === 'encuestas') {
+        if (data.quorum) data.quorum = parseInt(data.quorum) || null;
+        if (!data.fecha_termino) delete data.fecha_termino;
+        var altInputs = document.querySelectorAll('.encuesta-alt-input');
+        var alternativas = [];
+        altInputs.forEach(function(inp) {
+          var val = inp.value.trim();
+          if (val) alternativas.push(val);
+        });
+        data.alternativas = alternativas;
+        supabaseInsert(table, data).then(function(result) {
+          hideLoading();
+          if (result) {
+            alert('Encuesta creada.');
+            closeModal();
+            reloadTab(getCurrentTab());
+          } else {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Crear'; }
           }
         });
       } else {
@@ -269,6 +307,39 @@ function formAsambleas() {
     '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:#2563eb;font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem">' + parcelas + '</select></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
+}
+
+function formEncuestas() {
+  openModal('Nueva Encuesta', '<form data-table="encuestas" onsubmit="handleForm(event)">' +
+    '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Título de la propuesta" required></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)"></textarea></div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><label>Fecha de término</label><input type="date" name="fecha_termino"></div>' +
+      '<div class="form-group"><label>Quorum (mín. votos)</label><input type="number" name="quorum" min="0" placeholder="Sin límite"></div>' +
+    '</div>' +
+    '<div class="form-group"><label>Alternativas</label><div id="encuestaAlternativas">' +
+      '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 1" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
+      '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 2" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
+    '</div>' +
+    '<button type="button" class="btn-toggle" onclick="addEncuestaAlt()" style="font-size:0.8rem">+ Agregar alternativa</button>' +
+    '<div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Si no se agregan alternativas, será "A favor" / "En contra"</div>' +
+    '</div>' +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Crear</button></div>' +
+  '</form>');
+}
+
+function addEncuestaAlt() {
+  var container = document.getElementById('encuestaAlternativas');
+  var count = container.querySelectorAll('.encuesta-alt-input').length + 1;
+  var div = document.createElement('div');
+  div.style.cssText = 'display:flex;gap:0.5rem;margin-bottom:0.4rem';
+  div.innerHTML = '<input type="text" class="encuesta-alt-input" placeholder="Opción ' + count + '" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button>';
+  container.appendChild(div);
+  div.querySelector('input').focus();
+}
+
+function removeEncuestaAlt(btn) {
+  btn.parentElement.remove();
 }
 
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') confirmCloseModal(); });

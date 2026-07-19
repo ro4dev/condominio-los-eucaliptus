@@ -12,6 +12,8 @@ var RECLAMOS = [];
 var PROVEEDORES = [];
 var ASAMBLEAS = [];
 var ASAMBLEA_ASISTENTES = [];
+var ENCUESTAS = [];
+var ENCUESTAS_VOTOS = [];
 
 var loaded = { GASTOS: false };
 
@@ -26,6 +28,8 @@ var DEMO_FILES = {
   PROVEEDORES: 'data/proveedores.json',
   ASAMBLEAS: 'data/asambleas.json',
   ASAMBLEA_ASISTENTES: 'data/asamblea_asistentes.json',
+  ENCUESTAS: 'data/encuestas.json',
+  ENCUESTAS_VOTOS: 'data/encuestas_votos.json',
   CONFIG: 'data/config.json'
 };
 

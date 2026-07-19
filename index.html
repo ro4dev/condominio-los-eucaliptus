@@ -41,6 +41,7 @@
       <button class="tab-btn" onclick="switchTab('reclamos')">Reclamos/Sugerencias</button>
       <button class="tab-btn" onclick="switchTab('proveedores')">Proveedores</button>
       <button class="tab-btn" onclick="switchTab('asambleas')">Asambleas</button>
+      <button class="tab-btn" onclick="switchTab('encuestas')">Encuestas</button>
       <button class="tab-btn" id="configTabBtn" onclick="switchTab('config')" style="display:none">Configuración</button>
     </div>
 
@@ -196,6 +197,21 @@
         <span class="chip" onclick="filterAsambleas('Extraordinaria')">Extraordinarias</span>
       </div>
       <div id="asambleasTimeline">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </div>
+
+    <!-- ENCUESTAS -->
+    <div id="tab-encuestas" class="tab-content">
+      <a href="#" class="form-link" id="formEncuestas" onclick="formEncuestas(); return false;">+ Nueva Encuesta</a>
+      <button class="reload-btn" onclick="reloadTab('encuestas')">↻ Recargar</button>
+      <div class="filter-chips" id="encuestasChips">
+        <span class="chip active" onclick="filterEncuestas('Todos')">Todas</span>
+        <span class="chip" onclick="filterEncuestas('Abiertas')">Abiertas</span>
+        <span class="chip" onclick="filterEncuestas('Cerradas')">Cerradas</span>
+      </div>
+      <div id="encuestasList">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
       </div>

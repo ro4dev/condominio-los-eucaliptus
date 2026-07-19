@@ -114,6 +114,18 @@
 - **Removed**: Sección de gestión de admins en página de configuración
 - **Note**: Admin se asigna manualmente desde Supabase Dashboard → Auth → Users → Edit → user_metadata → `{ "role": "admin" }`
 
+### 19/07/2026 - Sistema de encuestas
+- **Added**: Nueva pestaña "Encuestas" con sistema de votación
+- **Added**: Tabla `encuestas` (título, descripción, fecha_termino, quorum)
+- **Added**: Tabla `encuestas_votos` (1 voto por parcela por encuesta)
+- **Added**: Barra de progreso a favor/en contra
+- **Added**: Filtros: Todas / Abiertas / Cerradas
+- **Added**: Botones "A favor" / "En contra" (solo si está abierta y no votó)
+- **Added**: Indicador de quorum alcanzado
+- **Added**: Auto-cierre por fecha_termino
+- **Added**: Admin puede crear encuestas via modal
+- **Note**: RLS: SELECT autenticado, INSERT votos autenticado, INSERT/UPDATE/DELETE encuestas admin
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)

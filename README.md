@@ -14,6 +14,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
+| **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |
 | **Configuración** | Panel admin: montos base, creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
 
 ## Stack
@@ -52,6 +53,9 @@ condominio-los-eucaliptus/
 │   ├── reclamos.json
 │   ├── proveedores.json
 │   ├── asambleas.json
+│   ├── asamblea_asistentes.json
+│   ├── encuestas.json
+│   ├── encuestas_votos.json
 │   └── config.json
 ├── supabase/
 │   ├── config.toml                # Configuración proyecto Supabase
@@ -78,7 +82,10 @@ condominio-los-eucaliptus/
 │       ├── 021_remove_condominio_config.sql
 │       ├── 022_rename_montos_config.sql
 │       ├── 023_parcela_foreign_keys.sql
-│       └── 024_roles_jwt.sql
+│       ├── 024_roles_jwt.sql
+│       ├── 025_fix_rls_policies.sql
+│       ├── 026_fix_rls_correct.sql
+│       └── 027_encuestas.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -114,7 +121,7 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 
 - RLS (Row Level Security) habilitado en todas las tablas
 - SELECT: requiere autenticación
-- INSERT: solo admin (excepto reclamos = usuario autenticado)
+- INSERT: solo admin (excepto reclamos y votos encuestas = usuario autenticado)
 - UPDATE/DELETE: solo admin
 - Roles via JWT: `raw_user_meta_data.role = 'admin'`
 - Asignar admin: `UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';`

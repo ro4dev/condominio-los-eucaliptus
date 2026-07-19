@@ -1,0 +1,20 @@
+[
+  {
+    "id": "e1a2b3c4-d5e6-7890-abcd-ef1234567890",
+    "titulo": "Piscina comunitaria",
+    "descripcion": "Se propone construir una piscina comunitaria en el espacio verde del sector norte. Inversión estimada: $15.000.000.",
+    "alternativas": ["Piscina", "Gimnasio", "Nada"],
+    "fecha_termino": "2026-08-15",
+    "quorum": 10,
+    "created_at": "2026-07-10T10:00:00Z"
+  },
+  {
+    "id": "f2b3c4d5-e6f7-8901-bcde-f12345678901",
+    "titulo": "Cámaras de seguridad",
+    "descripcion": "Instalar 8 cámaras de vigilancia en los accesos principales y estacionamiento. Presupuesto: $2.500.000.",
+    "alternativas": [],
+    "fecha_termino": null,
+    "quorum": null,
+    "created_at": "2026-07-15T14:30:00Z"
+  }
+]
