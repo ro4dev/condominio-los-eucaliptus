@@ -3,6 +3,7 @@ var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 var supabaseClient = null;
 var currentUser = null;
+var IS_ADMIN = false;
 
 function initSupabase() {
   if (SUPABASE_URL && SUPABASE_ANON_KEY) {
@@ -10,14 +11,33 @@ function initSupabase() {
     supabaseClient.auth.onAuthStateChange(function(event, session) {
       currentUser = session ? session.user : null;
       updateAuthUI();
+      checkAdmin();
     });
     supabaseClient.auth.getSession().then(function(result) {
       currentUser = result.data.session ? result.data.session.user : null;
       updateAuthUI();
+      checkAdmin();
     });
     return true;
   }
   return false;
+}
+
+async function checkAdmin() {
+  var configTab = document.getElementById('configTabBtn');
+  if (DEMO_MODE) {
+    IS_ADMIN = !!currentUser;
+    if (configTab) configTab.style.display = IS_ADMIN ? '' : 'none';
+    return;
+  }
+  if (!currentUser || !supabaseClient) {
+    IS_ADMIN = false;
+    if (configTab) configTab.style.display = 'none';
+    return;
+  }
+  var { data, error } = await supabaseClient.from('admin_users').select('user_id').eq('user_id', currentUser.id).maybeSingle();
+  IS_ADMIN = !error && !!data;
+  if (configTab) configTab.style.display = IS_ADMIN ? '' : 'none';
 }
 
 function updateAuthUI() {

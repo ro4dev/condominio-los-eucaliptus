@@ -1,0 +1,14 @@
+{
+  "condominio": {
+    "nombre": "Condominio Eucaliptus",
+    "direccion": "",
+    "contacto": ""
+  },
+  "montos": {
+    "monto_mensual": 50000,
+    "fondo_reserva": 15000,
+    "moneda": "CLP"
+  },
+  "categorias_documentos": ["Estatuto", "Actas", "Contratos", "Seguros", "Planos"],
+  "rubros_proveedores": ["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"]
+}

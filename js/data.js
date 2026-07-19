@@ -42,7 +42,8 @@ async function loadTabData(tab) {
     documentos: function() { return loadJson('DOCUMENTOS').then(function() { renderDocumentos(); }); },
     reclamos: function() { return loadJson('RECLAMOS').then(function() { renderReclamos(); }); },
     proveedores: function() { return loadJson('PROVEEDORES').then(function() { renderProveedores(); }); },
-    asambleas: function() { return loadJson('ASAMBLEAS').then(function() { renderAsambleas(); }); }
+    asambleas: function() { return loadJson('ASAMBLEAS').then(function() { renderAsambleas(); }); },
+    config: function() { return renderConfig(); }
   };
 
   if (configs[tab]) await configs[tab]();
@@ -65,7 +66,8 @@ function showSkeletons(tab) {
     documentos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     reclamos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     proveedores: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
-    asambleas: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>'
+    asambleas: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
+    config: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>'
   };
   var tabEl = document.getElementById('tab-' + tab);
   if (!tabEl) return;
