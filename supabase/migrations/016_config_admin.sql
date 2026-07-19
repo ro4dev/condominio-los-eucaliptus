@@ -19,33 +19,30 @@ CREATE TABLE admin_users (
 -- RLS: solo admins pueden leer/escribir config
 ALTER TABLE config ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Admins can read config" ON config
-  FOR SELECT USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE user_id = auth.uid())
-  );
+CREATE POLICY "Authenticated can read config" ON config
+  FOR SELECT USING (auth.role() = 'authenticated');
 
 CREATE POLICY "Admins can update config" ON config
-  FOR UPDATE USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE user_id = auth.uid())
-  );
+  FOR UPDATE USING (is_admin());
 
 CREATE POLICY "Admins can insert config" ON config
-  FOR INSERT WITH CHECK (
-    EXISTS (SELECT 1 FROM admin_users WHERE user_id = auth.uid())
-  );
+  FOR INSERT WITH CHECK (is_admin());
 
 -- RLS: solo admins pueden ver/gestionar admin_users
+-- NOTA: SELECT abierto a autenticados para evitar recursión infinita
+-- La seguridad real está en INSERT/DELETE que requieren is_admin()
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Admins can read admin_users" ON admin_users
-  FOR SELECT USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE user_id = auth.uid())
-  );
+CREATE POLICY "Authenticated can read admin_users" ON admin_users
+  FOR SELECT USING (auth.role() = 'authenticated');
+
+CREATE OR REPLACE FUNCTION is_admin()
+RETURNS BOOLEAN AS $$
+  SELECT EXISTS (SELECT 1 FROM admin_users WHERE user_id = auth.uid());
+$$ LANGUAGE sql SECURITY DEFINER STABLE;
 
 CREATE POLICY "Admins can manage admin_users" ON admin_users
-  FOR ALL USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE user_id = auth.uid())
-  );
+  FOR ALL USING (is_admin());
 
 -- SEED DATA: configuración inicial
 INSERT INTO config (key, value) VALUES
