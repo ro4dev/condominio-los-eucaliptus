@@ -23,38 +23,17 @@ async function saveConfig(key, value) {
   return true;
 }
 
-// --- CONDOMINIO ---
-function renderCondominio() {
-  var c = CONFIG.condominio || {};
-  document.getElementById('cfgNombre').value = c.nombre || '';
-  document.getElementById('cfgDireccion').value = c.direccion || '';
-  document.getElementById('cfgContacto').value = c.contacto || '';
-}
-
-async function saveCondominio() {
-  var value = {
-    nombre: document.getElementById('cfgNombre').value.trim(),
-    direccion: document.getElementById('cfgDireccion').value.trim(),
-    contacto: document.getElementById('cfgContacto').value.trim()
-  };
-  if (await saveConfig('condominio', value)) {
-    alert('Configuración del condominio guardada.');
-  }
-}
-
 // --- MONTOS ---
 function renderMontos() {
   var m = CONFIG.montos || {};
-  document.getElementById('cfgMontoMensual').value = m.monto_mensual || '';
+  document.getElementById('cfgGastoComunBase').value = m.gasto_comun_base || '';
   document.getElementById('cfgFondoReserva').value = m.fondo_reserva || '';
-  document.getElementById('cfgMoneda').value = m.moneda || 'CLP';
 }
 
 async function saveMontos() {
   var value = {
-    monto_mensual: parseFloat(document.getElementById('cfgMontoMensual').value) || 0,
-    fondo_reserva: parseFloat(document.getElementById('cfgFondoReserva').value) || 0,
-    moneda: document.getElementById('cfgMoneda').value
+    gasto_comun_base: parseFloat(document.getElementById('cfgGastoComunBase').value) || 0,
+    fondo_reserva: parseFloat(document.getElementById('cfgFondoReserva').value) || 0
   };
   if (await saveConfig('montos', value)) {
     alert('Montos guardados.');
@@ -246,7 +225,6 @@ async function removeAdmin(userId) {
 async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadAdmins()]);
-  renderCondominio();
   renderMontos();
   renderCategoriasDocs();
   renderRubrosProveedores();

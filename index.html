@@ -205,23 +205,13 @@
     <div id="tab-config" class="tab-content">
       <button class="reload-btn" onclick="reloadTab('config')">↻ Recargar</button>
 
-      <!-- Condominio -->
-      <div class="card" style="margin-bottom:1rem">
-        <h4>Datos del Condominio</h4>
-        <div class="form-group"><label>Nombre</label><input id="cfgNombre" type="text" placeholder="Nombre del condominio"></div>
-        <div class="form-group"><label>Dirección</label><input id="cfgDireccion" type="text" placeholder="Dirección completa"></div>
-        <div class="form-group"><label>Contacto</label><input id="cfgContacto" type="text" placeholder="Teléfono o email de contacto"></div>
-        <button class="btn btn-primary" onclick="saveCondominio()" style="margin-top:0.5rem">Guardar</button>
-      </div>
-
       <!-- Montos -->
       <div class="card" style="margin-bottom:1rem">
         <h4>Montos Base</h4>
         <div class="form-row">
-          <div class="form-group"><label>Monto mensual</label><input id="cfgMontoMensual" type="number" min="0" placeholder="50000"></div>
+          <div class="form-group"><label>Gasto común base</label><input id="cfgGastoComunBase" type="number" min="0" placeholder="50000"></div>
           <div class="form-group"><label>Fondo reserva</label><input id="cfgFondoReserva" type="number" min="0" placeholder="15000"></div>
         </div>
-        <div class="form-group"><label>Moneda</label><select id="cfgMoneda"><option value="CLP">CLP</option><option value="USD">USD</option><option value="EUR">EUR</option></select></div>
         <button class="btn btn-primary" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</button>
       </div>
 

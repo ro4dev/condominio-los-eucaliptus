@@ -23,7 +23,8 @@ var DEMO_FILES = {
   DOCUMENTOS: 'data/documentos.json',
   RECLAMOS: 'data/reclamos.json',
   PROVEEDORES: 'data/proveedores.json',
-  ASAMBLEAS: 'data/asambleas.json'
+  ASAMBLEAS: 'data/asambleas.json',
+  CONFIG: 'data/config.json'
 };
 
 function toggleDemoMode() {

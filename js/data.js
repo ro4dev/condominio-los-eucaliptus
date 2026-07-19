@@ -28,7 +28,7 @@ async function loadJson(target) {
 }
 
 async function loadInitialData() {
-  await loadJson('GASTOS');
+  await Promise.all([loadJson('GASTOS'), loadConfig()]);
   fillFilters();
   applyFilters();
 }
