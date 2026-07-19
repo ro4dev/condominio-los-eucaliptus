@@ -194,7 +194,8 @@ function renderFlujo() {
     var color = f.tipo === 'Ingreso' ? '#059669' : '#dc2626';
     var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2';
     var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
-    return '<div class="card">' +
+    var borderColor = f.tipo === 'Ingreso' ? '#059669' : '#dc2626';
+    return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
         '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>' +
@@ -283,17 +284,19 @@ function renderAsambleas() {
     return new Date(b.fecha) - new Date(a.fecha);
   });
   timeline.innerHTML = sorted.map(function(a) {
-    var extraClass = a.tipo === 'Extraordinaria' ? ' extra' : '';
+    var borderColor = a.tipo === 'Extraordinaria' ? '#f59e0b' : '#3b82f6';
     var fecha = formatDate(a.fecha);
     var asistentes = a.asistentes ? String(a.asistentes).split(',').map(function(item) {
       return '<span style="display:inline-block;background:#e5e7eb;padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + item.trim() + '</span>';
     }).join('') : '';
-    return '<div class="timeline-item' + extraClass + '">' +
-      '<div class="timeline-date">' + fecha + '</div>' +
-      '<span class="timeline-tipo' + extraClass + '">' + a.tipo + '</span>' +
-      '<div class="timeline-section"><strong>Temario:</strong><p>' + (a.temario || '') + '</p></div>' +
-      '<div class="timeline-section"><strong>Acuerdos:</strong><p>' + (a.acuerdos || '') + '</p></div>' +
-      '<div class="timeline-section"><strong>Asistentes:</strong><p>' + asistentes + '</p></div>' +
+    return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
+        '<span style="font-size:0.8rem;color:#6b7280">' + fecha + '</span>' +
+      '</div>' +
+      '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Temario:</strong> ' + (a.temario || '') + '</div>' +
+      (a.acuerdos ? '<div style="font-size:0.85rem;color:#374151;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + a.acuerdos + '</div>' : '') +
+      (asistentes ? '<div style="margin-top:0.4rem"><strong style="font-size:0.85rem">Asistentes:</strong><div style="margin-top:0.3rem">' + asistentes + '</div></div>' : '') +
       '</div>';
   }).join('');
 }

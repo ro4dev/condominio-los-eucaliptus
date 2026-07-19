@@ -65,7 +65,7 @@ function showSkeletons(tab) {
     documentos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     reclamos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     proveedores: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
-    asambleas: '<div class="skeleton skeleton-timeline"></div><div class="skeleton skeleton-timeline"></div>'
+    asambleas: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>'
   };
   var tabEl = document.getElementById('tab-' + tab);
   if (!tabEl) return;

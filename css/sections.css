@@ -3,6 +3,8 @@
 .news-card .dates { font-size: 0.8rem; color: #6b7280; margin-bottom: 0.5rem; }
 .news-card .desc { font-size: 0.9rem; color: #374151; line-height: 1.5; }
 
+.flujo-card { background: #fff; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; border-left: 4px solid #059669; }
+
 .doc-item { display: flex; align-items: center; gap: 1rem; background: #fff; border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; }
 .doc-icon { width: 40px; height: 40px; border-radius: 8px; background: #dbeafe; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .doc-info { flex: 1; }

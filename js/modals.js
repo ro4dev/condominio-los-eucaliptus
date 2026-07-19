@@ -236,9 +236,15 @@ function formAsambleas() {
     '</div>' +
     '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required></textarea></div>' +
     '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)"></textarea></div>' +
-    '<div class="form-group"><label>Asistentes</label><select name="asistentes" multiple style="min-height:6rem">' + parcelas + '</select></div>' +
+    '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:#2563eb;font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem">' + parcelas + '</select></div>' +
     '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
   '</form>');
 }
 
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') confirmCloseModal(); });
+
+function toggleAllAsistentes() {
+  var sel = document.querySelector('[name="asistentes"]');
+  var allSelected = Array.from(sel.options).every(function(o) { return o.selected; });
+  Array.from(sel.options).forEach(function(o) { o.selected = !allSelected; });
+}
