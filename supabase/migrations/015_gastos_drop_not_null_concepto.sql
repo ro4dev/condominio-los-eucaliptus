@@ -1,1 +1,0 @@
-ALTER TABLE gastos ALTER COLUMN concepto DROP NOT NULL;

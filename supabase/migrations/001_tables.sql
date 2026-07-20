@@ -1,5 +1,5 @@
 -- ============================================
--- Condominio Eucaliptus - Schema inicial
+-- Condominio Los Eucaliptus - Tablas
 -- ============================================
 
 -- PARCELAS
@@ -17,7 +17,7 @@ CREATE TABLE propietarios (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   nombre_completo TEXT NOT NULL,
   rut TEXT,
-  parcela TEXT NOT NULL,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE CASCADE,
   telefono TEXT,
   email TEXT,
   tipo TEXT DEFAULT 'Propietario',
@@ -27,7 +27,7 @@ CREATE TABLE propietarios (
 -- GASTOS COMUNES
 CREATE TABLE gastos (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  parcela TEXT NOT NULL,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE CASCADE,
   periodo TEXT NOT NULL,
   concepto TEXT NOT NULL,
   monto NUMERIC NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE documentos (
 CREATE TABLE reclamos (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   tipo TEXT NOT NULL CHECK (tipo IN ('Reclamo', 'Sugerencia')),
-  parcela TEXT,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE SET NULL,
   asunto TEXT NOT NULL,
   descripcion TEXT NOT NULL,
   created_at TIMESTAMPTZ DEFAULT now()
@@ -101,17 +101,47 @@ CREATE TABLE asambleas (
   tipo TEXT NOT NULL CHECK (tipo IN ('Ordinaria', 'Extraordinaria')),
   temario TEXT NOT NULL,
   acuerdos TEXT,
-  asistentes TEXT,
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
--- RLS: Habilitar cuando se configure Auth
--- ALTER TABLE parcelas ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE propietarios ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE gastos ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE flujo ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE noticias ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE documentos ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE reclamos ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE proveedores ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE asambleas ENABLE ROW LEVEL SECURITY;
+-- ASAMBLEA ASISTENTES (junction table)
+CREATE TABLE asamblea_asistentes (
+  asamblea_id UUID REFERENCES asambleas(id) ON DELETE CASCADE,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE CASCADE,
+  PRIMARY KEY (asamblea_id, parcela_id)
+);
+
+-- ENCUESTAS
+CREATE TABLE encuestas (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  titulo TEXT NOT NULL,
+  descripcion TEXT,
+  alternativas JSONB DEFAULT '[]'::jsonb,
+  fecha_termino DATE,
+  quorum INTEGER,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- ENCUESTAS VOTOS
+CREATE TABLE encuestas_votos (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  encuesta_id UUID REFERENCES encuestas(id) ON DELETE CASCADE,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE CASCADE,
+  seleccion TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(encuesta_id, parcela_id)
+);
+
+-- CONFIG (key-value store)
+CREATE TABLE config (
+  key TEXT PRIMARY KEY,
+  value JSONB NOT NULL,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- SEED DATA: configuración inicial
+INSERT INTO config (key, value) VALUES
+  ('montos', '{"gasto_comun_base": 50000, "fondo_reserva": 15000}'),
+  ('categorias_documentos', '["Estatuto", "Actas", "Contratos", "Seguros", "Planos"]'),
+  ('rubros_proveedores', '["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"]')
+ON CONFLICT (key) DO NOTHING;
