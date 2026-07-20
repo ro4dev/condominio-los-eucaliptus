@@ -88,6 +88,7 @@ supabase/migrations/    # Migraciones SQL
 ## Reglas importantes
 
 - **NUNCA ASUMIR NADA** — Preguntar siempre antes de hacer. No inventar interpretaciones. No suponer cantidad de migraciones, archivos, features, etc.
+- **NO HACER ACCIONES SIN CONSULTAR** — Ejecutar solo lo que el usuario pida explícitamente. No ejecutar comandos "por si acaso" o "para ayudar".
 - **NO ejecutar `git commit`** salvo pedido explícito del usuario
 - **NO tocar `js/supabase-config.js`** (credenciales)
 - **NO romper modo producción** al editar archivos de demo
