@@ -1,5 +1,5 @@
 var SUPABASE_URL = 'https://kxacuszfhyhxngeazuze.supabase.co';
-var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImViZm51c3lrZnZjYXJkdW5taWxxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMTk5NzQsImV4cCI6MjA5OTg5NTk3NH0.r6vvxtNutgkEc9thD4IUucpVzxGLHkE7_ovgoqKMUd8';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt4YWN1c3pmaHloeG5nZWF6dXplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ0OTY1MzQsImV4cCI6MjEwMDA3MjUzNH0.kwG5AEZ60dn6H1Y_pQq4rePn4inRs7a7NyDzvGa-P8E';
 
 var supabaseClient = null;
 var currentUser = null;
