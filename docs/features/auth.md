@@ -5,19 +5,25 @@ Sistema de autenticación y control de roles.
 
 ## Implementación
 - Supabase Auth (email/password)
-- Rol admin via JWT `raw_user_meta_data.role`
+- Rol admin via JWT `app_metadata.role` (no user_metadata por seguridad)
 
 ## Cómo funciona
 1. Usuarios se registran/inician sesión via modal
-2. Al loguearse, se obtiene sesión y se verifica role en metadata
-3. `IS_ADMIN = true` si `user_metadata.role === 'admin'`
+2. Al loguearse, se obtiene sesión y se verifica role en `app_metadata`
+3. `IS_ADMIN = true` si `app_metadata.role === 'admin'`
 4. Admin se asigna manualmente via SQL:
    ```sql
    UPDATE auth.users 
-   SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb 
+   SET raw_app_meta_data = raw_app_meta_data || '{"role": "admin"}'::jsonb 
    WHERE email = 'email@ejemplo.com';
    ```
 5. Después de asignar, usuario debe cerrar sesión y volver a entrar para regenerar JWT
+
+## Seguridad
+- **NUNCA usar `user_metadata` para autorización** — es editable por el usuario
+- **Usar `app_metadata`** — no es editable por el usuario
+- RLS policies: `auth.jwt() -> 'app_metadata' ->> 'role' = 'admin'`
+- JS: `currentUser.app_metadata.role`
 
 ## UI
 - Botón "Iniciar sesión" / "Cerrar sesión" en header

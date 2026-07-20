@@ -98,7 +98,7 @@ supabase/migrations/    # Migraciones SQL
 - El usuario testea en iPhone 12 Mini — mobile first
 - **Botones "+ Agregar"**: todos admin-only excepto Reclamos (cualquier user autenticado)
 - **NO modificar migraciones existentes**, solo crear nuevas
-- **Asignar admin**: `UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';` (re-loguear después)
+- **Asignar admin**: `UPDATE auth.users SET raw_app_meta_data = raw_app_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';` (re-loguear después)
 
 ## Cómo probar
 

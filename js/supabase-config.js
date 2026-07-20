@@ -35,7 +35,7 @@ async function checkAdmin() {
     if (configTab) configTab.style.display = 'none';
     return;
   }
-  IS_ADMIN = currentUser.user_metadata && currentUser.user_metadata.role === 'admin';
+  IS_ADMIN = currentUser.app_metadata && currentUser.app_metadata.role === 'admin';
   if (configTab) configTab.style.display = IS_ADMIN ? '' : 'none';
   updateAuthUI();
 }

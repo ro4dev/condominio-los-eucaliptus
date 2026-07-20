@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 19/07/2026 - Corrección auth: usar app_metadata
+- **Changed**: `checkAdmin()` lee `currentUser.app_metadata.role` en vez de `user_metadata`
+- **Security**: Role admin se almacena en `raw_app_meta_data` (no user-editable)
+- **Note**: Asignar admin: `UPDATE auth.users SET raw_app_meta_data = raw_app_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';`
+
 ### 03/07/2026 - Inicio del proyecto
 - HTML monolítico con CSS y JS inline
 - Backend: Google Apps Script (Code.gs)
