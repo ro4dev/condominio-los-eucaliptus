@@ -338,7 +338,10 @@ function renderProveedores() {
   var grid = document.getElementById('proveedoresGrid');
   grid.innerHTML = PROVEEDORES.map(function(p) {
     return '<div class="proveedor-card">' +
-      '<div class="proveedor-rubro">' + p.rubro + '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
+        '<div class="proveedor-rubro" style="margin:0">' + p.rubro + '</div>' +
+        adminActions("editProveedor('" + p.id + "')", "deleteProveedor('" + p.id + "')") +
+      '</div>' +
       '<div class="proveedor-nombre">' + p.nombre + '</div>' +
       '<div class="proveedor-contacto">' +
         '<div>&#128205; ' + p.contacto + '</div>' +
@@ -347,7 +350,6 @@ function renderProveedores() {
         (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
         '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
       '</div>' +
-      adminActions("editProveedor('" + p.id + "')", "deleteProveedor('" + p.id + "')") +
       '</div>';
   }).join('');
 }
