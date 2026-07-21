@@ -49,7 +49,9 @@ function generateUUID() {
 }
 
 function parcelName(parcelaId) {
-  if (!parcelaId) { return ''; }
+  if (!parcelaId) {
+    return '';
+  }
   var p = PARCELAS.find(function(x) { return x.id === parcelaId; });
   return p ? p.numero : parcelaId;
 }

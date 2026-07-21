@@ -22,7 +22,9 @@ function confirmCloseModal() {
   var inputs = body.querySelectorAll('input:not([type="file"]):not([type="hidden"]), textarea, select');
   var hasData = false;
   inputs.forEach(function(el) {
-    if (el.value && el.value.trim() !== '') { hasData = true; }
+    if (el.value && el.value.trim() !== '') {
+      hasData = true;
+    }
   });
   if (hasData) {
     if (!confirm('¿Cerrar? Se perderán los datos ingresados.')) return;
@@ -34,7 +36,10 @@ function handleForm(e) {
   e.preventDefault();
   var form = e.target;
   var submitBtn = form.querySelector('button[type="submit"]');
-  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Guardando...'; }
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Guardando...';
+  }
   showLoading();
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
@@ -56,7 +61,9 @@ function handleForm(e) {
   if (fileInput && fileInput.files.length > 0) {
     var bucket = form.dataset.bucket || 'gastos_comunes';
     var folder = '';
-    if (table === 'gastos' && data.periodo) { folder = data.periodo; }
+    if (table === 'gastos' && data.periodo) {
+      folder = data.periodo;
+    }
     else if (table === 'flujo' && data.fecha && data.tipo) folder = data.fecha.slice(0, 7) + '-' + data.tipo;
     else if (table === 'documentos' && data.categoria) folder = data.categoria;
     filePromise = supabaseUpload(fileInput.files[0], bucket, folder);
@@ -65,7 +72,10 @@ function handleForm(e) {
   filePromise.then(function(fileUrl) {
     if (fileInput && fileInput.files.length > 0 && !fileUrl) {
       hideLoading();
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Guardar';
+      }
       return;
     }
     if (fileUrl) {
@@ -77,11 +87,17 @@ function handleForm(e) {
         var alternativas = [];
         altInputs.forEach(function(inp) {
           var val = inp.value.trim();
-          if (val) { alternativas.push(val); }
+          if (val) {
+            alternativas.push(val);
+          }
         });
         data.alternativas = alternativas;
-        if (!data.fecha_termino) { delete data.fecha_termino; }
-        if (data.quorum) { data.quorum = parseInt(data.quorum) || null; }
+        if (!data.fecha_termino) {
+          delete data.fecha_termino;
+        }
+        if (data.quorum) {
+          data.quorum = parseInt(data.quorum) || null;
+        }
         data.id = generateUUID();
         data.created_at = new Date().toISOString();
         ENCUESTAS.push(data);
@@ -97,7 +113,10 @@ function handleForm(e) {
       if (!table) {
         showSnackbar('Error: no se especificó la tabla.', 'error');
         hideLoading();
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Guardar';
+        }
         return;
       }
       if (table === 'asambleas') {
@@ -105,7 +124,11 @@ function handleForm(e) {
         var asistentesIds = asistentesStr ? asistentesStr.split(', ') : [];
         delete data.asistentes;
         supabaseInsert(table, data).then(function(result) {
-          if (!result) { hideLoading(); if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; } return; }
+          if (!result) { hideLoading(); if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Guardar';
+            } return;
+          }
           var asambleaId = result.id;
           if (asistentesIds.length) {
             var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
@@ -123,13 +146,19 @@ function handleForm(e) {
           }
         });
       } else if (table === 'encuestas') {
-        if (data.quorum) { data.quorum = parseInt(data.quorum) || null; }
-        if (!data.fecha_termino) { delete data.fecha_termino; }
+        if (data.quorum) {
+          data.quorum = parseInt(data.quorum) || null;
+        }
+        if (!data.fecha_termino) {
+          delete data.fecha_termino;
+        }
         var altInputs = document.querySelectorAll('.encuesta-alt-input');
         var alternativas = [];
         altInputs.forEach(function(inp) {
           var val = inp.value.trim();
-          if (val) { alternativas.push(val); }
+          if (val) {
+            alternativas.push(val);
+          }
         });
         data.alternativas = alternativas;
         supabaseInsert(table, data).then(function(result) {
@@ -139,7 +168,10 @@ function handleForm(e) {
             closeModal();
             reloadTab(getCurrentTab());
           } else {
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Crear'; }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Crear';
+            }
           }
         });
       } else {
@@ -150,7 +182,10 @@ function handleForm(e) {
             closeModal();
             reloadTab(getCurrentTab());
           } else {
-            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Guardar';
+            }
           }
         });
       }
@@ -160,7 +195,9 @@ function handleForm(e) {
 
 function getCurrentTab() {
   var active = document.querySelector('.tab-content.active');
-  if (!active) { return 'cuenta'; }
+  if (!active) {
+    return 'cuenta';
+  }
   return active.id.replace('tab-', '');
 }
 

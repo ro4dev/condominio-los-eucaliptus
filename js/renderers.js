@@ -2,7 +2,9 @@
 function fillFilters() {
   var periodos = [];
   GASTOS.forEach(function(r) {
-    if (r.periodo && periodos.indexOf(r.periodo) === -1) { periodos.push(r.periodo); }
+    if (r.periodo && periodos.indexOf(r.periodo) === -1) {
+      periodos.push(r.periodo);
+    }
   });
   periodos.sort().reverse();
 
@@ -37,8 +39,12 @@ function renderStats(data) {
   var periodos = [];
   var parcelas = [];
   data.forEach(function(r) {
-    if (periodos.indexOf(r.periodo) === -1) { periodos.push(r.periodo); }
-    if (r.parcela_id && parcelas.indexOf(r.parcela_id) === -1) { parcelas.push(r.parcela_id); }
+    if (periodos.indexOf(r.periodo) === -1) {
+      periodos.push(r.periodo);
+    }
+    if (r.parcela_id && parcelas.indexOf(r.parcela_id) === -1) {
+      parcelas.push(r.parcela_id);
+    }
   });
 
   document.getElementById('stats').innerHTML =
@@ -114,11 +120,15 @@ function renderNoticias() {
   var list = document.getElementById('noticiasList');
   var hoy = new Date();
   var activas = NOTICIAS.filter(function(n) {
-    if (!n.fecha_hasta) { return true; }
+    if (!n.fecha_hasta) {
+      return true;
+    }
     return new Date(n.fecha_hasta) >= hoy;
   });
   var vencidas = NOTICIAS.filter(function(n) {
-    if (!n.fecha_hasta) { return false; }
+    if (!n.fecha_hasta) {
+      return false;
+    }
     return new Date(n.fecha_hasta) < hoy;
   });
 
@@ -378,8 +388,14 @@ function renderEncuestas() {
     };
   });
 
-  if (encuestasFilter === 'Abiertas') { data = data.filter(function(d) { return !d.cerrada; }); }
-  if (encuestasFilter === 'Cerradas') { data = data.filter(function(d) { return d.cerrada; }); }
+  if (encuestasFilter === 'Abiertas') { data = data.filter(function(d) {
+    return !d.cerrada;
+    });
+  }
+  if (encuestasFilter === 'Cerradas') { data = data.filter(function(d) {
+    return d.cerrada;
+    });
+  }
 
   data.sort(function(a, b) { return new Date(b.encuesta.created_at) - new Date(a.encuesta.created_at); });
 
@@ -450,7 +466,10 @@ function renderEncuestas() {
 }
 
 async function votarEncuesta(encuestaId, seleccion) {
-  if (!currentUser) { showSnackbar('Debes iniciar sesión para votar.', 'info'); return; }
+  if (!currentUser) {
+    showSnackbar('Debes iniciar sesión para votar.', 'info');
+    return;
+  }
 
   var miPropietario = (typeof PROPIETARIOS !== 'undefined') ? PROPIETARIOS.find(function(p) { return p.email === currentUser.email; }) : null;
   if (!miPropietario || !miPropietario.parcela_id) {

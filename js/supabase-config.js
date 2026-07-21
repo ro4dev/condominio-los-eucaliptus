@@ -27,16 +27,22 @@ async function checkAdmin() {
   var configTab = document.getElementById('configTabBtn');
   if (DEMO_MODE) {
     IS_ADMIN = !!currentUser;
-    if (configTab) { configTab.style.display = IS_ADMIN ? '' : 'none'; }
+    if (configTab) {
+      configTab.style.display = IS_ADMIN ? '' : 'none';
+    }
     return;
   }
   if (!currentUser) {
     IS_ADMIN = false;
-    if (configTab) { configTab.style.display = 'none'; }
+    if (configTab) {
+      configTab.style.display = 'none';
+    }
     return;
   }
   IS_ADMIN = currentUser.app_metadata && currentUser.app_metadata.role === 'admin';
-  if (configTab) { configTab.style.display = IS_ADMIN ? '' : 'none'; }
+  if (configTab) {
+    configTab.style.display = IS_ADMIN ? '' : 'none';
+  }
   updateAuthUI();
 }
 
@@ -47,29 +53,45 @@ function updateAuthUI() {
   var addBtns = document.querySelectorAll('.form-link');
   var adminBtns = document.querySelectorAll('.form-link.admin-only');
   if (currentUser) {
-    if (loginBtn) { loginBtn.style.display = 'none'; }
-    if (logoutBtn) { logoutBtn.style.display = ''; }
-    if (userInfo) { userInfo.textContent = currentUser.email; }
+    if (loginBtn) {
+      loginBtn.style.display = 'none';
+    }
+    if (logoutBtn) {
+      logoutBtn.style.display = '';
+    }
+    if (userInfo) {
+      userInfo.textContent = currentUser.email;
+    }
     addBtns.forEach(function(btn) { btn.style.display = 'none'; });
     adminBtns.forEach(function(btn) { btn.style.display = IS_ADMIN ? '' : 'none'; });
     var userBtns = document.querySelectorAll('.form-link:not(.admin-only)');
     userBtns.forEach(function(btn) { btn.style.display = ''; });
   } else {
-    if (loginBtn) { loginBtn.style.display = ''; }
-    if (logoutBtn) { logoutBtn.style.display = 'none'; }
-    if (userInfo) { userInfo.textContent = ''; }
+    if (loginBtn) {
+      loginBtn.style.display = '';
+    }
+    if (logoutBtn) {
+      logoutBtn.style.display = 'none';
+    }
+    if (userInfo) {
+      userInfo.textContent = '';
+    }
     addBtns.forEach(function(btn) { btn.style.display = 'none'; });
   }
 }
 
 function showLoginModal() {
   var modal = document.getElementById('loginModal');
-  if (modal) { modal.classList.add('active'); }
+  if (modal) {
+    modal.classList.add('active');
+  }
 }
 
 function closeLoginModal() {
   var modal = document.getElementById('loginModal');
-  if (modal) { modal.classList.remove('active'); }
+  if (modal) {
+    modal.classList.remove('active');
+  }
 }
 
 async function handleLogin(e) {
@@ -78,11 +100,15 @@ async function handleLogin(e) {
   var email = form.email.value;
   var password = form.password.value;
   var errorEl = document.getElementById('loginError');
-  if (errorEl) { errorEl.textContent = ''; }
+  if (errorEl) {
+    errorEl.textContent = '';
+  }
 
   var result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
   if (result.error) {
-    if (errorEl) { errorEl.textContent = result.error.message; }
+    if (errorEl) {
+      errorEl.textContent = result.error.message;
+    }
   } else {
     closeLoginModal();
     form.reset();
@@ -99,13 +125,19 @@ async function handleSignup(e) {
   var email = form.email.value;
   var password = form.password.value;
   var errorEl = document.getElementById('loginError');
-  if (errorEl) { errorEl.textContent = ''; }
+  if (errorEl) {
+    errorEl.textContent = '';
+  }
 
   var result = await supabaseClient.auth.signUp({ email: email, password: password });
   if (result.error) {
-    if (errorEl) { errorEl.textContent = result.error.message; }
+    if (errorEl) {
+      errorEl.textContent = result.error.message;
+    }
   } else {
-    if (errorEl) { errorEl.textContent = 'Revisa tu email para confirmar tu cuenta.'; }
+    if (errorEl) {
+      errorEl.textContent = 'Revisa tu email para confirmar tu cuenta.';
+    }
   }
 }
 
@@ -144,11 +176,15 @@ async function supabaseUpload(file, bucket, folder) {
 function showSignupForm() {
   var title = document.getElementById('loginModalTitle');
   var form = document.getElementById('loginForm');
-  if (title) { title.textContent = 'Crear cuenta'; }
+  if (title) {
+    title.textContent = 'Crear cuenta';
+  }
   if (form) {
     form.onsubmit = handleSignup;
     var errorEl = document.getElementById('loginError');
-    if (errorEl) { errorEl.textContent = ''; }
+    if (errorEl) {
+      errorEl.textContent = '';
+    }
     var link = form.parentElement.querySelector('a');
     if (link) {
       link.textContent = 'Ya tengo cuenta';
@@ -160,11 +196,15 @@ function showSignupForm() {
 function showLoginForm() {
   var title = document.getElementById('loginModalTitle');
   var form = document.getElementById('loginForm');
-  if (title) { title.textContent = 'Iniciar sesión'; }
+  if (title) {
+    title.textContent = 'Iniciar sesión';
+  }
   if (form) {
     form.onsubmit = handleLogin;
     var errorEl = document.getElementById('loginError');
-    if (errorEl) { errorEl.textContent = ''; }
+    if (errorEl) {
+      errorEl.textContent = '';
+    }
     var link = form.parentElement.querySelector('a');
     if (link) {
       link.textContent = 'Crear cuenta';
