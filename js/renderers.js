@@ -143,7 +143,15 @@ function renderParcelas() {
 }
 
 // NOTICIAS
-var showOldNoticias = false;
+var noticiasFilter = 'vigentes';
+
+function filterNoticias(filtro) {
+  noticiasFilter = filtro;
+  document.querySelectorAll('#noticiasFilter .chip').forEach(function(c) {
+    c.classList.toggle('active', c.textContent.toLowerCase() === (filtro === 'no_vigentes' ? 'no vigentes' : (filtro === 'todas' ? 'todas' : 'vigentes')));
+  });
+  renderNoticias();
+}
 
 function renderNoticias() {
   var list = document.getElementById('noticiasList');
@@ -169,39 +177,38 @@ function renderNoticias() {
     return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
   });
 
-  var html = '';
-  if (activas.length === 0 && !showOldNoticias) {
-    html = '<div style="text-align:center;color:#9ca3af;padding:2rem">No hay noticias activas</div>';
+  var mostrar = [];
+  if (noticiasFilter === 'vigentes') {
+    mostrar = activas;
+  } else if (noticiasFilter === 'no_vigentes') {
+    mostrar = vencidas;
   } else {
-    html += activas.map(function(n) { return renderNoticiaCard(n); }).join('');
-    if (vencidas.length > 0) {
-      html += '<div style="text-align:center;margin:1rem 0"><button onclick="toggleOldNoticias()" class="btn-toggle">' + (showOldNoticias ? 'Ocultar anteriores' : 'Ver ' + vencidas.length + ' noticias anteriores') + '</button></div>';
-      if (showOldNoticias) {
-        html += vencidas.map(function(n) { return renderNoticiaCard(n, true); }).join('');
-      }
-    }
+    mostrar = activas.concat(vencidas);
   }
-  list.innerHTML = html;
+
+  if (mostrar.length === 0) {
+    list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:2rem">No hay noticias</div>';
+    return;
+  }
+
+  list.innerHTML = mostrar.map(function(n) {
+    var esVencida = vencidas.indexOf(n) !== -1;
+    return renderNoticiaCard(n, esVencida);
+  }).join('');
 }
 
 function renderNoticiaCard(n, old) {
   var fecha = formatDate(n.fecha || n.created_at);
-  var hasta = formatDate(n.fecha_hasta);
   var style = old ? 'opacity:0.6;' : '';
   return '<div class="news-card" style="margin-bottom:1rem;' + style + '">' +
-    '<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
-      '<h4 style="margin:0">' + (n.titulo || '') + '</h4>' +
+    '<div style="display:flex;justify-content:space-between;align-items:center">' +
+      '<h4 style="margin:0;flex:1">' + (n.titulo || '') + '</h4>' +
+      '<span class="dates" style="margin:0">' + fecha + '</span>' +
       adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')") +
     '</div>' +
-    '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
     '<div class="desc">' + nl2br(n.descripcion) + '</div>' +
     (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
     '</div>';
-}
-
-function toggleOldNoticias() {
-  showOldNoticias = !showOldNoticias;
-  renderNoticias();
 }
 
 // INGRESOS/EGRESOS

@@ -111,6 +111,11 @@
     <div id="tab-noticias" class="tab-content">
       <a href="#" class="form-link admin-only" id="formNoticias" onclick="formNoticias(); return false;">+ Agregar Noticia</a>
       <button class="reload-btn" onclick="reloadTab('noticias')">↻ Recargar</button>
+      <div class="filter-chips" id="noticiasFilter">
+        <button class="chip active" onclick="filterNoticias('vigentes')">Vigentes</button>
+        <button class="chip" onclick="filterNoticias('no_vigentes')">No vigentes</button>
+        <button class="chip" onclick="filterNoticias('todas')">Todas</button>
+      </div>
       <div id="noticiasList">
         <div class="skeleton skeleton-news"></div>
         <div class="skeleton skeleton-news"></div>
