@@ -132,6 +132,11 @@
 - **Note**: RLS: SELECT autenticado, INSERT votos autenticado, INSERT/UPDATE/DELETE encuestas admin
 - **Fixed**: Botones "+ Agregar" ahora son admin-only (excepto Reclamos que es para cualquier user autenticado)
 
+### 20/07/2026 - Descripción de documentos en modal, iconos en cards
+- **Changed**: Document cards: "Ver" reemplazado por iconos ⓘ (descripción) y 📄 (archivo)
+- **Added**: `showDescripcion()` abre modal con descripción completa del documento
+- **Removed**: Descripción inline truncada de las cards de documentos
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)

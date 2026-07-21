@@ -137,6 +137,7 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 - **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *
+- **Descripción en modal**: documentos con descripción larga la muestran en un popup al hacer clic en ⓘ
 - **Confirmación de cierre**: advierte antes de cerrar un modal si hay datos ingresados
 - **Recarga**: botón de recarga por pestaña
 - **Responsive**: diseño adaptable a móviles (header, tabs, gráficos)
