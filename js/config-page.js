@@ -8,7 +8,7 @@ async function loadConfig() {
     CONFIG = await res.json();
   } else if (supabaseClient) {
     var { data, error } = await supabaseClient.from('config').select('key, value');
-    if (error) throw error;
+      if (error) { throw error; }
     CONFIG = {};
     data.forEach(function(row) { CONFIG[row.key] = row.value; });
   }
@@ -49,7 +49,7 @@ async function saveMontos() {
 
 // --- LIST CHIP HELPER ---
 function renderChipList(items, removeFn, usedItems) {
-  if (!items.length) return '<span style="color:var(--text-muted);font-size:0.85rem">Sin elementos</span>';
+  if (!items.length) { return '<span style="color:var(--text-muted);font-size:0.85rem">Sin elementos</span>'; }
   var used = usedItems || [];
   return '<div style="display:flex;flex-wrap:wrap;gap:0.5rem">' + items.map(function(item, i) {
     var isInUse = used.indexOf(item) !== -1;
@@ -77,14 +77,14 @@ function openConfigModal(title, placeholder, onAdd) {
   document.getElementById('cfgModalInput').focus();
   document.getElementById('cfgModalAddBtn').onclick = async function() {
     var val = document.getElementById('cfgModalInput').value.trim();
-    if (!val) return;
+    if (!val) { return; }
     showLoading();
     await onAdd(val);
     hideLoading();
     closeModal();
   };
   document.getElementById('cfgModalInput').onkeydown = function(e) {
-    if (e.key === 'Enter') document.getElementById('cfgModalAddBtn').click();
+    if (e.key === 'Enter') { document.getElementById('cfgModalAddBtn').click(); }
   };
 }
 
@@ -101,7 +101,7 @@ function openModalCategoriaDoc() {
     cats.push(val);
     CONFIG.categorias_documentos = cats;
     renderCategoriasDocs();
-    if (await saveConfig('categorias_documentos', cats)) showSnackbar('Categoría agregada.', 'success');
+    if (await saveConfig('categorias_documentos', cats)) { showSnackbar('Categoría agregada.', 'success'); }
   });
 }
 
@@ -110,7 +110,7 @@ function removeCategoriaDoc(i) {
   cats.splice(i, 1);
   CONFIG.categorias_documentos = cats;
   renderCategoriasDocs();
-  saveConfig('categorias_documentos', cats).then(function(ok) { if (ok) showSnackbar('Categoría eliminada.', 'success'); });
+  saveConfig('categorias_documentos', cats).then(function(ok) { if (ok) { showSnackbar('Categoría eliminada.', 'success'); } });
 }
 
 async function saveCategoriasDocs() {
@@ -132,7 +132,7 @@ function openModalRubroProveedor() {
     rubros.push(val);
     CONFIG.rubros_proveedores = rubros;
     renderRubrosProveedores();
-    if (await saveConfig('rubros_proveedores', rubros)) showSnackbar('Rubro agregado.', 'success');
+    if (await saveConfig('rubros_proveedores', rubros)) { showSnackbar('Rubro agregado.', 'success'); }
   });
 }
 
@@ -141,7 +141,7 @@ function removeRubroProveedor(i) {
   rubros.splice(i, 1);
   CONFIG.rubros_proveedores = rubros;
   renderRubrosProveedores();
-  saveConfig('rubros_proveedores', rubros).then(function(ok) { if (ok) showSnackbar('Rubro eliminado.', 'success'); });
+  saveConfig('rubros_proveedores', rubros).then(function(ok) { if (ok) { showSnackbar('Rubro eliminado.', 'success'); } });
 }
 
 async function saveRubrosProveedores() {
@@ -163,7 +163,7 @@ function openModalConceptoFlujo() {
     conceptos.push(val);
     CONFIG.conceptos_flujo = conceptos;
     renderConceptosFlujo();
-    if (await saveConfig('conceptos_flujo', conceptos)) showSnackbar('Concepto agregado.', 'success');
+    if (await saveConfig('conceptos_flujo', conceptos)) { showSnackbar('Concepto agregado.', 'success'); }
   });
 }
 
@@ -172,7 +172,7 @@ function removeConceptoFlujo(i) {
   conceptos.splice(i, 1);
   CONFIG.conceptos_flujo = conceptos;
   renderConceptosFlujo();
-  saveConfig('conceptos_flujo', conceptos).then(function(ok) { if (ok) showSnackbar('Concepto eliminado.', 'success'); });
+  saveConfig('conceptos_flujo', conceptos).then(function(ok) { if (ok) { showSnackbar('Concepto eliminado.', 'success'); } });
 }
 
 async function saveConceptosFlujo() {
@@ -193,17 +193,17 @@ async function renameParcelas(oldPrefijo, newPrefijo) {
   if (DEMO_MODE || !supabaseClient) {
     PARCELAS.forEach(function(p) {
       var match = p.numero.match(/^(\D+)\s+(\d+)$/);
-      if (match && match[1] === oldPrefijo) p.numero = newPrefijo + ' ' + match[2];
+      if (match && match[1] === oldPrefijo) { p.numero = newPrefijo + ' ' + match[2]; }
     });
     return;
   }
 
   for (var i = 0; i < PARCELAS.length; i++) {
     var match = PARCELAS[i].numero.match(/^(\D+)\s+(\d+)$/);
-    if (!match || match[1] !== oldPrefijo) continue;
+    if (!match || match[1] !== oldPrefijo) { continue; }
     var newName = newPrefijo + ' ' + match[2];
     var { error } = await supabaseClient.from('parcelas').update({ numero: newName }).eq('id', PARCELAS[i].id);
-    if (error) console.error('Error renaming parcela:', PARCELAS[i].numero, error);
+    if (error) { console.error('Error renaming parcela:', PARCELAS[i].numero, error); }
   }
 
   await loadJson('PARCELAS');

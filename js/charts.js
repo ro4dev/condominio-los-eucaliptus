@@ -15,7 +15,7 @@ function renderPeriodChart(data) {
   var values = Object.values(groups);
 
   var ctx = document.getElementById('chartPeriodos').getContext('2d');
-  if (chartPeriodos) chartPeriodos.destroy();
+  if (chartPeriodos) { chartPeriodos.destroy(); }
   chartPeriodos = new Chart(ctx, {
     type: 'bar',
     data: { labels: labels, datasets: [{ label: 'Monto', data: values, backgroundColor: '#3b82f6', borderRadius: 4 }] },
@@ -34,7 +34,7 @@ function renderParcelaChart(data) {
   var colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
 
   var ctx = document.getElementById('chartParcelas').getContext('2d');
-  if (chartParcelas) chartParcelas.destroy();
+  if (chartParcelas) { chartParcelas.destroy(); }
   chartParcelas = new Chart(ctx, {
     type: 'doughnut',
     data: { labels: labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length) }] },

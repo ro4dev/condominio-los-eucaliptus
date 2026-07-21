@@ -22,7 +22,7 @@ function confirmCloseModal() {
   var inputs = body.querySelectorAll('input:not([type="file"]):not([type="hidden"]), textarea, select');
   var hasData = false;
   inputs.forEach(function(el) {
-    if (el.value && el.value.trim() !== '') hasData = true;
+    if (el.value && el.value.trim() !== '') { hasData = true; }
   });
   if (hasData) {
     if (!confirm('¿Cerrar? Se perderán los datos ingresados.')) return;
@@ -56,7 +56,7 @@ function handleForm(e) {
   if (fileInput && fileInput.files.length > 0) {
     var bucket = form.dataset.bucket || 'gastos_comunes';
     var folder = '';
-    if (table === 'gastos' && data.periodo) folder = data.periodo;
+    if (table === 'gastos' && data.periodo) { folder = data.periodo; }
     else if (table === 'flujo' && data.fecha && data.tipo) folder = data.fecha.slice(0, 7) + '-' + data.tipo;
     else if (table === 'documentos' && data.categoria) folder = data.categoria;
     filePromise = supabaseUpload(fileInput.files[0], bucket, folder);
@@ -77,11 +77,11 @@ function handleForm(e) {
         var alternativas = [];
         altInputs.forEach(function(inp) {
           var val = inp.value.trim();
-          if (val) alternativas.push(val);
+          if (val) { alternativas.push(val); }
         });
         data.alternativas = alternativas;
-        if (data.quorum) data.quorum = parseInt(data.quorum) || null;
-        if (!data.fecha_termino) delete data.fecha_termino;
+        if (!data.fecha_termino) { delete data.fecha_termino; }
+        if (data.quorum) { data.quorum = parseInt(data.quorum) || null; }
         data.id = generateUUID();
         data.created_at = new Date().toISOString();
         ENCUESTAS.push(data);
@@ -123,13 +123,13 @@ function handleForm(e) {
           }
         });
       } else if (table === 'encuestas') {
-        if (data.quorum) data.quorum = parseInt(data.quorum) || null;
-        if (!data.fecha_termino) delete data.fecha_termino;
+        if (data.quorum) { data.quorum = parseInt(data.quorum) || null; }
+        if (!data.fecha_termino) { delete data.fecha_termino; }
         var altInputs = document.querySelectorAll('.encuesta-alt-input');
         var alternativas = [];
         altInputs.forEach(function(inp) {
           var val = inp.value.trim();
-          if (val) alternativas.push(val);
+          if (val) { alternativas.push(val); }
         });
         data.alternativas = alternativas;
         supabaseInsert(table, data).then(function(result) {
@@ -160,7 +160,7 @@ function handleForm(e) {
 
 function getCurrentTab() {
   var active = document.querySelector('.tab-content.active');
-  if (!active) return 'cuenta';
+  if (!active) { return 'cuenta'; }
   return active.id.replace('tab-', '');
 }
 

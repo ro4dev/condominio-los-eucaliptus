@@ -21,7 +21,7 @@ async function loadJson(target) {
     } else if (supabaseClient) {
       var table = TABLE_MAP[target];
       var { data, error } = await supabaseClient.from(table).select('*');
-      if (error) throw error;
+      if (error) { throw error; }
       window[target] = data;
     }
     loaded[target] = true;
@@ -50,7 +50,7 @@ async function loadTabData(tab) {
     config: function() { return renderConfig(); }
   };
 
-  if (configs[tab]) await configs[tab]();
+  if (configs[tab]) { await configs[tab](); }
 }
 
 async function switchTab(tab) {
@@ -75,18 +75,18 @@ function showSkeletons(tab) {
     config: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>'
   };
   var tabEl = document.getElementById('tab-' + tab);
-  if (!tabEl) return;
+  if (!tabEl) { return; }
   var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList, #flujoList');
-  if (content) content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
+  if (content) { content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>'; }
   if (tab === 'flujo') {
     var fl = document.getElementById('flujoList');
-    if (fl) fl.innerHTML = '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>';
+    if (fl) { fl.innerHTML = '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>'; }
   }
   if (tab === 'cuenta') {
     var tl = document.getElementById('tableLoading');
     var tg = document.getElementById('tableGastos');
-    if (tl) tl.style.display = '';
-    if (tg) tg.style.display = 'none';
+    if (tl) { tl.style.display = ''; }
+    if (tg) { tg.style.display = 'none'; }
   }
 }
 
