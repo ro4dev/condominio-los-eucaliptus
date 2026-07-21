@@ -111,14 +111,19 @@ Crear los siguientes buckets en **Supabase → Storage**, todos públicos:
 Luego ejecutar en **Supabase → SQL Editor** para habilitar subida/lectura:
 
 ```sql
-CREATE POLICY "auth upload" ON storage.objects
-  FOR INSERT TO authenticated
-  WITH CHECK (bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos'));
-
-CREATE POLICY "auth select" ON storage.objects
+CREATE POLICY "storage_select" ON storage.objects
   FOR SELECT TO authenticated
   USING (bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos'));
+
+CREATE POLICY "storage_insert" ON storage.objects
+  FOR INSERT TO authenticated
+  WITH CHECK (
+    bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos')
+    AND auth.jwt() -> 'app_metadata' ->> 'role' = 'admin'
+  );
 ```
+
+> Los buckets deben ser **no públicos** en el Dashboard (desmarcar "Public bucket").
 
 ### Modo Demo
 
