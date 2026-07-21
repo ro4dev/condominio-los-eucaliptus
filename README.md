@@ -98,6 +98,16 @@ condominio-los-eucaliptus/
 3. Pegarlas en `js/supabase-config.js`
 4. Las migraciones se aplican automáticamente con la integración de GitHub
 
+### Storage Buckets
+
+Crear los siguientes buckets en **Supabase → Storage**, todos públicos:
+
+| Bucket | Uso |
+|--------|-----|
+| `gastos_comunes` | Comprobantes de gastos |
+| `ingresos_egresos` | Comprobantes de ingresos/egresos |
+| `documentos` | Archivos adjuntos de documentos |
+
 ### Modo Demo
 
 Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON local, en producción envía a Supabase.
