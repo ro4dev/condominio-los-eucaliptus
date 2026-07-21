@@ -1,3 +1,31 @@
+// Helper: admin actions HTML
+function adminActions(editFn, deleteFn) {
+  if (!IS_ADMIN) return '';
+  return '<div style="display:flex;gap:0.3rem;flex-shrink:0;align-items:center">' +
+    '<button onclick="' + editFn + '" title="Editar" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:var(--text-2)">&#9998;</button>' +
+    '<button onclick="' + deleteFn + '" title="Eliminar" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:var(--text-2)">&#128465;</button>' +
+    '</div>';
+}
+
+function deleteItem(table, id, arrayName, renderFn) {
+  if (!IS_ADMIN) return;
+  if (!confirm('¿Eliminar este registro?')) return;
+  if (DEMO_MODE) {
+    window[arrayName] = window[arrayName].filter(function(item) { return item.id !== id; });
+    showSnackbar('Eliminado (demo).', 'success');
+    renderFn();
+  } else {
+    showLoading();
+    supabaseDelete(table, id).then(function(result) {
+      hideLoading();
+      if (result) {
+        showSnackbar('Eliminado correctamente.', 'success');
+        reloadTab(getCurrentTab());
+      }
+    });
+  }
+}
+
 // ESTADO DE CUENTA
 function fillFilters() {
   var periodos = [];
@@ -160,7 +188,10 @@ function renderNoticiaCard(n, old) {
   var hasta = formatDate(n.fecha_hasta);
   var style = old ? 'opacity:0.6;' : '';
   return '<div class="news-card" style="margin-bottom:1rem;' + style + '">' +
-    '<h4>' + (n.titulo || '') + '</h4>' +
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
+      '<h4 style="margin:0">' + (n.titulo || '') + '</h4>' +
+      adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')") +
+    '</div>' +
     '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
     '<div class="desc">' + nl2br(n.descripcion) + '</div>' +
     (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
@@ -214,7 +245,10 @@ function renderFlujo() {
       '</div>' +
       '<div style="display:flex;justify-content:space-between;align-items:center">' +
         '<div style="font-weight:500">' + f.concepto + '</div>' +
-        (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
+        '<div style="display:flex;gap:0.3rem;align-items:center">' +
+          (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
+          adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") +
+        '</div>' +
       '</div>' +
       (f.descripcion ? '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.4rem">' + nl2br(f.descripcion) + '</div>' : '') +
       '</div>';
@@ -243,6 +277,7 @@ function renderDocumentos() {
     var icon = icons[d.categoria] || '&#128196;';
     var fecha = formatDate(d.fecha || d.created_at);
     var btns = '<div style="display:flex;gap:0.25rem;flex-shrink:0;align-items:center">';
+    btns += adminActions("editDocumento('" + d.id + "')", "deleteDocumento('" + d.id + "')");
     if (d.descripcion) {
       btns += '<button onclick="showDescripcion(\'' + d.id + '\')" title="Ver descripción" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:0.2rem;color:var(--text-2)">&#9432;</button>';
     }
@@ -311,6 +346,7 @@ function renderProveedores() {
         (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
         '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
       '</div>' +
+      adminActions("editProveedor('" + p.id + "')", "deleteProveedor('" + p.id + "')") +
       '</div>';
   }).join('');
 }
@@ -344,7 +380,10 @@ function renderAsambleas() {
     return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
-        '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
+        '<div style="display:flex;gap:0.3rem;align-items:center">' +
+          '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
+          adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
+        '</div>' +
       '</div>' +
       '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Temario:</strong> ' + nl2br(a.temario) + '</div>' +
       (a.acuerdos ? '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + nl2br(a.acuerdos) + '</div>' : '') +
@@ -470,7 +509,10 @@ function renderEncuestas() {
     return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
-        (infoExtra ? '<span>' + infoExtra + '</span>' : '') +
+        '<div style="display:flex;gap:0.3rem;align-items:center">' +
+          (infoExtra ? '<span>' + infoExtra + '</span>' : '') +
+          adminActions("editEncuesta('" + e.id + "')", "deleteEncuesta('" + e.id + "')") +
+        '</div>' +
       '</div>' +
       '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + e.titulo + '</div>' +
       (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + nl2br(e.descripcion) + '</div>' : '') +
@@ -521,6 +563,100 @@ async function votarEncuesta(encuestaId, seleccion) {
   }
   await loadJson('ENCUESTAS_VOTOS');
   renderEncuestas();
+}
+
+// Edit helpers
+function editNoticia(id) {
+  var item = NOTICIAS.find(function(n) { return n.id === id; });
+  if (item) formNoticias(item);
+}
+
+function deleteNoticia(id) {
+  deleteItem('noticias', id, 'NOTICIAS', renderNoticias);
+}
+
+function editFlujo(id) {
+  var item = FLUJO.find(function(f) { return f.id === id; });
+  if (item) formFlujo(item);
+}
+
+function deleteFlujo(id) {
+  deleteItem('flujo', id, 'FLUJO', renderFlujo);
+}
+
+function editDocumento(id) {
+  var item = DOCUMENTOS.find(function(d) { return d.id === id; });
+  if (item) formDocumentos(item);
+}
+
+function deleteDocumento(id) {
+  deleteItem('documentos', id, 'DOCUMENTOS', renderDocumentos);
+}
+
+function editProveedor(id) {
+  var item = PROVEEDORES.find(function(p) { return p.id === id; });
+  if (item) formProveedores(item);
+}
+
+function deleteProveedor(id) {
+  deleteItem('proveedores', id, 'PROVEEDORES', renderProveedores);
+}
+
+function editAsamblea(id) {
+  var item = ASAMBLEAS.find(function(a) { return a.id === id; });
+  if (!item) return;
+  var asistenteIds = (ASAMBLEA_ASISTENTES || []).filter(function(aa) { return aa.asamblea_id === id; }).map(function(aa) { return aa.parcela_id; });
+  var copy = Object.assign({}, item, { asistentesIds: asistenteIds });
+  formAsambleas(copy);
+}
+
+function deleteAsamblea(id) {
+  if (!IS_ADMIN) return;
+  if (!confirm('¿Eliminar esta asamblea?')) return;
+  if (DEMO_MODE) {
+    ASAMBLEAS = ASAMBLEAS.filter(function(a) { return a.id !== id; });
+    ASAMBLEA_ASISTENTES = ASAMBLEA_ASISTENTES.filter(function(aa) { return aa.asamblea_id !== id; });
+    showSnackbar('Eliminado (demo).', 'success');
+    renderAsambleas();
+  } else {
+    showLoading();
+    supabaseClient.from('asamblea_asistentes').delete().eq('asamblea_id', id).then(function() {
+      supabaseDelete('asambleas', id).then(function(result) {
+        hideLoading();
+        if (result) {
+          showSnackbar('Eliminada correctamente.', 'success');
+          reloadTab(getCurrentTab());
+        }
+      });
+    });
+  }
+}
+
+function editEncuesta(id) {
+  var item = ENCUESTAS.find(function(e) { return e.id === id; });
+  if (item) formEncuestas(item);
+}
+
+function deleteEncuesta(id) {
+  if (!IS_ADMIN) return;
+  if (!confirm('¿Eliminar esta encuesta? También se eliminarán todos los votos.')) return;
+  if (DEMO_MODE) {
+    ENCUESTAS = ENCUESTAS.filter(function(e) { return e.id !== id; });
+    ENCUESTAS_VOTOS = ENCUESTAS_VOTOS.filter(function(v) { return v.encuesta_id !== id; });
+    showSnackbar('Eliminado (demo).', 'success');
+    renderEncuestas();
+  } else {
+    showLoading();
+    supabaseClient.from('encuestas_votos').delete().eq('encuesta_id', id).then(function() {
+      supabaseDelete('encuestas', id).then(function(result) {
+        hideLoading();
+        if (result) {
+          showSnackbar('Eliminada correctamente.', 'success');
+          reloadTab(getCurrentTab());
+        }
+      });
+    });
+  }
 }
 
 loadInitialData();

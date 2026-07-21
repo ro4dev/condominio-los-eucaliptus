@@ -48,6 +48,7 @@ function handleForm(e) {
   });
 
   var table = form.dataset.table;
+  var isEdit = !!data.id;
   var autoDateTables = ['noticias', 'documentos'];
   if (autoDateTables.indexOf(table) !== -1 && !data.fecha) {
     data.fecha = new Date().toISOString().slice(0, 10);
@@ -69,41 +70,68 @@ function handleForm(e) {
     filePromise = supabaseUpload(fileInput.files[0], bucket, folder);
   }
 
+  function afterSave() {
+    hideLoading();
+    showSnackbar(isEdit ? 'Actualizado correctamente.' : 'Guardado correctamente.', 'success');
+    closeModal();
+    reloadTab(getCurrentTab());
+  }
+
+  function submitError(msg) {
+    hideLoading();
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = isEdit ? 'Actualizar' : 'Guardar';
+    }
+    if (msg) showSnackbar(msg, 'error');
+  }
+
   filePromise.then(function(fileUrl) {
     if (fileInput && fileInput.files.length > 0 && !fileUrl) {
-      hideLoading();
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Guardar';
-      }
+      submitError();
       return;
     }
     if (fileUrl) {
       data[fileInput.name] = fileUrl;
     }
+
     if (DEMO_MODE) {
       if (table === 'encuestas') {
-        var altInputs = document.querySelectorAll('.encuesta-alt-input');
-        var alternativas = [];
-        altInputs.forEach(function(inp) {
-          var val = inp.value.trim();
-          if (val) {
-            alternativas.push(val);
-          }
-        });
-        data.alternativas = alternativas;
+        if (!isEdit) {
+          var altInputs = document.querySelectorAll('.encuesta-alt-input');
+          var alternativas = [];
+          altInputs.forEach(function(inp) {
+            var val = inp.value.trim();
+            if (val) {
+              alternativas.push(val);
+            }
+          });
+          data.alternativas = alternativas;
+        }
         if (!data.fecha_termino) {
           delete data.fecha_termino;
         }
         if (data.quorum) {
           data.quorum = parseInt(data.quorum) || null;
         }
-        data.id = generateUUID();
-        data.created_at = new Date().toISOString();
-        ENCUESTAS.push(data);
-        showSnackbar('Encuesta creada (demo).', 'success');
-        closeModal();
+        if (isEdit) {
+          var idx = ENCUESTAS.findIndex(function(e) { return e.id === data.id; });
+          if (idx !== -1) ENCUESTAS[idx] = Object.assign({}, ENCUESTAS[idx], data);
+        } else {
+          data.id = generateUUID();
+          data.created_at = new Date().toISOString();
+          ENCUESTAS.push(data);
+        }
+        afterSave();
         renderEncuestas();
+      } else if (isEdit) {
+        var arrName = tableToArray(table);
+        if (arrName) {
+          var idx = window[arrName].findIndex(function(item) { return item.id === data.id; });
+          if (idx !== -1) window[arrName][idx] = Object.assign({}, window[arrName][idx], data);
+        }
+        afterSave();
+        reloadTab(getCurrentTab());
       } else {
         console.log('Form data:', data);
         showSnackbar('Guardado (demo). En modo real se enviaría a Supabase.', 'success');
@@ -112,37 +140,39 @@ function handleForm(e) {
     } else {
       if (!table) {
         showSnackbar('Error: no se especificó la tabla.', 'error');
-        hideLoading();
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Guardar';
-        }
+        submitError();
         return;
       }
+
+      var doUpdate = isEdit ? function(tbl, payload) {
+        return supabaseUpdate(tbl, data.id, payload);
+      } : function(tbl, payload) {
+        return supabaseInsert(tbl, payload);
+      };
+
       if (table === 'asambleas') {
         var asistentesStr = data.asistentes || '';
         var asistentesIds = asistentesStr ? asistentesStr.split(', ') : [];
         delete data.asistentes;
-        supabaseInsert(table, data).then(function(result) {
-          if (!result) { hideLoading(); if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Guardar';
-            } return;
-          }
-          var asambleaId = result.id;
-          if (asistentesIds.length) {
-            var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
-            supabaseClient.from('asamblea_asistentes').insert(rows).then(function() {
-              hideLoading();
-              showSnackbar('Guardado correctamente.', 'success');
-              closeModal();
-              reloadTab(getCurrentTab());
+        doUpdate(table, data).then(function(result) {
+          if (!result) { submitError(); return; }
+          var asambleaId = isEdit ? data.id : result[0] && result[0].id;
+          if (isEdit) {
+            supabaseClient.from('asamblea_asistentes').delete().eq('asamblea_id', asambleaId).then(function() {
+              if (asistentesIds.length) {
+                var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
+                supabaseClient.from('asamblea_asistentes').insert(rows).then(function() { afterSave(); });
+              } else {
+                afterSave();
+              }
             });
           } else {
-            hideLoading();
-            showSnackbar('Guardado correctamente.', 'success');
-            closeModal();
-            reloadTab(getCurrentTab());
+            if (asistentesIds.length) {
+              var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
+              supabaseClient.from('asamblea_asistentes').insert(rows).then(function() { afterSave(); });
+            } else {
+              afterSave();
+            }
           }
         });
       } else if (table === 'encuestas') {
@@ -152,45 +182,53 @@ function handleForm(e) {
         if (!data.fecha_termino) {
           delete data.fecha_termino;
         }
-        var altInputs = document.querySelectorAll('.encuesta-alt-input');
-        var alternativas = [];
-        altInputs.forEach(function(inp) {
-          var val = inp.value.trim();
-          if (val) {
-            alternativas.push(val);
-          }
-        });
-        data.alternativas = alternativas;
-        supabaseInsert(table, data).then(function(result) {
+        if (!isEdit) {
+          var altInputs = document.querySelectorAll('.encuesta-alt-input');
+          var alternativas = [];
+          altInputs.forEach(function(inp) {
+            var val = inp.value.trim();
+            if (val) {
+              alternativas.push(val);
+            }
+          });
+          data.alternativas = alternativas;
+        }
+        doUpdate(table, data).then(function(result) {
           hideLoading();
           if (result) {
-            showSnackbar('Encuesta creada.', 'success');
+            showSnackbar(isEdit ? 'Encuesta actualizada.' : 'Encuesta creada.', 'success');
             closeModal();
             reloadTab(getCurrentTab());
           } else {
             if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.textContent = 'Crear';
+              submitBtn.textContent = isEdit ? 'Actualizar' : 'Crear';
             }
           }
         });
       } else {
-        supabaseInsert(table, data).then(function(result) {
-          hideLoading();
+        doUpdate(table, data).then(function(result) {
           if (result) {
-            showSnackbar('Guardado correctamente.', 'success');
-            closeModal();
-            reloadTab(getCurrentTab());
+            afterSave();
           } else {
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = 'Guardar';
-            }
+            submitError();
           }
         });
       }
     }
   });
+}
+
+function tableToArray(table) {
+  var map = {
+    noticias: 'NOTICIAS',
+    flujo: 'FLUJO',
+    documentos: 'DOCUMENTOS',
+    proveedores: 'PROVEEDORES',
+    asambleas: 'ASAMBLEAS',
+    encuestas: 'ENCUESTAS'
+  };
+  return map[table] || null;
 }
 
 function getCurrentTab() {
@@ -265,42 +303,55 @@ function formPropietarios() {
   '</form>');
 }
 
-function formNoticias() {
-  openModal('Agregar Noticia', '<form data-table="noticias" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Ej: Corte de agua programado" required></div>' +
-    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required></textarea></div>' +
-    '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fecha_hasta"></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
+function formNoticias(data) {
+  var isEdit = !!data;
+  openModal(isEdit ? 'Editar Noticia' : 'Agregar Noticia',
+    '<form data-table="noticias" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Ej: Corte de agua programado" required' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></div>' +
+    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required>' + (isEdit ? escHtml(data.descripcion) : '') + '</textarea></div>' +
+    '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fecha_hasta"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></div>' +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
   '</form>');
 }
 
-function formFlujo() {
+function formFlujo(data) {
   var conceptos = CONFIG.conceptos_flujo || [];
   if (!conceptos.length) {
     showSnackbar('Primero debes configurar los conceptos en la pestaña Configuración.', 'warning');
     return;
   }
-  var opts = conceptos.map(function(c) { return '<option value="' + c + '">' + c + '</option>'; }).join('');
-  openModal('Agregar Movimiento', '<form data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
+  var isEdit = !!data;
+  var opts = conceptos.map(function(c) { return '<option value="' + c + '"' + (isEdit && data.concepto === c ? ' selected' : '') + '>' + c + '</option>'; }).join('');
+  openModal(isEdit ? 'Editar Movimiento' : 'Agregar Movimiento',
+    '<form data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Ingreso</option><option>Egreso</option></select></div>' +
-      '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +
+      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '>Ingreso</option><option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '>Egreso</option></select></div>' +
+      '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></div>' +
     '</div>' +
     '<div class="form-group"><label>Concepto *</label><select name="concepto" required>' + opts + '</select></div>' +
-    '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del movimiento (opcional)"></textarea></div>' +
+    '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required' + (isEdit ? ' value="' + data.monto + '"' : '') + '></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del movimiento (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
+    (isEdit && data.comprobante ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.comprobante + '" target="_blank">ver</a></div>' : '') +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
   '</form>');
 }
 
-function formDocumentos() {
-  openModal('Agregar Documento', '<form data-table="documentos" data-bucket="documentos" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Ej: Acta reunión marzo 2026" required></div>' +
-    '<div class="form-group"><label>Categoría *</label><select name="categoria" required><option>Estatuto</option><option>Actas</option><option>Contratos</option><option>Seguros</option><option>Planos</option></select></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Resumen del documento (opcional)"></textarea></div>' +
+function formDocumentos(data) {
+  var isEdit = !!data;
+  var cats = (CONFIG.categorias_documentos && CONFIG.categorias_documentos.length) ? CONFIG.categorias_documentos : ['Estatuto', 'Actas', 'Contratos', 'Seguros', 'Planos'];
+  var catOpts = cats.map(function(c) { return '<option value="' + c + '"' + (isEdit && data.categoria === c ? ' selected' : '') + '>' + c + '</option>'; }).join('');
+  openModal(isEdit ? 'Editar Documento' : 'Agregar Documento',
+    '<form data-table="documentos" data-bucket="documentos" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Ej: Acta reunión marzo 2026" required' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></div>' +
+    '<div class="form-group"><label>Categoría *</label><select name="categoria" required>' + catOpts + '</select></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Resumen del documento (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
+    (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
   '</form>');
 }
 
@@ -317,56 +368,67 @@ function formReclamos() {
   '</form>');
 }
 
-function formProveedores() {
-  openModal('Agregar Proveedor', '<form data-table="proveedores" onsubmit="handleForm(event)">' +
+function formProveedores(data) {
+  var isEdit = !!data;
+  var rubros = CONFIG.rubros_proveedores && CONFIG.rubros_proveedores.length ? CONFIG.rubros_proveedores : ['Jardinería', 'Plomería', 'Electricidad', 'Albañilería', 'Pintura', 'Limpieza', 'Seguridad', 'Carpintería', 'Herrería', 'Tecnología', 'Otro'];
+  var rubroOpts = rubros.map(function(r) { return '<option value="' + r + '"' + (isEdit && data.rubro === r ? ' selected' : '') + '>' + r + '</option>'; }).join('');
+  openModal(isEdit ? 'Editar Proveedor' : 'Agregar Proveedor',
+    '<form data-table="proveedores" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Rubro *</label><select name="rubro" required><option value="">Seleccionar...</option><option>Jardinería</option><option>Plomería</option><option>Electricidad</option><option>Albañilería</option><option>Pintura</option><option>Limpieza</option><option>Seguridad</option><option>Carpintería</option><option>Herrería</option><option>Tecnología</option><option>Otro</option></select></div>' +
-      '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Nombre del proveedor o empresa" required></div>' +
+      '<div class="form-group"><label>Rubro *</label><select name="rubro" required><option value="">Seleccionar...</option>' + rubroOpts + '</select></div>' +
+      '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Nombre del proveedor o empresa" required' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></div>' +
     '</div>' +
-    '<div class="form-group"><label>Contacto *</label><input type="text" name="contacto" placeholder="Nombre de la persona de contacto" required></div>' +
+    '<div class="form-group"><label>Contacto *</label><input type="text" name="contacto" placeholder="Nombre de la persona de contacto" required' + (isEdit ? ' value="' + escHtml(data.contacto) + '"' : '') + '></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"></div>' +
-      '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"></div>' +
+      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></div>' +
+      '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></div>' +
     '</div>' +
-    '<div class="form-group"><label>Web/Instagram</label><input type="text" name="web_instagram" placeholder="https://..."></div>' +
-    '<div class="form-group"><label>Observaciones</label><textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)"></textarea></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
+    '<div class="form-group"><label>Web/Instagram</label><input type="text" name="web_instagram" placeholder="https://..."' + (isEdit && data.web_instagram ? ' value="' + escHtml(data.web_instagram) + '"' : '') + '></div>' +
+    '<div class="form-group"><label>Observaciones</label><textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)">' + (isEdit ? escHtml(data.observaciones || '') : '') + '</textarea></div>' +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
   '</form>');
 }
 
-function formAsambleas() {
+function formAsambleas(data) {
   if (PARCELAS.length === 0) {
     loadJson('PARCELAS').then(function() {
       if (PARCELAS.length === 0) {
         showSnackbar('Primero debes configurar las parcelas', 'warning');
         return;
       }
-      formAsambleas();
+      formAsambleas(data);
     });
     return;
   }
-  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Asamblea', '<form data-table="asambleas" onsubmit="handleForm(event)">' +
+  var isEdit = !!data;
+  var parcelas = PARCELAS.map(function(p) {
+    var selected = isEdit && data.asistentesIds && data.asistentesIds.indexOf(p.id) !== -1;
+    return '<option value="' + p.id + '"' + (selected ? ' selected' : '') + '>' + p.numero + '</option>';
+  }).join('');
+  openModal(isEdit ? 'Editar Asamblea' : 'Agregar Asamblea',
+    '<form data-table="asambleas" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +
-      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Ordinaria</option><option>Extraordinaria</option></select></div>' +
+      '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></div>' +
+      '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="Ordinaria"' + (isEdit && data.tipo === 'Ordinaria' ? ' selected' : '') + '>Ordinaria</option><option value="Extraordinaria"' + (isEdit && data.tipo === 'Extraordinaria' ? ' selected' : '') + '>Extraordinaria</option></select></div>' +
     '</div>' +
-    '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required></textarea></div>' +
-    '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)"></textarea></div>' +
+    '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required>' + (isEdit ? escHtml(data.temario) : '') + '</textarea></div>' +
+    '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)">' + (isEdit ? escHtml(data.acuerdos || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:#2563eb;font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem">' + parcelas + '</select></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
   '</form>');
 }
 
-function formEncuestas() {
-  openModal('Nueva Encuesta', '<form data-table="encuestas" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Título de la propuesta" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)"></textarea></div>' +
-    '<div class="form-row">' +
-      '<div class="form-group"><label>Fecha de término</label><input type="date" name="fecha_termino"></div>' +
-      '<div class="form-group"><label>Quorum (mín. votos)</label><input type="number" name="quorum" min="0" placeholder="Sin límite"></div>' +
-    '</div>' +
-    '<div class="form-group">' +
+function formEncuestas(data) {
+  var isEdit = !!data;
+  var alternativasHtml = '';
+  if (isEdit) {
+    var ops = (data.alternativas && data.alternativas.length && !(data.alternativas.length === 1 && data.alternativas[0] === ''))
+      ? data.alternativas : ['A favor', 'En contra'];
+    alternativasHtml = '<div style="font-size:0.85rem;color:var(--text-muted);padding:0.5rem;background:var(--skeleton-1);border-radius:6px">Opciones: ' + ops.join(' / ') + ' (no editable al tener votos)</div>';
+  } else {
+    alternativasHtml =
       '<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem">' +
         '<label style="margin:0;font-size:0.9rem">Con alternativas</label>' +
         '<label class="toggle"><input type="checkbox" id="encuestaModoAlt" onchange="toggleEncuestaAlternativas()"><span class="toggle-slider"></span></label>' +
@@ -376,9 +438,19 @@ function formEncuestas() {
         '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 2" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
       '</div>' +
       '<button type="button" id="btnAddAlt" class="btn-toggle" onclick="addEncuestaAlt()" style="font-size:0.8rem;display:none">+ Agregar alternativa</button>' +
-      '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>' +
+      '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>';
+  }
+  openModal(isEdit ? 'Editar Encuesta' : 'Nueva Encuesta',
+    '<form data-table="encuestas" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Título de la propuesta" required' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><label>Fecha de término</label><input type="date" name="fecha_termino"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></div>' +
+      '<div class="form-group"><label>Quorum (mín. votos)</label><input type="number" name="quorum" min="0" placeholder="Sin límite"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></div>' +
     '</div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Crear</button></div>' +
+    '<div class="form-group">' + alternativasHtml + '</div>' +
+    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Crear') + '</button></div>' +
   '</form>');
 }
 

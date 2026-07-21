@@ -54,6 +54,11 @@ function nl2br(text) {
   return (text || '').replace(/\n/g, '<br>');
 }
 
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function showSnackbar(message, type) {
   type = type || 'info';
   var el = document.getElementById('snackbar');

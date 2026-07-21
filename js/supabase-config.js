@@ -155,6 +155,34 @@ async function supabaseInsert(table, data) {
   return result.data;
 }
 
+async function supabaseUpdate(table, id, data) {
+  if (!currentUser) {
+    showSnackbar('Debes iniciar sesión.', 'info');
+    return null;
+  }
+  var result = await supabaseClient.from(table).update(data).eq('id', id).select();
+  if (result.error) {
+    console.error('Error updating:', result.error);
+    showSnackbar('Error al actualizar: ' + result.error.message, 'error');
+    return null;
+  }
+  return result.data;
+}
+
+async function supabaseDelete(table, id) {
+  if (!currentUser) {
+    showSnackbar('Debes iniciar sesión.', 'info');
+    return null;
+  }
+  var result = await supabaseClient.from(table).delete().eq('id', id);
+  if (result.error) {
+    console.error('Error deleting:', result.error);
+    showSnackbar('Error al eliminar: ' + result.error.message, 'error');
+    return null;
+  }
+  return true;
+}
+
 async function supabaseUpload(file, bucket, folder) {
   if (!currentUser) {
     showSnackbar('Debes iniciar sesión.', 'info');

@@ -137,6 +137,16 @@
 - **Added**: `showDescripcion()` abre modal con descripción completa del documento
 - **Removed**: Descripción inline truncada de las cards de documentos
 
+### 20/07/2026 - CRUD admin: editar y eliminar registros
+- **Added**: `supabaseUpdate()` y `supabaseDelete()` en supabase-config.js
+- **Added**: `handleForm` ahora soporta UPDATE (detecta `data.id`) en todos los módulos
+- **Added**: Formularios de Noticias, Flujo, Documentos, Proveedores, Asambleas, Encuestas aceptan datos para edición
+- **Added**: Iconos ✏️ y 🗑️ visibles solo para admin en cards de esos 6 módulos
+- **Added**: Funciones `editX()` y `deleteX()` por módulo, con confirmación y limpieza de datos relacionados (votos, asistentes)
+- **Added**: `escHtml()` en utils.js para escape seguro de valores en formularios
+- **Changed**: Al editar Encuesta, el modo de alternativas es estático (no editable si ya tiene votos)
+- **Fixed**: Demo mode update usa `Object.assign` para preservar campos no enviados en el form
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)
