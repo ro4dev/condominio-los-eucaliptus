@@ -242,15 +242,29 @@ function renderDocumentos() {
   list.innerHTML = filtered.map(function(d) {
     var icon = icons[d.categoria] || '&#128196;';
     var fecha = formatDate(d.fecha || d.created_at);
+    var btns = '<div style="display:flex;gap:0.25rem;flex-shrink:0;align-items:center">';
+    if (d.descripcion) {
+      btns += '<button onclick="showDescripcion(\'' + d.id + '\')" title="Ver descripción" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:0.2rem;color:var(--text-2)">&#9432;</button>';
+    }
+    if (d.archivo) {
+      btns += '<a href="' + d.archivo + '" title="Ver documento" target="_blank" style="text-decoration:none;font-size:1.2rem;padding:0.2rem;color:var(--text-2)">&#128206;</a>';
+    }
+    btns += '</div>';
     return '<div class="doc-item">' +
       '<div class="doc-icon">' + icon + '</div>' +
-      '<div class="doc-info">' +
+      '<div class="doc-info" style="flex:1">' +
         '<div class="doc-name">' + d.nombre + '</div>' +
         '<div class="doc-meta">' + d.categoria + ' · ' + fecha + '</div>' +
       '</div>' +
-      (d.archivo ? '<a href="' + d.archivo + '" class="doc-link" target="_blank">Ver</a>' : '') +
+      btns +
       '</div>';
   }).join('');
+}
+
+function showDescripcion(docId) {
+  var doc = DOCUMENTOS.find(function(d) { return d.id === docId; });
+  if (!doc) return;
+  openModal('Descripción', '<div style="line-height:1.6;white-space:pre-wrap">' + (doc.descripcion || '') + '</div>');
 }
 
 // RECLAMOS
