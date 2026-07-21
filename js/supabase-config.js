@@ -169,8 +169,13 @@ async function supabaseUpload(file, bucket, folder) {
     showSnackbar('Error al subir archivo: ' + result.error.message, 'error');
     return null;
   }
-  var urlResult = supabaseClient.storage.from(bucket).getPublicUrl(path);
-  return urlResult.data.publicUrl;
+  var urlResult = await supabaseClient.storage.from(bucket).createSignedUrl(path, 60 * 60 * 24 * 7);
+  if (urlResult.error) {
+    console.error('Error creating signed URL:', urlResult.error);
+    showSnackbar('Error al generar enlace: ' + urlResult.error.message, 'error');
+    return null;
+  }
+  return urlResult.data.signedUrl;
 }
 
 function showSignupForm() {
