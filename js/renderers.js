@@ -472,10 +472,12 @@ function renderEncuestas() {
 
     var infoExtra = '';
     if (e.fecha_termino) {
-      infoExtra += '<span style="font-size:0.8rem;color:var(--text-muted)">Termina: ' + formatDate(e.fecha_termino) + '</span>';
+      infoExtra = 'Termina: ' + formatDate(e.fecha_termino);
     }
+
+    var quorumHtml = '';
     if (e.quorum) {
-      infoExtra += (infoExtra ? ' · ' : '') + '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? '#16a34a' : '#b91c1c') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+      quorumHtml = '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? '#16a34a' : '#b91c1c') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
     var opcionesHtml = d.opciones.map(function(op, i) {
@@ -512,14 +514,17 @@ function renderEncuestas() {
     return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
+        (infoExtra ? '<span style="font-size:0.8rem;color:var(--text-muted);text-align:center;flex:1">' + infoExtra + '</span>' : '') +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
-          (infoExtra ? '<span>' + infoExtra + '</span>' : '') +
           adminActions("editEncuesta('" + e.id + "')", "deleteEncuesta('" + e.id + "')") +
         '</div>' +
       '</div>' +
       '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + e.titulo + '</div>' +
       (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + nl2br(e.descripcion) + '</div>' : '') +
-      '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">Total: ' + d.total + ' votos</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">' +
+        '<span>Total: ' + d.total + ' votos</span>' +
+        quorumHtml +
+      '</div>' +
       opcionesHtml + accion +
     '</div>';
   }).join('');
