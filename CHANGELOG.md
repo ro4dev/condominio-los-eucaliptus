@@ -145,6 +145,7 @@
 - **Added**: Funciones `editX()` y `deleteX()` por módulo, con confirmación y limpieza de datos relacionados (votos, asistentes)
 - **Added**: `escHtml()` en utils.js para escape seguro de valores en formularios
 - **Changed**: Al editar Encuesta, el modo de alternativas es estático (no editable si ya tiene votos)
+- **Changed**: `showConfirm()` reemplaza `confirm()` nativo por modal HTML en todas las confirmaciones de eliminación y cierre de formularios
 - **Fixed**: Demo mode update usa `Object.assign` para preservar campos no enviados en el form
 
 ## Próximos pasos

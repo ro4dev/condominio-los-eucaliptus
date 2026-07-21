@@ -138,6 +138,7 @@ Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON lo
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *
 - **CRUD admin**: iconos ✏️ editar y 🗑️ eliminar en cards (Noticias, Flujo, Documentos, Proveedores, Asambleas, Encuestas) — solo visible para admin
+- **Confirmación modal**: todas las eliminaciones y cierre de formularios usan modal HTML en vez de `confirm()` nativo
 - **Descripción en modal**: documentos con descripción larga la muestran en un popup al hacer clic en ⓘ
 - **Confirmación de cierre**: advierte antes de cerrar un modal si hay datos ingresados
 - **Recarga**: botón de recarga por pestaña

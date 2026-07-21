@@ -9,21 +9,22 @@ function adminActions(editFn, deleteFn) {
 
 function deleteItem(table, id, arrayName, renderFn) {
   if (!IS_ADMIN) return;
-  if (!confirm('¿Eliminar este registro?')) return;
-  if (DEMO_MODE) {
-    window[arrayName] = window[arrayName].filter(function(item) { return item.id !== id; });
-    showSnackbar('Eliminado (demo).', 'success');
-    renderFn();
-  } else {
-    showLoading();
-    supabaseDelete(table, id).then(function(result) {
-      hideLoading();
-      if (result) {
-        showSnackbar('Eliminado correctamente.', 'success');
-        reloadTab(getCurrentTab());
-      }
-    });
-  }
+  showConfirm('¿Eliminar este registro?', function() {
+    if (DEMO_MODE) {
+      window[arrayName] = window[arrayName].filter(function(item) { return item.id !== id; });
+      showSnackbar('Eliminado (demo).', 'success');
+      renderFn();
+    } else {
+      showLoading();
+      supabaseDelete(table, id).then(function(result) {
+        hideLoading();
+        if (result) {
+          showSnackbar('Eliminado correctamente.', 'success');
+          reloadTab(getCurrentTab());
+        }
+      });
+    }
+  });
 }
 
 // ESTADO DE CUENTA
@@ -612,24 +613,25 @@ function editAsamblea(id) {
 
 function deleteAsamblea(id) {
   if (!IS_ADMIN) return;
-  if (!confirm('¿Eliminar esta asamblea?')) return;
-  if (DEMO_MODE) {
-    ASAMBLEAS = ASAMBLEAS.filter(function(a) { return a.id !== id; });
-    ASAMBLEA_ASISTENTES = ASAMBLEA_ASISTENTES.filter(function(aa) { return aa.asamblea_id !== id; });
-    showSnackbar('Eliminado (demo).', 'success');
-    renderAsambleas();
-  } else {
-    showLoading();
-    supabaseClient.from('asamblea_asistentes').delete().eq('asamblea_id', id).then(function() {
-      supabaseDelete('asambleas', id).then(function(result) {
-        hideLoading();
-        if (result) {
-          showSnackbar('Eliminada correctamente.', 'success');
-          reloadTab(getCurrentTab());
-        }
+  showConfirm('¿Eliminar esta asamblea?', function() {
+    if (DEMO_MODE) {
+      ASAMBLEAS = ASAMBLEAS.filter(function(a) { return a.id !== id; });
+      ASAMBLEA_ASISTENTES = ASAMBLEA_ASISTENTES.filter(function(aa) { return aa.asamblea_id !== id; });
+      showSnackbar('Eliminado (demo).', 'success');
+      renderAsambleas();
+    } else {
+      showLoading();
+      supabaseClient.from('asamblea_asistentes').delete().eq('asamblea_id', id).then(function() {
+        supabaseDelete('asambleas', id).then(function(result) {
+          hideLoading();
+          if (result) {
+            showSnackbar('Eliminada correctamente.', 'success');
+            reloadTab(getCurrentTab());
+          }
+        });
       });
-    });
-  }
+    }
+  });
 }
 
 function editEncuesta(id) {
@@ -639,24 +641,25 @@ function editEncuesta(id) {
 
 function deleteEncuesta(id) {
   if (!IS_ADMIN) return;
-  if (!confirm('¿Eliminar esta encuesta? También se eliminarán todos los votos.')) return;
-  if (DEMO_MODE) {
-    ENCUESTAS = ENCUESTAS.filter(function(e) { return e.id !== id; });
-    ENCUESTAS_VOTOS = ENCUESTAS_VOTOS.filter(function(v) { return v.encuesta_id !== id; });
-    showSnackbar('Eliminado (demo).', 'success');
-    renderEncuestas();
-  } else {
-    showLoading();
-    supabaseClient.from('encuestas_votos').delete().eq('encuesta_id', id).then(function() {
-      supabaseDelete('encuestas', id).then(function(result) {
-        hideLoading();
-        if (result) {
-          showSnackbar('Eliminada correctamente.', 'success');
-          reloadTab(getCurrentTab());
-        }
+  showConfirm('¿Eliminar esta encuesta? También se eliminarán todos los votos.', function() {
+    if (DEMO_MODE) {
+      ENCUESTAS = ENCUESTAS.filter(function(e) { return e.id !== id; });
+      ENCUESTAS_VOTOS = ENCUESTAS_VOTOS.filter(function(v) { return v.encuesta_id !== id; });
+      showSnackbar('Eliminado (demo).', 'success');
+      renderEncuestas();
+    } else {
+      showLoading();
+      supabaseClient.from('encuestas_votos').delete().eq('encuesta_id', id).then(function() {
+        supabaseDelete('encuestas', id).then(function(result) {
+          hideLoading();
+          if (result) {
+            showSnackbar('Eliminada correctamente.', 'success');
+            reloadTab(getCurrentTab());
+          }
+        });
       });
-    });
-  }
+    }
+  });
 }
 
 loadInitialData();

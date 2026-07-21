@@ -9,6 +9,27 @@ function closeModal() {
   hideLoading();
 }
 
+function showConfirm(message, onConfirm, confirmText) {
+  confirmText = confirmText || 'Eliminar';
+  document.getElementById('modalTitle').textContent = 'Confirmar';
+  document.getElementById('modalBody').innerHTML =
+    '<div style="margin-bottom:1rem;line-height:1.5">' + message + '</div>' +
+    '<div class="form-actions" style="display:flex;gap:0.5rem">' +
+      '<button type="button" class="btn btn-secondary" onclick="closeModal()" style="flex:1">Cancelar</button>' +
+      '<button type="button" class="btn btn-primary" onclick="confirmAction()" style="flex:1;background:#dc2626;border-color:#dc2626">' + confirmText + '</button>' +
+    '</div>';
+  document.getElementById('modalOverlay').classList.add('active');
+  window._confirmCallback = onConfirm;
+}
+
+function confirmAction() {
+  closeModal();
+  if (typeof window._confirmCallback === 'function') {
+    window._confirmCallback();
+  }
+  window._confirmCallback = null;
+}
+
 function showLoading() {
   document.getElementById('modalLoading').style.display = 'flex';
 }
@@ -27,7 +48,8 @@ function confirmCloseModal() {
     }
   });
   if (hasData) {
-    if (!confirm('¿Cerrar? Se perderán los datos ingresados.')) return;
+    showConfirm('¿Cerrar? Se perderán los datos ingresados.', function() { closeModal(); }, 'Cerrar');
+    return;
   }
   closeModal();
 }
