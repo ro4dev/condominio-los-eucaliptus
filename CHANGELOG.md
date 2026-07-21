@@ -148,6 +148,11 @@
 - **Changed**: `showConfirm()` reemplaza `confirm()` nativo por modal HTML en todas las confirmaciones de eliminación y cierre de formularios
 - **Fixed**: Demo mode update usa `Object.assign` para preservar campos no enviados en el form
 
+### 20/07/2026 - Noticias: chips de filtro, encuestas: reorden de fechas
+- **Added**: Noticias ahora tiene chips Vigentes/No vigentes/Todas (reemplaza toggle "Ver anteriores")
+- **Changed**: Noticias: fecha inline con título, sin etiqueta "Publicado:", sin "Vigente hasta"
+- **Changed**: Encuestas: fecha de publicación en header row (der), Termina + Quorum arriba de opciones, Total abajo a la der
+
 ## Próximos pasos
 - [x] Reorganizar CSS y JS en carpetas
 - [x] Configurar Supabase (tablas, auth)
