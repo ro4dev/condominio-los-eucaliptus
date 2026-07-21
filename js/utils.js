@@ -69,7 +69,7 @@ function showSnackbar(message, type) {
     document.body.appendChild(el);
   }
   var icons = { success: '\u2713', warning: '\u26a0', error: '\u2717', info: '\u2139' };
-  var colors = { success: '#16a34a', warning: '#d97706', error: '#dc2626', info: '#2563eb' };
+  var colors = { success: '#16a34a', warning: '#d97706', error: '#b91c1c', info: '#2563eb' };
   var icon = icons[type] || icons.info;
   var color = colors[type] || colors.info;
   el.style.borderLeft = '4px solid ' + color;

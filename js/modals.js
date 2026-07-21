@@ -16,7 +16,7 @@ function showConfirm(message, onConfirm, confirmText) {
     '<div style="margin-bottom:1rem;line-height:1.5">' + message + '</div>' +
     '<div class="form-actions" style="display:flex;gap:0.5rem">' +
       '<button type="button" class="btn btn-secondary" onclick="closeModal()" style="flex:1">Cancelar</button>' +
-      '<button type="button" class="btn btn-primary" onclick="confirmAction()" style="flex:1;background:#dc2626;border-color:#dc2626">' + confirmText + '</button>' +
+      '<button type="button" class="btn btn-primary" onclick="confirmAction()" style="flex:1;background:#b91c1c;border-color:#b91c1c">' + confirmText + '</button>' +
     '</div>';
   document.getElementById('modalOverlay').classList.add('active');
   window._confirmCallback = onConfirm;
@@ -456,8 +456,8 @@ function formEncuestas(data) {
         '<label class="toggle"><input type="checkbox" id="encuestaModoAlt" onchange="toggleEncuestaAlternativas()"><span class="toggle-slider"></span></label>' +
       '</div>' +
       '<div id="encuestaAlternativas" style="display:none">' +
-        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 1" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
-        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 2" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 1" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#b91c1c;border-color:#b91c1c">&times;</button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><input type="text" class="encuesta-alt-input" placeholder="Opción 2" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#b91c1c;border-color:#b91c1c">&times;</button></div>' +
       '</div>' +
       '<button type="button" id="btnAddAlt" class="btn-toggle" onclick="addEncuestaAlt()" style="font-size:0.8rem;display:none">+ Agregar alternativa</button>' +
       '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>';
@@ -488,7 +488,7 @@ function addEncuestaAlt() {
   var count = container.querySelectorAll('.encuesta-alt-input').length + 1;
   var div = document.createElement('div');
   div.style.cssText = 'display:flex;gap:0.5rem;margin-bottom:0.4rem';
-  div.innerHTML = '<input type="text" class="encuesta-alt-input" placeholder="Opción ' + count + '" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#ef4444;border-color:#ef4444">&times;</button>';
+  div.innerHTML = '<input type="text" class="encuesta-alt-input" placeholder="Opción ' + count + '" style="flex:1;padding:0.5rem;border:1px solid var(--border);border-radius:6px;font-size:0.85rem;background:var(--bg-card);color:var(--text-2)"><button type="button" class="btn-toggle" onclick="removeEncuestaAlt(this)" style="color:#b91c1c;border-color:#b91c1c">&times;</button>';
   container.appendChild(div);
   div.querySelector('input').focus();
 }

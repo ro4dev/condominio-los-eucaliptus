@@ -33,7 +33,7 @@ function renderParcelaChart(data) {
   });
   var labels = Object.keys(groups);
   var values = Object.values(groups);
-  var colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
+  var colors = ['#3b82f6', '#10b981', '#f59e0b', '#b91c1c', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
 
   var ctx = document.getElementById('chartParcelas').getContext('2d');
   if (chartParcelas) {

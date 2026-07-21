@@ -459,7 +459,7 @@ function renderEncuestas() {
     return;
   }
 
-  var colores = ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+  var colores = ['#22c55e', '#3b82f6', '#f59e0b', '#b91c1c', '#8b5cf6', '#ec4899'];
 
   container.innerHTML = data.map(function(d) {
     var e = d.encuesta;
@@ -473,7 +473,7 @@ function renderEncuestas() {
       infoExtra += '<span style="font-size:0.8rem;color:var(--text-muted)">Termina: ' + formatDate(e.fecha_termino) + '</span>';
     }
     if (e.quorum) {
-      infoExtra += (infoExtra ? ' · ' : '') + '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? '#16a34a' : '#dc2626') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+      infoExtra += (infoExtra ? ' · ' : '') + '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? '#16a34a' : '#b91c1c') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
     var opcionesHtml = d.opciones.map(function(op, i) {
