@@ -111,13 +111,13 @@ async function handleSignup(e) {
 
 async function supabaseInsert(table, data) {
   if (!currentUser) {
-    alert('Debes iniciar sesión para guardar datos.');
+    showSnackbar('Debes iniciar sesión para guardar.', 'info');
     return null;
   }
   var result = await supabaseClient.from(table).insert(data).select();
   if (result.error) {
     console.error('Error inserting:', result.error);
-    alert('Error al guardar: ' + result.error.message);
+    showSnackbar('Error al guardar: ' + result.error.message, 'error');
     return null;
   }
   return result.data;
@@ -125,7 +125,7 @@ async function supabaseInsert(table, data) {
 
 async function supabaseUpload(file, bucket, folder) {
   if (!currentUser) {
-    alert('Debes iniciar sesión para subir archivos.');
+    showSnackbar('Debes iniciar sesión.', 'info');
     return null;
   }
   var ext = file.name.split('.').pop();
@@ -134,7 +134,7 @@ async function supabaseUpload(file, bucket, folder) {
   var result = await supabaseClient.storage.from(bucket).upload(path, file);
   if (result.error) {
     console.error('Error uploading:', result.error);
-    alert('Error al subir archivo: ' + result.error.message);
+    showSnackbar('Error al subir archivo: ' + result.error.message, 'error');
     return null;
   }
   var urlResult = supabaseClient.storage.from(bucket).getPublicUrl(path);

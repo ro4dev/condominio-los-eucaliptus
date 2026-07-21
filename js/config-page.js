@@ -20,7 +20,7 @@ async function saveConfig(key, value) {
     showLoading();
     var { error } = await supabaseClient.from('config').upsert({ key: key, value: value, updated_at: new Date().toISOString() });
     hideLoading();
-    if (error) { alert('Error al guardar: ' + error.message); return false; }
+    if (error) { showSnackbar('Error al guardar: ' + error.message, 'error'); return false; }
   }
   return true;
 }
@@ -41,7 +41,7 @@ async function saveMontos() {
     fondo_reserva: parseFloat(document.getElementById('cfgFondoReserva').value) || 0
   };
   if (await saveConfig('montos', value)) {
-    alert('Montos guardados.');
+    showSnackbar('Montos guardados.', 'success');
   }
   btn.disabled = false;
   btn.textContent = 'Guardar';
@@ -95,13 +95,13 @@ function renderCategoriasDocs() {
 }
 
 function openModalCategoriaDoc() {
-  openConfigModal('Agregar categoría de documento', 'Ej: Actas', function(val) {
+  openConfigModal('Agregar categoría de documento', 'Ej: Actas', async function(val) {
     var cats = CONFIG.categorias_documentos || [];
-    if (cats.indexOf(val) !== -1) { alert('Ya existe esa categoría.'); return; }
+    if (cats.indexOf(val) !== -1) { showSnackbar('Ya existe esa categoría.', 'warning'); return; }
     cats.push(val);
     CONFIG.categorias_documentos = cats;
     renderCategoriasDocs();
-    saveConfig('categorias_documentos', cats);
+    if (await saveConfig('categorias_documentos', cats)) showSnackbar('Categoría agregada.', 'success');
   });
 }
 
@@ -110,12 +110,12 @@ function removeCategoriaDoc(i) {
   cats.splice(i, 1);
   CONFIG.categorias_documentos = cats;
   renderCategoriasDocs();
-  saveConfig('categorias_documentos', cats);
+  saveConfig('categorias_documentos', cats).then(function(ok) { if (ok) showSnackbar('Categoría eliminada.', 'success'); });
 }
 
 async function saveCategoriasDocs() {
   if (await saveConfig('categorias_documentos', CONFIG.categorias_documentos || [])) {
-    alert('Categorías guardadas.');
+    showSnackbar('Categorías guardadas.', 'success');
   }
 }
 
@@ -126,13 +126,13 @@ function renderRubrosProveedores() {
 }
 
 function openModalRubroProveedor() {
-  openConfigModal('Agregar rubro de proveedor', 'Ej: Electricidad', function(val) {
+  openConfigModal('Agregar rubro de proveedor', 'Ej: Electricidad', async function(val) {
     var rubros = CONFIG.rubros_proveedores || [];
-    if (rubros.indexOf(val) !== -1) { alert('Ya existe ese rubro.'); return; }
+    if (rubros.indexOf(val) !== -1) { showSnackbar('Ya existe ese rubro.', 'warning'); return; }
     rubros.push(val);
     CONFIG.rubros_proveedores = rubros;
     renderRubrosProveedores();
-    saveConfig('rubros_proveedores', rubros);
+    if (await saveConfig('rubros_proveedores', rubros)) showSnackbar('Rubro agregado.', 'success');
   });
 }
 
@@ -141,12 +141,12 @@ function removeRubroProveedor(i) {
   rubros.splice(i, 1);
   CONFIG.rubros_proveedores = rubros;
   renderRubrosProveedores();
-  saveConfig('rubros_proveedores', rubros);
+  saveConfig('rubros_proveedores', rubros).then(function(ok) { if (ok) showSnackbar('Rubro eliminado.', 'success'); });
 }
 
 async function saveRubrosProveedores() {
   if (await saveConfig('rubros_proveedores', CONFIG.rubros_proveedores || [])) {
-    alert('Rubros guardados.');
+    showSnackbar('Rubros guardados.', 'success');
   }
 }
 
@@ -157,13 +157,13 @@ function renderConceptosFlujo() {
 }
 
 function openModalConceptoFlujo() {
-  openConfigModal('Agregar concepto de ingreso/egreso', 'Ej: Mantenimiento', function(val) {
+  openConfigModal('Agregar concepto de ingreso/egreso', 'Ej: Mantenimiento', async function(val) {
     var conceptos = CONFIG.conceptos_flujo || [];
-    if (conceptos.indexOf(val) !== -1) { alert('Ya existe ese concepto.'); return; }
+    if (conceptos.indexOf(val) !== -1) { showSnackbar('Ya existe ese concepto.', 'warning'); return; }
     conceptos.push(val);
     CONFIG.conceptos_flujo = conceptos;
     renderConceptosFlujo();
-    saveConfig('conceptos_flujo', conceptos);
+    if (await saveConfig('conceptos_flujo', conceptos)) showSnackbar('Concepto agregado.', 'success');
   });
 }
 
@@ -172,12 +172,12 @@ function removeConceptoFlujo(i) {
   conceptos.splice(i, 1);
   CONFIG.conceptos_flujo = conceptos;
   renderConceptosFlujo();
-  saveConfig('conceptos_flujo', conceptos);
+  saveConfig('conceptos_flujo', conceptos).then(function(ok) { if (ok) showSnackbar('Concepto eliminado.', 'success'); });
 }
 
 async function saveConceptosFlujo() {
   if (await saveConfig('conceptos_flujo', CONFIG.conceptos_flujo || [])) {
-    alert('Conceptos guardados.');
+    showSnackbar('Conceptos guardados.', 'success');
   }
 }
 
@@ -217,8 +217,8 @@ async function bulkCreateParcelas() {
 
   var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
   var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim();
-  if (!prefijo) { alert('Ingresá un prefijo.'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
-  if (!cantidad || cantidad < 1) { alert('Ingresá una cantidad válida.'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
+  if (!prefijo) { showSnackbar('Ingresá un prefijo.', 'warning'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
+  if (!cantidad || cantidad < 1) { showSnackbar('Ingresá una cantidad válida.', 'warning'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
 
   var prefijoAnterior = CONFIG.parcelas_prefijo || '';
 
@@ -234,7 +234,7 @@ async function bulkCreateParcelas() {
   if (iguales) {
     await saveConfig('parcelas_cantidad', cantidad);
     await saveConfig('parcelas_prefijo', prefijo);
-    alert('Sin cambios.');
+    showSnackbar('Sin cambios.', 'info');
     btn.disabled = false;
     btn.textContent = 'Aplicar';
     return;
@@ -266,7 +266,7 @@ async function bulkCreateParcelas() {
     console.log('Nuevas reales:', nuevasReales.map(function(p) { return p.numero; }));
     if (nuevasReales.length) {
       var { error } = await supabaseClient.from('parcelas').insert(nuevasReales);
-      if (error) { hideLoading(); alert('Error al crear parcelas: ' + error.message); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
+      if (error) { hideLoading(); showSnackbar('Error al crear parcelas: ' + error.message, 'error'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
       await loadJson('PARCELAS');
     }
     hideLoading();
@@ -278,7 +278,7 @@ async function bulkCreateParcelas() {
   var msg = prefijo !== prefijoAnterior
     ? 'Parcelas renombradas a "' + prefijo + '".'
     : 'Parcelas actualizadas.';
-  alert(msg);
+  showSnackbar(msg, 'success');
   renderParcelasConfig();
   btn.disabled = false;
   btn.textContent = 'Aplicar';

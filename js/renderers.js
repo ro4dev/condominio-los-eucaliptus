@@ -450,11 +450,11 @@ function renderEncuestas() {
 }
 
 async function votarEncuesta(encuestaId, seleccion) {
-  if (!currentUser) { alert('Debes iniciar sesión para votar.'); return; }
+  if (!currentUser) { showSnackbar('Debes iniciar sesión para votar.', 'info'); return; }
 
   var miPropietario = (typeof PROPIETARIOS !== 'undefined') ? PROPIETARIOS.find(function(p) { return p.email === currentUser.email; }) : null;
   if (!miPropietario || !miPropietario.parcela_id) {
-    alert('No se encontró una parcela asociada a tu cuenta.');
+    showSnackbar('No se encontró una parcela asociada a tu cuenta.', 'error');
     return;
   }
 
@@ -479,9 +479,9 @@ async function votarEncuesta(encuestaId, seleccion) {
   hideLoading();
   if (error) {
     if (error.code === '23505') {
-      alert('Ya votaste en esta encuesta.');
+      showSnackbar('Ya votaste en esta encuesta.', 'warning');
     } else {
-      alert('Error al votar: ' + error.message);
+      showSnackbar('Error al votar: ' + error.message, 'error');
     }
     return;
   }

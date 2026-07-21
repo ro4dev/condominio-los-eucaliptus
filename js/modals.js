@@ -85,17 +85,17 @@ function handleForm(e) {
         data.id = generateUUID();
         data.created_at = new Date().toISOString();
         ENCUESTAS.push(data);
-        alert('Encuesta creada (demo).');
+        showSnackbar('Encuesta creada (demo).', 'success');
         closeModal();
         renderEncuestas();
       } else {
         console.log('Form data:', data);
-        alert('Guardado (demo). En modo real se enviaría a Supabase.');
+        showSnackbar('Guardado (demo). En modo real se enviaría a Supabase.', 'success');
         closeModal();
       }
     } else {
       if (!table) {
-        alert('Error: no se especificó la tabla.');
+        showSnackbar('Error: no se especificó la tabla.', 'error');
         hideLoading();
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Guardar'; }
         return;
@@ -111,13 +111,13 @@ function handleForm(e) {
             var rows = asistentesIds.map(function(pid) { return { asamblea_id: asambleaId, parcela_id: pid }; });
             supabaseClient.from('asamblea_asistentes').insert(rows).then(function() {
               hideLoading();
-              alert('Guardado correctamente.');
+              showSnackbar('Guardado correctamente.', 'success');
               closeModal();
               reloadTab(getCurrentTab());
             });
           } else {
             hideLoading();
-            alert('Guardado correctamente.');
+            showSnackbar('Guardado correctamente.', 'success');
             closeModal();
             reloadTab(getCurrentTab());
           }
@@ -135,7 +135,7 @@ function handleForm(e) {
         supabaseInsert(table, data).then(function(result) {
           hideLoading();
           if (result) {
-            alert('Encuesta creada.');
+            showSnackbar('Encuesta creada.', 'success');
             closeModal();
             reloadTab(getCurrentTab());
           } else {
@@ -146,7 +146,7 @@ function handleForm(e) {
         supabaseInsert(table, data).then(function(result) {
           hideLoading();
           if (result) {
-            alert('Guardado correctamente.');
+            showSnackbar('Guardado correctamente.', 'success');
             closeModal();
             reloadTab(getCurrentTab());
           } else {
@@ -293,7 +293,13 @@ function formProveedores() {
 
 function formAsambleas() {
   if (PARCELAS.length === 0) {
-    loadJson('PARCELAS').then(function() { formAsambleas(); });
+    loadJson('PARCELAS').then(function() {
+      if (PARCELAS.length === 0) {
+        showSnackbar('Primero debes configurar las parcelas', 'warning');
+        return;
+      }
+      formAsambleas();
+    });
     return;
   }
   var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
