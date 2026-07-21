@@ -122,11 +122,15 @@ function openModalCategoriaDoc() {
 }
 
 function removeCategoriaDoc(i) {
-  var cats = CONFIG.categorias_documentos || [];
-  cats.splice(i, 1);
-  CONFIG.categorias_documentos = cats;
-  renderCategoriasDocs();
-  saveConfig('categorias_documentos', cats).then(function(ok) { if (ok) { showSnackbar('Categoría eliminada.', 'success'); } });
+  var cat = (CONFIG.categorias_documentos || [])[i];
+  if (!cat) return;
+  showConfirm('¿Eliminar categoría "' + cat + '"?', function() {
+    var cats = CONFIG.categorias_documentos || [];
+    cats.splice(i, 1);
+    CONFIG.categorias_documentos = cats;
+    renderCategoriasDocs();
+    saveConfig('categorias_documentos', cats).then(function(ok) { if (ok) { showSnackbar('Categoría eliminada.', 'success'); } });
+  });
 }
 
 async function saveCategoriasDocs() {
@@ -158,11 +162,15 @@ function openModalRubroProveedor() {
 }
 
 function removeRubroProveedor(i) {
-  var rubros = CONFIG.rubros_proveedores || [];
-  rubros.splice(i, 1);
-  CONFIG.rubros_proveedores = rubros;
-  renderRubrosProveedores();
-  saveConfig('rubros_proveedores', rubros).then(function(ok) { if (ok) { showSnackbar('Rubro eliminado.', 'success'); } });
+  var rubro = (CONFIG.rubros_proveedores || [])[i];
+  if (!rubro) return;
+  showConfirm('¿Eliminar rubro "' + rubro + '"?', function() {
+    var rubros = CONFIG.rubros_proveedores || [];
+    rubros.splice(i, 1);
+    CONFIG.rubros_proveedores = rubros;
+    renderRubrosProveedores();
+    saveConfig('rubros_proveedores', rubros).then(function(ok) { if (ok) { showSnackbar('Rubro eliminado.', 'success'); } });
+  });
 }
 
 async function saveRubrosProveedores() {
@@ -194,11 +202,15 @@ function openModalConceptoFlujo() {
 }
 
 function removeConceptoFlujo(i) {
-  var conceptos = CONFIG.conceptos_flujo || [];
-  conceptos.splice(i, 1);
-  CONFIG.conceptos_flujo = conceptos;
-  renderConceptosFlujo();
-  saveConfig('conceptos_flujo', conceptos).then(function(ok) { if (ok) { showSnackbar('Concepto eliminado.', 'success'); } });
+  var concepto = (CONFIG.conceptos_flujo || [])[i];
+  if (!concepto) return;
+  showConfirm('¿Eliminar concepto "' + concepto + '"?', function() {
+    var conceptos = CONFIG.conceptos_flujo || [];
+    conceptos.splice(i, 1);
+    CONFIG.conceptos_flujo = conceptos;
+    renderConceptosFlujo();
+    saveConfig('conceptos_flujo', conceptos).then(function(ok) { if (ok) { showSnackbar('Concepto eliminado.', 'success'); } });
+  });
 }
 
 async function saveConceptosFlujo() {
