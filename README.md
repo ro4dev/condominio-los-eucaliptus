@@ -108,6 +108,18 @@ Crear los siguientes buckets en **Supabase → Storage**, todos públicos:
 | `ingresos_egresos` | Comprobantes de ingresos/egresos |
 | `documentos` | Archivos adjuntos de documentos |
 
+Luego ejecutar en **Supabase → SQL Editor** para habilitar subida/lectura:
+
+```sql
+CREATE POLICY "auth upload" ON storage.objects
+  FOR INSERT TO authenticated
+  WITH CHECK (bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos'));
+
+CREATE POLICY "auth select" ON storage.objects
+  FOR SELECT TO authenticated
+  USING (bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos'));
+```
+
 ### Modo Demo
 
 Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON local, en producción envía a Supabase.
