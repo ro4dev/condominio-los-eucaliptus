@@ -119,17 +119,18 @@ var showOldNoticias = false;
 function renderNoticias() {
   var list = document.getElementById('noticiasList');
   var hoy = new Date();
+  var hoyStr = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0') + '-' + String(hoy.getDate()).padStart(2, '0');
   var activas = NOTICIAS.filter(function(n) {
     if (!n.fecha_hasta) {
       return true;
     }
-    return new Date(n.fecha_hasta) >= hoy;
+    return n.fecha_hasta >= hoyStr;
   });
   var vencidas = NOTICIAS.filter(function(n) {
     if (!n.fecha_hasta) {
       return false;
     }
-    return new Date(n.fecha_hasta) < hoy;
+    return n.fecha_hasta < hoyStr;
   });
 
   activas.sort(function(a, b) {
