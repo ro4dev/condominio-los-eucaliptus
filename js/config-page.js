@@ -55,8 +55,7 @@ async function saveMontos() {
 // --- LIST CHIP HELPER ---
 function renderChipList(items, removeFn, usedItems) {
   if (!items.length) {
-    return '<span style="color:var(--text-muted);
-    font-size:0.85rem">Sin elementos</span>';
+    return '<span style="color:var(--text-muted);font-size:0.85rem">Sin elementos</span>';
   }
   var used = usedItems || [];
   return '<div style="display:flex;flex-wrap:wrap;gap:0.5rem">' + items.map(function(item, i) {
