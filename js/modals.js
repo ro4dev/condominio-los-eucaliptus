@@ -275,12 +275,18 @@ function formNoticias() {
 }
 
 function formFlujo() {
+  var conceptos = CONFIG.conceptos_flujo || [];
+  if (!conceptos.length) {
+    showSnackbar('Primero debes configurar los conceptos en la pestaña Configuración.', 'warning');
+    return;
+  }
+  var opts = conceptos.map(function(c) { return '<option value="' + c + '">' + c + '</option>'; }).join('');
   openModal('Agregar Movimiento', '<form data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Ingreso</option><option>Egreso</option></select></div>' +
       '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required></div>' +
     '</div>' +
-    '<div class="form-group"><label>Concepto *</label><input type="text" name="concepto" placeholder="Ej: Pago de gestión, Luz comunal" required></div>' +
+    '<div class="form-group"><label>Concepto *</label><select name="concepto" required>' + opts + '</select></div>' +
     '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del movimiento (opcional)"></textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
