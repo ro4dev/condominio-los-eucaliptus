@@ -50,6 +50,10 @@ function getInitials(name) {
   return name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
 }
 
+function nl2br(text) {
+  return (text || '').replace(/\n/g, '<br>');
+}
+
 function showSnackbar(message, type) {
   type = type || 'info';
   var el = document.getElementById('snackbar');

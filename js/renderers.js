@@ -162,7 +162,7 @@ function renderNoticiaCard(n, old) {
   return '<div class="news-card" style="margin-bottom:1rem;' + style + '">' +
     '<h4>' + (n.titulo || '') + '</h4>' +
     '<div class="dates">Publicado: ' + fecha + (hasta ? ' · Vigente hasta: ' + hasta : '') + '</div>' +
-    '<div class="desc">' + (n.descripcion || '') + '</div>' +
+    '<div class="desc">' + nl2br(n.descripcion) + '</div>' +
     (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
     '</div>';
 }
@@ -216,7 +216,7 @@ function renderFlujo() {
         '<div style="font-weight:500">' + f.concepto + '</div>' +
         (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
       '</div>' +
-      (f.descripcion ? '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.4rem">' + f.descripcion + '</div>' : '') +
+      (f.descripcion ? '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.4rem">' + nl2br(f.descripcion) + '</div>' : '') +
       '</div>';
   }).join('');
 }
@@ -274,7 +274,7 @@ function renderReclamos() {
         '<span class="reclamo-fecha">' + formatDate(r.fecha || r.created_at) + '</span>' +
       '</div>' +
       '<div class="reclamo-title">' + r.asunto + '</div>' +
-      '<div class="reclamo-desc">' + r.descripcion + '</div>' +
+      '<div class="reclamo-desc">' + nl2br(r.descripcion) + '</div>' +
       (r.parcela_id ? '<div class="reclamo-parcela">' + parcelName(r.parcela_id) + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
       '</div>';
   }).join('');
@@ -332,8 +332,8 @@ function renderAsambleas() {
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
         '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
       '</div>' +
-      '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Temario:</strong> ' + (a.temario || '') + '</div>' +
-      (a.acuerdos ? '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + a.acuerdos + '</div>' : '') +
+      '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Temario:</strong> ' + nl2br(a.temario) + '</div>' +
+      (a.acuerdos ? '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + nl2br(a.acuerdos) + '</div>' : '') +
       (asistentes ? '<div style="margin-top:0.4rem"><strong style="font-size:0.85rem">Asistentes:</strong><div style="margin-top:0.3rem">' + asistentes + '</div></div>' : '') +
       '</div>';
   }).join('');
@@ -459,7 +459,7 @@ function renderEncuestas() {
         (infoExtra ? '<span>' + infoExtra + '</span>' : '') +
       '</div>' +
       '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + e.titulo + '</div>' +
-      (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + e.descripcion + '</div>' : '') +
+      (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + nl2br(e.descripcion) + '</div>' : '') +
       '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">Total: ' + d.total + ' votos</div>' +
       opcionesHtml + accion +
     '</div>';
