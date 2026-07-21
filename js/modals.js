@@ -86,6 +86,9 @@ function handleForm(e) {
     submitError();
     return;
   }
+  if (!data.parcela_id) {
+    delete data.parcela_id;
+  }
 
   var fileInput = form.querySelector('input[type="file"]');
   var filePromise = Promise.resolve(null);
