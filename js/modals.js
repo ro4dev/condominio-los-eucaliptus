@@ -78,6 +78,14 @@ function handleForm(e) {
   if (table === 'flujo' && currentUser && !data.registrado_por) {
     data.registrado_por = currentUser.email;
   }
+  if (table === 'proveedores' && data.web_instagram && data.web_instagram.indexOf('http') !== 0) {
+    data.web_instagram = 'https://' + data.web_instagram;
+  }
+  if (table === 'proveedores' && data.web_instagram && /[\s,]/.test(data.web_instagram)) {
+    showSnackbar('El campo Web/Instagram contiene caracteres inválidos (espacios, comas).', 'warning');
+    submitError();
+    return;
+  }
 
   var fileInput = form.querySelector('input[type="file"]');
   var filePromise = Promise.resolve(null);
