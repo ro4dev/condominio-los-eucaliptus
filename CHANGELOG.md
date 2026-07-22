@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Cards: bordes izquierdos en Parcelas, Documentos y Proveedores
+- **Style**: Parcelas borde lila `#8b5cf6`, Documentos azul `#3b82f6`, Proveedores ámbar `#f59e0b`
+
 ### 21/07/2026 - Modal footer customizable: botones en footer, no duplicados
 - **Changed**: `openModal(title, html, footerHtml)` — footer configurable
 - **Changed**: Todos los forms mueven Cancelar/Guardar al footer vía `form="modalForm"`
