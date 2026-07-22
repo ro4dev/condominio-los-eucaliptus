@@ -13,7 +13,7 @@ function closeModal() {
 function showConfirm(message, onConfirm, confirmText) {
   confirmText = confirmText || 'Eliminar';
   document.getElementById('modalTitle').textContent = 'Confirmar';
-  document.getElementById('modalBody').innerHTML = '<div style="margin-bottom:1rem;line-height:1.5">' + message + '</div>';
+  document.getElementById('modalBody').innerHTML = '<div style="line-height:1.5">' + message + '</div>';
   document.getElementById('modalFooter').innerHTML =
     '<button type="button" class="btn btn-secondary" onclick="closeModal()" style="flex:1">Cancelar</button>' +
     '<button type="button" class="btn btn-primary" onclick="confirmAction()" style="flex:1;background:#b91c1c;border-color:#b91c1c">' + confirmText + '</button>';

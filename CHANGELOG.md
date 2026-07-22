@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Modal: sin cierre al click fuera; menos espacio en confirm
+- **Changed**: Se desactiva el cierre del modal al hacer click fuera (ya hay botones Cerrar/Cancelar)
+- **Style**: Sacado `margin-bottom` extra en mensaje de confirmación
+
 ### 21/07/2026 - Parcelas: editar y agregar propietario desde card
 - **Feat**: Ícono ✏️ para editar parcela (formParcelas soporta edición)
 - **Feat**: Botón `+` en card para agregar propietario con parcela pre-seleccionada
