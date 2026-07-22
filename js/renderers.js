@@ -493,6 +493,8 @@ function renderEncuestas() {
       var remaining = getTimeRemaining(e.fecha_termino);
       if (remaining && !d.cerrada) {
         infoExtra = 'Termina en: ' + remaining;
+      } else if (d.cerrada) {
+        infoExtra = 'Terminada: ' + formatDate(e.fecha_termino);
       } else {
         infoExtra = 'Termina: ' + formatDate(e.fecha_termino);
       }
