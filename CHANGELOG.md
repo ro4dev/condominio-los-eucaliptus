@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Parcelas: botón mover a Config; Asambleas: Temario/Acuerdos como título
+- **Removed**: Botón "+ Agregar Parcela" de pestaña Parcelas (se configura desde Configuración)
+- **Changed**: "Temario:" y "Acuerdos:" en cards de asambleas ahora son título con contenido abajo
+
 ### 21/07/2026 - Encuestas: fin de día en fecha_termino y tiempo restante
 - **Fixed**: `fecha_termino` se compara contra end of day (23:59:59) en hora local, no UTC
 - **Feat**: Muestra tiempo restante ("2h 30m") si la encuesta cierra hoy

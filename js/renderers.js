@@ -395,8 +395,9 @@ function renderAsambleas() {
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
         '</div>' +
       '</div>' +
-      '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Temario:</strong> ' + nl2br(a.temario) + '</div>' +
-      (a.acuerdos ? '<div style="font-size:0.85rem;margin-bottom:0.4rem"><strong>Acuerdos:</strong> ' + nl2br(a.acuerdos) + '</div>' : '') +
+      '<div style="font-size:0.85rem;font-weight:600;margin-bottom:0.2rem">Temario</div>' +
+      '<div style="font-size:0.85rem;margin-bottom:0.6rem">' + nl2br(a.temario) + '</div>' +
+      (a.acuerdos ? '<div style="font-size:0.85rem;font-weight:600;margin-bottom:0.2rem">Acuerdos</div><div style="font-size:0.85rem;margin-bottom:0.4rem">' + nl2br(a.acuerdos) + '</div>' : '') +
       (asistentes ? '<div style="margin-top:0.4rem"><strong style="font-size:0.85rem">Asistentes:</strong><div style="margin-top:0.3rem">' + asistentes + '</div></div>' : '') +
       '</div>';
   }).join('');
