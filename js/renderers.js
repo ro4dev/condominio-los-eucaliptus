@@ -423,7 +423,7 @@ function getOpciones(encuesta) {
 
 function renderEncuestas() {
   var container = document.getElementById('encuestasList');
-  var today = new Date().toISOString().slice(0, 10);
+  var ahora = new Date();
 
   var data = ENCUESTAS.map(function(e) {
     var votos = ENCUESTAS_VOTOS.filter(function(v) { return v.encuesta_id === e.id; });
@@ -432,7 +432,12 @@ function renderEncuestas() {
     opciones.forEach(function(op) { conteo[op] = 0; });
     votos.forEach(function(v) { if (conteo[v.seleccion] !== undefined) conteo[v.seleccion]++; });
     var total = votos.length;
-    var cerrada = e.fecha_termino && e.fecha_termino < today;
+    var cerrada = false;
+    if (e.fecha_termino) {
+      var f = e.fecha_termino.split('T')[0].split('-');
+      var fin = new Date(+f[0], +f[1] - 1, +f[2], 23, 59, 59);
+      cerrada = ahora > fin;
+    }
 
     var miVoto = null;
     if (currentUser) {
@@ -479,7 +484,12 @@ function renderEncuestas() {
 
     var infoExtra = '';
     if (e.fecha_termino) {
-      infoExtra = 'Termina: ' + formatDate(e.fecha_termino);
+      var remaining = getTimeRemaining(e.fecha_termino);
+      if (remaining && !d.cerrada) {
+        infoExtra = 'Termina en: ' + remaining;
+      } else {
+        infoExtra = 'Termina: ' + formatDate(e.fecha_termino);
+      }
     }
 
     var fechaPub = formatDate(e.fecha || e.created_at);

@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Encuestas: fin de día en fecha_termino y tiempo restante
+- **Fixed**: `fecha_termino` se compara contra end of day (23:59:59) en hora local, no UTC
+- **Feat**: Muestra tiempo restante ("2h 30m") si la encuesta cierra hoy
+- **Changed**: `getTimeRemaining()` extraída a `utils.js` para reuso
+
 ### 19/07/2026 - Corrección auth: usar app_metadata
 - **Changed**: `checkAdmin()` lee `currentUser.app_metadata.role` en vez de `user_metadata`
 - **Security**: Role admin se almacena en `raw_app_meta_data` (no user-editable)
