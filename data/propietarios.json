@@ -1,5 +1,6 @@
 [
   {
+    "id": "p001-0000-0000-0000-000000000001",
     "nombre_completo": "Juan Pérez",
     "rut": "30123456",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -8,6 +9,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000002",
     "nombre_completo": "María García",
     "rut": "27654321",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -16,6 +18,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000003",
     "nombre_completo": "María López",
     "rut": "28765432",
     "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
@@ -24,6 +27,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000004",
     "nombre_completo": "Carlos Silva",
     "rut": "32987654",
     "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
@@ -32,6 +36,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000005",
     "nombre_completo": "Laura Díaz",
     "rut": "31234567",
     "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
@@ -40,6 +45,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000006",
     "nombre_completo": "Ana Martínez",
     "rut": "29876543",
     "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
@@ -48,6 +54,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000007",
     "nombre_completo": "Pedro Rojas",
     "rut": "33456789",
     "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
@@ -56,6 +63,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000008",
     "nombre_completo": "Laura Torres",
     "rut": "26543210",
     "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
@@ -64,6 +72,7 @@
     "tipo": "Arrendataria"
   },
   {
+    "id": "p001-0000-0000-0000-000000000009",
     "nombre_completo": "Diego Ramírez",
     "rut": "34567890",
     "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
@@ -72,6 +81,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000010",
     "nombre_completo": "Sofía Herrera",
     "rut": "25432109",
     "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
@@ -80,6 +90,7 @@
     "tipo": "Propietaria"
   },
   {
+    "id": "p001-0000-0000-0000-000000000011",
     "nombre_completo": "Miguel Ángel Ruiz",
     "rut": "35678901",
     "parcela_id": "781f0a38-011d-4340-b211-6ec61fa714ba",
@@ -88,6 +99,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000012",
     "nombre_completo": "Valentina Muñoz",
     "rut": "24321098",
     "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
@@ -96,6 +108,7 @@
     "tipo": "Propietaria"
   },
   {
+    "id": "p001-0000-0000-0000-000000000013",
     "nombre_completo": "Santiago Vega",
     "rut": "36789012",
     "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
@@ -104,6 +117,7 @@
     "tipo": "Arrendatario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000014",
     "nombre_completo": "Isabel Guerrero",
     "rut": "30123456",
     "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
@@ -112,6 +126,7 @@
     "tipo": "Propietaria"
   },
   {
+    "id": "p001-0000-0000-0000-000000000015",
     "nombre_completo": "Roberto Sánchez",
     "rut": "32987654",
     "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
@@ -120,6 +135,7 @@
     "tipo": "Propietario"
   },
   {
+    "id": "p001-0000-0000-0000-000000000016",
     "nombre_completo": "Pablo Castillo",
     "rut": "31234567",
     "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",

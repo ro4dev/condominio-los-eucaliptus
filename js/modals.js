@@ -168,9 +168,16 @@ function handleForm(e) {
         afterSave();
         reloadTab(getCurrentTab());
       } else {
-        console.log('Form data:', data);
-        showSnackbar('Guardado (demo). En modo real se enviaría a Supabase.', 'success');
-        closeModal();
+        var arrName = tableToArray(table);
+        if (arrName) {
+          data.id = generateUUID();
+          if (table === 'noticias' || table === 'documentos') {
+            data.fecha = data.fecha || new Date().toISOString().slice(0, 10);
+          }
+          window[arrName].push(data);
+        }
+        afterSave();
+        reloadTab(getCurrentTab());
       }
     } else {
       if (!table) {
@@ -261,7 +268,9 @@ function tableToArray(table) {
     documentos: 'DOCUMENTOS',
     proveedores: 'PROVEEDORES',
     asambleas: 'ASAMBLEAS',
-    encuestas: 'ENCUESTAS'
+    encuestas: 'ENCUESTAS',
+    parcelas: 'PARCELAS',
+    propietarios: 'PROPIETARIOS'
   };
   return map[table] || null;
 }
@@ -328,27 +337,36 @@ function formParcelas(data) {
   '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
-function formPropietarios(parcelaId) {
+function formPropietarios(opt) {
+  var isEdit = opt && typeof opt === 'object';
+  var data = isEdit ? opt : null;
+  var parcelaId = isEdit ? (data.parcela_id || null) : (opt || null);
   var isFromParcela = !!parcelaId;
   var parcelas = PARCELAS.map(function(p) {
     var sel = parcelaId === p.id ? ' selected' : '';
     return '<option value="' + p.id + '"' + sel + '>' + p.numero + '</option>';
   }).join('');
-  openModal('Agregar Propietario', '<form id="modalForm" data-table="propietarios" onsubmit="handleForm(event)">' +
-    '<div class="form-group"><label>Nombre completo *</label><input type="text" name="nombre_completo" placeholder="Juan Pérez" required></div>' +
+  openModal(isEdit ? 'Editar Propietario' : 'Agregar Propietario',
+    '<form id="modalForm" data-table="propietarios" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-group"><label>Nombre completo *</label><input type="text" name="nombre_completo" placeholder="Juan Pérez" required' + (isEdit ? ' value="' + escHtml(data.nombre_completo) + '"' : '') + '></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>RUT</label><input type="text" name="rut" placeholder="12.345.678-9"></div>' +
+      '<div class="form-group"><label>RUT</label><input type="text" name="rut" placeholder="12.345.678-9"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></div>' +
       (isFromParcela
         ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><label>Parcela</label><div style="padding:0.6rem 0.8rem;font-size:0.85rem;color:var(--text-2);background:var(--skeleton-1);border-radius:8px">' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</div></div>'
         : '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required>' + parcelas + '</select></div>') +
     '</div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"></div>' +
-      '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"></div>' +
+      '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></div>' +
+      '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></div>' +
     '</div>' +
-    '<div class="form-group"><label>Tipo</label><select name="tipo"><option>Propietario</option><option>Inquilino</option><option>Administrador</option></select></div>' +
+    '<div class="form-group"><label>Tipo</label><select name="tipo">' +
+      '<option value="Propietario"' + (isEdit && data.tipo === 'Propietario' ? ' selected' : '') + '>Propietario</option>' +
+      '<option value="Inquilino"' + (isEdit && data.tipo === 'Inquilino' ? ' selected' : '') + '>Inquilino</option>' +
+      '<option value="Administrador"' + (isEdit && data.tipo === 'Administrador' ? ' selected' : '') + '>Administrador</option>' +
+    '</select></div>' +
   '</form>',
-  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
 function formNoticias(data) {

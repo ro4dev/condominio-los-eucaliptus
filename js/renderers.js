@@ -119,10 +119,12 @@ function renderParcelas() {
     var propietariosHtml = propietarios.map(function(prop, j) {
       var propColor = colorClasses[(i + j) % 4];
       var nombre = prop.nombre_completo || '';
-      return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid #f3f4f6">' +
+      return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border-light)">' +
         '<div style="display:flex;align-items:center;gap:0.6rem">' +
           '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
-          '<div><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>' +
+          '<div style="flex:1"><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>' +
+          (IS_ADMIN ? '<button onclick="editPropietario(\'' + prop.id + '\')" title="Editar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#9998;</button>' +
+            '<button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#128465;</button>' : '') +
         '</div>' +
         '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
           (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:#2563eb;text-decoration:none">' + prop.telefono + '</a></div>' : '') +
@@ -597,6 +599,11 @@ async function votarEncuesta(encuestaId, seleccion) {
   renderEncuestas();
 }
 // Edit helpers
+
+function editPropietario(id) {
+  var data = PROPIETARIOS.find(function(p) { return p.id === id; });
+  if (data) formPropietarios(data);
+}
 
 function editParcela(id) {
   var data = PARCELAS.find(function(p) { return p.id === id; });

@@ -2,6 +2,13 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Propietarios: editar/eliminar desde card; demo mode fixes
+- **Feat**: Íconos ✏️ y 🗑️ en cada propietario dentro del card de parcela
+- **Feat**: `formPropietarios` soporta edición (recibe objeto data)
+- **Fixed**: Demo mode ahora guarda nuevos items en array (no solo log)
+- **Fixed**: `tableToArray` incluye `propietarios` y `parcelas`
+- **Changed**: Propietarios demo JSON ahora incluye `id`
+
 ### 21/07/2026 - Modal: sin cierre al click fuera; menos espacio en confirm
 - **Changed**: Se desactiva el cierre del modal al hacer click fuera (ya hay botones Cerrar/Cancelar)
 - **Style**: Sacado `margin-bottom` extra en mensaje de confirmación
