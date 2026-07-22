@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Modal footer customizable: botones en footer, no duplicados
+- **Changed**: `openModal(title, html, footerHtml)` — footer configurable
+- **Changed**: Todos los forms mueven Cancelar/Guardar al footer vía `form="modalForm"`
+- **Changed**: `showConfirm` mueve botones al footer (body solo mensaje)
+- **Style**: Footer buttons con `gap` y `flex: 1` (ancho completo)
+
 ### 21/07/2026 - Modal: responsive width, scrollbar estilizado
 - **Changed**: Modal mide 500px en mobile, 600px en desktop (≥700px)
 - **Style**: Scrollbar fino con `scrollbar-width: thin` y thumb `var(--text-muted)`

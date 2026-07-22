@@ -63,7 +63,8 @@ tr:hover td { background: var(--surface-hover); }
 .modal-body::-webkit-scrollbar { width: 5px; }
 .modal-body::-webkit-scrollbar-track { background: transparent; }
 .modal-body::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 3px; }
-.modal-footer { flex-shrink: 0; padding: 0.8rem 1.2rem; border-top: 1px solid var(--border); display: flex; justify-content: center; }
+.modal-footer { flex-shrink: 0; padding: 0.8rem 1.2rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; }
+.modal-footer .btn { flex: 1; text-align: center; }
 .form-group { margin-bottom: 1rem; }
 .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-2); margin-bottom: 0.3rem; }
 .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; font-family: inherit; box-sizing: border-box; min-height: 2.75rem; background: var(--bg-card); color: var(--text-2); }

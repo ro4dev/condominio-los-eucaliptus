@@ -1,6 +1,7 @@
-function openModal(title, html) {
+function openModal(title, html, footerHtml) {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalFooter').innerHTML = footerHtml !== undefined ? footerHtml : '<button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>';
   document.getElementById('modalOverlay').classList.add('active');
 }
 
@@ -12,12 +13,10 @@ function closeModal() {
 function showConfirm(message, onConfirm, confirmText) {
   confirmText = confirmText || 'Eliminar';
   document.getElementById('modalTitle').textContent = 'Confirmar';
-  document.getElementById('modalBody').innerHTML =
-    '<div style="margin-bottom:1rem;line-height:1.5">' + message + '</div>' +
-    '<div class="form-actions" style="display:flex;gap:0.5rem">' +
-      '<button type="button" class="btn btn-secondary" onclick="closeModal()" style="flex:1">Cancelar</button>' +
-      '<button type="button" class="btn btn-primary" onclick="confirmAction()" style="flex:1;background:#b91c1c;border-color:#b91c1c">' + confirmText + '</button>' +
-    '</div>';
+  document.getElementById('modalBody').innerHTML = '<div style="margin-bottom:1rem;line-height:1.5">' + message + '</div>';
+  document.getElementById('modalFooter').innerHTML =
+    '<button type="button" class="btn btn-secondary" onclick="closeModal()" style="flex:1">Cancelar</button>' +
+    '<button type="button" class="btn btn-primary" onclick="confirmAction()" style="flex:1;background:#b91c1c;border-color:#b91c1c">' + confirmText + '</button>';
   document.getElementById('modalOverlay').classList.add('active');
   window._confirmCallback = onConfirm;
 }
@@ -281,7 +280,7 @@ function formGastos() {
     return;
   }
   var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Gasto', '<form data-table="gastos" onsubmit="handleForm(event)">' +
+  openModal('Agregar Gasto', '<form id="modalForm" data-table="gastos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Periodo *</label><input type="month" name="periodo" required id="gastoPeriodo"></div>' +
       '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required id="gastoParcela">' + parcelas + '</select></div>' +
@@ -289,8 +288,8 @@ function formGastos() {
     '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)"></textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
   document.getElementById('gastoPeriodo').addEventListener('change', updateGastoParcelas);
 }
 
@@ -309,7 +308,7 @@ function updateGastoParcelas() {
 }
 
 function formParcelas() {
-  openModal('Agregar Parcela', '<form data-table="parcelas" onsubmit="handleForm(event)">' +
+  openModal('Agregar Parcela', '<form id="modalForm" data-table="parcelas" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Número *</label><input type="text" name="numero" placeholder="Ej: 1, 2A, 15" required></div>' +
       '<div class="form-group"><label>Rol</label><input type="text" name="rol" placeholder="Rol de la propiedad"></div>' +
@@ -318,13 +317,13 @@ function formParcelas() {
       '<div class="form-group"><label>Metros² *</label><input type="number" name="metros" min="0" placeholder="0" required></div>' +
       '<div class="form-group"><label>Estado</label><select name="estado"><option>Habitada</option><option>Desocupada</option><option>En construcción</option></select></div>' +
     '</div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
 }
 
 function formPropietarios() {
   var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Propietario', '<form data-table="propietarios" onsubmit="handleForm(event)">' +
+  openModal('Agregar Propietario', '<form id="modalForm" data-table="propietarios" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Nombre completo *</label><input type="text" name="nombre_completo" placeholder="Juan Pérez" required></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>RUT</label><input type="text" name="rut" placeholder="12.345.678-9"></div>' +
@@ -335,20 +334,20 @@ function formPropietarios() {
       '<div class="form-group"><label>Email</label><input type="email" name="email" placeholder="correo@ejemplo.com"></div>' +
     '</div>' +
     '<div class="form-group"><label>Tipo</label><select name="tipo"><option>Propietario</option><option>Inquilino</option><option>Administrador</option></select></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
 }
 
 function formNoticias(data) {
   var isEdit = !!data;
   openModal(isEdit ? 'Editar Noticia' : 'Agregar Noticia',
-    '<form data-table="noticias" onsubmit="handleForm(event)">' +
+    '<form id="modalForm" data-table="noticias" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Ej: Corte de agua programado" required' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></div>' +
     '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required>' + (isEdit ? escHtml(data.descripcion) : '') + '</textarea></div>' +
     '<div class="form-group"><label>Vigente hasta</label><input type="date" name="fecha_hasta"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
 function formFlujo(data) {
@@ -360,7 +359,7 @@ function formFlujo(data) {
   var isEdit = !!data;
   var opts = conceptos.map(function(c) { return '<option value="' + c + '"' + (isEdit && data.concepto === c ? ' selected' : '') + '>' + c + '</option>'; }).join('');
   openModal(isEdit ? 'Editar Movimiento' : 'Agregar Movimiento',
-    '<form data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
+    '<form id="modalForm" data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '>Ingreso</option><option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '>Egreso</option></select></div>' +
@@ -371,8 +370,8 @@ function formFlujo(data) {
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del movimiento (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
     (isEdit && data.comprobante ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.comprobante + '" target="_blank">ver</a></div>' : '') +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
 function formDocumentos(data) {
@@ -380,28 +379,28 @@ function formDocumentos(data) {
   var cats = (CONFIG.categorias_documentos && CONFIG.categorias_documentos.length) ? CONFIG.categorias_documentos : ['Estatuto', 'Actas', 'Contratos', 'Seguros', 'Planos'];
   var catOpts = cats.map(function(c) { return '<option value="' + c + '"' + (isEdit && data.categoria === c ? ' selected' : '') + '>' + c + '</option>'; }).join('');
   openModal(isEdit ? 'Editar Documento' : 'Agregar Documento',
-    '<form data-table="documentos" data-bucket="documentos" onsubmit="handleForm(event)">' +
+    '<form id="modalForm" data-table="documentos" data-bucket="documentos" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Nombre *</label><input type="text" name="nombre" placeholder="Ej: Acta reunión marzo 2026" required' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></div>' +
     '<div class="form-group"><label>Categoría *</label><select name="categoria" required>' + catOpts + '</select></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Resumen del documento (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
     (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
 function formReclamos() {
   var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Reclamo/Sugerencia', '<form data-table="reclamos" onsubmit="handleForm(event)">' +
+  openModal('Agregar Reclamo/Sugerencia', '<form id="modalForm" data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Tipo *</label><select name="tipo" required><option>Reclamo</option><option>Sugerencia</option></select></div>' +
       '<div class="form-group"><label>Parcela</label><select name="parcela_id"><option value="">Anónimo</option>' + parcelas + '</select></div>' +
     '</div>' +
     '<div class="form-group"><label>Asunto *</label><input type="text" name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required></div>' +
     '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa el problema o sugerencia con el mayor detalle posible" required></textarea></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">Guardar</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
 }
 
 function formProveedores(data) {
@@ -409,7 +408,7 @@ function formProveedores(data) {
   var rubros = CONFIG.rubros_proveedores && CONFIG.rubros_proveedores.length ? CONFIG.rubros_proveedores : ['Jardinería', 'Plomería', 'Electricidad', 'Albañilería', 'Pintura', 'Limpieza', 'Seguridad', 'Carpintería', 'Herrería', 'Tecnología', 'Otro'];
   var rubroOpts = rubros.map(function(r) { return '<option value="' + r + '"' + (isEdit && data.rubro === r ? ' selected' : '') + '>' + r + '</option>'; }).join('');
   openModal(isEdit ? 'Editar Proveedor' : 'Agregar Proveedor',
-    '<form data-table="proveedores" onsubmit="handleForm(event)">' +
+    '<form id="modalForm" data-table="proveedores" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
       '<div class="form-group"><label>Rubro *</label><select name="rubro" required><option value="">Seleccionar...</option>' + rubroOpts + '</select></div>' +
@@ -422,8 +421,8 @@ function formProveedores(data) {
     '</div>' +
     '<div class="form-group"><label>Web/Instagram</label><input type="text" name="web_instagram" placeholder="https://..."' + (isEdit && data.web_instagram ? ' value="' + escHtml(data.web_instagram) + '"' : '') + '></div>' +
     '<div class="form-group"><label>Observaciones</label><textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)">' + (isEdit ? escHtml(data.observaciones || '') : '') + '</textarea></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
 function formAsambleas(data) {
@@ -443,7 +442,7 @@ function formAsambleas(data) {
     return '<option value="' + p.id + '"' + (selected ? ' selected' : '') + '>' + p.numero + '</option>';
   }).join('');
   openModal(isEdit ? 'Editar Asamblea' : 'Agregar Asamblea',
-    '<form data-table="asambleas" onsubmit="handleForm(event)">' +
+    '<form id="modalForm" data-table="asambleas" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
       '<div class="form-group"><label>Fecha *</label><input type="date" name="fecha" required' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></div>' +
@@ -452,8 +451,8 @@ function formAsambleas(data) {
     '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required>' + (isEdit ? escHtml(data.temario) : '') + '</textarea></div>' +
     '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)">' + (isEdit ? escHtml(data.acuerdos || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:#2563eb;font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem">' + parcelas + '</select></div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
 function formEncuestas(data) {
@@ -477,7 +476,7 @@ function formEncuestas(data) {
       '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>';
   }
   openModal(isEdit ? 'Editar Encuesta' : 'Nueva Encuesta',
-    '<form data-table="encuestas" onsubmit="handleForm(event)">' +
+    '<form id="modalForm" data-table="encuestas" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Título *</label><input type="text" name="titulo" placeholder="Título de la propuesta" required' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
@@ -486,8 +485,8 @@ function formEncuestas(data) {
       '<div class="form-group"><label>Quorum (mín. votos)</label><input type="number" name="quorum" min="0" placeholder="Sin límite"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></div>' +
     '</div>' +
     '<div class="form-group">' + alternativasHtml + '</div>' +
-    '<div class="form-actions"><button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary">' + (isEdit ? 'Actualizar' : 'Crear') + '</button></div>' +
-  '</form>');
+  '</form>',
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Crear') + '</button>');
 }
 
 function toggleEncuestaAlternativas() {
