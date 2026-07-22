@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Modal: header fijo, scroll interno, botón Cerrar; fix editar archivo
+- **Changed**: Modal con flex column, header y footer fijos, body scrollable
+- **Feat**: Botón "Cerrar" centrado en footer del modal
+- **Style**: Scrollbar fino con `scrollbar-width: thin`
+- **Fixed**: `handleForm` no sobreescribe archivo si no se selecciona uno nuevo
+
 ### 21/07/2026 - Parcelas: botón mover a Config; Asambleas: Temario/Acuerdos como título
 - **Removed**: Botón "+ Agregar Parcela" de pestaña Parcelas (se configura desde Configuración)
 - **Changed**: "Temario:" y "Acuerdos:" en cards de asambleas ahora son título con contenido abajo

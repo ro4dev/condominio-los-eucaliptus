@@ -65,6 +65,9 @@ function handleForm(e) {
   showLoading();
   var data = {};
   new FormData(form).forEach(function(v, k) { data[k] = v; });
+  form.querySelectorAll('input[type="file"]').forEach(function(inp) {
+    if (inp.files.length === 0) delete data[inp.name];
+  });
   form.querySelectorAll('select[multiple]').forEach(function(sel) {
     data[sel.name] = Array.from(sel.selectedOptions).map(function(o) { return o.value; }).join(', ');
   });
