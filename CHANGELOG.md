@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Modal: responsive width, scrollbar estilizado
+- **Changed**: Modal mide 500px en mobile, 600px en desktop (≥700px)
+- **Style**: Scrollbar fino con `scrollbar-width: thin` y thumb `var(--text-muted)`
+
 ### 21/07/2026 - Modal: header fijo, scroll interno, botón Cerrar; fix editar archivo
 - **Changed**: Modal con flex column, header y footer fijos, body scrollable
 - **Feat**: Botón "Cerrar" centrado en footer del modal
