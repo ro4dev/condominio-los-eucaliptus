@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 21/07/2026 - Parcelas: editar y agregar propietario desde card
+- **Feat**: Ícono ✏️ para editar parcela (formParcelas soporta edición)
+- **Feat**: Botón `+` en card para agregar propietario con parcela pre-seleccionada
+- **Removed**: Botón global "+ Agregar Propietario" de pestaña Parcelas
+
 ### 21/07/2026 - Cards: bordes izquierdos en Parcelas, Documentos y Proveedores
 - **Style**: Parcelas borde lila `#8b5cf6`, Documentos azul `#3b82f6`, Proveedores ámbar `#f59e0b`
 

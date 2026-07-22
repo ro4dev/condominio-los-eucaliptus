@@ -307,27 +307,40 @@ function updateGastoParcelas() {
   }
 }
 
-function formParcelas() {
-  openModal('Agregar Parcela', '<form id="modalForm" data-table="parcelas" onsubmit="handleForm(event)">' +
+function formParcelas(data) {
+  var isEdit = !!data;
+  openModal(isEdit ? 'Editar Parcela' : 'Agregar Parcela',
+    '<form id="modalForm" data-table="parcelas" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Número *</label><input type="text" name="numero" placeholder="Ej: 1, 2A, 15" required></div>' +
-      '<div class="form-group"><label>Rol</label><input type="text" name="rol" placeholder="Rol de la propiedad"></div>' +
+      '<div class="form-group"><label>Número *</label><input type="text" name="numero" placeholder="Ej: 1, 2A, 15" required' + (isEdit ? ' value="' + escHtml(data.numero) + '"' : '') + '></div>' +
+      '<div class="form-group"><label>Rol</label><input type="text" name="rol" placeholder="Rol de la propiedad"' + (isEdit && data.rol ? ' value="' + escHtml(data.rol) + '"' : '') + '></div>' +
     '</div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Metros² *</label><input type="number" name="metros" min="0" placeholder="0" required></div>' +
-      '<div class="form-group"><label>Estado</label><select name="estado"><option>Habitada</option><option>Desocupada</option><option>En construcción</option></select></div>' +
+      '<div class="form-group"><label>Metros² *</label><input type="number" name="metros" min="0" placeholder="0" required' + (isEdit ? ' value="' + data.metros + '"' : '') + '></div>' +
+      '<div class="form-group"><label>Estado</label><select name="estado">' +
+        '<option value="Habitada"' + (isEdit && data.estado === 'Habitada' ? ' selected' : '') + '>Habitada</option>' +
+        '<option value="Desocupada"' + (isEdit && data.estado === 'Desocupada' ? ' selected' : '') + '>Desocupada</option>' +
+        '<option value="En construcción"' + (isEdit && data.estado === 'En construcción' ? ' selected' : '') + '>En construcción</option>' +
+      '</select></div>' +
     '</div>' +
   '</form>',
-  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
 }
 
-function formPropietarios() {
-  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
+function formPropietarios(parcelaId) {
+  var isFromParcela = !!parcelaId;
+  var parcelas = PARCELAS.map(function(p) {
+    var sel = parcelaId === p.id ? ' selected' : '';
+    return '<option value="' + p.id + '"' + sel + '>' + p.numero + '</option>';
+  }).join('');
   openModal('Agregar Propietario', '<form id="modalForm" data-table="propietarios" onsubmit="handleForm(event)">' +
     '<div class="form-group"><label>Nombre completo *</label><input type="text" name="nombre_completo" placeholder="Juan Pérez" required></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>RUT</label><input type="text" name="rut" placeholder="12.345.678-9"></div>' +
-      '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required>' + parcelas + '</select></div>' +
+      (isFromParcela
+        ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><label>Parcela</label><div style="padding:0.6rem 0.8rem;font-size:0.85rem;color:var(--text-2);background:var(--skeleton-1);border-radius:8px">' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</div></div>'
+        : '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required>' + parcelas + '</select></div>') +
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+56 9 1234 5678"></div>' +

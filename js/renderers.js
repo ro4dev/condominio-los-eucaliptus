@@ -133,7 +133,10 @@ function renderParcelas() {
     }).join('');
 
     return '<div class="card">' +
-      '<h4>' + (p.numero || '') + '</h4>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.8rem">' +
+        '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>' +
+        (IS_ADMIN ? '<button onclick="editParcela(\'' + p.id + '\')" title="Editar" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:var(--text-2);flex-shrink:0">&#9998;</button><button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:#2563eb;flex-shrink:0">+</button>' : '') +
+      '</div>' +
       (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
       '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
       '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
@@ -593,8 +596,13 @@ async function votarEncuesta(encuestaId, seleccion) {
   await loadJson('ENCUESTAS_VOTOS');
   renderEncuestas();
 }
-
 // Edit helpers
+
+function editParcela(id) {
+  var data = PARCELAS.find(function(p) { return p.id === id; });
+  if (data) formParcelas(data);
+}
+
 function editNoticia(id) {
   var item = NOTICIAS.find(function(n) { return n.id === id; });
   if (item) formNoticias(item);
