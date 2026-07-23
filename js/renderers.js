@@ -27,6 +27,38 @@ function deleteItem(table, id, arrayName, renderFn) {
   });
 }
 
+function deletePropietario(id, email) {
+  if (!IS_ADMIN) return;
+  showConfirm('¿Eliminar este propietario' + (email ? ' y su cuenta de usuario' : '') + '?', function() {
+    if (DEMO_MODE) {
+      PROPIETARIOS = PROPIETARIOS.filter(function(item) { return item.id !== id; });
+      showSnackbar('Eliminado (demo).', 'success');
+      renderParcelas();
+    } else {
+      showLoading();
+      if (email && supabaseClient) {
+        supabaseClient.functions.invoke('delete-user', { body: { email: email, propietario_id: id } }).then(function(res) {
+          hideLoading();
+          if (res.error) {
+            showSnackbar('Error al eliminar: ' + res.error.message, 'error');
+          } else {
+            showSnackbar('Propietario y cuenta de usuario eliminados.', 'success');
+            reloadTab(getCurrentTab());
+          }
+        });
+      } else {
+        supabaseDelete('propietarios', id).then(function(result) {
+          hideLoading();
+          if (result) {
+            showSnackbar('Eliminado correctamente.', 'success');
+            reloadTab(getCurrentTab());
+          }
+        });
+      }
+    }
+  });
+}
+
 // ESTADO DE CUENTA
 function fillFilters() {
   var periodos = [];
@@ -124,7 +156,7 @@ function renderParcelas() {
           '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
           '<div style="flex:1"><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>' +
           (IS_ADMIN ? '<button onclick="editPropietario(\'' + prop.id + '\')" title="Editar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#9998;</button>' +
-            '<button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#128465;</button>' : '') +
+            '<button onclick="deletePropietario(\'' + prop.id + '\', \'' + (prop.email || '').replace(/'/g, "\\'") + '\')" title="Eliminar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#128465;</button>' : '') +
         '</div>' +
         '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
           (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:#2563eb;text-decoration:none">' + prop.telefono + '</a></div>' : '') +
