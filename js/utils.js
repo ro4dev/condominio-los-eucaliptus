@@ -72,9 +72,8 @@ function getTimeRemaining(fechaStr) {
   return horas + 'h ' + minutos + 'm';
 }
 
-function showSnackbar(message, type, duration) {
+function showSnackbar(message, type) {
   type = type || 'info';
-  duration = duration || 3000;
   var el = document.getElementById('snackbar');
   if (!el) {
     el = document.createElement('div');
@@ -90,5 +89,5 @@ function showSnackbar(message, type, duration) {
   el.innerHTML = '<span style="color:' + color + ';font-weight:bold;font-size:1.1rem">' + icon + '</span> ' + message;
   el.style.opacity = '1';
   clearTimeout(el._timeout);
-  el._timeout = setTimeout(function() { el.style.opacity = '0'; }, duration);
+  el._timeout = setTimeout(function() { el.style.opacity = '0'; }, 3000);
 }

@@ -248,23 +248,6 @@ function handleForm(e) {
             }
           }
         });
-      } else if (table === 'propietarios' && !isEdit && data.email && !DEMO_MODE && supabaseClient) {
-        supabaseClient.functions.invoke('create-user', {
-          body: { email: data.email, nombre_completo: data.nombre_completo, rut: data.rut, telefono: data.telefono, tipo: data.tipo, parcela_id: data.parcela_id }
-        }).then(function(res) {
-          hideLoading();
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Guardar';
-          }
-          if (res.error) {
-            showSnackbar('Error al crear usuario: ' + res.error.message, 'error');
-          } else {
-            showSnackbar('Propietario guardado. Invitación enviada a ' + data.email, 'success');
-            closeModal();
-            reloadTab(getCurrentTab());
-          }
-        });
       } else {
         doUpdate(table, data).then(function(result) {
           if (result) {
