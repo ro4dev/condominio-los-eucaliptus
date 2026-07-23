@@ -538,7 +538,8 @@ function renderEncuestas() {
       accion = '<div style="margin-top:0.4rem;font-size:0.8rem;color:var(--text-muted)">Ya votaste</div>';
     }
 
-    return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
+    return '<div class="flujo-card' + (d.cerrada ? ' cerrada' : '') + '" style="border-left-color:' + borderColor + '">' +
+      (d.cerrada ? '<div class="watermark">TERMINADA</div>' : '') +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
