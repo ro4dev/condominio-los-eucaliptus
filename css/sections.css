@@ -11,7 +11,6 @@
 .doc-info { flex: 1; }
 .doc-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
 .doc-meta { font-size: 0.8rem; color: var(--text-muted); }
-.doc-link { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
 
 .reclamo-item { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; border-left: 4px solid #f59e0b; }
 .reclamo-item.reclamo { border-left-color: #b91c1c; }

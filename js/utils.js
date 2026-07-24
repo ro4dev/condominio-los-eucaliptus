@@ -74,20 +74,16 @@ function getTimeRemaining(fechaStr) {
 
 function showSnackbar(message, type) {
   type = type || 'info';
-  var el = document.getElementById('snackbar');
+  var el = document.getElementById('appSnackbar');
   if (!el) {
-    el = document.createElement('div');
-    el.id = 'snackbar';
-    el.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--bg-card);color:var(--text);padding:10px 18px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.15);font-size:0.9rem;z-index:99999;transition:opacity 0.3s;opacity:0;border:1px solid var(--border);max-width:90%;display:flex;align-items:center;gap:0.5rem';
+    el = document.createElement('md-snackbar');
+    el.id = 'appSnackbar';
+    el.setAttribute('auto-close', '');
+    el.setAttribute('timeout', '3000');
     document.body.appendChild(el);
   }
-  var icons = { success: '\u2713', warning: '\u26a0', error: '\u2717', info: '\u2139' };
-  var colors = { success: '#16a34a', warning: '#d97706', error: '#b91c1c', info: '#2563eb' };
+  var icons = { success: 'check_circle', warning: 'warning', error: 'error', info: 'info' };
   var icon = icons[type] || icons.info;
-  var color = colors[type] || colors.info;
-  el.style.borderLeft = '4px solid ' + color;
-  el.innerHTML = '<span style="color:' + color + ';font-weight:bold;font-size:1.1rem">' + icon + '</span> ' + message;
-  el.style.opacity = '1';
-  clearTimeout(el._timeout);
-  el._timeout = setTimeout(function() { el.style.opacity = '0'; }, 3000);
+  el.innerHTML = '<md-icon slot="leading-icon">' + icon + '</md-icon> ' + message;
+  el.open = true;
 }

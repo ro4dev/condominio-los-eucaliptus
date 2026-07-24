@@ -50,8 +50,7 @@ function updateAuthUI() {
   var loginBtn = document.getElementById('loginBtn');
   var logoutBtn = document.getElementById('logoutBtn');
   var userInfo = document.getElementById('userInfo');
-  var addBtns = document.querySelectorAll('.form-link');
-  var adminBtns = document.querySelectorAll('.form-link.admin-only');
+  var adminBtns = document.querySelectorAll('.admin-only');
   if (currentUser) {
     if (loginBtn) {
       loginBtn.style.display = 'none';
@@ -62,10 +61,7 @@ function updateAuthUI() {
     if (userInfo) {
       userInfo.textContent = currentUser.email;
     }
-    addBtns.forEach(function(btn) { btn.style.display = 'none'; });
     adminBtns.forEach(function(btn) { btn.style.display = IS_ADMIN ? '' : 'none'; });
-    var userBtns = document.querySelectorAll('.form-link:not(.admin-only)');
-    userBtns.forEach(function(btn) { btn.style.display = ''; });
   } else {
     if (loginBtn) {
       loginBtn.style.display = '';
@@ -76,21 +72,21 @@ function updateAuthUI() {
     if (userInfo) {
       userInfo.textContent = '';
     }
-    addBtns.forEach(function(btn) { btn.style.display = 'none'; });
+    adminBtns.forEach(function(btn) { btn.style.display = 'none'; });
   }
 }
 
 function showLoginModal() {
-  var modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.classList.add('active');
+  var dialog = document.getElementById('loginDialog');
+  if (dialog) {
+    dialog.show();
   }
 }
 
 function closeLoginModal() {
-  var modal = document.getElementById('loginModal');
-  if (modal) {
-    modal.classList.remove('active');
+  var dialog = document.getElementById('loginDialog');
+  if (dialog) {
+    dialog.close();
   }
 }
 
@@ -225,10 +221,11 @@ async function supabaseUpload(file, bucket, folder) {
 }
 
 function showSignupForm() {
-  var title = document.getElementById('loginModalTitle');
+  var dialog = document.getElementById('loginDialog');
+  var headline = dialog ? dialog.querySelector('[slot="headline"]') : null;
   var form = document.getElementById('loginForm');
-  if (title) {
-    title.textContent = 'Crear cuenta';
+  if (headline) {
+    headline.textContent = 'Crear cuenta';
   }
   if (form) {
     form.onsubmit = handleSignup;
@@ -236,30 +233,21 @@ function showSignupForm() {
     if (errorEl) {
       errorEl.textContent = '';
     }
-    var link = form.parentElement.querySelector('a');
-    if (link) {
-      link.textContent = 'Ya tengo cuenta';
-      link.onclick = function() { showLoginForm(); return false; };
-    }
   }
 }
 
 function showLoginForm() {
-  var title = document.getElementById('loginModalTitle');
+  var dialog = document.getElementById('loginDialog');
+  var headline = dialog ? dialog.querySelector('[slot="headline"]') : null;
   var form = document.getElementById('loginForm');
-  if (title) {
-    title.textContent = 'Iniciar sesión';
+  if (headline) {
+    headline.textContent = 'Iniciar sesión';
   }
   if (form) {
     form.onsubmit = handleLogin;
     var errorEl = document.getElementById('loginError');
     if (errorEl) {
       errorEl.textContent = '';
-    }
-    var link = form.parentElement.querySelector('a');
-    if (link) {
-      link.textContent = 'Crear cuenta';
-      link.onclick = function() { showSignupForm(); return false; };
     }
   }
 }

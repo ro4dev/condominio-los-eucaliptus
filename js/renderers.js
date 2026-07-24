@@ -1,9 +1,9 @@
 // Helper: admin actions HTML
 function adminActions(editFn, deleteFn) {
   if (!IS_ADMIN) return '';
-  return '<div style="display:flex;gap:0.3rem;flex-shrink:0;align-items:center">' +
-    '<button onclick="' + editFn + '" title="Editar" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:var(--text-2)">&#9998;</button>' +
-    '<button onclick="' + deleteFn + '" title="Eliminar" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:var(--text-2)">&#128465;</button>' +
+  return '<div style="display:flex;gap:0rem;flex-shrink:0;align-items:center">' +
+    '<md-icon-button onclick="' + editFn + '" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+    '<md-icon-button onclick="' + deleteFn + '" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
     '</div>';
 }
 
@@ -50,13 +50,13 @@ function fillFilters() {
   periodos.sort().reverse();
 
   var pf = document.getElementById('periodFilter');
-  pf.innerHTML = '<option value="">Todos</option>' + periodos.map(function(p) { return '<option value="' + p + '">' + formatPeriodo(p) + '</option>'; }).join('');
+  pf.innerHTML = '<md-select-option value=""><span slot="headline">Todos</span></md-select-option>' + periodos.map(function(p) { return '<md-select-option value="' + p + '"><span slot="headline">' + formatPeriodo(p) + '</span></md-select-option>'; }).join('');
 
   var paf = document.getElementById('parcelaFilter');
   var sorted = PARCELAS.slice().sort(function(a, b) {
     return (a.numero || '').localeCompare(b.numero || '', undefined, { numeric: true });
   });
-  paf.innerHTML = '<option value="">Todas</option>' + sorted.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
+  paf.innerHTML = '<md-select-option value=""><span slot="headline">Todas</span></md-select-option>' + sorted.map(function(p) { return '<md-select-option value="' + p.id + '"><span slot="headline">' + p.numero + '</span></md-select-option>'; }).join('');
 
   pf.onchange = applyFilters;
   paf.onchange = applyFilters;
@@ -136,8 +136,8 @@ function renderParcelas() {
         '<div style="display:flex;align-items:center;gap:0.6rem">' +
           '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
           '<div style="flex:1"><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>' +
-          (IS_ADMIN ? '<button onclick="editPropietario(\'' + prop.id + '\')" title="Editar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#9998;</button>' +
-            '<button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar" style="background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0.1rem;color:var(--text-2)">&#128465;</button>' : '') +
+          (IS_ADMIN ? '<md-icon-button onclick="editPropietario(\'' + prop.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+            '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' : '') +
         '</div>' +
         '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
           (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:#2563eb;text-decoration:none">' + prop.telefono + '</a></div>' : '') +
@@ -150,7 +150,7 @@ function renderParcelas() {
     return '<div class="card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.8rem">' +
         '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>' +
-        (IS_ADMIN ? '<button onclick="editParcela(\'' + p.id + '\')" title="Editar" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:var(--text-2);flex-shrink:0">&#9998;</button><button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="background:none;border:none;cursor:pointer;font-size:1rem;padding:0.1rem;color:#2563eb;flex-shrink:0">+</button>' : '') +
+        (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button><md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:#2563eb"><md-icon>person_add</md-icon></md-icon-button>' : '') +
       '</div>' +
       (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
       '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
@@ -165,8 +165,8 @@ var noticiasFilter = 'vigentes';
 
 function filterNoticias(filtro) {
   noticiasFilter = filtro;
-  document.querySelectorAll('#noticiasFilter .chip').forEach(function(c) {
-    c.classList.toggle('active', c.textContent.toLowerCase() === (filtro === 'no_vigentes' ? 'no vigentes' : (filtro === 'todas' ? 'todas' : 'vigentes')));
+  document.querySelectorAll('#noticiasFilter md-filter-chip').forEach(function(c) {
+    c.selected = c.textContent.toLowerCase() === (filtro === 'no_vigentes' ? 'no vigentes' : (filtro === 'todas' ? 'todas' : 'vigentes'));
   });
   renderNoticias();
 }
@@ -234,8 +234,8 @@ var flujoFilter = 'todos';
 
 function filterFlujo(tipo) {
   flujoFilter = tipo;
-  document.querySelectorAll('#flujoFilter .chip').forEach(function(c) { c.classList.remove('active'); });
-  event.target.classList.add('active');
+  document.querySelectorAll('#flujoFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
   renderFlujo();
 }
 
@@ -271,8 +271,8 @@ function renderFlujo() {
       '</div>' +
       '<div style="display:flex;justify-content:space-between;align-items:center">' +
         '<div style="font-weight:500">' + f.concepto + '</div>' +
-        '<div style="display:flex;gap:0.3rem;align-items:center">' +
-          (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="color:#2563eb;font-size:1rem;text-decoration:none" title="Ver comprobante">&#128206;</a>' : '') +
+        '<div style="display:flex;gap:0rem;align-items:center">' +
+          (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:#2563eb" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
           adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") +
         '</div>' +
       '</div>' +
@@ -286,8 +286,8 @@ var documentosFilter = 'Todos';
 
 function filterDocumentos(cat) {
   documentosFilter = cat;
-  document.querySelectorAll('#documentosChips .chip').forEach(function(c) {
-    c.classList.toggle('active', c.textContent === cat);
+  document.querySelectorAll('#documentosChips md-filter-chip').forEach(function(c) {
+    c.selected = c.textContent === cat;
   });
   renderDocumentos();
 }
@@ -302,13 +302,13 @@ function renderDocumentos() {
   list.innerHTML = filtered.map(function(d) {
     var icon = icons[d.categoria] || '&#128196;';
     var fecha = formatDate(d.fecha || d.created_at);
-    var btns = '<div style="display:flex;gap:0.25rem;flex-shrink:0;align-items:center">';
+    var btns = '<div style="display:flex;gap:0rem;flex-shrink:0;align-items:center">';
     btns += adminActions("editDocumento('" + d.id + "')", "deleteDocumento('" + d.id + "')");
     if (d.descripcion) {
-      btns += '<button onclick="showDescripcion(\'' + d.id + '\')" title="Ver descripción" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:0.2rem;color:var(--text-2)">&#9432;</button>';
+      btns += '<md-icon-button onclick="showDescripcion(\'' + d.id + '\')" title="Ver descripción"><md-icon>info</md-icon></md-icon-button>';
     }
     if (d.archivo) {
-      btns += '<a href="' + d.archivo + '" title="Ver documento" target="_blank" style="text-decoration:none;font-size:1.2rem;padding:0.2rem;color:var(--text-2)">&#128206;</a>';
+      btns += '<a href="' + d.archivo + '" title="Ver documento" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--text-2)"><md-icon>description</md-icon></md-icon-button></a>';
     }
     btns += '</div>';
     return '<div class="doc-item">' +
@@ -333,8 +333,8 @@ var reclamosFilter = 'todos';
 
 function filterReclamos(tipo) {
   reclamosFilter = tipo;
-  document.querySelectorAll('#reclamosFilter .chip').forEach(function(c) { c.classList.remove('active'); });
-  event.target.classList.add('active');
+  document.querySelectorAll('#reclamosFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
   renderReclamos();
 }
 
@@ -384,8 +384,8 @@ var asambleasFilter = 'Todos';
 
 function filterAsambleas(tipo) {
   asambleasFilter = tipo;
-  document.querySelectorAll('#asambleasChips .chip').forEach(function(c) {
-    c.classList.toggle('active', c.textContent === (tipo === 'Todos' ? 'Todos' : (tipo === 'Ordinaria' ? 'Ordinarias' : 'Extraordinarias')));
+  document.querySelectorAll('#asambleasChips md-filter-chip').forEach(function(c) {
+    c.selected = c.textContent === (tipo === 'Todos' ? 'Todos' : (tipo === 'Ordinaria' ? 'Ordinarias' : 'Extraordinarias'));
   });
   renderAsambleas();
 }
@@ -426,8 +426,8 @@ var encuestasFilter = 'Todos';
 
 function filterEncuestas(filtro) {
   encuestasFilter = filtro;
-  document.querySelectorAll('#encuestasChips .chip').forEach(function(c) {
-    c.classList.toggle('active', c.textContent === filtro || (filtro === 'Todos' && c.textContent === 'Todos'));
+  document.querySelectorAll('#encuestasChips md-filter-chip').forEach(function(c) {
+    c.selected = c.textContent === filtro || (filtro === 'Todos' && c.textContent === 'Todas');
   });
   renderEncuestas();
 }
@@ -532,7 +532,7 @@ function renderEncuestas() {
 
       var boton = '';
       if (!d.cerrada && currentUser && !d.miVoto) {
-        boton = ' <button class="btn btn-primary" onclick="votarEncuesta(\'' + e.id + '\', \'' + op.replace(/'/g, "\\'") + '\')" style="font-size:0.75rem;padding:0.2rem 0.6rem;background:' + color + ';border-color:' + color + '">Votar</button>';
+        boton = ' <md-filled-button onclick="votarEncuesta(\'' + e.id + '\', \'' + op.replace(/'/g, "\\'") + '\')" style="font-size:0.75rem;padding:0.2rem 0.6rem;--md-filled-button-container-color:' + color + '">Votar</md-filled-button>';
       }
 
       return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:4px;' : '') + '">' +

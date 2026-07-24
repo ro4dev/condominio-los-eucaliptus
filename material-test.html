@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material Web - Prueba</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <script type="importmap">
+  {
+    "imports": {
+      "@material/web/": "https://esm.run/@material/web/"
+    }
+  }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <style>
+    *, *:not(:is(md-*)) { box-sizing: border-box; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f5f7fa;
+      color: #1a1a2e;
+      padding: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    body.dark {
+      background: #111827;
+      color: #f9fafb;
+    }
+    h2 {
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    body.dark h2 { border-bottom-color: #374151; }
+    .section { margin-bottom: 2rem; }
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+    .dark-toggle {
+      position: fixed; top: 1rem; right: 1rem;
+      background: #1a1a2e; color: #fff; border: none; padding: 0.5rem 1rem;
+      border-radius: 8px; cursor: pointer; z-index: 100;
+    }
+    body.dark .dark-toggle { background: #374151; }
+    md-card {
+      display: block;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    body.dark md-card { background: #1f2937; }
+    .notes {
+      background: #fef3c7; border-left: 4px solid #f59e0b;
+      padding: 1rem; border-radius: 0 8px 8px 0; margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+    body.dark .notes { background: #451a03; }
+  </style>
+</head>
+<body>
+  <button class="dark-toggle" onclick="document.body.classList.toggle('dark')">Dark Mode</button>
+
+  <h1 style="margin-bottom:0.5rem">Material Web - Prueba</h1>
+  <p style="color:#6b7280;margin-bottom:1rem">Componentes M3 cargados via CDN (esm.run)</p>
+
+  <div class="section">
+    <h2>Buttons</h2>
+    <div class="row">
+      <md-filled-button>Filled</md-filled-button>
+      <md-filled-tonal-button>Filled Tonal</md-filled-tonal-button>
+      <md-outlined-button>Outlined</md-outlined-button>
+      <md-text-button>Text Button</md-text-button>
+    </div>
+    <div class="row">
+      <md-filled-button><md-icon slot="icon">add</md-icon>Con Icono</md-filled-button>
+      <md-filled-button disabled>Disabled</md-filled-button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>FAB</h2>
+    <div class="row">
+      <md-fab aria-label="Add"><md-icon slot="icon">add</md-icon></md-fab>
+      <md-fab aria-label="Edit" variant="secondary"><md-icon slot="icon">edit</md-icon></md-fab>
+      <md-fab aria-label="Delete" variant="tertiary"><md-icon slot="icon">delete</md-icon></md-fab>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Text Fields</h2>
+    <div class="row" style="flex-direction:column;align-items:stretch;">
+      <md-filled-text-field label="Nombre" value="Juan Pérez"></md-filled-text-field>
+      <md-outlined-text-field label="Email" type="email"></md-outlined-text-field>
+      <md-filled-text-field label="Monto" type="number" prefix-text="$"></md-filled-text-field>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Chips</h2>
+    <div class="row">
+      <md-filter-chip label="Todos" selected></md-filter-chip>
+      <md-filter-chip label="Ingresos"></md-filter-chip>
+      <md-filter-chip label="Egresos"></md-filter-chip>
+    </div>
+    <div class="row">
+      <md-chip label="Static Chip"></md-chip>
+      <md-chip label="Con Icono"><md-icon slot="icon">star</md-icon></md-chip>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Selection Controls</h2>
+    <div class="row">
+      <md-checkbox></md-checkbox>
+      <md-checkbox checked></md-checkbox>
+      <md-switch></md-switch>
+      <md-switch selected></md-switch>
+    </div>
+    <div class="row">
+      <md-radio name="test"></md-radio>
+      <md-radio name="test" checked></md-radio>
+      <span style="font-size:0.9rem;color:#6b7280">Radio options</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Cards</h2>
+    <md-card>
+      <h3 style="margin-bottom:0.5rem">Card de Ejemplo</h3>
+      <p style="color:#6b7280;margin-bottom:1rem">Este es un md-card con contenido custom adentro.</p>
+      <div class="row">
+        <md-filled-button>Acción</md-filled-button>
+        <md-text-button>Cancelar</md-text-button>
+      </div>
+    </md-card>
+  </div>
+
+  <div class="section">
+    <h2>Dialog</h2>
+    <div class="row">
+      <md-filled-button onclick="document.getElementById('testDialog').showModal()">Abrir Dialog</md-filled-button>
+    </div>
+    <md-dialog id="testDialog">
+      <div slot="headline">Confirmar</div>
+      <form slot="content" id="dialogForm">
+        <p>¿Estás seguro de que querés continuar?</p>
+      </form>
+      <div slot="actions">
+        <md-text-button onclick="this.closest('md-dialog').close()">Cancelar</md-text-button>
+        <md-filled-button onclick="this.closest('md-dialog').close()">Aceptar</md-filled-button>
+      </div>
+    </md-dialog>
+  </div>
+
+  <div class="section">
+    <h2>Progress</h2>
+    <div class="row" style="flex-direction:column;align-items:stretch;gap:0.5rem;">
+      <md-linear-progress value="0.5"></md-linear-progress>
+      <md-linear-progress indeterminate></md-linear-progress>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Typography M3</h2>
+    <p class="md-typescale-display-large">Display Large</p>
+    <p class="md-typescale-display-medium">Display Medium</p>
+    <p class="md-typescale-headline-large">Headline Large</p>
+    <p class="md-typescale-title-large">Title Large</p>
+    <p class="md-typescale-body-large">Body Large — Texto de ejemplo para el condominio</p>
+    <p class="md-typescale-body-medium">Body Medium</p>
+    <p class="md-typescale-label-large">Label Large</p>
+    <p class="md-typescale-label-medium">Label Medium</p>
+  </div>
+
+  <div class="section">
+    <h2>Icons (Material Symbols)</h2>
+    <div class="row" style="font-size:2rem;">
+      <span class="material-symbols-outlined">home</span>
+      <span class="material-symbols-outlined">receipt_long</span>
+      <span class="material-symbols-outlined">group</span>
+      <span class="material-symbols-outlined">campaign</span>
+      <span class="material-symbols-outlined">description</span>
+      <span class="material-symbols-outlined">balance</span>
+      <span class="material-symbols-outlined">poll</span>
+      <span class="material-symbols-outlined">settings</span>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>Notas:</strong> Todos estos componentes se cargan via <code>esm.run/@material/web</code>.
+    Los web components son <code>&lt;md-*&gt;</code> y funcionan sin framework.
+    El dark mode de M3 se maneja con <code>color-scheme: dark</code> en el html o con tokens CSS.
+  </div>
+</body>
+</html>

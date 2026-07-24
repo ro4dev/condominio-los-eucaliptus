@@ -1,4 +1,4 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*:not(:is(md-filled-button, md-filled-tonal-button, md-outlined-button, md-text-button, md-icon-button, md-fab, md-card, md-dialog, md-checkbox, md-switch, md-radio, md-text-field, md-filled-text-field, md-outlined-text-field, md-filter-chip, md-assist-chip, md-input-chip, md-chip, md-linear-progress, md-icon, md-tabs, md-primary-tab, md-filled-select, md-outlined-select, md-select-option, md-snackbar, md-circular-progress)) { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --bg: #f5f7fa;
@@ -12,6 +12,44 @@
   --skeleton-1: #e5e7eb;
   --skeleton-2: #f3f4f6;
   --modal-loading-bg: rgba(255,255,255,0.85);
+
+  /* MD3 system tokens — required by @material/web components */
+  --md-sys-color-primary: #2563eb;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #dbeafe;
+  --md-sys-color-on-primary-container: #1e3a5f;
+  --md-sys-color-secondary: #475569;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #e2e8f0;
+  --md-sys-color-on-secondary-container: #334155;
+  --md-sys-color-tertiary: #7c3aed;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-error: #b91c1c;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-surface: #ffffff;
+  --md-sys-color-on-surface: #1a1a2e;
+  --md-sys-color-on-surface-variant: #374151;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f5f7fa;
+  --md-sys-color-surface-container: #eef0f4;
+  --md-sys-color-surface-container-high: #e8eaee;
+  --md-sys-color-surface-container-highest: #e2e4e8;
+  --md-sys-color-outline: #9ca3af;
+  --md-sys-color-outline-variant: #e5e7eb;
+  --md-sys-color-inverse-surface: #1a1a2e;
+  --md-sys-color-inverse-on-surface: #f5f7fa;
+  --md-sys-color-inverse-primary: #93bbfd;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
+
+  --md-sys-typescale-body-medium: 400 0.875rem/1.25rem 'Roboto', sans-serif;
+  --md-sys-typescale-headline-small: 600 1.5rem/2rem 'Roboto', sans-serif;
+  --md-sys-typescale-label-large: 500 0.875rem/1.25rem 'Roboto', sans-serif;
+  --md-sys-typescale-label-medium: 500 0.75rem/1rem 'Roboto', sans-serif;
+
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
 }
 
 body.dark {
@@ -26,9 +64,66 @@ body.dark {
   --skeleton-1: #374151;
   --skeleton-2: #4b5563;
   --modal-loading-bg: rgba(17,24,39,0.85);
+
+  /* MD3 system tokens — dark mode */
+  --md-sys-color-primary: #93bbfd;
+  --md-sys-color-on-primary: #1e3a5f;
+  --md-sys-color-primary-container: #1e3a5f;
+  --md-sys-color-on-primary-container: #dbeafe;
+  --md-sys-color-secondary: #94a3b8;
+  --md-sys-color-on-secondary: #1e293b;
+  --md-sys-color-secondary-container: #334155;
+  --md-sys-color-on-secondary-container: #e2e8f0;
+  --md-sys-color-tertiary: #c4b5fd;
+  --md-sys-color-on-tertiary: #3b0764;
+  --md-sys-color-error: #fca5a5;
+  --md-sys-color-on-error: #7f1d1d;
+  --md-sys-color-surface: #111827;
+  --md-sys-color-on-surface: #f9fafb;
+  --md-sys-color-on-surface-variant: #d1d5db;
+  --md-sys-color-surface-container-lowest: #0b0f1a;
+  --md-sys-color-surface-container-low: #111827;
+  --md-sys-color-surface-container: #1f2937;
+  --md-sys-color-surface-container-high: #283548;
+  --md-sys-color-surface-container-highest: #374151;
+  --md-sys-color-outline: #6b7280;
+  --md-sys-color-outline-variant: #374151;
+  --md-sys-color-inverse-surface: #f9fafb;
+  --md-sys-color-inverse-on-surface: #1a1a2e;
+  --md-sys-color-inverse-primary: #2563eb;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
 }
 
-body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
+body { font-family: 'Roboto', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
+
+/* M3 dialog sizing */
+md-dialog {
+  min-width: 320px;
+  max-width: 90vw;
+  max-height: 85vh;
+}
+#modalBody {
+  padding: 24px;
+  overflow-y: auto;
+}
+#modalFooter {
+  padding: 8px 24px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+md-dialog [slot="headline"] {
+  padding: 24px 24px 0;
+}
+
+/* M3: dark mode overrides (only for components that need extra tuning) */
+body.dark {
+  color-scheme: dark;
+}
+body.dark md-icon-button md-icon {
+  color: var(--md-sys-color-on-surface);
+}
 .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
 header { background: #1a1a2e; color: #fff; padding: 1.5rem; text-align: center; border-radius: 12px; margin-bottom: 1.5rem; }
 header h1 { font-size: 1.8rem; font-weight: 600; letter-spacing: 1px; }

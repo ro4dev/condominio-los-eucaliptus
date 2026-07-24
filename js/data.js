@@ -58,9 +58,9 @@ async function loadTabData(tab) {
 }
 
 async function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.removeAttribute('active'); });
   document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
-  document.querySelector('[onclick="switchTab(\'' + tab + '\')"]').classList.add('active');
+  document.querySelector('[data-tab="' + tab + '"]').setAttribute('active', '');
   document.getElementById('tab-' + tab).classList.add('active');
   await loadTabData(tab);
 }

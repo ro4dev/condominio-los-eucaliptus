@@ -10,6 +10,20 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.1/dist/browser-image-compression.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <script type="importmap">
+  {
+    "imports": {
+      "@material/web/": "https://esm.run/@material/web/"
+    }
+  }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
@@ -25,31 +39,31 @@
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center">
           <span id="userInfo" style="font-size:0.85rem;color:#374151;font-weight:500"></span>
-          <button id="loginBtn" onclick="showLoginModal()" class="demo-toggle">Iniciar sesión</button>
-          <button id="logoutBtn" onclick="handleLogout()" class="demo-toggle" style="display:none">Cerrar sesión</button>
-          <button id="demoToggle" onclick="toggleDemoMode()" class="demo-toggle active">Salir de modo demo</button>
-          <button id="themeToggle" onclick="toggleTheme()" class="btn-toggle" title="Cambiar tema">☀️</button>
+          <md-filled-tonal-button id="loginBtn" onclick="showLoginModal()">Iniciar sesión</md-filled-tonal-button>
+          <md-outlined-button id="logoutBtn" onclick="handleLogout()" style="display:none">Cerrar sesión</md-outlined-button>
+          <md-filled-tonal-button id="demoToggle" onclick="toggleDemoMode()">Salir de modo demo</md-filled-tonal-button>
+          <md-icon-button id="themeToggle" onclick="toggleTheme()" title="Cambiar tema"><md-icon>light_mode</md-icon></md-icon-button>
         </div>
       </div>
     </header>
 
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('cuenta')">Gastos Comunes</button>
-      <button class="tab-btn" onclick="switchTab('parcelas')">Parcelas</button>
-      <button class="tab-btn" onclick="switchTab('noticias')">Noticias</button>
-      <button class="tab-btn" onclick="switchTab('flujo')">Ingresos/Egresos</button>
-      <button class="tab-btn" onclick="switchTab('documentos')">Documentos</button>
-      <button class="tab-btn" onclick="switchTab('reclamos')">Reclamos/Sugerencias</button>
-      <button class="tab-btn" onclick="switchTab('proveedores')">Proveedores</button>
-      <button class="tab-btn" onclick="switchTab('asambleas')">Asambleas</button>
-      <button class="tab-btn" onclick="switchTab('encuestas')">Encuestas</button>
-      <button class="tab-btn" id="configTabBtn" onclick="switchTab('config')" style="display:none">Configuración</button>
-    </div>
+    <md-tabs id="mainTabs" class="tabs">
+      <md-primary-tab class="tab-btn" data-tab="cuenta" onclick="switchTab('cuenta')" active>Gastos Comunes</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="parcelas" onclick="switchTab('parcelas')">Parcelas</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="noticias" onclick="switchTab('noticias')">Noticias</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="flujo" onclick="switchTab('flujo')">Ingresos/Egresos</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="documentos" onclick="switchTab('documentos')">Documentos</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="reclamos" onclick="switchTab('reclamos')">Reclamos/Sugerencias</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="proveedores" onclick="switchTab('proveedores')">Proveedores</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="asambleas" onclick="switchTab('asambleas')">Asambleas</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="encuestas" onclick="switchTab('encuestas')">Encuestas</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="config" id="configTabBtn" onclick="switchTab('config')" style="display:none">Configuración</md-primary-tab>
+    </md-tabs>
 
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
-      <a href="#" class="form-link admin-only" id="formGastos" onclick="formGastos(); return false;">+ Agregar Gasto</a>
-      <button class="reload-btn" onclick="reloadTab('cuenta')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formGastos" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Gasto</md-filled-button>
+      <md-icon-button onclick="reloadTab('cuenta')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <section class="stats" id="stats">
         <div class="skeleton skeleton-stat"></div>
         <div class="skeleton skeleton-stat"></div>
@@ -57,10 +71,8 @@
         <div class="skeleton skeleton-stat"></div>
       </section>
       <div class="filters">
-        <label>Periodo:</label>
-        <select id="periodFilter"></select>
-        <label>Parcela:</label>
-        <select id="parcelaFilter"></select>
+        <md-outlined-select id="periodFilter" label="Periodo"></md-outlined-select>
+        <md-outlined-select id="parcelaFilter" label="Parcela"></md-outlined-select>
       </div>
       <section class="charts">
         <div class="chart-box">
@@ -98,7 +110,7 @@
 
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
-      <button class="reload-btn" onclick="reloadTab('parcelas')">↻ Recargar</button>
+      <md-icon-button onclick="reloadTab('parcelas')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="cards-grid" id="parcelasGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -109,12 +121,12 @@
 
     <!-- NOTICIAS -->
     <div id="tab-noticias" class="tab-content">
-      <a href="#" class="form-link admin-only" id="formNoticias" onclick="formNoticias(); return false;">+ Agregar Noticia</a>
-      <button class="reload-btn" onclick="reloadTab('noticias')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formNoticias" onclick="formNoticias()"><md-icon slot="icon">add</md-icon>Agregar Noticia</md-filled-button>
+      <md-icon-button onclick="reloadTab('noticias')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="noticiasFilter">
-        <button class="chip active" onclick="filterNoticias('vigentes')">Vigentes</button>
-        <button class="chip" onclick="filterNoticias('no_vigentes')">No vigentes</button>
-        <button class="chip" onclick="filterNoticias('todas')">Todas</button>
+        <md-filter-chip label="Vigentes" selected onclick="filterNoticias('vigentes')"></md-filter-chip>
+        <md-filter-chip label="No vigentes" onclick="filterNoticias('no_vigentes')"></md-filter-chip>
+        <md-filter-chip label="Todas" onclick="filterNoticias('todas')"></md-filter-chip>
       </div>
       <div id="noticiasList">
         <div class="skeleton skeleton-news"></div>
@@ -125,8 +137,8 @@
 
     <!-- INGRESOS/EGRESOS -->
     <div id="tab-flujo" class="tab-content">
-      <a href="#" class="form-link admin-only" id="formFlujo" onclick="formFlujo(); return false;">+ Agregar Movimiento</a>
-      <button class="reload-btn" onclick="reloadTab('flujo')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formFlujo" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
+      <md-icon-button onclick="reloadTab('flujo')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <section class="stats" id="flujoStats">
         <div class="skeleton skeleton-stat"></div>
         <div class="skeleton skeleton-stat"></div>
@@ -134,9 +146,9 @@
         <div class="skeleton skeleton-stat"></div>
       </section>
       <div class="filter-chips" id="flujoFilter">
-        <button class="chip active" onclick="filterFlujo('todos')">Todos</button>
-        <button class="chip" onclick="filterFlujo('Ingreso')">Ingresos</button>
-        <button class="chip" onclick="filterFlujo('Egreso')">Egresos</button>
+        <md-filter-chip label="Todos" selected onclick="filterFlujo('todos')"></md-filter-chip>
+        <md-filter-chip label="Ingresos" onclick="filterFlujo('Ingreso')"></md-filter-chip>
+        <md-filter-chip label="Egresos" onclick="filterFlujo('Egreso')"></md-filter-chip>
       </div>
       <div class="cards-grid" id="flujoList">
         <div class="skeleton skeleton-card"></div>
@@ -147,15 +159,15 @@
 
     <!-- DOCUMENTOS -->
     <div id="tab-documentos" class="tab-content">
-      <a href="#" class="form-link admin-only" id="formDocumentos" onclick="formDocumentos(); return false;">+ Agregar Documento</a>
-      <button class="reload-btn" onclick="reloadTab('documentos')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formDocumentos" onclick="formDocumentos()"><md-icon slot="icon">add</md-icon>Agregar Documento</md-filled-button>
+      <md-icon-button onclick="reloadTab('documentos')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="documentosChips">
-        <span class="chip active" onclick="filterDocumentos('Todos')">Todos</span>
-        <span class="chip" onclick="filterDocumentos('Estatuto')">Estatuto</span>
-        <span class="chip" onclick="filterDocumentos('Actas')">Actas</span>
-        <span class="chip" onclick="filterDocumentos('Contratos')">Contratos</span>
-        <span class="chip" onclick="filterDocumentos('Seguros')">Seguros</span>
-        <span class="chip" onclick="filterDocumentos('Planos')">Planos</span>
+        <md-filter-chip label="Todos" selected onclick="filterDocumentos('Todos')"></md-filter-chip>
+        <md-filter-chip label="Estatuto" onclick="filterDocumentos('Estatuto')"></md-filter-chip>
+        <md-filter-chip label="Actas" onclick="filterDocumentos('Actas')"></md-filter-chip>
+        <md-filter-chip label="Contratos" onclick="filterDocumentos('Contratos')"></md-filter-chip>
+        <md-filter-chip label="Seguros" onclick="filterDocumentos('Seguros')"></md-filter-chip>
+        <md-filter-chip label="Planos" onclick="filterDocumentos('Planos')"></md-filter-chip>
       </div>
       <div class="cards-grid" id="documentosList">
         <div class="skeleton skeleton-doc"></div>
@@ -167,12 +179,12 @@
 
     <!-- RECLAMOS/SUGERENCIAS -->
     <div id="tab-reclamos" class="tab-content">
-      <a href="#" class="form-link" id="formReclamos" onclick="formReclamos(); return false;">+ Agregar Reclamo/Sugerencia</a>
-      <button class="reload-btn" onclick="reloadTab('reclamos')">↻ Recargar</button>
+      <md-filled-button id="formReclamos" onclick="formReclamos()"><md-icon slot="icon">add</md-icon>Agregar Reclamo/Sugerencia</md-filled-button>
+      <md-icon-button onclick="reloadTab('reclamos')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="reclamosFilter">
-        <button class="chip active" onclick="filterReclamos('todos')">Todos</button>
-        <button class="chip" onclick="filterReclamos('Reclamo')">Reclamos</button>
-        <button class="chip" onclick="filterReclamos('Sugerencia')">Sugerencias</button>
+        <md-filter-chip label="Todos" selected onclick="filterReclamos('todos')"></md-filter-chip>
+        <md-filter-chip label="Reclamos" onclick="filterReclamos('Reclamo')"></md-filter-chip>
+        <md-filter-chip label="Sugerencias" onclick="filterReclamos('Sugerencia')"></md-filter-chip>
       </div>
       <div id="reclamosList">
         <div class="skeleton skeleton-doc"></div>
@@ -183,8 +195,8 @@
 
     <!-- PROVEEDORES -->
     <div id="tab-proveedores" class="tab-content">
-      <a href="#" class="form-link admin-only" id="formProveedores" onclick="formProveedores(); return false;">+ Agregar Proveedor</a>
-      <button class="reload-btn" onclick="reloadTab('proveedores')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formProveedores" onclick="formProveedores()"><md-icon slot="icon">add</md-icon>Agregar Proveedor</md-filled-button>
+      <md-icon-button onclick="reloadTab('proveedores')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="cards-grid" id="proveedoresGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -194,12 +206,12 @@
 
     <!-- ASAMBLEAS -->
     <div id="tab-asambleas" class="tab-content">
-      <a href="#" class="form-link admin-only" id="formAsambleas" onclick="formAsambleas(); return false;">+ Agregar Asamblea</a>
-      <button class="reload-btn" onclick="reloadTab('asambleas')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formAsambleas" onclick="formAsambleas()"><md-icon slot="icon">add</md-icon>Agregar Asamblea</md-filled-button>
+      <md-icon-button onclick="reloadTab('asambleas')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="asambleasChips">
-        <span class="chip active" onclick="filterAsambleas('Todos')">Todos</span>
-        <span class="chip" onclick="filterAsambleas('Ordinaria')">Ordinarias</span>
-        <span class="chip" onclick="filterAsambleas('Extraordinaria')">Extraordinarias</span>
+        <md-filter-chip label="Todos" selected onclick="filterAsambleas('Todos')"></md-filter-chip>
+        <md-filter-chip label="Ordinarias" onclick="filterAsambleas('Ordinaria')"></md-filter-chip>
+        <md-filter-chip label="Extraordinarias" onclick="filterAsambleas('Extraordinaria')"></md-filter-chip>
       </div>
       <div id="asambleasTimeline">
         <div class="skeleton skeleton-card"></div>
@@ -209,12 +221,12 @@
 
     <!-- ENCUESTAS -->
     <div id="tab-encuestas" class="tab-content">
-      <a href="#" class="form-link admin-only" id="formEncuestas" onclick="formEncuestas(); return false;">+ Nueva Encuesta</a>
-      <button class="reload-btn" onclick="reloadTab('encuestas')">↻ Recargar</button>
+      <md-filled-button class="admin-only" id="formEncuestas" onclick="formEncuestas()"><md-icon slot="icon">add</md-icon>Nueva Encuesta</md-filled-button>
+      <md-icon-button onclick="reloadTab('encuestas')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="encuestasChips">
-        <span class="chip active" onclick="filterEncuestas('Todos')">Todas</span>
-        <span class="chip" onclick="filterEncuestas('Abiertas')">Abiertas</span>
-        <span class="chip" onclick="filterEncuestas('Cerradas')">Cerradas</span>
+        <md-filter-chip label="Todas" selected onclick="filterEncuestas('Todos')"></md-filter-chip>
+        <md-filter-chip label="Abiertas" onclick="filterEncuestas('Abiertas')"></md-filter-chip>
+        <md-filter-chip label="Cerradas" onclick="filterEncuestas('Cerradas')"></md-filter-chip>
       </div>
       <div id="encuestasList">
         <div class="skeleton skeleton-card"></div>
@@ -224,7 +236,7 @@
 
     <!-- CONFIGURACIÓN -->
     <div id="tab-config" class="tab-content">
-      <button class="reload-btn" onclick="reloadTab('config')">↻ Recargar</button>
+      <md-icon-button onclick="reloadTab('config')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
 
       <!-- Parcelas + Montos -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem" class="config-duo">
@@ -233,10 +245,10 @@
           <h4>Parcelas</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cantidad total y nombre de las parcelas</p>
           <div class="form-row">
-            <div class="form-group"><label>Cantidad</label><input id="cfgParcelasCantidad" type="number" min="1" placeholder="40"></div>
-            <div class="form-group"><label>Prefijo</label><input id="cfgParcelasPrefijo" type="text" placeholder="Terreno"></div>
+            <div class="form-group"><label>Cantidad</label><md-filled-text-field id="cfgParcelasCantidad" type="number" min="1" placeholder="40" style="width:100%"></md-filled-text-field></div>
+            <div class="form-group"><label>Prefijo</label><md-filled-text-field id="cfgParcelasPrefijo" type="text" placeholder="Terreno" style="width:100%"></md-filled-text-field></div>
           </div>
-          <button class="btn btn-primary" id="btnAplicarParcelas" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Aplicar</button>
+          <md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Aplicar</md-filled-button>
         </div>
 
         <!-- Montos -->
@@ -244,10 +256,10 @@
           <h4>Montos Base</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos fijos que se usan para calcular expensas</p>
           <div class="form-row">
-            <div class="form-group"><label>Gasto común base</label><input id="cfgGastoComunBase" type="number" min="0" placeholder="50000"></div>
-            <div class="form-group"><label>Fondo reserva</label><input id="cfgFondoReserva" type="number" min="0" placeholder="15000"></div>
+            <div class="form-group"><label>Gasto común base</label><md-filled-text-field id="cfgGastoComunBase" type="number" min="0" placeholder="50000" style="width:100%"></md-filled-text-field></div>
+            <div class="form-group"><label>Fondo reserva</label><md-filled-text-field id="cfgFondoReserva" type="number" min="0" placeholder="15000" style="width:100%"></md-filled-text-field></div>
           </div>
-          <button class="btn btn-primary" id="btnGuardarMontos" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</button>
+          <md-filled-button id="btnGuardarMontos" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</md-filled-button>
         </div>
       </div>
 
@@ -255,70 +267,52 @@
       <div class="card" style="margin-bottom:1rem">
         <h4>Categorías de Documentos</h4>
         <div id="cfgCategoriasDocs"></div>
-        <button class="btn btn-primary" onclick="openModalCategoriaDoc()" style="margin-top:0.8rem">+ Agregar</button>
+        <md-filled-button onclick="openModalCategoriaDoc()" style="margin-top:0.8rem"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button>
       </div>
 
       <!-- Rubros proveedores -->
       <div class="card" style="margin-bottom:1rem">
         <h4>Rubros de Proveedores</h4>
         <div id="cfgRubrosProveedores"></div>
-        <button class="btn btn-primary" onclick="openModalRubroProveedor()" style="margin-top:0.8rem">+ Agregar</button>
+        <md-filled-button onclick="openModalRubroProveedor()" style="margin-top:0.8rem"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button>
       </div>
 
       <!-- Conceptos flujo -->
       <div class="card" style="margin-bottom:1rem">
         <h4>Conceptos de Ingresos/Egresos</h4>
         <div id="cfgConceptosFlujo"></div>
-        <button class="btn btn-primary" onclick="openModalConceptoFlujo()" style="margin-top:0.8rem">+ Agregar</button>
+        <md-filled-button onclick="openModalConceptoFlujo()" style="margin-top:0.8rem"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button>
       </div>
 
     </div>
 
   </div>
 
-  <div id="modalOverlay" class="modal-overlay">
-    <div class="modal" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <h3 id="modalTitle"></h3>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body" id="modalBody"></div>
-      <div class="modal-footer" id="modalFooter"></div>
-      <div id="modalLoading" class="modal-loading" style="display:none">
-        <div class="spinner"></div>
-        <span>Guardando...</span>
-      </div>
+  <md-dialog id="mainDialog">
+    <div slot="headline"><span id="modalTitle"></span></div>
+    <div slot="content" id="modalBody"></div>
+    <div id="modalLoading" style="display:none;position:fixed;inset:0;background:var(--modal-loading-bg);flex-direction:column;justify-content:center;align-items:center;gap:0.8rem;z-index:10">
+      <md-circular-progress indeterminate></md-circular-progress>
+      <span style="font-size:0.9rem;color:var(--text-2);font-weight:500">Guardando...</span>
     </div>
-  </div>
+    <div slot="actions" id="modalFooter"></div>
+  </md-dialog>
 
-  <div class="modal-overlay" id="loginModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 id="loginModalTitle">Iniciar sesión</h3>
-        <button class="modal-close" onclick="closeLoginModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="loginForm" onsubmit="handleLogin(event)">
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" name="password" required>
-          </div>
-          <div id="loginError" style="color:#b91c1c;font-size:0.85rem;margin-bottom:1rem"></div>
-          <div class="form-actions">
-            <button type="button" class="btn btn-secondary" onclick="closeLoginModal()">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-          </div>
-        </form>
-        <div style="text-align:center;margin-top:1rem">
-          <a href="#" onclick="showSignupForm(); return false" style="color:#2563eb;font-size:0.85rem">Crear cuenta</a>
-        </div>
-      </div>
+  <md-dialog id="loginDialog">
+    <div slot="headline">Iniciar sesión</div>
+    <form slot="content" id="loginForm" onsubmit="handleLogin(event)" style="display:flex;flex-direction:column;gap:0.5rem">
+      <md-filled-text-field label="Email" type="email" name="email" required style="width:100%"></md-filled-text-field>
+      <md-filled-text-field label="Contraseña" type="password" name="password" required style="width:100%"></md-filled-text-field>
+      <div id="loginError" style="color:#b91c1c;font-size:0.85rem;margin-bottom:0.5rem"></div>
+    </form>
+    <div slot="actions">
+      <md-text-button onclick="closeLoginModal()">Cancelar</md-text-button>
+      <md-filled-button type="submit" form="loginForm">Entrar</md-filled-button>
     </div>
-  </div>
+    <div style="text-align:center;padding:0 1.5rem 1rem">
+      <md-text-button onclick="showSignupForm()">Crear cuenta</md-text-button>
+    </div>
+  </md-dialog>
 
   <script src="js/supabase-config.js"></script>
   <script src="js/config.js"></script>

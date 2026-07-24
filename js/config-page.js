@@ -58,29 +58,43 @@ function renderChipList(items, removeFn, usedItems) {
     return '<span style="color:var(--text-muted);font-size:0.85rem">Sin elementos</span>';
   }
   var used = usedItems || [];
-  return '<div style="display:flex;flex-wrap:wrap;gap:0.5rem">' + items.map(function(item, i) {
+  return '<div class="chip-list" data-removefn="' + removeFn + '" style="display:flex;flex-wrap:wrap;gap:0.5rem">' + items.map(function(item, i) {
     var isInUse = used.indexOf(item) !== -1;
-    var btn = isInUse
-      ? '<span style="color:var(--text-muted);font-size:0.7rem" title="En uso — no se puede eliminar">&#128274;</span>'
-      : '<button onclick="' + removeFn + '(' + i + ')" style="background:none;border:none;color:#b91c1c;cursor:pointer;font-size:0.9rem;line-height:1" title="Eliminar">&times;</button>';
-    var style = isInUse ? 'opacity:0.6;cursor:default' : '';
-    return '<span class="chip" style="display:inline-flex;align-items:center;gap:0.3rem;' + style + '">' + item + ' ' + btn + '</span>';
+    if (isInUse) {
+      return '<md-assist-chip>' + item + '</md-assist-chip>';
+    }
+    return '<div class="chip-remove-wrapper" data-fn="' + removeFn + '" data-idx="' + i + '" style="cursor:pointer"><md-input-chip removable>' + item + '</md-input-chip></div>';
   }).join('') + '</div>';
 }
 
+document.addEventListener('click', function(e) {
+  var path = e.composedPath();
+  var wrapper = null;
+  for (var i = 0; i < path.length; i++) {
+    if (path[i].classList && path[i].classList.contains('chip-remove-wrapper')) {
+      wrapper = path[i];
+      break;
+    }
+  }
+  if (!wrapper) return;
+  e.preventDefault();
+  e.stopPropagation();
+  var fn = wrapper.dataset.fn;
+  var idx = parseInt(wrapper.dataset.idx);
+  if (fn && !isNaN(idx)) {
+    window[fn](idx);
+  }
+}, true);
+
 // --- MODAL HELPER ---
 function openConfigModal(title, placeholder, onAdd) {
-  var overlay = document.getElementById('modalOverlay');
-  var titleEl = document.getElementById('modalTitle');
-  var body = document.querySelector('.modal-body');
-  titleEl.textContent = title;
-  body.innerHTML =
-    '<div class="form-group"><label>Nombre</label><input id="cfgModalInput" type="text" placeholder="' + placeholder + '" autofocus></div>' +
-    '<div class="form-actions">' +
-      '<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>' +
-      '<button class="btn btn-primary" id="cfgModalAddBtn">Agregar</button>' +
-    '</div>';
-  overlay.classList.add('active');
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML =
+    '<div class="form-group"><label>Nombre</label><md-filled-text-field id="cfgModalInput" placeholder="' + placeholder + '" style="width:100%"></md-filled-text-field></div>';
+  document.getElementById('modalFooter').innerHTML =
+    '<md-text-button onclick="closeModal()">Cancelar</md-text-button>' +
+    '<md-filled-button id="cfgModalAddBtn">Agregar</md-filled-button>';
+  document.getElementById('mainDialog').show();
   document.getElementById('cfgModalInput').focus();
   document.getElementById('cfgModalAddBtn').onclick = async function() {
     var val = document.getElementById('cfgModalInput').value.trim();
