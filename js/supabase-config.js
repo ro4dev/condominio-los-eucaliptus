@@ -192,6 +192,20 @@ async function supabaseUpload(file, bucket, folder) {
     showSnackbar('Debes iniciar sesión.', 'info');
     return null;
   }
+
+  if (file.type.startsWith('image/') && file.size > 500 * 1024) {
+    var opts = {
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true
+    };
+    try {
+      file = await imageCompression(file, opts);
+    } catch (e) {
+      console.warn('Compresión fallida, subiendo original:', e);
+    }
+  }
+
   var ext = file.name.split('.').pop();
   var dir = folder || currentUser.id;
   var path = dir + '/' + Date.now() + '.' + ext;
