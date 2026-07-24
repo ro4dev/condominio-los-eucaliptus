@@ -192,7 +192,15 @@ function handleForm(e) {
         return supabaseInsert(tbl, payload);
       };
 
-      if (table === 'asambleas') {
+      if (table === 'propietarios' && !isEdit) {
+        supabaseClient.functions.invoke('create-user', { body: data }).then(function(res) {
+          if (res.error) {
+            submitError(res.error.message || 'Error al crear usuario');
+          } else {
+            afterSave();
+          }
+        });
+      } else if (table === 'asambleas') {
         var asistentesStr = data.asistentes || '';
         var asistentesIds = asistentesStr ? asistentesStr.split(', ') : [];
         delete data.asistentes;

@@ -16,13 +16,25 @@ function deleteItem(table, id, arrayName, renderFn) {
       renderFn();
     } else {
       showLoading();
-      supabaseDelete(table, id).then(function(result) {
-        hideLoading();
-        if (result) {
-          showSnackbar('Eliminado correctamente.', 'success');
-          reloadTab(getCurrentTab());
-        }
-      });
+      if (table === 'propietarios') {
+        supabaseClient.functions.invoke('delete-user', { body: { propietario_id: id } }).then(function(res) {
+          hideLoading();
+          if (res.error) {
+            showSnackbar(res.error.message || 'Error al eliminar', 'error');
+          } else {
+            showSnackbar('Eliminado correctamente.', 'success');
+            reloadTab(getCurrentTab());
+          }
+        });
+      } else {
+        supabaseDelete(table, id).then(function(result) {
+          hideLoading();
+          if (result) {
+            showSnackbar('Eliminado correctamente.', 'success');
+            reloadTab(getCurrentTab());
+          }
+        });
+      }
     }
   });
 }
