@@ -100,7 +100,7 @@ function renderTable(data) {
   document.getElementById('tableGastos').style.display = 'table';
   var tbody = document.getElementById('tableBody');
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(function(r) {
@@ -109,6 +109,7 @@ function renderTable(data) {
       '<td>' + formatPeriodo(r.periodo) + '</td>' +
       '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
       '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank">Ver</a>' : '') + '</td>' +
+      '<td>' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>' +
       '</tr>';
   }).join('');
 }
@@ -618,6 +619,21 @@ async function votarEncuesta(encuestaId, seleccion) {
 function editPropietario(id) {
   var data = PROPIETARIOS.find(function(p) { return p.id === id; });
   if (data) formPropietarios(data);
+}
+
+function editGasto(id) {
+  var data = GASTOS.find(function(g) { return g.id === id; });
+  if (data) formGastos(data);
+}
+
+function deleteGasto(id) {
+  deleteItem('gastos', id, 'GASTOS', renderStatsAndTable);
+}
+
+function renderStatsAndTable() {
+  var data = filteredData();
+  renderStats(data);
+  renderTable(data);
 }
 
 function editParcela(id) {

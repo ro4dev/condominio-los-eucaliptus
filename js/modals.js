@@ -291,36 +291,70 @@ function getCurrentTab() {
   return active.id.replace('tab-', '');
 }
 
-function formGastos() {
+function formGastos(opt) {
+  var isEdit = opt && typeof opt === 'object';
+  var data = isEdit ? opt : null;
   if (PARCELAS.length === 0) {
-    loadJson('PARCELAS').then(function() { formGastos(); });
+    loadJson('PARCELAS').then(function() { formGastos(opt); });
     return;
   }
-  var parcelas = PARCELAS.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
-  openModal('Agregar Gasto', '<form id="modalForm" data-table="gastos" onsubmit="handleForm(event)">' +
+  var sorted = PARCELAS.slice().sort(function(a, b) {
+    var numA = parseInt((a['numero'] || '').replace(/\D/g, '')) || 0;
+    var numB = parseInt((b['numero'] || '').replace(/\D/g, '')) || 0;
+    return numA - numB;
+  });
+  var parcelas = sorted.map(function(p) {
+    var sel = isEdit && data.parcela_id === p.id ? ' selected' : '';
+    return '<option value="' + p.id + '"' + sel + '>' + p.numero + '</option>';
+  }).join('');
+  openModal(isEdit ? 'Editar Gasto' : 'Agregar Gasto', '<form id="modalForm" data-table="gastos" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<input type="hidden" name="concepto" id="gastoConcepto">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Periodo *</label><input type="month" name="periodo" required id="gastoPeriodo"></div>' +
+      '<div class="form-group"><label>Periodo *</label><input type="month" name="periodo" required id="gastoPeriodo"' + (isEdit ? ' value="' + data.periodo + '"' : '') + '></div>' +
       '<div class="form-group"><label>Parcela *</label><select name="parcela_id" required id="gastoParcela">' + parcelas + '</select></div>' +
     '</div>' +
-    '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required></div>' +
-    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)"></textarea></div>' +
+    '<div class="form-group"><label>Monto *</label><input type="number" name="monto" min="0" placeholder="0" required' + (isEdit ? ' value="' + data.monto + '"' : '') + '></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
+    (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
   '</form>',
-  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">Guardar</button>');
+  '<button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn btn-primary" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</button>');
   document.getElementById('gastoPeriodo').addEventListener('change', updateGastoParcelas);
+  document.getElementById('gastoParcela').addEventListener('change', updateGastoConcepto);
+  updateGastoConcepto();
 }
 
 function updateGastoParcelas() {
   var periodo = document.getElementById('gastoPeriodo').value;
   var select = document.getElementById('gastoParcela');
   var usadas = GASTOS.filter(function(g) { return g.periodo === periodo; }).map(function(g) { return g.parcela_id; });
-  select.innerHTML = PARCELAS.filter(function(p) { return usadas.indexOf(p.id) === -1; })
-    .map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
+  var sorted = PARCELAS.filter(function(p) { return usadas.indexOf(p.id) === -1; }).slice().sort(function(a, b) {
+    var numA = parseInt((a['numero'] || '').replace(/\D/g, '')) || 0;
+    var numB = parseInt((b['numero'] || '').replace(/\D/g, '')) || 0;
+    return numA - numB;
+  });
+  select.innerHTML = sorted.map(function(p) { return '<option value="' + p.id + '">' + p.numero + '</option>'; }).join('');
   if (select.options.length === 0) {
     select.innerHTML = '<option value="">Todas las parcelas ya tienen gasto</option>';
     select.disabled = true;
   } else {
     select.disabled = false;
+  }
+  updateGastoConcepto();
+}
+
+function updateGastoConcepto() {
+  var periodo = document.getElementById('gastoPeriodo').value || '';
+  var select = document.getElementById('gastoParcela');
+  var option = select.options[select.selectedIndex];
+  var numero = option ? option.textContent : '';
+  var conceptoEl = document.getElementById('gastoConcepto');
+  if (periodo && numero) {
+    var parts = periodo.split('-');
+    conceptoEl.value = 'GC_' + parts[1] + '_' + parts[0] + '_' + numero;
+  } else {
+    conceptoEl.value = '';
   }
 }
 
