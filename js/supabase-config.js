@@ -107,7 +107,11 @@ async function handleLogin(e) {
   var result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
   if (result.error) {
     if (errorEl) {
-      errorEl.textContent = result.error.message;
+      if (result.error.message.indexOf('Invalid login credentials') !== -1) {
+        errorEl.textContent = 'Email o contraseña incorrectos';
+      } else {
+        errorEl.textContent = result.error.message;
+      }
     }
   } else {
     closeLoginModal();
