@@ -1,4 +1,4 @@
-md-tabs.tabs { display: block; margin-bottom: 1.5rem; }
+md-tabs.tabs { display: block; margin-bottom: 1.5rem; overflow-x: auto; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 .tab-content > md-filled-button { margin-bottom: 1rem; }
