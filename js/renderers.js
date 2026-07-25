@@ -9,7 +9,9 @@ function adminActions(editFn, deleteFn) {
 
 function deleteItem(table, id, arrayName, renderFn) {
   if (!IS_ADMIN) return;
-  showConfirm('¿Eliminar este registro?', function() {
+  var nombres = { gastos: 'este gasto', noticias: 'esta noticia', flujo: 'este movimiento', documentos: 'este documento', proveedores: 'este proveedor', propietarios: 'este propietario' };
+  var nombre = nombres[table] || 'este registro';
+  showConfirm('¿Estás seguro de eliminar ' + nombre + '? Esta acción no se puede deshacer.', function() {
     if (DEMO_MODE) {
       window[arrayName] = window[arrayName].filter(function(item) { return item.id !== id; });
       showSnackbar('Eliminado (demo).', 'success');
@@ -687,7 +689,7 @@ function editAsamblea(id) {
 
 function deleteAsamblea(id) {
   if (!IS_ADMIN) return;
-  showConfirm('¿Eliminar esta asamblea?', function() {
+  showConfirm('¿Eliminar esta asamblea? Se perderán todos los datos y asistentes asociados. Esta acción no se puede deshacer.', function() {
     if (DEMO_MODE) {
       ASAMBLEAS = ASAMBLEAS.filter(function(a) { return a.id !== id; });
       ASAMBLEA_ASISTENTES = ASAMBLEA_ASISTENTES.filter(function(aa) { return aa.asamblea_id !== id; });
