@@ -138,7 +138,7 @@ function openModalCategoriaDoc() {
 function removeCategoriaDoc(i) {
   var cat = (CONFIG.categorias_documentos || [])[i];
   if (!cat) return;
-  showConfirm('¿Eliminar categoría "' + cat + '"?', function() {
+  showConfirm('¿Eliminar la categoría "' + cat + '"? Los documentos asociados no se eliminarán, pero quedarán sin categoría.', function() {
     var cats = CONFIG.categorias_documentos || [];
     cats.splice(i, 1);
     CONFIG.categorias_documentos = cats;
@@ -178,7 +178,7 @@ function openModalRubroProveedor() {
 function removeRubroProveedor(i) {
   var rubro = (CONFIG.rubros_proveedores || [])[i];
   if (!rubro) return;
-  showConfirm('¿Eliminar rubro "' + rubro + '"?', function() {
+  showConfirm('¿Eliminar el rubro "' + rubro + '"? Los proveedores asociados no se eliminarán, pero quedarán sin rubro.', function() {
     var rubros = CONFIG.rubros_proveedores || [];
     rubros.splice(i, 1);
     CONFIG.rubros_proveedores = rubros;
@@ -218,7 +218,7 @@ function openModalConceptoFlujo() {
 function removeConceptoFlujo(i) {
   var concepto = (CONFIG.conceptos_flujo || [])[i];
   if (!concepto) return;
-  showConfirm('¿Eliminar concepto "' + concepto + '"?', function() {
+  showConfirm('¿Eliminar el concepto "' + concepto + '"? Los movimientos asociados no se eliminarán, pero quedarán sin concepto.', function() {
     var conceptos = CONFIG.conceptos_flujo || [];
     conceptos.splice(i, 1);
     CONFIG.conceptos_flujo = conceptos;
