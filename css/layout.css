@@ -1,8 +1,7 @@
 md-tabs.tabs { display: block; margin-bottom: 1.5rem; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
-.tab-content > md-filled-button,
-.tab-content > md-icon-button { margin-bottom: 1rem; }
+.tab-content > md-filled-button { margin-bottom: 1rem; }
 
 .filters { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
 .filters md-outlined-select { min-width: 150px; }

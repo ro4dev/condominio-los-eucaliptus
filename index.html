@@ -63,7 +63,6 @@
     <!-- GASTOS COMUNES -->
     <div id="tab-cuenta" class="tab-content active">
       <md-filled-button class="admin-only" id="formGastos" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Gasto</md-filled-button>
-      <md-icon-button onclick="reloadTab('cuenta')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <section class="stats" id="stats">
         <div class="skeleton skeleton-stat"></div>
         <div class="skeleton skeleton-stat"></div>
@@ -110,7 +109,6 @@
 
     <!-- PARCELAS -->
     <div id="tab-parcelas" class="tab-content">
-      <md-icon-button onclick="reloadTab('parcelas')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="cards-grid" id="parcelasGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -122,7 +120,6 @@
     <!-- NOTICIAS -->
     <div id="tab-noticias" class="tab-content">
       <md-filled-button class="admin-only" id="formNoticias" onclick="formNoticias()"><md-icon slot="icon">add</md-icon>Agregar Noticia</md-filled-button>
-      <md-icon-button onclick="reloadTab('noticias')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="noticiasFilter">
         <md-filter-chip label="Vigentes" selected onclick="filterNoticias('vigentes')"></md-filter-chip>
         <md-filter-chip label="No vigentes" onclick="filterNoticias('no_vigentes')"></md-filter-chip>
@@ -138,7 +135,6 @@
     <!-- INGRESOS/EGRESOS -->
     <div id="tab-flujo" class="tab-content">
       <md-filled-button class="admin-only" id="formFlujo" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
-      <md-icon-button onclick="reloadTab('flujo')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <section class="stats" id="flujoStats">
         <div class="skeleton skeleton-stat"></div>
         <div class="skeleton skeleton-stat"></div>
@@ -160,7 +156,6 @@
     <!-- DOCUMENTOS -->
     <div id="tab-documentos" class="tab-content">
       <md-filled-button class="admin-only" id="formDocumentos" onclick="formDocumentos()"><md-icon slot="icon">add</md-icon>Agregar Documento</md-filled-button>
-      <md-icon-button onclick="reloadTab('documentos')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="documentosChips">
         <md-filter-chip label="Todos" selected onclick="filterDocumentos('Todos')"></md-filter-chip>
         <md-filter-chip label="Estatuto" onclick="filterDocumentos('Estatuto')"></md-filter-chip>
@@ -180,7 +175,6 @@
     <!-- RECLAMOS/SUGERENCIAS -->
     <div id="tab-reclamos" class="tab-content">
       <md-filled-button id="formReclamos" onclick="formReclamos()"><md-icon slot="icon">add</md-icon>Agregar Reclamo/Sugerencia</md-filled-button>
-      <md-icon-button onclick="reloadTab('reclamos')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="reclamosFilter">
         <md-filter-chip label="Todos" selected onclick="filterReclamos('todos')"></md-filter-chip>
         <md-filter-chip label="Reclamos" onclick="filterReclamos('Reclamo')"></md-filter-chip>
@@ -196,7 +190,6 @@
     <!-- PROVEEDORES -->
     <div id="tab-proveedores" class="tab-content">
       <md-filled-button class="admin-only" id="formProveedores" onclick="formProveedores()"><md-icon slot="icon">add</md-icon>Agregar Proveedor</md-filled-button>
-      <md-icon-button onclick="reloadTab('proveedores')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="cards-grid" id="proveedoresGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -207,7 +200,6 @@
     <!-- ASAMBLEAS -->
     <div id="tab-asambleas" class="tab-content">
       <md-filled-button class="admin-only" id="formAsambleas" onclick="formAsambleas()"><md-icon slot="icon">add</md-icon>Agregar Asamblea</md-filled-button>
-      <md-icon-button onclick="reloadTab('asambleas')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="asambleasChips">
         <md-filter-chip label="Todos" selected onclick="filterAsambleas('Todos')"></md-filter-chip>
         <md-filter-chip label="Ordinarias" onclick="filterAsambleas('Ordinaria')"></md-filter-chip>
@@ -222,7 +214,6 @@
     <!-- ENCUESTAS -->
     <div id="tab-encuestas" class="tab-content">
       <md-filled-button class="admin-only" id="formEncuestas" onclick="formEncuestas()"><md-icon slot="icon">add</md-icon>Nueva Encuesta</md-filled-button>
-      <md-icon-button onclick="reloadTab('encuestas')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
       <div class="filter-chips" id="encuestasChips">
         <md-filter-chip label="Todas" selected onclick="filterEncuestas('Todos')"></md-filter-chip>
         <md-filter-chip label="Abiertas" onclick="filterEncuestas('Abiertas')"></md-filter-chip>
@@ -236,7 +227,6 @@
 
     <!-- CONFIGURACIÓN -->
     <div id="tab-config" class="tab-content">
-      <md-icon-button onclick="reloadTab('config')" title="Recargar"><md-icon>refresh</md-icon></md-icon-button>
 
       <!-- Parcelas + Montos -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem" class="config-duo">

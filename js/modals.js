@@ -40,19 +40,6 @@ function hideLoading() {
 }
 
 function confirmCloseModal() {
-  var body = document.getElementById('modalBody');
-  var inputs = body.querySelectorAll('input:not([type="file"]):not([type="hidden"]), textarea, select, md-filled-text-field, md-outlined-text-field, md-filled-select');
-  var hasData = false;
-  inputs.forEach(function(el) {
-    var val = el.value || '';
-    if (val.trim && val.trim() !== '') {
-      hasData = true;
-    }
-  });
-  if (hasData) {
-    showConfirm('¿Cerrar? Se perderán los datos ingresados.', function() { closeModal(); }, 'Cerrar');
-    return;
-  }
   closeModal();
 }
 
@@ -402,8 +389,8 @@ function formPropietarios(opt) {
     '<div class="form-row">' +
       '<div class="form-group"><label>RUT</label><md-outlined-text-field name="rut" placeholder="12.345.678-9" style="width:100%"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></md-outlined-text-field></div>' +
       (isFromParcela
-        ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><label>Parcela</label><div style="padding:0.6rem 0.8rem;font-size:0.85rem;color:var(--text-2);background:var(--skeleton-1);border-radius:8px">' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</div></div>'
-        : '<div class="form-group"><label>Parcela *</label><md-filled-select name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>') +
+        ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><label>Parcela</label><md-outlined-select disabled style="width:100%"><md-select-option value="' + parcelaId + '" selected>' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</md-select-option></md-outlined-select></div>'
+        : '<div class="form-group"><label>Parcela *</label><md-outlined-select name="parcela_id" required style="width:100%">' + parcelas + '</md-outlined-select></div>') +
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Teléfono</label><md-outlined-text-field type="tel" name="telefono" placeholder="+56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-outlined-text-field></div>' +
