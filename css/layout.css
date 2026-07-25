@@ -4,7 +4,7 @@ md-tabs.tabs { display: block; margin-bottom: 1.5rem; }
 .tab-content > md-filled-button { margin-bottom: 1rem; }
 
 .filters { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
-.filters md-outlined-select { min-width: 150px; }
+.filters md-filled-select { min-width: 150px; }
 
 header > div { flex-wrap: wrap; }
 header > div > div:last-child { min-width: 0; }
