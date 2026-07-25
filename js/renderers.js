@@ -219,7 +219,7 @@ function renderNoticias() {
 
 function renderNoticiaCard(n, old) {
   var fecha = formatDate(n.fecha || n.created_at);
-  var style = old ? 'opacity:0.6;' : '';
+  var style = '';
   return '<div class="news-card" style="margin-bottom:1rem;' + style + '">' +
     '<div style="display:flex;justify-content:space-between;align-items:center">' +
       '<h4 style="margin:0;flex:1">' + (n.titulo || '') + '</h4>' +
