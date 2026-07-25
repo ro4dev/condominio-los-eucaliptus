@@ -116,6 +116,12 @@ md-dialog {
 md-dialog [slot="headline"] {
   padding: 24px 24px 0;
 }
+md-dialog [slot="content"] {
+  padding: 0 24px;
+}
+md-dialog [slot="actions"] {
+  padding: 0 24px 24px;
+}
 
 /* M3: dark mode overrides (only for components that need extra tuning) */
 body.dark {
