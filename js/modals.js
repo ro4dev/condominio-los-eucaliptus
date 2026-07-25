@@ -55,8 +55,8 @@ function handleForm(e) {
   var data = {};
   form.querySelectorAll('input[type="hidden"]').forEach(function(inp) { if (inp.name) data[inp.name] = inp.value; });
   form.querySelectorAll('input:not([type="file"]):not([type="hidden"]), textarea, select').forEach(function(el) { if (el.name) data[el.name] = el.value; });
-  form.querySelectorAll('md-filled-text-field, md-outlined-text-field').forEach(function(el) { if (el.name) data[el.name] = el.value; });
-  form.querySelectorAll('md-filled-select, md-outlined-select').forEach(function(el) { if (el.name) data[el.name] = el.value; });
+  form.querySelectorAll('md-filled-text-field, md-filled-text-field').forEach(function(el) { if (el.name) data[el.name] = el.value; });
+  form.querySelectorAll('md-filled-select, md-filled-select').forEach(function(el) { if (el.name) data[el.name] = el.value; });
   form.querySelectorAll('input[type="file"]').forEach(function(inp) {
     if (inp.files.length === 0) delete data[inp.name];
   });
@@ -359,7 +359,7 @@ function formParcelas(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
       '<div class="form-group"><label>Número *</label><md-filled-text-field name="numero" placeholder="Ej: 1, 2A, 15" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.numero) + '"' : '') + '></md-filled-text-field></div>' +
-      '<div class="form-group"><label>Rol</label><md-outlined-text-field name="rol" placeholder="Rol de la propiedad" style="width:100%"' + (isEdit && data.rol ? ' value="' + escHtml(data.rol) + '"' : '') + '></md-outlined-text-field></div>' +
+      '<div class="form-group"><label>Rol</label><md-filled-text-field name="rol" placeholder="Rol de la propiedad" style="width:100%"' + (isEdit && data.rol ? ' value="' + escHtml(data.rol) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Metros² *</label><md-filled-text-field type="number" name="metros" min="0" placeholder="0" required style="width:100%"' + (isEdit ? ' value="' + data.metros + '"' : '') + '></md-filled-text-field></div>' +
@@ -387,14 +387,14 @@ function formPropietarios(opt) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Nombre completo *</label><md-filled-text-field name="nombre_completo" placeholder="Juan Pérez" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.nombre_completo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>RUT</label><md-outlined-text-field name="rut" placeholder="12.345.678-9" style="width:100%"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></md-outlined-text-field></div>' +
+      '<div class="form-group"><label>RUT</label><md-filled-text-field name="rut" placeholder="12.345.678-9" style="width:100%"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></md-filled-text-field></div>' +
       (isFromParcela
-        ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><label>Parcela</label><md-outlined-select disabled style="width:100%"><md-select-option value="' + parcelaId + '" selected>' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</md-select-option></md-outlined-select></div>'
-        : '<div class="form-group"><label>Parcela *</label><md-outlined-select name="parcela_id" required style="width:100%">' + parcelas + '</md-outlined-select></div>') +
+        ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><label>Parcela</label><md-filled-select disabled style="width:100%"><md-select-option value="' + parcelaId + '" selected>' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</md-select-option></md-filled-select></div>'
+        : '<div class="form-group"><label>Parcela *</label><md-filled-select name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>') +
     '</div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Teléfono</label><md-outlined-text-field type="tel" name="telefono" placeholder="+56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-outlined-text-field></div>' +
-      '<div class="form-group"><label>Email</label><md-outlined-text-field type="email" name="email" placeholder="correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-outlined-text-field></div>' +
+      '<div class="form-group"><label>Teléfono</label><md-filled-text-field type="tel" name="telefono" placeholder="+56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><label>Email</label><md-filled-text-field type="email" name="email" placeholder="correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><label>Tipo</label><md-filled-select name="tipo" style="width:100%">' +
       '<md-select-option value="Propietario"' + (isEdit && data.tipo === 'Propietario' ? ' selected' : '') + '>Propietario</md-select-option>' +
@@ -412,7 +412,7 @@ function formNoticias(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Título *</label><md-filled-text-field name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Descripción *</label><md-filled-text-field textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required style="width:100%">' + (isEdit ? escHtml(data.descripcion) : '') + '</md-filled-text-field></div>' +
-    '<div class="form-group"><label>Vigente hasta</label><md-outlined-text-field type="date" name="fecha_hasta" style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-outlined-text-field></div>' +
+    '<div class="form-group"><label>Vigente hasta</label><md-filled-text-field type="date" name="fecha_hasta" style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-filled-text-field></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }
@@ -483,10 +483,10 @@ function formProveedores(data) {
     '</div>' +
     '<div class="form-group"><label>Contacto *</label><md-filled-text-field name="contacto" placeholder="Nombre de la persona de contacto" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.contacto) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Teléfono</label><md-outlined-text-field type="tel" name="telefono" placeholder="+56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-outlined-text-field></div>' +
-      '<div class="form-group"><label>Email</label><md-outlined-text-field type="email" name="email" placeholder="correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-outlined-text-field></div>' +
+      '<div class="form-group"><label>Teléfono</label><md-filled-text-field type="tel" name="telefono" placeholder="+56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><label>Email</label><md-filled-text-field type="email" name="email" placeholder="correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
-    '<div class="form-group"><label>Web/Instagram</label><md-outlined-text-field name="web_instagram" placeholder="https://..." style="width:100%"' + (isEdit && data.web_instagram ? ' value="' + escHtml(data.web_instagram) + '"' : '') + '></md-outlined-text-field></div>' +
+    '<div class="form-group"><label>Web/Instagram</label><md-filled-text-field name="web_instagram" placeholder="https://..." style="width:100%"' + (isEdit && data.web_instagram ? ' value="' + escHtml(data.web_instagram) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Observaciones</label><md-filled-text-field textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)" style="width:100%">' + (isEdit ? escHtml(data.observaciones || '') : '') + '</md-filled-text-field></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
@@ -536,8 +536,8 @@ function formEncuestas(data) {
         '<md-switch id="encuestaModoAlt" onchange="toggleEncuestaAlternativas()"></md-switch>' +
       '</div>' +
       '<div id="encuestaAlternativas" style="display:none">' +
-        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-outlined-text-field class="encuesta-alt-input" placeholder="Opción 1" style="flex:1"></md-outlined-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button></div>' +
-        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-outlined-text-field class="encuesta-alt-input" placeholder="Opción 2" style="flex:1"></md-outlined-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-filled-text-field class="encuesta-alt-input" placeholder="Opción 1" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-filled-text-field class="encuesta-alt-input" placeholder="Opción 2" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button></div>' +
       '</div>' +
       '<md-filled-tonal-button id="btnAddAlt" onclick="addEncuestaAlt()" style="display:none"><md-icon slot="icon">add</md-icon>Alternativa</md-filled-tonal-button>' +
       '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>';
@@ -548,8 +548,8 @@ function formEncuestas(data) {
     '<div class="form-group"><label>Título *</label><md-filled-text-field name="titulo" placeholder="Título de la propuesta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Descripción</label><md-filled-text-field textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)" style="width:100%">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</md-filled-text-field></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Fecha de término</label><md-outlined-text-field type="date" name="fecha_termino" style="width:100%"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></md-outlined-text-field></div>' +
-      '<div class="form-group"><label>Quorum (mín. votos)</label><md-outlined-text-field type="number" name="quorum" min="0" placeholder="Sin límite" style="width:100%"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></md-outlined-text-field></div>' +
+      '<div class="form-group"><label>Fecha de término</label><md-filled-text-field type="date" name="fecha_termino" style="width:100%"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><label>Quorum (mín. votos)</label><md-filled-text-field type="number" name="quorum" min="0" placeholder="Sin límite" style="width:100%"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group">' + alternativasHtml + '</div>' +
   '</form>',
@@ -568,9 +568,9 @@ function addEncuestaAlt() {
   var count = container.querySelectorAll('.encuesta-alt-input').length + 1;
   var div = document.createElement('div');
   div.style.cssText = 'display:flex;gap:0.5rem;margin-bottom:0.4rem;align-items:center';
-  div.innerHTML = '<md-outlined-text-field class="encuesta-alt-input" placeholder="Opción ' + count + '" style="flex:1"></md-outlined-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button>';
+  div.innerHTML = '<md-filled-text-field class="encuesta-alt-input" placeholder="Opción ' + count + '" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button>';
   container.appendChild(div);
-  div.querySelector('md-outlined-text-field').focus();
+  div.querySelector('md-filled-text-field').focus();
 }
 
 function removeEncuestaAlt(btn) {

@@ -103,6 +103,10 @@ md-dialog {
   max-width: 90vw;
   max-height: 85vh;
 }
+md-dialog md-filled-text-field[type="date"],
+md-dialog md-filled-text-field[type="date"] {
+  height: 56px;
+}
 #modalBody {
   padding: 24px;
   overflow-y: auto;
