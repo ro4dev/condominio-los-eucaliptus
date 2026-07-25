@@ -4,7 +4,7 @@
     "tipo": "Ingreso",
     "concepto": "Cuotas",
     "descripcion": "Cobro expensas julio",
-    "monto": "650000",
+    "monto": "12000000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -13,7 +13,7 @@
     "tipo": "Ingreso",
     "concepto": "Cuotas",
     "descripcion": "Pago Juan Pérez",
-    "monto": "50000",
+    "monto": "3500000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -22,7 +22,7 @@
     "tipo": "Ingreso",
     "concepto": "Cuotas",
     "descripcion": "Pago María López",
-    "monto": "50000",
+    "monto": "3500000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -31,7 +31,7 @@
     "tipo": "Ingreso",
     "concepto": "Cuotas",
     "descripcion": "Pago junio (varios)",
-    "monto": "250000",
+    "monto": "4000000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -40,7 +40,16 @@
     "tipo": "Ingreso",
     "concepto": "Fondo reserva",
     "descripcion": "Cobro fondo reserva junio",
-    "monto": "90000",
+    "monto": "1500000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa ruido excesivo Pedro Rojas",
+    "monto": "500000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -49,7 +58,7 @@
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de agua",
-    "monto": "35000",
+    "monto": "8000000",
     "comprobante": "https://drive.google.com/file/d/abc123",
     "registrado_por": "Admin"
   },
@@ -57,8 +66,8 @@
     "fecha": "12/07/2026",
     "tipo": "Egreso",
     "concepto": "Servicios",
-    "descripcion": "Factura electricity junio",
-    "monto": "28000",
+    "descripcion": "Factura electricidad junio",
+    "monto": "6500000",
     "comprobante": "https://drive.google.com/file/d/def456",
     "registrado_por": "Admin"
   },
@@ -67,7 +76,7 @@
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Poda de árboles mes julio",
-    "monto": "15000",
+    "monto": "4500000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -76,7 +85,7 @@
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Service limpieza común",
-    "monto": "12000",
+    "monto": "3000000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -85,17 +94,8 @@
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro anual condominio",
-    "monto": "85000",
+    "monto": "3000000",
     "comprobante": "https://drive.google.com/file/d/ghi789",
-    "registrado_por": "Admin"
-  },
-  {
-    "fecha": "5/07/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa ruido excesivo Pedro Rojas",
-    "monto": "5000",
-    "comprobante": "",
     "registrado_por": "Admin"
   }
 ]
