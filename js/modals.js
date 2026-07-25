@@ -300,11 +300,20 @@ function formGastos(opt) {
     var sel = isEdit && data.parcela_id === p.id ? ' selected' : '';
     return '<md-select-option value="' + p.id + '"' + sel + '>' + p.numero + '</md-select-option>';
   }).join('');
+  var meses = [];
+  var now = new Date();
+  for (var i = -6; i <= 6; i++) {
+    var d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    var val = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    var label = d.toLocaleDateString('es-CL', { year: 'numeric', month: 'long' });
+    var sel = isEdit && data.periodo === val ? ' selected' : '';
+    meses.push('<md-select-option value="' + val + '"' + sel + '>' + label + '</md-select-option>');
+  }
   openModal(isEdit ? 'Editar Gasto' : 'Agregar Gasto', '<form id="modalForm" data-table="gastos" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<input type="hidden" name="concepto" id="gastoConcepto">' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Periodo *</label><md-filled-text-field type="month" name="periodo" required id="gastoPeriodo" style="width:100%"' + (isEdit ? ' value="' + data.periodo + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><label>Periodo *</label><md-filled-select name="periodo" required id="gastoPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
       '<div class="form-group"><label>Parcela *</label><md-filled-select name="parcela_id" required id="gastoParcela" style="width:100%">' + parcelas + '</md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
