@@ -16,4 +16,5 @@ header > div > div:last-child { min-width: 0; }
   #userInfo { width: 100%; max-width: 100%; }
   .config-duo { grid-template-columns: 1fr !important; }
   .filters { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: 1fr 1fr !important; }
 }
