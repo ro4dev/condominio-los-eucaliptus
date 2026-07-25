@@ -367,7 +367,7 @@ function formParcelas(data) {
     '<form id="modalForm" data-table="parcelas" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Número *</label><md-filled-text-field name="numero" placeholder="Ej: 1, 2A, 15" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.numero) + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><label>Número *</label><md-filled-text-field name="numero" placeholder="Ej: 1, 2A, 15" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.numero) + '" disabled' : '') + '></md-filled-text-field></div>' +
       '<div class="form-group"><label>Rol</label><md-filled-text-field name="rol" placeholder="Rol de la propiedad" style="width:100%"' + (isEdit && data.rol ? ' value="' + escHtml(data.rol) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-row">' +
