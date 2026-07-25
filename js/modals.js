@@ -528,7 +528,7 @@ function formEncuestas(data) {
   if (isEdit) {
     var ops = (data.alternativas && data.alternativas.length && !(data.alternativas.length === 1 && data.alternativas[0] === ''))
       ? data.alternativas : ['A favor', 'En contra'];
-    alternativasHtml = '<div style="font-size:0.85rem;color:var(--text-muted);padding:0.5rem;background:var(--skeleton-1);border-radius:6px">Opciones: ' + ops.join(' / ') + ' (no editable al tener votos)</div>';
+    alternativasHtml = '<div style="font-size:0.85rem;color:var(--text-muted);padding:0.5rem;background:var(--skeleton-1);border-radius:6px">Opciones:<br>' + ops.map(function(op) { return '- ' + op; }).join('<br>') + '<br><span style="font-size:0.75rem">(no editable al tener votos)</span></div>';
   } else {
     alternativasHtml =
       '<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem">' +
