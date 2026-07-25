@@ -3,8 +3,8 @@ md-tabs.tabs { display: block; margin-bottom: 1.5rem; overflow-x: auto; }
 .tab-content.active { display: block; }
 .tab-content > md-filled-button { margin-bottom: 1rem; }
 
-.filters { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
-.filters md-filled-select { min-width: 150px; }
+.filters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.filters md-filled-select { min-width: 0; }
 
 header > div { flex-wrap: wrap; }
 header > div > div:last-child { min-width: 0; }
@@ -15,4 +15,5 @@ header > div > div:last-child { min-width: 0; }
   header > div > div:last-child { width: 100%; display: flex; flex-wrap: wrap; gap: 0.4rem; }
   #userInfo { width: 100%; max-width: 100%; }
   .config-duo { grid-template-columns: 1fr !important; }
+  .filters { grid-template-columns: 1fr 1fr; }
 }
