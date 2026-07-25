@@ -312,11 +312,11 @@ function formGastos(opt) {
   openModal(isEdit ? 'Editar Gasto' : 'Agregar Gasto', '<form id="modalForm" data-table="gastos" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<input type="hidden" name="concepto" id="gastoConcepto">' +
+    '<div class="form-group"><label>Periodo *</label><md-filled-select name="periodo" required id="gastoPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><label>Periodo *</label><md-filled-select name="periodo" required id="gastoPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
       '<div class="form-group"><label>Parcela *</label><md-filled-select name="parcela_id" required id="gastoParcela" style="width:100%">' + parcelas + '</md-filled-select></div>' +
+      '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
-    '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
     (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
