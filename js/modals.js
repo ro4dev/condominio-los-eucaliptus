@@ -308,7 +308,7 @@ function formGastos(opt) {
       '<div class="form-group"><label>Parcela *</label><md-filled-select name="parcela_id" required id="gastoParcela" style="width:100%">' + parcelas + '</md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Descripción</label><md-filled-text-field textarea name="descripcion" placeholder="Detalles del gasto (opcional)" style="width:100%">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</md-filled-text-field></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del gasto (opcional)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
     (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
   '</form>',
@@ -411,8 +411,8 @@ function formNoticias(data) {
     '<form id="modalForm" data-table="noticias" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Título *</label><md-filled-text-field name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Descripción *</label><md-filled-text-field textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required style="width:100%">' + (isEdit ? escHtml(data.descripcion) : '') + '</md-filled-text-field></div>' +
     '<div class="form-group"><label>Vigente hasta</label><md-filled-text-field type="date" name="fecha_hasta" style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion) : '') + '</textarea></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }
@@ -434,7 +434,7 @@ function formFlujo(data) {
     '</div>' +
     '<div class="form-group"><label>Concepto *</label><md-filled-select name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>' +
     '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Descripción</label><md-filled-text-field textarea name="descripcion" placeholder="Detalles del movimiento (opcional)" style="width:100%">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</md-filled-text-field></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalles del movimiento (opcional)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
     (isEdit && data.comprobante ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.comprobante + '" target="_blank">ver</a></div>' : '') +
   '</form>',
@@ -450,7 +450,7 @@ function formDocumentos(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Nombre *</label><md-filled-text-field name="nombre" placeholder="Ej: Acta reunión marzo 2026" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Categoría *</label><md-filled-select name="categoria" required style="width:100%">' + catOpts + '</md-filled-select></div>' +
-    '<div class="form-group"><label>Descripción</label><md-filled-text-field textarea name="descripcion" placeholder="Resumen del documento (opcional)" style="width:100%">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</md-filled-text-field></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Resumen del documento (opcional)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
     (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
   '</form>',
@@ -465,7 +465,7 @@ function formReclamos() {
       '<div class="form-group"><label>Parcela</label><md-filled-select name="parcela_id" style="width:100%"><md-select-option value="">Anónimo</md-select-option>' + parcelas + '</md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><label>Asunto *</label><md-filled-text-field name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required style="width:100%"></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Descripción *</label><md-filled-text-field textarea name="descripcion" placeholder="Describa el problema o sugerencia con el mayor detalle posible" required style="width:100%"></md-filled-text-field></div>' +
+    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Describa el problema o sugerencia con el mayor detalle posible" required style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none"></textarea></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Guardar</md-filled-button>');
 }
@@ -487,7 +487,7 @@ function formProveedores(data) {
       '<div class="form-group"><label>Email</label><md-filled-text-field type="email" name="email" placeholder="correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><label>Web/Instagram</label><md-filled-text-field name="web_instagram" placeholder="https://..." style="width:100%"' + (isEdit && data.web_instagram ? ' value="' + escHtml(data.web_instagram) + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Observaciones</label><md-filled-text-field textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)" style="width:100%">' + (isEdit ? escHtml(data.observaciones || '') : '') + '</md-filled-text-field></div>' +
+    '<div class="form-group"><label>Observaciones</label><textarea name="observaciones" placeholder="Notas adicionales sobre el proveedor (opcional)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.observaciones || '') : '') + '</textarea></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }
@@ -515,8 +515,8 @@ function formAsambleas(data) {
       '<div class="form-group"><label>Fecha *</label><md-filled-text-field type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>' +
       '<div class="form-group"><label>Tipo *</label><md-filled-select name="tipo" required style="width:100%"><md-select-option value="Ordinaria"' + (isEdit && data.tipo === 'Ordinaria' ? ' selected' : '') + '>Ordinaria</md-select-option><md-select-option value="Extraordinaria"' + (isEdit && data.tipo === 'Extraordinaria' ? ' selected' : '') + '>Extraordinaria</md-select-option></md-filled-select></div>' +
     '</div>' +
-    '<div class="form-group"><label>Temario *</label><md-filled-text-field textarea name="temario" placeholder="Puntos a tratar en la asamblea" required style="width:100%">' + (isEdit ? escHtml(data.temario) : '') + '</md-filled-text-field></div>' +
-    '<div class="form-group"><label>Acuerdos</label><md-filled-text-field textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)" style="width:100%">' + (isEdit ? escHtml(data.acuerdos || '') : '') + '</md-filled-text-field></div>' +
+    '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Puntos a tratar en la asamblea" required style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.temario) : '') + '</textarea></div>' +
+    '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Decisiones tomadas (completar después de la asamblea)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.acuerdos || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:#2563eb;font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem;width:100%">' + parcelas + '</select></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
@@ -546,7 +546,7 @@ function formEncuestas(data) {
     '<form id="modalForm" data-table="encuestas" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><label>Título *</label><md-filled-text-field name="titulo" placeholder="Título de la propuesta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Descripción</label><md-filled-text-field textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)" style="width:100%">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</md-filled-text-field></div>' +
+    '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Detalle de la propuesta (opcional)" style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Fecha de término</label><md-filled-text-field type="date" name="fecha_termino" style="width:100%"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></md-filled-text-field></div>' +
       '<div class="form-group"><label>Quorum (mín. votos)</label><md-filled-text-field type="number" name="quorum" min="0" placeholder="Sin límite" style="width:100%"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></md-filled-text-field></div>' +
