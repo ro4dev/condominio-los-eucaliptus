@@ -167,9 +167,8 @@ var noticiasFilter = 'vigentes';
 
 function filterNoticias(filtro) {
   noticiasFilter = filtro;
-  document.querySelectorAll('#noticiasFilter md-filter-chip').forEach(function(c) {
-    c.selected = c.textContent.toLowerCase() === (filtro === 'no_vigentes' ? 'no vigentes' : (filtro === 'todas' ? 'todas' : 'vigentes'));
-  });
+  document.querySelectorAll('#noticiasFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
   renderNoticias();
 }
 
@@ -288,9 +287,8 @@ var documentosFilter = 'Todos';
 
 function filterDocumentos(cat) {
   documentosFilter = cat;
-  document.querySelectorAll('#documentosChips md-filter-chip').forEach(function(c) {
-    c.selected = c.textContent === cat;
-  });
+  document.querySelectorAll('#documentosChips md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
   renderDocumentos();
 }
 
@@ -386,9 +384,8 @@ var asambleasFilter = 'Todos';
 
 function filterAsambleas(tipo) {
   asambleasFilter = tipo;
-  document.querySelectorAll('#asambleasChips md-filter-chip').forEach(function(c) {
-    c.selected = c.textContent === (tipo === 'Todos' ? 'Todos' : (tipo === 'Ordinaria' ? 'Ordinarias' : 'Extraordinarias'));
-  });
+  document.querySelectorAll('#asambleasChips md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
   renderAsambleas();
 }
 
@@ -428,9 +425,8 @@ var encuestasFilter = 'Todos';
 
 function filterEncuestas(filtro) {
   encuestasFilter = filtro;
-  document.querySelectorAll('#encuestasChips md-filter-chip').forEach(function(c) {
-    c.selected = c.textContent === filtro || (filtro === 'Todos' && c.textContent === 'Todas');
-  });
+  document.querySelectorAll('#encuestasChips md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
   renderEncuestas();
 }
 
