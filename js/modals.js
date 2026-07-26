@@ -419,8 +419,10 @@ function formNoticias(data) {
   openModal(isEdit ? 'Editar Noticia' : 'Agregar Noticia',
     '<form id="modalForm" data-table="noticias" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-row" style="grid-template-columns:2fr 1fr">' +
     '<div class="form-group"><label>Título *</label><md-filled-text-field name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Vigente hasta</label><md-filled-text-field type="date" name="fecha_hasta" style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-filled-text-field></div>' +
+    '</div>' +
     '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Detalle de la noticia para los residentes" required style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-muted);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion) : '') + '</textarea></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
