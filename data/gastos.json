@@ -160,11 +160,5 @@
     "monto": "15000",
     "descripcion": "Pago fondo reserva Pablo Castillo",
     "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a"
-  },
-  {
-    "periodo": "2026-07",
-    "monto": "25000",
-    "descripcion": "Reparación pileta",
-    "parcela_id": null
   }
 ]
