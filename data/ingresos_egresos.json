@@ -1,10 +1,271 @@
 [
   {
+    "fecha": "1/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota mayo Juan Pérez",
+    "monto": "600000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota mayo María López",
+    "monto": "550000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota mayo Carlos Silva",
+    "monto": "620000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota mayo Ana Martínez",
+    "monto": "580000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "20/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota mayo Pedro Rojas",
+    "monto": "610000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "25/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota mayo Laura Torres",
+    "monto": "570000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "2/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Juan Pérez",
+    "monto": "750000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "3/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Juan Pérez",
+    "monto": "300000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "4/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio María López",
+    "monto": "700000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio María López",
+    "monto": "250000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "6/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Carlos Silva",
+    "monto": "680000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "7/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Carlos Silva",
+    "monto": "280000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "8/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Ana Martínez",
+    "monto": "720000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "8/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa uso piscina fuera de horario Miguel Ángel Ruiz",
+    "monto": "180000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "9/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Ana Martínez",
+    "monto": "320000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Pedro Rojas",
+    "monto": "690000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "11/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Pedro Rojas",
+    "monto": "200000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "12/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Laura Torres",
+    "monto": "710000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "13/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Laura Torres",
+    "monto": "350000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "14/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Sofía Herrera",
+    "monto": "740000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Sofía Herrera",
+    "monto": "150000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "16/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota junio Miguel Ángel Ruiz",
+    "monto": "760000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "17/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Miguel Ángel Ruiz",
+    "monto": "270000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "18/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa basura en zona común Valentina Muñoz",
+    "monto": "250000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "19/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Valentina Muñoz",
+    "monto": "310000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "21/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva junio Santiago Vega",
+    "monto": "240000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "28/06/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Isabel Guerrero",
+    "monto": "90000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
     "fecha": "1/07/2026",
     "tipo": "Ingreso",
     "concepto": "Cuotas",
-    "descripcion": "Cobro expensas julio",
-    "monto": "12000000",
+    "descripcion": "Pago cuota julio Juan Pérez",
+    "monto": "500000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "2/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio María López",
+    "monto": "480000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "2/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Juan Pérez",
+    "monto": "200000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -12,17 +273,26 @@
     "fecha": "3/07/2026",
     "tipo": "Ingreso",
     "concepto": "Cuotas",
-    "descripcion": "Pago Juan Pérez",
-    "monto": "3500000",
+    "descripcion": "Pago cuota julio Carlos Silva",
+    "monto": "520000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
   {
-    "fecha": "3/07/2026",
+    "fecha": "4/07/2026",
     "tipo": "Ingreso",
     "concepto": "Cuotas",
-    "descripcion": "Pago María López",
-    "monto": "3500000",
+    "descripcion": "Pago cuota julio Ana Martínez",
+    "monto": "490000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "4/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio María López",
+    "monto": "180000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -30,17 +300,8 @@
     "fecha": "5/07/2026",
     "tipo": "Ingreso",
     "concepto": "Cuotas",
-    "descripcion": "Pago junio (varios)",
-    "monto": "4000000",
-    "comprobante": "",
-    "registrado_por": "Admin"
-  },
-  {
-    "fecha": "6/07/2026",
-    "tipo": "Ingreso",
-    "concepto": "Fondo reserva",
-    "descripcion": "Cobro fondo reserva junio",
-    "monto": "1500000",
+    "descripcion": "Pago cuota julio Pedro Rojas",
+    "monto": "510000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
@@ -49,53 +310,521 @@
     "tipo": "Ingreso",
     "concepto": "Multa",
     "descripcion": "Multa ruido excesivo Pedro Rojas",
+    "monto": "150000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "6/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Carlos Silva",
+    "monto": "220000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "7/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Laura Torres",
+    "monto": "470000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "8/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Sofía Herrera",
+    "monto": "530000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "8/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Ana Martínez",
+    "monto": "190000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Miguel Ángel Ruiz",
     "monto": "500000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
   {
     "fecha": "10/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Laura Torres",
+    "monto": "200000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Pedro Rojas",
+    "monto": "210000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "11/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Valentina Muñoz",
+    "monto": "460000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "12/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Santiago Vega",
+    "monto": "540000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "12/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Laura Torres",
+    "monto": "170000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "13/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Isabel Guerrero",
+    "monto": "510000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "14/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Pablo Castillo",
+    "monto": "490000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "14/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Sofía Herrera",
+    "monto": "230000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Rocío Fernández",
+    "monto": "480000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Carlos Silva",
+    "monto": "100000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "16/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Fondo reserva",
+    "descripcion": "Fondo reserva julio Miguel Ángel Ruiz",
+    "monto": "200000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "17/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Cuotas",
+    "descripcion": "Pago cuota julio Santiago Vega",
+    "monto": "4095250",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "20/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa vertimiento Ana Martínez",
+    "monto": "75000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "25/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa horario ruido Sofía Herrera",
+    "monto": "120000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/08/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa建设 sin permiso Pablo Castillo",
+    "monto": "300000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/08/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa ruido excesivo Rocío Fernández",
+    "monto": "250000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "3/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Factura gas junio",
+    "monto": "260000",
+    "comprobante": "https://drive.google.com/file/d/serv8",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "3/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Poda de árboles mes junio",
+    "monto": "600000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/06/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
-    "descripcion": "Reparación bomba de agua",
-    "monto": "8000000",
-    "comprobante": "https://drive.google.com/file/d/abc123",
+    "descripcion": "Mantenimiento pileta filtro",
+    "monto": "500000",
+    "comprobante": "https://drive.google.com/file/d/mant8",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Limpieza",
+    "descripcion": "Desinfección áreas comunes",
+    "monto": "200000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "8/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Cable comunitario julio",
+    "monto": "350000",
+    "comprobante": "https://drive.google.com/file/d/serv9",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Arreglo rejilla desagüe",
+    "monto": "150000",
+    "comprobante": "https://drive.google.com/file/d/mant9",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Riego sistema automático junio",
+    "monto": "260000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "12/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Cable comunitario junio",
+    "monto": "330000",
+    "comprobante": "https://drive.google.com/file/d/serv10",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Reparación bomba de presión",
+    "monto": "680000",
+    "comprobante": "https://drive.google.com/file/d/mant10",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "17/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Fertilización jardines junio",
+    "monto": "300000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "20/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Seguros",
+    "descripcion": "Seguro accidentes comunes",
+    "monto": "6770500",
+    "comprobante": "https://drive.google.com/file/d/seg3",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "24/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Control plagas mes junio",
+    "monto": "180000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "25/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Factura agua junio",
+    "monto": "410000",
+    "comprobante": "https://drive.google.com/file/d/serv6",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "28/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Internet comunitario junio",
+    "monto": "300000",
+    "comprobante": "https://drive.google.com/file/d/serv7",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "28/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Limpieza",
+    "descripcion": "Limpieza alfombras acceso",
+    "monto": "150000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "30/06/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Reparación autoestrap",
+    "monto": "420000",
+    "comprobante": "https://drive.google.com/file/d/mant7",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "1/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Seguros",
+    "descripcion": "Seguro incendio trimestral",
+    "monto": "750000",
+    "comprobante": "https://drive.google.com/file/d/seg1",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "2/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Factura electricity julio",
+    "monto": "780000",
+    "comprobante": "https://drive.google.com/file/d/serv1",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "3/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Reparación bomba de agua principal",
+    "monto": "750000",
+    "comprobante": "https://drive.google.com/file/d/mant1",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Factura agua julio",
+    "monto": "450000",
+    "comprobante": "https://drive.google.com/file/d/serv2",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "5/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Poda de árboles mes julio",
+    "monto": "650000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "7/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Limpieza",
+    "descripcion": "Service limpieza común julio",
+    "monto": "450000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "8/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Arreglo tendedero ropa",
+    "monto": "200000",
+    "comprobante": "https://drive.google.com/file/d/mant2",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "10/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Servicios",
+    "descripcion": "Internet comunitario julio",
+    "monto": "320000",
+    "comprobante": "https://drive.google.com/file/d/serv3",
     "registrado_por": "Admin"
   },
   {
     "fecha": "12/07/2026",
     "tipo": "Egreso",
-    "concepto": "Servicios",
-    "descripcion": "Factura electricidad junio",
-    "monto": "6500000",
-    "comprobante": "https://drive.google.com/file/d/def456",
+    "concepto": "Mantenimiento",
+    "descripcion": "Pintura portón ingreso",
+    "monto": "350000",
+    "comprobante": "https://drive.google.com/file/d/mant3",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "12/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Riego sistema automático",
+    "monto": "280000",
+    "comprobante": "",
     "registrado_por": "Admin"
   },
   {
     "fecha": "14/07/2026",
     "tipo": "Egreso",
-    "concepto": "Jardinería",
-    "descripcion": "Poda de árboles mes julio",
-    "monto": "4500000",
+    "concepto": "Limpieza",
+    "descripcion": "Limpieza profunda piscina",
+    "monto": "380000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
   {
     "fecha": "15/07/2026",
     "tipo": "Egreso",
-    "concepto": "Limpieza",
-    "descripcion": "Service limpieza común",
-    "monto": "3000000",
+    "concepto": "Servicios",
+    "descripcion": "Factura gas julio",
+    "monto": "280000",
+    "comprobante": "https://drive.google.com/file/d/serv4",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "15/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Seguros",
+    "descripcion": "Seguro RC anual condominio",
+    "monto": "800000",
+    "comprobante": "https://drive.google.com/file/d/seg2",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "18/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Reparación iluminación pasillo",
+    "monto": "180000",
+    "comprobante": "https://drive.google.com/file/d/mant4",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "19/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Fertilización jardines",
+    "monto": "320000",
     "comprobante": "",
     "registrado_por": "Admin"
   },
   {
-    "fecha": "16/07/2026",
+    "fecha": "20/07/2026",
     "tipo": "Egreso",
-    "concepto": "Seguros",
-    "descripcion": "Seguro anual condominio",
-    "monto": "3000000",
-    "comprobante": "https://drive.google.com/file/d/ghi789",
+    "concepto": "Servicios",
+    "descripcion": "Factura electricity junio",
+    "monto": "720000",
+    "comprobante": "https://drive.google.com/file/d/serv5",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "21/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Limpieza",
+    "descripcion": "Service limpieza común junio",
+    "monto": "420000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "22/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Arreglo cerradura acceso principal",
+    "monto": "250000",
+    "comprobante": "https://drive.google.com/file/d/mant5",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "26/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Jardinería",
+    "descripcion": "Control plagas mes julio",
+    "monto": "200000",
+    "comprobante": "",
+    "registrado_por": "Admin"
+  },
+  {
+    "fecha": "27/07/2026",
+    "tipo": "Egreso",
+    "concepto": "Mantenimiento",
+    "descripcion": "Cambio grifería baño común",
+    "monto": "300000",
+    "comprobante": "https://drive.google.com/file/d/mant6",
     "registrado_por": "Admin"
   }
 ]
