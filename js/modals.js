@@ -314,9 +314,9 @@ function formGastos(opt) {
   openModal(isEdit ? 'Editar Gasto' : 'Agregar Gasto', '<form id="modalForm" data-table="gastos" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<input type="hidden" name="concepto" id="gastoConcepto">' +
-    '<div class="form-group"><md-filled-select label="Periodo *" name="periodo" required id="gastoPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
+    '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required id="gastoPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-select label="Parcela *" name="parcela_id" required id="gastoParcela" style="width:100%">' + parcelas + '</md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" required id="gastoParcela" style="width:100%">' + parcelas + '</md-filled-select></div>' +
       '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Ej: Detalles del gasto..." style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-2);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
@@ -401,7 +401,7 @@ function formPropietarios(opt) {
       '<div class="form-group"><label>RUT</label><md-filled-text-field name="rut" placeholder="Ej: 12.345.678-9" style="width:100%"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></md-filled-text-field></div>' +
       (isFromParcela
         ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><md-filled-select label="Parcela" disabled style="width:100%"><md-select-option value="' + parcelaId + '" selected><span slot="headline">' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</span></md-select-option></md-filled-select></div>'
-        : '<div class="form-group"><md-filled-select label="Parcela *" name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>') +
+        : '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>') +
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-group"><label>Teléfono</label><md-filled-text-field type="tel" name="telefono" placeholder="Ej: +56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-filled-text-field></div>' +
@@ -442,10 +442,10 @@ function formFlujo(data) {
     '<form id="modalForm" data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-select label="Tipo *" name="tipo" required style="width:100%"><md-select-option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '><span slot="headline">Ingreso</span></md-select-option><md-select-option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '><span slot="headline">Egreso</span></md-select-option></md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '><span slot="headline">Ingreso</span></md-select-option><md-select-option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '><span slot="headline">Egreso</span></md-select-option></md-filled-select></div>' +
       '<div class="form-group"><label>Fecha *</label><md-filled-text-field type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
-    '<div class="form-group"><md-filled-select label="Concepto *" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>' +
+    '<div class="form-group"><md-filled-select label="Concepto" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>' +
     '<div class="form-group"><label>Monto *</label><md-filled-text-field type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Ej: Detalles del movimiento..." style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-2);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
@@ -463,7 +463,7 @@ function formDocumentos(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row" style="grid-template-columns:2fr 1fr">' +
     '<div class="form-group"><label>Nombre *</label><md-filled-text-field name="nombre" placeholder="Ej: Acta reunión marzo 2026" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><md-filled-select label="Categoría *" name="categoria" required style="width:100%">' + catOpts + '</md-filled-select></div>' +
+    '<div class="form-group"><md-filled-select label="Categoría" name="categoria" required style="width:100%">' + catOpts + '</md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><label>Descripción</label><textarea name="descripcion" placeholder="Ej: Resumen del documento..." style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-2);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.descripcion || '') : '') + '</textarea></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
@@ -476,7 +476,7 @@ function formReclamos() {
   var parcelas = PARCELAS.map(function(p) { return '<md-select-option value="' + p.id + '"><span slot="headline">' + p.numero + '</span></md-select-option>'; }).join('');
   openModal('Agregar Reclamo/Sugerencia', '<form id="modalForm" data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-select label="Tipo *" name="tipo" required style="width:100%"><md-select-option value="Reclamo"><span slot="headline">Reclamo</span></md-select-option><md-select-option value="Sugerencia"><span slot="headline">Sugerencia</span></md-select-option></md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Reclamo"><span slot="headline">Reclamo</span></md-select-option><md-select-option value="Sugerencia"><span slot="headline">Sugerencia</span></md-select-option></md-filled-select></div>' +
       '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" style="width:100%"><md-select-option value=""><span slot="headline">Anónimo</span></md-select-option>' + parcelas + '</md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><label>Asunto *</label><md-filled-text-field name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required style="width:100%"></md-filled-text-field></div>' +
@@ -493,7 +493,7 @@ function formProveedores(data) {
     '<form id="modalForm" data-table="proveedores" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-select label="Rubro *" name="rubro" required style="width:100%"><md-select-option value=""><span slot="headline">Seleccionar...</span></md-select-option>' + rubroOpts + '</md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Rubro" name="rubro" required style="width:100%"><md-select-option value=""><span slot="headline">Seleccionar...</span></md-select-option>' + rubroOpts + '</md-filled-select></div>' +
       '<div class="form-group"><label>Nombre *</label><md-filled-text-field name="nombre" placeholder="Ej: Nombre del proveedor o empresa" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><label>Contacto *</label><md-filled-text-field name="contacto" placeholder="Ej: Nombre de la persona de contacto" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.contacto) + '"' : '') + '></md-filled-text-field></div>' +
@@ -528,7 +528,7 @@ function formAsambleas(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
       '<div class="form-group"><label>Fecha *</label><md-filled-text-field type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>' +
-      '<div class="form-group"><md-filled-select label="Tipo *" name="tipo" required style="width:100%"><md-select-option value="Ordinaria"' + (isEdit && data.tipo === 'Ordinaria' ? ' selected' : '') + '><span slot="headline">Ordinaria</span></md-select-option><md-select-option value="Extraordinaria"' + (isEdit && data.tipo === 'Extraordinaria' ? ' selected' : '') + '><span slot="headline">Extraordinaria</span></md-select-option></md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Ordinaria"' + (isEdit && data.tipo === 'Ordinaria' ? ' selected' : '') + '><span slot="headline">Ordinaria</span></md-select-option><md-select-option value="Extraordinaria"' + (isEdit && data.tipo === 'Extraordinaria' ? ' selected' : '') + '><span slot="headline">Extraordinaria</span></md-select-option></md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><label>Temario *</label><textarea name="temario" placeholder="Ej: Puntos a tratar en la asamblea" required style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-2);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.temario) : '') + '</textarea></div>' +
     '<div class="form-group"><label>Acuerdos</label><textarea name="acuerdos" placeholder="Ej: Decisiones tomadas..." style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-2);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none">' + (isEdit ? escHtml(data.acuerdos || '') : '') + '</textarea></div>' +
