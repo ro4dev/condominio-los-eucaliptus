@@ -421,7 +421,7 @@ function renderAsambleas() {
 }
 
 // ENCUESTAS
-var encuestasFilter = 'Todos';
+var encuestasFilter = 'Abiertas';
 
 function filterEncuestas(filtro) {
   encuestasFilter = filtro;
