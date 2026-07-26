@@ -1,4 +1,4 @@
-*:not(:is(md-filled-button, md-filled-tonal-button, md-outlined-button, md-text-button, md-icon-button, md-fab, md-card, md-dialog, md-checkbox, md-switch, md-radio, md-text-field, md-filled-text-field, md-outlined-text-field, md-filter-chip, md-assist-chip, md-input-chip, md-chip, md-linear-progress, md-icon, md-tabs, md-primary-tab, md-filled-select, md-outlined-select, md-select-option, md-snackbar, md-circular-progress)) { margin: 0; padding: 0; box-sizing: border-box; }
+*:not(:is(md-filled-button, md-filled-tonal-button, md-outlined-button, md-text-button, md-icon-button, md-fab, md-card, md-dialog, md-checkbox, md-switch, md-radio, md-text-field, md-filled-text-field, md-outlined-text-field, md-filter-chip, md-assist-chip, md-input-chip, md-chip, md-linear-progress, md-icon, md-tabs, md-primary-tab, md-filled-select, md-outlined-select, md-select-option, md-circular-progress)) { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --bg: #f5f7fa;
@@ -147,3 +147,44 @@ md-filter-chip {
 header { background: #1a1a2e; color: #fff; padding: 1.5rem; text-align: center; border-radius: 12px; margin-bottom: 1.5rem; }
 header h1 { font-size: 1.8rem; font-weight: 600; letter-spacing: 1px; }
 header p { color: #a0a0b8; margin-top: 0.3rem; font-size: 0.9rem; }
+
+/* Snackbar */
+#appSnackbar {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 280px;
+  max-width: 90vw;
+  padding: 0.875rem 1.25rem;
+  border-radius: 12px;
+  background: var(--md-sys-color-inverse-surface, #1a1a2e);
+  color: var(--md-sys-color-inverse-on-surface, #f5f7fa);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.25s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+}
+#appSnackbar.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+#appSnackbar .snackbar-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+#appSnackbar .snackbar-icon.success { color: #4ade80; }
+#appSnackbar .snackbar-icon.warning { color: #fbbf24; }
+#appSnackbar .snackbar-icon.error { color: #f87171; }
+#appSnackbar .snackbar-icon.info { color: #60a5fa; }
+body.dark #appSnackbar {
+  background: var(--md-sys-color-surface-container-high, #283548);
+  color: var(--md-sys-color-on-surface, #f9fafb);
+}
