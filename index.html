@@ -215,9 +215,9 @@
     <div id="tab-encuestas" class="tab-content">
       <md-filled-button class="admin-only" id="formEncuestas" onclick="formEncuestas()"><md-icon slot="icon">add</md-icon>Nueva Encuesta</md-filled-button>
       <div class="filter-chips" id="encuestasChips">
-        <md-filter-chip label="Todas" selected onclick="filterEncuestas('Todos')"></md-filter-chip>
         <md-filter-chip label="Abiertas" onclick="filterEncuestas('Abiertas')"></md-filter-chip>
         <md-filter-chip label="Cerradas" onclick="filterEncuestas('Cerradas')"></md-filter-chip>
+        <md-filter-chip label="Todas" selected onclick="filterEncuestas('Todos')"></md-filter-chip>
       </div>
       <div id="encuestasList">
         <div class="skeleton skeleton-card"></div>
