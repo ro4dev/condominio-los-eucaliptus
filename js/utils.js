@@ -72,18 +72,21 @@ function getTimeRemaining(fechaStr) {
   return horas + 'h ' + minutos + 'm';
 }
 
+var _snackbarTimer = null;
 function showSnackbar(message, type) {
   type = type || 'info';
   var el = document.getElementById('appSnackbar');
   if (!el) {
-    el = document.createElement('md-snackbar');
+    el = document.createElement('div');
     el.id = 'appSnackbar';
-    el.setAttribute('auto-close', '');
-    el.setAttribute('timeout', '3000');
     document.body.appendChild(el);
   }
+  clearTimeout(_snackbarTimer);
+  el.classList.remove('show');
   var icons = { success: 'check_circle', warning: 'warning', error: 'error', info: 'info' };
   var icon = icons[type] || icons.info;
-  el.innerHTML = '<md-icon slot="leading-icon">' + icon + '</md-icon> ' + message;
-  el.open = true;
+  el.innerHTML = '<span class="snackbar-icon material-symbols-outlined ' + type + '">' + icon + '</span>' + escHtml(message);
+  void el.offsetWidth;
+  el.classList.add('show');
+  _snackbarTimer = setTimeout(function() { el.classList.remove('show'); }, 3000);
 }
