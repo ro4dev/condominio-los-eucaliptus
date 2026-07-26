@@ -421,7 +421,7 @@ function formNoticias(data) {
   openModal(isEdit ? 'Editar Noticia' : 'Agregar Noticia',
     '<form id="modalForm" data-table="noticias" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
-    '<div class="form-row" style="grid-template-columns:2fr 1fr">' +
+    '<div class="form-row" style="grid-template-columns:1fr 1fr">' +
     '<div class="form-group"><label>Título *</label><md-filled-text-field name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Vigente hasta</label><md-filled-text-field type="date" name="fecha_hasta" style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
