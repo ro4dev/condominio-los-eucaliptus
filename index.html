@@ -235,8 +235,8 @@
           <h4>Parcelas</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cantidad total y nombre de las parcelas</p>
           <div class="form-row">
-            <div class="form-group"><label>Cantidad</label><md-filled-text-field id="cfgParcelasCantidad" type="number" min="1" placeholder="Ej: 40" style="width:100%"></md-filled-text-field></div>
-            <div class="form-group"><label>Prefijo</label><md-filled-text-field id="cfgParcelasPrefijo" type="text" placeholder="Ej: Terreno" style="width:100%"></md-filled-text-field></div>
+            <div class="form-group"><md-filled-text-field label="Cantidad" id="cfgParcelasCantidad" type="number" min="1" placeholder="Ej: 40" style="width:100%"></md-filled-text-field></div>
+            <div class="form-group"><md-filled-text-field label="Prefijo" id="cfgParcelasPrefijo" type="text" placeholder="Ej: Terreno" style="width:100%"></md-filled-text-field></div>
           </div>
           <md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Aplicar</md-filled-button>
         </div>
@@ -246,8 +246,8 @@
           <h4>Montos Base</h4>
           <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos fijos que se usan para calcular expensas</p>
           <div class="form-row">
-            <div class="form-group"><label>Gasto común base</label><md-filled-text-field id="cfgGastoComunBase" type="number" min="0" placeholder="Ej: 50000" style="width:100%"></md-filled-text-field></div>
-            <div class="form-group"><label>Fondo reserva</label><md-filled-text-field id="cfgFondoReserva" type="number" min="0" placeholder="Ej: 15000" style="width:100%"></md-filled-text-field></div>
+            <div class="form-group"><md-filled-text-field label="Gasto común base" id="cfgGastoComunBase" type="number" min="0" placeholder="Ej: 50000" style="width:100%"></md-filled-text-field></div>
+            <div class="form-group"><md-filled-text-field label="Fondo reserva" id="cfgFondoReserva" type="number" min="0" placeholder="Ej: 15000" style="width:100%"></md-filled-text-field></div>
           </div>
           <md-filled-button id="btnGuardarMontos" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</md-filled-button>
         </div>
