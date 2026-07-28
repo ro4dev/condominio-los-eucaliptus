@@ -502,7 +502,7 @@ function formProveedores(data) {
       '<div class="form-group"><md-filled-text-field label="Email" type="email" name="email" placeholder="Ej: correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Web/Instagram" name="web_instagram" placeholder="Ej: https://..." style="width:100%"' + (isEdit && data.web_instagram ? ' value="' + escHtml(data.web_instagram) + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><md-filled-text-field label="Observaciones" name="observaciones" placeholder="Ej: Notas adicionales sobre el proveedor..." style="width:100%"' + (isEdit ? ' value="' + escHtml(data.observaciones || '') + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><md-filled-text-field label="Observaciones" name="observaciones" placeholder="Ej: Notas adicionales sobre el proveedor..." type="textarea" rows="3" style="width:100%"' + (isEdit ? ' value="' + escHtml(data.observaciones || '') + '"' : '') + '></md-filled-text-field></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>', true);
 }
