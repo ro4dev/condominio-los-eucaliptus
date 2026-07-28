@@ -477,7 +477,7 @@ function formReclamos() {
   openModal('Agregar Reclamo/Sugerencia', '<form id="modalForm" data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Reclamo"><span slot="headline">Reclamo</span></md-select-option><md-select-option value="Sugerencia"><span slot="headline">Sugerencia</span></md-select-option></md-filled-select></div>' +
-      '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" style="width:100%"><md-select-option value=""><span slot="headline">Anónimo</span></md-select-option>' + parcelas + '</md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Asunto" name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required style="width:100%"></md-filled-text-field></div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Describa el problema o sugerencia..." type="textarea" rows="3" required style="width:100%"></md-filled-text-field></div>' +
