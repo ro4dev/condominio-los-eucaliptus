@@ -479,8 +479,8 @@ function formReclamos() {
       '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Reclamo"><span slot="headline">Reclamo</span></md-select-option><md-select-option value="Sugerencia"><span slot="headline">Sugerencia</span></md-select-option></md-filled-select></div>' +
       '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" style="width:100%"><md-select-option value=""><span slot="headline">Anónimo</span></md-select-option>' + parcelas + '</md-filled-select></div>' +
     '</div>' +
-    '<div class="form-group"><label>Asunto *</label><md-filled-text-field name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required style="width:100%"></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Descripción *</label><textarea name="descripcion" placeholder="Ej: Describa el problema o sugerencia..." required style="width:100%;padding:24px 16px 8px;border:none;border-bottom:1px solid var(--text-2);border-radius:4px 4px 0 0;background:var(--md-sys-color-surface-container-highest);color:var(--text);font-family:inherit;font-size:1rem;min-height:80px;resize:vertical;outline:none"></textarea></div>' +
+    '<div class="form-group"><md-filled-text-field label="Asunto" name="asunto" placeholder="Ej: Ruido excesivo, Fuga de agua" required style="width:100%"></md-filled-text-field></div>' +
+    '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Describa el problema o sugerencia..." required style="width:100%"></md-filled-text-field></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Guardar</md-filled-button>', true);
 }
