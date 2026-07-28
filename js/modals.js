@@ -566,7 +566,7 @@ function formEncuestas(data) {
       '<div class="form-group"><md-filled-text-field label="Fecha de término" type="date" name="fecha_termino" required style="width:100%"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></md-filled-text-field></div>' +
       '<div class="form-group"><md-filled-text-field label="Quorum (mín. votos)" type="number" name="quorum" min="0" placeholder="Ej: Sin límite" style="width:100%"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
-    '<div class="form-group">' + alternativasHtml + '</div>' +
+    '<div class="form-group" style="margin-top:1rem">' + alternativasHtml + '</div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Crear') + '</md-filled-button>', true);
 }
