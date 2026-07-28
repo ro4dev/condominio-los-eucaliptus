@@ -465,7 +465,7 @@ function formDocumentos(data) {
     '<div class="form-group"><md-filled-text-field label="Nombre" name="nombre" placeholder="Ej: Acta reunión marzo 2026" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.nombre) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><md-filled-select label="Categoría" name="categoria" required style="width:100%">' + catOpts + '</md-filled-select></div>' +
     '</div>' +
-    '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Resumen del documento..." type="textarea" rows="3" style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Resumen del documento..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
     (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
   '</form>',
