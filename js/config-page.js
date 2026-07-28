@@ -90,7 +90,7 @@ document.addEventListener('click', function(e) {
 function openConfigModal(title, placeholder, onAdd) {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML =
-    '<div class="form-group"><label>Nombre</label><md-filled-text-field id="cfgModalInput" placeholder="' + placeholder + '" style="width:100%"></md-filled-text-field></div>';
+    '<div class="form-group"><label>Nombre</label><md-filled-text-field id="cfgModalInput" placeholder="' + placeholder + '" required style="width:100%"></md-filled-text-field></div>';
   document.getElementById('modalFooter').innerHTML =
     '<md-text-button onclick="closeModal()">Cancelar</md-text-button>' +
     '<md-filled-button id="cfgModalAddBtn">Agregar</md-filled-button>';
