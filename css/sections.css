@@ -1,20 +1,18 @@
-.news-card { background: var(--bg-card); border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-left: 4px solid #3b82f6; }
+.news-card { background: var(--bg-card); border-radius: 10px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .news-card h4 { font-size: 1rem; color: var(--text); margin-bottom: 0.5rem; }
 .news-card .dates { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
 .news-card .desc { font-size: 0.9rem; color: var(--text-2); line-height: 1.5; }
 
-.flujo-card { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; border-left: 4px solid #059669; position: relative; overflow: hidden; }
+.flujo-card { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; position: relative; overflow: hidden; }
 .flujo-card.cerrada .watermark { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%) rotate(-8deg); font-size: 1.2rem; font-weight: 900; color: rgba(220, 38, 38, 0.7); pointer-events: none; text-align: center; z-index: 2; white-space: nowrap; letter-spacing: 0.25em; padding: 0.2rem 1rem; border: 3px solid rgba(220, 38, 38, 0.55); border-radius: 8px; background: rgba(156, 163, 175, 0.15); }
 
-.doc-item { display: flex; align-items: center; gap: 1rem; background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; border-left: 4px solid #3b82f6; }
+.doc-item { display: flex; align-items: center; gap: 1rem; background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; }
 .doc-icon { width: 40px; height: 40px; border-radius: 8px; background: #dbeafe; color: #2563eb; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .doc-info { flex: 1; }
 .doc-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
 .doc-meta { font-size: 0.8rem; color: var(--text-muted); }
 
-.reclamo-item { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; border-left: 4px solid #f59e0b; }
-.reclamo-item.reclamo { border-left-color: #b91c1c; }
-.reclamo-item.sugerencia { border-left-color: #10b981; }
+.reclamo-item { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 0.5rem; }
 .reclamo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
 .reclamo-tipo { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; }
 .reclamo-tipo.reclamo { background: #fee2e2; color: #991b1b; }
@@ -24,7 +22,7 @@
 .reclamo-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.4; }
 .reclamo-parcela { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
 
-.proveedor-card { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-left: 4px solid #f59e0b; }
+.proveedor-card { background: var(--bg-card); border-radius: 10px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .proveedor-rubro { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; background: #dbeafe; color: #1e40af; display: inline-block; margin-bottom: 0.5rem; }
 .proveedor-nombre { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
 .proveedor-contacto { font-size: 0.85rem; color: var(--text-2); }
