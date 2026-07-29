@@ -265,7 +265,7 @@ function renderFlujo() {
     var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
         '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>' +
         '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
       '</div>' +
@@ -400,11 +400,11 @@ function renderAsambleas() {
     var fecha = formatDate(a.fecha);
     var asistentesIds = (ASAMBLEA_ASISTENTES || []).filter(function(aa) { return aa.asamblea_id === a.id; }).map(function(aa) { return aa.parcela_id; });
     var asistentes = asistentesIds.length ? asistentesIds.map(function(pid) {
-      return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + parcelName(pid) + '</span>';
+      return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:var(--md-sys-shape-corner-extra-small);font-size:0.8rem;margin:0.1rem">' + parcelName(pid) + '</span>';
     }).join('') : '';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
@@ -530,7 +530,7 @@ function renderEncuestas() {
         boton = ' <md-filled-button onclick="votarEncuesta(\'' + e.id + '\', \'' + op.replace(/'/g, "\\'") + '\')" style="font-size:0.75rem;padding:0.2rem 0.6rem;--md-filled-button-container-color:' + color + '">Votar</md-filled-button>';
       }
 
-      return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:4px;' : '') + '">' +
+      return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:var(--md-sys-shape-corner-extra-small);' : '') + '">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem">' +
           '<span' + (esMiVoto ? ' style="font-weight:600"' : '') + '>' + op + (esMiVoto ? ' ✓' : '') + '</span>' +
           '<span style="color:var(--text-muted)">' + count + ' (' + pct + '%)' + boton + '</span>' +
@@ -549,7 +549,7 @@ function renderEncuestas() {
     return '<div class="flujo-card' + (d.cerrada ? ' cerrada' : '') + '">' +
       (d.cerrada ? '<div class="watermark">TERMINADA</div>' : '') +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fechaPub + '</span>' +
           adminActions("editEncuesta('" + e.id + "')", "deleteEncuesta('" + e.id + "')") +
