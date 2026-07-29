@@ -150,7 +150,7 @@ function renderParcelas() {
     }).join('');
 
     return '<div class="card">' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--border);padding-bottom:0.5rem;margin-bottom:0.8rem">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">' +
         '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>' +
         (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button><md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:#2563eb"><md-icon>person_add</md-icon></md-icon-button>' : '') +
       '</div>' +
