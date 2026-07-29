@@ -263,8 +263,7 @@ function renderFlujo() {
     var color = f.tipo === 'Ingreso' ? '#059669' : '#b91c1c';
     var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2';
     var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
-    var borderColor = f.tipo === 'Ingreso' ? '#059669' : '#b91c1c';
-    return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
+    return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
         '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>' +
@@ -398,13 +397,12 @@ function renderAsambleas() {
     return new Date(b.fecha) - new Date(a.fecha);
   });
   timeline.innerHTML = sorted.map(function(a) {
-    var borderColor = a.tipo === 'Extraordinaria' ? '#f59e0b' : '#3b82f6';
     var fecha = formatDate(a.fecha);
     var asistentesIds = (ASAMBLEA_ASISTENTES || []).filter(function(aa) { return aa.asamblea_id === a.id; }).map(function(aa) { return aa.parcela_id; });
     var asistentes = asistentesIds.length ? asistentesIds.map(function(pid) {
       return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:4px;font-size:0.8rem;margin:0.1rem">' + parcelName(pid) + '</span>';
     }).join('') : '';
-    return '<div class="flujo-card" style="border-left-color:' + borderColor + '">' +
+    return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
@@ -495,7 +493,6 @@ function renderEncuestas() {
   container.innerHTML = data.map(function(d) {
     var e = d.encuesta;
     var quorumAlcanzado = e.quorum ? d.total >= e.quorum : true;
-    var borderColor = d.cerrada ? '#9ca3af' : '#22c55e';
     var estadoBg = d.cerrada ? '#f3f4f6' : '#dcfce7';
     var estadoText = d.cerrada ? '#374151' : '#166534';
 
@@ -549,7 +546,7 @@ function renderEncuestas() {
       accion = '<div style="margin-top:0.4rem;font-size:0.8rem;color:var(--text-muted)">Ya votaste</div>';
     }
 
-    return '<div class="flujo-card' + (d.cerrada ? ' cerrada' : '') + '" style="border-left-color:' + borderColor + '">' +
+    return '<div class="flujo-card' + (d.cerrada ? ' cerrada' : '') + '">' +
       (d.cerrada ? '<div class="watermark">TERMINADA</div>' : '') +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:999px;font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
