@@ -16,7 +16,7 @@
 .reclamo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
 .reclamo-tipo { font: var(--md-sys-typescale-label-small); padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; }
 .reclamo-tipo.reclamo { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
-.reclamo-tipo.sugerencia { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+.reclamo-tipo.sugerencia { background: var(--color-positive-bg); color: var(--color-positive-text); }
 .reclamo-fecha { font-size: 0.8rem; color: var(--text-muted); }
 .reclamo-title { font: var(--md-sys-typescale-title-small); margin-bottom: 0.3rem; color: var(--text); }
 .reclamo-desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.4; }
