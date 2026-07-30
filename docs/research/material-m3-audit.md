@@ -420,36 +420,32 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 ### FASE 2 — Hardcoded colors en CSS
 
 **`css/components.css`:**
-- [ ] `.stat-card .value.blue` → `var(--md-sys-color-primary)`
-- [ ] `.stat-card .value.green` → `var(--md-sys-color-tertiary)`
-- [ ] `.stat-card .value.red` → `var(--md-sys-color-error)`
-- [ ] `.avatar` (default azul bg:#3b82f6) → `var(--md-sys-color-primary-container)`
-- [ ] `.avatar.green` → `var(--md-sys-color-tertiary-container)`
-- [ ] `.avatar.purple` → `var(--md-sys-color-secondary-container)`
-- [ ] `.avatar.orange` → decidir variable
-- [ ] `.avatar.pink` → decidir variable
+- [x] `.stat-card .value.blue` → `var(--md-sys-color-primary)` (#2563eb)
+- [x] `.stat-card .value.green` → `var(--md-sys-color-tertiary)` (#059669 → #7c3aed, cambia visual)
+- [x] `.stat-card .value.red` → `var(--md-sys-color-error)` (#b91c1c)
+- [x] `.avatar` (default) → `var(--md-sys-color-primary)` (#3b82f6 → #2563eb, azul más oscuro)
+- [x] `.avatar.green` → se mantiene `#10b981` (no hay token M3 verde)
+- [x] `.avatar.purple` → `var(--md-sys-color-tertiary)` (#8b5cf6 → #7c3aed, cambia)
+- [x] `.avatar.orange` → se mantiene `#f97316` (sin M3 naranja)
+- [x] `.avatar.pink` → se mantiene `#ec4899` (sin M3 rosa)
 
 **`css/sections.css`:**
-- [ ] `.doc-icon { background: #dbeafe }` → `var(--md-sys-color-primary-container)`
-- [ ] `.doc-icon { color: #2563eb }` → `var(--md-sys-color-on-primary-container)`
-- [ ] `.reclamo-tipo.reclamo { background: #fee2e2 }` → `var(--md-sys-color-error-container)`
-- [ ] `.reclamo-tipo.reclamo { color: #991b1b }` → `var(--md-sys-color-on-error-container)`
-- [ ] `.reclamo-tipo.sugerencia { background: #d1fae5 }` → `var(--md-sys-color-tertiary-container)`
-- [ ] `.reclamo-tipo.sugerencia { color: #065f46 }` → `var(--md-sys-color-on-tertiary-container)`
-- [ ] `.proveedor-rubro { background: #dbeafe }` → `var(--md-sys-color-secondary-container)`
-- [ ] `.proveedor-rubro { color: #1e40af }` → `var(--md-sys-color-on-secondary-container)`
-- [ ] `.timeline-item::before { background: #3b82f6 }` → `var(--md-sys-color-primary)`
-- [ ] `.timeline-item.extra::before { background: #f59e0b }` → `var(--md-sys-color-tertiary)`
-- [ ] `.timeline-tipo { background: #dbeafe }` → `var(--md-sys-color-secondary-container)`
-- [ ] `.timeline-tipo { color: #1e40af }` → `var(--md-sys-color-on-secondary-container)`
-- [ ] `.timeline-tipo.extra { background: #fef3c7 }` → `var(--md-sys-color-tertiary-container)`
-- [ ] `.timeline-tipo.extra { color: #92400e }` → `var(--md-sys-color-on-tertiary-container)`
+- [x] `.doc-icon { background: #dbeafe }` → `var(--md-sys-color-primary-container)` ✅
+- [x] `.doc-icon { color: #2563eb }` → `var(--md-sys-color-primary)` ✅
+- [x] `.reclamo-tipo.reclamo` → `var(--md-sys-color-error-container)` / `on-error-container` ✅
+- [x] `.reclamo-tipo.sugerencia` → `var(--md-sys-color-tertiary-container)` / `on-tertiary-container` ✅
+- [x] `.proveedor-rubro` → `var(--md-sys-color-primary-container)` / `var(--md-sys-color-primary)` (cambia de #1e40af a #2563eb)
+- [x] `.timeline-item::before` → `var(--md-sys-color-primary)` (#3b82f6 → #2563eb, azul más oscuro)
+- [x] `.timeline-item.extra::before` → `var(--md-sys-color-tertiary)` (#f59e0b → #7c3aed, naranja→púrpura)
+- [x] `.timeline-tipo` → `var(--md-sys-color-primary-container)` / `on-primary-container` (#dbeafe → primary-container ✅, color #1e40af → #1e3a5f)
+- [x] `.timeline-tipo.extra` → se mantiene hardcoded (ámbar no tiene M3 directo)
 
-**`css/base.css`:**
-- [ ] `.snackbar-icon.success { color: #4ade80 }` → `var(--md-sys-color-tertiary)`
-- [ ] `.snackbar-icon.warning { color: #fbbf24 }` → `var(--md-sys-color-secondary)`
-- [ ] `.snackbar-icon.error { color: #f87171 }` → `var(--md-sys-color-error)`
-- [ ] `.snackbar-icon.info { color: #60a5fa }` → `var(--md-sys-color-primary)`
+**Tokens M3 agregados:**
+- [x] `--md-sys-color-error-container` / `on-error-container` en light (#fee2e2/#991b1b) y dark (#93000a/#ffdad6)
+- [x] `--md-sys-color-tertiary-container` / `on-tertiary-container` en light (#d1fae5/#065f46) y dark (#4c1d95/#e9d5ff)
+
+**`css/base.css` (snackbar):**
+- [ ] `.snackbar-icon.*` → se mantienen hardcoded (colores de estado sin M3 directo)
 
 **Verificación F2:**
 - [ ] Revisar cada badge, avatar, icono en light y dark
