@@ -36,6 +36,8 @@ async function loadInitialData() {
   await Promise.all([loadJson('GASTOS'), loadJson('PARCELAS'), loadConfig()]);
   fillFilters();
   applyFilters();
+  var tabEl = document.getElementById('tab-cuenta');
+  if (tabEl) tabEl.setAttribute('aria-busy', 'false');
 }
 
 async function loadTabData(tab) {
@@ -61,8 +63,11 @@ async function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(function(b) { b.removeAttribute('active'); });
   document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
   document.querySelector('[data-tab="' + tab + '"]').setAttribute('active', '');
-  document.getElementById('tab-' + tab).classList.add('active');
+  var tabEl = document.getElementById('tab-' + tab);
+  tabEl.classList.add('active');
+  tabEl.setAttribute('aria-busy', 'true');
   await loadTabData(tab);
+  tabEl.setAttribute('aria-busy', 'false');
 }
 
 function showSkeletons(tab) {
@@ -82,6 +87,7 @@ function showSkeletons(tab) {
   if (!tabEl) {
     return;
   }
+  tabEl.setAttribute('aria-busy', 'true');
   var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList, #flujoList');
   if (content) {
     content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
@@ -108,4 +114,6 @@ async function reloadTab(tab) {
   showSkeletons(tab);
   loaded = {};
   await loadTabData(tab);
+  var tabEl = document.getElementById('tab-' + tab);
+  if (tabEl) tabEl.setAttribute('aria-busy', 'false');
 }

@@ -581,8 +581,8 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 ### FASE 10 — Accesibilidad
 
-- [ ] `aria-busy="true"` en regiones skeleton
-- [ ] `role="region"` y `aria-label` en cada `.tab-content`
+- [x] `aria-busy="true"` en regiones skeleton
+- [x] `role="region"` y `aria-label` en cada `.tab-content`
 - [ ] Lighthouse sin errores críticos
 
 ---
@@ -609,6 +609,6 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 | F7 — Refactor CSS | 4 | 0 |
 | F8 — Fix imports | 2 | — (revertido) |
 | F9 — Transiciones | 3 | 3 |
-| F10 — Accesibilidad | 3 | 0 |
+| F10 — Accesibilidad | 3 | 2 |
 | EXTRA — Shape fixes | 4 | 0 |
 | **Total** | **114** | **0%** |

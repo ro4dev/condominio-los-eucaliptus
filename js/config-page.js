@@ -369,4 +369,6 @@ async function renderConfig() {
   renderCategoriasDocs();
   renderRubrosProveedores();
   renderConceptosFlujo();
+  var tabEl = document.getElementById('tab-config');
+  if (tabEl) tabEl.setAttribute('aria-busy', 'false');
 }
