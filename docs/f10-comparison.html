@@ -1,44 +1,222 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F10 — Accesibilidad</title>
 <style>
-body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid #ddd; }
-th { background: #f5f5f5; }
-code { background: #f0f0f0; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9rem; }
-.section { margin: 2rem 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #eef0f4; font-weight: 600; }
+  .code { font-family: monospace; font-size: 0.8rem; white-space: pre-wrap; line-height: 1.5; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .note { background: #e2e8f0; color: #475569; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  nav { position: sticky; top: 0; background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  nav a { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  nav a:hover { text-decoration: underline; }
+  section { margin-bottom: 2.5rem; }
 </style>
 </head>
 <body>
-<h1>F10 — Accesibilidad</h1>
 
-<div class="section">
-<h2>Cambios</h2>
+<h1>Fase 10 — Accesibilidad</h1>
+<p class="sub">role="region", aria-label y aria-busy en tab panels.</p>
 
-<h3>1. <code>role="region"</code> + <code>aria-label</code> en tab panels</h3>
-<p>Cada <code>.tab-content</code> ahora tiene:</p>
-<pre><code>&lt;div id="tab-cuenta" class="tab-content" role="region" aria-label="Gastos comunes"&gt;</code></pre>
-<p><strong>Archivo:</strong> <code>index.html</code> (10 tab-content divs)</p>
+<nav>
+  <span style="font-weight:600">Saltar a:</span>
+  <a href="#html">index.html</a>
+  <a href="#switch">data.js (switchTab)</a>
+  <a href="#skeletons">data.js (showSkeletons)</a>
+  <a href="#reload">data.js (reloadTab)</a>
+  <a href="#init">data.js (loadInitialData)</a>
+  <a href="#config">config-page.js (renderConfig)</a>
+</nav>
 
-<h3>2. <code>aria-busy</code> durante carga de datos</h3>
-<p>Cuando se muestran skeletons, el tab panel recibe <code>aria-busy="true"</code>; cuando los datos terminan de cargarse, pasa a <code>aria-busy="false"</code>.</p>
-<p><strong>Archivos:</strong></p>
-<ul>
-<li><code>js/data.js</code> — <code>switchTab()</code> setea <code>aria-busy="true"</code> antes de cargar, <code>"false"</code> después</li>
-<li><code>js/data.js</code> — <code>showSkeletons()</code> setea <code>aria-busy="true"</code></li>
-<li><code>js/data.js</code> — <code>reloadTab()</code> setea <code>aria-busy="false"</code> tras cargar</li>
-<li><code>js/data.js</code> — <code>loadInitialData()</code> setea <code>aria-busy="false"</code> en tab-cuenta</li>
-<li><code>js/config-page.js</code> — <code>renderConfig()</code> setea <code>aria-busy="false"</code> en tab-config</li>
-<li><code>index.html</code> — tab-cuenta inicia con <code>aria-busy="true"</code></li>
-</ul>
+<section id="html">
+<h2>index.html — role="region" + aria-label + aria-busy</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">&lt;div id="tab-cuenta" class="tab-content active"&gt;</td>
+    <td class="code">&lt;div id="tab-cuenta" class="tab-content active" role="region" aria-label="Gastos comunes" aria-busy="true"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-parcelas" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-parcelas" class="tab-content" role="region" aria-label="Parcelas"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-noticias" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-noticias" class="tab-content" role="region" aria-label="Noticias"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-flujo" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-flujo" class="tab-content" role="region" aria-label="Ingresos/Egresos"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-documentos" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-documentos" class="tab-content" role="region" aria-label="Documentos"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-reclamos" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-reclamos" class="tab-content" role="region" aria-label="Reclamos/Sugerencias"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-proveedores" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-proveedores" class="tab-content" role="region" aria-label="Proveedores"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-asambleas" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-asambleas" class="tab-content" role="region" aria-label="Asambleas"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-encuestas" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-encuestas" class="tab-content" role="region" aria-label="Encuestas"&gt;</td>
+  </tr>
+  <tr>
+    <td class="code">&lt;div id="tab-config" class="tab-content"&gt;</td>
+    <td class="code">&lt;div id="tab-config" class="tab-content" role="region" aria-label="Configuración"&gt;</td>
+  </tr>
+</table>
+</section>
+
+<section id="switch">
+<h2>js/data.js — switchTab()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">async function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(
+    function(b) { b.removeAttribute('active'); });
+  document.querySelectorAll('.tab-content').forEach(
+    function(c) { c.classList.remove('active'); });
+  document.querySelector(
+    '[data-tab="' + tab + '"]').setAttribute('active', '');
+  document.getElementById(
+    'tab-' + tab).classList.add('active');
+  await loadTabData(tab);
+}</td>
+    <td class="code">async function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(
+    function(b) { b.removeAttribute('active'); });
+  document.querySelectorAll('.tab-content').forEach(
+    function(c) { c.classList.remove('active'); });
+  document.querySelector(
+    '[data-tab="' + tab + '"]').setAttribute('active', '');
+  var tabEl = document.getElementById('tab-' + tab);
+  tabEl.classList.add('active');
+  tabEl.setAttribute('aria-busy', 'true');
+  await loadTabData(tab);
+  tabEl.setAttribute('aria-busy', 'false');
+}</td>
+  </tr>
+</table>
+</section>
+
+<section id="skeletons">
+<h2>js/data.js — showSkeletons()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">  var tabEl = document.getElementById('tab-' + tab);
+  if (!tabEl) { return; }
+  var content = tabEl.querySelector(...);</td>
+    <td class="code">  var tabEl = document.getElementById('tab-' + tab);
+  if (!tabEl) { return; }
+  tabEl.setAttribute('aria-busy', 'true');
+  var content = tabEl.querySelector(...);</td>
+  </tr>
+</table>
+</section>
+
+<section id="reload">
+<h2>js/data.js — reloadTab()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">async function reloadTab(tab) {
+  showSkeletons(tab);
+  loaded = {};
+  await loadTabData(tab);
+}</td>
+    <td class="code">async function reloadTab(tab) {
+  showSkeletons(tab);
+  loaded = {};
+  await loadTabData(tab);
+  var tabEl = document.getElementById('tab-' + tab);
+  if (tabEl) tabEl.setAttribute('aria-busy', 'false');
+}</td>
+  </tr>
+</table>
+</section>
+
+<section id="init">
+<h2>js/data.js — loadInitialData()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">async function loadInitialData() {
+  await Promise.all([loadJson('GASTOS'),
+    loadJson('PARCELAS'), loadConfig()]);
+  fillFilters();
+  applyFilters();
+}</td>
+    <td class="code">async function loadInitialData() {
+  await Promise.all([loadJson('GASTOS'),
+    loadJson('PARCELAS'), loadConfig()]);
+  fillFilters();
+  applyFilters();
+  var tabEl = document.getElementById('tab-cuenta');
+  if (tabEl) tabEl.setAttribute('aria-busy', 'false');
+}</td>
+  </tr>
+</table>
+</section>
+
+<section id="config">
+<h2>js/config-page.js — renderConfig()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">async function renderConfig() {
+  showSkeletons('config');
+  await Promise.all([loadConfig(),
+    loadJson('PARCELAS'),
+    loadJson('DOCUMENTOS'),
+    loadJson('PROVEEDORES'),
+    loadJson('FLUJO')]);
+  renderMontos();
+  renderParcelasConfig();
+  renderCategoriasDocs();
+  renderRubrosProveedores();
+  renderConceptosFlujo();
+}</td>
+    <td class="code">async function renderConfig() {
+  showSkeletons('config');
+  await Promise.all([loadConfig(),
+    loadJson('PARCELAS'),
+    loadJson('DOCUMENTOS'),
+    loadJson('PROVEEDORES'),
+    loadJson('FLUJO')]);
+  renderMontos();
+  renderParcelasConfig();
+  renderCategoriasDocs();
+  renderRubrosProveedores();
+  renderConceptosFlujo();
+  var tabEl = document.getElementById('tab-config');
+  if (tabEl) tabEl.setAttribute('aria-busy', 'false');
+}</td>
+  </tr>
+</table>
+</section>
+
+<div style="margin-top:2rem;padding:1rem;background:#d1fae5;border-radius:8px;border:1px solid #059669">
+  <strong>✅ Sin cambio visual.</strong> Solo atributos ARIA para lectores de pantalla.
 </div>
 
-<div class="section">
-<h2>Material Design 3 alignment</h2>
-<p>M3 no prescribe ARIA específico, pero la guía de accesibilidad de Material Design recomienda roles semánticos y regiones navegables para lectores de pantalla.</p>
-</div>
 </body>
 </html>

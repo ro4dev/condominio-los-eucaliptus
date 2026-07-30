@@ -1,50 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F9 — Tab transitions</title>
 <style>
-body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid #ddd; }
-th { background: #f5f5f5; }
-code { background: #f0f0f0; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9rem; }
-.section { margin: 2rem 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #eef0f4; font-weight: 600; }
+  .code { font-family: monospace; font-size: 0.8rem; white-space: pre-wrap; line-height: 1.5; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .note { background: #e2e8f0; color: #475569; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
 </style>
 </head>
 <body>
-<h1>F9 — Tab transitions (fade)</h1>
 
-<div class="section">
-<h2>Before</h2>
-<pre><code>/* layout.css */
-.tab-content.active { display: block; }</code></pre>
-<p>No transition — tabs snap instantly.</p>
-</div>
+<h1>Fase 9 — Tab transitions</h1>
+<p class="sub">Fade animation al cambiar de tab. Sin cambio de layout — solo animación visual.</p>
 
-<div class="section">
-<h2>After</h2>
-<pre><code>/* layout.css */
+<h2>css/layout.css</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">.tab-content { display: none; }
+.tab-content.active { display: block; }</td>
+    <td class="code">.tab-content { display: none; }
 .tab-content.active { display: block; animation: tabFadeIn 0.2s cubic-bezier(0.2, 0, 0, 1); }
-@keyframes tabFadeIn { from { opacity: 0; } to { opacity: 1; } }</code></pre>
-<p>Fade animation: 0.2s cubic-bezier(0.2, 0, 0, 1). Doesn't change layout flow — just adds a visual fade-in when tab becomes active.</p>
+@keyframes tabFadeIn { from { opacity: 0; } to { opacity: 1; } }</td>
+  </tr>
+</table>
+
+<div style="margin-top:2rem;padding:1rem;background:#d1fae5;border-radius:8px;border:1px solid #059669">
+  <strong>✅ Sin cambio visual.</strong> Solo se agrega fade in de 200ms con easing M3 estándar. El layout no cambia.
 </div>
 
-<div class="section">
-<h2>Archivos tocados</h2>
-<ul>
-<li><code>css/layout.css</code> — animation + keyframe agregados</li>
-</ul>
+<div style="margin-top:1rem;padding:1rem;background:#fef3c7;border-radius:8px;border:1px solid #f59e0b">
+  <strong>⚠️ Nota:</strong> F8 (imports individuales) fue revertido en este mismo commit porque rompía todos los componentes de Material Web. Se volvió a <code>@material/web/all.js</code>.
 </div>
 
-<div class="section">
-<h2>Nota</h2>
-<p>F8 (imports individuales) fue revertido porque rompía los componentes de Material Web. Se volvió a <code>@material/web/all.js</code>.</p>
-</div>
-
-<div class="section">
-<h2>Material Design 3 alignment</h2>
-<p>M3 motion spec recomienda <code>cubic-bezier(0.2, 0, 0, 1)</code> para entering transitions (standard easing). 200ms es la duración "short" para micro-interacciones.</p>
-</div>
 </body>
 </html>
