@@ -386,34 +386,34 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 ### FASE 1 — Alias variables legacy → M3 tokens (base.css)
 
 **`:root` (light):**
-- [ ] `--bg` = `var(--md-sys-color-surface-container-low)`
-- [ ] `--bg-card` = `var(--md-sys-color-surface)`
-- [ ] `--text` = `var(--md-sys-color-on-surface)`
-- [ ] `--text-2` = `var(--md-sys-color-on-surface-variant)`
-- [ ] `--border` = `var(--md-sys-color-outline-variant)`
-- [ ] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #6b7280 a #9ca3af)*
-- [ ] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #f3f4f6 a #f5f7fa)*
-- [ ] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #f9fafb a #e8eaee)*
-- [ ] `--skeleton-1` = mantener valor (sin M3 directo)
+- [x] `--bg` = `var(--md-sys-color-surface-container-low)`
+- [x] `--bg-card` = `var(--md-sys-color-surface)`
+- [x] `--text` = `var(--md-sys-color-on-surface)`
+- [x] `--text-2` = `var(--md-sys-color-on-surface-variant)`
+- [x] `--border` = `var(--md-sys-color-outline-variant)`
+- [x] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #6b7280 a #9ca3af)*
+- [x] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #f3f4f6 a #f5f7fa)*
+- [x] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #f9fafb a #e8eaee)*
+- [ ] `--skeleton-1` = mantener valor
 - [ ] `--skeleton-2` = mantener valor
 - [ ] `--modal-loading-bg` = mantener valor
 
 **`body.dark`:**
-- [ ] `--bg` = `var(--md-sys-color-surface-container-low)`
-- [ ] `--bg-card` = `var(--md-sys-color-surface)` *(cambia de #1f2937 a #111827)*
-- [ ] `--text` = `var(--md-sys-color-on-surface)`
-- [ ] `--text-2` = `var(--md-sys-color-on-surface-variant)`
-- [ ] `--border` = `var(--md-sys-color-outline-variant)`
-- [ ] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #9ca3af a #6b7280)*
-- [ ] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #1f2937 a #111827)*
-- [ ] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #374151 a #283548)*
+- [x] `--bg` = `var(--md-sys-color-surface-container-low)`
+- [x] `--bg-card` = `var(--md-sys-color-surface)` *(cambia de #1f2937 a #111827)*
+- [x] `--text` = `var(--md-sys-color-on-surface)`
+- [x] `--text-2` = `var(--md-sys-color-on-surface-variant)`
+- [x] `--border` = `var(--md-sys-color-outline-variant)`
+- [x] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #9ca3af a #6b7280)*
+- [x] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #1f2937 a #111827)*
+- [x] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #374151 a #283548)*
 - [ ] `--skeleton-1` = mantener
 - [ ] `--skeleton-2` = mantener
 - [ ] `--modal-loading-bg` = mantener
 
 **Verificación F1:**
 - [ ] Abrir demo mode, toggle light/dark, revisar todas las tabs
-- [ ] No hay cambios visuales (valores legacy equivalentes)
+- [ ] No hay cambios visuales relevantes (los valores legacy ahora referencian M3 tokens)
 
 ---
 
@@ -610,7 +610,7 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 | Fase | Items | Completados |
 |------|-------|-------------|
-| F1 — Alias variables CSS | 22 | 0 |
+| F1 — Alias variables CSS | 22 | 16 |
 | F2 — Hardcoded CSS colors | 22 | 0 |
 | F3 — Hardcoded renderers.js | 19 | 0 |
 | F4 — Hardcoded modals+charts | 6 | 0 |
