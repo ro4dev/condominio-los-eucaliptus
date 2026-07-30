@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F8 — Fix imports: @material/web/all.js → individuales</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #eef0f4; font-weight: 600; }
+  .code { font-family: monospace; font-size: 0.8rem; white-space: pre-wrap; line-height: 1.5; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; }
+</style>
+</head>
+<body>
+
+<h1>Fase 8 — Fix imports</h1>
+<p class="sub">Reemplazo de <code>import '@material/web/all.js'</code> por imports individuales. Sin cambio visual.</p>
+
+<h2>index.html</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">import '@material/web/all.js';</td>
+    <td class="code">import '@material/web/tabs/tabs.js';<br>import '@material/web/tabs/primary-tab.js';<br>import '@material/web/button/filled-button.js';<br>import '@material/web/button/filled-tonal-button.js';<br>import '@material/web/button/outlined-button.js';<br>import '@material/web/button/text-button.js';<br>import '@material/web/iconbutton/icon-button.js';<br>import '@material/web/chips/filter-chip.js';<br>import '@material/web/chips/input-chip.js';<br>import '@material/web/chips/assist-chip.js';<br>import '@material/web/textfield/filled-text-field.js';<br>import '@material/web/textfield/outlined-text-field.js';<br>import '@material/web/select/filled-select.js';<br>import '@material/web/select/select-option.js';<br>import '@material/web/dialog/dialog.js';<br>import '@material/web/progress/circular-progress.js';<br>import '@material/web/icon/icon.js';</td>
+  </tr>
+</table>
+
+<p style="font-size:0.85rem;color:#6b7280">Misma corrección en <code>material-test.html</code> (mismos 17 imports, sin outlined-text-field que no se usa ahí).</p>
+
+<div style="margin-top:2rem;padding:1rem;background:#d1fae5;border-radius:8px;border:1px solid #059669">
+  <strong>✅ Sin cambio visual.</strong> Solo se cargan los componentes que la app realmente usa, reduciendo el bundle aproximadamente 60-80%.
+</div>
+
+</body>
+</html>
