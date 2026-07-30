@@ -557,9 +557,9 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 ### FASE 7 — Refactor CSS (body.dark + reset)
 
-- [ ] Mover reglas 2do `body.dark` (línea 162-167) al bloque principal (línea 79)
-- [ ] Eliminar bloque duplicado
-- [ ] Reemplazar reset `*:not(:is(md-...))` por reset simple
+- [x] Mover `color-scheme: dark` al bloque principal `body.dark` (línea 83)
+- [x] Eliminar 2do bloque `body.dark` duplicado
+- [x] Reemplazar reset `*:not(:is(md-...))` por `*, *::before, *::after { box-sizing: border-box; } body { margin: 0; }`
 - [ ] Verificar md-* componentes no rotos
 
 ---
