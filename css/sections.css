@@ -1,7 +1,7 @@
 .news-card { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
-.news-card h4 { font-size: 1rem; color: var(--text); margin-bottom: 0.5rem; }
-.news-card .dates { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-.news-card .desc { font-size: 0.9rem; color: var(--text-2); line-height: 1.5; }
+.news-card h4 { font: var(--md-sys-typescale-title-medium); color: var(--text); margin-bottom: 0.5rem; }
+.news-card .dates { font: var(--md-sys-typescale-body-small); color: var(--text-muted); margin-bottom: 0.5rem; }
+.news-card .desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.5; }
 
 .flujo-card { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1rem; box-shadow: var(--md-sys-elevation-level1); margin-bottom: 0.5rem; position: relative; overflow: hidden; }
 .flujo-card.cerrada .watermark { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%) rotate(-8deg); font-size: 1.2rem; font-weight: 900; color: rgba(220, 38, 38, 0.7); pointer-events: none; text-align: center; z-index: 2; white-space: nowrap; letter-spacing: 0.25em; padding: 0.2rem 1rem; border: 3px solid rgba(220, 38, 38, 0.55); border-radius: var(--md-sys-shape-corner-small); background: rgba(156, 163, 175, 0.15); }
@@ -14,18 +14,18 @@
 
 .reclamo-item { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1rem; box-shadow: var(--md-sys-elevation-level1); margin-bottom: 0.5rem; }
 .reclamo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-.reclamo-tipo { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; }
+.reclamo-tipo { font: var(--md-sys-typescale-label-small); padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; }
 .reclamo-tipo.reclamo { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
 .reclamo-tipo.sugerencia { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
 .reclamo-fecha { font-size: 0.8rem; color: var(--text-muted); }
-.reclamo-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
-.reclamo-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.4; }
+.reclamo-title { font: var(--md-sys-typescale-title-small); margin-bottom: 0.3rem; color: var(--text); }
+.reclamo-desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.4; }
 .reclamo-parcela { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
 
 .proveedor-card { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1rem; box-shadow: var(--md-sys-elevation-level1); }
 .proveedor-rubro { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); display: inline-block; margin-bottom: 0.5rem; }
-.proveedor-nombre { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
-.proveedor-contacto { font-size: 0.85rem; color: var(--text-2); }
+.proveedor-nombre { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.5rem; color: var(--text); }
+.proveedor-contacto { font: var(--md-sys-typescale-body-medium); color: var(--text-2); }
 .proveedor-contacto div { padding: 0.2rem 0; }
 
 .timeline { position: relative; padding-left: 2rem; }
@@ -36,7 +36,7 @@
 .timeline-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
 .timeline-tipo { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); display: inline-block; margin-bottom: 0.5rem; }
 .timeline-tipo.extra { background: #fef3c7; color: #92400e; }
-.timeline-title { font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
+.timeline-title { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.5rem; color: var(--text); }
 .timeline-section { font-size: 0.85rem; margin-bottom: 0.5rem; }
 .timeline-section strong { color: var(--text-2); }
 .timeline-section p { color: var(--text-2); line-height: 1.4; white-space: pre-line; }
@@ -44,7 +44,7 @@
 
 .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
 .chart-box { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
-.chart-box h3 { font-size: 0.95rem; margin-bottom: 0.8rem; color: var(--text-2); }
+.chart-box h3 { font: var(--md-sys-typescale-title-small); margin-bottom: 0.8rem; color: var(--text-2); }
 .chart-box canvas { max-height: 280px; }
 
 @media (max-width: 700px) {

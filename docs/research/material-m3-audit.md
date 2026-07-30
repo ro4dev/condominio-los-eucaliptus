@@ -504,29 +504,29 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 ### FASE 5 — Typescale tokens
 
 **`css/base.css`:**
-- [ ] `header h1` → `font: var(--md-sys-typescale-title-large)`
-- [ ] `header p` → `font: var(--md-sys-typescale-body-medium)`
+- [x] `header h1` → `font: var(--md-sys-typescale-title-large)` (cambia de 1.8rem/600 a 1.375rem/400)
+- [x] `header p` → `font: var(--md-sys-typescale-body-medium)` (cambia de 0.9rem a 0.875rem)
+- [x] `body` → `font: var(--md-sys-typescale-body-medium)` (antes sin font-size, ahora 0.875rem)
 
 **`css/components.css`:**
-- [ ] `.stat-card .value` → `font: var(--md-sys-typescale-headline-small)`
-- [ ] `.stat-card .label` → `font: var(--md-sys-typescale-label-small)`
-- [ ] `table, td, th` → `font: var(--md-sys-typescale-body-small)`
-- [ ] `.card h4` → `font: var(--md-sys-typescale-title-medium)`
-- [ ] `.card .field` (label+value) → `font: var(--md-sys-typescale-body-medium)`
-- [ ] `body` → `font: var(--md-sys-typescale-body-medium)`
+- [x] `.stat-card .value` → `font: var(--md-sys-typescale-headline-small)` (1.6rem/700 → 1.5rem/600)
+- [x] `.stat-card .label` → `font: var(--md-sys-typescale-label-small)` (0.8rem → 0.6875rem, más pequeño)
+- [x] `table` → `font: var(--md-sys-typescale-body-small)` (0.85rem → 0.75rem)
+- [x] `.card h4` → `font: var(--md-sys-typescale-title-medium)` (1rem, ahora con weight 500)
+- [x] `.card .field` → `font: var(--md-sys-typescale-body-medium)` (0.85rem → 0.875rem)
+- [x] `.table-wrap h3` → `font: var(--md-sys-typescale-title-small)` (0.95rem → 0.875rem)
 
 **`css/sections.css`:**
-- [ ] `.news-card h4` → `font: var(--md-sys-typescale-title-medium)`
-- [ ] `.news-card .dates` → `font: var(--md-sys-typescale-body-small)`
-- [ ] `.news-card .desc` → `font: var(--md-sys-typescale-body-medium)`
-- [ ] `.reclamo-title` → `font: var(--md-sys-typescale-title-small)`
-- [ ] `.reclamo-desc` → `font: var(--md-sys-typescale-body-medium)`
-- [ ] `.reclamo-tipo` → `font: var(--md-sys-typescale-label-small)`
-- [ ] `.proveedor-nombre` → `font: var(--md-sys-typescale-title-medium)`
-- [ ] `.proveedor-contacto` → `font: var(--md-sys-typescale-body-medium)`
-- [ ] `.timeline-title` → `font: var(--md-sys-typescale-title-medium)`
-- [ ] `.chart-box h3` → `font: var(--md-sys-typescale-title-small)`
-- [ ] `.table-wrap h3` → `font: var(--md-sys-typescale-title-small)`
+- [x] `.news-card h4` → `font: var(--md-sys-typescale-title-medium)` (1rem, ahora con weight 500)
+- [x] `.news-card .dates` → `font: var(--md-sys-typescale-body-small)` (0.8rem → 0.75rem)
+- [x] `.news-card .desc` → `font: var(--md-sys-typescale-body-medium)` (0.9rem → 0.875rem)
+- [x] `.reclamo-title` → `font: var(--md-sys-typescale-title-small)` (0.95rem/600 → 0.875rem/500)
+- [x] `.reclamo-desc` → `font: var(--md-sys-typescale-body-medium)` (0.85rem → 0.875rem)
+- [x] `.reclamo-tipo` → `font: var(--md-sys-typescale-label-small)` (0.75rem → 0.6875rem, weight 600 se mantiene)
+- [x] `.proveedor-nombre` → `font: var(--md-sys-typescale-title-medium)` (1rem/600 → 1rem/500)
+- [x] `.proveedor-contacto` → `font: var(--md-sys-typescale-body-medium)` (0.85rem → 0.875rem)
+- [x] `.timeline-title` → `font: var(--md-sys-typescale-title-medium)` (1rem/600 → 1rem/500)
+- [x] `.chart-box h3` → `font: var(--md-sys-typescale-title-small)` (0.95rem → 0.875rem)
 
 **Verificación F5:**
 - [ ] Revisar tamaños de texto en todas las tabs, light y dark

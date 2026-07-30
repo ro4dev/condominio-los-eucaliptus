@@ -1,22 +1,22 @@
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
 .stat-card { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); text-align: center; }
-.stat-card .label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-.stat-card .value { font-size: 1.6rem; font-weight: 700; margin-top: 0.3rem; }
+.stat-card .label { font: var(--md-sys-typescale-label-small); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-card .value { font: var(--md-sys-typescale-headline-small); margin-top: 0.3rem; }
 .stat-card .value.blue { color: var(--md-sys-color-primary); }
 .stat-card .value.green { color: var(--md-sys-color-tertiary); }
 .stat-card .value.red { color: var(--md-sys-color-error); }
 
 .table-wrap { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); overflow-x: auto; margin-bottom: 1.5rem; }
-.table-wrap h3 { font-size: 0.95rem; margin-bottom: 0.8rem; color: var(--text-2); }
-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.table-wrap h3 { font: var(--md-sys-typescale-title-small); margin-bottom: 0.8rem; color: var(--text-2); }
+table { width: 100%; border-collapse: collapse; font: var(--md-sys-typescale-body-small); }
 th { background: var(--surface-hover); text-align: left; padding: 0.6rem 0.8rem; font-weight: 600; color: var(--text-2); border-bottom: 2px solid var(--border); }
 td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border-light); color: var(--text-2); }
 tr:hover td { background: var(--surface-hover); }
 
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 .card { background: var(--bg-card); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
-.card h4 { font-size: 1rem; color: var(--text); margin-bottom: 0.8rem; }
-.card .field { display: flex; justify-content: space-between; padding: 0.3rem 0; font-size: 0.85rem; }
+.card h4 { font: var(--md-sys-typescale-title-medium); color: var(--text); margin-bottom: 0.8rem; }
+.card .field { font: var(--md-sys-typescale-body-medium); display: flex; justify-content: space-between; padding: 0.3rem 0; }
 .card .field-label { color: var(--text-muted); }
 .card .field-value { font-weight: 500; color: var(--text-2); }
 
