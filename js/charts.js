@@ -1,4 +1,5 @@
 var chartPeriodos, chartParcelas;
+var m3Primary = getComputedStyle(document.documentElement).getPropertyValue('--md-sys-color-primary').trim();
 
 function renderCharts(data) {
   renderPeriodChart(data);
@@ -20,7 +21,7 @@ function renderPeriodChart(data) {
   }
   chartPeriodos = new Chart(ctx, {
     type: 'bar',
-    data: { labels: labels, datasets: [{ label: 'Monto', data: values, backgroundColor: '#3b82f6', borderRadius: 4 }] },
+    data: { labels: labels, datasets: [{ label: 'Monto', data: values, backgroundColor: m3Primary, borderRadius: 4 }] },
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: function(v) { return '$' + formatMoney(v); } } } } }
   });
 }
@@ -33,7 +34,7 @@ function renderParcelaChart(data) {
   });
   var labels = Object.keys(groups);
   var values = Object.values(groups);
-  var colors = ['#3b82f6', '#10b981', '#f59e0b', '#b91c1c', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
+  var colors = [m3Primary, '#10b981', '#f59e0b', '#b91c1c', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#84cc16'];
 
   var ctx = document.getElementById('chartParcelas').getContext('2d');
   if (chartParcelas) {

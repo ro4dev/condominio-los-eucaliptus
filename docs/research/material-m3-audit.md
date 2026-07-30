@@ -487,16 +487,16 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 ### FASE 4 — Hardcoded colors en modals.js + charts.js
 
 **`js/modals.js`:**
-- [ ] `--md-filled-button-container-color:#b91c1c` (línea 21) → `var(--md-sys-color-error)`
-- [ ] `border-radius:6px` (línea 546) → `var(--md-sys-shape-corner-small)`
-- [ ] `color:#b91c1c` (línea 554) → `var(--md-sys-color-error)`
-- [ ] `color:#b91c1c` (línea 586) → `var(--md-sys-color-error)`
+- [x] `--md-filled-button-container-color:#b91c1c` (línea 21) → `var(--md-sys-color-error)`
+- [x] `border-radius:6px` (línea 546) → `var(--md-sys-shape-corner-small)`
+- [x] `color:#b91c1c` encuesta alternativas close icons → `var(--md-sys-color-error)` (3 ocurrencias)
 
 **`js/charts.js`:**
-- [ ] `backgroundColor: '#3b82f6'` (bar chart) → getPropertyValue('--md-sys-color-primary')
-- [ ] `var colors = ['#3b82f6', ...]` (doughnut) → leer de CSS variables programáticamente
+- [x] `backgroundColor: '#3b82f6'` (bar chart) → `getPropertyValue('--md-sys-color-primary')`
+- [x] `var colors[0] = '#3b82f6'` → `var m3Primary` (resto se mantiene, paleta dataviz sin M3)
 
 **Verificación F4:**
+- [ ] Confirm dialog, encuesta alt close, charts en light y dark**
 - [ ] Confirm dialog, encuesta alt close, charts en light y dark
 
 ---

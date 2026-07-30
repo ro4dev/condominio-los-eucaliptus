@@ -18,7 +18,7 @@ function showConfirm(message, onConfirm, confirmText) {
   document.getElementById('modalBody').innerHTML = '<div style="line-height:1.5">' + message + '</div>';
   document.getElementById('modalFooter').innerHTML =
     '<md-text-button onclick="closeModal()">Cancelar</md-text-button>' +
-    '<md-filled-button onclick="confirmAction()" style="--md-filled-button-container-color:#b91c1c">' + confirmText + '</md-filled-button>';
+    '<md-filled-button onclick="confirmAction()" style="--md-filled-button-container-color:var(--md-sys-color-error)">' + confirmText + '</md-filled-button>';
   document.getElementById('mainDialog').show();
   window._confirmCallback = onConfirm;
 }
@@ -543,7 +543,7 @@ function formEncuestas(data) {
   if (isEdit) {
     var ops = (data.alternativas && data.alternativas.length && !(data.alternativas.length === 1 && data.alternativas[0] === ''))
       ? data.alternativas : ['A favor', 'En contra'];
-    alternativasHtml = '<div style="font-size:0.85rem;color:var(--text-muted);padding:0.5rem;background:var(--skeleton-1);border-radius:6px">Opciones:<br>' + ops.map(function(op) { return '- ' + op; }).join('<br>') + '<br><span style="font-size:0.75rem">(no editable al tener votos)</span></div>';
+    alternativasHtml = '<div style="font-size:0.85rem;color:var(--text-muted);padding:0.5rem;background:var(--skeleton-1);border-radius:var(--md-sys-shape-corner-small)">Opciones:<br>' + ops.map(function(op) { return '- ' + op; }).join('<br>') + '<br><span style="font-size:0.75rem">(no editable al tener votos)</span></div>';
   } else {
     alternativasHtml =
       '<div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem">' +
@@ -551,8 +551,8 @@ function formEncuestas(data) {
         '<md-switch id="encuestaModoAlt" onchange="toggleEncuestaAlternativas()"></md-switch>' +
       '</div>' +
       '<div id="encuestaAlternativas" style="display:none">' +
-        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-filled-text-field class="encuesta-alt-input" placeholder="Ej: Opción 1" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button></div>' +
-        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-filled-text-field class="encuesta-alt-input" placeholder="Ej: Opción 2" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-filled-text-field class="encuesta-alt-input" placeholder="Ej: Opción 1" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:var(--md-sys-color-error)"><md-icon>close</md-icon></md-icon-button></div>' +
+        '<div style="display:flex;gap:0.5rem;margin-bottom:0.4rem"><md-filled-text-field class="encuesta-alt-input" placeholder="Ej: Opción 2" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:var(--md-sys-color-error)"><md-icon>close</md-icon></md-icon-button></div>' +
       '</div>' +
       '<md-filled-tonal-button id="btnAddAlt" onclick="addEncuestaAlt()" style="display:none"><md-icon slot="icon">add</md-icon>Alternativa</md-filled-tonal-button>' +
       '<div id="encuestaModoInfo" style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">Modo simple: "A favor" / "En contra"</div>';
@@ -583,7 +583,7 @@ function addEncuestaAlt() {
   var count = container.querySelectorAll('.encuesta-alt-input').length + 1;
   var div = document.createElement('div');
   div.style.cssText = 'display:flex;gap:0.5rem;margin-bottom:0.4rem;align-items:center';
-  div.innerHTML = '<md-filled-text-field class="encuesta-alt-input" placeholder="Ej: Opción ' + count + '" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:#b91c1c"><md-icon>close</md-icon></md-icon-button>';
+  div.innerHTML = '<md-filled-text-field class="encuesta-alt-input" placeholder="Ej: Opción ' + count + '" style="flex:1"></md-filled-text-field><md-icon-button onclick="removeEncuestaAlt(this)" style="color:var(--md-sys-color-error)"><md-icon>close</md-icon></md-icon-button>';
   container.appendChild(div);
   div.querySelector('md-filled-text-field').focus();
 }
