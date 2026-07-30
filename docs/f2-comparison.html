@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F2 — Comparación hardcoded colors vs M3 tokens</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+
+  .mode { margin-bottom: 2.5rem; }
+  .mode h2 { font-size: 1.2rem; margin-bottom: 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid #e5e7eb; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; }
+  th { background: #eef0f4; font-weight: 600; }
+  .elem { font-family: monospace; font-weight: 600; white-space: nowrap; font-size: 0.8rem; }
+  .hex { font-family: monospace; font-size: 0.8rem; }
+  .swatch { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #d1d5db; display: inline-block; vertical-align: middle; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .diff { background: #fee2e2; color: #991b1b; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .kept { background: #e2e8f0; color: #475569; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+
+  .card-row { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .card { background: #fff; border-radius: 12px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.15); flex: 1; min-width: 280px; }
+  .card h3 { font-size: 0.9rem; margin-bottom: 0.8rem; color: #374151; }
+
+  .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
+  .sample { display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0; }
+  .sample .box { width: 60px; height: 36px; border-radius: 6px; border: 1px solid #d1d5db; flex-shrink: 0; }
+  .sample .label { font-size: 0.8rem; color: #6b7280; }
+  .sample .val { font-family: monospace; font-size: 0.8rem; }
+
+  nav { position: sticky; top: 0; background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  nav a { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  nav a:hover { text-decoration: underline; }
+
+  section { margin-bottom: 2rem; }
+</style>
+</head>
+<body>
+
+<h1>Fase 2 — Comparación: hardcoded colors vs M3 tokens</h1>
+<p class="sub">Cada color hardcodeado en CSS reemplazado por <code>var(--md-sys-color-*)</code>. Verde = mismo valor exacto. Rojo = cambia visualmente. Gris = se mantiene hardcodeado (sin M3 directo).</p>
+
+<nav>
+  <span style="font-weight:600">Saltar a:</span>
+  <a href="#components">components.css</a>
+  <a href="#sections">sections.css</a>
+  <a href="#tokens">Nuevos tokens</a>
+  <a href="#demo">Demo visual</a>
+</nav>
+
+<!-- ========== COMPONENTS.CSS ========== -->
+<section id="components">
+<h2>📦 components.css</h2>
+
+<table>
+  <tr><th>Elemento</th><th>Prop</th><th>Hardcoded</th><th>→ Token</th><th>Valor nuevo</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">.stat-card .value.blue</td><td>color</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.stat-card .value.green</td><td>color</td>
+    <td class="hex">#059669 <span class="swatch" style="background:#059669"></span></td>
+    <td><code>--md-sys-color-tertiary</code></td>
+    <td class="hex">#7c3aed <span class="swatch" style="background:#7c3aed"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.stat-card .value.red</td><td>color</td>
+    <td class="hex">#b91c1c <span class="swatch" style="background:#b91c1c"></span></td>
+    <td><code>--md-sys-color-error</code></td>
+    <td class="hex">#b91c1c <span class="swatch" style="background:#b91c1c"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.avatar (default)</td><td>background</td>
+    <td class="hex">#3b82f6 <span class="swatch" style="background:#3b82f6"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.avatar.purple</td><td>background</td>
+    <td class="hex">#8b5cf6 <span class="swatch" style="background:#8b5cf6"></span></td>
+    <td><code>--md-sys-color-tertiary</code></td>
+    <td class="hex">#7c3aed <span class="swatch" style="background:#7c3aed"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.avatar.green</td><td>background</td>
+    <td class="hex">#10b981 <span class="swatch" style="background:#10b981"></span></td>
+    <td>— (sin M3 verde)</td>
+    <td class="hex">#10b981 <span class="swatch" style="background:#10b981"></span></td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.avatar.orange</td><td>background</td>
+    <td class="hex">#f97316 <span class="swatch" style="background:#f97316"></span></td>
+    <td>— (sin M3 naranja)</td>
+    <td class="hex">#f97316 <span class="swatch" style="background:#f97316"></span></td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.avatar.pink</td><td>background</td>
+    <td class="hex">#ec4899 <span class="swatch" style="background:#ec4899"></span></td>
+    <td>— (sin M3 rosa)</td>
+    <td class="hex">#ec4899 <span class="swatch" style="background:#ec4899"></span></td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+</table>
+</section>
+
+<!-- ========== SECTIONS.CSS ========== -->
+<section id="sections">
+<h2>📋 sections.css</h2>
+
+<table>
+  <tr><th>Elemento</th><th>Prop</th><th>Hardcoded</th><th>→ Token</th><th>Valor nuevo</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">.doc-icon</td><td>background</td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><code>--md-sys-color-primary-container</code></td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.doc-icon</td><td>color</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.reclamo-tipo.reclamo</td><td>background</td>
+    <td class="hex">#fee2e2 <span class="swatch" style="background:#fee2e2"></span></td>
+    <td><code>--md-sys-color-error-container</code></td>
+    <td class="hex">#fee2e2 <span class="swatch" style="background:#fee2e2"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.reclamo-tipo.reclamo</td><td>color</td>
+    <td class="hex">#991b1b <span class="swatch" style="background:#991b1b"></span></td>
+    <td><code>--md-sys-color-on-error-container</code></td>
+    <td class="hex">#991b1b <span class="swatch" style="background:#991b1b"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.reclamo-tipo.sugerencia</td><td>background</td>
+    <td class="hex">#d1fae5 <span class="swatch" style="background:#d1fae5"></span></td>
+    <td><code>--md-sys-color-tertiary-container</code></td>
+    <td class="hex">#d1fae5 <span class="swatch" style="background:#d1fae5"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.reclamo-tipo.sugerencia</td><td>color</td>
+    <td class="hex">#065f46 <span class="swatch" style="background:#065f46"></span></td>
+    <td><code>--md-sys-color-on-tertiary-container</code></td>
+    <td class="hex">#065f46 <span class="swatch" style="background:#065f46"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.proveedor-rubro</td><td>background</td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><code>--md-sys-color-primary-container</code></td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.proveedor-rubro</td><td>color</td>
+    <td class="hex">#1e40af <span class="swatch" style="background:#1e40af"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.timeline-item::before</td><td>background</td>
+    <td class="hex">#3b82f6 <span class="swatch" style="background:#3b82f6"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.timeline-item.extra::before</td><td>background</td>
+    <td class="hex">#f59e0b <span class="swatch" style="background:#f59e0b"></span></td>
+    <td><code>--md-sys-color-tertiary</code></td>
+    <td class="hex">#7c3aed <span class="swatch" style="background:#7c3aed"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.timeline-tipo</td><td>background</td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><code>--md-sys-color-primary-container</code></td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.timeline-tipo</td><td>color</td>
+    <td class="hex">#1e40af <span class="swatch" style="background:#1e40af"></span></td>
+    <td><code>--md-sys-color-on-primary-container</code></td>
+    <td class="hex">#1e3a5f <span class="swatch" style="background:#1e3a5f"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.timeline-tipo.extra</td><td>bg+color</td>
+    <td class="hex">#fef3c7/#92400e <span class="swatch" style="background:#fef3c7"></span></td>
+    <td>— (sin M3 ámbar)</td>
+    <td class="hex">#fef3c7/#92400e <span class="swatch" style="background:#fef3c7"></span></td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+</table>
+</section>
+
+<!-- ========== NEW TOKENS ========== -->
+<section id="tokens">
+<h2>🆕 Nuevos tokens agregados a base.css</h2>
+
+<table>
+  <tr><th>Token</th><th>Light</th><th>Dark</th></tr>
+  <tr>
+    <td><code>--md-sys-color-error-container</code></td>
+    <td class="hex">#fee2e2 <span class="swatch" style="background:#fee2e2"></span></td>
+    <td class="hex">#93000a <span class="swatch" style="background:#93000a"></span></td>
+  </tr>
+  <tr>
+    <td><code>--md-sys-color-on-error-container</code></td>
+    <td class="hex">#991b1b <span class="swatch" style="background:#991b1b"></span></td>
+    <td class="hex">#ffdad6 <span class="swatch" style="background:#ffdad6"></span></td>
+  </tr>
+  <tr>
+    <td><code>--md-sys-color-tertiary-container</code></td>
+    <td class="hex">#d1fae5 <span class="swatch" style="background:#d1fae5"></span></td>
+    <td class="hex">#4c1d95 <span class="swatch" style="background:#4c1d95"></span></td>
+  </tr>
+  <tr>
+    <td><code>--md-sys-color-on-tertiary-container</code></td>
+    <td class="hex">#065f46 <span class="swatch" style="background:#065f46"></span></td>
+    <td class="hex">#e9d5ff <span class="swatch" style="background:#e9d5ff"></span></td>
+  </tr>
+</table>
+</section>
+
+<!-- ========== DEMO VISUAL ========== -->
+<section id="demo">
+<h2 style="margin-bottom:1rem">🎨 Demo visual del cambio</h2>
+
+<div class="card-row">
+
+<!-- LIGHT: badge reclamo antes/después -->
+<div class="card">
+  <h3>Badge reclamo — antes</h3>
+  <div class="sample"><span class="badge" style="background:#fee2e2;color:#991b1b">Reclamo</span></div>
+  <div style="font-size:0.75rem;color:#6b7280">bg: #fee2e2 / color: #991b1b</div>
+</div>
+<div class="card">
+  <h3>Badge reclamo — después</h3>
+  <div class="sample"><span class="badge" style="background:var(--md-sys-color-error-container, #fee2e2);color:var(--md-sys-color-on-error-container, #991b1b)">Reclamo</span></div>
+  <div style="font-size:0.75rem;color:#6b7280">usa <code>--md-sys-color-error-container</code></div>
+</div>
+
+</div>
+
+<div class="card-row">
+
+<!-- LIGHT: badge sugerencia -->
+<div class="card">
+  <h3>Badge sugerencia — antes</h3>
+  <div class="sample"><span class="badge" style="background:#d1fae5;color:#065f46">Sugerencia</span></div>
+  <div style="font-size:0.75rem;color:#6b7280">bg: #d1fae5 / color: #065f46</div>
+</div>
+<div class="card">
+  <h3>Badge sugerencia — después</h3>
+  <div class="sample"><span class="badge" style="background:var(--md-sys-color-tertiary-container, #d1fae5);color:var(--md-sys-color-on-tertiary-container, #065f46)">Sugerencia</span></div>
+  <div style="font-size:0.75rem;color:#6b7280">usa <code>--md-sys-color-tertiary-container</code></div>
+</div>
+
+</div>
+
+<div class="card-row">
+
+<!-- Cambios visuales más notorios -->
+<div class="card" style="background:#fff3cd;border:1px solid #ffc107">
+  <h3>⚠️ Cambios visuales más notorios</h3>
+  <div style="font-size:0.85rem;line-height:1.6">
+    <strong>🟢→🟣 stat-card .value.green</strong><br>
+    <span style="color:#059669">Verde (#059669)</span> → <span style="color:#7c3aed">Púrpura (#7c3aed, tertiary)</span><br><br>
+    <strong>🟠→🟣 timeline-item.extra::before</strong><br>
+    <span style="color:#f59e0b">Ámbar (#f59e0b)</span> → <span style="color:#7c3aed">Púrpura (#7c3aed, tertiary)</span><br><br>
+    <strong>🔵 avatars y dots</strong><br>
+    <span style="color:#3b82f6">Azul claro (#3b82f6)</span> → <span style="color:#2563eb">Azul más oscuro (#2563eb, primary)</span>
+  </div>
+</div>
+
+<div class="card" style="background:#dbeafe;border:1px solid #93bbfd">
+  <h3>✅ Sin cambio visual</h3>
+  <div style="font-size:0.85rem;line-height:1.6">
+    • .doc-icon bg/color<br>
+    • .reclamo-tipo.reclamo bg/color<br>
+    • .reclamo-tipo.sugerencia bg/color<br>
+    • .proveedor-rubro bg<br>
+    • .timeline-tipo bg<br>
+    • .stat-card .value.blue<br>
+    • .stat-card .value.red
+  </div>
+</div>
+
+</div>
+
+<div style="margin-top:2rem;padding:1rem;background:#fff3cd;border-radius:8px;border:1px solid #ffc107">
+  <strong>⚠️ 8 propiedades cambian visualmente</strong> (marcadas en rojo en las tablas).<br>
+  Las más notorias: el stat verde se vuelve púrpura, los dots de asambleas extraordinarias pasan de ámbar a púrpura, y los avatars/dots azules se oscurecen ligeramente.<br>
+  Los badges (reclamo, sugerencia, documento, timeline-tipo) mantienen su color exacto porque los nuevos tokens se definieron con los mismos valores.
+</div>
+
+</section>
+
+</body>
+</html>
