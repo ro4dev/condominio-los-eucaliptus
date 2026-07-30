@@ -1,14 +1,14 @@
 *:not(:is(md-filled-button, md-filled-tonal-button, md-outlined-button, md-text-button, md-icon-button, md-fab, md-card, md-dialog, md-checkbox, md-switch, md-radio, md-text-field, md-filled-text-field, md-outlined-text-field, md-filter-chip, md-assist-chip, md-input-chip, md-chip, md-linear-progress, md-icon, md-tabs, md-primary-tab, md-filled-select, md-outlined-select, md-select-option, md-circular-progress)) { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #f5f7fa;
-  --bg-card: #fff;
-  --text: #1a1a2e;
-  --text-2: #374151;
-  --text-muted: #6b7280;
-  --border: #e5e7eb;
-  --border-light: #f3f4f6;
-  --surface-hover: #f9fafb;
+  --bg: var(--md-sys-color-surface-container-low);
+  --bg-card: var(--md-sys-color-surface);
+  --text: var(--md-sys-color-on-surface);
+  --text-2: var(--md-sys-color-on-surface-variant);
+  --text-muted: var(--md-sys-color-outline);
+  --border: var(--md-sys-color-outline-variant);
+  --border-light: var(--md-sys-color-surface-container-low);
+  --surface-hover: var(--md-sys-color-surface-container-high);
   --skeleton-1: #e5e7eb;
   --skeleton-2: #f3f4f6;
   --modal-loading-bg: rgba(255,255,255,0.85);
@@ -77,14 +77,14 @@
 }
 
 body.dark {
-  --bg: #111827;
-  --bg-card: #1f2937;
-  --text: #f9fafb;
-  --text-2: #d1d5db;
-  --text-muted: #9ca3af;
-  --border: #374151;
-  --border-light: #1f2937;
-  --surface-hover: #374151;
+  --bg: var(--md-sys-color-surface-container-low);
+  --bg-card: var(--md-sys-color-surface);
+  --text: var(--md-sys-color-on-surface);
+  --text-2: var(--md-sys-color-on-surface-variant);
+  --text-muted: var(--md-sys-color-outline);
+  --border: var(--md-sys-color-outline-variant);
+  --border-light: var(--md-sys-color-surface-container-low);
+  --surface-hover: var(--md-sys-color-surface-container-high);
   --skeleton-1: #374151;
   --skeleton-2: #4b5563;
   --modal-loading-bg: rgba(17,24,39,0.85);
