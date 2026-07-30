@@ -536,21 +536,22 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 ### FASE 6 — Elevación tonal
 
 **`css/components.css`:**
-- [ ] `.stat-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)`
-- [ ] `.table-wrap` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)`
-- [ ] `.card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [x] `.stat-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)` (cambia de #fff a #f5f7fa en light)
+- [x] `.table-wrap` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)` (cambia de #fff a #f5f7fa en light)
+- [x] `.card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
 
 **`css/sections.css`:**
-- [ ] `.news-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
-- [ ] `.flujo-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
-- [ ] `.doc-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
-- [ ] `.reclamo-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
-- [ ] `.proveedor-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
-- [ ] `.chart-box` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)`
-- [ ] `.timeline-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [x] `.news-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
+- [x] `.flujo-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
+- [x] `.doc-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
+- [x] `.reclamo-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
+- [x] `.proveedor-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
+- [x] `.chart-box` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)` (cambia de #fff a #f5f7fa en light)
+- [x] `.timeline-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
+- [x] `.timeline-item::before` border: `var(--bg-card)` → `var(--md-sys-color-surface)` (mismo valor)
 
 **Verificación F6:**
-- [ ] Cards se distinguen por color de fondo, jerarquía visual se mantiene
+- [ ] Revisar cards, stat-cards, chart-box en light y dark (3 elementos cambian de #fff a #f5f7fa en light)
 
 ---
 
