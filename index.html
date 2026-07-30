@@ -61,7 +61,7 @@
     </md-tabs>
 
     <!-- GASTOS COMUNES -->
-    <div id="tab-cuenta" class="tab-content active">
+    <div id="tab-cuenta" class="tab-content active" role="region" aria-label="Gastos comunes" aria-busy="true">
       <md-filled-button class="admin-only" id="formGastos" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Gasto</md-filled-button>
       <section class="stats" id="stats">
         <div class="skeleton skeleton-stat"></div>
@@ -108,7 +108,7 @@
     </div>
 
     <!-- PARCELAS -->
-    <div id="tab-parcelas" class="tab-content">
+    <div id="tab-parcelas" class="tab-content" role="region" aria-label="Parcelas">
       <div class="cards-grid" id="parcelasGrid">
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -118,7 +118,7 @@
     </div>
 
     <!-- NOTICIAS -->
-    <div id="tab-noticias" class="tab-content">
+    <div id="tab-noticias" class="tab-content" role="region" aria-label="Noticias">
       <md-filled-button class="admin-only" id="formNoticias" onclick="formNoticias()"><md-icon slot="icon">add</md-icon>Agregar Noticia</md-filled-button>
       <div class="filter-chips" id="noticiasFilter">
         <md-filter-chip label="Vigentes" selected onclick="filterNoticias('vigentes')"></md-filter-chip>
@@ -133,7 +133,7 @@
     </div>
 
     <!-- INGRESOS/EGRESOS -->
-    <div id="tab-flujo" class="tab-content">
+    <div id="tab-flujo" class="tab-content" role="region" aria-label="Ingresos/Egresos">
       <md-filled-button class="admin-only" id="formFlujo" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
       <section class="stats" id="flujoStats">
         <div class="skeleton skeleton-stat"></div>
@@ -154,7 +154,7 @@
     </div>
 
     <!-- DOCUMENTOS -->
-    <div id="tab-documentos" class="tab-content">
+    <div id="tab-documentos" class="tab-content" role="region" aria-label="Documentos">
       <md-filled-button class="admin-only" id="formDocumentos" onclick="formDocumentos()"><md-icon slot="icon">add</md-icon>Agregar Documento</md-filled-button>
       <div class="filter-chips" id="documentosChips">
         <md-filter-chip label="Todos" selected onclick="filterDocumentos('Todos')"></md-filter-chip>
@@ -173,7 +173,7 @@
     </div>
 
     <!-- RECLAMOS/SUGERENCIAS -->
-    <div id="tab-reclamos" class="tab-content">
+    <div id="tab-reclamos" class="tab-content" role="region" aria-label="Reclamos/Sugerencias">
       <md-filled-button id="formReclamos" onclick="formReclamos()"><md-icon slot="icon">add</md-icon>Agregar Reclamo/Sugerencia</md-filled-button>
       <div class="filter-chips" id="reclamosFilter">
         <md-filter-chip label="Todos" selected onclick="filterReclamos('todos')"></md-filter-chip>
@@ -188,7 +188,7 @@
     </div>
 
     <!-- PROVEEDORES -->
-    <div id="tab-proveedores" class="tab-content">
+    <div id="tab-proveedores" class="tab-content" role="region" aria-label="Proveedores">
       <md-filled-button class="admin-only" id="formProveedores" onclick="formProveedores()"><md-icon slot="icon">add</md-icon>Agregar Proveedor</md-filled-button>
       <div class="cards-grid" id="proveedoresGrid">
         <div class="skeleton skeleton-card"></div>
@@ -198,7 +198,7 @@
     </div>
 
     <!-- ASAMBLEAS -->
-    <div id="tab-asambleas" class="tab-content">
+    <div id="tab-asambleas" class="tab-content" role="region" aria-label="Asambleas">
       <md-filled-button class="admin-only" id="formAsambleas" onclick="formAsambleas()"><md-icon slot="icon">add</md-icon>Agregar Asamblea</md-filled-button>
       <div class="filter-chips" id="asambleasChips">
         <md-filter-chip label="Todos" selected onclick="filterAsambleas('Todos')"></md-filter-chip>
@@ -212,7 +212,7 @@
     </div>
 
     <!-- ENCUESTAS -->
-    <div id="tab-encuestas" class="tab-content">
+    <div id="tab-encuestas" class="tab-content" role="region" aria-label="Encuestas">
       <md-filled-button class="admin-only" id="formEncuestas" onclick="formEncuestas()"><md-icon slot="icon">add</md-icon>Nueva Encuesta</md-filled-button>
       <div class="filter-chips" id="encuestasChips">
         <md-filter-chip label="Abiertas" selected onclick="filterEncuestas('Abiertas')"></md-filter-chip>
@@ -226,7 +226,7 @@
     </div>
 
     <!-- CONFIGURACIÓN -->
-    <div id="tab-config" class="tab-content">
+    <div id="tab-config" class="tab-content" role="region" aria-label="Configuración">
 
       <!-- Parcelas + Montos -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem" class="config-duo">
