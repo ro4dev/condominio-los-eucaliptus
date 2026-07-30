@@ -31,7 +31,7 @@
 .timeline { position: relative; padding-left: 2rem; }
 .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: var(--border); }
 .timeline-item { position: relative; margin-bottom: 1.5rem; background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
-.timeline-item::before { content: ''; position: absolute; left: -1.65rem; top: 1.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--md-sys-color-primary); border: 2px solid var(--md-sys-color-surface); }
+.timeline-item::before { content: ''; position: absolute; left: -1.65rem; top: 1.5rem; width: 12px; height: 12px; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-primary); border: 2px solid var(--md-sys-color-surface); }
 .timeline-item.extra::before { background: var(--md-sys-color-tertiary); }
 .timeline-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
 .timeline-tipo { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); display: inline-block; margin-bottom: 0.5rem; }

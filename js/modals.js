@@ -62,9 +62,10 @@ function handleForm(e) {
   form.querySelectorAll('input[type="file"]').forEach(function(inp) {
     if (inp.files.length === 0) delete data[inp.name];
   });
-  form.querySelectorAll('select[multiple]').forEach(function(sel) {
-    data[sel.name] = Array.from(sel.selectedOptions).map(function(o) { return o.value; }).join(', ');
-  });
+  var asistentesChips = document.getElementById('asistentesChips');
+  if (asistentesChips) {
+    data.asistentes = Array.from(asistentesChips.querySelectorAll('md-filter-chip[selected]')).map(function(c) { return c.getAttribute('value'); }).join(', ');
+  }
 
   var table = form.dataset.table;
   var isEdit = !!data.id;
@@ -521,7 +522,7 @@ function formAsambleas(data) {
   var isEdit = !!data;
   var parcelas = PARCELAS.map(function(p) {
     var selected = isEdit && data.asistentesIds && data.asistentesIds.indexOf(p.id) !== -1;
-    return '<option value="' + p.id + '"' + (selected ? ' selected' : '') + '>' + p.numero + '</option>';
+    return '<md-filter-chip label="' + p.numero + '" value="' + p.id + '"' + (selected ? ' selected' : '') + ' onclick="toggleChip(this)"></md-filter-chip>';
   }).join('');
   openModal(isEdit ? 'Editar Asamblea' : 'Agregar Asamblea',
     '<form id="modalForm" data-table="asambleas" onsubmit="handleForm(event)">' +
@@ -532,7 +533,7 @@ function formAsambleas(data) {
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Temario" name="temario" placeholder="Ej: Puntos a tratar en la asamblea" type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.temario) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><md-filled-text-field label="Acuerdos" name="acuerdos" placeholder="Ej: Decisiones tomadas..." type="textarea" rows="3" style="width:100%"' + (isEdit ? ' value="' + escHtml(data.acuerdos || '') + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:var(--md-sys-color-primary);font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem;width:100%">' + parcelas + '</select></div>' +
+    '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:var(--md-sys-color-primary);font-size:0.8rem">Seleccionar todas</a></div><div id="asistentesChips" class="filter-chips">' + parcelas + '</div></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>', true);
 }
@@ -598,7 +599,15 @@ document.getElementById('mainDialog').addEventListener('cancel', function(e) {
 });
 
 function toggleAllAsistentes() {
-  var sel = document.querySelector('[name="asistentes"]');
-  var allSelected = Array.from(sel.options).every(function(o) { return o.selected; });
-  Array.from(sel.options).forEach(function(o) { o.selected = !allSelected; });
+  var chips = document.querySelectorAll('#asistentesChips md-filter-chip');
+  var allSelected = Array.from(chips).every(function(c) { return c.hasAttribute('selected'); });
+  chips.forEach(function(c) {
+    if (allSelected) c.removeAttribute('selected');
+    else c.setAttribute('selected', '');
+  });
+}
+
+function toggleChip(chip) {
+  if (chip.hasAttribute('selected')) chip.removeAttribute('selected');
+  else chip.setAttribute('selected', '');
 }
