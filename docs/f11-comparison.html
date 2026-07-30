@@ -1,60 +1,144 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F11 — Shape fixes + chips</title>
 <style>
-body { font-family: system-ui, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-th, td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid #ddd; }
-th { background: #f5f5f5; }
-code { background: #f0f0f0; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9rem; }
-.section { margin: 2rem 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+  th { background: #eef0f4; font-weight: 600; }
+  .code { font-family: monospace; font-size: 0.8rem; white-space: pre-wrap; line-height: 1.5; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .note { background: #e2e8f0; color: #475569; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  nav { position: sticky; top: 0; background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  nav a { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  nav a:hover { text-decoration: underline; }
+  section { margin-bottom: 2.5rem; }
 </style>
 </head>
 <body>
-<h1>F11 — Shape fixes + chips reemplazan select multiple</h1>
 
-<div class="section">
-<h2>Shape fixes</h2>
+<h1>Fase 11 — Shape fixes + Select multiple → M3 chips</h1>
+<p class="sub">border-radius hardcodeados reemplazados por shape tokens M3. Select nativo reemplazado por md-filter-chip.</p>
 
+<nav>
+  <span style="font-weight:600">Saltar a:</span>
+  <a href="#avatar">.avatar</a>
+  <a href="#timeline">.timeline-item</a>
+  <a href="#barra">barra encuesta</a>
+  <a href="#chips">select → chips</a>
+  <a href="#toggle">toggleAllAsistentes</a>
+</nav>
+
+<section id="avatar">
+<h2>css/components.css — .avatar</h2>
 <table>
-<tr><th>Ubicación</th><th>Antes</th><th>Después</th></tr>
-<tr>
-  <td><code>css/components.css:23</code> — .avatar</td>
-  <td><code>border-radius: 50%</code></td>
-  <td><code>border-radius: var(--md-sys-shape-corner-full)</code></td>
-</tr>
-<tr>
-  <td><code>css/sections.css:34</code> — .timeline-item::before</td>
-  <td><code>border-radius: 50%</code></td>
-  <td><code>border-radius: var(--md-sys-shape-corner-full)</code></td>
-</tr>
-<tr>
-  <td><code>js/renderers.js:524</code> — barra encuesta</td>
-  <td><code>border-radius:3px</code></td>
-  <td><code>border-radius:var(--md-sys-shape-corner-extra-small)</code></td>
-</tr>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">.avatar { border-radius: 50%; ... }</td>
+    <td class="code">.avatar { border-radius: var(--md-sys-shape-corner-full); ... }</td>
+  </tr>
 </table>
+</section>
+
+<section id="timeline">
+<h2>css/sections.css — .timeline-item::before</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">.timeline-item::before { border-radius: 50%; ... }</td>
+    <td class="code">.timeline-item::before { border-radius: var(--md-sys-shape-corner-full); ... }</td>
+  </tr>
+</table>
+</section>
+
+<section id="barra">
+<h2>js/renderers.js — barra de votos en encuestas</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">var barra = '&lt;div style="...border-radius:3px;..."&gt;' +</td>
+    <td class="code">var barra = '&lt;div style="...border-radius:var(--md-sys-shape-corner-extra-small);..."&gt;' +</td>
+  </tr>
+</table>
+</section>
+
+<section id="chips">
+<h2>js/modals.js — formAsambleas()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">var parcelas = PARCELAS.map(function(p) {
+  var selected = isEdit &amp;&amp; data.asistentesIds
+    &amp;&amp; data.asistentesIds.indexOf(p.id) !== -1;
+  return '&lt;option value="' + p.id + '"'
+    + (selected ? ' selected' : '') + '&gt;'
+    + p.numero + '&lt;/option&gt;';
+}).join('');
+...
+'&lt;select name="asistentes" multiple
+  style="min-height:6rem;width:100%"&gt;'
+  + parcelas + '&lt;/select&gt;'</td>
+    <td class="code">var parcelas = PARCELAS.map(function(p) {
+  var selected = isEdit &amp;&amp; data.asistentesIds
+    &amp;&amp; data.asistentesIds.indexOf(p.id) !== -1;
+  return '&lt;md-filter-chip label="' + p.numero
+    + '" value="' + p.id + '"'
+    + (selected ? ' selected' : '')
+    + ' onclick="toggleChip(this)"&gt;&lt;/md-filter-chip&gt;';
+}).join('');
+...
+'&lt;div id="asistentesChips"
+  class="filter-chips"&gt;'
+  + parcelas + '&lt;/div&gt;'</td>
+  </tr>
+</table>
+</section>
+
+<section id="toggle">
+<h2>js/modals.js — toggleAllAsistentes() + toggleChip()</h2>
+<table>
+  <tr><th style="width:50%">Antes</th><th style="width:50%">Después</th></tr>
+  <tr>
+    <td class="code">function toggleAllAsistentes() {
+  var sel = document.querySelector(
+    '[name="asistentes"]');
+  var allSelected = Array.from(
+    sel.options).every(
+    function(o) { return o.selected; });
+  Array.from(sel.options).forEach(
+    function(o) { o.selected = !allSelected; });
+}</td>
+    <td class="code">function toggleAllAsistentes() {
+  var chips = document.querySelectorAll(
+    '#asistentesChips md-filter-chip');
+  var allSelected = Array.from(
+    chips).every(
+    function(c) { return c.hasAttribute('selected'); });
+  chips.forEach(function(c) {
+    if (allSelected) c.removeAttribute('selected');
+    else c.setAttribute('selected', '');
+  });
+}
+
+function toggleChip(chip) {
+  if (chip.hasAttribute('selected'))
+    chip.removeAttribute('selected');
+  else chip.setAttribute('selected', '');
+}</td>
+  </tr>
+</table>
+</section>
+
+<div style="margin-top:2rem;padding:1rem;background:#d1fae5;border-radius:8px;border:1px solid #059669">
+  <strong>✅ Sin cambio visual.</strong> Los shape tokens producen el mismo radio visual. Los chips M3 reemplazan al select nativo con el mismo comportamiento.
 </div>
 
-<div class="section">
-<h2>Select multiple → M3 chips</h2>
-<p><strong>Antes:</strong> <code>&lt;select name="asistentes" multiple&gt;</code> nativo en form asambleas (<code>js/modals.js:535</code>)</p>
-<p><strong>Después:</strong> <code>&lt;md-filter-chip&gt;</code> en contenedor <code>#asistentesChips</code>, con toggle onclick y "Seleccionar todas".</p>
-
-<p><strong>Cambios:</strong></p>
-<ul>
-<li><code>js/modals.js</code> — <code>formAsambleas()</code>: <code>&lt;select multiple&gt;</code> reemplazado por <code>&lt;md-filter-chip&gt;</code></li>
-<li><code>js/modals.js</code> — <code>handleForm()</code>: recolección de chips seleccionados en vez de <code>select[multiple]</code></li>
-<li><code>js/modals.js</code> — <code>toggleAllAsistentes()</code>: ahora togglea chips, no options</li>
-<li><code>js/modals.js</code> — nueva función <code>toggleChip(chip)</code>: togglea <code>selected</code> en un chip</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>Material Design 3 alignment</h2>
-<p>Los shape tokens <code>--md-sys-shape-corner-full</code> y <code>--md-sys-shape-corner-extra-small</code> ya estaban definidos en <code>base.css</code>. Los chips <code>&lt;md-filter-chip&gt;</code> son el componente M3 nativo para selección múltiple.</p>
-</div>
 </body>
 </html>
