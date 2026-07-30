@@ -1,7 +1,7 @@
 var chartPeriodos, chartParcelas;
 
 function getCSS(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return getComputedStyle(document.body).getPropertyValue(name).trim();
 }
 
 function renderCharts(data) {
@@ -18,7 +18,7 @@ function renderPeriodChart(data) {
   var labels = Object.keys(groups).map(formatPeriodo);
   var values = Object.values(groups);
   var textColor = getCSS('--text');
-  var gridColor = getCSS('--border-light');
+  var gridColor = getCSS('--border');
   var primary = getCSS('--md-sys-color-primary');
 
   var ctx = document.getElementById('chartPeriodos').getContext('2d');
@@ -67,7 +67,7 @@ function renderParcelaChart(data) {
 
 function updateChartTheme() {
   var textColor = getCSS('--text');
-  var gridColor = getCSS('--border-light');
+  var gridColor = getCSS('--border');
   var primary = getCSS('--md-sys-color-primary');
   if (chartPeriodos) {
     chartPeriodos.data.datasets[0].backgroundColor = primary;
