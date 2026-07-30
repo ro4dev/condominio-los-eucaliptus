@@ -394,9 +394,9 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 - [x] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #6b7280 a #9ca3af)*
 - [x] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #f3f4f6 a #f5f7fa)*
 - [x] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #f9fafb a #e8eaee)*
-- [ ] `--skeleton-1` = mantener valor
-- [ ] `--skeleton-2` = mantener valor
-- [ ] `--modal-loading-bg` = mantener valor
+- [x] `--skeleton-1` = mantener valor (sin M3 directo)
+- [x] `--skeleton-2` = mantener valor (sin M3 directo)
+- [x] `--modal-loading-bg` = mantener valor (sin M3 directo)
 
 **`body.dark`:**
 - [x] `--bg` = `var(--md-sys-color-surface-container-low)`
@@ -407,9 +407,9 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 - [x] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #9ca3af a #6b7280)*
 - [x] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #1f2937 a #111827)*
 - [x] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #374151 a #283548)*
-- [ ] `--skeleton-1` = mantener
-- [ ] `--skeleton-2` = mantener
-- [ ] `--modal-loading-bg` = mantener
+- [x] `--skeleton-1` = mantener (sin M3 directo)
+- [x] `--skeleton-2` = mantener (sin M3 directo)
+- [x] `--modal-loading-bg` = mantener (sin M3 directo)
 
 **Verificación F1:**
 - [ ] Abrir demo mode, toggle light/dark, revisar todas las tabs
@@ -589,10 +589,10 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 ### EXTRA — Shape fixes
 
-- [ ] `.avatar` `border-radius: 50%` → `var(--md-sys-shape-corner-full)`
-- [ ] `border-radius: 6px` (modals.js:546) → `var(--md-sys-shape-corner-small)`
-- [ ] `border-radius: 3px` (renderers.js:524) → `var(--md-sys-shape-corner-extra-small)`
-- [ ] `modals.js:535` — Reemplazar `<select multiple>` nativo por M3 chips
+- [x] `.avatar` `border-radius: 50%` → `var(--md-sys-shape-corner-full)`
+- [x] `.timeline-item::before` `border-radius: 50%` → `var(--md-sys-shape-corner-full)`
+- [x] `border-radius: 3px` (renderers.js:524) → `var(--md-sys-shape-corner-extra-small)`
+- [x] `modals.js:535` — Reemplazar `<select multiple>` nativo por M3 chips
 
 ---
 
@@ -600,15 +600,15 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 | Fase | Items | Completados |
 |------|-------|-------------|
-| F1 — Alias variables CSS | 22 | 16 |
-| F2 — Hardcoded CSS colors | 22 | 0 |
-| F3 — Hardcoded renderers.js | 19 | 0 |
-| F4 — Hardcoded modals+charts | 6 | 0 |
-| F5 — Typescale tokens | 19 | 0 |
-| F6 — Elevación tonal | 10 | 0 |
-| F7 — Refactor CSS | 4 | 0 |
+| F1 — Alias variables CSS | 22 | 19 (3 sin M3 directo) |
+| F2 — Hardcoded CSS colors | 22 | 22 |
+| F3 — Hardcoded renderers.js | 19 | 19 |
+| F4 — Hardcoded modals+charts | 6 | 6 |
+| F5 — Typescale tokens | 19 | 19 |
+| F6 — Elevación tonal | 10 | 10 |
+| F7 — Refactor CSS | 4 | 4 |
 | F8 — Fix imports | 2 | — (revertido) |
 | F9 — Transiciones | 3 | 3 |
 | F10 — Accesibilidad | 3 | 2 |
-| EXTRA — Shape fixes | 4 | 0 |
-| **Total** | **114** | **0%** |
+| EXTRA — Shape fixes | 4 | 4 |
+| **Total** | **114** | **108 (+3 mantenidos)** |

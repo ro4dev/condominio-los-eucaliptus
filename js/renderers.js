@@ -521,7 +521,7 @@ function renderEncuestas() {
       var color = colores[i % colores.length];
       var esMiVoto = d.miVoto && d.miVoto.seleccion === op;
 
-      var barra = '<div style="display:flex;height:6px;border-radius:3px;overflow:hidden;margin:0.3rem 0;background:var(--skeleton-1)">' +
+      var barra = '<div style="display:flex;height:6px;border-radius:var(--md-sys-shape-corner-extra-small);overflow:hidden;margin:0.3rem 0;background:var(--skeleton-1)">' +
         '<div style="width:' + pct + '%;background:' + color + ';transition:width 0.3s"></div>' +
       '</div>';
 
