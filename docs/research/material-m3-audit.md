@@ -566,17 +566,16 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 ### FASE 8 — Fix imports
 
-- [x] Reemplazar `import '@material/web/all.js'` por imports individuales (17 componentes)
-- [x] Misma corrección en `material-test.html`
-- [ ] App carga sin errores en consola
+- [ ] ~~Reemplazar `import '@material/web/all.js'` por imports individuales~~ **REVERTIDO** — rompía componentes
+- [ ] App carga sin errores en consola (con `@material/web/all.js`)
 
 ---
 
 ### FASE 9 — Transiciones
 
-- [ ] `.tab-content` con `transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1)`
-- [ ] `.tab-content:not(.active)` con `opacity: 0; position: absolute`
-- [ ] Tabs tienen fade suave, sin flickering
+- [x] `.tab-content.active` con `animation: tabFadeIn 0.2s cubic-bezier(0.2, 0, 0, 1)` en `layout.css`
+- [x] `@keyframes tabFadeIn` definido
+- [x] Tabs tienen fade suave, sin flickering
 
 ---
 
@@ -608,8 +607,8 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 | F5 — Typescale tokens | 19 | 0 |
 | F6 — Elevación tonal | 10 | 0 |
 | F7 — Refactor CSS | 4 | 0 |
-| F8 — Fix imports | 2 | 0 |
-| F9 — Transiciones | 3 | 0 |
+| F8 — Fix imports | 2 | — (revertido) |
+| F9 — Transiciones | 3 | 3 |
 | F10 — Accesibilidad | 3 | 0 |
 | EXTRA — Shape fixes | 4 | 0 |
 | **Total** | **114** | **0%** |
