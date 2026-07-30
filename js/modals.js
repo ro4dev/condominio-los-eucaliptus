@@ -532,7 +532,7 @@ function formAsambleas(data) {
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Temario" name="temario" placeholder="Ej: Puntos a tratar en la asamblea" type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.temario) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><md-filled-text-field label="Acuerdos" name="acuerdos" placeholder="Ej: Decisiones tomadas..." type="textarea" rows="3" style="width:100%"' + (isEdit ? ' value="' + escHtml(data.acuerdos || '') + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:#2563eb;font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem;width:100%">' + parcelas + '</select></div>' +
+    '<div class="form-group"><label>Asistentes</label><div style="margin-bottom:0.3rem"><a href="#" onclick="toggleAllAsistentes(); return false" style="color:var(--md-sys-color-primary);font-size:0.8rem">Seleccionar todas</a></div><select name="asistentes" multiple style="min-height:6rem;width:100%">' + parcelas + '</select></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>', true);
 }

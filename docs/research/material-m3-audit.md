@@ -455,35 +455,29 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 ### FASE 3 — Hardcoded colors en renderers.js
 
 **Textos "sin datos":**
-- [ ] `color:#9ca3af` (línea 105) → `color:var(--md-sys-color-outline)`
-- [ ] `color:#9ca3af` (línea 209) → `color:var(--md-sys-color-outline)`
-- [ ] `color:#9ca3af` (línea 356) → `color:var(--md-sys-color-outline)`
+- [x] `color:#9ca3af` (línea 105) → `var(--md-sys-color-outline)`
+- [x] `color:#9ca3af` (línea 209) → `var(--md-sys-color-outline)`
+- [x] `color:#9ca3af` (línea 356) → `var(--md-sys-color-outline)`
 
-**Links:**
-- [ ] `color:#2563eb` (línea 145) → `color:var(--md-sys-color-primary)`
-- [ ] `color:#2563eb` (línea 146) → `color:var(--md-sys-color-primary)`
-- [ ] `color:#2563eb` (línea 229) → `color:var(--md-sys-color-primary)`
-- [ ] `color:#2563eb` (línea 275) → `color:var(--md-sys-color-primary)`
-- [ ] `color:#2563eb` (línea 372) → `color:var(--md-sys-color-primary)`
-- [ ] `color:#2563eb` (línea 373) → `color:var(--md-sys-color-primary)`
-- [ ] `color:#2563eb` (línea 374) → `color:var(--md-sys-color-primary)`
+**Links (renderers.js + modals.js):**
+- [x] 9 ocurrencias de `style="color:#2563eb"` → `var(--md-sys-color-primary)` (8 en renderers.js + 1 en modals.js)
 
 **Flujo (ingresos/egresos):**
-- [ ] `var color = '#059669' / '#b91c1c'` → `var(--md-sys-color-tertiary)` / `var(--md-sys-color-error)`
-- [ ] `var bgColor = '#d1fae5' / '#fee2e2'` → `var(--md-sys-color-tertiary-container)` / `var(--md-sys-color-error-container)`
-- [ ] `var textColor = '#065f46' / '#991b1b'` → `var(--md-sys-color-on-tertiary-container)` / `var(--md-sys-color-on-error-container)`
+- [x] `var color = '#059669' / '#b91c1c'` → `--md-sys-color-tertiary` / `--md-sys-color-error`
+- [x] `var bgColor = '#d1fae5' / '#fee2e2'` → `--md-sys-color-tertiary-container` / `--md-sys-color-error-container`
+- [x] `var textColor = '#065f46' / '#991b1b'` → `--md-sys-color-on-tertiary-container` / `--md-sys-color-on-error-container`
 
 **Asambleas:**
-- [ ] background tipo: `'#fef3c7' / '#dbeafe'` → `var(--md-sys-color-tertiary-container)` / `var(--md-sys-color-secondary-container)`
-- [ ] color tipo: `'#92400e' / '#1e40af'` → `var(--md-sys-color-on-tertiary-container)` / `var(--md-sys-color-on-secondary-container)`
+- [x] Ordinaria: background `#dbeafe` → `--md-sys-color-primary-container`, color `#1e40af` → `--md-sys-color-on-primary-container`
+- [x] Extraordinaria: se mantiene hardcoded `#fef3c7` / `#92400e` (ámbar sin M3 directo)
 
 **Encuestas:**
-- [ ] `var colores = ['#22c55e', '#3b82f6', ...]` → array con `var(--md-sys-color-*)`
-- [ ] `estadoBg = '#f3f4f6' / '#dcfce7'` → `var(--md-sys-color-surface-container)` / `var(--md-sys-color-tertiary-container)`
-- [ ] `estadoText = '#374151' / '#166534'` → `var(--md-sys-color-on-surface-variant)` / `var(--md-sys-color-on-tertiary-container)`
-- [ ] quorum `#16a34a` → `var(--md-sys-color-tertiary)`
-- [ ] quorum `#b91c1c` → `var(--md-sys-color-error)`
-- [ ] `--md-filled-button-container-color:#b91c1c` (línea 530) → `var(--md-sys-color-error)`
+- [x] `estadoBg = '#f3f4f6' / '#dcfce7'` → `--md-sys-color-surface-container` / `--md-sys-color-tertiary-container`
+- [x] `estadoText = '#374151' / '#166534'` → `--md-sys-color-on-surface-variant` / `--md-sys-color-on-tertiary-container`
+- [x] quorum `#16a34a` → `--md-sys-color-tertiary`
+- [x] quorum `#b91c1c` → `--md-sys-color-error`
+- [ ] `var colores = ['#22c55e', '#3b82f6', ...]` → mantener (dataviz, sin M3 directo)
+- [ ] `--md-filled-button-container-color:#b91c1c` (línea 530) → F4
 
 **Verificación F3:**
 - [ ] Revisar flujo, asambleas, encuestas en light y dark

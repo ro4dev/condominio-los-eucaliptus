@@ -102,7 +102,7 @@ function renderTable(data) {
   document.getElementById('tableGastos').style.display = 'table';
   var tbody = document.getElementById('tableBody');
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#9ca3af;padding:1.5rem">Sin registros</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--md-sys-color-outline);padding:1.5rem">Sin registros</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(function(r) {
@@ -142,8 +142,8 @@ function renderParcelas() {
             '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' : '') +
         '</div>' +
         '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
-          (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:#2563eb;text-decoration:none">' + prop.telefono + '</a></div>' : '') +
-          (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:#2563eb;text-decoration:none">' + prop.email + '</a></div>' : '') +
+          (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.telefono + '</a></div>' : '') +
+          (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.email + '</a></div>' : '') +
           (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
         '</div>' +
       '</div>';
@@ -152,7 +152,7 @@ function renderParcelas() {
     return '<div class="card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">' +
         '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>' +
-        (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button><md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:#2563eb"><md-icon>person_add</md-icon></md-icon-button>' : '') +
+        (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button><md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:var(--md-sys-color-primary)"><md-icon>person_add</md-icon></md-icon-button>' : '') +
       '</div>' +
       (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
       '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
@@ -206,7 +206,7 @@ function renderNoticias() {
   }
 
   if (mostrar.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:2rem">No hay noticias</div>';
+    list.innerHTML = '<div style="text-align:center;color:var(--md-sys-color-outline);padding:2rem">No hay noticias</div>';
     return;
   }
 
@@ -226,7 +226,7 @@ function renderNoticiaCard(n, old) {
       adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')") +
     '</div>' +
     '<div class="desc">' + nl2br(n.descripcion) + '</div>' +
-    (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:#2563eb;font-size:0.85rem">Ver archivo adjunto</a>' : '') +
+    (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>' : '') +
     '</div>';
 }
 
@@ -260,9 +260,9 @@ function renderFlujo() {
   });
   list.innerHTML = sorted.map(function(f) {
     var fecha = formatDate(f.fecha);
-    var color = f.tipo === 'Ingreso' ? '#059669' : '#b91c1c';
-    var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : '#fee2e2';
-    var textColor = f.tipo === 'Ingreso' ? '#065f46' : '#991b1b';
+    var color = f.tipo === 'Ingreso' ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)';
+    var bgColor = f.tipo === 'Ingreso' ? 'var(--md-sys-color-tertiary-container)' : 'var(--md-sys-color-error-container)';
+    var textColor = f.tipo === 'Ingreso' ? 'var(--md-sys-color-on-tertiary-container)' : 'var(--md-sys-color-on-error-container)';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
@@ -272,7 +272,7 @@ function renderFlujo() {
       '<div style="display:flex;justify-content:space-between;align-items:center">' +
         '<div style="font-weight:500">' + f.concepto + '</div>' +
         '<div style="display:flex;gap:0rem;align-items:center">' +
-          (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:#2563eb" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+          (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
           adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") +
         '</div>' +
       '</div>' +
@@ -353,7 +353,7 @@ function renderReclamos() {
       '</div>';
   }).join('');
   if (filtered.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:2rem">Sin registros</div>';
+    list.innerHTML = '<div style="text-align:center;color:var(--md-sys-color-outline);padding:2rem">Sin registros</div>';
   }
 }
 
@@ -369,9 +369,9 @@ function renderProveedores() {
       '<div class="proveedor-nombre">' + p.nombre + '</div>' +
       '<div class="proveedor-contacto">' +
         '<div>&#128205; ' + p.contacto + '</div>' +
-        (p.telefono ? '<div>&#128222; <a href="tel:' + p.telefono + '" style="color:#2563eb;text-decoration:none">' + p.telefono + '</a></div>' : '') +
-        (p.email ? '<div>&#9993; <a href="mailto:' + p.email + '" style="color:#2563eb;text-decoration:none">' + p.email + '</a></div>' : '') +
-        (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:#2563eb;text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
+        (p.telefono ? '<div>&#128222; <a href="tel:' + p.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + p.telefono + '</a></div>' : '') +
+        (p.email ? '<div>&#9993; <a href="mailto:' + p.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + p.email + '</a></div>' : '') +
+        (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
         '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
       '</div>' +
       '</div>';
@@ -404,7 +404,7 @@ function renderAsambleas() {
     }).join('') : '';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : '#dbeafe') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : '#1e40af') + '">' + a.tipo + '</span>' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : 'var(--md-sys-color-on-primary-container)') + '">' + a.tipo + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
@@ -493,8 +493,8 @@ function renderEncuestas() {
   container.innerHTML = data.map(function(d) {
     var e = d.encuesta;
     var quorumAlcanzado = e.quorum ? d.total >= e.quorum : true;
-    var estadoBg = d.cerrada ? '#f3f4f6' : '#dcfce7';
-    var estadoText = d.cerrada ? '#374151' : '#166534';
+    var estadoBg = d.cerrada ? 'var(--md-sys-color-surface-container)' : 'var(--md-sys-color-tertiary-container)';
+    var estadoText = d.cerrada ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-tertiary-container)';
 
     var infoExtra = '';
     if (e.fecha_termino) {
@@ -512,7 +512,7 @@ function renderEncuestas() {
 
     var quorumHtml = '';
     if (e.quorum) {
-      quorumHtml = '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? '#16a34a' : '#b91c1c') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+      quorumHtml = '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
     var opcionesHtml = d.opciones.map(function(op, i) {
