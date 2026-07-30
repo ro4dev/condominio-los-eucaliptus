@@ -3,7 +3,7 @@
 .stat-card .label { font: var(--md-sys-typescale-label-small); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-card .value { font: var(--md-sys-typescale-headline-small); margin-top: 0.3rem; }
 .stat-card .value.blue { color: var(--md-sys-color-primary); }
-.stat-card .value.green { color: var(--md-sys-color-tertiary); }
+.stat-card .value.green { color: #059669; }
 .stat-card .value.red { color: var(--md-sys-color-error); }
 
 .table-wrap { background: var(--md-sys-color-surface-container-low); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); overflow-x: auto; margin-bottom: 1.5rem; }

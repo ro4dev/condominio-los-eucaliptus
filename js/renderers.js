@@ -260,9 +260,9 @@ function renderFlujo() {
   });
   list.innerHTML = sorted.map(function(f) {
     var fecha = formatDate(f.fecha);
-    var color = f.tipo === 'Ingreso' ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)';
-    var bgColor = f.tipo === 'Ingreso' ? 'var(--md-sys-color-tertiary-container)' : 'var(--md-sys-color-error-container)';
-    var textColor = f.tipo === 'Ingreso' ? 'var(--md-sys-color-on-tertiary-container)' : 'var(--md-sys-color-on-error-container)';
+    var color = f.tipo === 'Ingreso' ? '#059669' : 'var(--md-sys-color-error)';
+    var bgColor = f.tipo === 'Ingreso' ? '#d1fae5' : 'var(--md-sys-color-error-container)';
+    var textColor = f.tipo === 'Ingreso' ? '#065f46' : 'var(--md-sys-color-on-error-container)';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>' +
