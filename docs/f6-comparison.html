@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F6 — Comparación elevación tonal vs bg-card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+  h2 { font-size: 1.2rem; margin: 1.5rem 0 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid #e5e7eb; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; }
+  th { background: #eef0f4; font-weight: 600; }
+  .elem { font-family: monospace; font-weight: 600; white-space: nowrap; font-size: 0.8rem; }
+  .hex { font-family: monospace; font-size: 0.8rem; }
+  .swatch { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #d1d5db; display: inline-block; vertical-align: middle; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .diff { background: #fee2e2; color: #991b1b; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+
+  nav { position: sticky; top: 0; background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  nav a { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>Fase 6 — Comparación: elevación tonal</h1>
+<p class="sub">Reemplazo de <code>var(--bg-card)</code> por tokens de superficie M3 directos.</p>
+
+<nav>
+  <a href="#components">components.css</a>
+  <a href="#sections">sections.css</a>
+  <a href="#resumen">Resumen</a>
+</nav>
+
+<section id="components">
+<h2>components.css</h2>
+<table>
+  <tr><th>Elemento</th><th>Antes (bg-card)</th><th>→ Token</th><th>Light</th><th>Dark</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">.stat-card</td>
+    <td class="hex">var(--bg-card) → #fff</td>
+    <td><code>surface-container-low</code></td>
+    <td class="hex">#f5f7fa <span class="swatch" style="background:#f5f7fa"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="diff">❌ light</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.table-wrap</td>
+    <td class="hex">var(--bg-card) → #fff</td>
+    <td><code>surface-container-low</code></td>
+    <td class="hex">#f5f7fa <span class="swatch" style="background:#f5f7fa"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="diff">❌ light</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.card</td>
+    <td class="hex">var(--bg-card) → #fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+</table>
+</section>
+
+<section id="sections">
+<h2>sections.css</h2>
+<table>
+  <tr><th>Elemento</th><th>Antes (bg-card)</th><th>→ Token</th><th>Light</th><th>Dark</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">.news-card</td>
+    <td class="hex">#fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.flujo-card</td>
+    <td class="hex">#fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.doc-item</td>
+    <td class="hex">#fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.reclamo-item</td>
+    <td class="hex">#fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.proveedor-card</td>
+    <td class="hex">#fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.chart-box</td>
+    <td class="hex">#fff</td>
+    <td><code>surface-container-low</code></td>
+    <td class="hex">#f5f7fa <span class="swatch" style="background:#f5f7fa"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="diff">❌ light</span></td>
+  </tr>
+  <tr>
+    <td class="elem">.timeline-item</td>
+    <td class="hex">#fff</td>
+    <td><code>surface</code></td>
+    <td class="hex">#ffffff <span class="swatch" style="background:#ffffff"></span></td>
+    <td class="hex">#111827 <span class="swatch" style="background:#111827"></span></td>
+    <td><span class="match">✅ =</span></td>
+  </tr>
+</table>
+</section>
+
+<section id="resumen">
+<h2>Resumen</h2>
+<table>
+  <tr><th>Total</th><th>Sin cambio</th><th>Cambia (light: #fff → #f5f7fa)</th></tr>
+  <tr><td>12 elementos</td><td>9</td><td>3 (.stat-card, .table-wrap, .chart-box)</td></tr>
+</table>
+
+<div style="margin-top:2rem;padding:1rem;background:#fff3cd;border-radius:8px;border:1px solid #ffc107">
+  <strong>⚠️ Solo 3 elementos cambian visualmente en light mode</strong>: .stat-card, .table-wrap y .chart-box pasan de fondo blanco (#fff) a fondo levemente gris (#f5f7fa, surface-container-low), igual al fondo de página.<br>
+  En dark mode no hay cambio (todos los tokens de superficie son #111827).<br>
+  Los 9 elementos restantes mantienen su color (surface = bg-card = #fff / #111827).
+</div>
+</section>
+
+</body>
+</html>
