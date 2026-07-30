@@ -376,3 +376,249 @@ Cada fase se prueba individualmente en demo mode antes de pasar a la siguiente.
 | 8 | Consola sin errores, app carga |
 | 9 | Transiciones suaves en tabs |
 | 10 | Lighthouse / axe devtools sin errores críticos |
+
+---
+
+## Checklist detallado (128 items)
+
+Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en demo mode.
+
+### FASE 1 — Alias variables legacy → M3 tokens (base.css)
+
+**`:root` (light):**
+- [ ] `--bg` = `var(--md-sys-color-surface-container-low)`
+- [ ] `--bg-card` = `var(--md-sys-color-surface)`
+- [ ] `--text` = `var(--md-sys-color-on-surface)`
+- [ ] `--text-2` = `var(--md-sys-color-on-surface-variant)`
+- [ ] `--border` = `var(--md-sys-color-outline-variant)`
+- [ ] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #6b7280 a #9ca3af)*
+- [ ] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #f3f4f6 a #f5f7fa)*
+- [ ] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #f9fafb a #e8eaee)*
+- [ ] `--skeleton-1` = mantener valor (sin M3 directo)
+- [ ] `--skeleton-2` = mantener valor
+- [ ] `--modal-loading-bg` = mantener valor
+
+**`body.dark`:**
+- [ ] `--bg` = `var(--md-sys-color-surface-container-low)`
+- [ ] `--bg-card` = `var(--md-sys-color-surface)` *(cambia de #1f2937 a #111827)*
+- [ ] `--text` = `var(--md-sys-color-on-surface)`
+- [ ] `--text-2` = `var(--md-sys-color-on-surface-variant)`
+- [ ] `--border` = `var(--md-sys-color-outline-variant)`
+- [ ] `--text-muted` = `var(--md-sys-color-outline)` *(cambia de #9ca3af a #6b7280)*
+- [ ] `--border-light` = `var(--md-sys-color-surface-container-low)` *(cambia de #1f2937 a #111827)*
+- [ ] `--surface-hover` = `var(--md-sys-color-surface-container-high)` *(cambia de #374151 a #283548)*
+- [ ] `--skeleton-1` = mantener
+- [ ] `--skeleton-2` = mantener
+- [ ] `--modal-loading-bg` = mantener
+
+**Verificación F1:**
+- [ ] Abrir demo mode, toggle light/dark, revisar todas las tabs
+- [ ] No hay cambios visuales (valores legacy equivalentes)
+
+---
+
+### FASE 2 — Hardcoded colors en CSS
+
+**`css/components.css`:**
+- [ ] `.stat-card .value.blue` → `var(--md-sys-color-primary)`
+- [ ] `.stat-card .value.green` → `var(--md-sys-color-tertiary)`
+- [ ] `.stat-card .value.red` → `var(--md-sys-color-error)`
+- [ ] `.avatar` (default azul bg:#3b82f6) → `var(--md-sys-color-primary-container)`
+- [ ] `.avatar.green` → `var(--md-sys-color-tertiary-container)`
+- [ ] `.avatar.purple` → `var(--md-sys-color-secondary-container)`
+- [ ] `.avatar.orange` → decidir variable
+- [ ] `.avatar.pink` → decidir variable
+
+**`css/sections.css`:**
+- [ ] `.doc-icon { background: #dbeafe }` → `var(--md-sys-color-primary-container)`
+- [ ] `.doc-icon { color: #2563eb }` → `var(--md-sys-color-on-primary-container)`
+- [ ] `.reclamo-tipo.reclamo { background: #fee2e2 }` → `var(--md-sys-color-error-container)`
+- [ ] `.reclamo-tipo.reclamo { color: #991b1b }` → `var(--md-sys-color-on-error-container)`
+- [ ] `.reclamo-tipo.sugerencia { background: #d1fae5 }` → `var(--md-sys-color-tertiary-container)`
+- [ ] `.reclamo-tipo.sugerencia { color: #065f46 }` → `var(--md-sys-color-on-tertiary-container)`
+- [ ] `.proveedor-rubro { background: #dbeafe }` → `var(--md-sys-color-secondary-container)`
+- [ ] `.proveedor-rubro { color: #1e40af }` → `var(--md-sys-color-on-secondary-container)`
+- [ ] `.timeline-item::before { background: #3b82f6 }` → `var(--md-sys-color-primary)`
+- [ ] `.timeline-item.extra::before { background: #f59e0b }` → `var(--md-sys-color-tertiary)`
+- [ ] `.timeline-tipo { background: #dbeafe }` → `var(--md-sys-color-secondary-container)`
+- [ ] `.timeline-tipo { color: #1e40af }` → `var(--md-sys-color-on-secondary-container)`
+- [ ] `.timeline-tipo.extra { background: #fef3c7 }` → `var(--md-sys-color-tertiary-container)`
+- [ ] `.timeline-tipo.extra { color: #92400e }` → `var(--md-sys-color-on-tertiary-container)`
+
+**`css/base.css`:**
+- [ ] `.snackbar-icon.success { color: #4ade80 }` → `var(--md-sys-color-tertiary)`
+- [ ] `.snackbar-icon.warning { color: #fbbf24 }` → `var(--md-sys-color-secondary)`
+- [ ] `.snackbar-icon.error { color: #f87171 }` → `var(--md-sys-color-error)`
+- [ ] `.snackbar-icon.info { color: #60a5fa }` → `var(--md-sys-color-primary)`
+
+**Verificación F2:**
+- [ ] Revisar cada badge, avatar, icono en light y dark
+
+---
+
+### FASE 3 — Hardcoded colors en renderers.js
+
+**Textos "sin datos":**
+- [ ] `color:#9ca3af` (línea 105) → `color:var(--md-sys-color-outline)`
+- [ ] `color:#9ca3af` (línea 209) → `color:var(--md-sys-color-outline)`
+- [ ] `color:#9ca3af` (línea 356) → `color:var(--md-sys-color-outline)`
+
+**Links:**
+- [ ] `color:#2563eb` (línea 145) → `color:var(--md-sys-color-primary)`
+- [ ] `color:#2563eb` (línea 146) → `color:var(--md-sys-color-primary)`
+- [ ] `color:#2563eb` (línea 229) → `color:var(--md-sys-color-primary)`
+- [ ] `color:#2563eb` (línea 275) → `color:var(--md-sys-color-primary)`
+- [ ] `color:#2563eb` (línea 372) → `color:var(--md-sys-color-primary)`
+- [ ] `color:#2563eb` (línea 373) → `color:var(--md-sys-color-primary)`
+- [ ] `color:#2563eb` (línea 374) → `color:var(--md-sys-color-primary)`
+
+**Flujo (ingresos/egresos):**
+- [ ] `var color = '#059669' / '#b91c1c'` → `var(--md-sys-color-tertiary)` / `var(--md-sys-color-error)`
+- [ ] `var bgColor = '#d1fae5' / '#fee2e2'` → `var(--md-sys-color-tertiary-container)` / `var(--md-sys-color-error-container)`
+- [ ] `var textColor = '#065f46' / '#991b1b'` → `var(--md-sys-color-on-tertiary-container)` / `var(--md-sys-color-on-error-container)`
+
+**Asambleas:**
+- [ ] background tipo: `'#fef3c7' / '#dbeafe'` → `var(--md-sys-color-tertiary-container)` / `var(--md-sys-color-secondary-container)`
+- [ ] color tipo: `'#92400e' / '#1e40af'` → `var(--md-sys-color-on-tertiary-container)` / `var(--md-sys-color-on-secondary-container)`
+
+**Encuestas:**
+- [ ] `var colores = ['#22c55e', '#3b82f6', ...]` → array con `var(--md-sys-color-*)`
+- [ ] `estadoBg = '#f3f4f6' / '#dcfce7'` → `var(--md-sys-color-surface-container)` / `var(--md-sys-color-tertiary-container)`
+- [ ] `estadoText = '#374151' / '#166534'` → `var(--md-sys-color-on-surface-variant)` / `var(--md-sys-color-on-tertiary-container)`
+- [ ] quorum `#16a34a` → `var(--md-sys-color-tertiary)`
+- [ ] quorum `#b91c1c` → `var(--md-sys-color-error)`
+- [ ] `--md-filled-button-container-color:#b91c1c` (línea 530) → `var(--md-sys-color-error)`
+
+**Verificación F3:**
+- [ ] Revisar flujo, asambleas, encuestas en light y dark
+
+---
+
+### FASE 4 — Hardcoded colors en modals.js + charts.js
+
+**`js/modals.js`:**
+- [ ] `--md-filled-button-container-color:#b91c1c` (línea 21) → `var(--md-sys-color-error)`
+- [ ] `border-radius:6px` (línea 546) → `var(--md-sys-shape-corner-small)`
+- [ ] `color:#b91c1c` (línea 554) → `var(--md-sys-color-error)`
+- [ ] `color:#b91c1c` (línea 586) → `var(--md-sys-color-error)`
+
+**`js/charts.js`:**
+- [ ] `backgroundColor: '#3b82f6'` (bar chart) → getPropertyValue('--md-sys-color-primary')
+- [ ] `var colors = ['#3b82f6', ...]` (doughnut) → leer de CSS variables programáticamente
+
+**Verificación F4:**
+- [ ] Confirm dialog, encuesta alt close, charts en light y dark
+
+---
+
+### FASE 5 — Typescale tokens
+
+**`css/base.css`:**
+- [ ] `header h1` → `font: var(--md-sys-typescale-title-large)`
+- [ ] `header p` → `font: var(--md-sys-typescale-body-medium)`
+
+**`css/components.css`:**
+- [ ] `.stat-card .value` → `font: var(--md-sys-typescale-headline-small)`
+- [ ] `.stat-card .label` → `font: var(--md-sys-typescale-label-small)`
+- [ ] `table, td, th` → `font: var(--md-sys-typescale-body-small)`
+- [ ] `.card h4` → `font: var(--md-sys-typescale-title-medium)`
+- [ ] `.card .field` (label+value) → `font: var(--md-sys-typescale-body-medium)`
+- [ ] `body` → `font: var(--md-sys-typescale-body-medium)`
+
+**`css/sections.css`:**
+- [ ] `.news-card h4` → `font: var(--md-sys-typescale-title-medium)`
+- [ ] `.news-card .dates` → `font: var(--md-sys-typescale-body-small)`
+- [ ] `.news-card .desc` → `font: var(--md-sys-typescale-body-medium)`
+- [ ] `.reclamo-title` → `font: var(--md-sys-typescale-title-small)`
+- [ ] `.reclamo-desc` → `font: var(--md-sys-typescale-body-medium)`
+- [ ] `.reclamo-tipo` → `font: var(--md-sys-typescale-label-small)`
+- [ ] `.proveedor-nombre` → `font: var(--md-sys-typescale-title-medium)`
+- [ ] `.proveedor-contacto` → `font: var(--md-sys-typescale-body-medium)`
+- [ ] `.timeline-title` → `font: var(--md-sys-typescale-title-medium)`
+- [ ] `.chart-box h3` → `font: var(--md-sys-typescale-title-small)`
+- [ ] `.table-wrap h3` → `font: var(--md-sys-typescale-title-small)`
+
+**Verificación F5:**
+- [ ] Revisar tamaños de texto en todas las tabs, light y dark
+
+---
+
+### FASE 6 — Elevación tonal
+
+**`css/components.css`:**
+- [ ] `.stat-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)`
+- [ ] `.table-wrap` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)`
+- [ ] `.card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+
+**`css/sections.css`:**
+- [ ] `.news-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [ ] `.flujo-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [ ] `.doc-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [ ] `.reclamo-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [ ] `.proveedor-card` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+- [ ] `.chart-box` bg: `var(--bg-card)` → `var(--md-sys-color-surface-container-low)`
+- [ ] `.timeline-item` bg: `var(--bg-card)` → `var(--md-sys-color-surface)`
+
+**Verificación F6:**
+- [ ] Cards se distinguen por color de fondo, jerarquía visual se mantiene
+
+---
+
+### FASE 7 — Refactor CSS (body.dark + reset)
+
+- [ ] Mover reglas 2do `body.dark` (línea 162-167) al bloque principal (línea 79)
+- [ ] Eliminar bloque duplicado
+- [ ] Reemplazar reset `*:not(:is(md-...))` por reset simple
+- [ ] Verificar md-* componentes no rotos
+
+---
+
+### FASE 8 — Fix imports
+
+- [ ] Reemplazar `import '@material/web/all.js'` por imports individuales
+- [ ] Importar: tabs, primary-tab, filled-button, filled-tonal-button, outlined-button, text-button, icon-button, filter-chip, input-chip, assist-chip, filled-text-field, filled-select, select-option, dialog, circular-progress, icon
+- [ ] App carga sin errores en consola
+
+---
+
+### FASE 9 — Transiciones
+
+- [ ] `.tab-content` con `transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1)`
+- [ ] `.tab-content:not(.active)` con `opacity: 0; position: absolute`
+- [ ] Tabs tienen fade suave, sin flickering
+
+---
+
+### FASE 10 — Accesibilidad
+
+- [ ] `aria-busy="true"` en regiones skeleton
+- [ ] `role="region"` y `aria-label` en cada `.tab-content`
+- [ ] Lighthouse sin errores críticos
+
+---
+
+### EXTRA — Shape fixes
+
+- [ ] `.avatar` `border-radius: 50%` → `var(--md-sys-shape-corner-full)`
+- [ ] `border-radius: 6px` (modals.js:546) → `var(--md-sys-shape-corner-small)`
+- [ ] `border-radius: 3px` (renderers.js:524) → `var(--md-sys-shape-corner-extra-small)`
+- [ ] `modals.js:535` — Reemplazar `<select multiple>` nativo por M3 chips
+
+---
+
+### Progress summary
+
+| Fase | Items | Completados |
+|------|-------|-------------|
+| F1 — Alias variables CSS | 22 | 0 |
+| F2 — Hardcoded CSS colors | 22 | 0 |
+| F3 — Hardcoded renderers.js | 19 | 0 |
+| F4 — Hardcoded modals+charts | 6 | 0 |
+| F5 — Typescale tokens | 19 | 0 |
+| F6 — Elevación tonal | 10 | 0 |
+| F7 — Refactor CSS | 4 | 0 |
+| F8 — Fix imports | 2 | 0 |
+| F9 — Transiciones | 3 | 0 |
+| F10 — Accesibilidad | 3 | 0 |
+| EXTRA — Shape fixes | 4 | 0 |
+| **Total** | **114** | **0%** |
