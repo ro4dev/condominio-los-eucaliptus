@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 — Comparación hardcoded colors en renderers.js vs M3 tokens</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 2rem; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sub { color: #6b7280; margin-bottom: 2rem; }
+  h2 { font-size: 1.2rem; margin: 1.5rem 0 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid #e5e7eb; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; font-size: 0.85rem; border-bottom: 1px solid #e5e7eb; }
+  th { background: #eef0f4; font-weight: 600; }
+  .elem { font-family: monospace; font-weight: 600; white-space: nowrap; font-size: 0.8rem; }
+  .hex { font-family: monospace; font-size: 0.8rem; }
+  .swatch { width: 28px; height: 28px; border-radius: 6px; border: 1px solid #d1d5db; display: inline-block; vertical-align: middle; }
+  .match { background: #d1fae5; color: #065f46; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .diff { background: #fee2e2; color: #991b1b; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+  .kept { background: #e2e8f0; color: #475569; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.75rem; white-space: nowrap; }
+
+  nav { position: sticky; top: 0; background: #fff; padding: 0.8rem 1rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); margin-bottom: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  nav a { color: #2563eb; text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  nav a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>Fase 3 — Comparación: hardcoded colors en renderers.js vs M3 tokens</h1>
+<p class="sub">Inline styles en renderers.js con colores hardcodeados reemplazados por <code>var(--md-sys-color-*)</code>.</p>
+
+<nav>
+  <a href="#textos">Textos sin datos</a>
+  <a href="#links">Links</a>
+  <a href="#flujo">Flujo</a>
+  <a href="#asambleas">Asambleas</a>
+  <a href="#encuestas">Encuestas</a>
+  <a href="#resumen">Resumen visual</a>
+</nav>
+
+<section id="textos">
+<h2>Textos "sin datos"</h2>
+<table>
+  <tr><th>Ubicación</th><th>Hardcoded</th><th>→ Token</th><th>Valor nuevo</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">renderTable — Sin registros</td>
+    <td class="hex">#9ca3af <span class="swatch" style="background:#9ca3af"></span></td>
+    <td><code>--md-sys-color-outline</code></td>
+    <td class="hex">#9ca3af <span class="swatch" style="background:#9ca3af"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">renderNoticias — No hay noticias</td>
+    <td class="hex">#9ca3af <span class="swatch" style="background:#9ca3af"></span></td>
+    <td><code>--md-sys-color-outline</code></td>
+    <td class="hex">#9ca3af <span class="swatch" style="background:#9ca3af"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">renderReclamos — Sin registros</td>
+    <td class="hex">#9ca3af <span class="swatch" style="background:#9ca3af"></span></td>
+    <td><code>--md-sys-color-outline</code></td>
+    <td class="hex">#9ca3af <span class="swatch" style="background:#9ca3af"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+</table>
+</section>
+
+<section id="links">
+<h2>Links (color: #2563eb → primary)</h2>
+<table>
+  <tr><th>Ubicación</th><th>Hardcoded</th><th>→ Token</th><th>Valor nuevo</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">renderParcelas — tel/email links</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">renderParcelas — add owner icon</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">renderNoticiaCard — file link</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">renderFlujo — comprobante icon</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">renderProveedores — tel/email/web</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">modals.js — "Seleccionar todas"</td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><code>--md-sys-color-primary</code></td>
+    <td class="hex">#2563eb <span class="swatch" style="background:#2563eb"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+</table>
+<p style="font-size:0.85rem;color:#6b7280">9 ocurrencias en total. Todas mantienen el color exacto (#2563eb = primary ✅).</p>
+</section>
+
+<section id="flujo">
+<h2>Flujo (ingresos/egresos)</h2>
+<table>
+  <tr><th>Variable</th><th>Ingreso (antes)</th><th>Ingreso (después)</th><th>Egreso (antes)</th><th>Egreso (después)</th></tr>
+  <tr>
+    <td class="elem">color (monto)</td>
+    <td class="hex">#059669 <span class="swatch" style="background:#059669"></span></td>
+    <td class="hex">#7c3aed <span class="swatch" style="background:#7c3aed"></span></td>
+    <td class="hex">#b91c1c <span class="swatch" style="background:#b91c1c"></span></td>
+    <td class="hex">#b91c1c <span class="swatch" style="background:#b91c1c"></span></td>
+  </tr>
+  <tr>
+    <td class="elem">bgColor (badge)</td>
+    <td class="hex">#d1fae5 <span class="swatch" style="background:#d1fae5"></span></td>
+    <td class="hex">#d1fae5 <span class="swatch" style="background:#d1fae5"></span></td>
+    <td class="hex">#fee2e2 <span class="swatch" style="background:#fee2e2"></span></td>
+    <td class="hex">#fee2e2 <span class="swatch" style="background:#fee2e2"></span></td>
+  </tr>
+  <tr>
+    <td class="elem">textColor (badge)</td>
+    <td class="hex">#065f46 <span class="swatch" style="background:#065f46"></span></td>
+    <td class="hex">#065f46 <span class="swatch" style="background:#065f46"></span></td>
+    <td class="hex">#991b1b <span class="swatch" style="background:#991b1b"></span></td>
+    <td class="hex">#991b1b <span class="swatch" style="background:#991b1b"></span></td>
+  </tr>
+</table>
+<p style="font-size:0.85rem;color:#6b7280">bgColor y textColor mantienen el mismo color (los tokens se definieron con esos valores). <strong style="color:#b91c1c">color (monto) de ingresos cambia: verde → púrpura.</strong></p>
+<p style="font-size:0.85rem;color:#6b7280">Tokens: <code>--md-sys-color-tertiary/error</code> (color), <code>--md-sys-color-tertiary-container/error-container</code> (bg), <code>--md-sys-color-on-tertiary-container/on-error-container</code> (text).</p>
+</section>
+
+<section id="asambleas">
+<h2>Asambleas</h2>
+<table>
+  <tr><th>Tipo</th><th>Prop</th><th>Hardcoded</th><th>→ Token</th><th>Valor nuevo</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">Ordinaria</td><td>background</td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><code>--md-sys-color-primary-container</code></td>
+    <td class="hex">#dbeafe <span class="swatch" style="background:#dbeafe"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">Ordinaria</td><td>color</td>
+    <td class="hex">#1e40af <span class="swatch" style="background:#1e40af"></span></td>
+    <td><code>--md-sys-color-on-primary-container</code></td>
+    <td class="hex">#1e3a5f <span class="swatch" style="background:#1e3a5f"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">Extraordinaria</td><td>background</td>
+    <td class="hex">#fef3c7 <span class="swatch" style="background:#fef3c7"></span></td>
+    <td>— (sin M3 ámbar)</td>
+    <td class="hex">#fef3c7 <span class="swatch" style="background:#fef3c7"></span></td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+  <tr>
+    <td class="elem">Extraordinaria</td><td>color</td>
+    <td class="hex">#92400e <span class="swatch" style="background:#92400e"></span></td>
+    <td>— (sin M3 ámbar)</td>
+    <td class="hex">#92400e <span class="swatch" style="background:#92400e"></span></td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+</table>
+</section>
+
+<section id="encuestas">
+<h2>Encuestas</h2>
+<table>
+  <tr><th>Variable</th><th>Antes</th><th>→ Token</th><th>Después</th><th>Match</th></tr>
+  <tr>
+    <td class="elem">estadoBg (cerrada)</td>
+    <td class="hex">#f3f4f6 <span class="swatch" style="background:#f3f4f6"></span></td>
+    <td><code>--md-sys-color-surface-container</code></td>
+    <td class="hex">#f5f7fa <span class="swatch" style="background:#f5f7fa"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">estadoBg (abierta)</td>
+    <td class="hex">#dcfce7 <span class="swatch" style="background:#dcfce7"></span></td>
+    <td><code>--md-sys-color-tertiary-container</code></td>
+    <td class="hex">#d1fae5 <span class="swatch" style="background:#d1fae5"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">estadoText (cerrada)</td>
+    <td class="hex">#374151 <span class="swatch" style="background:#374151"></span></td>
+    <td><code>--md-sys-color-on-surface-variant</code></td>
+    <td class="hex">#374151 <span class="swatch" style="background:#374151"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">estadoText (abierta)</td>
+    <td class="hex">#166534 <span class="swatch" style="background:#166534"></span></td>
+    <td><code>--md-sys-color-on-tertiary-container</code></td>
+    <td class="hex">#065f46 <span class="swatch" style="background:#065f46"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">quorum alcanzado</td>
+    <td class="hex">#16a34a <span class="swatch" style="background:#16a34a"></span></td>
+    <td><code>--md-sys-color-tertiary</code></td>
+    <td class="hex">#7c3aed <span class="swatch" style="background:#7c3aed"></span></td>
+    <td><span class="diff">❌</span></td>
+  </tr>
+  <tr>
+    <td class="elem">quorum no alcanzado</td>
+    <td class="hex">#b91c1c <span class="swatch" style="background:#b91c1c"></span></td>
+    <td><code>--md-sys-color-error</code></td>
+    <td class="hex">#b91c1c <span class="swatch" style="background:#b91c1c"></span></td>
+    <td><span class="match">✅</span></td>
+  </tr>
+  <tr>
+    <td class="elem">colores (paleta dataviz)</td>
+    <td class="hex">6 colores fijos</td>
+    <td>—</td>
+    <td class="hex">se mantiene</td>
+    <td><span class="kept">mantenido</span></td>
+  </tr>
+</table>
+<p style="font-size:0.85rem;color:#6b7280">Los colores dataviz de barras y botones se mantienen (no hay M3 directo para paletas de gráficos).</p>
+</section>
+
+<section id="resumen">
+<h2>Resumen visual</h2>
+<table>
+  <tr><th></th><th>Sin cambio</th><th>Cambia</th><th>Mantenido</th></tr>
+  <tr><td>Textos sin datos</td><td>3</td><td>0</td><td>0</td></tr>
+  <tr><td>Links</td><td>9</td><td>0</td><td>0</td></tr>
+  <tr><td>Flujo color monto</td><td>1 (egreso)</td><td>1 (ingreso verde→púrpura)</td><td>0</td></tr>
+  <tr><td>Flujo badge bg/text</td><td>4</td><td>0</td><td>0</td></tr>
+  <tr><td>Asambleas ordinaria</td><td>1 (bg)</td><td>1 (color)</td><td>0</td></tr>
+  <tr><td>Asambleas extra</td><td>0</td><td>0</td><td>2</td></tr>
+  <tr><td>Encuesta estado bg</td><td>0</td><td>2</td><td>0</td></tr>
+  <tr><td>Encuesta estado text</td><td>1 (cerrada)</td><td>1 (abierta)</td><td>0</td></tr>
+  <tr><td>Encuesta quorum</td><td>1 (no alcanzado)</td><td>1 (alcanzado verde→púrpura)</td><td>0</td></tr>
+  <tr><td>Encuesta colores dataviz</td><td>0</td><td>0</td><td>6</td></tr>
+</table>
+
+<div style="margin-top:2rem;padding:1rem;background:#fff3cd;border-radius:8px;border:1px solid #ffc107">
+  <strong>⚠️ 7 propiedades cambian visualmente</strong>:<br>
+  • Flujo ingresos: verde → púrpura (tertiary)<br>
+  • Asamblea ordinaria badge color: #1e40af → #1e3a5f (sutil)<br>
+  • Encuesta cerrada bg: #f3f4f6 → #f5f7fa (sutil)<br>
+  • Encuesta abierta bg: verde claro → verde tertiary-container<br>
+  • Encuesta abierta text: verde oscuro → on-tertiary-container<br>
+  • Quorum alcanzado: verde → púrpura (tertiary)
+</div>
+</section>
+
+</body>
+</html>
