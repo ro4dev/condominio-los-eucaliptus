@@ -83,7 +83,7 @@ body { margin: 0; }
 
 body.dark {
   color-scheme: dark;
-  --bg: var(--md-sys-color-surface-container-low);
+  --bg: var(--md-sys-color-surface-container-lowest);
   --bg-card: var(--md-sys-color-surface);
   --text: var(--md-sys-color-on-surface);
   --text-2: var(--md-sys-color-on-surface-variant);
