@@ -566,8 +566,8 @@ Instrucciones: marcar `[x]` cuando el cambio está commiteado y verificado en de
 
 ### FASE 8 — Fix imports
 
-- [ ] Reemplazar `import '@material/web/all.js'` por imports individuales
-- [ ] Importar: tabs, primary-tab, filled-button, filled-tonal-button, outlined-button, text-button, icon-button, filter-chip, input-chip, assist-chip, filled-text-field, filled-select, select-option, dialog, circular-progress, icon
+- [x] Reemplazar `import '@material/web/all.js'` por imports individuales (17 componentes)
+- [x] Misma corrección en `material-test.html`
 - [ ] App carga sin errores en consola
 
 ---
