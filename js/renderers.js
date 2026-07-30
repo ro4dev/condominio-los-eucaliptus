@@ -260,7 +260,7 @@ function renderFlujo() {
   });
   list.innerHTML = sorted.map(function(f) {
     var fecha = formatDate(f.fecha);
-    var color = f.tipo === 'Ingreso' ? '#059669' : 'var(--md-sys-color-error)';
+    var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
     var bgColor = f.tipo === 'Ingreso' ? 'var(--color-positive-bg)' : 'var(--md-sys-color-error-container)';
     var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
     return '<div class="flujo-card">' +
@@ -404,7 +404,7 @@ function renderAsambleas() {
     }).join('') : '';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? '#fef3c7' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? '#92400e' : 'var(--md-sys-color-on-primary-container)') + '">' + a.tipo + '</span>' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-bg)' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-text)' : 'var(--md-sys-color-on-primary-container)') + '">' + a.tipo + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
