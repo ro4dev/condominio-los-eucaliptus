@@ -63,6 +63,7 @@ function toggleTheme() {
   document.body.classList.toggle('dark', isDark);
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
   document.getElementById('themeToggle').querySelector('md-icon').textContent = isDark ? 'light_mode' : 'dark_mode';
+  if (typeof updateChartTheme === 'function') updateChartTheme();
 }
 
 initSupabase();
