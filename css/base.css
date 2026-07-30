@@ -13,6 +13,9 @@ body { margin: 0; }
   --skeleton-1: #e5e7eb;
   --skeleton-2: #f3f4f6;
   --modal-loading-bg: rgba(255,255,255,0.85);
+  --color-positive: #059669;
+  --color-positive-bg: #d1fae5;
+  --color-positive-text: #065f46;
 
   /* MD3 system tokens — required by @material/web components */
   --md-sys-color-primary: #2563eb;
@@ -94,6 +97,9 @@ body.dark {
   --skeleton-1: #374151;
   --skeleton-2: #4b5563;
   --modal-loading-bg: rgba(17,24,39,0.85);
+  --color-positive: #059669;
+  --color-positive-bg: #064e3b;
+  --color-positive-text: #a7f3d0;
 
   /* MD3 system tokens — dark mode */
   --md-sys-color-primary: #93bbfd;
