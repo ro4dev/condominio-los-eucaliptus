@@ -401,14 +401,14 @@ function formPropietarios(opt) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-group"><md-filled-text-field label="Nombre completo" name="nombre_completo" placeholder="Ej: Juan Pérez" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.nombre_completo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-text-field label="RUT" name="rut" placeholder="Ej: 12.345.678-9" style="width:100%"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><md-filled-text-field label="RUT" name="rut" placeholder="Ej: 12.345.678-9" required style="width:100%"' + (isEdit && data.rut ? ' value="' + escHtml(data.rut) + '"' : '') + '></md-filled-text-field></div>' +
       (isFromParcela
         ? '<input type="hidden" name="parcela_id" value="' + parcelaId + '"><div class="form-group"><md-filled-select label="Parcela" disabled style="width:100%"><md-select-option value="' + parcelaId + '" selected><span slot="headline">' + (PARCELAS.find(function(p) { return p.id === parcelaId; }) || {}).numero + '</span></md-select-option></md-filled-select></div>'
         : '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>') +
     '</div>' +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-text-field label="Teléfono" type="tel" name="telefono" placeholder="Ej: +56 9 1234 5678" style="width:100%"' + (isEdit && data.telefono ? ' value="' + escHtml(data.telefono) + '"' : '') + '></md-filled-text-field></div>' +
-      '<div class="form-group"><md-filled-text-field label="Email" type="email" name="email" placeholder="Ej: correo@ejemplo.com" style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-filled-text-field></div>' +
+      '<div class="form-group"><md-filled-text-field label="Email" type="email" name="email" placeholder="Ej: correo@ejemplo.com" required style="width:100%"' + (isEdit && data.email ? ' value="' + escHtml(data.email) + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><md-filled-select label="Tipo" name="tipo" style="width:100%">' +
       '<md-select-option value="Propietario"' + (isEdit && data.tipo === 'Propietario' ? ' selected' : '') + '><span slot="headline">Propietario</span></md-select-option>' +
