@@ -163,7 +163,7 @@ function showPropietarios(parcelaId) {
     body = props.map(function(prop, j) {
       var propColor = colorClasses[j % 4];
       var nombre = prop.nombre_completo || '';
-      return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--border-light)' : '') + '">' +
+      return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--divider)' : '') + '">' +
         '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
         '<div style="flex:1;min-width:0">' +
           '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + nombre + '</div>' +

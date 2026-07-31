@@ -9,6 +9,7 @@ body { margin: 0; }
   --text-muted: var(--md-sys-color-outline);
   --border: var(--md-sys-color-outline-variant);
   --border-light: var(--md-sys-color-surface-container-low);
+  --divider: var(--md-sys-color-outline);
   --surface-hover: var(--md-sys-color-surface-container-high);
   --skeleton-1: #e5e7eb;
   --skeleton-2: #f3f4f6;
@@ -95,6 +96,7 @@ body.dark {
   --text-muted: var(--md-sys-color-outline);
   --border: var(--md-sys-color-outline-variant);
   --border-light: var(--md-sys-color-surface-container-low);
+  --divider: var(--md-sys-color-on-surface);
   --surface-hover: var(--md-sys-color-surface-container-high);
   --skeleton-1: #374151;
   --skeleton-2: #4b5563;
