@@ -186,6 +186,19 @@ body.dark md-icon-button md-icon {
 header { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); padding: 1.5rem; text-align: center; border-radius: var(--md-sys-shape-corner-large); margin-bottom: 1.5rem; }
 header h1 { font: var(--md-sys-typescale-title-large); letter-spacing: 1px; }
 header p { color: var(--md-sys-color-on-primary); opacity: 0.75; margin-top: 0.3rem; font: var(--md-sys-typescale-body-medium); }
+header md-icon-button#themeToggle {
+  --md-icon-button-icon-color: var(--md-sys-color-on-primary);
+  --md-icon-button-hover-state-layer-color: var(--md-sys-color-on-primary);
+  --md-icon-button-pressed-state-layer-color: var(--md-sys-color-on-primary);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+header md-icon-button#themeToggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+header md-icon-button#themeToggle md-icon {
+  color: var(--md-sys-color-on-primary);
+}
 
 /* Snackbar */
 #appSnackbar {
