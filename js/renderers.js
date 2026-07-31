@@ -167,7 +167,7 @@ function showPropietarios(parcelaId) {
         '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
         '<div style="flex:1;min-width:0">' +
           '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + nombre + '</div>' +
-          '<div style="font-size:0.75rem;color:var(--text-muted)">' + (prop.tipo || '') + '</div>' +
+          '<div style="font-size:0.75rem;color:var(--text-2)">' + (prop.tipo || '') + '</div>' +
           '<div style="margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
             (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.telefono + '</a></div>' : '') +
             (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.email + '</a></div>' : '') +
