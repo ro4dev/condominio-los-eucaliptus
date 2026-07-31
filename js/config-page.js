@@ -103,9 +103,12 @@ function openConfigModal(title, placeholder, onAdd) {
       input.reportValidity();
       return;
     }
+    var addBtn = document.getElementById('cfgModalAddBtn');
+    addBtn.disabled = true;
     showLoading();
     await onAdd(val);
     hideLoading();
+    addBtn.disabled = false;
     closeModal();
   };
   document.getElementById('cfgModalInput').onkeydown = function(e) {

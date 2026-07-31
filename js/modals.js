@@ -50,7 +50,7 @@ function confirmCloseModal() {
 function handleForm(e) {
   e.preventDefault();
   var form = e.target;
-  var submitBtn = form.querySelector('button[type="submit"], md-filled-button[type="submit"]');
+  var submitBtn = document.querySelector('#modalFooter [type="submit"]');
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Guardando...';

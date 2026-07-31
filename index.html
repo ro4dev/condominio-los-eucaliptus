@@ -280,10 +280,12 @@
 
   <md-dialog id="mainDialog">
     <div slot="headline"><span id="modalTitle"></span></div>
-    <div slot="content" id="modalBody"></div>
-    <div id="modalLoading" style="display:none;position:fixed;inset:0;background:var(--modal-loading-bg);flex-direction:column;justify-content:center;align-items:center;gap:0.8rem;z-index:10">
-      <md-circular-progress indeterminate></md-circular-progress>
-      <span style="font-size:0.9rem;color:var(--text-2);font-weight:500">Guardando...</span>
+    <div slot="content" style="position:relative">
+      <div id="modalBody"></div>
+      <div id="modalLoading" style="display:none;position:fixed;inset:0;background:var(--modal-loading-bg);flex-direction:column;justify-content:center;align-items:center;gap:0.8rem;z-index:10">
+        <md-circular-progress indeterminate></md-circular-progress>
+        <span style="font-size:0.9rem;color:var(--text-2);font-weight:500">Guardando...</span>
+      </div>
     </div>
     <div slot="actions" id="modalFooter"></div>
   </md-dialog>
