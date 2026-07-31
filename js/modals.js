@@ -4,7 +4,9 @@ function openModal(title, html, footerHtml, wide) {
   document.getElementById('modalBody').innerHTML = html;
   document.getElementById('modalFooter').innerHTML = footerHtml !== undefined ? footerHtml : '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
   dialog.classList.toggle('modal-wide', !!wide);
-  dialog.show();
+  if (!dialog.open) {
+    dialog.show();
+  }
 }
 
 function closeModal() {
