@@ -119,7 +119,6 @@ function renderTable(data) {
 // PARCELAS
 function renderParcelas() {
   var grid = document.getElementById('parcelasGrid');
-  var colorClasses = ['green', 'purple', 'orange', 'pink'];
 
   var sorted = PARCELAS.slice().sort(function(a, b) {
     var numA = parseInt((a['numero'] || '').replace(/\D/g, '')) || 0;
@@ -129,37 +128,65 @@ function renderParcelas() {
 
   grid.innerHTML = sorted.map(function(p, i) {
     var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela_id === p.id; });
-    var colorClass = colorClasses[i % 4];
 
-    var propietariosHtml = propietarios.map(function(prop, j) {
-      var propColor = colorClasses[(i + j) % 4];
-      var nombre = prop.nombre_completo || '';
-      return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border-light)">' +
-        '<div style="display:flex;align-items:center;gap:0.6rem">' +
-          '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
-          '<div style="flex:1"><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>' +
-          (IS_ADMIN ? '<md-icon-button onclick="editPropietario(\'' + prop.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
-            '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' : '') +
-        '</div>' +
-        '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
-          (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.telefono + '</a></div>' : '') +
-          (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.email + '</a></div>' : '') +
-          (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
-        '</div>' +
-      '</div>';
-    }).join('');
+    var badgeHtml = propietarios.length > 0
+      ? '<span style="position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;border-radius:8px;background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary);font-size:0.65rem;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 4px;box-sizing:border-box">' + propietarios.length + '</span>'
+      : '';
 
     return '<div class="card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">' +
         '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>' +
+        '<span style="position:relative;display:inline-flex">' +
+          '<md-icon-button onclick="showPropietarios(\'' + p.id + '\')" title="Ver propietarios (' + propietarios.length + ')" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>' +
+          badgeHtml +
+        '</span>' +
         (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button><md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:var(--md-sys-color-primary)"><md-icon>person_add</md-icon></md-icon-button>' : '') +
       '</div>' +
-      (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '') +
+      '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + (p.rol || 'XXXX-XXXX') + '</span></div>' +
       '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
       '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
-      propietariosHtml +
       '</div>';
   }).join('');
+}
+
+// POPUP PROPIETARIOS (desde card de parcela)
+function showPropietarios(parcelaId) {
+  var parcela = PARCELAS.find(function(p) { return p.id === parcelaId; });
+  if (!parcela) return;
+  var props = PROPIETARIOS.filter(function(pr) { return pr.parcela_id === parcelaId; });
+  var colorClasses = ['green', 'purple', 'orange', 'pink'];
+
+  var body;
+  if (!props.length) {
+    body = '<div style="text-align:center;color:var(--text-muted);padding:2rem">No hay propietarios registrados para esta parcela.</div>';
+  } else {
+    body = props.map(function(prop, j) {
+      var propColor = colorClasses[j % 4];
+      var nombre = prop.nombre_completo || '';
+      return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--border-light)' : '') + '">' +
+        '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + nombre + '</div>' +
+          '<div style="font-size:0.75rem;color:var(--text-muted)">' + (prop.tipo || '') + '</div>' +
+          '<div style="margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
+            (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.telefono + '</a></div>' : '') +
+            (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.email + '</a></div>' : '') +
+            (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
+          '</div>' +
+        '</div>' +
+        (IS_ADMIN ? '<div style="display:flex;flex-shrink:0;align-items:center">' +
+          '<md-icon-button onclick="editPropietario(\'' + prop.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+          '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
+        '</div>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  if (IS_ADMIN) {
+    footer = '<md-filled-button onclick="closeModal();formPropietarios(\'' + parcelaId + '\')" style="margin-right:auto"><md-icon slot="icon">person_add</md-icon>Agregar</md-filled-button>' + footer;
+  }
+  openModal('Propietarios de ' + (parcela.numero || parcelaId), body, footer, true);
 }
 
 // NOTICIAS
