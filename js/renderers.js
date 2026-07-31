@@ -140,7 +140,7 @@ function renderParcelas() {
           '<md-icon-button onclick="showPropietarios(\'' + p.id + '\')" title="Ver propietarios (' + propietarios.length + ')" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>' +
           badgeHtml +
         '</span>' +
-        (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button><md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:var(--md-sys-color-primary)"><md-icon>person_add</md-icon></md-icon-button>' : '') +
+        (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') +
       '</div>' +
       '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + (p.rol || 'XXXX-XXXX') + '</span></div>' +
       '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
@@ -184,7 +184,7 @@ function showPropietarios(parcelaId) {
 
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
   if (IS_ADMIN) {
-    footer = '<md-filled-button onclick="closeModal();formPropietarios(\'' + parcelaId + '\')" style="margin-right:auto"><md-icon slot="icon">person_add</md-icon>Agregar</md-filled-button>' + footer;
+    footer += '<md-filled-button onclick="formPropietarios(\'' + parcelaId + '\')"><md-icon slot="icon">person_add</md-icon>Agregar</md-filled-button>';
   }
   openModal('Propietarios de ' + (parcela.numero || parcelaId), body, footer, true);
 }
