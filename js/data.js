@@ -95,7 +95,7 @@ function showSkeletons(tab) {
   if (tab === 'flujo') {
     var fl = document.getElementById('flujoList');
     if (fl) {
-      fl.innerHTML = '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>';
+      fl.innerHTML = '<div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>';
     }
   }
   if (tab === 'cuenta') {

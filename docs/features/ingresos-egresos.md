@@ -73,10 +73,10 @@ CREATE TABLE flujo (
     <md-filter-chip label="Egresos" onclick="filterFlujo('Egreso')"></md-filter-chip>
   </div>
 
-  <div class="cards-grid" id="flujoList">
-    <div class="skeleton skeleton-card"></div>
-    <div class="skeleton skeleton-card"></div>
-    <div class="skeleton skeleton-card"></div>
+  <div class="table-wrap" id="flujoList">
+    <div class="skeleton skeleton-row"></div>
+    <div class="skeleton skeleton-row"></div>
+    <div class="skeleton skeleton-row"></div>
   </div>
 </div>
 ```
@@ -122,14 +122,14 @@ function filterFlujo(tipo) {
 2. Renderizar 4 stat cards
 3. Filtrar según flujoFilter
 4. Ordenar por fecha descendente
-5. Por cada movimiento:
-   a. Badge tipo (coloreado)
-   b. Monto (coloreado según tipo)
-   c. Fecha
-   d. Concepto
-   e. Comprobante (icono receipt si existe)
-   f. Acciones admin
-   g. Descripción (opcional)
+5. Renderizar tabla (min-width:640px, scroll horizontal en mobile):
+   a. Columna Fecha
+   b. Columna Tipo (badge coloreado)
+   c. Columna Concepto (+ descripción debajo)
+   d. Columna Comprobante (icono receipt si existe)
+   e. Columna Monto (derecha, coloreado según tipo)
+   f. Columna Acciones admin
+6. Si no hay registros: fila con "Sin registros" (colspan=6)
 ```
 
 **Código exacto**:
@@ -150,27 +150,36 @@ function renderFlujo() {
   var filtered = flujoFilter === 'todos' ? FLUJO : FLUJO.filter(function(f) { return f.tipo === flujoFilter; });
   var list = document.getElementById('flujoList');
   var sorted = filtered.slice().sort(function(a, b) { return new Date(b.fecha) - new Date(a.fecha); });
-  list.innerHTML = sorted.map(function(f) {
-    var fecha = formatDate(f.fecha);
-    var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
-    var bgColor = f.tipo === 'Ingreso' ? 'var(--color-positive-bg)' : 'var(--md-sys-color-error-container)';
-    var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
-    return '<div class="flujo-card">'
-      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">'
-        + '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span>'
-        + '<span style="font-size:1.1rem;font-weight:700;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</span>'
-        + '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>'
-      + '</div>'
-      + '<div style="display:flex;justify-content:space-between;align-items:center">'
-        + '<div style="font-weight:500">' + f.concepto + '</div>'
-        + '<div style="display:flex;gap:0rem;align-items:center">'
-          + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '')
-          + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')")
-        + '</div>'
-      + '</div>'
-      + (f.descripcion ? '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.4rem">' + nl2br(f.descripcion) + '</div>' : '')
-    + '</div>';
-  }).join('');
+
+  var head = '<thead><tr>'
+    + '<th>Fecha</th>'
+    + '<th>Tipo</th>'
+    + '<th>Concepto</th>'
+    + '<th>Comprobante</th>'
+    + '<th style="text-align:right">Monto</th>'
+    + '<th></th>'
+    + '</tr></thead>';
+
+  var body;
+  if (!sorted.length) {
+    body = '<tbody><tr><td colspan="6" style="text-align:center;color:var(--md-sys-color-outline);padding:1.5rem">Sin registros</td></tr></tbody>';
+  } else {
+    body = '<tbody>' + sorted.map(function(f) {
+      var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
+      var bgColor = f.tipo === 'Ingreso' ? 'var(--color-positive-bg)' : 'var(--md-sys-color-error-container)';
+      var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
+      return '<tr>'
+        + '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>'
+        + '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span></td>'
+        + '<td>' + f.concepto + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>'
+        + '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>'
+        + '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>'
+        + '<td>' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>'
+        + '</tr>';
+    }).join('') + '</tbody>';
+  }
+
+  list.innerHTML = '<table style="min-width:640px">' + head + body + '</table>';
 }
 ```
 
@@ -210,28 +219,28 @@ function formFlujo(data) {
 ## 8. Render output exacto
 
 ```html
-<div class="flujo-card">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
-    <span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;
-      background:var(--color-positive-bg);color:var(--color-positive-text)">
-      Ingreso
-    </span>
-    <span style="font-size:1.1rem;font-weight:700;color:var(--color-positive)">$2.500.000</span>
-    <span style="font-size:0.8rem;color:var(--text-muted)">01/03/2026</span>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <div style="font-weight:500">Cuotas ordinarias</div>
-    <div style="display:flex;gap:0rem;align-items:center">
-      <!-- comprobante si existe -->
-      <a href="https://..." target="_blank" style="text-decoration:none">
-        <md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button>
-      </a>
-      [edit] [delete]
-    </div>
-  </div>
-  <!-- descripción si existe -->
-  <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.4rem">Pago de gastos comunes marzo 2026</div>
-</div>
+<table style="min-width:640px">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Tipo</th>
+      <th>Concepto</th>
+      <th>Comprobante</th>
+      <th style="text-align:right">Monto</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space:nowrap">01/03/2026</td>
+      <td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--color-positive-bg);color:var(--color-positive-text)">Ingreso</span></td>
+      <td>Cuotas ordinarias<div style="font-size:0.8rem;color:var(--text-muted)">Pago de gastos comunes marzo 2026</div></td>
+      <td><!-- comprobante si existe --><a href="https://..." target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a></td>
+      <td style="text-align:right;font-weight:600;white-space:nowrap;color:var(--color-positive)">$2.500.000</td>
+      <td>[edit] [delete]</td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 ## 9. Colores según tipo
