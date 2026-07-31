@@ -93,6 +93,10 @@ function closeLoginModal() {
 async function handleLogin(e) {
   e.preventDefault();
   var form = e.target;
+  var submitBtn = document.querySelector('#loginDialog [type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+  }
   var email = form.email.value;
   var password = form.password.value;
   var errorEl = document.getElementById('loginError');
@@ -101,6 +105,9 @@ async function handleLogin(e) {
   }
 
   var result = await supabaseClient.auth.signInWithPassword({ email: email, password: password });
+  if (submitBtn) {
+    submitBtn.disabled = false;
+  }
   if (result.error) {
     if (errorEl) {
       if (result.error.message.indexOf('Invalid login credentials') !== -1) {
@@ -122,6 +129,10 @@ async function handleLogout() {
 async function handleSignup(e) {
   e.preventDefault();
   var form = e.target;
+  var submitBtn = document.querySelector('#loginDialog [type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+  }
   var email = form.email.value;
   var password = form.password.value;
   var errorEl = document.getElementById('loginError');
@@ -130,6 +141,9 @@ async function handleSignup(e) {
   }
 
   var result = await supabaseClient.auth.signUp({ email: email, password: password });
+  if (submitBtn) {
+    submitBtn.disabled = false;
+  }
   if (result.error) {
     if (errorEl) {
       errorEl.textContent = result.error.message;
