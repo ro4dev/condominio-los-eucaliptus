@@ -154,17 +154,14 @@ function showPropietarios(parcelaId) {
   var parcela = PARCELAS.find(function(p) { return p.id === parcelaId; });
   if (!parcela) return;
   var props = PROPIETARIOS.filter(function(pr) { return pr.parcela_id === parcelaId; });
-  var colorClasses = ['green', 'purple', 'orange', 'pink'];
 
   var body;
   if (!props.length) {
     body = '<div style="text-align:center;color:var(--text-muted);padding:2rem">No hay propietarios registrados para esta parcela.</div>';
   } else {
     body = props.map(function(prop, j) {
-      var propColor = colorClasses[j % 4];
       var nombre = prop.nombre_completo || '';
       return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--divider)' : '') + '">' +
-        '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>' +
         '<div style="flex:1;min-width:0">' +
           '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + nombre + '</div>' +
           '<div style="font-size:0.75rem;color:var(--text-2)">' + (prop.tipo || '') + '</div>' +
