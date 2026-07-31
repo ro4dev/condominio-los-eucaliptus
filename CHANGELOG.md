@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 30/07/2026 - Theme toggle: fondo circular y color on-primary
+- **Style**: `#themeToggle` ahora resalta sobre el header con fondo circular translúcido blanco, ícono en `--md-sys-color-on-primary` y state layers blancos (css/base.css)
+- **Style**: En dark mode el ícono mantiene color blanco (specificity `header md-icon-button#themeToggle md-icon`)
+
 ### 21/07/2026 - Propietarios: editar/eliminar desde card; demo mode fixes
 - **Feat**: Íconos ✏️ y 🗑️ en cada propietario dentro del card de parcela
 - **Feat**: `formPropietarios` soporta edición (recibe objeto data)

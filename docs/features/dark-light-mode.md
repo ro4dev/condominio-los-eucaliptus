@@ -35,6 +35,20 @@ function toggleTheme() {
 ```
 - Icono: `dark_mode` en modo light (para cambiar a dark)
 - Icono: `light_mode` en modo dark (para cambiar a light)
+- Para que resalte sobre el header de color `--md-sys-color-primary`, tiene fondo circular translúcido blanco y el ícono en `--md-sys-color-on-primary` (blanco), con state layers de hover/pressed en blanco (css/base.css):
+
+```css
+header md-icon-button#themeToggle {
+  --md-icon-button-icon-color: var(--md-sys-color-on-primary);
+  --md-icon-button-hover-state-layer-color: var(--md-sys-color-on-primary);
+  --md-icon-button-pressed-state-layer-color: var(--md-sys-color-on-primary);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+header md-icon-button#themeToggle:hover { background: rgba(255, 255, 255, 0.25); }
+header md-icon-button#themeToggle md-icon { color: var(--md-sys-color-on-primary); }
+```
+- La regla `header md-icon-button#themeToggle md-icon` (specificity mayor) garantiza que el ícono quede blanco también en dark mode, donde el default sería `on-surface`.
 
 ## Variables CSS
 
