@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 31/07/2026 - Ingresos/Egresos como tabla
+- **Changed**: El listado de movimientos pasa de cards (`flujo-card`) a tabla con columnas Fecha, Tipo, Concepto, Comprobante, Monto y Acciones
+- **Changed**: `#flujoList` ahora es `.table-wrap` (scroll horizontal en mobile, min-width 640px); skeletons de fila en vez de cards
+- **Docs**: Spec `ingresos-egresos.md` actualizada con el nuevo render
+
 ### 30/07/2026 - Theme toggle: fondo circular y color on-primary
 - **Style**: `#themeToggle` ahora resalta sobre el header con fondo circular translúcido blanco, ícono en `--md-sys-color-on-primary` y state layers blancos (css/base.css)
 - **Style**: En dark mode el ícono mantiene color blanco (specificity `header md-icon-button#themeToggle md-icon`)
