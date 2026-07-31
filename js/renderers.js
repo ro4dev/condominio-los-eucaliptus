@@ -142,7 +142,7 @@ function renderParcelas() {
         '</span>' +
         (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') +
       '</div>' +
-      '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + (p.rol || 'XXXX-XXXX') + '</span></div>' +
+      '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + (p.rol || '—') + '</span></div>' +
       '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
       '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
       '</div>';
