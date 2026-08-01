@@ -2,6 +2,15 @@
 
 ## Registro de cambios
 
+### 31/07/2026 - Tabla de gastos sin título; loader y doble submit
+- **Style**: Quitado el título "Registros" de la tabla de gastos comunes; gráfico "Por parcela" renombrado a "Monto por parcela"
+- **Fixed**: El loader `#modalLoading` ahora se muestra (estaba fuera de un slot de `md-dialog`) y el botón submit de los modales se deshabilita durante el guardado (el lookup lo buscaba dentro del form cuando estaba en `#modalFooter`); aplica también a login/signup y modales de config
+- **Style**: Divider del listado de propietarios con nueva variable `--divider` (oscuro en light, blanco en dark); tipo de propietario pasa de `--text-muted` a `--text-2` (visible en dark)
+- **Style**: Parcelas sin rol muestran "—" en vez de "XXXX-XXXX"; quitado el avatar circular del listado de propietarios
+- **Fixed**: Correo del usuario logueado usa `--md-sys-color-on-primary` (adaptable a dark/light)
+- **Fixed**: RUT y Email obligatorios en form de propietarios (requeridos por edge function `create-user`)
+- **Docs**: Specs `gastos-comunes.md`, `ingresos-egresos.md` y `propietarios.md` actualizadas
+
 ### 31/07/2026 - Ingresos/Egresos como tabla
 - **Changed**: El listado de movimientos pasa de cards (`flujo-card`) a tabla con columnas Fecha, Tipo, Concepto, Comprobante, Monto y Acciones
 - **Changed**: `#flujoList` ahora es `.table-wrap` (scroll horizontal en mobile, min-width 640px); skeletons de fila en vez de cards
