@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 31/07/2026 - Header como app bar
+- **Style**: El header sale del `.container` y pasa a ser una app bar full-width con `position: sticky` (fondo `--md-sys-color-surface-container`, borde inferior)
+- **Style**: `#themeToggle` y `#userInfo` adaptados al nuevo fondo de surface (ícono `--md-sys-color-on-surface-variant`, círculo `surface-container-high`)
+- **Docs**: Specs `auth.md` y `dark-light-mode.md` actualizadas
+
 ### 31/07/2026 - Tabla de gastos sin título; loader y doble submit
 - **Style**: Quitado el título "Registros" de la tabla de gastos comunes; gráfico "Por parcela" renombrado a "Monto por parcela"
 - **Fixed**: El loader `#modalLoading` ahora se muestra (estaba fuera de un slot de `md-dialog`) y el botón submit de los modales se deshabilita durante el guardado (el lookup lo buscaba dentro del form cuando estaba en `#modalFooter`); aplica también a login/signup y modales de config

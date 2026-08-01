@@ -185,21 +185,30 @@ body.dark md-icon-button md-icon {
 }
 /* Filter chips: M3 checkmark visible for selected state */
 .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
-header { background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); padding: 1.5rem; text-align: center; border-radius: var(--md-sys-shape-corner-large); margin-bottom: 1.5rem; }
-header h1 { font: var(--md-sys-typescale-title-large); letter-spacing: 1px; }
-header p { color: var(--md-sys-color-on-primary); opacity: 0.75; margin-top: 0.3rem; font: var(--md-sys-typescale-body-medium); }
+/* App bar (top bar full-width) */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--md-sys-color-surface-container);
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+}
+header h1 { font: var(--md-sys-typescale-title-large); letter-spacing: 1px; margin: 0; }
+header p { color: var(--text-2); opacity: 1; margin-top: 0.1rem; font: var(--md-sys-typescale-body-medium); }
 header md-icon-button#themeToggle {
-  --md-icon-button-icon-color: var(--md-sys-color-on-primary);
-  --md-icon-button-hover-state-layer-color: var(--md-sys-color-on-primary);
-  --md-icon-button-pressed-state-layer-color: var(--md-sys-color-on-primary);
-  background: rgba(255, 255, 255, 0.15);
+  --md-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
+  --md-icon-button-hover-state-layer-color: var(--md-sys-color-on-surface);
+  --md-icon-button-pressed-state-layer-color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container-high);
   border-radius: 50%;
 }
 header md-icon-button#themeToggle:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--md-sys-color-surface-container-highest);
 }
 header md-icon-button#themeToggle md-icon {
-  color: var(--md-sys-color-on-primary);
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Snackbar */
