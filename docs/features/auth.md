@@ -13,12 +13,12 @@ var currentUser = null;
 var IS_ADMIN = false;
 ```
 
-## 3. HTML structure (index.html lines 34-47, 291-305)
+## 3. HTML structure (index.html lines 33-47, 291-305)
 
-### Header auth section
+### Header auth section (app bar full-width)
 ```html
 <header>
-  <div style="display:flex;justify-content:space-between;align-items:center">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem">
     <div>
       <h1>CONDOMINIO EUCALIPTUS</h1>
       <p>Control de gastos comunes</p>
@@ -35,6 +35,7 @@ var IS_ADMIN = false;
   </div>
 </header>
 ```
+- El `<header>` vive **fuera** de `.container`: es una app bar full-width con `position: sticky` (queda fija arriba al scrollear). Estilos en `css/base.css` (fondo `--md-sys-color-surface-container`, borde inferior).
 
 ### Login dialog
 ```html

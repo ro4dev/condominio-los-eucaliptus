@@ -30,23 +30,23 @@
   <link rel="stylesheet" href="css/sections.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div>
-          <h1>CONDOMINIO EUCALIPTUS</h1>
-          <p>Control de gastos comunes</p>
-        </div>
-        <div style="display:flex;gap:0.5rem;align-items:center">
-          <span id="userInfo" style="font-size:0.85rem;color:var(--md-sys-color-on-primary);font-weight:500"></span>
-          <md-filled-tonal-button id="loginBtn" onclick="showLoginModal()">Iniciar sesión</md-filled-tonal-button>
-          <md-filled-tonal-button id="logoutBtn" onclick="handleLogout()" style="display:none">Cerrar sesión</md-filled-tonal-button>
-          <md-filled-tonal-button id="demoToggle" onclick="toggleDemoMode()">Salir de modo demo</md-filled-tonal-button>
-          <md-icon-button id="themeToggle" onclick="toggleTheme()" title="Cambiar tema"><md-icon>light_mode</md-icon></md-icon-button>
-        </div>
+  <header>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem">
+      <div>
+        <h1>CONDOMINIO EUCALIPTUS</h1>
+        <p>Control de gastos comunes</p>
       </div>
-    </header>
+      <div style="display:flex;gap:0.5rem;align-items:center">
+        <span id="userInfo" style="font-size:0.85rem;color:var(--text-2);font-weight:500"></span>
+        <md-filled-tonal-button id="loginBtn" onclick="showLoginModal()">Iniciar sesión</md-filled-tonal-button>
+        <md-filled-tonal-button id="logoutBtn" onclick="handleLogout()" style="display:none">Cerrar sesión</md-filled-tonal-button>
+        <md-filled-tonal-button id="demoToggle" onclick="toggleDemoMode()">Salir de modo demo</md-filled-tonal-button>
+        <md-icon-button id="themeToggle" onclick="toggleTheme()" title="Cambiar tema"><md-icon>light_mode</md-icon></md-icon-button>
+      </div>
+    </div>
+  </header>
 
+  <div class="container">
     <md-tabs id="mainTabs" class="tabs">
       <md-primary-tab class="tab-btn" data-tab="cuenta" onclick="switchTab('cuenta')" active>Gastos Comunes</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="parcelas" onclick="switchTab('parcelas')">Parcelas</md-primary-tab>
