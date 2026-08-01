@@ -47,31 +47,26 @@ async function checkAdmin() {
 }
 
 function updateAuthUI() {
-  var loginBtn = document.getElementById('loginBtn');
-  var logoutBtn = document.getElementById('logoutBtn');
-  var userInfo = document.getElementById('userInfo');
+  var menuLogin = document.getElementById('menuLogin');
+  var menuLogout = document.getElementById('menuLogout');
   var adminBtns = document.querySelectorAll('.admin-only');
   if (currentUser) {
-    if (loginBtn) {
-      loginBtn.style.display = 'none';
+    if (menuLogin) {
+      menuLogin.style.display = 'none';
     }
-    if (logoutBtn) {
-      logoutBtn.style.display = '';
+    if (menuLogout) {
+      menuLogout.style.display = '';
     }
-    if (userInfo) {
-      userInfo.textContent = currentUser.email;
-    }
+    setMenuHeadline('menuUserInfo', currentUser.email);
     adminBtns.forEach(function(btn) { btn.style.display = IS_ADMIN ? '' : 'none'; });
   } else {
-    if (loginBtn) {
-      loginBtn.style.display = '';
+    if (menuLogin) {
+      menuLogin.style.display = '';
     }
-    if (logoutBtn) {
-      logoutBtn.style.display = 'none';
+    if (menuLogout) {
+      menuLogout.style.display = 'none';
     }
-    if (userInfo) {
-      userInfo.textContent = '';
-    }
+    setMenuHeadline('menuUserInfo', 'Invitado');
     adminBtns.forEach(function(btn) { btn.style.display = 'none'; });
   }
 }

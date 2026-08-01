@@ -1,5 +1,17 @@
 var DEMO_MODE = localStorage.getItem('demoMode') !== 'false';
-document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Salir de modo demo' : 'Ir a modo demo';
+
+function setMenuHeadline(id, text) {
+  var el = document.getElementById(id);
+  var headline = el && el.querySelector('[slot="headline"]');
+  if (headline) {
+    headline.textContent = text;
+  }
+}
+
+function updateDemoMenu() {
+  setMenuHeadline('menuDemo', DEMO_MODE ? 'Salir de modo demo' : 'Ir a modo demo');
+}
+updateDemoMenu();
 
 var GASTOS = [];
 var PARCELAS = [];
@@ -35,7 +47,7 @@ var DEMO_FILES = {
 function toggleDemoMode() {
   DEMO_MODE = !DEMO_MODE;
   localStorage.setItem('demoMode', DEMO_MODE);
-  document.getElementById('demoToggle').textContent = DEMO_MODE ? 'Salir de modo demo' : 'Ir a modo demo';
+  updateDemoMenu();
   location.reload();
 }
 
@@ -56,14 +68,27 @@ function parcelName(parcelaId) {
 
 var isDark = localStorage.getItem('theme') === 'dark';
 if (isDark) document.body.classList.add('dark');
-document.getElementById('themeToggle').querySelector('md-icon').textContent = isDark ? 'light_mode' : 'dark_mode';
+
+function updateThemeMenu() {
+  var icon = document.getElementById('menuTheme').querySelector('md-icon');
+  icon.textContent = isDark ? 'light_mode' : 'dark_mode';
+  setMenuHeadline('menuTheme', isDark ? 'Modo claro' : 'Modo oscuro');
+}
+updateThemeMenu();
 
 function toggleTheme() {
   isDark = !isDark;
   document.body.classList.toggle('dark', isDark);
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  document.getElementById('themeToggle').querySelector('md-icon').textContent = isDark ? 'light_mode' : 'dark_mode';
+  updateThemeMenu();
   if (typeof updateChartTheme === 'function') updateChartTheme();
+}
+
+function toggleUserMenu() {
+  var menu = document.getElementById('userMenu');
+  if (menu) {
+    menu.open = !menu.open;
+  }
 }
 
 initSupabase();
