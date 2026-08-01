@@ -13,9 +13,9 @@ var currentUser = null;
 var IS_ADMIN = false;
 ```
 
-## 3. HTML structure (index.html lines 33-47, 291-305)
+## 3. HTML structure (index.html lines 33-88, 313-327)
 
-### Header auth section (app bar full-width)
+### Header auth section (app bar full-width + menú de usuario)
 ```html
 <header>
   <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem">
@@ -23,19 +23,41 @@ var IS_ADMIN = false;
       <h1>CONDOMINIO EUCALIPTUS</h1>
       <p>Control de gastos comunes</p>
     </div>
-    <div style="display:flex;gap:0.5rem;align-items:center">
-      <span id="userInfo" style="font-size:0.85rem;color:var(--text-2);font-weight:500"></span>
-      <md-filled-tonal-button id="loginBtn" onclick="showLoginModal()">Iniciar sesión</md-filled-tonal-button>
-      <md-filled-tonal-button id="logoutBtn" onclick="handleLogout()" style="display:none">Cerrar sesión</md-filled-tonal-button>
-      <md-filled-tonal-button id="demoToggle" onclick="toggleDemoMode()">Salir de modo demo</md-filled-tonal-button>
-      <md-icon-button id="themeToggle" onclick="toggleTheme()" title="Cambiar tema">
-        <md-icon>dark_mode</md-icon>
+    <div style="display:flex;align-items:center">
+      <md-icon-button id="userMenuButton" onclick="toggleUserMenu()" title="Menú de usuario">
+        <md-icon>account_circle</md-icon>
       </md-icon-button>
     </div>
   </div>
+  <md-menu id="userMenu" anchor="userMenuButton" anchor-corner="end-end" menu-corner="start-end" positioning="fixed">
+    <md-menu-item id="menuUserInfo" disabled>
+      <div slot="headline" style="font-weight:500">Invitado</div>
+    </md-menu-item>
+    <md-divider></md-divider>
+    <md-menu-item id="menuLogin" onclick="showLoginModal()">
+      <md-icon slot="start">login</md-icon>
+      <div slot="headline">Iniciar sesión</div>
+    </md-menu-item>
+    <md-menu-item id="menuLogout" onclick="handleLogout()" style="display:none">
+      <md-icon slot="start">logout</md-icon>
+      <div slot="headline">Cerrar sesión</div>
+    </md-menu-item>
+    <md-divider></md-divider>
+    <md-menu-item id="menuDemo" onclick="toggleDemoMode()">
+      <md-icon slot="start">science</md-icon>
+      <div slot="headline">Salir de modo demo</div>
+    </md-menu-item>
+    <md-menu-item id="menuTheme" onclick="toggleTheme()">
+      <md-icon slot="start">dark_mode</md-icon>
+      <div slot="headline">Modo oscuro</div>
+    </md-menu-item>
+  </md-menu>
 </header>
 ```
 - El `<header>` vive **fuera** de `.container`: es una app bar full-width con `position: sticky` (queda fija arriba al scrollear). Estilos en `css/base.css` (fondo `--md-sys-color-surface-container`, borde inferior).
+- Login, logout, modo demo y theme se centralizan en un único menú de usuario (`md-menu`). `positioning="fixed"` + `anchor-corner="end-end"`/`menu-corner="start-end"` para que el menú abra exactamente bajo el avatar, alineado a la derecha (no se sale de pantalla en mobile).
+- `updateAuthUI()` (supabase-config.js) muestra/oculta `#menuLogin`/`#menuLogout` y setea el email en `#menuUserInfo` según `currentUser`.
+- Labels dinámicos: `updateDemoMenu()` y `updateThemeMenu()` (config.js) setean headline/ícono de `#menuDemo` y `#menuTheme`; helper global `setMenuHeadline(id, text)`.
 
 ### Login dialog
 ```html

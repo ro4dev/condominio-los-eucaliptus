@@ -2,6 +2,13 @@
 
 ## Registro de cambios
 
+### 31/07/2026 - Menú de usuario centralizado en el header
+- **Changed**: Login, logout, modo demo y dark/light mode se centralizan en un único menú de usuario (`md-menu`) abierto desde el avatar (`#userMenuButton`) en la app bar
+- **Changed**: `#userInfo`, `#loginBtn`, `#logoutBtn`, `#demoToggle` y `#themeToggle` eliminados del header; ahora son `#menuUserInfo` (email/Invitado), `#menuLogin`, `#menuLogout`, `#menuDemo` y `#menuTheme` (`md-menu-item`)
+- **Style**: `positioning="fixed"` + `anchor-corner="end-end"`/`menu-corner="start-end"` para que el menú abra bajo el avatar alineado a la derecha (sin overflow en mobile)
+- **Changed**: Labels dinámicos con `updateDemoMenu()` y `updateThemeMenu()`; helper global `setMenuHeadline(id, text)` en config.js
+- **Docs**: Specs `auth.md` y `dark-light-mode.md` actualizadas
+
 ### 31/07/2026 - Header como app bar
 - **Style**: El header sale del `.container` y pasa a ser una app bar full-width con `position: sticky` (fondo `--md-sys-color-surface-container`, borde inferior)
 - **Style**: `#themeToggle` y `#userInfo` adaptados al nuevo fondo de surface (ícono `--md-sys-color-on-surface-variant`, círculo `surface-container-high`)

@@ -27,28 +27,26 @@ function toggleTheme() {
 - Si es `'dark'`: agrega clase `.dark` al body
 - Si no existe o es `'light'`: tema claro (default)
 
-### Botón en header
+### Toggle en menú de usuario
+El toggle de tema ya no es un botón en el header: vive dentro del menú de usuario (`#userMenu`), como un `md-menu-item` (`#menuTheme`):
 ```html
-<md-icon-button id="themeToggle" onclick="toggleTheme()" title="Cambiar tema">
-  <md-icon>dark_mode / light_mode</md-icon>
-</md-icon-button>
+<md-menu-item id="menuTheme" onclick="toggleTheme()">
+  <md-icon slot="start">dark_mode</md-icon>
+  <div slot="headline">Modo oscuro</div>
+</md-menu-item>
 ```
-- Icono: `dark_mode` en modo light (para cambiar a dark)
-- Icono: `light_mode` en modo dark (para cambiar a light)
-- El header ahora es una app bar con fondo `--md-sys-color-surface-container` (ya no primary). El toggle usa colores de surface: ícono `--md-sys-color-on-surface-variant`, círculo de fondo `--md-sys-color-surface-container-high` (css/base.css):
+- Ícono: `dark_mode` en modo light (para cambiar a dark)
+- Ícono: `light_mode` en modo dark (para cambiar a light)
+- Los labels/íconos se actualizan con `updateThemeMenu()` (js/config.js), que setea el headline y el ícono de `#menuTheme` según `isDark`.
+- El ícono del botón del menú (`#userMenuButton`) usa `--md-sys-color-on-surface-variant`, con state layers de hover/pressed en `on-surface` (css/base.css):
 
 ```css
-header md-icon-button#themeToggle {
+header md-icon-button#userMenuButton {
   --md-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
   --md-icon-button-hover-state-layer-color: var(--md-sys-color-on-surface);
   --md-icon-button-pressed-state-layer-color: var(--md-sys-color-on-surface);
-  background: var(--md-sys-color-surface-container-high);
-  border-radius: 50%;
 }
-header md-icon-button#themeToggle:hover { background: var(--md-sys-color-surface-container-highest); }
-header md-icon-button#themeToggle md-icon { color: var(--md-sys-color-on-surface-variant); }
 ```
-- La regla `header md-icon-button#themeToggle md-icon` (specificity mayor) garantiza que el ícono respete el color del app bar en ambos modos.
 
 ## Variables CSS
 
