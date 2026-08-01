@@ -46,7 +46,7 @@ var CONFIG = {};  // en config-page.js
         <div class="form-group"><md-filled-text-field label="Cantidad" id="cfgParcelasCantidad" type="number" min="1" placeholder="Ej: 40" style="width:100%"></md-filled-text-field></div>
         <div class="form-group"><md-filled-text-field label="Prefijo" id="cfgParcelasPrefijo" type="text" placeholder="Ej: Terreno" style="width:100%"></md-filled-text-field></div>
       </div>
-      <md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()" style="margin-top:0.5rem">Aplicar</md-filled-button>
+      <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()">Aplicar</md-filled-button></div>
     </div>
 
     <!-- Montos -->
@@ -57,7 +57,7 @@ var CONFIG = {};  // en config-page.js
         <div class="form-group"><md-filled-text-field label="Gasto común base" id="cfgGastoComunBase" type="number" min="0" placeholder="Ej: 50000" style="width:100%"></md-filled-text-field></div>
         <div class="form-group"><md-filled-text-field label="Fondo reserva" id="cfgFondoReserva" type="number" min="0" placeholder="Ej: 15000" style="width:100%"></md-filled-text-field></div>
       </div>
-      <md-filled-button id="btnGuardarMontos" onclick="saveMontos()" style="margin-top:0.5rem">Guardar</md-filled-button>
+      <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
     </div>
   </div>
 
@@ -65,21 +65,21 @@ var CONFIG = {};  // en config-page.js
   <div class="card" style="margin-bottom:1rem">
     <h4>Categorías de Documentos</h4>
     <div id="cfgCategoriasDocs"></div>
-    <md-filled-button onclick="openModalCategoriaDoc()" style="margin-top:0.8rem"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button>
+    <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalCategoriaDoc()"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button></div>
   </div>
 
   <!-- Rubros proveedores -->
   <div class="card" style="margin-bottom:1rem">
     <h4>Rubros de Proveedores</h4>
     <div id="cfgRubrosProveedores"></div>
-    <md-filled-button onclick="openModalRubroProveedor()" style="margin-top:0.8rem"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button>
+    <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalRubroProveedor()"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button></div>
   </div>
 
   <!-- Conceptos flujo -->
   <div class="card" style="margin-bottom:1rem">
     <h4>Conceptos de Ingresos/Egresos</h4>
     <div id="cfgConceptosFlujo"></div>
-    <md-filled-button onclick="openModalConceptoFlujo()" style="margin-top:0.8rem"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button>
+    <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalConceptoFlujo()"><md-icon slot="icon">add</md-icon>Agregar</md-filled-button></div>
   </div>
 </div>
 ```
