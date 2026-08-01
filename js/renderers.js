@@ -548,7 +548,9 @@ function renderEncuestas() {
       quorumHtml = '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
-    var opcionesHtml = d.opciones.map(function(op, i) {
+    var opcionesHtml = '<div style="position:relative">' +
+      (d.cerrada ? '<div class="watermark">TERMINADA</div>' : '') +
+      d.opciones.map(function(op, i) {
       var count = d.conteo[op];
       var pct = d.total > 0 ? Math.round((count / d.total) * 100) : 0;
       var color = colores[i % colores.length];
@@ -570,7 +572,8 @@ function renderEncuestas() {
         '</div>' +
         barra +
       '</div>';
-    }).join('');
+    }).join('') +
+    '</div>';
 
     var accion = '';
     if (!d.cerrada && currentUser && !d.miVoto) {
@@ -580,7 +583,6 @@ function renderEncuestas() {
     }
 
     return '<div class="flujo-card' + (d.cerrada ? ' cerrada' : '') + '">' +
-      (d.cerrada ? '<div class="watermark">TERMINADA</div>' : '') +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
