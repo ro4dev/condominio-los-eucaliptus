@@ -83,14 +83,13 @@ CREATE TABLE gastos (
       <canvas id="chartPeriodos"></canvas>
     </div>
     <div class="chart-box">
-      <h3>Por parcela</h3>
+      <h3>Monto por parcela</h3>
       <canvas id="chartParcelas"></canvas>
     </div>
   </section>
 
   <!-- Tabla -->
   <div class="table-wrap">
-    <h3>Registros</h3>
     <div id="tableLoading">
       <div class="skeleton skeleton-row"></div>
       <div class="skeleton skeleton-row"></div>
