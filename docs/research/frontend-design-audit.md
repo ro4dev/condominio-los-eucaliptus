@@ -578,15 +578,15 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 
 | Fase | Estado |
 |------|--------|
-| F1 — Seguridad | ✅ Código listo, checklist marcado, CHANGELOG actualizado (commit pendiente del usuario) |
-| F2 — test.html | ✅ Código listo, checklist marcado, CHANGELOG actualizado (commit pendiente del usuario) |
-| F3 — Contraste | ⬜ Pendiente |
-| F4 — Deuda técnica | ⬜ Pendiente |
-| F5 — Empty states | ⬜ Pendiente |
-| F6 — Copy | ⬜ Pendiente |
-| F7 — Motion/foco | ⬜ Pendiente |
-| F8 — Iconos | ⬜ Pendiente |
-| F9 — Identidad | ⬜ Pendiente (decisión) |
+| F1 — Seguridad | ✅ Completa (commit `d90c991` + `f1903b2`) |
+| F2 — test.html | ✅ Completa (commit `f1903b2`) |
+| F3 — Contraste | ✅ Completa (commits `cd543b3`, `a4a092c`, `fa5d754`; verificación axe en browser pendiente) |
+| F4 — Deuda técnica | ✅ Completa (commits `8c67e2f`→`35964ad`; favicon es placeholder, definitivo en F9) |
+| F5 — Empty states | ✅ Completa (commit `c198515`) |
+| F6 — Copy | ✅ Completa (commit `7611867`) |
+| F7 — Motion/foco | ✅ Completa (commit `a881cf0`) |
+| F8 — Iconos | ✅ Completa (commit `8eaa783`) |
+| F9 — Identidad | ⬜ Pendiente (decisión A / B) |
 
 ---
 
