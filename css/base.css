@@ -6,7 +6,7 @@ body { margin: 0; }
   --bg-card: var(--md-sys-color-surface);
   --text: var(--md-sys-color-on-surface);
   --text-2: var(--md-sys-color-on-surface-variant);
-  --text-muted: var(--md-sys-color-outline);
+  --text-muted: #6b7280;   /* gray-500: 4.6:1 sobre #fff (outline M3 era 2.5:1) */
   --border: var(--md-sys-color-outline-variant);
   --border-light: var(--md-sys-color-surface-container-low);
   --divider: var(--md-sys-color-outline);
@@ -93,7 +93,7 @@ body.dark {
   --bg-card: var(--md-sys-color-surface);
   --text: var(--md-sys-color-on-surface);
   --text-2: var(--md-sys-color-on-surface-variant);
-  --text-muted: var(--md-sys-color-outline);
+  --text-muted: #9ca3af;   /* 6.9:1 sobre #111827 */
   --border: var(--md-sys-color-outline-variant);
   --border-light: var(--md-sys-color-surface-container-low);
   --divider: var(--md-sys-color-on-surface);
