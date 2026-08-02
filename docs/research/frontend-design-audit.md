@@ -527,11 +527,11 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] Summary verde al abrir — 35/35 asserts de funciones puras verificados en node; confirmación visual en browser pendiente del usuario
 
 ### FASE 3 — Contraste
-- [ ] `--text-muted` light = `#6b7280` (o on-surface-variant)
-- [ ] `--text-muted` dark = `#9ca3af`
-- [ ] `#loginError` → `var(--md-sys-color-error)` (`index.html:318`)
-- [ ] Watermark TERMINADA → `color-mix` con `--md-sys-color-error` (`sections.css:7`)
-- [ ] axe DevTools sin violaciones de color (light + dark)
+- [x] `--text-muted` light = `#6b7280` (4.6:1) — commiteado
+- [x] `--text-muted` dark = `#9ca3af` (6.9:1) — commiteado
+- [x] `#loginError` → `var(--md-sys-color-error)` (`index.html:318`) — commiteado
+- [x] Watermark TERMINADA → `var(--md-sys-color-error)` + `opacity: 0.7` (versión intermedia elegida; no `color-mix`) (`sections.css:7`) — pendiente commit
+- [ ] axe DevTools sin violaciones de color (light + dark) — verificación del usuario
 
 ### FASE 4 — Deuda técnica
 - [ ] Selectores duplicados en `handleForm` unificados (`modals.js:62-63`)
