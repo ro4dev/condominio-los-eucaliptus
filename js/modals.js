@@ -59,8 +59,8 @@ function handleForm(e) {
   var data = {};
   form.querySelectorAll('input[type="hidden"]').forEach(function(inp) { if (inp.name) data[inp.name] = inp.value; });
   form.querySelectorAll('input:not([type="file"]):not([type="hidden"]), textarea, select').forEach(function(el) { if (el.name) data[el.name] = el.value; });
-  form.querySelectorAll('md-filled-text-field, md-filled-text-field').forEach(function(el) { if (el.name) data[el.name] = el.value; });
-  form.querySelectorAll('md-filled-select, md-filled-select').forEach(function(el) { if (el.name) data[el.name] = el.value; });
+  form.querySelectorAll('md-filled-text-field').forEach(function(el) { if (el.name) data[el.name] = el.value; });
+  form.querySelectorAll('md-filled-select').forEach(function(el) { if (el.name) data[el.name] = el.value; });
   form.querySelectorAll('input[type="file"]').forEach(function(inp) {
     if (inp.files.length === 0) delete data[inp.name];
   });
