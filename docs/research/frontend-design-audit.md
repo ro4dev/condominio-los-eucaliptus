@@ -560,10 +560,10 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] `:focus-visible` global con `--md-sys-color-primary` (`base.css`)
 
 ### FASE 8 — Iconos
-- [ ] Documentos sin emoji → Material Symbols
-- [ ] Proveedores sin emoji → Material Symbols
-- [ ] Propietarios sin emoji → Material Symbols
-- [ ] `aria-label`/`title` en cada icono
+- [x] Documentos sin emoji → Material Symbols (`book`/`description`/`contract`/`shield`/`map` en `renderers.js`)
+- [x] Proveedores sin emoji → Material Symbols (`person`/`phone`/`mail`/`language`)
+- [x] Propietarios sin emoji → Material Symbols (`phone`/`mail`/`badge`)
+- [x] `aria-label`/`title` en cada ícono
 
 ### FASE 9 — Identidad (pendiente decisión)
 - [ ] Dirección elegida (A verde eucalipto / B neutral / otra)

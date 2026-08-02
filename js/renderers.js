@@ -178,9 +178,9 @@ function showPropietarios(parcelaId) {
           '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + escHtml(nombre) + '</div>' +
           '<div style="font-size:0.75rem;color:var(--text-2)">' + escHtml(prop.tipo) + '</div>' +
           '<div style="margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
-            (prop.telefono ? '<div>📱 <a href="tel:' + escHtml(prop.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.telefono) + '</a></div>' : '') +
-            (prop.email ? '<div>✉️ <a href="mailto:' + escHtml(prop.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.email) + '</a></div>' : '') +
-            (prop.rut ? '<div>📄 RUT: ' + escHtml(prop.rut) + '</div>' : '') +
+            (prop.telefono ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="Teléfono" title="Teléfono">phone</md-icon> <a href="tel:' + escHtml(prop.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.telefono) + '</a></div>' : '') +
+            (prop.email ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="Correo" title="Correo">mail</md-icon> <a href="mailto:' + escHtml(prop.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.email) + '</a></div>' : '') +
+            (prop.rut ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="RUT" title="RUT">badge</md-icon> RUT: ' + escHtml(prop.rut) + '</div>' : '') +
           '</div>' +
         '</div>' +
         (IS_ADMIN ? '<div style="display:flex;flex-shrink:0;align-items:center">' +
@@ -337,13 +337,13 @@ function filterDocumentos(cat) {
 
 function renderDocumentos() {
   var list = document.getElementById('documentosList');
-  var icons = { 'Estatuto': '&#128220;', 'Actas': '&#128196;', 'Contratos': '&#128221;', 'Seguros': '&#128737;', 'Planos': '&#128208;' };
+  var icons = { 'Estatuto': 'book', 'Actas': 'description', 'Contratos': 'contract', 'Seguros': 'shield', 'Planos': 'map' };
   var filtered = DOCUMENTOS.filter(function(d) {
     return documentosFilter === 'Todos' || d.categoria === documentosFilter;
   });
 
   list.innerHTML = filtered.map(function(d) {
-    var icon = icons[d.categoria] || '&#128196;';
+    var icon = icons[d.categoria] || 'description';
     var fecha = formatDate(d.fecha || d.created_at);
     var btns = '<div style="display:flex;gap:0rem;flex-shrink:0;align-items:center">';
     btns += adminActions("editDocumento('" + d.id + "')", "deleteDocumento('" + d.id + "')");
@@ -355,7 +355,7 @@ function renderDocumentos() {
     }
     btns += '</div>';
     return '<div class="doc-item">' +
-      '<div class="doc-icon">' + icon + '</div>' +
+      '<div class="doc-icon"><md-icon aria-label="' + (d.categoria || 'Documento') + '" title="' + (d.categoria || 'Documento') + '">' + icon + '</md-icon></div>' +
       '<div class="doc-info" style="flex:1">' +
         '<div class="doc-name">' + escHtml(d.nombre) + '</div>' +
         '<div class="doc-meta">' + d.categoria + ' · ' + fecha + '</div>' +
@@ -416,10 +416,10 @@ function renderProveedores() {
       '</div>' +
       '<div class="proveedor-nombre">' + escHtml(p.nombre) + '</div>' +
       '<div class="proveedor-contacto">' +
-        '<div>&#128205; ' + escHtml(p.contacto) + '</div>' +
-        (p.telefono ? '<div>&#128222; <a href="tel:' + escHtml(p.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.telefono) + '</a></div>' : '') +
-        (p.email ? '<div>&#9993; <a href="mailto:' + escHtml(p.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.email) + '</a></div>' : '') +
-        (p.web_instagram ? '<div>&#127760; <a href="' + escHtml(p.web_instagram) + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.web_instagram) + '</a></div>' : '') +
+        '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Contacto" title="Contacto">person</md-icon> ' + escHtml(p.contacto) + '</div>' +
+        (p.telefono ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Teléfono" title="Teléfono">phone</md-icon> <a href="tel:' + escHtml(p.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.telefono) + '</a></div>' : '') +
+        (p.email ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Correo" title="Correo">mail</md-icon> <a href="mailto:' + escHtml(p.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.email) + '</a></div>' : '') +
+        (p.web_instagram ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Sitio web" title="Sitio web">language</md-icon> <a href="' + escHtml(p.web_instagram) + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.web_instagram) + '</a></div>' : '') +
         '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + escHtml(p.observaciones) + '</div>' +
       '</div>' +
       '</div>';
