@@ -2,6 +2,13 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Iconos Material Symbols (Fase 8 auditoría)
+- **Style**: Documentos: emojis por categoría reemplazados por Material Symbols (`book`, `description`, `contract`, `shield`, `map`)
+- **Style**: Proveedores: emojis de contacto reemplazados por Material Symbols (`person`, `phone`, `mail`, `language`)
+- **Style**: Propietarios: emojis reemplazados por Material Symbols (`phone`, `mail`, `badge`)
+- **A11y**: Cada ícono lleva `aria-label` y `title` descriptivo
+- **Docs**: Checklist de Fase 8 completado en `docs/research/frontend-design-audit.md`
+
 ### 02/08/2026 - Motion y foco accesible (Fase 7 auditoría)
 - **Feat**: Bloque `@media (prefers-reduced-motion: reduce)` global en `base.css` — desactiva skeleton, `tabFadeIn`, snackbar y transiciones de tema para usuarios con "Reducir movimiento" activado
 - **Feat**: Regla global `:focus-visible` con outline `--md-sys-color-primary` — indica el foco en navegación por teclado (antes no había ningún estilo de focus)
