@@ -243,3 +243,19 @@ body.dark #appSnackbar {
   background: var(--md-sys-color-surface-container-high, #283548);
   color: var(--md-sys-color-on-surface, #f9fafb);
 }
+
+/* Accesibilidad: indicador de foco visible (navegación por teclado) */
+:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+  border-radius: var(--md-sys-shape-corner-small);
+}
+
+/* Accesibilidad: reduce movimiento para usuarios que lo requieran */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -556,8 +556,8 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] Botón parcelas "Aplicar" → "Crear parcelas" (`config-page.js`; estado de carga "Creando...")
 
 ### FASE 7 — Motion/foco
-- [ ] `prefers-reduced-motion: reduce` para skeleton, tabFadeIn, transitions
-- [ ] `:focus-visible` global con `--md-sys-color-primary`
+- [x] `prefers-reduced-motion: reduce` para skeleton, tabFadeIn, transitions (bloque global en `base.css`)
+- [x] `:focus-visible` global con `--md-sys-color-primary` (`base.css`)
 
 ### FASE 8 — Iconos
 - [ ] Documentos sin emoji → Material Symbols

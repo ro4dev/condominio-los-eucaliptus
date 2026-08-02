@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Motion y foco accesible (Fase 7 auditoría)
+- **Feat**: Bloque `@media (prefers-reduced-motion: reduce)` global en `base.css` — desactiva skeleton, `tabFadeIn`, snackbar y transiciones de tema para usuarios con "Reducir movimiento" activado
+- **Feat**: Regla global `:focus-visible` con outline `--md-sys-color-primary` — indica el foco en navegación por teclado (antes no había ningún estilo de focus)
+- **Docs**: Checklist de Fase 7 completado en `docs/research/frontend-design-audit.md`
+
 ### 02/08/2026 - Copy de botones (Fase 6 auditoría)
 - **Style**: Botón de login "Entrar" → "Iniciar sesión" (`index.html`)
 - **Style**: Botón de parcelas "Aplicar" → "Crear parcelas" con estado de carga "Creando..." (`config-page.js`)
