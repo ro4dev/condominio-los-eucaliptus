@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Contraste AA (Fase 3 auditoría)
+- **Style**: `--text-muted` pasa de `var(--md-sys-color-outline)` a valor semántico custom: `#6b7280` en light (4.6:1) y `#9ca3af` en dark (6.9:1); el outline M3 no llegaba a AA en light
+- **Style**: `#loginError` usa `var(--md-sys-color-error)` (rojo claro `#fca5a5` en dark, antes ilegible)
+- **Style**: Watermark "TERMINADA" de encuestas cerradas usa `var(--md-sys-color-error)` con `opacity: 0.7` (rojo claro en dark; antes rojo oscuro fijo)
+
 ### 02/08/2026 - test.html arreglado (Fase 2 auditoría)
 - **Fixed**: `test.html` volvió a correr los tests. Ahora incluye solo `js/utils.js` y prueba únicamente funciones puras
 - **Fixed**: Eliminados los asserts de `SHEET_NAMES` (no existía), `toggleDemoMode` (recargaba la página en loop infinito), `DEMO_FILES` y `loaded` (dependían de `config.js`, que no aplica a tests de funciones puras)
