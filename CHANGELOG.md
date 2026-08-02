@@ -5,6 +5,7 @@
 ### 02/08/2026 - Deuda técnica: código muerto eliminado (Fase 4 auditoría)
 - **Refactor**: Selectores duplicados en `handleForm` unificados (`modals.js`)
 - **Refactor**: Eliminado `var style` muerto en `renderNoticiaCard` (`renderers.js`)
+- **Refactor**: Eliminada `getInitials` (`utils.js`) y sus asserts en `test.html`
 - **Style**: Eliminadas reglas muertas `#userInfo` (`layout.css`) y `.avatar*` (`components.css`, sin uso en HTML/JS)
 
 ### 02/08/2026 - Contraste AA (Fase 3 auditoría)

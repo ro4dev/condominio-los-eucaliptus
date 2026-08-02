@@ -46,10 +46,6 @@ function formatDate(d) {
   return s;
 }
 
-function getInitials(name) {
-  return name.split(' ').map(function(w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
-}
-
 function nl2br(text) {
   return escHtml(text || '').replace(/\n/g, '<br>');
 }

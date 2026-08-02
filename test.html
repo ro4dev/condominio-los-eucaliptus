@@ -88,12 +88,6 @@
     assert('nl2br escapa y convierte \\n', nl2br('<b>x</b>\nlinea'), '&lt;b&gt;x&lt;/b&gt;<br>linea');
     assert('nl2br(null)', nl2br(null), '');
 
-    // ── getInitials ──
-    assert('getInitials("Juan Perez")', getInitials('Juan Perez'), 'JP');
-    assert('getInitials("Maria Jose")', getInitials('Maria Jose'), 'MJ');
-    assert('getInitials("Ana")', getInitials('Ana'), 'A');
-    assert('getInitials("Carlos Alberto Lopez")', getInitials('Carlos Alberto Lopez'), 'CA');
-
     // Summary
     var summary = document.getElementById('summary');
     var total = passed + failed;
