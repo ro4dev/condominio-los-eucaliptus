@@ -315,7 +315,7 @@
     <form slot="content" id="loginForm" onsubmit="handleLogin(event)" style="display:flex;flex-direction:column;gap:0.5rem">
       <md-filled-text-field label="Email" type="email" name="email" required style="width:100%"></md-filled-text-field>
       <md-filled-text-field label="Contraseña" type="password" name="password" required style="width:100%"></md-filled-text-field>
-      <div id="loginError" style="color:#b91c1c;font-size:0.85rem;margin-bottom:0.5rem"></div>
+      <div id="loginError" style="color:var(--md-sys-color-error);font-size:0.85rem;margin-bottom:0.5rem"></div>
     </form>
     <div slot="actions">
       <md-text-button onclick="closeLoginModal()">Cancelar</md-text-button>
