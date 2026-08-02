@@ -434,7 +434,7 @@ function renderAsambleas() {
     var asistentes = asistentesIds.length ? asistentesIds.map(function(pid) {
       return '<span style="display:inline-block;background:var(--skeleton-1);color:var(--text-2);padding:0.2rem 0.5rem;border-radius:var(--md-sys-shape-corner-extra-small);font-size:0.8rem;margin:0.1rem">' + parcelName(pid) + '</span>';
     }).join('') : '';
-    return '<div class="flujo-card">' +
+    return '<div class="item-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-bg)' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-text)' : 'var(--md-sys-color-on-primary-container)') + '">' + escHtml(a.tipo) + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
@@ -581,7 +581,7 @@ function renderEncuestas() {
       accion = '<div style="margin-top:0.4rem;font-size:0.8rem;color:var(--text-muted)">Ya votaste</div>';
     }
 
-    return '<div class="flujo-card' + (d.cerrada ? ' cerrada' : '') + '">' +
+    return '<div class="item-card' + (d.cerrada ? ' cerrada' : '') + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
         '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
