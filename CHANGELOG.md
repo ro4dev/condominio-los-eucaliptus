@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Auditoría de seguridad + plan de fixes
+- **Security**: Auditoría completa del sitio (frontend, RLS, Edge Functions, storage, Code.gs) documentada en `docs/research/security-audit.md`
+- **Security**: 2 hallazgos críticos (Edge Functions `create-user`/`delete-user` sin autorización y con password derivada del RUT), 3 altos (votación manipulable, PII expuesta, stored XSS) y 7 medios
+- **Docs**: Plan de fixes priorizado en 7 fases (con SQL y pasos de verificación) integrado en el mismo `docs/research/security-audit.md`
+
 ### 02/08/2026 - Iconos Material Symbols (Fase 8 auditoría)
 - **Style**: Documentos: emojis por categoría reemplazados por Material Symbols (`book`, `description`, `contract`, `shield`, `map`)
 - **Style**: Proveedores: emojis de contacto reemplazados por Material Symbols (`person`, `phone`, `mail`, `language`)
