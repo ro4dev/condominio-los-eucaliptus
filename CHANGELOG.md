@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - test.html arreglado (Fase 2 auditoría)
+- **Fixed**: `test.html` volvió a correr los tests. Ahora incluye solo `js/utils.js` y prueba únicamente funciones puras
+- **Fixed**: Eliminados los asserts de `SHEET_NAMES` (no existía), `toggleDemoMode` (recargaba la página en loop infinito), `DEMO_FILES` y `loaded` (dependían de `config.js`, que no aplica a tests de funciones puras)
+- **Fixed**: Agregados asserts de `escHtml` y `nl2br` (regresión de la Fase 1)
+- **Docs**: Checklist de Fase 2 completado en `docs/research/frontend-design-audit.md`
+
 ### 02/08/2026 - Seguridad: escape de contenido de usuario (XSS)
 - **Fixed**: `nl2br` ahora escapa el texto antes de insertar `<br>` (`js/utils.js`)
 - **Fixed**: Todos los campos de usuario se escapan con `escHtml` antes de inyectarse: noticias (título, descripción), flujo (concepto, descripción, tipo), documentos (nombre, descripción), reclamos (asunto, descripción, tipo), proveedores (rubro, nombre, contacto, teléfono, email, web, observaciones), asambleas (temario, acuerdos, tipo), encuestas (título, descripción, opciones), propietarios (nombre, tipo, teléfono, email, RUT)
