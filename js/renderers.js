@@ -163,12 +163,12 @@ function showPropietarios(parcelaId) {
       var nombre = prop.nombre_completo || '';
       return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--divider)' : '') + '">' +
         '<div style="flex:1;min-width:0">' +
-          '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + nombre + '</div>' +
-          '<div style="font-size:0.75rem;color:var(--text-2)">' + (prop.tipo || '') + '</div>' +
+          '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + escHtml(nombre) + '</div>' +
+          '<div style="font-size:0.75rem;color:var(--text-2)">' + escHtml(prop.tipo) + '</div>' +
           '<div style="margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
-            (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.telefono + '</a></div>' : '') +
-            (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.email + '</a></div>' : '') +
-            (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '') +
+            (prop.telefono ? '<div>📱 <a href="tel:' + escHtml(prop.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.telefono) + '</a></div>' : '') +
+            (prop.email ? '<div>✉️ <a href="mailto:' + escHtml(prop.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.email) + '</a></div>' : '') +
+            (prop.rut ? '<div>📄 RUT: ' + escHtml(prop.rut) + '</div>' : '') +
           '</div>' +
         '</div>' +
         (IS_ADMIN ? '<div style="display:flex;flex-shrink:0;align-items:center">' +
@@ -183,7 +183,7 @@ function showPropietarios(parcelaId) {
   if (IS_ADMIN) {
     footer += '<md-filled-button onclick="formPropietarios(\'' + parcelaId + '\')"><md-icon slot="icon">person_add</md-icon>Agregar</md-filled-button>';
   }
-  openModal('Propietarios de ' + (parcela.numero || parcelaId), body, footer, true);
+  openModal('Propietarios de ' + escHtml(parcela.numero || parcelaId), body, footer, true);
 }
 
 // NOTICIAS
@@ -245,7 +245,7 @@ function renderNoticiaCard(n, old) {
   var style = '';
   return '<div class="news-card" style="margin-bottom:1rem;' + style + '">' +
     '<div style="display:flex;justify-content:space-between;align-items:center">' +
-      '<h4 style="margin:0;flex:1">' + (n.titulo || '') + '</h4>' +
+      '<h4 style="margin:0;flex:1">' + escHtml(n.titulo) + '</h4>' +
       '<span class="dates" style="margin:0">' + fecha + '</span>' +
       adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')") +
     '</div>' +
@@ -302,8 +302,8 @@ function renderFlujo() {
       var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
       return '<tr>' +
         '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>' +
-        '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span></td>' +
-        '<td>' + f.concepto + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
+        '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + escHtml(f.tipo) + '</span></td>' +
+        '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
         '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
         '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
         '<td>' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>' +
@@ -346,7 +346,7 @@ function renderDocumentos() {
     return '<div class="doc-item">' +
       '<div class="doc-icon">' + icon + '</div>' +
       '<div class="doc-info" style="flex:1">' +
-        '<div class="doc-name">' + d.nombre + '</div>' +
+        '<div class="doc-name">' + escHtml(d.nombre) + '</div>' +
         '<div class="doc-meta">' + d.categoria + ' · ' + fecha + '</div>' +
       '</div>' +
       btns +
@@ -357,7 +357,7 @@ function renderDocumentos() {
 function showDescripcion(docId) {
   var doc = DOCUMENTOS.find(function(d) { return d.id === docId; });
   if (!doc) return;
-  openModal('Descripción', '<div style="line-height:1.6;white-space:pre-wrap">' + (doc.descripcion || '') + '</div>');
+  openModal('Descripción', '<div style="line-height:1.6;white-space:pre-wrap">' + escHtml(doc.descripcion) + '</div>');
 }
 
 // RECLAMOS
@@ -374,13 +374,13 @@ function renderReclamos() {
   var list = document.getElementById('reclamosList');
   var filtered = reclamosFilter === 'todos' ? RECLAMOS : RECLAMOS.filter(function(r) { return r.tipo === reclamosFilter; });
   list.innerHTML = filtered.map(function(r) {
-    var tipoClass = r.tipo.toLowerCase();
+    var tipoClass = String(r.tipo || '').toLowerCase().replace(/[^a-z0-9-]/g, '') || 'reclamo';
     return '<div class="reclamo-item ' + tipoClass + '">' +
       '<div class="reclamo-header">' +
-        '<span class="reclamo-tipo ' + tipoClass + '">' + r.tipo + '</span>' +
+        '<span class="reclamo-tipo ' + tipoClass + '">' + escHtml(r.tipo) + '</span>' +
         '<span class="reclamo-fecha">' + formatDate(r.fecha || r.created_at) + '</span>' +
       '</div>' +
-      '<div class="reclamo-title">' + r.asunto + '</div>' +
+      '<div class="reclamo-title">' + escHtml(r.asunto) + '</div>' +
       '<div class="reclamo-desc">' + nl2br(r.descripcion) + '</div>' +
       (r.parcela_id ? '<div class="reclamo-parcela">' + parcelName(r.parcela_id) + '</div>' : '<div class="reclamo-parcela">Anónimo</div>') +
       '</div>';
@@ -396,16 +396,16 @@ function renderProveedores() {
   grid.innerHTML = PROVEEDORES.map(function(p) {
     return '<div class="proveedor-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<div class="proveedor-rubro" style="margin:0">' + p.rubro + '</div>' +
+        '<div class="proveedor-rubro" style="margin:0">' + escHtml(p.rubro) + '</div>' +
         adminActions("editProveedor('" + p.id + "')", "deleteProveedor('" + p.id + "')") +
       '</div>' +
-      '<div class="proveedor-nombre">' + p.nombre + '</div>' +
+      '<div class="proveedor-nombre">' + escHtml(p.nombre) + '</div>' +
       '<div class="proveedor-contacto">' +
-        '<div>&#128205; ' + p.contacto + '</div>' +
-        (p.telefono ? '<div>&#128222; <a href="tel:' + p.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + p.telefono + '</a></div>' : '') +
-        (p.email ? '<div>&#9993; <a href="mailto:' + p.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + p.email + '</a></div>' : '') +
-        (p.web_instagram ? '<div>&#127760; <a href="' + p.web_instagram + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + p.web_instagram + '</a></div>' : '') +
-        '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + p.observaciones + '</div>' +
+        '<div>&#128205; ' + escHtml(p.contacto) + '</div>' +
+        (p.telefono ? '<div>&#128222; <a href="tel:' + escHtml(p.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.telefono) + '</a></div>' : '') +
+        (p.email ? '<div>&#9993; <a href="mailto:' + escHtml(p.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.email) + '</a></div>' : '') +
+        (p.web_instagram ? '<div>&#127760; <a href="' + escHtml(p.web_instagram) + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.web_instagram) + '</a></div>' : '') +
+        '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + escHtml(p.observaciones) + '</div>' +
       '</div>' +
       '</div>';
   }).join('');
@@ -437,7 +437,7 @@ function renderAsambleas() {
     }).join('') : '';
     return '<div class="flujo-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-bg)' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-text)' : 'var(--md-sys-color-on-primary-container)') + '">' + a.tipo + '</span>' +
+        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-bg)' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-text)' : 'var(--md-sys-color-on-primary-container)') + '">' + escHtml(a.tipo) + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
@@ -562,12 +562,12 @@ function renderEncuestas() {
 
       var boton = '';
       if (!d.cerrada && currentUser && !d.miVoto) {
-        boton = ' <md-filled-button onclick="votarEncuesta(\'' + e.id + '\', \'' + op.replace(/'/g, "\\'") + '\')" style="font-size:0.75rem;padding:0.2rem 0.6rem;--md-filled-button-container-color:' + color + '">Votar</md-filled-button>';
+        boton = ' <md-filled-button onclick="votarEncuesta(\'' + e.id + '\', ' + i + ')" style="font-size:0.75rem;padding:0.2rem 0.6rem;--md-filled-button-container-color:' + color + '">Votar</md-filled-button>';
       }
 
       return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:var(--md-sys-shape-corner-extra-small);' : '') + '">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem">' +
-          '<span' + (esMiVoto ? ' style="font-weight:600"' : '') + '>' + op + (esMiVoto ? ' ✓' : '') + '</span>' +
+          '<span' + (esMiVoto ? ' style="font-weight:600"' : '') + '>' + escHtml(op) + (esMiVoto ? ' ✓' : '') + '</span>' +
           '<span style="color:var(--text-muted)">' + count + ' (' + pct + '%)' + boton + '</span>' +
         '</div>' +
         barra +
@@ -590,7 +590,7 @@ function renderEncuestas() {
           adminActions("editEncuesta('" + e.id + "')", "deleteEncuesta('" + e.id + "')") +
         '</div>' +
       '</div>' +
-      '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + e.titulo + '</div>' +
+      '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + escHtml(e.titulo) + '</div>' +
       (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + nl2br(e.descripcion) + '</div>' : '') +
       (infoExtra || quorumHtml ? '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">' +
         '<span>' + (infoExtra || '') + '</span>' +
@@ -602,9 +602,16 @@ function renderEncuestas() {
   }).join('');
 }
 
-async function votarEncuesta(encuestaId, seleccion) {
+async function votarEncuesta(encuestaId, indice) {
   if (!currentUser) {
     showSnackbar('Debes iniciar sesión para votar.', 'info');
+    return;
+  }
+
+  var encuesta = ENCUESTAS.find(function(e) { return e.id === encuestaId; });
+  var seleccion = encuesta ? getOpciones(encuesta)[indice] : null;
+  if (seleccion === null || seleccion === undefined) {
+    showSnackbar('Opción inválida.', 'error');
     return;
   }
 

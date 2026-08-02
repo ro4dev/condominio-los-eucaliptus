@@ -506,16 +506,19 @@ Bajo impacto. Alternativa: en `body.dark`, subir la opacidad del scrim (`--md-sy
 Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en demo mode.
 
 ### FASE 1 — Seguridad XSS
-- [ ] `nl2br` escapa antes de insertar `<br>` (`utils.js`)
-- [ ] `renderNoticiaCard`: `titulo` y `descripcion` escapados (`renderers.js:248,252`)
-- [ ] `renderFlujo`: `concepto` y `descripcion` escapados (`renderers.js:306`)
-- [ ] `renderDocumentos`: `nombre` escapado (`renderers.js:349`)
-- [ ] `renderReclamos`: `asunto` y `descripcion` escapados (`renderers.js:383-384`)
-- [ ] `renderProveedores`: nombre/rubro/contacto/telefono/email/web/observaciones escapados (`renderers.js:398-408`)
-- [ ] `renderAsambleas`: `temario` y `acuerdos` escapados (`renderers.js:447-448`)
-- [ ] `renderEncuestas`: `titulo` y `descripcion` escapados (`renderers.js:593-594`)
-- [ ] `votarEncuesta` `onclick`: `op` con escape mínimo o delegado (M10)
-- [ ] Demo: inyectar `<img onerror>` en noticia/reclamo → no ejecuta
+- [x] `nl2br` escapa antes de insertar `<br>` (`utils.js`)
+- [x] `renderNoticiaCard`: `titulo` y `descripcion` escapados (`renderers.js:248,252`)
+- [x] `renderFlujo`: `concepto` y `descripcion` escapados (`renderers.js:306`)
+- [x] `renderDocumentos`: `nombre` escapado (`renderers.js:349`)
+- [x] `renderReclamos`: `asunto` y `descripcion` escapados (`renderers.js:383-384`) — además `tipo` escapado (texto y class sanitizada)
+- [x] `renderProveedores`: nombre/rubro/contacto/telefono/email/web/observaciones escapados (`renderers.js:398-408`)
+- [x] `renderAsambleas`: `temario` y `acuerdos` escapados (`renderers.js:447-448`)
+- [x] `renderEncuestas`: `titulo` y `descripcion` escapados (`renderers.js:593-594`)
+- [x] `votarEncuesta` `onclick`: `op` delegado por índice (ya no inyecta texto de usuario) — además texto de `op` escapado (`renderers.js:565,570`)
+- [x] Demo: inyectar `<img onerror>` en noticia/reclamo → no ejecuta — verificado por sanity test de `escHtml`/`nl2br` en node
+- [x] Extra: `showDescripcion` (documento) escapado (`renderers.js:360`)
+- [x] Extra: propietarios en `showPropietarios` escapados (nombre, tipo, tel, email, rut, título) (`renderers.js:163-186`)
+- [x] Extra: `f.tipo` y `a.tipo` escapados (`renderers.js:305,440`)
 
 ### FASE 2 — test.html
 - [ ] `js/supabase-config.js` incluido antes de `config.js`
@@ -575,7 +578,7 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 
 | Fase | Estado |
 |------|--------|
-| F1 — Seguridad | ⬜ Pendiente |
+| F1 — Seguridad | ✅ En curso de verificación (código listo) |
 | F2 — test.html | ⬜ Pendiente |
 | F3 — Contraste | ⬜ Pendiente |
 | F4 — Deuda técnica | ⬜ Pendiente |
