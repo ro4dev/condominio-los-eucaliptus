@@ -276,20 +276,20 @@ async function renameParcelas(oldPrefijo, newPrefijo) {
 async function bulkCreateParcelas() {
   var btn = document.getElementById('btnAplicarParcelas');
   btn.disabled = true;
-  btn.textContent = 'Procesando...';
+  btn.textContent = 'Creando...';
 
   var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
   var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim();
   if (!prefijo) {
     showSnackbar('Ingresá un prefijo.', 'warning');
     btn.disabled = false;
-    btn.textContent = 'Aplicar';
+    btn.textContent = 'Crear parcelas';
     return;
   }
   if (!cantidad || cantidad < 1) {
     showSnackbar('Ingresá una cantidad válida.', 'warning');
     btn.disabled = false;
-    btn.textContent = 'Aplicar';
+    btn.textContent = 'Crear parcelas';
     return;
   }
 
@@ -309,7 +309,7 @@ async function bulkCreateParcelas() {
     await saveConfig('parcelas_prefijo', prefijo);
     showSnackbar('Sin cambios.', 'info');
     btn.disabled = false;
-    btn.textContent = 'Aplicar';
+    btn.textContent = 'Crear parcelas';
     return;
   }
 
@@ -343,7 +343,7 @@ async function bulkCreateParcelas() {
         hideLoading();
         showSnackbar('Error al crear parcelas: ' + error.message, 'error');
         btn.disabled = false;
-        btn.textContent = 'Aplicar';
+        btn.textContent = 'Crear parcelas';
         return;
       }
       await loadJson('PARCELAS');
@@ -360,7 +360,7 @@ async function bulkCreateParcelas() {
   showSnackbar(msg, 'success');
   renderParcelasConfig();
   btn.disabled = false;
-  btn.textContent = 'Aplicar';
+  btn.textContent = 'Crear parcelas';
 }
 
 // --- INIT CONFIG TAB ---

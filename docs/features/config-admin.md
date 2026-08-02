@@ -46,7 +46,7 @@ var CONFIG = {};  // en config-page.js
         <div class="form-group"><md-filled-text-field label="Cantidad" id="cfgParcelasCantidad" type="number" min="1" placeholder="Ej: 40" style="width:100%"></md-filled-text-field></div>
         <div class="form-group"><md-filled-text-field label="Prefijo" id="cfgParcelasPrefijo" type="text" placeholder="Ej: Terreno" style="width:100%"></md-filled-text-field></div>
       </div>
-      <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()">Aplicar</md-filled-button></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()">Crear parcelas</md-filled-button></div>
     </div>
 
     <!-- Montos -->
@@ -314,8 +314,8 @@ async function bulkCreateParcelas() {
   var cantidad = parseInt(document.getElementById('cfgParcelasCantidad').value);
   var prefijo = document.getElementById('cfgParcelasPrefijo').value.trim();
 
-  if (!prefijo) { showSnackbar('Ingresá un prefijo.', 'warning'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
-  if (!cantidad || cantidad < 1) { showSnackbar('Ingresá una cantidad válida.', 'warning'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
+  if (!prefijo) { showSnackbar('Ingresá un prefijo.', 'warning'); btn.disabled = false; btn.textContent = 'Crear parcelas';
+  if (!cantidad || cantidad < 1) { showSnackbar('Ingresá una cantidad válida.', 'warning'); btn.disabled = false; btn.textContent = 'Crear parcelas';
 
   var prefijoAnterior = CONFIG.parcelas_prefijo || '';
 
@@ -333,7 +333,7 @@ async function bulkCreateParcelas() {
     await saveConfig('parcelas_cantidad', cantidad);
     await saveConfig('parcelas_prefijo', prefijo);
     showSnackbar('Sin cambios.', 'info');
-    btn.disabled = false; btn.textContent = 'Aplicar'; return;
+    btn.disabled = false; btn.textContent = 'Crear parcelas';
   }
 
   if (DEMO_MODE) {
@@ -355,7 +355,7 @@ async function bulkCreateParcelas() {
     var nuevasReales = nuevas.filter(function(p) { return nombresExistentes.indexOf(p.numero) === -1; });
     if (nuevasReales.length) {
       var { error } = await supabaseClient.from('parcelas').insert(nuevasReales);
-      if (error) { hideLoading(); showSnackbar('Error al crear parcelas: ' + error.message, 'error'); btn.disabled = false; btn.textContent = 'Aplicar'; return; }
+      if (error) { hideLoading(); showSnackbar('Error al crear parcelas: ' + error.message, 'error'); btn.disabled = false; btn.textContent = 'Crear parcelas';
       await loadJson('PARCELAS');
     }
     hideLoading();
@@ -365,7 +365,7 @@ async function bulkCreateParcelas() {
   await saveConfig('parcelas_prefijo', prefijo);
   showSnackbar(prefijo !== prefijoAnterior ? 'Parcelas renombradas a "' + prefijo + '".' : 'Parcelas actualizadas.', 'success');
   renderParcelasConfig();
-  btn.disabled = false; btn.textContent = 'Aplicar';
+  btn.disabled = false; btn.textContent = 'Crear parcelas';
 }
 
 async function renameParcelas(oldPrefijo, newPrefijo) {

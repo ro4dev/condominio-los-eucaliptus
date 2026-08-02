@@ -70,7 +70,7 @@ var IS_ADMIN = false;
   </form>
   <div slot="actions">
     <md-text-button onclick="closeLoginModal()">Cancelar</md-text-button>
-    <md-filled-button type="submit" form="loginForm">Entrar</md-filled-button>
+    <md-filled-button type="submit" form="loginForm">Iniciar sesión</md-filled-button>
   </div>
   <div style="text-align:center;padding:0 1.5rem 1rem">
     <md-text-button onclick="showSignupForm()">Crear cuenta</md-text-button>
@@ -207,7 +207,7 @@ function showLoginForm() {
   form.onsubmit = handleLogin;
   var actions = dialog.querySelector('[slot="actions"]');
   actions.innerHTML = '<md-text-button onclick="closeLoginModal()">Cancelar</md-text-button>' +
-    '<md-filled-button type="submit" form="loginForm">Entrar</md-filled-button>';
+    '<md-filled-button type="submit" form="loginForm">Iniciar sesión</md-filled-button>';
   var footer = dialog.querySelector('div[style*="text-align:center"]');
   footer.innerHTML = '<md-text-button onclick="showSignupForm()">Crear cuenta</md-text-button>';
 }
