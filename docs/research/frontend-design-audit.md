@@ -534,10 +534,10 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [ ] axe DevTools sin violaciones de color (light + dark) — verificación del usuario
 
 ### FASE 4 — Deuda técnica
-- [ ] Selectores duplicados en `handleForm` unificados (`modals.js:62-63`)
-- [ ] `var style` muerto eliminado (`renderers.js:245-246`)
-- [ ] `#userInfo` eliminado (`layout.css:12,17`)
-- [ ] `.avatar*` eliminado (`components.css:23-27`) **o** avatar reincorporado con tokens
+- [x] Selectores duplicados en `handleForm` unificados (`modals.js:62-63`) — commiteado
+- [x] `var style` muerto eliminado (`renderers.js:245-246`)
+- [x] `#userInfo` eliminado (`layout.css:12,17`)
+- [x] `.avatar*` eliminado (`components.css:23-27`) **o** avatar reincorporado con tokens
 - [ ] `getInitials` eliminado (`utils.js:49-51`) **o** test actualizado si se mantiene
 - [ ] `.flujo-card` → `.item-card` (`sections.css` + `renderers.js`)
 - [ ] `.stat-card .value.green` → `var(--color-positive)`
