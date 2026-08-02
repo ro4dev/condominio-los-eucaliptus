@@ -541,8 +541,8 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] `getInitials` eliminado (`utils.js`) y sus asserts de `test.html` removidos
 - [x] `.flujo-card` → `.item-card` (`sections.css` + `renderers.js`)
 - [x] `.stat-card .value.green` → `var(--color-positive)`
-- [ ] `.filters` → `repeat(2, 1fr)` (`layout.css:7`)
-- [ ] Favicon agregado
+- [x] `.filters` → descartado: se probó `repeat(2, 1fr)` y no gustó (demasiado espacio); se mantiene `repeat(4, 1fr)` original
+- [x] Favicon agregado (SVG emoji 🌳 en `index.html`)
 
 ### FASE 5 — Empty states
 - [ ] Helper `emptyState(texto, ctaHtml)` en `renderers.js`
