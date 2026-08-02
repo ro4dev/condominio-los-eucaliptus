@@ -51,7 +51,7 @@ function getInitials(name) {
 }
 
 function nl2br(text) {
-  return (text || '').replace(/\n/g, '<br>');
+  return escHtml(text || '').replace(/\n/g, '<br>');
 }
 
 function escHtml(str) {

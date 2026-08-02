@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Seguridad: escape de contenido de usuario (XSS)
+- **Fixed**: `nl2br` ahora escapa el texto antes de insertar `<br>` (`js/utils.js`)
+- **Fixed**: Todos los campos de usuario se escapan con `escHtml` antes de inyectarse: noticias (título, descripción), flujo (concepto, descripción, tipo), documentos (nombre, descripción), reclamos (asunto, descripción, tipo), proveedores (rubro, nombre, contacto, teléfono, email, web, observaciones), asambleas (temario, acuerdos, tipo), encuestas (título, descripción, opciones), propietarios (nombre, tipo, teléfono, email, RUT)
+- **Fixed**: `votarEncuesta` ahora recibe el índice de la opción en vez del texto (elimina la inyección de datos en `onclick`)
+- **Docs**: Checklist de Fase 1 completado en `docs/research/frontend-design-audit.md`
+
 ### 31/07/2026 - Menú de usuario centralizado en el header
 - **Changed**: Login, logout, modo demo y dark/light mode se centralizan en un único menú de usuario (`md-menu`) abierto desde el avatar (`#userMenuButton`) en la app bar
 - **Changed**: `#userInfo`, `#loginBtn`, `#logoutBtn`, `#demoToggle` y `#themeToggle` eliminados del header; ahora son `#menuUserInfo` (email/Invitado), `#menuLogin`, `#menuLogout`, `#menuDemo` y `#menuTheme` (`md-menu-item`)
