@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Copy de botones (Fase 6 auditoría)
+- **Style**: Botón de login "Entrar" → "Iniciar sesión" (`index.html`)
+- **Style**: Botón de parcelas "Aplicar" → "Crear parcelas" con estado de carga "Creando..." (`config-page.js`)
+- **Docs**: Specs `auth.md` y `config-admin.md` actualizadas; checklist de Fase 6 completado
+
 ### 02/08/2026 - Empty states unificados (Fase 5 auditoría)
 - **Feat**: Componente `.empty-state` en `components.css` (borde punteado, ícono `inbox` y texto corto) + helper `emptyState(texto)` en `renderers.js`
 - **Feat**: Empty state aplicado a las 9 listas: Gastos, Flujo, Noticias, Documentos, Reclamos, Proveedores, Asambleas, Encuestas y Parcelas (antes varias mostraban "Sin registros" a mano y Asambleas no tenía nada)

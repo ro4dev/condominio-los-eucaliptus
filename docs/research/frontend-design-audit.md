@@ -552,8 +552,8 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] Extendido a Gastos, Flujo, Noticias, Reclamos, Asambleas y Encuestas (consistencia; Asambleas no tenía nada)
 
 ### FASE 6 — Copy
-- [ ] Botón login "Entrar" → "Iniciar sesión" (`index.html:322`)
-- [ ] Botón parcelas "Aplicar" → verbo de acción (`config-page.js`)
+- [x] Botón login "Entrar" → "Iniciar sesión" (`index.html`)
+- [x] Botón parcelas "Aplicar" → "Crear parcelas" (`config-page.js`; estado de carga "Creando...")
 
 ### FASE 7 — Motion/foco
 - [ ] `prefers-reduced-motion: reduce` para skeleton, tabFadeIn, transitions
