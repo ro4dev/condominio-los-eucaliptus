@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 02/08/2026 - Deuda técnica: código muerto eliminado (Fase 4 auditoría)
+- **Refactor**: Selectores duplicados en `handleForm` unificados (`modals.js`)
+- **Refactor**: Eliminado `var style` muerto en `renderNoticiaCard` (`renderers.js`)
+- **Style**: Eliminadas reglas muertas `#userInfo` (`layout.css`) y `.avatar*` (`components.css`, sin uso en HTML/JS)
+
 ### 02/08/2026 - Contraste AA (Fase 3 auditoría)
 - **Style**: `--text-muted` pasa de `var(--md-sys-color-outline)` a valor semántico custom: `#6b7280` en light (4.6:1) y `#9ca3af` en dark (6.9:1); el outline M3 no llegaba a AA en light
 - **Style**: `#loginError` usa `var(--md-sys-color-error)` (rojo claro `#fca5a5` en dark, antes ilegible)
