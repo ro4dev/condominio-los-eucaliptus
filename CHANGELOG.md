@@ -9,6 +9,8 @@
 - **Refactor**: `.flujo-card` renombrado a `.item-card` (usado en asambleas y encuestas; el flujo ya es tabla)
 - **Refactor**: `.stat-card .value.green` usa el token `--color-positive` en vez del literal `#059669`
 - **Style**: Eliminadas reglas muertas `#userInfo` (`layout.css`) y `.avatar*` (`components.css`, sin uso en HTML/JS)
+- **Style**: Favicon emoji 🌳 agregado (SVG inline en `index.html`, placeholder hasta la Fase 9 de identidad)
+- **Docs**: Checklist de Fase 4 completado en `docs/research/frontend-design-audit.md`
 
 ### 02/08/2026 - Contraste AA (Fase 3 auditoría)
 - **Style**: `--text-muted` pasa de `var(--md-sys-color-outline)` a valor semántico custom: `#6b7280` en light (4.6:1) y `#9ca3af` en dark (6.9:1); el outline M3 no llegaba a AA en light
