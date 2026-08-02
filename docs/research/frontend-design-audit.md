@@ -545,10 +545,11 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] Favicon agregado (SVG emoji 🌳 en `index.html`)
 
 ### FASE 5 — Empty states
-- [ ] Helper `emptyState(texto, ctaHtml)` en `renderers.js`
-- [ ] Parcelas con mensaje vacío + CTA admin
-- [ ] Documentos con mensaje vacío + CTA admin
-- [ ] Proveedores con mensaje vacío + CTA admin
+- [x] Componente `.empty-state` + helper `emptyState(texto)` en `renderers.js` (borde punteado, ícono `inbox`, texto corto, sin CTA)
+- [x] Parcelas con mensaje vacío (sin botón: se crean desde Configuración)
+- [x] Documentos con mensaje vacío (el "+ Agregar" ya está en el header de la pestaña)
+- [x] Proveedores con mensaje vacío (el "+ Agregar" ya está en el header de la pestaña)
+- [x] Extendido a Gastos, Flujo, Noticias, Reclamos, Asambleas y Encuestas (consistencia; Asambleas no tenía nada)
 
 ### FASE 6 — Copy
 - [ ] Botón login "Entrar" → "Iniciar sesión" (`index.html:322`)

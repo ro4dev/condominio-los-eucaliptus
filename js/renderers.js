@@ -7,6 +7,14 @@ function adminActions(editFn, deleteFn) {
     '</div>';
 }
 
+// Helper: empty state
+function emptyState(texto) {
+  return '<div class="empty-state">' +
+    '<span class="material-symbols-outlined">inbox</span>' +
+    '<p>' + texto + '</p>' +
+    '</div>';
+}
+
 function deleteItem(table, id, arrayName, renderFn) {
   if (!IS_ADMIN) return;
   var nombres = { gastos: 'este gasto', noticias: 'esta noticia', flujo: 'este movimiento', documentos: 'este documento', proveedores: 'este proveedor', propietarios: 'este propietario' };
@@ -102,7 +110,7 @@ function renderTable(data) {
   document.getElementById('tableGastos').style.display = 'table';
   var tbody = document.getElementById('tableBody');
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--md-sys-color-outline);padding:1.5rem">Sin registros</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5">' + emptyState('Sin gastos para este filtro.') + '</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(function(r) {
@@ -147,6 +155,10 @@ function renderParcelas() {
       '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
       '</div>';
   }).join('');
+
+  if (!PARCELAS.length) {
+    grid.innerHTML = emptyState('No hay parcelas registradas.');
+  }
 }
 
 // POPUP PROPIETARIOS (desde card de parcela)
@@ -230,7 +242,7 @@ function renderNoticias() {
   }
 
   if (mostrar.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:var(--md-sys-color-outline);padding:2rem">No hay noticias</div>';
+    list.innerHTML = emptyState('No hay noticias.');
     return;
   }
 
@@ -293,7 +305,7 @@ function renderFlujo() {
 
   var body;
   if (!sorted.length) {
-    body = '<tbody><tr><td colspan="6" style="text-align:center;color:var(--md-sys-color-outline);padding:1.5rem">Sin registros</td></tr></tbody>';
+    body = '<tbody><tr><td colspan="6">' + emptyState('Sin movimientos para este filtro.') + '</td></tr></tbody>';
   } else {
     body = '<tbody>' + sorted.map(function(f) {
       var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
@@ -351,6 +363,10 @@ function renderDocumentos() {
       btns +
       '</div>';
   }).join('');
+
+  if (!filtered.length) {
+    list.innerHTML = emptyState('No hay documentos en esta categoría.');
+  }
 }
 
 function showDescripcion(docId) {
@@ -385,7 +401,7 @@ function renderReclamos() {
       '</div>';
   }).join('');
   if (filtered.length === 0) {
-    list.innerHTML = '<div style="text-align:center;color:var(--md-sys-color-outline);padding:2rem">Sin registros</div>';
+    list.innerHTML = emptyState('No hay reclamos ni sugerencias.');
   }
 }
 
@@ -408,6 +424,10 @@ function renderProveedores() {
       '</div>' +
       '</div>';
   }).join('');
+
+  if (!PROVEEDORES.length) {
+    grid.innerHTML = emptyState('No hay proveedores registrados.');
+  }
 }
 
 // ASAMBLEAS
@@ -448,6 +468,10 @@ function renderAsambleas() {
       (asistentes ? '<div style="margin-top:0.4rem"><strong style="font-size:0.85rem">Asistentes:</strong><div style="margin-top:0.3rem">' + asistentes + '</div></div>' : '') +
       '</div>';
   }).join('');
+
+  if (!sorted.length) {
+    timeline.innerHTML = emptyState('No hay asambleas.');
+  }
 }
 
 // ENCUESTAS
@@ -516,7 +540,7 @@ function renderEncuestas() {
   data.sort(function(a, b) { return new Date(b.encuesta.created_at) - new Date(a.encuesta.created_at); });
 
   if (!data.length) {
-    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem">No hay encuestas para mostrar.</p>';
+    container.innerHTML = emptyState('No hay encuestas para mostrar.');
     return;
   }
 
