@@ -540,7 +540,7 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] `.avatar*` eliminado (`components.css:23-27`) **o** avatar reincorporado con tokens
 - [x] `getInitials` eliminado (`utils.js`) y sus asserts de `test.html` removidos
 - [x] `.flujo-card` → `.item-card` (`sections.css` + `renderers.js`)
-- [ ] `.stat-card .value.green` → `var(--color-positive)`
+- [x] `.stat-card .value.green` → `var(--color-positive)`
 - [ ] `.filters` → `repeat(2, 1fr)` (`layout.css:7`)
 - [ ] Favicon agregado
 
