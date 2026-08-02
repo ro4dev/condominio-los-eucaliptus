@@ -90,6 +90,7 @@ supabase/migrations/    # Migraciones SQL
 - **NUNCA ASUMIR NADA** — Preguntar siempre antes de hacer. No inventar interpretaciones. No suponer cantidad de migraciones, archivos, features, etc.
 - **NO HACER ACCIONES SIN CONSULTAR** — Ejecutar solo lo que el usuario pida explícitamente. No ejecutar comandos "por si acaso" o "para ayudar".
 - **NO ejecutar `git commit`** salvo pedido explícito del usuario
+- **Instalar skills SOLO con `--agent opencode`** — `npx skills add <repo>@<skill> --agent opencode -y`. NUNCA sin `--agent`, NUNCA con `-g` (global). Después de instalar, verificar que no exista carpeta `.claude/`; si aparece, borrarla (`.claude/` es de Claude Code, el usuario no lo usa). Las skills van solo en `.agents/skills/` del proyecto.
 - **NO tocar `js/supabase-config.js`** (credenciales)
 - **NO romper modo producción** al editar archivos de demo
 - **Actualizar `CHANGELOG.md` y `README.md`** cuando corresponda (nuevas features, fixes relevantes, cambios de UX)

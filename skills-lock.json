@@ -7,6 +7,24 @@
       "skillPath": "skills/caveman/SKILL.md",
       "computedHash": "d18cdf73a5f5c496d681a43a6846336b110223bdffa6817b8992529c57f1a815"
     },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
+    },
+    "material-3": {
+      "source": "hamen/material-3-skill",
+      "sourceType": "github",
+      "skillPath": "skills/material-3/SKILL.md",
+      "computedHash": "72d56347fae33c9b1763e16d0bffb781da382aa3be316b9252dcd35fd050c6bc"
+    },
+    "material-design-3-guide": {
+      "source": "shelbeely/Shelbeely-Agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/material-design-3-guide/SKILL.md",
+      "computedHash": "f6f94d3d1e708a3b41b461505e2eb9377d80ae6dfa4df496d2152bb8d98648d7"
+    },
     "supabase": {
       "source": "supabase/agent-skills",
       "sourceType": "github",
