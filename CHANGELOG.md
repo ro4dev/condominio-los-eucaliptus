@@ -6,6 +6,7 @@
 - **Refactor**: Selectores duplicados en `handleForm` unificados (`modals.js`)
 - **Refactor**: Eliminado `var style` muerto en `renderNoticiaCard` (`renderers.js`)
 - **Refactor**: Eliminada `getInitials` (`utils.js`) y sus asserts en `test.html`
+- **Refactor**: `.flujo-card` renombrado a `.item-card` (usado en asambleas y encuestas; el flujo ya es tabla)
 - **Style**: Eliminadas reglas muertas `#userInfo` (`layout.css`) y `.avatar*` (`components.css`, sin uso en HTML/JS)
 
 ### 02/08/2026 - Contraste AA (Fase 3 auditoría)
