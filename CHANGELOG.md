@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 03/08/2026 - Copy de confirmación de borrado en Configuración
+- **Fix**: Mensajes de confirmación de categorías, rubros y conceptos ya no dicen "pero quedarán sin X": como los items en uso muestran candado, no se pueden eliminar, así que el confirm solo aparece para items no usados (`config-page.js`)
+
 ### 02/08/2026 - Auditoría de seguridad + plan de fixes
 - **Security**: Auditoría completa del sitio (frontend, RLS, Edge Functions, storage, Code.gs) documentada en `docs/audit/security.md`
 - **Security**: 2 hallazgos críticos (Edge Functions `create-user`/`delete-user` sin autorización y con password derivada del RUT), 3 altos (votación manipulable, PII expuesta, stored XSS) y 7 medios
