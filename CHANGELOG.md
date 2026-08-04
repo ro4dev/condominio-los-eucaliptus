@@ -3,21 +3,21 @@
 ## Registro de cambios
 
 ### 02/08/2026 - Auditoría de seguridad + plan de fixes
-- **Security**: Auditoría completa del sitio (frontend, RLS, Edge Functions, storage, Code.gs) documentada en `docs/research/security-audit.md`
+- **Security**: Auditoría completa del sitio (frontend, RLS, Edge Functions, storage, Code.gs) documentada en `docs/audit/security.md`
 - **Security**: 2 hallazgos críticos (Edge Functions `create-user`/`delete-user` sin autorización y con password derivada del RUT), 3 altos (votación manipulable, PII expuesta, stored XSS) y 7 medios
-- **Docs**: Plan de fixes priorizado en 7 fases (con SQL y pasos de verificación) integrado en el mismo `docs/research/security-audit.md`
+- **Docs**: Plan de fixes priorizado en 7 fases (con SQL y pasos de verificación) integrado en el mismo `docs/audit/security.md`
 
 ### 02/08/2026 - Iconos Material Symbols (Fase 8 auditoría)
 - **Style**: Documentos: emojis por categoría reemplazados por Material Symbols (`book`, `description`, `contract`, `shield`, `map`)
 - **Style**: Proveedores: emojis de contacto reemplazados por Material Symbols (`person`, `phone`, `mail`, `language`)
 - **Style**: Propietarios: emojis reemplazados por Material Symbols (`phone`, `mail`, `badge`)
 - **A11y**: Cada ícono lleva `aria-label` y `title` descriptivo
-- **Docs**: Checklist de Fase 8 completado en `docs/research/frontend-design-audit.md`
+- **Docs**: Checklist de Fase 8 completado en `docs/audit/frontend-design.md`
 
 ### 02/08/2026 - Motion y foco accesible (Fase 7 auditoría)
 - **Feat**: Bloque `@media (prefers-reduced-motion: reduce)` global en `base.css` — desactiva skeleton, `tabFadeIn`, snackbar y transiciones de tema para usuarios con "Reducir movimiento" activado
 - **Feat**: Regla global `:focus-visible` con outline `--md-sys-color-primary` — indica el foco en navegación por teclado (antes no había ningún estilo de focus)
-- **Docs**: Checklist de Fase 7 completado en `docs/research/frontend-design-audit.md`
+- **Docs**: Checklist de Fase 7 completado en `docs/audit/frontend-design.md`
 
 ### 02/08/2026 - Copy de botones (Fase 6 auditoría)
 - **Style**: Botón de login "Entrar" → "Iniciar sesión" (`index.html`)
@@ -28,7 +28,7 @@
 - **Feat**: Componente `.empty-state` en `components.css` (borde punteado, ícono `inbox` y texto corto) + helper `emptyState(texto)` en `renderers.js`
 - **Feat**: Empty state aplicado a las 9 listas: Gastos, Flujo, Noticias, Documentos, Reclamos, Proveedores, Asambleas, Encuestas y Parcelas (antes varias mostraban "Sin registros" a mano y Asambleas no tenía nada)
 - **Style**: Sin botón en el empty state: cada pestaña ya tiene su "+ Agregar" en el header, y las Parcelas se crean desde Configuración
-- **Docs**: Checklist de Fase 5 completado en `docs/research/frontend-design-audit.md`
+- **Docs**: Checklist de Fase 5 completado en `docs/audit/frontend-design.md`
 
 ### 02/08/2026 - Deuda técnica: código muerto eliminado (Fase 4 auditoría)
 - **Refactor**: Selectores duplicados en `handleForm` unificados (`modals.js`)
@@ -38,7 +38,7 @@
 - **Refactor**: `.stat-card .value.green` usa el token `--color-positive` en vez del literal `#059669`
 - **Style**: Eliminadas reglas muertas `#userInfo` (`layout.css`) y `.avatar*` (`components.css`, sin uso en HTML/JS)
 - **Style**: Favicon emoji 🌳 agregado (SVG inline en `index.html`, placeholder hasta la Fase 9 de identidad)
-- **Docs**: Checklist de Fase 4 completado en `docs/research/frontend-design-audit.md`
+- **Docs**: Checklist de Fase 4 completado en `docs/audit/frontend-design.md`
 
 ### 02/08/2026 - Contraste AA (Fase 3 auditoría)
 - **Style**: `--text-muted` pasa de `var(--md-sys-color-outline)` a valor semántico custom: `#6b7280` en light (4.6:1) y `#9ca3af` en dark (6.9:1); el outline M3 no llegaba a AA en light
@@ -49,13 +49,13 @@
 - **Fixed**: `test.html` volvió a correr los tests. Ahora incluye solo `js/utils.js` y prueba únicamente funciones puras
 - **Fixed**: Eliminados los asserts de `SHEET_NAMES` (no existía), `toggleDemoMode` (recargaba la página en loop infinito), `DEMO_FILES` y `loaded` (dependían de `config.js`, que no aplica a tests de funciones puras)
 - **Fixed**: Agregados asserts de `escHtml` y `nl2br` (regresión de la Fase 1)
-- **Docs**: Checklist de Fase 2 completado en `docs/research/frontend-design-audit.md`
+- **Docs**: Checklist de Fase 2 completado en `docs/audit/frontend-design.md`
 
 ### 02/08/2026 - Seguridad: escape de contenido de usuario (XSS)
 - **Fixed**: `nl2br` ahora escapa el texto antes de insertar `<br>` (`js/utils.js`)
 - **Fixed**: Todos los campos de usuario se escapan con `escHtml` antes de inyectarse: noticias (título, descripción), flujo (concepto, descripción, tipo), documentos (nombre, descripción), reclamos (asunto, descripción, tipo), proveedores (rubro, nombre, contacto, teléfono, email, web, observaciones), asambleas (temario, acuerdos, tipo), encuestas (título, descripción, opciones), propietarios (nombre, tipo, teléfono, email, RUT)
 - **Fixed**: `votarEncuesta` ahora recibe el índice de la opción en vez del texto (elimina la inyección de datos en `onclick`)
-- **Docs**: Checklist de Fase 1 completado en `docs/research/frontend-design-audit.md`
+- **Docs**: Checklist de Fase 1 completado en `docs/audit/frontend-design.md`
 
 ### 31/07/2026 - Menú de usuario centralizado en el header
 - **Changed**: Login, logout, modo demo y dark/light mode se centralizan en un único menú de usuario (`md-menu`) abierto desde el avatar (`#userMenuButton`) en la app bar

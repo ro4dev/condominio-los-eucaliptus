@@ -4,7 +4,7 @@
 
 Documento de referencia con la revisión completa del frontend (visual, UX, accesibilidad, seguridad y deuda técnica) usando la skill `frontend-design` (identidad, tipografía, estructura, copy, motion) + la guía Material Design 3 + revisión manual del código.
 
-**Complementa** a `material-m3-audit.md` (que ya cubrió la migración a tokens M3). Este doc cubre lo que quedó fuera: seguridad, tests, contraste, identidad y mantenibilidad.
+**Complementa** a `material-m3.md` (que ya cubrió la migración a tokens M3). Este doc cubre lo que quedó fuera: seguridad, tests, contraste, identidad y mantenibilidad.
 
 ## Alcance y método
 
@@ -304,7 +304,7 @@ border-color: color-mix(in srgb, var(--md-sys-color-error) 55%, transparent);
 
 ### Convenciones
 
-- **Una fase por sesión/PR**, testeable independientemente (mismo criterio que `material-m3-audit.md`).
+- **Una fase por sesión/PR**, testeable independientemente (mismo criterio que `material-m3.md`).
 - Después de cada fase: cargar demo mode, recorrer todas las tabs, abrir modales, toggle dark/light.
 - No tocar `js/supabase-config.js`.
 - No romper modo producción.
@@ -497,7 +497,7 @@ Bajo impacto. Alternativa: en `body.dark`, subir la opacidad del scrim (`--md-sy
 
 ### Fase 8 revertida de la auditoría M3 (imports `@material/web/all.js`)
 
-`material-m3-audit.md` Fase 8 quedó **revertida** porque los imports individuales rompían componentes. No re-intentar sin testear componente por componente. Alternativa: mantener `all.js` (acepta el peso de bundle) o importar de a uno **verificando cada componente usado** (los que lista el módulo actual: tabs, buttons, chips, selects, dialogs, switch, icon, icon-button, menu, menu-item, divider, text-field, circular-progress, snackbar). Dejarlo fuera del scope de este doc.
+`material-m3.md` Fase 8 quedó **revertida** porque los imports individuales rompían componentes. No re-intentar sin testear componente por componente. Alternativa: mantener `all.js` (acepta el peso de bundle) o importar de a uno **verificando cada componente usado** (los que lista el módulo actual: tabs, buttons, chips, selects, dialogs, switch, icon, icon-button, menu, menu-item, divider, text-field, circular-progress, snackbar). Dejarlo fuera del scope de este doc.
 
 ---
 
