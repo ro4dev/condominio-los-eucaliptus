@@ -569,7 +569,7 @@ function renderEncuestas() {
 
     var quorumHtml = '';
     if (e.quorum) {
-      quorumHtml = '<span style="font-size:0.8rem;color:' + (quorumAlcanzado ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+      quorumHtml = '<span style="padding:0.15rem 0.5rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--md-sys-color-surface-container);color:' + (quorumAlcanzado ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
     var opcionesHtml = '<div style="position:relative">' +
@@ -616,12 +616,12 @@ function renderEncuestas() {
       '</div>' +
       '<div style="font-size:1rem;font-weight:600;margin-bottom:0.3rem;color:var(--text)">' + escHtml(e.titulo) + '</div>' +
       (e.descripcion ? '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.4rem">' + nl2br(e.descripcion) + '</div>' : '') +
-      (infoExtra || quorumHtml ? '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">' +
-        '<span>' + (infoExtra || '') + '</span>' +
-        quorumHtml +
-      '</div>' : '') +
+      (infoExtra ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.3rem">' + infoExtra + '</div>' : '') +
       opcionesHtml + accion +
-      '<div style="text-align:right;font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem">Total: ' + d.total + ' votos</div>' +
+      '<div style="display:flex;justify-content:flex-end;align-items:center;gap:0.4rem;margin-top:0.3rem">' +
+        quorumHtml +
+        '<span style="padding:0.15rem 0.5rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--md-sys-color-surface-container);color:var(--text-2)">Total: ' + d.total + ' votos</span>' +
+      '</div>' +
     '</div>';
   }).join('');
 }
