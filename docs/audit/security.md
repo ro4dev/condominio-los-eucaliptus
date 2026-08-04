@@ -430,3 +430,67 @@ Eliminar el archivo (es un prototipo descartado, `FOLDER_ID = 'TU_FOLDER_ID'`) o
 | `index.html` | M1 | Fase 6 |
 | `Code.gs` | M5 | Fase 7 |
 | `.gitignore`, `README.md` | M7 | Fase 7 |
+
+---
+
+## Checklist detallado
+
+Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en demo mode.
+
+### FASE 1 — Edge Functions con autorización (C1, C2)
+- [ ] `create-user/index.ts`: chequear admin con el JWT del llamador antes de usar `service_role`
+- [ ] `delete-user/index.ts`: idem
+- [ ] `create-user/index.ts`: password temporal aleatorio (no derivado del RUT) o `invokeUserByEmail`
+- [ ] `supabase/config.toml`: `verify_jwt = true` fijado en ambas funciones
+- [ ] Deploy de las Edge Functions
+- [ ] Verificación: curl con JWT no-admin → 403; con admin → 200/404
+- [ ] Crear usuario desde UI como admin funciona; el password no es el RUT
+
+### FASE 2 — Votación manipulable (A1)
+- [ ] Migración `supabase/migrations/003_security_fixes.sql` creada
+- [ ] `encuestas_votos_insert`: `WITH CHECK` ata `parcela_id` a la parcela del email autenticado
+- [ ] `reclamos_insert` corregida: `WITH CHECK (true)`
+- [ ] Migración aplicada
+- [ ] Verificación: voto con parcela ajena → violación de política; con la propia → OK
+
+### FASE 3 — Stored XSS (A3)
+- [ ] Helper `safeUrl()` en `js/utils.js`
+- [ ] `href` envueltos con `safeUrl()`: `r.archivo`, `n.archivo`, `f.comprobante`, `d.archivo`, `p.web_instagram`
+- [ ] Escapados con `escHtml()`: `p.numero`, `p.rol`, `p.estado`, `d.categoria`, `formatPeriodo(r.periodo)`
+- [ ] Asserts de `safeUrl` en `test.html`
+- [ ] Verificación demo: `<img onerror>` y `javascript:` en documento/noticia → no ejecutan
+
+### FASE 4 — PII y signup abierto (A2) — requiere decisión
+- [ ] Definir con el usuario el modelo de acceso (A cerrar signup / B limitar lectura / C ambas)
+- [ ] Aplicar según decisión
+- [ ] Verificación: no-admin no ve PII ajena; "Crear cuenta" oculto (si aplica)
+
+### FASE 5 — Storage (M2)
+- [ ] `supabaseUpload` devuelve `{ path }` en vez de URL firmada de 7 días
+- [ ] Renderers firman URLs con TTL corto + cache en memoria
+- [ ] `supabaseDelete`/edit limpian objetos huérfanos del bucket
+- [ ] Políticas de storage movidas a migración SQL (`003` o `004_storage.sql`)
+- [ ] Validar tipo/tamaño de archivo al subir (hoy solo `accept="image/*"` client-side)
+- [ ] Verificación: subir/eliminar archivo; `supabase db advisors` sin warnings de storage
+
+### FASE 6 — CSP / SRI / dependencias (M1)
+- [ ] CSP por meta tag en `index.html` (probar Material Web en iPhone 12 Mini)
+- [ ] Importmap: fijar versión de `@material/web`
+- [ ] SRI + crossorigin en scripts jsdelivr (o self-hostear bundle)
+- [ ] Verificación: incógnito light/dark sin bloqueos; Chart.js y `md-*` funcionan
+
+### FASE 7 — Hardening (M3, M4, M5, M6, M7)
+- [ ] `WITH CHECK (admin)` en todos los UPDATE policies (en `003_security_fixes.sql`)
+- [ ] Rol stale: documentado (aceptable) u opcional `checkAdmin()` con `getUser()`
+- [ ] `Code.gs` eliminado o movido a `docs/legacy/` con nota "no desplegar sin auth"
+- [ ] Password policy: min 8 caracteres + un número en `handleSignup`
+- [ ] `README.md:156-157`: `raw_user_meta_data.role` → `raw_app_meta_data`
+- [ ] `README.md:63-88`: alinear lista de migraciones (001, 002, 003)
+- [ ] `.gitignore`: agregar `js/supabase-config.local.js`
+
+### Verificación global (antes de cerrar)
+- [ ] `supabase db advisors` sin issues
+- [ ] Login no-admin: no vota por otras parcelas, no ve PII ajena, no invoca create/delete-user
+- [ ] Login admin: todo el CRUD sigue funcionando
+- [ ] `test.html` con asserts nuevos (safeUrl, escapar campos) pasa
+- [ ] Modo demo intacto
