@@ -173,20 +173,22 @@ function showPropietarios(parcelaId) {
   } else {
     body = props.map(function(prop, j) {
       var nombre = prop.nombre_completo || '';
-      return '<div style="display:flex;align-items:center;gap:0.6rem;padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--divider)' : '') + '">' +
-        '<div style="flex:1;min-width:0">' +
-          '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + escHtml(nombre) + '</div>' +
-          '<div style="font-size:0.75rem;color:var(--text-2)">' + escHtml(prop.tipo) + '</div>' +
-          '<div style="margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
-            (prop.telefono ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="Teléfono" title="Teléfono">phone</md-icon> <a href="tel:' + escHtml(prop.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.telefono) + '</a></div>' : '') +
-            (prop.email ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="Correo" title="Correo">mail</md-icon> <a href="mailto:' + escHtml(prop.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.email) + '</a></div>' : '') +
-            (prop.rut ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="RUT" title="RUT">badge</md-icon> RUT: ' + escHtml(prop.rut) + '</div>' : '') +
+      return '<div style="padding:0.8rem 0;' + (j > 0 ? 'border-top:1px solid var(--divider)' : '') + '">' +
+        '<div style="display:flex;align-items:center;gap:0.6rem">' +
+          '<div style="flex:1;min-width:0">' +
+            '<div style="font-weight:600;font-size:0.9rem;color:var(--text)">' + escHtml(nombre) + '</div>' +
+            '<div style="font-size:0.75rem;color:var(--text-2)">' + escHtml(prop.tipo) + '</div>' +
           '</div>' +
+          (IS_ADMIN ? '<div style="display:flex;flex-shrink:0;align-items:center">' +
+            '<md-icon-button onclick="editPropietario(\'' + prop.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+            '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
+          '</div>' : '') +
         '</div>' +
-        (IS_ADMIN ? '<div style="display:flex;flex-shrink:0;align-items:center">' +
-          '<md-icon-button onclick="editPropietario(\'' + prop.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
-          '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
-        '</div>' : '') +
+        '<div style="margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">' +
+          (prop.telefono ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="Teléfono" title="Teléfono">phone</md-icon> <a href="tel:' + escHtml(prop.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.telefono) + '</a></div>' : '') +
+          (prop.email ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="Correo" title="Correo">mail</md-icon> <a href="mailto:' + escHtml(prop.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(prop.email) + '</a></div>' : '') +
+          (prop.rut ? '<div><md-icon style="vertical-align:middle;font-size:1rem" aria-label="RUT" title="RUT">badge</md-icon> RUT: ' + escHtml(prop.rut) + '</div>' : '') +
+        '</div>' +
       '</div>';
     }).join('');
   }
