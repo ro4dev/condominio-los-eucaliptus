@@ -555,18 +555,17 @@ function renderEncuestas() {
     var estadoText = d.cerrada ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-tertiary-container)';
 
     var infoExtra = '';
-    if (e.fecha_termino) {
+    if (e.fecha_termino && !d.cerrada) {
       var remaining = getTimeRemaining(e.fecha_termino);
-      if (remaining && !d.cerrada) {
+      if (remaining) {
         infoExtra = 'Termina en: ' + remaining;
-      } else if (d.cerrada) {
-        infoExtra = 'Terminada: ' + formatDate(e.fecha_termino);
-      } else {
-        infoExtra = 'Termina: ' + formatDate(e.fecha_termino);
       }
     }
 
-    var fechaPub = formatDate(e.fecha || e.created_at);
+    var inicio = e.fecha || e.created_at;
+    var fechaPub = (e.fecha_termino && inicio)
+      ? formatDateCorta(inicio) + ' - ' + formatDateCorta(e.fecha_termino)
+      : formatDateCorta(inicio);
 
     var quorumHtml = '';
     if (e.quorum) {

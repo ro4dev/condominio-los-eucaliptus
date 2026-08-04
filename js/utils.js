@@ -46,6 +46,14 @@ function formatDate(d) {
   return s;
 }
 
+function formatDateCorta(d) {
+  var s = formatDate(d);
+  if (s.length === 10) {
+    return s.slice(0, 6) + s.slice(8);
+  }
+  return s;
+}
+
 function nl2br(text) {
   return escHtml(text || '').replace(/\n/g, '<br>');
 }
