@@ -2,6 +2,14 @@
 
 ## Registro de cambios
 
+### 04/08/2026 - Date picker M3 custom (rama experimental/datepicker-m3-custom)
+- **Feat**: Los 4 campos de fecha (Noticias, Ingresos/Egresos, Asambleas, Encuestas) pasan de `md-filled-text-field type="date"` a un date picker M3 custom: campo filled con ícono calendario que abre un popup anclado al campo (`<dialog>` nativo `showModal()` con flip arriba/abajo según espacio) con calendario en español (meses y días en ES, semana L-D) y navegación de mes
+- **Feat**: `dateFieldHtml()` en `modals.js` genera el campo (input display no-editable + hidden input con ISO + label flotante + estado de error), `openDatePicker()`/`renderDatePicker()`/`pickDate()` manejan el calendario
+- **Style**: Estilos `.m3-date-group` (tokens M3 de filled field: `surface-container-highest`, línea 1px→3px en focus, label flotante) y `.date-picker-*` para el grid de días en `base.css`
+- **Fix**: `dateFieldOk` acepta elemento o evento (antes crasheaba con `undefined.closest` al recibir el input desde `pickDate`/`dateFieldTyped`, dejando el dialog abierto y rompiendo selecciones posteriores)
+- **Fix**: El popup ya no depende del idioma del browser/SO (antes el calendar nativo salía en inglés aunque el sitio es ES)
+- **Note**: `md-datepicker` no existe en `@material/web` (verificado en source 2.5.0); el popup usa un `<dialog>` nativo `showModal()` (top layer, queda sobre el modal) con backdrop transparente y grid propio, sin dependencias nuevas
+
 ### 03/08/2026 - Copy de confirmación de borrado en Configuración
 - **Fix**: Mensajes de confirmación de categorías, rubros y conceptos ya no dicen "pero quedarán sin X": como los items en uso muestran candado, no se pueden eliminar, así que el confirm solo aparece para items no usados (`config-page.js`)
 

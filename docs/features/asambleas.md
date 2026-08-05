@@ -207,7 +207,7 @@ function formAsambleas(data) {
     '<form id="modalForm" data-table="asambleas" onsubmit="handleForm(event)">'
     + (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '')
     + '<div class="form-row">'
-      + '<div class="form-group"><md-filled-text-field label="Fecha" type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>'
+      + dateFieldHtml('fecha', 'Fecha*', isEdit ? data.fecha : '')
       + '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%">'
         + '<md-select-option value="Ordinaria"' + (isEdit && data.tipo === 'Ordinaria' ? ' selected' : '') + '><span slot="headline">Ordinaria</span></md-select-option>'
         + '<md-select-option value="Extraordinaria"' + (isEdit && data.tipo === 'Extraordinaria' ? ' selected' : '') + '><span slot="headline">Extraordinaria</span></md-select-option>'

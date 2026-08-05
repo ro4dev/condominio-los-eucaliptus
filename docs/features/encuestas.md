@@ -425,7 +425,7 @@ function formEncuestas(data) {
     + '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Título de la propuesta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>'
     + '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalle de la propuesta..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>'
     + '<div class="form-row">'
-      + '<div class="form-group"><md-filled-text-field label="Fecha de término" type="date" name="fecha_termino" required style="width:100%"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></md-filled-text-field></div>'
+      + dateFieldHtml('fecha_termino', 'Fecha de término*', isEdit ? data.fecha_termino : '')
       + '<div class="form-group"><md-filled-text-field label="Quorum (mín. votos)" type="number" name="quorum" min="0" placeholder="Ej: Sin límite" style="width:100%"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></md-filled-text-field></div>'
     + '</div>'
     + '<div class="form-group" style="margin-top:1rem">' + alternativasHtml + '</div>'
