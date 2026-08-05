@@ -60,8 +60,8 @@ function dateFieldHtml(name, label, isoValue) {
     '<input type="text" class="m3-date" placeholder=" " required inputmode="none" value="' + val + '"' +
     (isoValue ? ' data-iso="' + isoValue + '"' : '') +
     ' onkeydown="if(event.key.length===1)return false" onpaste="return false" oninput="dateFieldTyped(this)" oninvalid="dateFieldInvalid(event)" onclick="openDatePicker(this)">' +
-    '<input type="hidden" name="' + name + '"' + (isoValue ? ' value="' + isoValue + '"' : '') + '>' +
     '<label class="m3-date-label">' + label + '</label>' +
+    '<input type="hidden" name="' + name + '"' + (isoValue ? ' value="' + isoValue + '"' : '') + '>' +
     '<div class="m3-date-error"></div>' +
     '<md-icon class="m3-date-icon" aria-hidden="true">calendar_month</md-icon>' +
   '</div></div>';

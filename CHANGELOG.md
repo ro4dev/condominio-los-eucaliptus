@@ -7,6 +7,7 @@
 - **Feat**: `dateFieldHtml()` en `modals.js` genera el campo (input display no-editable + hidden input con ISO + label flotante + estado de error), `openDatePicker()`/`renderDatePicker()`/`pickDate()` manejan el calendario
 - **Style**: Estilos `.m3-date-group` (tokens M3 de filled field: `surface-container-highest`, línea 1px→3px en focus, label flotante) y `.date-picker-*` para el grid de días en `base.css`
 - **Fix**: `dateFieldOk` acepta elemento o evento (antes crasheaba con `undefined.closest` al recibir el input desde `pickDate`/`dateFieldTyped`, dejando el dialog abierto y rompiendo selecciones posteriores)
+- **Fix**: En `dateFieldHtml` el `<label>` vuelve a ir inmediatamente después del input display (el hidden input lo separaba y rompía el selector `.m3-date + .m3-date-label`, dejando el label centrado y superpuesto a la fecha)
 - **Fix**: El popup ya no depende del idioma del browser/SO (antes el calendar nativo salía en inglés aunque el sitio es ES)
 - **Note**: `md-datepicker` no existe en `@material/web` (verificado en source 2.5.0); el popup usa un `<dialog>` nativo `showModal()` (top layer, queda sobre el modal) con backdrop transparente y grid propio, sin dependencias nuevas
 
