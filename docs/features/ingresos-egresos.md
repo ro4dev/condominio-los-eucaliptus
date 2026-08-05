@@ -204,7 +204,7 @@ function formFlujo(data) {
         + '<md-select-option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '><span slot="headline">Ingreso</span></md-select-option>'
         + '<md-select-option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '><span slot="headline">Egreso</span></md-select-option>'
       + '</md-filled-select></div>'
-      + '<div class="form-group"><md-filled-text-field label="Fecha" type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>'
+      + dateFieldHtml('fecha', 'Fecha*', isEdit ? data.fecha : '')
     + '</div>'
     + '<div class="form-group"><md-filled-select label="Concepto" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>'
     + '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>'

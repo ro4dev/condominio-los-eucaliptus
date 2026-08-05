@@ -10,6 +10,7 @@ function openModal(title, html, footerHtml, wide) {
 }
 
 function closeModal() {
+  closeDatePicker();
   document.getElementById('mainDialog').close();
   hideLoading();
 }
@@ -45,6 +46,153 @@ function hideLoading() {
 
 function confirmCloseModal() {
   closeModal();
+}
+
+var MESES_ES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+var DIAS_ES = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+var _datePickerInput = null;
+var _dpYear = null;
+var _dpMonth = null;
+
+function dateFieldHtml(name, label, isoValue) {
+  var val = isoValue ? formatDate(isoValue) : '';
+  return '<div class="form-group"><div class="m3-date-group">' +
+    '<input type="text" class="m3-date" placeholder=" " required inputmode="none" value="' + val + '"' +
+    (isoValue ? ' data-iso="' + isoValue + '"' : '') +
+    ' onkeydown="if(event.key.length===1)return false" onpaste="return false" oninput="dateFieldTyped(this)" oninvalid="dateFieldInvalid(event)" onclick="openDatePicker(this)">' +
+    '<input type="hidden" name="' + name + '"' + (isoValue ? ' value="' + isoValue + '"' : '') + '>' +
+    '<label class="m3-date-label">' + label + '</label>' +
+    '<div class="m3-date-error"></div>' +
+    '<md-icon class="m3-date-icon" aria-hidden="true">calendar_month</md-icon>' +
+  '</div></div>';
+}
+
+function dateFieldInvalid(e) {
+  e.preventDefault();
+  var group = e.target.closest('.m3-date-group');
+  if (!group) return;
+  group.classList.add('m3-error');
+  var msg = group.querySelector('.m3-date-error');
+  if (msg) msg.textContent = 'Campo requerido';
+}
+
+function dateFieldOk(e) {
+  var el = e.target || e;
+  var group = el.closest ? el.closest('.m3-date-group') : null;
+  if (group) group.classList.remove('m3-error');
+}
+
+function dateFieldTyped(el) {
+  var iso = el.getAttribute('data-iso');
+  var expected = iso ? formatDate(iso) : '';
+  if (el.value !== expected) el.value = expected;
+  dateFieldOk(el);
+}
+
+function dateISO(d) {
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+}
+
+function openDatePicker(inputEl) {
+  _datePickerInput = inputEl;
+  var iso = inputEl.getAttribute('data-iso') || '';
+  var base = iso ? new Date(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10)) : new Date();
+  _dpYear = base.getFullYear();
+  _dpMonth = base.getMonth();
+  renderDatePicker();
+  var dlg = document.getElementById('datePickerDialog');
+  var rect = inputEl.getBoundingClientRect();
+  var estH = 340;
+  if (rect.bottom + estH > window.innerHeight - 8) {
+    dlg.style.top = Math.max(8, rect.top - estH) + 'px';
+  } else {
+    dlg.style.top = (rect.bottom + 4) + 'px';
+  }
+  var left = Math.min(Math.max(8, rect.left), Math.max(8, window.innerWidth - 308));
+  dlg.style.left = left + 'px';
+  dlg.addEventListener('close', datePickerCleanup);
+  document.addEventListener('scroll', closeDatePicker, true);
+  document.addEventListener('click', datePickerBackdrop, true);
+  document.addEventListener('keydown', datePickerKey);
+  dlg.showModal();
+}
+
+function closeDatePicker() {
+  var dlg = document.getElementById('datePickerDialog');
+  if (dlg.open) dlg.close();
+}
+
+function datePickerBackdrop(e) {
+  var dlg = document.getElementById('datePickerDialog');
+  if (e.target === dlg) closeDatePicker();
+}
+
+function datePickerKey(e) {
+  if (e.key === 'Escape') closeDatePicker();
+}
+
+function datePickerCleanup() {
+  var dlg = document.getElementById('datePickerDialog');
+  dlg.removeEventListener('close', datePickerCleanup);
+  document.removeEventListener('scroll', closeDatePicker, true);
+  document.removeEventListener('click', datePickerBackdrop, true);
+  document.removeEventListener('keydown', datePickerKey);
+}
+
+function renderDatePicker() {
+  var todayISO = dateISO(new Date());
+  var selectedISO = _datePickerInput ? _datePickerInput.getAttribute('data-iso') || '' : '';
+  var startWeekday = (new Date(_dpYear, _dpMonth, 1).getDay() + 6) % 7;
+  var daysInMonth = new Date(_dpYear, _dpMonth + 1, 0).getDate();
+  var cells = [];
+  for (var i = 0; i < 42; i++) {
+    var day = i - startWeekday + 1;
+    var inMonth = day >= 1 && day <= daysInMonth;
+    var isoStr = dateISO(new Date(_dpYear, _dpMonth, day));
+    var cls = 'date-picker-day';
+    if (!inMonth) cls += ' other';
+    if (isoStr === selectedISO) cls += ' selected';
+    if (isoStr === todayISO) cls += ' today';
+    cells.push('<button type="button" class="' + cls + '" data-date="' + isoStr + '">' + new Date(_dpYear, _dpMonth, day).getDate() + '</button>');
+  }
+  document.getElementById('datePickerBody').innerHTML =
+    '<div class="date-picker-header">' +
+      '<md-icon-button onclick="datePickerPrevMonth()"><md-icon>chevron_left</md-icon></md-icon-button>' +
+      '<span class="date-picker-title">' + MESES_ES[_dpMonth] + ' ' + _dpYear + '</span>' +
+      '<md-icon-button onclick="datePickerNextMonth()"><md-icon>chevron_right</md-icon></md-icon-button>' +
+    '</div>' +
+    '<div class="date-picker-weekdays">' + DIAS_ES.map(function(d) { return '<span>' + d + '</span>'; }).join('') + '</div>' +
+    '<div class="date-picker-grid" onclick="datePickerClick(event)">' + cells.join('') + '</div>';
+}
+
+function datePickerPrevMonth() {
+  _dpMonth--;
+  if (_dpMonth < 0) { _dpMonth = 11; _dpYear--; }
+  renderDatePicker();
+}
+
+function datePickerNextMonth() {
+  _dpMonth++;
+  if (_dpMonth > 11) { _dpMonth = 0; _dpYear++; }
+  renderDatePicker();
+}
+
+function datePickerClick(e) {
+  var btn = e.target.closest('.date-picker-day');
+  if (!btn) return;
+  pickDate(btn.getAttribute('data-date'));
+}
+
+function pickDate(isoStr) {
+  var input = _datePickerInput;
+  if (input) {
+    input.value = formatDate(isoStr);
+    input.setAttribute('data-iso', isoStr);
+    var hidden = input.closest('.m3-date-group').querySelector('input[type="hidden"]');
+    if (hidden) hidden.value = isoStr;
+    dateFieldOk(input);
+  }
+  closeDatePicker();
 }
 
 function handleForm(e) {
@@ -426,7 +574,7 @@ function formNoticias(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row" style="grid-template-columns:1fr 1fr">' +
     '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><md-filled-text-field label="Vigente hasta" type="date" name="fecha_hasta" required style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-filled-text-field></div>' +
+    dateFieldHtml('fecha_hasta', 'Vigente hasta*', isEdit ? data.fecha_hasta : '') +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalle de la noticia..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion) + '"' : '') + '></md-filled-text-field></div>' +
   '</form>',
@@ -446,7 +594,7 @@ function formFlujo(data) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '><span slot="headline">Ingreso</span></md-select-option><md-select-option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '><span slot="headline">Egreso</span></md-select-option></md-filled-select></div>' +
-      '<div class="form-group"><md-filled-text-field label="Fecha" type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>' +
+      dateFieldHtml('fecha', 'Fecha*', isEdit ? data.fecha : '') +
     '</div>' +
     '<div class="form-group"><md-filled-select label="Concepto" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>' +
     '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
@@ -530,7 +678,7 @@ function formAsambleas(data) {
     '<form id="modalForm" data-table="asambleas" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-text-field label="Fecha" type="date" name="fecha" required style="width:100%"' + (isEdit ? ' value="' + data.fecha + '"' : '') + '></md-filled-text-field></div>' +
+      dateFieldHtml('fecha', 'Fecha*', isEdit ? data.fecha : '') +
       '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Ordinaria"' + (isEdit && data.tipo === 'Ordinaria' ? ' selected' : '') + '><span slot="headline">Ordinaria</span></md-select-option><md-select-option value="Extraordinaria"' + (isEdit && data.tipo === 'Extraordinaria' ? ' selected' : '') + '><span slot="headline">Extraordinaria</span></md-select-option></md-filled-select></div>' +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Temario" name="temario" placeholder="Ej: Puntos a tratar en la asamblea" type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.temario) + '"' : '') + '></md-filled-text-field></div>' +
@@ -566,7 +714,7 @@ function formEncuestas(data) {
     '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Título de la propuesta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalle de la propuesta..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-row">' +
-      '<div class="form-group"><md-filled-text-field label="Fecha de término" type="date" name="fecha_termino" required style="width:100%"' + (isEdit && data.fecha_termino ? ' value="' + data.fecha_termino + '"' : '') + '></md-filled-text-field></div>' +
+      dateFieldHtml('fecha_termino', 'Fecha de término*', isEdit ? data.fecha_termino : '') +
       '<div class="form-group"><md-filled-text-field label="Quorum (mín. votos)" type="number" name="quorum" min="0" placeholder="Ej: Sin límite" style="width:100%"' + (isEdit && data.quorum ? ' value="' + data.quorum + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group" style="margin-top:1rem">' + alternativasHtml + '</div>' +

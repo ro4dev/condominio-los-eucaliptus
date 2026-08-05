@@ -174,7 +174,8 @@ function formNoticias(data) {
     + (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '')
     + '<div class="form-row" style="grid-template-columns:1fr 1fr">'
       + '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>'
-      + '<div class="form-group"><md-filled-text-field label="Vigente hasta" type="date" name="fecha_hasta" required style="width:100%"' + (isEdit && data.fecha_hasta ? ' value="' + data.fecha_hasta + '"' : '') + '></md-filled-text-field></div>'
+      + dateFieldHtml('fecha_hasta', 'Vigente hasta*', isEdit ? data.fecha_hasta : '')
+      // → Genera el date picker M3 custom (campo display + hidden input ISO + label + error + ícono calendario)
     + '</div>'
     + '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalle de la noticia..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion) + '"' : '') + '></md-filled-text-field></div>'
     + '</form>',
