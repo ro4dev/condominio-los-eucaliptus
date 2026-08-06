@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 05/08/2026 - Espaciado uniforme entre campos de los forms en mobile
+- **Fix**: En mobile los campos apilados dentro de un `.form-row` quedaban con 1.5rem de separación (margin del `.form-group` + gap del grid), más grande que entre los demás campos (1rem)
+- **Fix**: `.form-row .form-group { margin-bottom: 0 }` y `margin-bottom: 1rem` en `.form-row` (`components.css`); gap del `.form-row` en mobile pasa de `0.5rem` a `1rem` (`layout.css`). Desktop sin cambios
+
 ### 05/08/2026 - Tooltip del gráfico de torta con separador de miles consistente
 - **Fix**: El tooltip del doughnut (Ingresos/Egresos) mostraba el separador de miles con coma (`12,500`) por usar el formateo por defecto de Chart.js; ahora usa `formatMoney` (`$12.500`) como el resto del sitio (`charts.js`)
 
