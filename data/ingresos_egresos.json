@@ -5,7 +5,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Reparación iluminación pasillo",
     "monto": "180000",
-    "comprobante": "https://drive.google.com/file/d/mant4",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -104,7 +104,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Mantenimiento pileta filtro",
     "monto": "500000",
-    "comprobante": "https://drive.google.com/file/d/mant8",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -113,7 +113,7 @@
     "concepto": "Servicios",
     "descripcion": "Internet comunitario julio",
     "monto": "320000",
-    "comprobante": "https://drive.google.com/file/d/serv3",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -131,7 +131,7 @@
     "concepto": "Servicios",
     "descripcion": "Internet comunitario junio",
     "monto": "300000",
-    "comprobante": "https://drive.google.com/file/d/serv7",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -212,7 +212,7 @@
     "concepto": "Servicios",
     "descripcion": "Factura gas julio",
     "monto": "280000",
-    "comprobante": "https://drive.google.com/file/d/serv4",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -230,7 +230,7 @@
     "concepto": "Servicios",
     "descripcion": "Cable comunitario julio",
     "monto": "350000",
-    "comprobante": "https://drive.google.com/file/d/serv9",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -257,7 +257,7 @@
     "concepto": "Servicios",
     "descripcion": "Factura electricity junio",
     "monto": "720000",
-    "comprobante": "https://drive.google.com/file/d/serv5",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -275,7 +275,7 @@
     "concepto": "Servicios",
     "descripcion": "Factura gas junio",
     "monto": "260000",
-    "comprobante": "https://drive.google.com/file/d/serv8",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -302,7 +302,7 @@
     "concepto": "Servicios",
     "descripcion": "Factura electricity julio",
     "monto": "780000",
-    "comprobante": "https://drive.google.com/file/d/serv1",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -338,7 +338,7 @@
     "concepto": "Seguros",
     "descripcion": "Seguro accidentes comunes",
     "monto": "6770500",
-    "comprobante": "https://drive.google.com/file/d/seg3",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -347,7 +347,7 @@
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "750000",
-    "comprobante": "https://drive.google.com/file/d/seg1",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -392,7 +392,7 @@
     "concepto": "Servicios",
     "descripcion": "Cable comunitario junio",
     "monto": "330000",
-    "comprobante": "https://drive.google.com/file/d/serv10",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -437,7 +437,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo rejilla desagüe",
     "monto": "150000",
-    "comprobante": "https://drive.google.com/file/d/mant9",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -536,7 +536,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de agua principal",
     "monto": "750000",
-    "comprobante": "https://drive.google.com/file/d/mant1",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -563,7 +563,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de presión",
     "monto": "680000",
-    "comprobante": "https://drive.google.com/file/d/mant10",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -599,7 +599,7 @@
     "concepto": "Servicios",
     "descripcion": "Factura agua julio",
     "monto": "450000",
-    "comprobante": "https://drive.google.com/file/d/serv2",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -617,7 +617,7 @@
     "concepto": "Seguros",
     "descripcion": "Seguro RC anual condominio",
     "monto": "800000",
-    "comprobante": "https://drive.google.com/file/d/seg2",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -626,7 +626,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo cerradura acceso principal",
     "monto": "250000",
-    "comprobante": "https://drive.google.com/file/d/mant5",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -653,7 +653,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo tendedero ropa",
     "monto": "200000",
-    "comprobante": "https://drive.google.com/file/d/mant2",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -689,7 +689,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Pintura portón ingreso",
     "monto": "350000",
-    "comprobante": "https://drive.google.com/file/d/mant3",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -716,7 +716,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Cambio grifería baño común",
     "monto": "300000",
-    "comprobante": "https://drive.google.com/file/d/mant6",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -743,7 +743,7 @@
     "concepto": "Mantenimiento",
     "descripcion": "Reparación autoestrap",
     "monto": "420000",
-    "comprobante": "https://drive.google.com/file/d/mant7",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {
@@ -752,7 +752,7 @@
     "concepto": "Servicios",
     "descripcion": "Factura agua junio",
     "monto": "410000",
-    "comprobante": "https://drive.google.com/file/d/serv6",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
   {

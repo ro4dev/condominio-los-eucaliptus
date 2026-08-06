@@ -3,42 +3,49 @@
     "nombre": "Reglamento interno 2026",
     "categoria": "Estatuto",
     "fecha": "1/01/2026",
-    "descripcion": "Reglamento aprobado en asamblea ordinaria"
+    "descripcion": "Reglamento aprobado en asamblea ordinaria",
+    "archivo": "assets/demo_documento.pdf"
   },
   {
     "nombre": "Acta asamblea junio 2026",
     "categoria": "Actas",
     "fecha": "15/06/2026",
-    "descripcion": "Acta de la asamblea mensual de junio"
+    "descripcion": "Acta de la asamblea mensual de junio",
+    "archivo": "assets/demo_documento.pdf"
   },
   {
     "nombre": "Acta asamblea julio 2026",
     "categoria": "Actas",
     "fecha": "20/07/2026",
-    "descripcion": "Acta de la asamblea mensual de julio"
+    "descripcion": "Acta de la asamblea mensual de julio",
+    "archivo": "assets/demo_documento.pdf"
   },
   {
     "nombre": "Contrato mantenimiento jardines",
     "categoria": "Contratos",
     "fecha": "1/03/2026",
-    "descripcion": "Contrato anual con jardinería \"Verde Total\""
+    "descripcion": "Contrato anual con jardinería \"Verde Total\"",
+    "archivo": "assets/demo_documento.pdf"
   },
   {
     "nombre": "Póliza seguro 2026",
     "categoria": "Seguros",
     "fecha": "1/01/2026",
-    "descripcion": "Póliza de seguro contra incendio y robo"
+    "descripcion": "Póliza de seguro contra incendio y robo",
+    "archivo": "assets/demo_documento.pdf"
   },
   {
     "nombre": "Plano domicilio original",
     "categoria": "Planos",
     "fecha": "1/01/2020",
-    "descripcion": "Plano de loteo aprobado por municipio"
+    "descripcion": "Plano de loteo aprobado por municipio",
+    "archivo": "assets/demo_documento.pdf"
   },
   {
     "nombre": "Convenio cooperative eléctrica",
     "categoria": "Contratos",
     "fecha": "15/02/2024",
-    "descripcion": "Convenio suministro eléctrico común"
+    "descripcion": "Convenio suministro eléctrico común",
+    "archivo": "assets/demo_documento.pdf"
   }
 ]
