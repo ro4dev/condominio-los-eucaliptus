@@ -16,7 +16,7 @@ header > div > div:last-child { min-width: 0; }
   .config-duo { grid-template-columns: 1fr !important; }
   .filters { grid-template-columns: 1fr 1fr; }
   .stats { grid-template-columns: 1fr !important; }
-  .form-row { grid-template-columns: 1fr !important; gap: 0.5rem; }
+  .form-row { grid-template-columns: 1fr !important; gap: 1rem; }
   .form-row .form-group { min-width: 0; }
   .form-row md-filled-select,
   .form-row md-filled-text-field { min-width: 0; width: 100%; }
