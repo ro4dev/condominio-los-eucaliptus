@@ -261,14 +261,18 @@ function handleForm(e) {
   var fileInput = form.querySelector('input[type="file"]');
   var filePromise = Promise.resolve(null);
   if (fileInput && fileInput.files.length > 0) {
-    var bucket = form.dataset.bucket || 'gastos_comunes';
-    var folder = '';
-    if (table === 'gastos' && data.periodo) {
-      folder = data.periodo;
+    if (DEMO_MODE) {
+      filePromise = fileToBlobURL(fileInput.files[0]);
+    } else {
+      var bucket = form.dataset.bucket || 'gastos_comunes';
+      var folder = '';
+      if (table === 'gastos' && data.periodo) {
+        folder = data.periodo;
+      }
+      else if (table === 'flujo' && data.fecha && data.tipo) folder = data.fecha.slice(0, 7) + '-' + data.tipo;
+      else if (table === 'documentos' && data.categoria) folder = data.categoria;
+      filePromise = supabaseUpload(fileInput.files[0], bucket, folder);
     }
-    else if (table === 'flujo' && data.fecha && data.tipo) folder = data.fecha.slice(0, 7) + '-' + data.tipo;
-    else if (table === 'documentos' && data.categoria) folder = data.categoria;
-    filePromise = supabaseUpload(fileInput.files[0], bucket, folder);
   }
 
   function afterSave() {
@@ -288,7 +292,7 @@ function handleForm(e) {
   }
 
   filePromise.then(function(fileUrl) {
-    if (fileInput && fileInput.files.length > 0 && !fileUrl) {
+    if (!DEMO_MODE && fileInput && fileInput.files.length > 0 && !fileUrl) {
       submitError();
       return;
     }
@@ -435,8 +439,25 @@ function handleForm(e) {
   });
 }
 
+function fileToBlobURL(file) {
+  return new Promise(function(resolve) {
+    function toURL(blob) {
+      resolve(URL.createObjectURL(blob));
+    }
+    if (typeof imageCompression !== 'undefined' && file.type && file.type.indexOf('image/') === 0 && file.size > 500 * 1024) {
+      imageCompression(file, { maxSizeMB: 0.5, maxWidthOrHeight: 1920, useWebWorker: true })
+        .then(toURL)
+        .catch(function() { toURL(file); });
+    } else {
+      toURL(file);
+    }
+  });
+}
+
 function tableToArray(table) {
   var map = {
+    gastos: 'GASTOS',
+    reclamos: 'RECLAMOS',
     noticias: 'NOTICIAS',
     flujo: 'FLUJO',
     documentos: 'DOCUMENTOS',

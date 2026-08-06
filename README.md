@@ -127,7 +127,7 @@ CREATE POLICY "storage_insert" ON storage.objects
 
 ### Modo Demo
 
-Los formularios modales funcionan en ambos modos. En modo demo guarda en JSON local, en producción envía a Supabase.
+Los formularios modales funcionan en ambos modos. En modo demo los cambios se guardan en memoria del navegador (los archivos se comprimen y almacenan como base64, sin tocar el storage real) y se pierden al recargar la página; en producción envía a Supabase.
 
 ## Funcionalidades
 
