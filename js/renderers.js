@@ -118,7 +118,7 @@ function renderTable(data) {
       '<td>' + parcelName(r.parcela_id) + '</td>' +
       '<td>' + formatPeriodo(r.periodo) + '</td>' +
       '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
-      '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank">Ver</a>' : '') + '</td>' +
+      '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
       '<td>' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>' +
       '</tr>';
   }).join('');
