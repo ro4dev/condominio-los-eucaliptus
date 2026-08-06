@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 05/08/2026 - Archivos demo reales (boleta y PDF)
+- **Feat**: Los 23 `comprobante` del demo que tenían links fake de Google Drive ahora apuntan a `assets/demo_comprobante_transferencia.png` (imagen real de boleta/transferencia) — el click en "Ver"/ícono abre la imagen en pestaña nueva igual que en producción
+- **Feat**: Los 7 documentos del demo llevan `archivo: assets/demo_documento.pdf` (PDF real de 1 página) — el ícono de ver documento abre el PDF en el visor del navegador
+
 ### 05/08/2026 - Modo demo: fixes de guardado y subida de archivos en memoria
 - **Fix**: Los botones "+ Agregar" admin aparecen tras iniciar sesión en demo — `checkAdmin()` en demo ahora llama `updateAuthUI()` (`supabase-config.js`)
 - **Fix**: Guardar Gasto/Reclamo en demo ahora sí agrega/actualiza en los arrays — `tableToArray()` mapea `gastos` y `reclamos` (`modals.js`)
