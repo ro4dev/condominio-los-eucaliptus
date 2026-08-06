@@ -16,6 +16,7 @@ var TABLE_MAP = {
 async function loadJson(target) {
   try {
     if (DEMO_MODE) {
+      if (loaded[target]) return;
       var res = await fetch(DEMO_FILES[target], { cache: 'no-store' });
       window[target] = await res.json();
     } else if (supabaseClient) {
@@ -112,7 +113,9 @@ function showSkeletons(tab) {
 
 async function reloadTab(tab) {
   showSkeletons(tab);
-  loaded = {};
+  if (!DEMO_MODE) {
+    loaded = {};
+  }
   await loadTabData(tab);
   var tabEl = document.getElementById('tab-' + tab);
   if (tabEl) tabEl.setAttribute('aria-busy', 'false');

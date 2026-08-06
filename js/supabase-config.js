@@ -30,6 +30,7 @@ async function checkAdmin() {
     if (configTab) {
       configTab.style.display = IS_ADMIN ? '' : 'none';
     }
+    updateAuthUI();
     return;
   }
   if (!currentUser) {

@@ -2,6 +2,13 @@
 
 ## Registro de cambios
 
+### 05/08/2026 - Modo demo: fixes de guardado y subida de archivos en memoria
+- **Fix**: Los botones "+ Agregar" admin aparecen tras iniciar sesión en demo — `checkAdmin()` en demo ahora llama `updateAuthUI()` (`supabase-config.js`)
+- **Fix**: Guardar Gasto/Reclamo en demo ahora sí agrega/actualiza en los arrays — `tableToArray()` mapea `gastos` y `reclamos` (`modals.js`)
+- **Fix**: Subir archivo en demo ya no aborta el guardado ni sube al storage real de producción — el upload queda limitado a `!DEMO_MODE` (`modals.js`)
+- **Feat**: En demo los archivos se guardan localmente en memoria: se comprimen con `browser-image-compression` (mismos parámetros que producción) y se almacenan como blob URL (`blob:...`) en `archivo`/`comprobante` — no se toca el bucket de producción y el click en "Ver"/ícono abre la imagen en pestaña nueva igual que en producción (los `data:` quedan bloqueados por el navegador, los `blob:` no)
+- **Feat**: El modo demo no re-fetchea tablas ya cargadas (`loadJson` usa `loaded[target]`), así lo guardado sobrevive al cambiar de pestaña; se resetea solo al recargar la página (`data.js`)
+
 ### 05/08/2026 - Espaciado uniforme entre campos de los forms en mobile
 - **Fix**: En mobile los campos apilados dentro de un `.form-row` quedaban con 1.5rem de separación (margin del `.form-group` + gap del grid), más grande que entre los demás campos (1rem)
 - **Fix**: `.form-row .form-group { margin-bottom: 0 }` y `margin-bottom: 1rem` en `.form-row` (`components.css`); gap del `.form-row` en mobile pasa de `0.5rem` a `1rem` (`layout.css`). Desktop sin cambios
