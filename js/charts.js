@@ -60,7 +60,7 @@ function renderParcelaChart(data) {
     data: { labels: labels, datasets: [{ data: values, backgroundColor: colors.slice(0, labels.length) }] },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { color: textColor, boxWidth: 12, padding: 12, font: { size: 11 } } } }
+      plugins: { legend: { position: 'bottom', labels: { color: textColor, boxWidth: 12, padding: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: function(ctx) { return ctx.label + ': $' + formatMoney(ctx.parsed); } } } }
     }
   });
 }

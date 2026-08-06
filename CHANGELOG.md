@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 05/08/2026 - Tooltip del gráfico de torta con separador de miles consistente
+- **Fix**: El tooltip del doughnut (Ingresos/Egresos) mostraba el separador de miles con coma (`12,500`) por usar el formateo por defecto de Chart.js; ahora usa `formatMoney` (`$12.500`) como el resto del sitio (`charts.js`)
+
 ### 05/08/2026 - Popups ya no se cierran al hacer click fuera
 - **UX**: Los popups (`md-dialog`) ya no se cierran al hacer click fuera de su área — evita perder datos tipeados por accidente. Aplica a todos: forms, confirmaciones y login
 - **Feat**: `patchScrimClose()` en `modals.js` anula `handleDialogClick`/`handleCancel` del prototype de `md-dialog` (bloquea el cierre por backdrop pero preserva Escape y los botones), invocado desde `openModal()` y `showConfirm()`
