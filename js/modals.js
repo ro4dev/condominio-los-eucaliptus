@@ -1,4 +1,24 @@
+var _scrimClosePatched = false;
+function patchScrimClose() {
+  if (_scrimClosePatched) return;
+  var ctor = customElements.get('md-dialog');
+  if (!ctor) return;
+  var proto = ctor.prototype;
+  if (typeof proto.handleDialogClick !== 'function') return;
+  var origCancel = proto.handleCancel;
+  proto.handleDialogClick = function () { this.nextClickIsFromContent = false; };
+  proto.handleCancel = function (e) {
+    if (e.target !== this.dialog) return;
+    if (typeof origCancel === 'function' && this.escapePressedWithoutCancel) {
+      return origCancel.call(this, e);
+    }
+    e.preventDefault();
+  };
+  _scrimClosePatched = true;
+}
+
 function openModal(title, html, footerHtml) {
+  patchScrimClose();
   var dialog = document.getElementById('mainDialog');
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = html;
@@ -15,6 +35,7 @@ function closeModal() {
 }
 
 function showConfirm(message, onConfirm, confirmText) {
+  patchScrimClose();
   confirmText = confirmText || 'Eliminar';
   document.getElementById('modalTitle').textContent = 'Confirmar';
   document.getElementById('modalBody').innerHTML = '<div style="line-height:1.5">' + message + '</div>';
