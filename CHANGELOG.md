@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 05/08/2026 - Popups ya no se cierran al hacer click fuera
+- **UX**: Los popups (`md-dialog`) ya no se cierran al hacer click fuera de su área — evita perder datos tipeados por accidente. Aplica a todos: forms, confirmaciones y login
+- **Feat**: `patchScrimClose()` en `modals.js` anula `handleDialogClick`/`handleCancel` del prototype de `md-dialog` (bloquea el cierre por backdrop pero preserva Escape y los botones), invocado desde `openModal()` y `showConfirm()`
+- **Note**: No existe atributo `scrimClickAction` en `@material/web@2.5.0` (verificado en source); el cierre por click fuera lo maneja el componente con dos rutas (click en backdrop + evento nativo `cancel`)
+
 ### 05/08/2026 - Ancho único de popups en desktop
 - **Style**: Todos los popups de forms (Gastos, Parcelas, Propietarios, Noticias, Ingresos/Egresos, Documentos, Reclamos, Proveedores, Asambleas, Encuestas) usan un ancho fijo de `560px` en desktop (`#mainDialog`, media query `min-width: 701px` en `base.css`) — antes cada diálogo se autodimensionaba según su contenido
 - **Style**: Se elimina la clase `modal-wide` (única excepción de ancho) y el parámetro `wide` de `openModal()` — todos los popups quedan con el mismo ancho
