@@ -5,7 +5,10 @@
 ### 05/08/2026 - Archivos demo reales (boleta y PDF)
 - **Feat**: Los 23 `comprobante` del demo que tenían links fake de Google Drive ahora apuntan a `assets/demo_comprobante_transferencia.png` (imagen real de boleta/transferencia) — el click en "Ver"/ícono abre la imagen en pestaña nueva igual que en producción
 - **Feat**: Los 7 documentos del demo llevan `archivo: assets/demo_documento.pdf` (PDF real de 1 página) — el ícono de ver documento abre el PDF en el visor del navegador
-- **Feat**: Los 27 gastos del demo llevan `archivo: assets/demo_comprobante_transferencia.png` — la columna "Ver" de la tabla de gastos comunes muestra la boleta
+- **Feat**: Los 27 gastos del demo llevan `archivo: assets/demo_comprobante_transferencia.png` — la columna de la tabla de gastos comunes muestra la boleta
+- **Style**: La columna de comprobante en la tabla de Gastos usa el mismo ícono `receipt` de Ingresos/Egresos en vez del texto "Ver" (`renderers.js`)
+- **Style**: En los modales de editar Gasto y Movimiento, el "Archivo actual: ver" ahora usa el ícono `receipt` (`modals.js`)
+- **Style**: El ícono `receipt` y el input de archivo comparten una fila (`.comprobante-row` en `components.css`) — input crece y el ícono queda a la derecha
 
 ### 05/08/2026 - Modo demo: fixes de guardado y subida de archivos en memoria
 - **Fix**: Los botones "+ Agregar" admin aparecen tras iniciar sesión en demo — `checkAdmin()` en demo ahora llama `updateAuthUI()` (`supabase-config.js`)

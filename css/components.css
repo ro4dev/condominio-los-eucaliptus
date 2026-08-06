@@ -39,3 +39,5 @@ textarea::placeholder { color: var(--md-sys-color-on-surface-variant); }
 .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-2); margin-bottom: 0.3rem; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem; }
 .form-row .form-group { margin-bottom: 0; }
+.comprobante-row { display: flex; align-items: center; gap: 0.5rem; }
+.comprobante-row input[type="file"] { flex: 1; min-width: 0; }

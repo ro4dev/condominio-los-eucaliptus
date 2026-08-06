@@ -512,8 +512,12 @@ function formGastos(opt) {
       '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalles del gasto..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="archivo" accept="image/*"></div>' +
-    (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
+    '<div class="form-group"><label>Comprobante (foto)</label>' +
+      '<div class="comprobante-row">' +
+        '<input type="file" name="archivo" accept="image/*">' +
+        (isEdit && data.archivo ? '<a href="' + data.archivo + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+      '</div>' +
+    '</div>' +
   '</form>',
     '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
   document.getElementById('gastoPeriodo').addEventListener('change', updateGastoParcelas);
@@ -640,8 +644,12 @@ function formFlujo(data) {
     '<div class="form-group"><md-filled-select label="Concepto" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>' +
     '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalles del movimiento..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
-    '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>' +
-    (isEdit && data.comprobante ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.comprobante + '" target="_blank">ver</a></div>' : '') +
+    '<div class="form-group"><label>Comprobante (foto)</label>' +
+      '<div class="comprobante-row">' +
+        '<input type="file" name="comprobante" accept="image/*">' +
+        (isEdit && data.comprobante ? '<a href="' + data.comprobante + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+      '</div>' +
+    '</div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }
