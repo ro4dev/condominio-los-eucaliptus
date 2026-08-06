@@ -152,10 +152,13 @@ body.dark {
 body { font: var(--md-sys-typescale-body-medium); background: var(--bg); color: var(--text); transition: background 0.3s, color 0.3s; }
 
 /* M3 dialog sizing */
-md-dialog {
+#mainDialog {
   min-width: 320px;
   max-width: 90vw;
   max-height: 85vh;
+}
+@media (min-width: 701px) {
+  #mainDialog { width: 560px; }
 }
 .m3-date-group {
   position: relative;

@@ -197,7 +197,7 @@ function showPropietarios(parcelaId) {
   if (IS_ADMIN) {
     footer += '<md-filled-button onclick="formPropietarios(\'' + parcelaId + '\')"><md-icon slot="icon">person_add</md-icon>Agregar</md-filled-button>';
   }
-  openModal('Propietarios de ' + escHtml(parcela.numero || parcelaId), body, footer, true);
+  openModal('Propietarios de ' + escHtml(parcela.numero || parcelaId), body, footer);
 }
 
 // NOTICIAS

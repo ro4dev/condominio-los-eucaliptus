@@ -21,6 +21,3 @@ header > div > div:last-child { min-width: 0; }
   .form-row md-filled-select,
   .form-row md-filled-text-field { min-width: 0; width: 100%; }
 }
-@media (min-width: 701px) {
-  md-dialog.modal-wide { min-width: 560px; }
-}

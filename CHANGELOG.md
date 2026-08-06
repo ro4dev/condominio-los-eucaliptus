@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 05/08/2026 - Ancho único de popups en desktop
+- **Style**: Todos los popups de forms (Gastos, Parcelas, Propietarios, Noticias, Ingresos/Egresos, Documentos, Reclamos, Proveedores, Asambleas, Encuestas) usan un ancho fijo de `560px` en desktop (`#mainDialog`, media query `min-width: 701px` en `base.css`) — antes cada diálogo se autodimensionaba según su contenido
+- **Style**: Se elimina la clase `modal-wide` (única excepción de ancho) y el parámetro `wide` de `openModal()` — todos los popups quedan con el mismo ancho
+- **Chore**: Limpieza de parámetros `, true` huérfanos en las llamadas a `openModal` (`modals.js`)
+
 ### 04/08/2026 - Date picker M3 custom (rama experimental/datepicker-m3-custom)
 - **Feat**: Los 4 campos de fecha (Noticias, Ingresos/Egresos, Asambleas, Encuestas) pasan de `md-filled-text-field type="date"` a un date picker M3 custom: campo filled con ícono calendario que abre un popup anclado al campo (`<dialog>` nativo `showModal()` con flip arriba/abajo según espacio) con calendario en español (meses y días en ES, semana L-D) y navegación de mes
 - **Feat**: `dateFieldHtml()` en `modals.js` genera el campo (input display no-editable + hidden input con ISO + label flotante + estado de error), `openDatePicker()`/`renderDatePicker()`/`pickDate()` manejan el calendario
