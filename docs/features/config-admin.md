@@ -29,6 +29,8 @@ var CONFIG = {};  // en config-page.js
 //   CONFIG.conceptos_flujo → ["Mantención", "Cuotas", ...]
 //   CONFIG.parcelas_prefijo → "Terreno"
 //   CONFIG.parcelas_cantidad → 40
+//   CONFIG.datos_pago → { banco, tipo_cuenta, numero_cuenta, rut, titular, email, qr }
+//     (consume la pestaña Home → card "Cómo pagar")
 ```
 
 ## 4. HTML structure (index.html lines 229-277)
@@ -59,6 +61,26 @@ var CONFIG = {};  // en config-page.js
       </div>
       <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
     </div>
+  </div>
+
+  <!-- Datos de pago (Home → Cómo pagar) -->
+  <div class="card" style="margin-bottom:1rem">
+    <h4>Datos de Pago</h4>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cuenta y QR que se muestran en Home → "Cómo pagar" para que los deudores transfieran su cuota</p>
+    <div class="form-row">
+      <div class="form-group"><md-filled-text-field label="Banco" id="cfgPagoBanco" type="text" placeholder="Ej: Banco Estado" style="width:100%"></md-filled-text-field></div>
+      <div class="form-group"><md-filled-text-field label="Tipo de cuenta" id="cfgPagoTipoCuenta" type="text" placeholder="Ej: CuentaRut" style="width:100%"></md-filled-text-field></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><md-filled-text-field label="Número de cuenta" id="cfgPagoNumeroCuenta" type="text" placeholder="Ej: 12-345678-9" style="width:100%"></md-filled-text-field></div>
+      <div class="form-group"><md-filled-text-field label="RUT" id="cfgPagoRut" type="text" placeholder="Ej: 77.123.456-7" style="width:100%"></md-filled-text-field></div>
+    </div>
+    <div class="form-group"><md-filled-text-field label="Titular" id="cfgPagoTitular" type="text" placeholder="Ej: Comunidad Condominio Eucaliptus" style="width:100%"></md-filled-text-field></div>
+    <div class="form-row">
+      <div class="form-group"><md-filled-text-field label="Email tesorería" id="cfgPagoEmail" type="email" placeholder="Ej: tesoreria@eucaliptus.cl" style="width:100%"></md-filled-text-field></div>
+      <div class="form-group"><md-filled-text-field label="URL imagen QR" id="cfgPagoQr" type="url" placeholder="https://...qr.png" style="width:100%"></md-filled-text-field></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarDatosPago" onclick="saveDatosPago()">Guardar</md-filled-button></div>
   </div>
 
   <!-- Categorías documentos -->
@@ -129,6 +151,7 @@ async function renderConfig() {
     loadJson('FLUJO')
   ]);
   renderMontos();
+  renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();
   renderRubrosProveedores();
@@ -160,6 +183,41 @@ async function saveMontos() {
   btn.textContent = 'Guardar';
 }
 ```
+
+### 5.4b Datos de Pago
+
+```js
+function renderDatosPago() {
+  var d = CONFIG.datos_pago || {};
+  document.getElementById('cfgPagoBanco').value = d.banco || '';
+  document.getElementById('cfgPagoTipoCuenta').value = d.tipo_cuenta || '';
+  document.getElementById('cfgPagoNumeroCuenta').value = d.numero_cuenta || '';
+  document.getElementById('cfgPagoRut').value = d.rut || '';
+  document.getElementById('cfgPagoTitular').value = d.titular || '';
+  document.getElementById('cfgPagoEmail').value = d.email || '';
+  document.getElementById('cfgPagoQr').value = d.qr || '';
+}
+
+async function saveDatosPago() {
+  var btn = document.getElementById('btnGuardarDatosPago');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+  var value = {
+    banco: document.getElementById('cfgPagoBanco').value.trim(),
+    tipo_cuenta: document.getElementById('cfgPagoTipoCuenta').value.trim(),
+    numero_cuenta: document.getElementById('cfgPagoNumeroCuenta').value.trim(),
+    rut: document.getElementById('cfgPagoRut').value.trim(),
+    titular: document.getElementById('cfgPagoTitular').value.trim(),
+    email: document.getElementById('cfgPagoEmail').value.trim(),
+    qr: document.getElementById('cfgPagoQr').value.trim()
+  };
+  if (await saveConfig('datos_pago', value)) { showSnackbar('Datos de pago guardados.', 'success'); }
+  btn.disabled = false;
+  btn.textContent = 'Guardar';
+}
+```
+
+El `qr` es una URL de imagen QR estática (subida por el admin, p.ej. al bucket `documentos`). La consume `openComoPagar()` de la pestaña Home. El QR dinámico con monto requiere pasarela de pago (fuera de GitHub Pages).
 
 ### 5.5 Chip list system
 
@@ -429,6 +487,8 @@ INSERT INTO config (key, value) VALUES
   ('rubros_proveedores', '["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"]')
 ON CONFLICT (key) DO NOTHING;
 ```
+
+> `datos_pago` no se siembra: queda vacío hasta que el admin lo configure en la pestaña de Configuración. Sin él, la card "Cómo pagar" de Home muestra un aviso "Sin datos de pago configurados".
 
 ## 8. Dependencias
 

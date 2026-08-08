@@ -1,5 +1,7 @@
 # Gastos Comunes
 
+> **Deprecado**: este módulo se fusiona en [`docs/features/finanzas.md`](./finanzas.md). La tabla de cuotas por parcela pasa a ser una sección de la pestaña Finanzas, con columna de estado de pago (ver [`deudores.md`](./deudores.md)). Este documento se conserva como referencia histórica del render y funciones originales.
+
 ## 1. Descripción general
 
 Módulo principal del sistema. Es el primer tab que ve el usuario. Registra, visualiza y analiza los gastos comunes (expensas) que cada parcela debe pagar mensualmente. Incluye tabla de registros, 4 cards de estadísticas, 2 gráficos Chart.js y filtros combinados.

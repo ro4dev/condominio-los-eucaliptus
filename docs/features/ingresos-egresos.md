@@ -1,5 +1,7 @@
 # Ingresos/Egresos (Flujo de Caja)
 
+> **Deprecado**: este módulo se fusiona en [`docs/features/finanzas.md`](./finanzas.md). Los ingresos por cuotas y fondo reserva se **derivan** de los gastos pagados (ya no se cargan a mano); la tabla de movimientos pasa a ser una sección de la pestaña Finanzas (egresos e ingresos manuales). Este documento se conserva como referencia histórica del render y funciones originales.
+
 ## 1. Descripción general
 
 Registro de movimientos financieros del condominio. Incluye ingresos y egresos con concepto configurable, fecha, monto, descripción y comprobante opcional. Muestra estadísticas de totales y balance.
