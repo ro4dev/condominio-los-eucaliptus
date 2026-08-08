@@ -307,6 +307,8 @@ function renderFlujo() {
     '<div class="stat-card"><div class="label">Balance</div><div class="value ' + (balance >= 0 ? 'green' : 'red') + '">$' + formatMoney(balance) + '</div></div>' +
     '<div class="stat-card"><div class="label">Movimientos</div><div class="value">' + FLUJO.length + '</div></div>';
 
+  renderFlujoChart();
+
   var filtered = flujoFilter === 'todos' ? FLUJO : FLUJO.filter(function(f) { return f.tipo === flujoFilter; });
   var list = document.getElementById('flujoList');
   var sorted = filtered.slice().sort(function(a, b) {
