@@ -126,7 +126,12 @@ function renderTable(data) {
 
 // PARCELAS
 function renderParcelas() {
-  var grid = document.getElementById('parcelasGrid');
+  var wrap = document.getElementById('parcelasGrid');
+
+  if (!PARCELAS.length) {
+    wrap.innerHTML = emptyState('No hay parcelas registradas.');
+    return;
+  }
 
   var sorted = PARCELAS.slice().sort(function(a, b) {
     var numA = parseInt((a['numero'] || '').replace(/\D/g, '')) || 0;
@@ -134,31 +139,43 @@ function renderParcelas() {
     return numA - numB;
   });
 
-  grid.innerHTML = sorted.map(function(p, i) {
+  var estadoChip = function(estado) {
+    var st = String(estado || '').toLowerCase();
+    var bg, color;
+    if (st.indexOf('habit') !== -1) {
+      bg = 'var(--color-positive-bg)';
+      color = 'var(--color-positive-text)';
+    } else if (st.indexOf('construc') !== -1) {
+      bg = 'var(--color-extraordinaria-bg)';
+      color = 'var(--color-extraordinaria-text)';
+    } else {
+      bg = 'var(--md-sys-color-surface-container-highest)';
+      color = 'var(--md-sys-color-on-surface-variant)';
+    }
+    return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + escHtml(estado) + '</span>';
+  };
+
+  var rows = sorted.map(function(p) {
     var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela_id === p.id; });
-
-    var badgeHtml = propietarios.length > 0
-      ? '<span style="position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;border-radius:8px;background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary);font-size:0.65rem;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 4px;box-sizing:border-box">' + propietarios.length + '</span>'
-      : '';
-
-    return '<div class="card">' +
-      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">' +
-        '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>' +
-        '<span style="position:relative;display:inline-flex">' +
-          '<md-icon-button onclick="showPropietarios(\'' + p.id + '\')" title="Ver propietarios (' + propietarios.length + ')" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>' +
-          badgeHtml +
-        '</span>' +
-        (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') +
-      '</div>' +
-      '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + (p.rol || '—') + '</span></div>' +
-      '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>' +
-      '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>' +
-      '</div>';
+    return '<tr>' +
+      '<td style="font-weight:600;color:var(--text)">' + escHtml(p.numero || '') + '</td>' +
+      '<td>' + escHtml(p.rol || '—') + '</td>' +
+      '<td>' + (p.metros ? escHtml(p.metros) + ' m²' : '—') + '</td>' +
+      '<td>' + estadoChip(p.estado) + '</td>' +
+      '<td><div style="display:flex;align-items:center;gap:0.2rem">' +
+        '<md-icon-button onclick="showPropietarios(\'' + p.id + '\')" title="Ver propietarios (' + propietarios.length + ')" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>' +
+        '<span style="font-size:0.8rem;color:var(--text-2)">' + propietarios.length + '</span>' +
+      '</div></td>' +
+      '<td>' + (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') + '</td>' +
+      '</tr>';
   }).join('');
 
-  if (!PARCELAS.length) {
-    grid.innerHTML = emptyState('No hay parcelas registradas.');
-  }
+  wrap.innerHTML = '<table style="min-width:560px">' +
+    '<thead><tr>' +
+      '<th>Parcela</th><th>Rol</th><th>Metros²</th><th>Estado</th><th>Propietarios</th><th></th>' +
+    '</tr></thead>' +
+    '<tbody>' + rows + '</tbody>' +
+    '</table>';
 }
 
 // POPUP PROPIETARIOS (desde card de parcela)
