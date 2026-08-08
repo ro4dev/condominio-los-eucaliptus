@@ -63,7 +63,7 @@ CREATE TABLE documentos (
     <md-filter-chip label="Planos" onclick="filterDocumentos('Planos')"></md-filter-chip>
   </div>
 
-  <div class="cards-grid" id="documentosList">
+  <div class="docs-grid" id="documentosList">
     <div class="skeleton skeleton-doc"></div>
     <div class="skeleton skeleton-doc"></div>
     <div class="skeleton skeleton-doc"></div>

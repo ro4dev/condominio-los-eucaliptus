@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 08/08/2026 - Documentos en grid de 2 columnas
+- **Style**: La lista de Documentos pasa de `.cards-grid` (auto-fill, 3 por fila en desktop) a `.docs-grid` con exactamente 2 columnas en desktop (`repeat(2, 1fr)`) y 1 en mobile; el `.doc-item` pierde su `margin-bottom` dentro del grid (`css/sections.css`)
+
 ### 08/08/2026 - Gráficos de tendencia (línea/puntos)
 - **Changed**: El gráfico "Monto por período" pasa de barras a línea con puntos (`renderPeriodChart` en `charts.js`) — mejor para leer la evolución/tendencia a lo largo de los 24 periodos; se mantiene el color primario y se actualiza en dark mode (`updateChartTheme`)
 - **Feat**: Nueva pestaña Ingresos/Egresos con gráfico "Ingresos vs Egresos por mes" (`renderFlujoChart` en `charts.js`): dos líneas (verde `--color-positive` y rojo `--md-sys-color-error`) agrupadas por mes, que responde al filtro de chips (Todos/Ingresos/Egresos); se renderiza desde `renderFlujo`, actualiza colores en dark mode y usa todo el ancho en desktop (sin wrapper `.charts` de 2 columnas)
