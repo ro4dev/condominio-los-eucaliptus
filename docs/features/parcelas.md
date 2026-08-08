@@ -2,7 +2,7 @@
 
 ## 1. Descripción general
 
-Gestión de unidades habitacionales del condominio. Cada parcela se muestra como card con datos catastrales y lista inline de propietarios asociados. La creación puede ser individual (modal) o masiva (config). Es la entidad central del sistema: gastos, reclamos, votos y asistencias referencian a parcelas.
+Gestión de unidades habitacionales del condominio. Cada parcela se muestra como fila de tabla con datos catastrales, chip de estado y acceso al popup de propietarios asociados. La creación puede ser individual (modal) o masiva (config). Es la entidad central del sistema: gastos, reclamos, votos y asistencias referencian a parcelas.
 
 ID del tab: `parcelas`
 Contenedor: `<div id="tab-parcelas">`
@@ -34,11 +34,11 @@ CREATE TABLE parcelas (
 
 ```html
 <div id="tab-parcelas" class="tab-content" role="region" aria-label="Parcelas">
-  <div class="cards-grid" id="parcelasGrid">
-    <div class="skeleton skeleton-card"></div>
-    <div class="skeleton skeleton-card"></div>
-    <div class="skeleton skeleton-card"></div>
-    <div class="skeleton skeleton-card"></div>
+  <div class="table-wrap" id="parcelasGrid">
+    <div class="skeleton skeleton-row"></div>
+    <div class="skeleton skeleton-row"></div>
+    <div class="skeleton skeleton-row"></div>
+    <div class="skeleton skeleton-row"></div>
   </div>
 </div>
 ```
@@ -67,23 +67,29 @@ parcelas: function() {
 
 ### 7.1 renderParcelas()
 
+Renderiza el listado como tabla (`.table-wrap`, scroll horizontal en mobile), replicando el patrón de `renderFlujo`.
+
 **Flujo**:
 ```
-1. Ordena PARCELAS numéricamente (extrae dígitos con parseInt + replace \D)
-2. Por cada parcela:
+1. Si no hay parcelas, muestra emptyState en #parcelasGrid
+2. Ordena PARCELAS numéricamente (extrae dígitos con parseInt + replace \D)
+3. Por cada parcela:
    a. Filtra PROPIETARIOS donde prop.parcela_id === p.id
-   b. Calcula colorClass: colorClasses[i % 4] → green/purple/orange/pink cíclico
-   c. Renderiza header: número + botones edit parcela + add propietario (admin)
-   d. Renderiza campos: Rol (si existe), Metros², Estado
-   e. Renderiza propietarios inline
-3. Setea innerHTML de #parcelasGrid
+   b. Genera chip de estado: Habitada (verde), En construcción (ámbar), resto (gris)
+   c. Botón 👥 abre showPropietarios(p.id) + conteo de propietarios
+   d. Ícono ✏️ editar solo admin
+4. Setea innerHTML de #parcelasGrid con <table> (min-width 560px)
 ```
 
 **Código exacto**:
 ```js
 function renderParcelas() {
-  var grid = document.getElementById('parcelasGrid');
-  var colorClasses = ['green', 'purple', 'orange', 'pink'];
+  var wrap = document.getElementById('parcelasGrid');
+
+  if (!PARCELAS.length) {
+    wrap.innerHTML = emptyState('No hay parcelas registradas.');
+    return;
+  }
 
   var sorted = PARCELAS.slice().sort(function(a, b) {
     var numA = parseInt((a['numero'] || '').replace(/\D/g, '')) || 0;
@@ -91,40 +97,43 @@ function renderParcelas() {
     return numA - numB;
   });
 
-  grid.innerHTML = sorted.map(function(p, i) {
+  var estadoChip = function(estado) {
+    var st = String(estado || '').toLowerCase();
+    var bg, color;
+    if (st.indexOf('habit') !== -1) {
+      bg = 'var(--color-positive-bg)';
+      color = 'var(--color-positive-text)';
+    } else if (st.indexOf('construc') !== -1) {
+      bg = 'var(--color-extraordinaria-bg)';
+      color = 'var(--color-extraordinaria-text)';
+    } else {
+      bg = 'var(--md-sys-color-surface-container-highest)';
+      color = 'var(--md-sys-color-on-surface-variant)';
+    }
+    return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + escHtml(estado) + '</span>';
+  };
+
+  var rows = sorted.map(function(p) {
     var propietarios = PROPIETARIOS.filter(function(pr) { return pr.parcela_id === p.id; });
-    var colorClass = colorClasses[i % 4];
-
-    var propietariosHtml = propietarios.map(function(prop, j) {
-      var propColor = colorClasses[(i + j) % 4];
-      var nombre = prop.nombre_completo || '';
-      return '<div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border-light)">'
-        + '<div style="display:flex;align-items:center;gap:0.6rem">'
-          + '<div class="avatar ' + propColor + '">' + getInitials(nombre) + '</div>'
-          + '<div style="flex:1"><div style="font-weight:600;font-size:0.9rem">' + nombre + '</div><div style="font-size:0.75rem;color:var(--text-muted)">' + prop.tipo + '</div></div>'
-          + (IS_ADMIN ? '<md-icon-button onclick="editPropietario(\'' + prop.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>'
-            + '<md-icon-button onclick="deleteItem(\'propietarios\', \'' + prop.id + '\', \'PROPIETARIOS\', renderParcelas)" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' : '')
-        + '</div>'
-        + '<div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">'
-          + (prop.telefono ? '<div>📱 <a href="tel:' + prop.telefono + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.telefono + '</a></div>' : '')
-          + (prop.email ? '<div>✉️ <a href="mailto:' + prop.email + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + prop.email + '</a></div>' : '')
-          + (prop.rut ? '<div>📄 RUT: ' + prop.rut + '</div>' : '')
-        + '</div>'
-      + '</div>';
-    }).join('');
-
-    return '<div class="card">'
-      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">'
-        + '<h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">' + (p.numero || '') + '</h4>'
-        + (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>'
-          + '<md-icon-button onclick="formPropietarios(\'' + p.id + '\')" title="Agregar propietario" style="color:var(--md-sys-color-primary)"><md-icon>person_add</md-icon></md-icon-button>' : '')
-      + '</div>'
-      + (p.rol ? '<div class="field"><span class="field-label">Rol</span><span class="field-value">' + p.rol + '</span></div>' : '')
-      + '<div class="field"><span class="field-label">Metros²</span><span class="field-value">' + (p.metros || '') + ' m²</span></div>'
-      + '<div class="field"><span class="field-label">Estado</span><span class="field-value">' + p.estado + '</span></div>'
-      + propietariosHtml
-    + '</div>';
+    return '<tr>' +
+      '<td style="font-weight:600;color:var(--text)">' + escHtml(p.numero || '') + '</td>' +
+      '<td>' + escHtml(p.rol || '—') + '</td>' +
+      '<td>' + (p.metros ? escHtml(p.metros) + ' m²' : '—') + '</td>' +
+      '<td>' + estadoChip(p.estado) + '</td>' +
+      '<td><div style="display:flex;align-items:center;gap:0.2rem">' +
+        '<md-icon-button onclick="showPropietarios(\'' + p.id + '\')" title="Ver propietarios (' + propietarios.length + ')" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>' +
+        '<span style="font-size:0.8rem;color:var(--text-2)">' + propietarios.length + '</span>' +
+      '</div></td>' +
+      '<td>' + (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') + '</td>' +
+      '</tr>';
   }).join('');
+
+  wrap.innerHTML = '<table style="min-width:560px">' +
+    '<thead><tr>' +
+      '<th>Parcela</th><th>Rol</th><th>Metros²</th><th>Estado</th><th>Propietarios</th><th></th>' +
+    '</tr></thead>' +
+    '<tbody>' + rows + '</tbody>' +
+    '</table>';
 }
 ```
 
@@ -162,55 +171,42 @@ function editParcela(id) {
 }
 ```
 
-## 8. Render output exacto (por card)
+## 8. Render output exacto (por fila)
 
 ```html
-<div class="card">
-  <!-- Header -->
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
-    <h4 style="font-size:1rem;color:var(--text);margin:0;padding:0;border:none;flex:1">1</h4>
-    <!-- admin: edit + add owner -->
-    <md-icon-button onclick="editParcela('p1')" title="Editar"><md-icon>edit</md-icon></md-icon-button>
-    <md-icon-button onclick="formPropietarios('p1')" title="Agregar propietario" style="color:var(--md-sys-color-primary)"><md-icon>person_add</md-icon></md-icon-button>
-  </div>
-
-  <!-- Fields -->
-  <div class="field"><span class="field-label">Rol</span><span class="field-value">1234-5</span></div>
-  <div class="field"><span class="field-label">Metros²</span><span class="field-value">250 m²</span></div>
-  <div class="field"><span class="field-label">Estado</span><span class="field-value">Habitada</span></div>
-
-  <!-- Propietarios -->
-  <div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid var(--border-light)">
-    <div style="display:flex;align-items:center;gap:0.6rem">
-      <div class="avatar green">JP</div>
-      <div style="flex:1">
-        <div style="font-weight:600;font-size:0.9rem">Juan Pérez</div>
-        <div style="font-size:0.75rem;color:var(--text-muted)">Propietario</div>
-      </div>
-      <!-- admin: edit + delete owner -->
-    </div>
-    <div style="margin-left:2.4rem;margin-top:0.3rem;font-size:0.8rem;color:var(--text-2)">
-      <div>📱 <a href="tel:+56912345678" style="color:var(--md-sys-color-primary);text-decoration:none">+56 9 1234 5678</a></div>
-      <div>✉️ <a href="mailto:juan@ejemplo.com" style="color:var(--md-sys-color-primary);text-decoration:none">juan@ejemplo.com</a></div>
-      <div>📄 RUT: 12.345.678-9</div>
-    </div>
-  </div>
-</div>
+<table style="min-width:560px">
+  <thead>
+    <tr><th>Parcela</th><th>Rol</th><th>Metros²</th><th>Estado</th><th>Propietarios</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:600;color:var(--text)">Parcela 1</td>
+      <td>00521-001</td>
+      <td>450 m²</td>
+      <td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:var(--color-positive-bg);color:var(--color-positive-text)">Habitada</span></td>
+      <td>
+        <div style="display:flex;align-items:center;gap:0.2rem">
+          <md-icon-button onclick="showPropietarios('...')" title="Ver propietarios (2)" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>
+          <span style="font-size:0.8rem;color:var(--text-2)">2</span>
+        </div>
+      </td>
+      <!-- admin -->
+      <td><md-icon-button onclick="editParcela('...')" title="Editar"><md-icon>edit</md-icon></md-icon-button></td>
+    </tr>
+  </tbody>
+</table>
 ```
 
 ## 9. CSS classes usadas
 
 | Class | Elemento | Estilo |
 |-------|----------|--------|
-| `.card` | Card contenedor | bg-card, border-radius, padding, sombra |
-| `.field` | `<div>` fila | display flex, justify-content space-between, padding 0.3rem 0 |
-| `.field-label` | `<span>` label | font-size 0.8rem, color text-muted |
-| `.field-value` | `<span>` valor | font-size 0.85rem, font-weight 500 |
-| `.avatar` | `<div>` círculo | width 36px, height 36px, border-radius 50%, display flex, align-items center, justify-content center, font-weight 600, font-size 0.85rem |
-| `.avatar.green` | avatar | background #d1fae5, color #065f46 |
-| `.avatar.purple` | avatar | background #ede9fe, color #5b21b6 |
-| `.avatar.orange` | avatar | background #ffedd5, color #9a3412 |
-| `.avatar.pink` | avatar | background #fce7f3, color #9d174d |
+| `.table-wrap` | Contenedor de la tabla | surface, border-radius, padding, sombra, overflow-x auto |
+| `table` | `<table>` | width 100%, border-collapse, typescale body-small |
+| `th` | `<th>` | background surface-hover, color text-2, border-bottom 2px border |
+| `td` | `<td>` | padding 0.5rem 0.8rem, border-bottom border-light |
+| `tr:hover td` | fila hover | background surface-hover |
+| `.empty-state` | Sin parcelas | borde punteado, ícono inbox, texto muted |
 
 ## 10. Modal form HTML exacto
 

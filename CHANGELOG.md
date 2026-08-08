@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 07/08/2026 - Parcelas en modo tabla
+- **Changed**: La pestaña Parcelas pasa de cards a tabla (`renderParcelas` en `renderers.js`) con columnas Parcela, Rol, Metros², Estado, Propietarios y acciones — mismo patrón que la tabla de Ingresos/Egresos (`.table-wrap`, scroll horizontal en mobile con `min-width:560px`)
+- **Style**: Estado como chip coloreado con tokens de dark mode: Habitada verde (`--color-positive-*`), En construcción ámbar (`--color-extraordinaria-*`), resto gris (`surface-container-highest`)
+- **Changed**: `#parcelasGrid` pasa de `.cards-grid` a `.table-wrap` (`index.html`) y el skeleton de la pestaña pasa de cards a filas (`data.js`)
+- **Docs**: `docs/features/parcelas.md` actualizado (render, HTML, output y CSS classes)
+
 ### 07/08/2026 - Datos de prueba expandidos (60 parcelas y 2 años)
 - **Feat**: `parcelas.json` pasa de 13 a 60 parcelas (Parcela 1-60, rol `00521-001` a `00521-060`) con estados variados (Habitada, En construcción, Baldío); se mantienen los IDs existentes de las primeras 13
 - **Feat**: `propietarios.json` pasa de 16 a 67 propietarios (todos con id, RUT, teléfono y email generados)
