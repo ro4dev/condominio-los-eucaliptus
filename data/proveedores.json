@@ -5,7 +5,8 @@
     "telefono": "+54 9 11 5555-1111",
     "email": "contacto@aguasol.com",
     "contacto": "Roberto",
-    "observaciones": "Trabaja lunes a viernes 8-18"
+    "observaciones": "Trabaja lunes a viernes 8-18",
+    "id": "35ecbfa1-6c28-4f98-8dc6-55eab1a63891"
   },
   {
     "rubro": "Electricidad",
@@ -13,7 +14,8 @@
     "telefono": "+54 9 11 5555-2222",
     "email": "info@electrobarrio.com",
     "contacto": "Martín",
-    "observaciones": "Emergencias 24hs"
+    "observaciones": "Emergencias 24hs",
+    "id": "370b326f-8596-4617-acb8-6fa9fa2bde93"
   },
   {
     "rubro": "Jardinería",
@@ -21,7 +23,8 @@
     "telefono": "+54 9 11 5555-3333",
     "email": "jardin@verdetotal.com",
     "contacto": "Carlos",
-    "observaciones": "Viernes y sábados"
+    "observaciones": "Viernes y sábados",
+    "id": "4045d6c2-a3d8-424f-bd5d-04dc0b550746"
   },
   {
     "rubro": "Limpieza",
@@ -29,7 +32,8 @@
     "telefono": "+54 9 11 5555-4444",
     "email": "service@limpiahogar.com",
     "contacto": "Ana",
-    "observaciones": "Lunes miércoles y viernes"
+    "observaciones": "Lunes miércoles y viernes",
+    "id": "49132e9c-22ca-4473-844a-598732d4a536"
   },
   {
     "rubro": "Seguridad",
@@ -37,7 +41,8 @@
     "telefono": "+54 9 11 5555-5555",
     "email": "contacto@guardiatotal.com",
     "contacto": "Pablo",
-    "observaciones": "Monitoreo 24hs"
+    "observaciones": "Monitoreo 24hs",
+    "id": "c0c5183c-1e72-4a66-8851-85d47e655012"
   },
   {
     "rubro": "Construcción",
@@ -45,7 +50,8 @@
     "telefono": "+54 9 11 5555-6662",
     "email": "obras@edifcaplus.com",
     "contacto": "Luis",
-    "observaciones": "Presupuestos sin cargo"
+    "observaciones": "Presupuestos sin cargo",
+    "id": "b76b35d6-c269-49ad-8a6c-788d3ddc2fc7"
   },
   {
     "rubro": "Pintura",
@@ -53,6 +59,34 @@
     "telefono": "+54 9 11 5555-7777",
     "email": "info@colorexpress.com",
     "contacto": "Gustavo",
-    "observaciones": "Trabajos exteriores e interiores"
+    "observaciones": "Trabajos exteriores e interiores",
+    "id": "b2d00fc7-df2b-4842-8bf7-c150db1dfe00"
+  },
+  {
+    "rubro": "Fumigación",
+    "nombre": "Sanimax Control",
+    "telefono": "+54 9 11 5555-8888",
+    "email": "contacto@sanimax.com",
+    "contacto": "Verónica",
+    "observaciones": "Fumigación y control de plagas",
+    "id": "48c8c1d8-0275-4fbb-be51-e1a859d8081d"
+  },
+  {
+    "rubro": "Piscinas",
+    "nombre": "Aqua Clean",
+    "telefono": "+54 9 11 5555-9999",
+    "email": "info@aquaclean.com",
+    "contacto": "Eduardo",
+    "observaciones": "Mantención de piscinas",
+    "id": "794f4fd9-d914-4092-b82b-4b120f21edc2"
+  },
+  {
+    "rubro": "Seguros",
+    "nombre": "Corredora Millenium",
+    "telefono": "+54 9 11 5555-0000",
+    "email": "seguros@millenium.cl",
+    "contacto": "Patricia",
+    "observaciones": "Pólizas comunales",
+    "id": "5977ebaf-ec0a-46f6-8500-ec4a75dafa5d"
   }
 ]

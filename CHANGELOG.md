@@ -2,6 +2,18 @@
 
 ## Registro de cambios
 
+### 07/08/2026 - Datos de prueba expandidos (60 parcelas y 2 años)
+- **Feat**: `parcelas.json` pasa de 13 a 60 parcelas (Parcela 1-60, rol `00521-001` a `00521-060`) con estados variados (Habitada, En construcción, Baldío); se mantienen los IDs existentes de las primeras 13
+- **Feat**: `propietarios.json` pasa de 16 a 67 propietarios (todos con id, RUT, teléfono y email generados)
+- **Feat**: `gastos.json` pasa de 27 a 1.632 registros cubriendo 24 periodos (2024-08 a 2026-07): mensualidad por parcela por mes + fondo de reserva; montos históricos ($42.000 en 2024, $46.000 en 2025, $50.000 en 2026) y registros "pendiente" distribuidos
+- **Feat**: `ingresos_egresos.json` pasa de 86 a 418 movimientos con 2 años de historia (egresos recurrentes de servicios/jardinería/limpieza/mantenimiento/seguros + ingresos por cuotas/fondo reserva/multas); todos llevan `comprobante: assets/demo_comprobante_transferencia.png`
+- **Feat**: `noticias.json` pasa de 4 a 36 avisos (vigentes y vencidos) desde 2024-08
+- **Feat**: `documentos.json` pasa de 7 a 18 (actas 2025-2026, contratos, pólizas, planos)
+- **Feat**: `asambleas.json` pasa de 3 a 12 con `asamblea_asistentes.json` ampliado a 199 registros
+- **Feat**: `encuestas.json` pasa de 2 a 6 (abiertas y cerradas) con `encuestas_votos.json` ampliado a 47 votos
+- **Feat**: `reclamos.json` pasa de 5 a 15 (reclamos y sugerencias con fecha 2025-2026) y `proveedores.json` pasa de 7 a 10
+- **Feat**: Gastos, noticias, movimientos, documentos, reclamos y proveedores del demo ahora llevan `id` (edit/eliminar en modo demo funciona por registro y no por lote)
+
 ### 05/08/2026 - Archivos demo reales (boleta y PDF)
 - **Feat**: Los 23 `comprobante` del demo que tenían links fake de Google Drive ahora apuntan a `assets/demo_comprobante_transferencia.png` (imagen real de boleta/transferencia) — el click en "Ver"/ícono abre la imagen en pestaña nueva igual que en producción
 - **Feat**: Los 7 documentos del demo llevan `archivo: assets/demo_documento.pdf` (PDF real de 1 página) — el ícono de ver documento abre el PDF en el visor del navegador

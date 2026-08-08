@@ -3,7 +3,11 @@
     "id": "e1a2b3c4-d5e6-7890-abcd-ef1234567890",
     "titulo": "Piscina comunitaria",
     "descripcion": "Se propone construir una piscina comunitaria en el espacio verde del sector norte. Inversión estimada: $15.000.000.",
-    "alternativas": ["Piscina", "Gimnasio", "Nada"],
+    "alternativas": [
+      "Piscina",
+      "Gimnasio",
+      "Nada"
+    ],
     "fecha_termino": "2026-08-15",
     "quorum": 10,
     "created_at": "2026-07-10T10:00:00Z"
@@ -16,5 +20,54 @@
     "fecha_termino": null,
     "quorum": null,
     "created_at": "2026-07-15T14:30:00Z"
+  },
+  {
+    "id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "titulo": "Parquización sector norte",
+    "descripcion": "Plantar especies nativas y bancas en el espacio verde del sector norte.",
+    "alternativas": [
+      "Sí",
+      "No"
+    ],
+    "fecha_termino": "2026-03-20",
+    "quorum": 15,
+    "created_at": "2026-02-25T12:00:00Z"
+  },
+  {
+    "id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "titulo": "Horario de uso de piscina",
+    "descripcion": "Extender el horario de la piscina a las 21hs durante el verano.",
+    "alternativas": [
+      "Sí, hasta 21hs",
+      "No, mantener actual"
+    ],
+    "fecha_termino": "2025-12-01",
+    "quorum": 20,
+    "created_at": "2025-11-05T10:00:00Z"
+  },
+  {
+    "id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "titulo": "Instalación de paneles solares",
+    "descripcion": "Estudiar la instalación de paneles solares para el alumbrado de áreas comunes.",
+    "alternativas": [
+      "Sí",
+      "No",
+      "No sabe"
+    ],
+    "fecha_termino": "2026-10-01",
+    "quorum": 25,
+    "created_at": "2026-08-01T09:00:00Z"
+  },
+  {
+    "id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "titulo": "Reposición de juegos infantiles",
+    "descripcion": "Renovar el equipamiento del área de juegos del sector sur.",
+    "alternativas": [
+      "Sí",
+      "No"
+    ],
+    "fecha_termino": "2026-09-15",
+    "quorum": 18,
+    "created_at": "2026-07-20T16:00:00Z"
   }
 ]

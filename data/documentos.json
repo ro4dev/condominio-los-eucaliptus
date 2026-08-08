@@ -4,48 +4,143 @@
     "categoria": "Estatuto",
     "fecha": "1/01/2026",
     "descripcion": "Reglamento aprobado en asamblea ordinaria",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "698293e2-92b0-4306-b5d9-4e01ff89319a"
   },
   {
     "nombre": "Acta asamblea junio 2026",
     "categoria": "Actas",
     "fecha": "15/06/2026",
     "descripcion": "Acta de la asamblea mensual de junio",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "51c61356-6a80-4e3a-9d8d-891544f1400a"
   },
   {
     "nombre": "Acta asamblea julio 2026",
     "categoria": "Actas",
     "fecha": "20/07/2026",
     "descripcion": "Acta de la asamblea mensual de julio",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "04b0a0f2-2051-42ec-89b8-75bc0a82220d"
   },
   {
     "nombre": "Contrato mantenimiento jardines",
     "categoria": "Contratos",
     "fecha": "1/03/2026",
     "descripcion": "Contrato anual con jardinería \"Verde Total\"",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "19373c52-ed36-42b8-811c-40705580c05e"
   },
   {
     "nombre": "Póliza seguro 2026",
     "categoria": "Seguros",
     "fecha": "1/01/2026",
     "descripcion": "Póliza de seguro contra incendio y robo",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "2d6ad612-a101-4767-9e33-be3c39e1ae22"
   },
   {
     "nombre": "Plano domicilio original",
     "categoria": "Planos",
     "fecha": "1/01/2020",
     "descripcion": "Plano de loteo aprobado por municipio",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "5de3d839-0a16-49c8-b243-a6789b2724e1"
   },
   {
-    "nombre": "Convenio cooperative eléctrica",
+    "nombre": "Convenio cooperativa eléctrica",
     "categoria": "Contratos",
     "fecha": "15/02/2024",
     "descripcion": "Convenio suministro eléctrico común",
-    "archivo": "assets/demo_documento.pdf"
+    "archivo": "assets/demo_documento.pdf",
+    "id": "f6d0153a-c30a-48af-988c-5455f8396c3e"
+  },
+  {
+    "nombre": "Acta asamblea mayo 2026",
+    "categoria": "Actas",
+    "fecha": "21/05/2026",
+    "descripcion": "Acta de la asamblea mensual de mayo",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "bd77132e-23d0-48ec-a77d-60f0e588fa51"
+  },
+  {
+    "nombre": "Acta asamblea abril 2026",
+    "categoria": "Actas",
+    "fecha": "16/04/2026",
+    "descripcion": "Acta de la asamblea mensual de abril",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "a45e67db-e518-4abc-b9cf-5c77afa04746"
+  },
+  {
+    "nombre": "Acta asamblea marzo 2026",
+    "categoria": "Actas",
+    "fecha": "19/03/2026",
+    "descripcion": "Acta de la asamblea mensual de marzo",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "e5472e70-7daa-409d-9f0b-66d2e54288b9"
+  },
+  {
+    "nombre": "Acta asamblea enero 2026",
+    "categoria": "Actas",
+    "fecha": "15/01/2026",
+    "descripcion": "Acta de la asamblea mensual de enero",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "33b33293-c928-405e-a889-3ba5f2c1d0e5"
+  },
+  {
+    "nombre": "Acta asamblea septiembre 2025",
+    "categoria": "Actas",
+    "fecha": "18/09/2025",
+    "descripcion": "Acta de la asamblea ordinaria de septiembre",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "067cedd2-089b-466b-a7fc-1b0c912ea709"
+  },
+  {
+    "nombre": "Acta asamblea extraordinaria diciembre 2025",
+    "categoria": "Actas",
+    "fecha": "10/12/2025",
+    "descripcion": "Acta de asamblea extraordinaria: presupuesto 2026",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "9a7390a6-55a6-4dde-baaf-3b8280304fb9"
+  },
+  {
+    "nombre": "Contrato servicio limpieza 2026",
+    "categoria": "Contratos",
+    "fecha": "2/01/2026",
+    "descripcion": "Contrato anual de servicio de limpieza áreas comunes",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "5994a1e3-94af-4032-adf2-0454ee47e347"
+  },
+  {
+    "nombre": "Contrato servicio de seguridad",
+    "categoria": "Contratos",
+    "fecha": "1/04/2025",
+    "descripcion": "Contrato de monitoreo y rondín nocturno",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "ffde7523-cd8a-42cf-b663-ce73f243b63a"
+  },
+  {
+    "nombre": "Póliza seguro 2025",
+    "categoria": "Seguros",
+    "fecha": "1/01/2025",
+    "descripcion": "Póliza de seguro contra incendio y robo 2025",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "345951e6-2b45-49e4-898c-839ad4c7af1a"
+  },
+  {
+    "nombre": "Plano instalaciones de gas",
+    "categoria": "Planos",
+    "fecha": "15/06/2024",
+    "descripcion": "Plano de la red de gas comunitaria",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "721b8214-d194-4d9c-bba4-b6c327f0b18e"
+  },
+  {
+    "nombre": "Acta asamblea noviembre 2025",
+    "categoria": "Actas",
+    "fecha": "20/11/2025",
+    "descripcion": "Acta de la asamblea ordinaria de noviembre",
+    "archivo": "assets/demo_documento.pdf",
+    "id": "1b55db96-0866-4d6c-833c-584a05f20015"
   }
 ]

@@ -3,30 +3,105 @@
     "tipo": "Reclamo",
     "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
     "asunto": "Fuga de agua en zona común",
-    "descripcion": "Se está filtrando agua cerca del tanque de reserva. El caño parece viejo."
+    "descripcion": "Se está filtrando agua cerca del tanque de reserva. El caño parece viejo.",
+    "fecha": "2026-07-15"
   },
   {
     "tipo": "Sugerencia",
     "parcela_id": null,
     "asunto": "Mejorar iluminación del camino",
-    "descripcion": "Sería bueno colocar luces LED en todo el camino principal."
+    "descripcion": "Sería bueno colocar luces LED en todo el camino principal.",
+    "fecha": "2026-07-02"
   },
   {
     "tipo": "Reclamo",
     "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
     "asunto": "Ruido excesivo nocturno",
-    "descripcion": "Los vecinos de al lado hacen fiesta todos los viernes hasta la madrugada."
+    "descripcion": "Los vecinos de al lado hacen fiesta todos los viernes hasta la madrugada.",
+    "fecha": "2026-06-20"
   },
   {
     "tipo": "Sugerencia",
     "parcela_id": null,
     "asunto": "Árboles en zona verde",
-    "descripcion": "Podríamos plantar más árboles en la entrada del barrio."
+    "descripcion": "Podríamos plantar más árboles en la entrada del barrio.",
+    "fecha": "2026-06-05"
   },
   {
     "tipo": "Reclamo",
     "parcela_id": null,
     "asunto": "Problema con reja de seguridad",
-    "descripcion": "La reja principal no cierra bien y queda abierta por la noche."
+    "descripcion": "La reja principal no cierra bien y queda abierta por la noche.",
+    "fecha": "2026-05-18"
+  },
+  {
+    "tipo": "Reclamo",
+    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
+    "asunto": "Estacionamiento ocupado sin autorización",
+    "descripcion": "Hay un vehículo ajeno ocupando mi estacionamiento desde hace tres días.",
+    "fecha": "2026-04-22"
+  },
+  {
+    "tipo": "Sugerencia",
+    "parcela_id": null,
+    "asunto": "Buzón de sugerencias digital",
+    "descripcion": "Sería útil poder hacer seguimiento de los reclamos desde la app.",
+    "fecha": "2026-03-30"
+  },
+  {
+    "tipo": "Reclamo",
+    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
+    "asunto": "Mascota suelta en áreas comunes",
+    "descripcion": "Un perro sin correa corre por la piscina los fines de semana.",
+    "fecha": "2026-02-14"
+  },
+  {
+    "tipo": "Reclamo",
+    "parcela_id": null,
+    "asunto": "Luminaria apagada en pasillo",
+    "descripcion": "La luminaria del pasillo sur está apagada hace una semana.",
+    "fecha": "2025-12-11"
+  },
+  {
+    "tipo": "Sugerencia",
+    "parcela_id": null,
+    "asunto": "Talleres para la comunidad",
+    "descripcion": "Proponemos talleres de huerta y yoga en el salón común.",
+    "fecha": "2025-11-08"
+  },
+  {
+    "tipo": "Reclamo",
+    "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
+    "asunto": "Vertido de aguas en pasaje",
+    "descripcion": "Se acumula agua en el pasaje trasero por un desagüe tapado.",
+    "fecha": "2025-10-03"
+  },
+  {
+    "tipo": "Sugerencia",
+    "parcela_id": null,
+    "asunto": "Cartelería informativa",
+    "descripcion": "Podría instalarse un cartel con el reglamento en la entrada.",
+    "fecha": "2025-09-16"
+  },
+  {
+    "tipo": "Reclamo",
+    "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
+    "asunto": "Obra sin permiso",
+    "descripcion": "Se están realizando trabajos de construcción sin aviso a la administración.",
+    "fecha": "2025-08-19"
+  },
+  {
+    "tipo": "Reclamo",
+    "parcela_id": null,
+    "asunto": "Cámaras de seguridad descalibradas",
+    "descripcion": "Una de las cámaras nuevas apunta hacia un jardín privado.",
+    "fecha": "2025-07-07"
+  },
+  {
+    "tipo": "Sugerencia",
+    "parcela_id": null,
+    "asunto": "Mejorar horario de conserjería",
+    "descripcion": "Sugerimos ampliar el horario de la conserjería los domingos.",
+    "fecha": "2025-05-21"
   }
 ]

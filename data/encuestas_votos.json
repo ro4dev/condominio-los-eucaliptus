@@ -40,5 +40,292 @@
     "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
     "seleccion": "A favor",
     "created_at": "2026-07-16T09:30:00Z"
+  },
+  {
+    "id": "v7-0000-0000-0000-664494578269",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "seleccion": "Sí",
+    "created_at": "2026-07-09T10:00:00Z"
+  },
+  {
+    "id": "v8-0000-0000-0000-305867015017",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "seleccion": "No",
+    "created_at": "2026-04-04T10:00:00Z"
+  },
+  {
+    "id": "v9-0000-0000-0000-227787044993",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
+    "seleccion": "Sí",
+    "created_at": "2026-06-10T10:00:00Z"
+  },
+  {
+    "id": "v10-0000-0000-0000-364150998346",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "seleccion": "No",
+    "created_at": "2026-01-14T10:00:00Z"
+  },
+  {
+    "id": "v11-0000-0000-0000-633760127332",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
+    "seleccion": "Sí",
+    "created_at": "2026-04-11T10:00:00Z"
+  },
+  {
+    "id": "v12-0000-0000-0000-953878525672",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "seleccion": "No",
+    "created_at": "2026-03-09T10:00:00Z"
+  },
+  {
+    "id": "v13-0000-0000-0000-166196485017",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "seleccion": "Sí",
+    "created_at": "2026-06-21T10:00:00Z"
+  },
+  {
+    "id": "v14-0000-0000-0000-734915493687",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "1111aa1e-1773-4c94-b112-64147a72848c",
+    "seleccion": "No",
+    "created_at": "2026-05-03T10:00:00Z"
+  },
+  {
+    "id": "v15-0000-0000-0000-449810392299",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "seleccion": "No",
+    "created_at": "2026-07-01T10:00:00Z"
+  },
+  {
+    "id": "v16-0000-0000-0000-521548442609",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "seleccion": "Sí",
+    "created_at": "2026-04-20T10:00:00Z"
+  },
+  {
+    "id": "v17-0000-0000-0000-175908402297",
+    "encuesta_id": "ff52b557-a733-46c8-9749-3906ead274a6",
+    "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
+    "seleccion": "Sí",
+    "created_at": "2026-02-02T10:00:00Z"
+  },
+  {
+    "id": "v18-0000-0000-0000-327670550149",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "seleccion": "Sí, hasta 21hs",
+    "created_at": "2026-07-28T10:00:00Z"
+  },
+  {
+    "id": "v19-0000-0000-0000-865492378911",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "seleccion": "No, mantener actual",
+    "created_at": "2026-01-27T10:00:00Z"
+  },
+  {
+    "id": "v20-0000-0000-0000-800136089629",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "seleccion": "Sí, hasta 21hs",
+    "created_at": "2026-07-15T10:00:00Z"
+  },
+  {
+    "id": "v21-0000-0000-0000-956233312979",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "seleccion": "Sí, hasta 21hs",
+    "created_at": "2026-02-07T10:00:00Z"
+  },
+  {
+    "id": "v22-0000-0000-0000-504023283987",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "seleccion": "No, mantener actual",
+    "created_at": "2026-05-27T10:00:00Z"
+  },
+  {
+    "id": "v23-0000-0000-0000-698911552012",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
+    "seleccion": "No, mantener actual",
+    "created_at": "2026-04-15T10:00:00Z"
+  },
+  {
+    "id": "v24-0000-0000-0000-647054842456",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "seleccion": "No, mantener actual",
+    "created_at": "2026-01-20T10:00:00Z"
+  },
+  {
+    "id": "v25-0000-0000-0000-217503264167",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
+    "seleccion": "No, mantener actual",
+    "created_at": "2026-06-13T10:00:00Z"
+  },
+  {
+    "id": "v26-0000-0000-0000-770369171421",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "a93dd0d0-c625-4956-bb04-9ca5eeb38f95",
+    "seleccion": "Sí, hasta 21hs",
+    "created_at": "2026-04-20T10:00:00Z"
+  },
+  {
+    "id": "v27-0000-0000-0000-671197430282",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
+    "seleccion": "No, mantener actual",
+    "created_at": "2026-01-20T10:00:00Z"
+  },
+  {
+    "id": "v28-0000-0000-0000-693583010338",
+    "encuesta_id": "baf136db-1a08-4872-8505-07f8b2c82083",
+    "parcela_id": "a48de3b6-7c3e-4257-bfbd-a03dff7d7e8c",
+    "seleccion": "Sí, hasta 21hs",
+    "created_at": "2026-05-17T10:00:00Z"
+  },
+  {
+    "id": "v29-0000-0000-0000-745611566968",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "seleccion": "Sí",
+    "created_at": "2026-02-12T10:00:00Z"
+  },
+  {
+    "id": "v30-0000-0000-0000-624747334124",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "1111aa1e-1773-4c94-b112-64147a72848c",
+    "seleccion": "No",
+    "created_at": "2026-01-16T10:00:00Z"
+  },
+  {
+    "id": "v31-0000-0000-0000-671200079290",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "seleccion": "Sí",
+    "created_at": "2026-07-08T10:00:00Z"
+  },
+  {
+    "id": "v32-0000-0000-0000-057509957810",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "seleccion": "Sí",
+    "created_at": "2026-02-27T10:00:00Z"
+  },
+  {
+    "id": "v33-0000-0000-0000-825038879633",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "739e2202-1565-4ef3-909c-0ca856d53392",
+    "seleccion": "No sabe",
+    "created_at": "2026-02-16T10:00:00Z"
+  },
+  {
+    "id": "v34-0000-0000-0000-138272046916",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
+    "seleccion": "No sabe",
+    "created_at": "2026-06-17T10:00:00Z"
+  },
+  {
+    "id": "v35-0000-0000-0000-758483153639",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "20d1f8f9-9d56-41ae-9669-807e8241fe47",
+    "seleccion": "No",
+    "created_at": "2026-03-11T10:00:00Z"
+  },
+  {
+    "id": "v36-0000-0000-0000-220466516303",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
+    "seleccion": "No sabe",
+    "created_at": "2026-07-11T10:00:00Z"
+  },
+  {
+    "id": "v37-0000-0000-0000-083683966360",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "c2674b52-b175-491e-90b8-daf145b527b9",
+    "seleccion": "Sí",
+    "created_at": "2026-01-10T10:00:00Z"
+  },
+  {
+    "id": "v38-0000-0000-0000-126204947452",
+    "encuesta_id": "83ebf5de-dff7-47aa-99b8-dde1d5b6f85e",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "seleccion": "No",
+    "created_at": "2026-05-26T10:00:00Z"
+  },
+  {
+    "id": "v39-0000-0000-0000-662582711255",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "seleccion": "No",
+    "created_at": "2026-06-27T10:00:00Z"
+  },
+  {
+    "id": "v40-0000-0000-0000-763413307609",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
+    "seleccion": "No",
+    "created_at": "2026-01-22T10:00:00Z"
+  },
+  {
+    "id": "v41-0000-0000-0000-353188281602",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
+    "seleccion": "Sí",
+    "created_at": "2026-03-25T10:00:00Z"
+  },
+  {
+    "id": "v42-0000-0000-0000-048085475251",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "seleccion": "No",
+    "created_at": "2026-06-28T10:00:00Z"
+  },
+  {
+    "id": "v43-0000-0000-0000-252941953695",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
+    "seleccion": "No",
+    "created_at": "2026-06-02T10:00:00Z"
+  },
+  {
+    "id": "v44-0000-0000-0000-152945623680",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "seleccion": "Sí",
+    "created_at": "2026-03-24T10:00:00Z"
+  },
+  {
+    "id": "v45-0000-0000-0000-431084611905",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "seleccion": "No",
+    "created_at": "2026-01-16T10:00:00Z"
+  },
+  {
+    "id": "v46-0000-0000-0000-766491006606",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "seleccion": "Sí",
+    "created_at": "2026-01-05T10:00:00Z"
+  },
+  {
+    "id": "v47-0000-0000-0000-848706028156",
+    "encuesta_id": "5759b040-9574-4fb3-88d8-69d8b885d9d6",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "seleccion": "Sí",
+    "created_at": "2026-02-06T10:00:00Z"
   }
 ]

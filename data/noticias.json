@@ -3,24 +3,252 @@
     "titulo": "Asamblea mensual",
     "descripcion": "Se realiza el viernes 25 a las 19hs en el salón común. Temas: presupuesto, mantenimiento y nuevos proyectos.",
     "fecha": "2026-07-18",
-    "fecha_hasta": "2026-07-25"
+    "fecha_hasta": "2026-07-25",
+    "id": "dd62e0b7-f9a6-4845-8db6-453afc21e721"
   },
   {
     "titulo": "Corte de agua programado",
     "descripcion": "El martes 22 de julio no habrá agua de 8 a 16hs por trabajos en la red principal.",
     "fecha": "2026-07-18",
-    "fecha_hasta": "2026-07-22"
+    "fecha_hasta": "2026-07-22",
+    "id": "1ebd834c-7719-40c0-b43d-eeec28105062"
   },
   {
     "titulo": "Nueva seguridad nocturna",
     "descripcion": "Se instalaron 4 cámaras de seguridad en las entradas del barrio.",
     "fecha": "2026-07-10",
-    "fecha_hasta": "2026-12-31"
+    "fecha_hasta": "2026-12-31",
+    "id": "ef3860e3-6a63-436f-b7ff-14e8866bdf19"
   },
   {
     "titulo": "Reparación iluminación",
     "descripcion": "Se repararán las luces del camino principal la próxima semana.",
     "fecha": "2026-07-15",
-    "fecha_hasta": "2026-07-20"
+    "fecha_hasta": "2026-07-20",
+    "id": "bfb89213-8833-4f74-81c0-6c160a56cd53"
+  },
+  {
+    "titulo": "Mantención de piscina agosto",
+    "descripcion": "Durante el fin de semana se realizará la limpieza profunda y mantención de la piscina comunitaria.",
+    "fecha": "2026-07-28",
+    "fecha_hasta": "2026-08-05",
+    "id": "9995a100-3148-41b6-aa2a-bee81ff05c49"
+  },
+  {
+    "titulo": "Nuevo reglamento de estacionamientos",
+    "descripcion": "Se aprobó el nuevo reglamento que asigna estacionamientos visitas en el sector norte.",
+    "fecha": "2026-07-22",
+    "fecha_hasta": "2026-09-30",
+    "id": "4226925c-7232-4322-84bb-21cd0be89748"
+  },
+  {
+    "titulo": "Campaña de reciclaje",
+    "descripcion": "Invitamos a todos los vecinos a participar de la campaña de reciclaje mensual los primeros sábados.",
+    "fecha": "2026-07-05",
+    "fecha_hasta": "2026-12-31",
+    "id": "a011a296-2682-4b76-a02c-aa5b69a5285d"
+  },
+  {
+    "titulo": "Arreglo portón de acceso",
+    "descripcion": "El lunes se reemplazará el sistema del portón principal, se solicita paciencia por los cortes intermitentes.",
+    "fecha": "2026-06-18",
+    "fecha_hasta": "2026-06-24",
+    "id": "d43167a2-62b6-4078-84d4-a2004b0d141b"
+  },
+  {
+    "titulo": "Elección de comité de convivencia",
+    "descripcion": "Se realizará la elección del nuevo comité de convivencia el 20 de junio en el salón común.",
+    "fecha": "2026-06-10",
+    "fecha_hasta": "2026-06-20",
+    "id": "3c514112-ae51-4941-9582-13abb8bbd3cb"
+  },
+  {
+    "titulo": "Pintura de fachadas aprobada",
+    "descripcion": "Se aprobó en asamblea extraordinaria la pintura de fachadas. Las obras comenzarán en septiembre.",
+    "fecha": "2026-05-12",
+    "fecha_hasta": "2026-12-31",
+    "id": "89458b65-fd8b-4ba9-bc96-d26770e82dba"
+  },
+  {
+    "titulo": "Corte de energía programado",
+    "descripcion": "El sábado 15 de mayo se suspenderá el suministro eléctrico de 9 a 14hs por mantención de la red.",
+    "fecha": "2026-05-10",
+    "fecha_hasta": "2026-05-15",
+    "id": "cf6f5d35-c855-4a1a-b7a6-19f6ed56a279"
+  },
+  {
+    "titulo": "Mejoras en juegos infantiles",
+    "descripcion": "Se renovaron los juegos infantiles del sector sur con materiales nuevos.",
+    "fecha": "2026-04-02",
+    "fecha_hasta": "2026-12-31",
+    "id": "73b17779-37f7-4062-891b-7bdba53e4be7"
+  },
+  {
+    "titulo": "Jornada de limpieza comunitaria",
+    "descripcion": "Se convoca a una jornada de limpieza y ornato el sábado 21 de marzo.",
+    "fecha": "2026-03-15",
+    "fecha_hasta": "2026-03-21",
+    "id": "07132d32-3d5a-4c48-b784-acc7e295e297"
+  },
+  {
+    "titulo": "Inicio de obra veredas",
+    "descripcion": "Comienzan las obras de reparación de veredas del sector oeste.",
+    "fecha": "2026-02-03",
+    "fecha_hasta": "2026-04-30",
+    "id": "b992da5b-45f4-496d-a9c9-c785be6c3fcf"
+  },
+  {
+    "titulo": "Bienvenida a nuevos vecinos",
+    "descripcion": "Damos la bienvenida a las familias que se mudaron este verano. Recordamos leer el reglamento interno.",
+    "fecha": "2026-01-10",
+    "fecha_hasta": "2026-03-31",
+    "id": "d44ccba9-09fc-4503-860d-2fc193412993"
+  },
+  {
+    "titulo": "Fiestas de fin de año",
+    "descripcion": "La administración desea felices fiestas. Se solicita moderar el volumen de la música.",
+    "fecha": "2025-12-20",
+    "fecha_hasta": "2026-01-06",
+    "id": "9f36c586-41cc-4431-933b-a88c78463d64"
+  },
+  {
+    "titulo": "Aumento de cuota 2026",
+    "descripcion": "Informamos que a partir de enero 2026 la cuota de gastos comunes se reajusta a $50.000.",
+    "fecha": "2025-12-05",
+    "fecha_hasta": "2026-01-31",
+    "id": "2450ea08-f7f6-49a4-a34d-0e2c27014f3a"
+  },
+  {
+    "titulo": "Instalación de WiFi en salón común",
+    "descripcion": "Quedó operativa la red WiFi comunitaria en el salón y la piscina.",
+    "fecha": "2025-11-14",
+    "fecha_hasta": "2026-12-31",
+    "id": "748936a6-2ab0-44ce-8942-cdb7bac13704"
+  },
+  {
+    "titulo": "Aviso poda de árboles",
+    "descripcion": "Se realizará la poda de los árboles de la entrada principal el 8 de noviembre.",
+    "fecha": "2025-11-03",
+    "fecha_hasta": "2025-11-08",
+    "id": "e9350912-7738-489e-953f-93ae7e0bed63"
+  },
+  {
+    "titulo": "Asamblea extraordinaria presupuesto",
+    "descripcion": "Se convoca a asamblea extraordinaria el 10 de diciembre para aprobar el presupuesto 2026.",
+    "fecha": "2025-11-25",
+    "fecha_hasta": "2025-12-10",
+    "id": "574201c3-3533-4cfa-b95e-7bc2cebcab7b"
+  },
+  {
+    "titulo": "Fuga en red de agua",
+    "descripcion": "Se detectó una fuga en la red principal y se realizaron las reparaciones de urgencia.",
+    "fecha": "2025-10-06",
+    "fecha_hasta": "2025-10-13",
+    "id": "3f733e14-8d3e-449e-9485-53ec240eabf1"
+  },
+  {
+    "titulo": "Recambio de luminarias LED",
+    "descripcion": "Se completó el recambio de todas las luminarias del camino principal a tecnología LED.",
+    "fecha": "2025-09-19",
+    "fecha_hasta": "2026-12-31",
+    "id": "4846e09f-0d0e-40b7-908c-703e8022572d"
+  },
+  {
+    "titulo": "Prohibición de pirotecnia",
+    "descripcion": "Recordamos que está prohibida la pirotecnia dentro del condominio por reglamento.",
+    "fecha": "2025-09-01",
+    "fecha_hasta": "2026-01-31",
+    "id": "013d7b74-07c7-41ad-bce4-70f747d78e91"
+  },
+  {
+    "titulo": "Día del vecino",
+    "descripcion": "Se celebrará el día del vecino con actividades para toda la comunidad el sábado 30 de agosto.",
+    "fecha": "2025-08-18",
+    "fecha_hasta": "2025-08-30",
+    "id": "109df5f0-a4b7-430a-ac7a-5c5f0cbb6410"
+  },
+  {
+    "titulo": "Mejoras en portón de acceso",
+    "descripcion": "Se automatizó el portón de ingreso vehicular con control por código.",
+    "fecha": "2025-07-25",
+    "fecha_hasta": "2026-12-31",
+    "id": "7cee2819-e4dd-42c7-8fbb-4c494d8ad8ab"
+  },
+  {
+    "titulo": "Corte de agua por reparaciones",
+    "descripcion": "El martes 3 de junio se cortará el agua de 10 a 15hs por reparación de válvulas.",
+    "fecha": "2025-05-28",
+    "fecha_hasta": "2025-06-03",
+    "id": "58b3ed71-72db-47c6-ba6c-a838f553b7ba"
+  },
+  {
+    "titulo": "Embellecimiento de jardines",
+    "descripcion": "Se renovaron los jardines de la entrada con nuevas especies y riego por goteo.",
+    "fecha": "2025-04-11",
+    "fecha_hasta": "2026-12-31",
+    "id": "c8c3b9b7-a8c8-48e0-b7d3-b90deb5e9e56"
+  },
+  {
+    "titulo": "Fumigación de áreas comunes",
+    "descripcion": "Se realizará fumigación preventiva el viernes 7 de marzo en áreas verdes.",
+    "fecha": "2025-03-03",
+    "fecha_hasta": "2025-03-07",
+    "id": "74b7b6dd-16ca-481b-80b2-8530eb3fd75d"
+  },
+  {
+    "titulo": "Nuevo horario de piscina",
+    "descripcion": "A partir de marzo la piscina abrirá de 10 a 20hs los fines de semana.",
+    "fecha": "2025-02-20",
+    "fecha_hasta": "2026-03-01",
+    "id": "2baa7c98-150c-4f06-a8e2-b14d63306a40"
+  },
+  {
+    "titulo": "Reunión de inicio de año",
+    "descripcion": "Primera asamblea del año: se revisarán los gastos 2024 y las metas 2025.",
+    "fecha": "2025-01-10",
+    "fecha_hasta": "2025-01-15",
+    "id": "acdb8cf0-0ba3-4f9c-925c-978788b238ab"
+  },
+  {
+    "titulo": "Suspensión temporal de seguridad 24hs",
+    "descripcion": "Durante la semana se realizará mantención del sistema de alarmas, se reforzará el patrullaje.",
+    "fecha": "2024-12-02",
+    "fecha_hasta": "2024-12-09",
+    "id": "7d4c7942-b7f0-409c-952c-36a4bf6a206d"
+  },
+  {
+    "titulo": "Reajuste de cuota 2025",
+    "descripcion": "A partir de enero 2025 la cuota de gastos comunes pasa a $46.000.",
+    "fecha": "2024-12-10",
+    "fecha_hasta": "2025-01-31",
+    "id": "74c8de49-5bfd-4490-bb70-53026c05623b"
+  },
+  {
+    "titulo": "Taller de primeros auxilios",
+    "descripcion": "Se dictará un taller gratuito de primeros auxilios para vecinos en el salón común.",
+    "fecha": "2024-11-05",
+    "fecha_hasta": "2024-11-15",
+    "id": "962840e6-2e9d-431b-9a08-564c46356c84"
+  },
+  {
+    "titulo": "Arreglo de techumbre del salón",
+    "descripcion": "Se repararon las filtraciones del techo del salón comunitario.",
+    "fecha": "2024-10-14",
+    "fecha_hasta": "2024-10-20",
+    "id": "13e0a057-74a5-4452-8a5f-87cae4725fdd"
+  },
+  {
+    "titulo": "Plan de seguridad vecinal",
+    "descripcion": "Se conformó el plan de seguridad vecinal con apoyo de carabineros.",
+    "fecha": "2024-09-09",
+    "fecha_hasta": "2026-12-31",
+    "id": "a08bb617-dcfc-4d50-9980-21042b83e42b"
+  },
+  {
+    "titulo": "Aviso de corte de luz",
+    "descripcion": "El viernes 16 de agosto se cortará la luz de 9 a 12hs por mejoras.",
+    "fecha": "2024-08-12",
+    "fecha_hasta": "2024-08-16",
+    "id": "eccf0e6a-6d40-4571-9205-c5f18e24e81d"
   }
 ]

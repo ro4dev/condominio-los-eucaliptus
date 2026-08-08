@@ -89,5 +89,334 @@
     "rol": "00521-013",
     "metros": "430",
     "estado": "Habitada"
+  },
+  {
+    "id": "1f042348-ab04-4067-bc74-da4f7049147f",
+    "numero": "Parcela 14",
+    "rol": "00521-014",
+    "metros": "360",
+    "estado": "Habitada"
+  },
+  {
+    "id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "numero": "Parcela 15",
+    "rol": "00521-015",
+    "metros": "410",
+    "estado": "Habitada"
+  },
+  {
+    "id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "numero": "Parcela 16",
+    "rol": "00521-016",
+    "metros": "440",
+    "estado": "Habitada"
+  },
+  {
+    "id": "ff748fb0-5348-455e-99c1-cf825a247258",
+    "numero": "Parcela 17",
+    "rol": "00521-017",
+    "metros": "470",
+    "estado": "Habitada"
+  },
+  {
+    "id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "numero": "Parcela 18",
+    "rol": "00521-018",
+    "metros": "490",
+    "estado": "Habitada"
+  },
+  {
+    "id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "numero": "Parcela 19",
+    "rol": "00521-019",
+    "metros": "510",
+    "estado": "Habitada"
+  },
+  {
+    "id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "numero": "Parcela 20",
+    "rol": "00521-020",
+    "metros": "530",
+    "estado": "En construcción"
+  },
+  {
+    "id": "a596d12a-c465-4093-ab95-c04564f94b25",
+    "numero": "Parcela 21",
+    "rol": "00521-021",
+    "metros": "560",
+    "estado": "Habitada"
+  },
+  {
+    "id": "ccc37411-1c19-4571-8ee3-0512925695c6",
+    "numero": "Parcela 22",
+    "rol": "00521-022",
+    "metros": "580",
+    "estado": "Habitada"
+  },
+  {
+    "id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "numero": "Parcela 23",
+    "rol": "00521-023",
+    "metros": "620",
+    "estado": "Habitada"
+  },
+  {
+    "id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "numero": "Parcela 24",
+    "rol": "00521-024",
+    "metros": "650",
+    "estado": "Habitada"
+  },
+  {
+    "id": "a48de3b6-7c3e-4257-bfbd-a03dff7d7e8c",
+    "numero": "Parcela 25",
+    "rol": "00521-025",
+    "metros": "680",
+    "estado": "Baldío"
+  },
+  {
+    "id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
+    "numero": "Parcela 26",
+    "rol": "00521-026",
+    "metros": "540",
+    "estado": "Habitada"
+  },
+  {
+    "id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "numero": "Parcela 27",
+    "rol": "00521-027",
+    "metros": "460",
+    "estado": "Habitada"
+  },
+  {
+    "id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
+    "numero": "Parcela 28",
+    "rol": "00521-028",
+    "metros": "500",
+    "estado": "Habitada"
+  },
+  {
+    "id": "5d75b92f-213a-42b4-8af6-5c4580860712",
+    "numero": "Parcela 29",
+    "rol": "00521-029",
+    "metros": "480",
+    "estado": "Habitada"
+  },
+  {
+    "id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "numero": "Parcela 30",
+    "rol": "00521-030",
+    "metros": "420",
+    "estado": "Habitada"
+  },
+  {
+    "id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
+    "numero": "Parcela 31",
+    "rol": "00521-031",
+    "metros": "520",
+    "estado": "Habitada"
+  },
+  {
+    "id": "1cc57544-3a87-43c7-8925-623195d7fdfc",
+    "numero": "Parcela 32",
+    "rol": "00521-032",
+    "metros": "600",
+    "estado": "Habitada"
+  },
+  {
+    "id": "a93dd0d0-c625-4956-bb04-9ca5eeb38f95",
+    "numero": "Parcela 33",
+    "rol": "00521-033",
+    "metros": "630",
+    "estado": "Habitada"
+  },
+  {
+    "id": "96ebb517-6de4-440f-a535-aba79018c188",
+    "numero": "Parcela 34",
+    "rol": "00521-034",
+    "metros": "550",
+    "estado": "En construcción"
+  },
+  {
+    "id": "c2674b52-b175-491e-90b8-daf145b527b9",
+    "numero": "Parcela 35",
+    "rol": "00521-035",
+    "metros": "590",
+    "estado": "Habitada"
+  },
+  {
+    "id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "numero": "Parcela 36",
+    "rol": "00521-036",
+    "metros": "530",
+    "estado": "Habitada"
+  },
+  {
+    "id": "20d1f8f9-9d56-41ae-9669-807e8241fe47",
+    "numero": "Parcela 37",
+    "rol": "00521-037",
+    "metros": "470",
+    "estado": "Habitada"
+  },
+  {
+    "id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "numero": "Parcela 38",
+    "rol": "00521-038",
+    "metros": "510",
+    "estado": "Habitada"
+  },
+  {
+    "id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "numero": "Parcela 39",
+    "rol": "00521-039",
+    "metros": "490",
+    "estado": "Habitada"
+  },
+  {
+    "id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
+    "numero": "Parcela 40",
+    "rol": "00521-040",
+    "metros": "570",
+    "estado": "Habitada"
+  },
+  {
+    "id": "1111aa1e-1773-4c94-b112-64147a72848c",
+    "numero": "Parcela 41",
+    "rol": "00521-041",
+    "metros": "610",
+    "estado": "Baldío"
+  },
+  {
+    "id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "numero": "Parcela 42",
+    "rol": "00521-042",
+    "metros": "460",
+    "estado": "Habitada"
+  },
+  {
+    "id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
+    "numero": "Parcela 43",
+    "rol": "00521-043",
+    "metros": "500",
+    "estado": "Habitada"
+  },
+  {
+    "id": "f14db3c5-b240-48c5-98ea-8973ac1af542",
+    "numero": "Parcela 44",
+    "rol": "00521-044",
+    "metros": "540",
+    "estado": "Habitada"
+  },
+  {
+    "id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "numero": "Parcela 45",
+    "rol": "00521-045",
+    "metros": "560",
+    "estado": "Habitada"
+  },
+  {
+    "id": "020d14e7-372f-4a84-898e-000d97e8682c",
+    "numero": "Parcela 46",
+    "rol": "00521-046",
+    "metros": "520",
+    "estado": "Habitada"
+  },
+  {
+    "id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "numero": "Parcela 47",
+    "rol": "00521-047",
+    "metros": "480",
+    "estado": "Habitada"
+  },
+  {
+    "id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
+    "numero": "Parcela 48",
+    "rol": "00521-048",
+    "metros": "590",
+    "estado": "En construcción"
+  },
+  {
+    "id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
+    "numero": "Parcela 49",
+    "rol": "00521-049",
+    "metros": "630",
+    "estado": "Habitada"
+  },
+  {
+    "id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "numero": "Parcela 50",
+    "rol": "00521-050",
+    "metros": "550",
+    "estado": "Habitada"
+  },
+  {
+    "id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "numero": "Parcela 51",
+    "rol": "00521-051",
+    "metros": "470",
+    "estado": "Habitada"
+  },
+  {
+    "id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "numero": "Parcela 52",
+    "rol": "00521-052",
+    "metros": "510",
+    "estado": "Habitada"
+  },
+  {
+    "id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "numero": "Parcela 53",
+    "rol": "00521-053",
+    "metros": "530",
+    "estado": "Habitada"
+  },
+  {
+    "id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
+    "numero": "Parcela 54",
+    "rol": "00521-054",
+    "metros": "580",
+    "estado": "Habitada"
+  },
+  {
+    "id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
+    "numero": "Parcela 55",
+    "rol": "00521-055",
+    "metros": "500",
+    "estado": "Baldío"
+  },
+  {
+    "id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "numero": "Parcela 56",
+    "rol": "00521-056",
+    "metros": "450",
+    "estado": "Habitada"
+  },
+  {
+    "id": "31cddcb7-afac-4716-b08d-eac968745d50",
+    "numero": "Parcela 57",
+    "rol": "00521-057",
+    "metros": "620",
+    "estado": "Habitada"
+  },
+  {
+    "id": "44a21843-96dd-4a4f-8c0e-dbcc36eb549c",
+    "numero": "Parcela 58",
+    "rol": "00521-058",
+    "metros": "490",
+    "estado": "Habitada"
+  },
+  {
+    "id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "numero": "Parcela 59",
+    "rol": "00521-059",
+    "metros": "540",
+    "estado": "Habitada"
+  },
+  {
+    "id": "739e2202-1565-4ef3-909c-0ca856d53392",
+    "numero": "Parcela 60",
+    "rol": "00521-060",
+    "metros": "560",
+    "estado": "Habitada"
   }
 ]
