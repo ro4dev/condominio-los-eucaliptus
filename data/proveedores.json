@@ -1,91 +1,91 @@
 [
   {
     "rubro": "Plomería",
-    "nombre": "Agua & Sol",
+    "nombre": "Roberto Fuentes Rojas",
     "telefono": "+54 9 11 5555-1111",
     "email": "contacto@aguasol.com",
-    "contacto": "Roberto",
+    "contacto": "Roberto Fuentes Rojas",
     "observaciones": "Trabaja lunes a viernes 8-18",
     "id": "35ecbfa1-6c28-4f98-8dc6-55eab1a63891"
   },
   {
     "rubro": "Electricidad",
-    "nombre": "Electro Barrio",
+    "nombre": "Martín Cáceres Salas",
     "telefono": "+54 9 11 5555-2222",
     "email": "info@electrobarrio.com",
-    "contacto": "Martín",
+    "contacto": "Martín Cáceres Salas",
     "observaciones": "Emergencias 24hs",
     "id": "370b326f-8596-4617-acb8-6fa9fa2bde93"
   },
   {
     "rubro": "Jardinería",
-    "nombre": "Verde Total",
+    "nombre": "Carlos Morales Pino",
     "telefono": "+54 9 11 5555-3333",
     "email": "jardin@verdetotal.com",
-    "contacto": "Carlos",
+    "contacto": "Carlos Morales Pino",
     "observaciones": "Viernes y sábados",
     "id": "4045d6c2-a3d8-424f-bd5d-04dc0b550746"
   },
   {
     "rubro": "Limpieza",
-    "nombre": "Limpia Hogar",
+    "nombre": "Ana Castillo Vega",
     "telefono": "+54 9 11 5555-4444",
     "email": "service@limpiahogar.com",
-    "contacto": "Ana",
+    "contacto": "Ana Castillo Vega",
     "observaciones": "Lunes miércoles y viernes",
     "id": "49132e9c-22ca-4473-844a-598732d4a536"
   },
   {
     "rubro": "Seguridad",
-    "nombre": "Guardia Total",
+    "nombre": "Pablo Riquelme Soto",
     "telefono": "+54 9 11 5555-5555",
     "email": "contacto@guardiatotal.com",
-    "contacto": "Pablo",
+    "contacto": "Pablo Riquelme Soto",
     "observaciones": "Monitoreo 24hs",
     "id": "c0c5183c-1e72-4a66-8851-85d47e655012"
   },
   {
     "rubro": "Construcción",
-    "nombre": "Edifica Plus",
+    "nombre": "Luis Espinoza Tapia",
     "telefono": "+54 9 11 5555-6662",
     "email": "obras@edifcaplus.com",
-    "contacto": "Luis",
+    "contacto": "Luis Espinoza Tapia",
     "observaciones": "Presupuestos sin cargo",
     "id": "b76b35d6-c269-49ad-8a6c-788d3ddc2fc7"
   },
   {
     "rubro": "Pintura",
-    "nombre": "Color Express",
+    "nombre": "Gustavo Herrera Molina",
     "telefono": "+54 9 11 5555-7777",
     "email": "info@colorexpress.com",
-    "contacto": "Gustavo",
+    "contacto": "Gustavo Herrera Molina",
     "observaciones": "Trabajos exteriores e interiores",
     "id": "b2d00fc7-df2b-4842-8bf7-c150db1dfe00"
   },
   {
     "rubro": "Fumigación",
-    "nombre": "Sanimax Control",
+    "nombre": "Verónica Valdés Núñez",
     "telefono": "+54 9 11 5555-8888",
     "email": "contacto@sanimax.com",
-    "contacto": "Verónica",
+    "contacto": "Verónica Valdés Núñez",
     "observaciones": "Fumigación y control de plagas",
     "id": "48c8c1d8-0275-4fbb-be51-e1a859d8081d"
   },
   {
     "rubro": "Piscinas",
-    "nombre": "Aqua Clean",
+    "nombre": "Eduardo Bravo Cifuentes",
     "telefono": "+54 9 11 5555-9999",
     "email": "info@aquaclean.com",
-    "contacto": "Eduardo",
+    "contacto": "Eduardo Bravo Cifuentes",
     "observaciones": "Mantención de piscinas",
     "id": "794f4fd9-d914-4092-b82b-4b120f21edc2"
   },
   {
     "rubro": "Seguros",
-    "nombre": "Corredora Millenium",
+    "nombre": "Patricia Sepúlveda Rojas",
     "telefono": "+54 9 11 5555-0000",
     "email": "seguros@millenium.cl",
-    "contacto": "Patricia",
+    "contacto": "Patricia Sepúlveda Rojas",
     "observaciones": "Pólizas comunales",
     "id": "5977ebaf-ec0a-46f6-8500-ec4a75dafa5d"
   }
