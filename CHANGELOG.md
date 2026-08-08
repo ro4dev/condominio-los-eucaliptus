@@ -2,6 +2,17 @@
 
 ## Registro de cambios
 
+### 08/08/2026 - Specs: Home + Finanzas unificado + deudores + auditoría + notificaciones
+- **Docs (fase de diseño, sin código)**: se definieron 5 specs nuevas y se actualizó `config-admin.md`:
+  - `docs/features/deudores.md` — motor de cobranza: normaliza `gastos.pagado` (la columna ya existe en SQL pero el demo la tiene codificada como texto "pendiente" en la descripción), y expone funciones puras `isPagado`, `esperadoPorPeriodo`, `recaudadoPorPeriodo`, `pctRecaudado`, `deudaParcela`, `estadoParcelaPago` y `morosos`
+  - `docs/features/finanzas.md` — pestaña única Finanzas/Balance que reemplaza a Gastos Comunes + Ingresos/Egresos. Los ingresos por cuotas/fondo reserva se **derivan** de los gastos pagados (se elimina la carga manual duplicada en `flujo`); la tabla de cuotas por parcela queda como sección con columna Estado (chip Pagado/Pendiente); gráfico "Recaudado vs Esperado" por periodo
+  - `docs/features/home.md` — nueva pestaña inicial: balance del periodo vigente con % de recaudación, listado de morosos (admin ve todos, propietario ve su parcela) y card "Cómo pagar" con datos de transferencia + QR estático (v1, desde `CONFIG.datos_pago`)
+  - `docs/features/auditoria.md` — auditoría de cambios **log en JS** (sin triggers): tabla `audit_log`, API `logAudit()` con sanitización de PII, puntos de inserción en `handleForm`/`deleteItem`, y sección "Actividad reciente" en Configuración
+  - `docs/features/notificaciones.md` — **diseño solamente** (sin email operativo): casos de uso, match email↔parcela como prerrequisito, canal in-app (tabla `notificaciones` + badge) recomendado como v1, y email vía Edge Function + Resend/SendGrid como fase B
+  - `docs/features/config-admin.md` — nueva card "Datos de Pago" (banco, tipo, número, RUT, titular, email, QR) que alimenta el "Cómo pagar" de Home
+  - `gastos-comunes.md` e `ingresos-egresos.md` marcados como deprecados (fusionados en `finanzas.md`)
+- **Next**: implementación en modo demo (Home → Finanzas → Parcelas chip → auditoría), luego migración SQL (`audit_log`)
+
 ### 08/08/2026 - Proveedores: nombres completos en el demo
 - **Style**: Los nombres de proveedores en `data/proveedores.json` pasan a formato nombre + apellido paterno + materno (ej: "Fernando Torres Aguilar" en vez de "Fernando Torres") — solo datos de demo, sin cambios de código
 
