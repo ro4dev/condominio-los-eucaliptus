@@ -167,6 +167,10 @@
         <md-filter-chip label="Ingresos" onclick="filterFlujo('Ingreso')"></md-filter-chip>
         <md-filter-chip label="Egresos" onclick="filterFlujo('Egreso')"></md-filter-chip>
       </div>
+      <div class="chart-box" style="margin-bottom:1.5rem">
+        <h3>Ingresos vs Egresos por mes</h3>
+        <canvas id="chartFlujo"></canvas>
+      </div>
       <div class="table-wrap" id="flujoList">
         <div class="skeleton skeleton-row"></div>
         <div class="skeleton skeleton-row"></div>
