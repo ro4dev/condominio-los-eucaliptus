@@ -119,7 +119,7 @@ function renderTable(data) {
       '<td>' + formatPeriodo(r.periodo) + '</td>' +
       '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
       '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
-      '<td>' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>' +
+      '<td style="width:1%;white-space:nowrap">' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>' +
       '</tr>';
   }).join('');
 }
@@ -166,13 +166,13 @@ function renderParcelas() {
         '<md-icon-button onclick="showPropietarios(\'' + p.id + '\')" title="Ver propietarios (' + propietarios.length + ')" style="color:var(--md-sys-color-primary)"><md-icon>groups</md-icon></md-icon-button>' +
         '<span style="font-size:0.8rem;color:var(--text-2)">' + propietarios.length + '</span>' +
       '</div></td>' +
-      '<td>' + (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') + '</td>' +
+      '<td style="width:1%;white-space:nowrap">' + (IS_ADMIN ? '<md-icon-button onclick="editParcela(\'' + p.id + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' : '') + '</td>' +
       '</tr>';
   }).join('');
 
   wrap.innerHTML = '<table style="min-width:560px">' +
     '<thead><tr>' +
-      '<th>Parcela</th><th>Rol</th><th>Metros²</th><th>Estado</th><th>Propietarios</th><th></th>' +
+      '<th>Parcela</th><th>Rol</th><th>Metros²</th><th>Estado</th><th>Propietarios</th><th style="width:1%;white-space:nowrap"></th>' +
     '</tr></thead>' +
     '<tbody>' + rows + '</tbody>' +
     '</table>';
@@ -319,7 +319,7 @@ function renderFlujo() {
     '<th>Concepto</th>' +
     '<th>Comprobante</th>' +
     '<th style="text-align:right">Monto</th>' +
-    '<th></th>' +
+    '<th style="width:1%;white-space:nowrap"></th>' +
     '</tr></thead>';
 
   var body;
@@ -336,7 +336,7 @@ function renderFlujo() {
         '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
         '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
         '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
-        '<td>' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>' +
+        '<td style="width:1%;white-space:nowrap">' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>' +
         '</tr>';
     }).join('') + '</tbody>';
   }
