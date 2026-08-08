@@ -73,6 +73,11 @@ CREATE TABLE flujo (
     <md-filter-chip label="Egresos" onclick="filterFlujo('Egreso')"></md-filter-chip>
   </div>
 
+  <div class="chart-box" style="margin-bottom:1.5rem">
+    <h3>Ingresos vs Egresos por mes</h3>
+    <canvas id="chartFlujo"></canvas>
+  </div>
+
   <div class="table-wrap" id="flujoList">
     <div class="skeleton skeleton-row"></div>
     <div class="skeleton skeleton-row"></div>
@@ -120,16 +125,17 @@ function filterFlujo(tipo) {
    - totalEgresos = sum montos egresos
    - balance = totalIngresos - totalEgresos
 2. Renderizar 4 stat cards
-3. Filtrar según flujoFilter
-4. Ordenar por fecha descendente
-5. Renderizar tabla (min-width:640px, scroll horizontal en mobile):
+3. Renderizar gráfico "Ingresos vs Egresos por mes" (renderFlujoChart)
+4. Filtrar según flujoFilter
+5. Ordenar por fecha descendente
+6. Renderizar tabla (min-width:640px, scroll horizontal en mobile):
    a. Columna Fecha
    b. Columna Tipo (badge coloreado)
    c. Columna Concepto (+ descripción debajo)
    d. Columna Comprobante (icono receipt si existe)
    e. Columna Monto (derecha, coloreado según tipo)
    f. Columna Acciones admin
-6. Si no hay registros: fila con "Sin registros" (colspan=6)
+7. Si no hay registros: fila con "Sin registros" (colspan=6)
 ```
 
 **Código exacto**:
@@ -147,6 +153,8 @@ function renderFlujo() {
     + '<div class="stat-card"><div class="label">Balance</div><div class="value ' + (balance >= 0 ? 'green' : 'red') + '">$' + formatMoney(balance) + '</div></div>'
     + '<div class="stat-card"><div class="label">Movimientos</div><div class="value">' + FLUJO.length + '</div></div>';
 
+  renderFlujoChart();
+
   var filtered = flujoFilter === 'todos' ? FLUJO : FLUJO.filter(function(f) { return f.tipo === flujoFilter; });
   var list = document.getElementById('flujoList');
   var sorted = filtered.slice().sort(function(a, b) { return new Date(b.fecha) - new Date(a.fecha); });
@@ -157,7 +165,7 @@ function renderFlujo() {
     + '<th>Concepto</th>'
     + '<th>Comprobante</th>'
     + '<th style="text-align:right">Monto</th>'
-    + '<th></th>'
+    + '<th style="width:1%;white-space:nowrap"></th>'
     + '</tr></thead>';
 
   var body;
@@ -171,10 +179,10 @@ function renderFlujo() {
       return '<tr>'
         + '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>'
         + '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + f.tipo + '</span></td>'
-        + '<td>' + f.concepto + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>'
+        + '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>'
         + '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>'
         + '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>'
-        + '<td>' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>'
+        + '<td style="width:1%;white-space:nowrap">' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>'
         + '</tr>';
     }).join('') + '</tbody>';
   }
@@ -182,6 +190,69 @@ function renderFlujo() {
   list.innerHTML = '<table style="min-width:640px">' + head + body + '</table>';
 }
 ```
+
+### 7.2.1 renderFlujoChart()
+
+**Propósito**: Renderiza el gráfico "Ingresos vs Egresos por mes" (`#chartFlujo`) — línea con puntos (verde `--color-positive` para Ingresos, rojo `--md-sys-color-error` para Egresos) agrupando montos por mes. Responde al filtro de chips: si `flujoFilter` es `Ingreso`/`Egreso` solo muestra esa línea. Usa todo el ancho en desktop (sin wrapper `.charts` de 2 columnas) y actualiza colores en dark mode (`updateChartTheme`).
+
+**Código exacto**:
+```js
+function renderFlujoChart() {
+  var grupos = {};
+  FLUJO.forEach(function(f) {
+    var s = String(f.fecha || '');
+    var y, m;
+    if (s.indexOf('/') !== -1) {
+      var parts = s.split('/');
+      y = parseInt(parts[2], 10);
+      m = parseInt(parts[1], 10);
+    } else {
+      var iso = s.indexOf('T') !== -1 ? s.split('T')[0] : s;
+      var p = iso.split('-');
+      y = parseInt(p[0], 10);
+      m = parseInt(p[1], 10);
+    }
+    if (!y || !m) return;
+    var key = y + '-' + String(m).padStart(2, '0');
+    grupos[key] = grupos[key] || { ing: 0, egr: 0 };
+    if (f.tipo === 'Ingreso') grupos[key].ing += parseFloat(f.monto || 0);
+    else grupos[key].egr += parseFloat(f.monto || 0);
+  });
+  var keys = Object.keys(grupos).sort();
+  var labels = keys.map(formatPeriodo);
+  var datosIng = keys.map(function(k) { return grupos[k].ing; });
+  var datosEgr = keys.map(function(k) { return grupos[k].egr; });
+  var textColor = getCSS('--text');
+  var gridColor = getCSS('--border');
+  var colorIng = getCSS('--color-positive');
+  var colorEgr = getCSS('--md-sys-color-error');
+
+  var datasets = [];
+  if (flujoFilter === 'todos' || flujoFilter === 'Ingreso') {
+    datasets.push({ label: 'Ingresos', data: datosIng, borderColor: colorIng, borderWidth: 2, pointBackgroundColor: colorIng, pointRadius: 3, pointHoverRadius: 5, tension: 0.3, fill: false });
+  }
+  if (flujoFilter === 'todos' || flujoFilter === 'Egreso') {
+    datasets.push({ label: 'Egresos', data: datosEgr, borderColor: colorEgr, borderWidth: 2, pointBackgroundColor: colorEgr, pointRadius: 3, pointHoverRadius: 5, tension: 0.3, fill: false });
+  }
+
+  var ctx = document.getElementById('chartFlujo').getContext('2d');
+  if (chartFlujo) chartFlujo.destroy();
+  chartFlujo = new Chart(ctx, {
+    type: 'line',
+    data: { labels: labels, datasets: datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: textColor, boxWidth: 12, padding: 12, font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { color: textColor }, grid: { color: gridColor } },
+        y: { beginAtZero: true, ticks: { color: textColor, callback: function(v) { return '$' + formatMoney(v); } }, grid: { color: gridColor } }
+      }
+    }
+  });
+}
+```
+
+En `updateChartTheme()` el `chartFlujo` actualiza colores de datasets según su label (`Ingresos`/`Egresos`), la leyenda y los ejes.
 
 ### 7.3 formFlujo(data?)
 
@@ -193,26 +264,25 @@ function formFlujo(data) {
     return;
   }
   var isEdit = !!data;
-  var opts = conceptos.map(function(c) {
-    return '<md-select-option value="' + c + '"' + (isEdit && data.concepto === c ? ' selected' : '') + '><span slot="headline">' + c + '</span></md-select-option>';
-  }).join('');
+  var opts = conceptos.map(function(c) { return '<md-select-option value="' + c + '"' + (isEdit && data.concepto === c ? ' selected' : '') + '><span slot="headline">' + c + '</span></md-select-option>'; }).join('');
   openModal(isEdit ? 'Editar Movimiento' : 'Agregar Movimiento',
-    '<form id="modalForm" data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">'
-    + (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '')
-    + '<div class="form-row">'
-      + '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%">'
-        + '<md-select-option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '><span slot="headline">Ingreso</span></md-select-option>'
-        + '<md-select-option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '><span slot="headline">Egreso</span></md-select-option>'
-      + '</md-filled-select></div>'
-      + dateFieldHtml('fecha', 'Fecha*', isEdit ? data.fecha : '')
-    + '</div>'
-    + '<div class="form-group"><md-filled-select label="Concepto" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>'
-    + '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>'
-    + '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalles del movimiento..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>'
-    + '<div class="form-group"><label>Comprobante (foto)</label><input type="file" name="comprobante" accept="image/*"></div>'
-    + (isEdit && data.comprobante ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.comprobante + '" target="_blank">ver</a></div>' : '')
-    + '</form>',
-    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>', true);
+    '<form id="modalForm" data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Ingreso"' + (isEdit && data.tipo === 'Ingreso' ? ' selected' : '') + '><span slot="headline">Ingreso</span></md-select-option><md-select-option value="Egreso"' + (isEdit && data.tipo === 'Egreso' ? ' selected' : '') + '><span slot="headline">Egreso</span></md-select-option></md-filled-select></div>' +
+      dateFieldHtml('fecha', 'Fecha*', isEdit ? data.fecha : '') +
+    '</div>' +
+    '<div class="form-group"><md-filled-select label="Concepto" name="concepto" required style="width:100%">' + opts + '</md-filled-select></div>' +
+    '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalles del movimiento..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><label>Comprobante (foto)</label>' +
+      '<div class="comprobante-row">' +
+        '<input type="file" name="comprobante" accept="image/*">' +
+        (isEdit && data.comprobante ? '<a href="' + data.comprobante + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+      '</div>' +
+    '</div>' +
+  '</form>',
+  '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }
 ```
 
@@ -227,7 +297,7 @@ function formFlujo(data) {
       <th>Concepto</th>
       <th>Comprobante</th>
       <th style="text-align:right">Monto</th>
-      <th></th>
+      <th style="width:1%;white-space:nowrap"></th>
     </tr>
   </thead>
   <tbody>
@@ -237,7 +307,7 @@ function formFlujo(data) {
       <td>Cuotas ordinarias<div style="font-size:0.8rem;color:var(--text-muted)">Pago de gastos comunes marzo 2026</div></td>
       <td><!-- comprobante si existe --><a href="https://..." target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a></td>
       <td style="text-align:right;font-weight:600;white-space:nowrap;color:var(--color-positive)">$2.500.000</td>
-      <td>[edit] [delete]</td>
+      <td style="width:1%;white-space:nowrap">[edit] [delete]</td>
     </tr>
   </tbody>
 </table>

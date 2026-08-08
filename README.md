@@ -60,32 +60,8 @@ condominio-los-eucaliptus/
 ├── supabase/
 │   ├── config.toml                # Configuración proyecto Supabase
 │   └── migrations/                # Migraciones SQL
-│       ├── 001_crear_tablas.sql
-│       ├── 002_datos_ejemplo.sql
-│       ├── 003_rls_auth.sql
-│       ├── 004_fix_rls_select_policies.sql
-│       ├── 005_block_inserts.sql
-│       ├── 006_fix_asistentes_text.sql
-│       ├── 007_fix_gastos_parcela.sql
-│       ├── 008_gastos_parcela_text.sql
-│       ├── 009_standardize_fields.sql
-│       ├── 010_auth_insert_authenticated.sql
-│       ├── 011_gastos_add_archivo.sql
-│       ├── 012_storage_comprobantes.sql
-│       ├── 013_storage_flujo_documentos.sql
-│       ├── 014_fix_not_null_constraints.sql
-│       ├── 015_gastos_drop_not_null_concepto.sql
-│       ├── 016_config_admin.sql
-│       ├── 017_fix_admin_rls_recursion.sql
-│       ├── 018_grant_admin_tables.sql
-│       ├── 019_revoke_custom_grants.sql
-│       ├── 021_remove_condominio_config.sql
-│       ├── 022_rename_montos_config.sql
-│       ├── 023_parcela_foreign_keys.sql
-│       ├── 024_roles_jwt.sql
-│       ├── 025_fix_rls_policies.sql
-│       ├── 026_fix_rls_correct.sql
-│       └── 027_encuestas.sql
+│       ├── 001_tables.sql
+│       └── 002_rls_policies.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -127,17 +103,17 @@ CREATE POLICY "storage_insert" ON storage.objects
 
 ### Modo Demo
 
-Los formularios modales funcionan en ambos modos. En modo demo los cambios se guardan en memoria del navegador (los archivos se comprimen y almacenan como base64, sin tocar el storage real) y se pierden al recargar la página; en producción envía a Supabase.
+Los formularios modales funcionan en ambos modos. En modo demo los cambios se guardan en memoria del navegador (los archivos se comprimen con `browser-image-compression` y se almacenan como blob URL, sin tocar el storage real) y se pierden al recargar la página; en producción envía a Supabase.
 
 ## Funcionalidades
 
-- **Gráficos interactivos**: barras por período, doughnut por parcela
+- **Gráficos interactivos**: línea de montos por período, doughnut por parcela, y línea de ingresos vs egresos por mes (responde al filtro de chips)
 - **Filtros**: por periodo y parcela en la pestaña de gastos
 - **Chips de filtro**: en Reclamos, Ingresos/Egresos, Documentos y Asambleas
 - **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *
-- **CRUD admin**: iconos ✏️ editar y 🗑️ eliminar en cards (Noticias, Flujo, Documentos, Proveedores, Asambleas, Encuestas) — solo visible para admin
+- **CRUD admin**: iconos ✏️ editar y 🗑️ eliminar en tablas/cards (Gastos, Parcelas, Noticias, Flujo, Documentos, Proveedores, Asambleas, Encuestas) — solo visible para admin
 - **Confirmación modal**: todas las eliminaciones y cierre de formularios usan modal HTML en vez de `confirm()` nativo
 - **Descripción en modal**: documentos con descripción larga la muestran en un popup al hacer clic en ⓘ
 - **Confirmación de cierre**: advierte antes de cerrar un modal si hay datos ingresados

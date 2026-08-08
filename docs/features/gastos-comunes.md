@@ -263,8 +263,8 @@ function renderStats(data) {
 **Llamado desde**: `applyFilters()`, `renderStatsAndTable()`
 
 **Comportamiento**:
-- Si `data.length === 0`: muestra "Sin registros" en tbody (colspan 5)
-- Si hay datos: genera TRs con parcela, periodo, monto ($), comprobante (link "Ver" si existe), acciones admin
+- Si `data.length === 0`: muestra empty state en tbody (colspan 5)
+- Si hay datos: genera TRs con parcela, periodo, monto ($), comprobante (ícono receipt si existe, abierto en pestaña nueva), acciones admin (con `width:1%;white-space:nowrap` para que la columna no se estire)
 
 **Código exacto**:
 ```js
@@ -273,17 +273,17 @@ function renderTable(data) {
   document.getElementById('tableGastos').style.display = 'table';
   var tbody = document.getElementById('tableBody');
   if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--md-sys-color-outline);padding:1.5rem">Sin registros</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5">' + emptyState('Sin gastos para este filtro.') + '</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(function(r) {
-    return '<tr>'
-      + '<td>' + parcelName(r.parcela_id) + '</td>'
-      + '<td>' + formatPeriodo(r.periodo) + '</td>'
-      + '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>'
-      + '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank">Ver</a>' : '') + '</td>'
-      + '<td>' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>'
-      + '</tr>';
+    return '<tr>' +
+      '<td>' + parcelName(r.parcela_id) + '</td>' +
+      '<td>' + formatPeriodo(r.periodo) + '</td>' +
+      '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
+      '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
+      '<td style="width:1%;white-space:nowrap">' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>' +
+      '</tr>';
   }).join('');
 }
 ```
@@ -304,7 +304,7 @@ function renderCharts(data) {
 
 ### 7.7 renderPeriodChart(data)
 
-**Agrupa** por periodo, suma montos. **Gráfico de barras**.
+**Agrupa** por periodo, suma montos. **Gráfico de línea con puntos** (cambio 08/08/2026: antes era barras) — mejor para leer la evolución/tendencia a lo largo de los periodos; mantiene el color primario y se actualiza en dark mode.
 
 **Código exacto**:
 ```js
@@ -322,8 +322,8 @@ function renderPeriodChart(data) {
   var ctx = document.getElementById('chartPeriodos').getContext('2d');
   if (chartPeriodos) chartPeriodos.destroy();
   chartPeriodos = new Chart(ctx, {
-    type: 'bar',
-    data: { labels: labels, datasets: [{ label: 'Monto', data: values, backgroundColor: primary, borderRadius: 4 }] },
+    type: 'line',
+    data: { labels: labels, datasets: [{ label: 'Monto', data: values, borderColor: primary, borderWidth: 2, pointBackgroundColor: primary, pointRadius: 3, pointHoverRadius: 5, tension: 0.3, fill: false }] },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
@@ -381,7 +381,8 @@ function updateChartTheme() {
   var gridColor = getCSS('--border');
   var primary = getCSS('--md-sys-color-primary');
   if (chartPeriodos) {
-    chartPeriodos.data.datasets[0].backgroundColor = primary;
+    chartPeriodos.data.datasets[0].borderColor = primary;
+    chartPeriodos.data.datasets[0].pointBackgroundColor = primary;
     chartPeriodos.options.scales.x.ticks.color = textColor;
     chartPeriodos.options.scales.y.ticks.color = textColor;
     chartPeriodos.options.scales.x.grid.color = gridColor;
