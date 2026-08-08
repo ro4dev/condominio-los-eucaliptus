@@ -11,13 +11,76 @@
     "fecha": "20/07/2026",
     "tipo": "Ordinaria",
     "temario": "1. Revisión gastos junio-julio\n2. Reparación bomba agua\n3. Próximos proyectos\n4. Preguntas varias",
-    "acuerdos": "Se revisaron gastos. Se aprobó reparación bomba $35.000. Se propuso jardín común."
+    "acuerdos": "Se revisaron gastos. Se aprobó reparación bomba. Se propuso jardín común."
   },
   {
     "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
     "fecha": "15/08/2025",
     "tipo": "Extraordinaria",
     "temario": "1. Emergencia filtración techo salón\n2. Votación pintura fachada",
-    "acuerdos": "Se aprobó reparación urgente $180.000. Se votó pintura fachada aprobada."
+    "acuerdos": "Se aprobó reparación urgente. Se votó pintura fachada aprobada."
+  },
+  {
+    "id": "8b38dd51-4e72-49ba-9a11-d2dc89b1c010",
+    "fecha": "15/01/2025",
+    "tipo": "Ordinaria",
+    "temario": "1. Revisión gastos 2024\n2. Reajuste cuota 2025\n3. Metas del año",
+    "acuerdos": "Se aprobó reajuste de cuota a $46.000. Se definió plan de seguridad."
+  },
+  {
+    "id": "ecf92c79-2913-422f-8267-fe6ddc9b9d54",
+    "fecha": "20/03/2025",
+    "tipo": "Ordinaria",
+    "temario": "1. Mantención de áreas verdes\n2. Reparación veredas\n3. Nuevo horario piscina",
+    "acuerdos": "Se contrató servicio de jardinería. Se aprobó reparación de veredas."
+  },
+  {
+    "id": "1d03655e-029a-44b5-90b5-5e155ec6ce49",
+    "fecha": "12/06/2025",
+    "tipo": "Ordinaria",
+    "temario": "1. Presupuesto semestral\n2. Fumigación preventiva\n3. Preguntas varias",
+    "acuerdos": "Se aprobó presupuesto semestral. Se programó fumigación."
+  },
+  {
+    "id": "69fbcb01-e823-4a8c-b62b-f70316f275ce",
+    "fecha": "18/09/2025",
+    "tipo": "Ordinaria",
+    "temario": "1. Recambio luminarias LED\n2. Reglamento estacionamientos\n3. Preguntas varias",
+    "acuerdos": "Se aprobó recambio LED. Se revisó nuevo reglamento."
+  },
+  {
+    "id": "111cb221-1efb-4404-951a-c1e709befe78",
+    "fecha": "20/11/2025",
+    "tipo": "Ordinaria",
+    "temario": "1. Revisión de gastos\n2. Mejoras en portón de acceso\n3. Preguntas varias",
+    "acuerdos": "Se aprobó automatización del portón. Se revisaron cuentas."
+  },
+  {
+    "id": "0bc2bb0e-b279-4a6b-9390-30e41e6d2d9f",
+    "fecha": "10/12/2025",
+    "tipo": "Extraordinaria",
+    "temario": "1. Presupuesto 2026\n2. Proyecto paneles solares\n3. Votación fachadas",
+    "acuerdos": "Se aprobó presupuesto 2026. Se aprobó estudio de paneles solares."
+  },
+  {
+    "id": "47ef95b9-0304-4115-a60a-a815a444272d",
+    "fecha": "15/01/2026",
+    "tipo": "Ordinaria",
+    "temario": "1. Presupuesto 2026\n2. Nuevo reglamento interno\n3. Preguntas varias",
+    "acuerdos": "Se aprobó reglamento interno 2026. Se definieron comisiones."
+  },
+  {
+    "id": "2f3d201b-8fcd-4f82-8f4f-252a10485840",
+    "fecha": "19/03/2026",
+    "tipo": "Ordinaria",
+    "temario": "1. Contrato limpieza\n2. Jornada de limpieza comunitaria\n3. Preguntas varias",
+    "acuerdos": "Se renovó contrato de limpieza. Se convocó a jornada comunitaria."
+  },
+  {
+    "id": "628001e8-9865-4bce-a3d4-c169c560b99c",
+    "fecha": "21/05/2026",
+    "tipo": "Ordinaria",
+    "temario": "1. Pintura de fachadas\n2. Mantención piscina\n3. Preguntas varias",
+    "acuerdos": "Se aprobó pintura de fachadas para septiembre."
   }
 ]

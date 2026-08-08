@@ -142,5 +142,464 @@
     "telefono": "+54 9 11 3456-7890",
     "email": "pablo.castillo@mail.com",
     "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000017",
+    "nombre_completo": "Fernanda Escobar",
+    "rut": "22134045",
+    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
+    "telefono": "+54 9 11 7316-0943",
+    "email": "fernanda.escobar@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000018",
+    "nombre_completo": "Verónica Pino",
+    "rut": "12599536",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "telefono": "+54 9 11 1383-9924",
+    "email": "veronica.pino@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000019",
+    "nombre_completo": "Benjamín Contreras",
+    "rut": "11913692",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "telefono": "+54 9 11 8803-3768",
+    "email": "benjamin.contreras@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000020",
+    "nombre_completo": "Martina Espinoza",
+    "rut": "13038465",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "telefono": "+54 9 11 8253-6979",
+    "email": "martina.espinoza@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000021",
+    "nombre_completo": "Luis Morales",
+    "rut": "29270071",
+    "parcela_id": "ff748fb0-5348-455e-99c1-cf825a247258",
+    "telefono": "+54 9 11 9183-8918",
+    "email": "luis.morales@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000022",
+    "nombre_completo": "Rodrigo Vidal",
+    "rut": "23858375",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "telefono": "+54 9 11 1906-1740",
+    "email": "rodrigo.vidal@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000023",
+    "nombre_completo": "Pía Fuentes",
+    "rut": "15342402",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "telefono": "+54 9 11 5610-7649",
+    "email": "pia.fuentes@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000024",
+    "nombre_completo": "Silvia Carvajal",
+    "rut": "36130974",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "telefono": "+54 9 11 3125-2157",
+    "email": "silvia.carvajal@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000025",
+    "nombre_completo": "Hugo Peña",
+    "rut": "10195344",
+    "parcela_id": "a596d12a-c465-4093-ab95-c04564f94b25",
+    "telefono": "+54 9 11 2607-1135",
+    "email": "hugo.pena@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000026",
+    "nombre_completo": "Eduardo Navarrete",
+    "rut": "10139042",
+    "parcela_id": "ccc37411-1c19-4571-8ee3-0512925695c6",
+    "telefono": "+54 9 11 1336-5714",
+    "email": "eduardo.navarrete@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000027",
+    "nombre_completo": "Mónica Urrutia",
+    "rut": "17831191",
+    "parcela_id": "ccc37411-1c19-4571-8ee3-0512925695c6",
+    "telefono": "+54 9 11 6732-6750",
+    "email": "monica.urrutia@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000028",
+    "nombre_completo": "Mario Zapata",
+    "rut": "30388771",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "telefono": "+54 9 11 7992-7439",
+    "email": "mario.zapata@mail.com",
+    "tipo": "Arrendatario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000029",
+    "nombre_completo": "Esteban Carvajal",
+    "rut": "14808942",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "telefono": "+54 9 11 3210-3440",
+    "email": "esteban.carvajal@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000030",
+    "nombre_completo": "Karina Morales",
+    "rut": "14633979",
+    "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
+    "telefono": "+54 9 11 7589-4470",
+    "email": "karina.morales@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000031",
+    "nombre_completo": "Patricia Ortiz",
+    "rut": "29553343",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "telefono": "+54 9 11 7885-8402",
+    "email": "patricia.ortiz@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000032",
+    "nombre_completo": "Isidora Urrutia",
+    "rut": "36094027",
+    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
+    "telefono": "+54 9 11 8223-2973",
+    "email": "isidora.urrutia@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000033",
+    "nombre_completo": "Karen Palma",
+    "rut": "15118432",
+    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
+    "telefono": "+54 9 11 7248-3383",
+    "email": "karen.palma@mail.com",
+    "tipo": "Arrendataria"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000034",
+    "nombre_completo": "Vicente Quintana",
+    "rut": "29197915",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "telefono": "+54 9 11 0866-7670",
+    "email": "vicente.quintana@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000035",
+    "nombre_completo": "Ignacio Salazar",
+    "rut": "24849328",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "telefono": "+54 9 11 2383-3681",
+    "email": "ignacio.salazar@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000036",
+    "nombre_completo": "Josefa Carvajal",
+    "rut": "19513381",
+    "parcela_id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
+    "telefono": "+54 9 11 8453-9012",
+    "email": "josefa.carvajal@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000037",
+    "nombre_completo": "Felipe Espinoza",
+    "rut": "12792514",
+    "parcela_id": "1cc57544-3a87-43c7-8925-623195d7fdfc",
+    "telefono": "+54 9 11 1861-0421",
+    "email": "felipe.espinoza@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000038",
+    "nombre_completo": "Josefa Valdés",
+    "rut": "10651010",
+    "parcela_id": "a93dd0d0-c625-4956-bb04-9ca5eeb38f95",
+    "telefono": "+54 9 11 9497-4462",
+    "email": "josefa.valdes@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000039",
+    "nombre_completo": "Rodrigo Zamora",
+    "rut": "33948576",
+    "parcela_id": "96ebb517-6de4-440f-a535-aba79018c188",
+    "telefono": "+54 9 11 4001-8155",
+    "email": "rodrigo.zamora@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000040",
+    "nombre_completo": "Denise Bravo",
+    "rut": "17244094",
+    "parcela_id": "c2674b52-b175-491e-90b8-daf145b527b9",
+    "telefono": "+54 9 11 7516-6885",
+    "email": "denise.bravo@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000041",
+    "nombre_completo": "Tomás Gallardo",
+    "rut": "21053136",
+    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "telefono": "+54 9 11 4813-2966",
+    "email": "tomas.gallardo@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000042",
+    "nombre_completo": "Susana Bustamante",
+    "rut": "15952388",
+    "parcela_id": "20d1f8f9-9d56-41ae-9669-807e8241fe47",
+    "telefono": "+54 9 11 5987-6403",
+    "email": "susana.bustamante@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000043",
+    "nombre_completo": "Vicente Urrutia",
+    "rut": "33839595",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "telefono": "+54 9 11 6379-0119",
+    "email": "vicente.urrutia@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000044",
+    "nombre_completo": "Fernanda Aguilar",
+    "rut": "20989150",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "telefono": "+54 9 11 4892-1308",
+    "email": "fernanda.aguilar@mail.com",
+    "tipo": "Arrendataria"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000045",
+    "nombre_completo": "Florencia Lagos",
+    "rut": "23028260",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "telefono": "+54 9 11 6705-1398",
+    "email": "florencia.lagos@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000046",
+    "nombre_completo": "Gabriela Castro",
+    "rut": "13641064",
+    "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
+    "telefono": "+54 9 11 7746-4263",
+    "email": "gabriela.castro@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000047",
+    "nombre_completo": "Pía Urrutia",
+    "rut": "14929441",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "telefono": "+54 9 11 3237-4089",
+    "email": "pia.urrutia@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000048",
+    "nombre_completo": "Andrés Merino",
+    "rut": "22873923",
+    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
+    "telefono": "+54 9 11 7071-7624",
+    "email": "andres.merino@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000049",
+    "nombre_completo": "Leonardo Gallardo",
+    "rut": "32456590",
+    "parcela_id": "f14db3c5-b240-48c5-98ea-8973ac1af542",
+    "telefono": "+54 9 11 1538-3056",
+    "email": "leonardo.gallardo@mail.com",
+    "tipo": "Arrendatario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000050",
+    "nombre_completo": "Helena Ulloa",
+    "rut": "27275573",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "telefono": "+54 9 11 9139-4932",
+    "email": "helena.ulloa@mail.com",
+    "tipo": "Arrendataria"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000051",
+    "nombre_completo": "Daniela Toledo",
+    "rut": "15763977",
+    "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
+    "telefono": "+54 9 11 7066-7484",
+    "email": "daniela.toledo@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000052",
+    "nombre_completo": "Isidora Alarcón",
+    "rut": "17887350",
+    "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
+    "telefono": "+54 9 11 7536-6597",
+    "email": "isidora.alarcon@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000053",
+    "nombre_completo": "Leonardo Mendoza",
+    "rut": "12934253",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "telefono": "+54 9 11 2846-1884",
+    "email": "leonardo.mendoza@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000054",
+    "nombre_completo": "Bárbara Delgado",
+    "rut": "24421793",
+    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
+    "telefono": "+54 9 11 5002-7441",
+    "email": "barbara.delgado@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000055",
+    "nombre_completo": "Paola Cabrera",
+    "rut": "10118758",
+    "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
+    "telefono": "+54 9 11 7621-6008",
+    "email": "paola.cabrera@mail.com",
+    "tipo": "Arrendataria"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000056",
+    "nombre_completo": "Emilia Morales",
+    "rut": "19351226",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "telefono": "+54 9 11 1787-5042",
+    "email": "emilia.morales@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000057",
+    "nombre_completo": "Álvaro Sepúlveda",
+    "rut": "31064161",
+    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "telefono": "+54 9 11 2755-9885",
+    "email": "alvaro.sepulveda@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000058",
+    "nombre_completo": "Martina Salazar",
+    "rut": "19396938",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "telefono": "+54 9 11 6906-3419",
+    "email": "martina.salazar@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000059",
+    "nombre_completo": "Luis Fernández",
+    "rut": "16172736",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "telefono": "+54 9 11 2507-7679",
+    "email": "luis.fernandez@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000060",
+    "nombre_completo": "Carla Vargas",
+    "rut": "39777836",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "telefono": "+54 9 11 7055-8184",
+    "email": "carla.vargas@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000061",
+    "nombre_completo": "Julieta Alarcón",
+    "rut": "36409076",
+    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
+    "telefono": "+54 9 11 5839-3749",
+    "email": "julieta.alarcon@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000062",
+    "nombre_completo": "Bárbara Bustamante",
+    "rut": "27529090",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "telefono": "+54 9 11 0788-6854",
+    "email": "barbara.bustamante@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000063",
+    "nombre_completo": "Hernán Zamora",
+    "rut": "35513315",
+    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
+    "telefono": "+54 9 11 0577-4603",
+    "email": "hernan.zamora@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000064",
+    "nombre_completo": "Isabel Fernández",
+    "rut": "17637784",
+    "parcela_id": "44a21843-96dd-4a4f-8c0e-dbcc36eb549c",
+    "telefono": "+54 9 11 5126-6680",
+    "email": "isabel.fernandez@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000065",
+    "nombre_completo": "Gabriela Valdés",
+    "rut": "32242951",
+    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "telefono": "+54 9 11 8524-5753",
+    "email": "gabriela.valdes@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000066",
+    "nombre_completo": "Joaquín Fuentes",
+    "rut": "32067964",
+    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "telefono": "+54 9 11 3627-8875",
+    "email": "joaquin.fuentes@mail.com",
+    "tipo": "Propietario"
+  },
+  {
+    "id": "p001-0000-0000-0000-000000000067",
+    "nombre_completo": "Paola Moya",
+    "rut": "12172291",
+    "parcela_id": "739e2202-1565-4ef3-909c-0ca856d53392",
+    "telefono": "+54 9 11 5990-3073",
+    "email": "paola.moya@mail.com",
+    "tipo": "Propietario"
   }
 ]
