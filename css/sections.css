@@ -8,8 +8,8 @@
 
 .doc-item { display: flex; align-items: center; gap: 1rem; background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); margin-bottom: 1rem; }
 .doc-icon { width: 40px; height: 40px; border-radius: var(--md-sys-shape-corner-small); background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-.doc-info { flex: 1; }
-.doc-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+.doc-info { flex: 1; min-width: 0; }
+.doc-name { font-weight: 600; font-size: 0.9rem; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .doc-meta { font-size: 0.8rem; color: var(--text-muted); }
 .docs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .docs-grid .doc-item { margin-bottom: 0; }
@@ -55,4 +55,6 @@
   .charts { grid-template-columns: 1fr; }
   .chart-box canvas { max-height: 200px; }
   .docs-grid { grid-template-columns: 1fr; }
+  .doc-item { flex-wrap: wrap; }
+  .doc-item > div:nth-child(3) { width: 100%; justify-content: flex-end; }
 }
