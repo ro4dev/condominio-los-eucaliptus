@@ -61,7 +61,7 @@ textarea::placeholder { color: var(--md-sys-color-on-surface-variant); }
 .progress-label { font-size: 0.85rem; color: var(--text-2); margin-top: 0.5rem; }
 
 /* Home: filas de datos de pago (Cómo pagar) */
-.pago-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); }
+.pago-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--divider); }
 .pago-row .pago-label { font-size: 0.8rem; color: var(--text-muted); flex: 1; min-width: 0; }
 .pago-row .value { font-weight: 500; color: var(--text); user-select: all; word-break: break-all; }
 .pago-qr { max-width: 180px; width: 100%; height: auto; margin-top: 0.8rem; border-radius: var(--md-sys-shape-corner-small); }
