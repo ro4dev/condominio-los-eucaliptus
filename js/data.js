@@ -34,15 +34,15 @@ async function loadJson(target) {
 }
 
 async function loadInitialData() {
-  await Promise.all([loadJson('GASTOS'), loadJson('PARCELAS'), loadConfig()]);
-  fillFilters();
-  applyFilters();
-  var tabEl = document.getElementById('tab-cuenta');
+  await Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]);
+  renderHome();
+  var tabEl = document.getElementById('tab-home');
   if (tabEl) tabEl.setAttribute('aria-busy', 'false');
 }
 
 async function loadTabData(tab) {
   var configs = {
+    home: function() { return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]).then(function() { renderHome(); }); },
     cuenta: function() { return loadJson('GASTOS').then(function() { fillFilters(); applyFilters(); }); },
     parcelas: function() { return Promise.all([loadJson('PARCELAS'), loadJson('PROPIETARIOS')]).then(function() { renderParcelas(); }); },
     noticias: function() { return loadJson('NOTICIAS').then(function() { renderNoticias(); }); },
@@ -73,6 +73,7 @@ async function switchTab(tab) {
 
 function showSkeletons(tab) {
   var skeletons = {
+    home: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
     cuenta: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
     parcelas: '<div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>',
     noticias: '<div class="skeleton skeleton-news"></div><div class="skeleton skeleton-news"></div><div class="skeleton skeleton-news"></div>',

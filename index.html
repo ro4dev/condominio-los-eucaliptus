@@ -70,7 +70,8 @@
 
   <div class="container">
     <md-tabs id="mainTabs" class="tabs">
-      <md-primary-tab class="tab-btn" data-tab="cuenta" onclick="switchTab('cuenta')" active>Gastos Comunes</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="home" onclick="switchTab('home')" active>Home</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="cuenta" onclick="switchTab('cuenta')">Gastos Comunes</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="parcelas" onclick="switchTab('parcelas')">Parcelas</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="noticias" onclick="switchTab('noticias')">Noticias</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="flujo" onclick="switchTab('flujo')">Ingresos/Egresos</md-primary-tab>
@@ -82,8 +83,37 @@
       <md-primary-tab class="tab-btn" data-tab="config" id="configTabBtn" onclick="switchTab('config')" style="display:none">Configuración</md-primary-tab>
     </md-tabs>
 
+    <!-- HOME -->
+    <div id="tab-home" class="tab-content active" role="region" aria-label="Home" aria-busy="true">
+      <section class="stats" id="homeStats">
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+      </section>
+
+      <div class="home-duo">
+        <div class="card" id="homeRecaudacion">
+          <h4>Recaudación del periodo</h4>
+          <div class="progress-track"><div class="progress-fill" id="homeRecaudacionFill" style="width:0%"></div></div>
+          <p class="progress-label" id="homeRecaudacionLabel"></p>
+        </div>
+
+        <div class="card" id="homeComoPagar">
+          <h4>Cómo pagar</h4>
+          <p id="homePagoResumen" style="font-size:0.85rem;color:var(--text-2);margin-bottom:1rem">Transferí tu cuota mensual a la cuenta del condominio.</p>
+          <md-filled-button onclick="openComoPagar()"><md-icon slot="icon">payments</md-icon>Ver datos de pago</md-filled-button>
+        </div>
+      </div>
+
+      <div class="card" id="homeMorosos" style="margin-bottom:1rem">
+        <h4>Parcelas morosas</h4>
+        <div id="homeMorososList"></div>
+      </div>
+    </div>
+
     <!-- GASTOS COMUNES -->
-    <div id="tab-cuenta" class="tab-content active" role="region" aria-label="Gastos comunes" aria-busy="true">
+    <div id="tab-cuenta" class="tab-content" role="region" aria-label="Gastos comunes" aria-busy="true">
       <md-filled-button class="admin-only" id="formGastos" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Gasto</md-filled-button>
       <section class="stats" id="stats">
         <div class="skeleton skeleton-stat"></div>
@@ -276,6 +306,26 @@
           </div>
           <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
         </div>
+      </div>
+
+      <!-- Datos de pago (Home → Cómo pagar) -->
+      <div class="card" style="margin-bottom:1rem">
+        <h4>Datos de Pago</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cuenta y QR que se muestran en Home → "Cómo pagar" para que los deudores transfieran su cuota</p>
+        <div class="form-row">
+          <div class="form-group"><md-filled-text-field label="Banco" id="cfgPagoBanco" type="text" placeholder="Ej: Banco Estado" style="width:100%"></md-filled-text-field></div>
+          <div class="form-group"><md-filled-text-field label="Tipo de cuenta" id="cfgPagoTipoCuenta" type="text" placeholder="Ej: CuentaRut" style="width:100%"></md-filled-text-field></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><md-filled-text-field label="Número de cuenta" id="cfgPagoNumeroCuenta" type="text" placeholder="Ej: 12-345678-9" style="width:100%"></md-filled-text-field></div>
+          <div class="form-group"><md-filled-text-field label="RUT" id="cfgPagoRut" type="text" placeholder="Ej: 77.123.456-7" style="width:100%"></md-filled-text-field></div>
+        </div>
+        <div class="form-group"><md-filled-text-field label="Titular" id="cfgPagoTitular" type="text" placeholder="Ej: Comunidad Condominio Eucaliptus" style="width:100%"></md-filled-text-field></div>
+        <div class="form-row">
+          <div class="form-group"><md-filled-text-field label="Email tesorería" id="cfgPagoEmail" type="email" placeholder="Ej: tesoreria@eucaliptus.cl" style="width:100%"></md-filled-text-field></div>
+          <div class="form-group"><md-filled-text-field label="URL imagen QR" id="cfgPagoQr" type="url" placeholder="https://...qr.png" style="width:100%"></md-filled-text-field></div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarDatosPago" onclick="saveDatosPago()">Guardar</md-filled-button></div>
       </div>
 
       <!-- Categorías documentos -->

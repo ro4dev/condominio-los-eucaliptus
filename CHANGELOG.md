@@ -2,6 +2,25 @@
 
 ## Registro de cambios
 
+### 08/08/2026 - Home: listado de morosos rediseñado
+- **Changed**: El card "Parcelas morosas" deja de repetir un botón "Cómo pagar" por fila. Ahora es un **grid de cards compactas** (`.morosos-grid`/`.moroso-card` en `components.css`, auto-fill con mínimo 135px: 2 cards por fila en mobile/iPhone, más en desktop) que aprovecha el ancho; ordenado por **número de parcela** (`morosos()` en `utils.js` ordena por el número extraído de `numero`). Cada card clicable muestra parcela, deuda total y cantidad de periodos adeudados
+- **Changed**: Las cards "Recaudación del periodo" y "Cómo pagar" quedan **lado a lado en desktop** (`.home-duo`, 2 columnas) y apiladas en mobile; "Cómo pagar" se muestra arriba del listado de morosos, que ocupa todo el ancho
+- **Feat**: Click en una parcela abre el modal `openDeudaParcela()` con el **desglose por periodo** (cada periodo adeudado con su monto, orden cronológico) y el total — el "Cómo pagar" se mantiene aparte en su card
+- **Feat**: Nuevas funciones puras en `utils.js`: `periodosPendientes` (cantidad de periodos adeudados) y `deudaPorPeriodo` (desglose monto por periodo, agrupando los sin periodo)
+- **Docs**: `test.html` ampliado con asserts de `periodosPendientes`, `deudaPorPeriodo` (incl. sin periodo y orden) y del orden natural por número de parcela
+
+### 08/08/2026 - Home: balance, morosos y "Cómo pagar"
+- **Feat**: Nueva pestaña **Home** (primer tab, activa por defecto). Reemplaza a Gastos Comunes como punto de entrada (`index.html`, `data.js`)
+- **Feat**: Stats del periodo vigente (último `periodo` en GASTOS): Recaudado, Esperado, Egresos del mes y cantidad de morosos; para un propietario autenticado se calculan para **su** parcela (Pagado, Cuota, Estado Al día/Deudor, Deuda acumulada) via match email ↔ `propietarios.email` (`renderHome`, `miParcelaId` en `renderers.js`)
+- **Feat**: Card "Recaudación del periodo" con barra de progreso (`.progress-track`/`.progress-fill`) coloreada por pct (≥90 verde, ≥60 ámbar, <60 rojo) y label "X% de las cuotas del periodo pagadas"
+- **Feat**: Card "Parcelas morosas": admin ve todas con deuda acumulada ordenada desc; propietario ve su parcela (o "Tu parcela está al día"); sin login se oculta. Cada fila tiene botón "Cómo pagar" (`renderMorosos`)
+- **Feat**: Card "Cómo pagar" siempre visible + modal `openComoPagar()` con monto adeudado, filas de transferencia copiables (`.pago-row`, botón copiar por fila), QR opcional y botón "Copiar todos los datos" (`navigator.clipboard` con fallback)
+- **Feat**: Config → nueva card "Datos de Pago" (banco, tipo, número, RUT, titular, email, URL QR) que alimenta el modal de Home (`renderDatosPago`/`saveDatosPago` en `config-page.js`); demo seed en `data/config.json`
+- **Feat**: Motor de deudores en `utils.js` (funciones puras): `isPagado`, `esperadoPorPeriodo`, `recaudadoPorPeriodo`, `pctRecaudado`, `pendientesDeParcela`, `deudaParcela`, `estadoParcelaPago`, `morosos`
+- **Feat**: `data/gastos.json` normalizado con campo `pagado` (`"Sí"`/`"No"`): 141 registros "pendiente" (sin `archivo`) y 1.491 pagados — la columna ya existía en SQL, el demo ahora la usa
+- **Feat**: Form de gastos ahora permite marcar "Cuota pagada" (switch `md-switch`, default No) al agregar/editar (`modals.js`)
+- **Docs**: `test.html` con asserts de las funciones de deudores
+
 ### 08/08/2026 - Specs: Home + Finanzas unificado + deudores + auditoría + notificaciones
 - **Docs (fase de diseño, sin código)**: se definieron 5 specs nuevas y se actualizó `config-admin.md`:
   - `docs/features/deudores.md` — motor de cobranza: normaliza `gastos.pagado` (la columna ya existe en SQL pero el demo la tiene codificada como texto "pendiente" en la descripción), y expone funciones puras `isPagado`, `esperadoPorPeriodo`, `recaudadoPorPeriodo`, `pctRecaudado`, `deudaParcela`, `estadoParcelaPago` y `morosos`
@@ -11,7 +30,7 @@
   - `docs/features/notificaciones.md` — **diseño solamente** (sin email operativo): casos de uso, match email↔parcela como prerrequisito, canal in-app (tabla `notificaciones` + badge) recomendado como v1, y email vía Edge Function + Resend/SendGrid como fase B
   - `docs/features/config-admin.md` — nueva card "Datos de Pago" (banco, tipo, número, RUT, titular, email, QR) que alimenta el "Cómo pagar" de Home
   - `gastos-comunes.md` e `ingresos-egresos.md` marcados como deprecados (fusionados en `finanzas.md`)
-- **Next**: implementación en modo demo (Home → Finanzas → Parcelas chip → auditoría), luego migración SQL (`audit_log`)
+- **Next**: implementación en modo demo (Home ✅ → Finanzas → Parcelas chip → auditoría), luego migración SQL (`audit_log`)
 
 ### 08/08/2026 - Proveedores: nombres completos en el demo
 - **Style**: Los nombres de proveedores en `data/proveedores.json` pasan a formato nombre + apellido paterno + materno (ej: "Fernando Torres Aguilar" en vez de "Fernando Torres") — solo datos de demo, sin cambios de código

@@ -52,6 +52,38 @@ async function saveMontos() {
   btn.textContent = 'Guardar';
 }
 
+// --- DATOS DE PAGO (Home → Cómo pagar) ---
+function renderDatosPago() {
+  var d = CONFIG.datos_pago || {};
+  document.getElementById('cfgPagoBanco').value = d.banco || '';
+  document.getElementById('cfgPagoTipoCuenta').value = d.tipo_cuenta || '';
+  document.getElementById('cfgPagoNumeroCuenta').value = d.numero_cuenta || '';
+  document.getElementById('cfgPagoRut').value = d.rut || '';
+  document.getElementById('cfgPagoTitular').value = d.titular || '';
+  document.getElementById('cfgPagoEmail').value = d.email || '';
+  document.getElementById('cfgPagoQr').value = d.qr || '';
+}
+
+async function saveDatosPago() {
+  var btn = document.getElementById('btnGuardarDatosPago');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+  var value = {
+    banco: document.getElementById('cfgPagoBanco').value.trim(),
+    tipo_cuenta: document.getElementById('cfgPagoTipoCuenta').value.trim(),
+    numero_cuenta: document.getElementById('cfgPagoNumeroCuenta').value.trim(),
+    rut: document.getElementById('cfgPagoRut').value.trim(),
+    titular: document.getElementById('cfgPagoTitular').value.trim(),
+    email: document.getElementById('cfgPagoEmail').value.trim(),
+    qr: document.getElementById('cfgPagoQr').value.trim()
+  };
+  if (await saveConfig('datos_pago', value)) {
+    showSnackbar('Datos de pago guardados.', 'success');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Guardar';
+}
+
 // --- LIST CHIP HELPER ---
 function renderChipList(items, removeFn, usedItems) {
   if (!items.length) {
@@ -368,6 +400,7 @@ async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO')]);
   renderMontos();
+  renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();
   renderRubrosProveedores();
