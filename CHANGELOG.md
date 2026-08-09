@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 09/08/2026 - Fix visibilidad barra de progreso de recaudación (Home)
+- **Fix**: El fondo de la barra de progreso del Home pasa de `var(--border-light)` a `var(--border)`. En light era `#f5f7fa` (casi invisible sobre el card blanco) y en dark era `#111827` (idéntico al fondo del card). Ahora usa `#e5e7eb` / `#374151`, visible en ambos modos (`css/components.css`)
+
 ### 09/08/2026 - Pestaña Reclamos/Sugerencias renombrada a Comentarios
 - **Changed**: La pestaña "Reclamos/Sugerencias" ahora se llama **Comentarios** (tab, aria-label, botón "Agregar Comentario", modal y empty state). Los chips internos de filtro (Reclamos/Sugerencias) se mantienen igual
 

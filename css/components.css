@@ -57,7 +57,7 @@ textarea::placeholder { color: var(--md-sys-color-on-surface-variant); }
 .comprobante-row input[type="file"] { flex: 1; min-width: 0; }
 
 /* Home: progreso de recaudación */
-.progress-track { background: var(--border-light); border-radius: var(--md-sys-shape-corner-full); height: 0.6rem; overflow: hidden; }
+.progress-track { background: var(--border); border-radius: var(--md-sys-shape-corner-full); height: 0.6rem; overflow: hidden; }
 .progress-fill { height: 100%; border-radius: var(--md-sys-shape-corner-full); transition: width 0.3s; }
 .progress-label { font-size: 0.85rem; color: var(--text-2); margin-top: 0.5rem; }
 
