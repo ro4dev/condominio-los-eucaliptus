@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 09/08/2026 - Fix alineación de votos/porcentaje en Encuestas
+- **Fix**: El conteo y porcentaje de cada opción se centran verticalmente junto al botón "Votar" (`inline-flex` + `align-items:center`), ya que antes el texto quedaba desalineado por la altura del `md-filled-button` (`js/renderers.js`)
+
 ### 09/08/2026 - Fix visibilidad barra de progreso de recaudación (Home)
 - **Fix**: El fondo de la barra de progreso del Home pasa de `var(--border-light)` a `var(--border)`. En light era `#f5f7fa` (casi invisible sobre el card blanco) y en dark era `#111827` (idéntico al fondo del card). Ahora usa `#e5e7eb` / `#374151`, visible en ambos modos (`css/components.css`)
 

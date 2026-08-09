@@ -828,7 +828,7 @@ function renderEncuestas() {
       return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:var(--md-sys-shape-corner-extra-small);' : '') + '">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem">' +
           '<span' + (esMiVoto ? ' style="font-weight:600"' : '') + '>' + escHtml(op) + (esMiVoto ? ' ✓' : '') + '</span>' +
-          '<span style="color:var(--text-muted)">' + count + ' (' + pct + '%)' + boton + '</span>' +
+          '<span style="display:inline-flex;align-items:center;gap:0.4rem;color:var(--text-muted)">' + count + ' (' + pct + '%)' + boton + '</span>' +
         '</div>' +
         barra +
       '</div>';
