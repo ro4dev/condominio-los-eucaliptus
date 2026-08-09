@@ -170,11 +170,11 @@ function openDeudaParcela(parcelaId) {
   }
   var total = detalle.reduce(function(s, d) { return s + d.monto; }, 0);
   var body =
-    '<div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-muted);padding-bottom:0.4rem;border-bottom:1px solid var(--border-light)">' +
+    '<div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-muted);padding-bottom:0.4rem;border-bottom:1px solid var(--divider)">' +
       '<span>Periodo</span><span>Monto</span>' +
     '</div>' +
     detalle.map(function(d) {
-      return '<div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border-light)">' +
+      return '<div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--divider)">' +
         '<span style="color:var(--text)">' + (d.periodo ? formatPeriodo(d.periodo) : 'Sin periodo') + '</span>' +
         '<span style="color:var(--text-2)">$' + formatMoney(d.monto) + '</span>' +
       '</div>';
