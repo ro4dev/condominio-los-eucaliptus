@@ -6,6 +6,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 
 | Pestaña | Descripción |
 |---------|-------------|
+| **Home** | Vista resumen: balance del periodo vigente (% de recaudación con barra de progreso), listado de parcelas morosas (admin ve todas, el propietario su parcela) y card "Cómo pagar" con datos de transferencia. Es la pestaña inicial. |
 | **Gastos Comunes** | Gráficos y tabla de expensas por período y parcela. Filtros por periodo y parcela. |
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
@@ -15,7 +16,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 | **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |
-| **Configuración** | Panel admin: montos base, creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
+| **Configuración** | Panel admin: montos base, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
 
 ## Stack
 
@@ -108,6 +109,7 @@ Los formularios modales funcionan en ambos modos. En modo demo los cambios se gu
 ## Funcionalidades
 
 - **Gráficos interactivos**: línea de montos por período, doughnut por parcela, y línea de ingresos vs egresos por mes (responde al filtro de chips)
+- **Home / Cobranza**: balance del periodo vigente, % de recaudación, listado de morosos con deuda acumulada y modal "Cómo pagar" con datos de transferencia copiables
 - **Filtros**: por periodo y parcela en la pestaña de gastos
 - **Chips de filtro**: en Reclamos, Ingresos/Egresos, Documentos y Asambleas
 - **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso

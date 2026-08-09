@@ -26,6 +26,19 @@ tr:hover td { background: var(--surface-hover); }
 .empty-state .material-symbols-outlined { font-size: 3rem; color: var(--md-sys-color-outline); }
 .empty-state p { font: var(--md-sys-typescale-body-medium); margin: 0; max-width: 28rem; }
 
+.morosos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 0.6rem; }
+.moroso-card { background: var(--surface-hover); border: 1px solid var(--border-light); border-radius: var(--md-sys-shape-corner-medium); padding: 0.8rem; cursor: pointer; transition: border-color 0.15s; }
+.moroso-card:hover { border-color: var(--md-sys-color-outline); }
+.moroso-card-num { font: var(--md-sys-typescale-title-small); color: var(--text); }
+.moroso-card-propia { color: var(--text-muted); font-size: 0.7rem; font-weight: 400; }
+.moroso-card-deuda { font: var(--md-sys-typescale-title-medium); color: var(--md-sys-color-error); margin-top: 0.3rem; }
+.moroso-card-periodos { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+.home-duo { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1rem; }
+@media (min-width: 701px) {
+  .home-duo { grid-template-columns: 1fr 1fr; align-items: stretch; }
+}
+
 .skeleton { background: linear-gradient(90deg, var(--skeleton-1) 25%, var(--skeleton-2) 50%, var(--skeleton-1) 75%); background-size: 200% 100%; animation: skeleton 1.5s infinite; border-radius: var(--md-sys-shape-corner-small); }
 .skeleton-card { height: 200px; margin-bottom: 1rem; }
 .skeleton-row { height: 40px; margin-bottom: 0.5rem; }
@@ -41,3 +54,14 @@ textarea::placeholder { color: var(--md-sys-color-on-surface-variant); }
 .form-row .form-group { margin-bottom: 0; }
 .comprobante-row { display: flex; align-items: center; gap: 0.5rem; }
 .comprobante-row input[type="file"] { flex: 1; min-width: 0; }
+
+/* Home: progreso de recaudación */
+.progress-track { background: var(--border-light); border-radius: var(--md-sys-shape-corner-full); height: 0.6rem; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: var(--md-sys-shape-corner-full); transition: width 0.3s; }
+.progress-label { font-size: 0.85rem; color: var(--text-2); margin-top: 0.5rem; }
+
+/* Home: filas de datos de pago (Cómo pagar) */
+.pago-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); }
+.pago-row .pago-label { font-size: 0.8rem; color: var(--text-muted); flex: 1; min-width: 0; }
+.pago-row .value { font-weight: 500; color: var(--text); user-select: all; word-break: break-all; }
+.pago-qr { max-width: 180px; width: 100%; height: auto; margin-top: 0.8rem; border-radius: var(--md-sys-shape-corner-small); }

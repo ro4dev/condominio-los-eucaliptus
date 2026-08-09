@@ -49,6 +49,234 @@ function deleteItem(table, id, arrayName, renderFn) {
   });
 }
 
+// HOME
+function periodoVigente() {
+  var p = null;
+  GASTOS.forEach(function(g) {
+    if (g.periodo && (!p || g.periodo > p)) {
+      p = g.periodo;
+    }
+  });
+  return p;
+}
+
+function miParcelaId() {
+  if (!currentUser || typeof PROPIETARIOS === 'undefined') return null;
+  var prop = PROPIETARIOS.find(function(p) { return p.email === currentUser.email; });
+  return prop ? prop.parcela_id : null;
+}
+
+function egresosDelMes(periodo) {
+  var target = String(periodo || '');
+  return FLUJO.filter(function(f) {
+    if (f.tipo !== 'Egreso' || !f.fecha) return false;
+    var fecha = String(f.fecha);
+    var m;
+    if (fecha.indexOf('-') !== -1) {
+      m = fecha.slice(0, 7);
+    } else {
+      var p = fecha.split('/');
+      if (p.length !== 3) return false;
+      m = p[2] + '-' + (p[1].length === 1 ? '0' + p[1] : p[1]);
+    }
+    return m === target;
+  }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
+}
+
+function renderHome() {
+  var periodo = periodoVigente();
+  var miParcela = currentUser && !IS_ADMIN ? miParcelaId() : null;
+  var esPropietario = !!miParcela;
+
+  var statsEl = document.getElementById('homeStats');
+  if (esPropietario) {
+    var regsParcela = GASTOS.filter(function(g) { return g.parcela_id === miParcela; });
+    var esp = esperadoPorPeriodo(periodo, regsParcela);
+    var rec = recaudadoPorPeriodo(periodo, regsParcela);
+    var estado = estadoParcelaPago(miParcela, GASTOS);
+    var deuda = deudaParcela(miParcela, GASTOS);
+    statsEl.innerHTML =
+      '<div class="stat-card"><div class="label">Pagado (periodo)</div><div class="value blue">$' + formatMoney(rec) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Cuota (periodo)</div><div class="value">$' + formatMoney(esp) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Estado</div><div class="value ' + (estado === 'Al día' ? 'green' : 'red') + '">' + estado + '</div></div>' +
+      '<div class="stat-card"><div class="label">Deuda acumulada</div><div class="value ' + (deuda > 0 ? 'red' : 'green') + '">$' + formatMoney(deuda) + '</div></div>';
+  } else {
+    var recaudado = recaudadoPorPeriodo(periodo, GASTOS);
+    var esperado = esperadoPorPeriodo(periodo, GASTOS);
+    var egresos = egresosDelMes(periodo);
+    var cantidadMorosos = morosos(GASTOS, PARCELAS).length;
+    statsEl.innerHTML =
+      '<div class="stat-card"><div class="label">Recaudado (periodo)</div><div class="value blue">$' + formatMoney(recaudado) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Esperado (periodo)</div><div class="value">$' + formatMoney(esperado) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Egresos (periodo)</div><div class="value red">$' + formatMoney(egresos) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Morosos</div><div class="value ' + (cantidadMorosos > 0 ? 'red' : 'green') + '">' + cantidadMorosos + '</div></div>';
+  }
+
+  var pct = esPropietario
+    ? pctRecaudado(periodo, GASTOS.filter(function(g) { return g.parcela_id === miParcela; }))
+    : pctRecaudado(periodo, GASTOS);
+  var fill = document.getElementById('homeRecaudacionFill');
+  fill.style.width = pct + '%';
+  fill.style.background = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
+  document.getElementById('homeRecaudacionLabel').textContent =
+    pct + '% de las cuotas del periodo pagadas' + (esPropietario ? ' (tu parcela)' : '') + '.';
+
+  renderMorosos();
+}
+
+function renderMorosos() {
+  var card = document.getElementById('homeMorosos');
+  var list = document.getElementById('homeMorososList');
+  if (!currentUser) {
+    card.style.display = 'none';
+    return;
+  }
+  card.style.display = '';
+  var miParcela = miParcelaId();
+
+  var mcard = function(m, isPropia) {
+    var periodos = periodosPendientes(m.parcela_id, GASTOS).length;
+    return '<div class="moroso-card" onclick="openDeudaParcela(\'' + m.parcela_id + '\')">' +
+      '<div class="moroso-card-num">' + escHtml(m.numero) + (isPropia ? ' <span class="moroso-card-propia">(tu parcela)</span>' : '') + '</div>' +
+      '<div class="moroso-card-deuda">$' + formatMoney(m.deuda) + '</div>' +
+      '<div class="moroso-card-periodos">' + (periodos ? periodos + ' periodo' + (periodos > 1 ? 's' : '') : '') + '</div>' +
+    '</div>';
+  };
+
+  if (IS_ADMIN) {
+    var mor = morosos(GASTOS, PARCELAS);
+    if (!mor.length) {
+      list.innerHTML = emptyState('Todas las parcelas están al día.');
+      return;
+    }
+    list.innerHTML = '<div class="morosos-grid">' + mor.map(function(m) { return mcard(m, false); }).join('') + '</div>';
+  } else if (miParcela) {
+    var deuda = deudaParcela(miParcela, GASTOS);
+    if (deuda <= 0) {
+      list.innerHTML = emptyState('Tu parcela está al día.');
+      return;
+    }
+    list.innerHTML = '<div class="morosos-grid">' + mcard({ parcela_id: miParcela, numero: parcelName(miParcela), deuda: deuda }, true) + '</div>';
+  } else {
+    card.style.display = 'none';
+  }
+}
+
+function openDeudaParcela(parcelaId) {
+  var detalle = deudaPorPeriodo(parcelaId, GASTOS);
+  if (!detalle.length) {
+    openModal('Deuda de ' + escHtml(parcelName(parcelaId)), '<p style="color:var(--text-muted);margin:0">Esta parcela no tiene deuda.</p>');
+    return;
+  }
+  var total = detalle.reduce(function(s, d) { return s + d.monto; }, 0);
+  var body =
+    '<div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-muted);padding-bottom:0.4rem;border-bottom:1px solid var(--border-light)">' +
+      '<span>Periodo</span><span>Monto</span>' +
+    '</div>' +
+    detalle.map(function(d) {
+      return '<div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border-light)">' +
+        '<span style="color:var(--text)">' + (d.periodo ? formatPeriodo(d.periodo) : 'Sin periodo') + '</span>' +
+        '<span style="color:var(--text-2)">$' + formatMoney(d.monto) + '</span>' +
+      '</div>';
+    }).join('') +
+    '<div style="display:flex;justify-content:space-between;padding-top:0.7rem;font-weight:700;color:var(--text)">' +
+      '<span>Total</span><span style="color:var(--md-sys-color-error)">$' + formatMoney(total) + '</span>' +
+    '</div>';
+  openModal('Deuda de ' + escHtml(parcelName(parcelaId)), body);
+}
+
+function openComoPagar(parcelaId) {
+  var d = CONFIG.datos_pago || {};
+  var tieneDatos = !!(d.banco || d.tipo_cuenta || d.numero_cuenta || d.rut || d.titular || d.email);
+
+  var body = '';
+  if (parcelaId) {
+    var monto = deudaParcela(parcelaId, GASTOS);
+    body += '<p style="margin:0 0 0.8rem;font-weight:600;color:var(--text)">Deuda de ' + escHtml(parcelName(parcelaId)) + ': $' + formatMoney(monto) + '</p>';
+  } else if (currentUser) {
+    var mp = miParcelaId();
+    if (mp) {
+      var montoPropia = deudaParcela(mp, GASTOS);
+      body += '<p style="margin:0 0 0.8rem;font-weight:600;color:var(--text)">Tu deuda: $' + formatMoney(montoPropia) + '</p>';
+    }
+  }
+
+  var campos = [];
+  if (!tieneDatos) {
+    body += '<p style="color:var(--text-muted);margin:0">Sin datos de pago configurados.</p>';
+  } else {
+    campos = [
+      ['Banco', d.banco],
+      ['Tipo de cuenta', d.tipo_cuenta],
+      ['Número de cuenta', d.numero_cuenta],
+      ['RUT', d.rut],
+      ['Titular', d.titular],
+      ['Email tesorería', d.email]
+    ];
+    body += campos.filter(function(c) { return c[1]; }).map(function(c) {
+      return '<div class="pago-row">' +
+        '<span class="pago-label">' + c[0] + '</span>' +
+        '<span class="value">' + escHtml(c[1]) + '</span>' +
+        '<md-icon-button title="Copiar" aria-label="Copiar" style="flex-shrink:0;color:var(--md-sys-color-primary)" data-value="' + escHtml(c[1]) + '" onclick="copiarDato(this)"><md-icon>content_copy</md-icon></md-icon-button>' +
+        '</div>';
+    }).join('');
+    if (d.qr) {
+      body += '<img src="' + d.qr + '" alt="Código QR de pago" class="pago-qr">';
+    }
+  }
+
+  var allText = campos.filter(function(c) { return c[1]; }).map(function(c) { return c[0] + ': ' + c[1]; }).join('\n');
+  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  if (allText) {
+    footer += '<md-filled-button onclick="copiarTodosDatos()"><md-icon slot="icon">content_copy</md-icon>Copiar todos los datos</md-filled-button>';
+  }
+  openModal('Cómo pagar tu cuota', body, footer);
+}
+
+function copiarTodosDatos() {
+  var d = CONFIG.datos_pago || {};
+  var lineas = [
+    ['Banco', d.banco],
+    ['Tipo de cuenta', d.tipo_cuenta],
+    ['Número de cuenta', d.numero_cuenta],
+    ['RUT', d.rut],
+    ['Titular', d.titular],
+    ['Email tesorería', d.email]
+  ].filter(function(c) { return c[1]; }).map(function(c) { return c[0] + ': ' + c[1]; });
+  copiarTexto(lineas.join('\n'));
+}
+
+function copiarTexto(texto) {
+  function done() {
+    showSnackbar('Copiado al portapapeles.', 'success');
+  }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = texto;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      done();
+    } catch (e) {
+      showSnackbar('No se pudo copiar.', 'error');
+    }
+    document.body.removeChild(ta);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(done, fallback);
+  } else {
+    fallback();
+  }
+}
+
+function copiarDato(btn) {
+  var val = btn.getAttribute('data-value');
+  copiarTexto(val || '');
+}
+
 // ESTADO DE CUENTA
 function fillFilters() {
   var periodos = [];

@@ -5,5 +5,14 @@
   },
   "categorias_documentos": ["Estatuto", "Actas", "Contratos", "Seguros", "Planos"],
   "rubros_proveedores": ["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"],
-  "conceptos_flujo": ["Cuotas", "Fondo reserva", "Multa", "Mantenimiento", "Servicios", "Jardinería", "Limpieza", "Seguros"]
+  "conceptos_flujo": ["Cuotas", "Fondo reserva", "Multa", "Mantenimiento", "Servicios", "Jardinería", "Limpieza", "Seguros"],
+  "datos_pago": {
+    "banco": "Banco Estado",
+    "tipo_cuenta": "CuentaRut",
+    "numero_cuenta": "12-345678-9",
+    "rut": "77.123.456-7",
+    "titular": "Comunidad Condominio Eucaliptus",
+    "email": "tesoreria@eucaliptus.cl",
+    "qr": ""
+  }
 }

@@ -512,6 +512,13 @@ function formGastos(opt) {
       '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalles del gasto..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">' +
+      '<label for="gastoPagado" style="margin:0">Cuota pagada</label>' +
+      '<div style="display:flex;align-items:center;gap:0.5rem">' +
+        '<md-switch id="gastoPagado"' + (isEdit && data.pagado === 'Sí' ? ' selected' : '') + ' onchange="syncGastoPagado()"></md-switch>' +
+        '<input type="hidden" name="pagado" id="gastoPagadoHidden" value="' + (isEdit && data.pagado === 'Sí' ? 'Sí' : 'No') + '">' +
+      '</div>' +
+    '</div></div>' +
     '<div class="form-group"><label>Comprobante (foto)</label>' +
       '<div class="comprobante-row">' +
         '<input type="file" name="archivo" accept="image/*">' +
@@ -557,6 +564,11 @@ function updateGastoConcepto() {
   } else {
     conceptoEl.value = '';
   }
+}
+
+function syncGastoPagado() {
+  var sw = document.getElementById('gastoPagado');
+  document.getElementById('gastoPagadoHidden').value = sw.selected ? 'Sí' : 'No';
 }
 
 function formParcelas(data) {

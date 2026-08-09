@@ -76,6 +76,89 @@ function getTimeRemaining(fechaStr) {
   return horas + 'h ' + minutos + 'm';
 }
 
+// ── Deudores / estado de pago (funciones puras) ──
+function isPagado(gasto) {
+  return !!(gasto && gasto.pagado === 'Sí');
+}
+
+function esperadoPorPeriodo(periodo, GASTOS) {
+  return (GASTOS || []).filter(function(g) { return g.periodo === periodo; })
+    .reduce(function(s, g) { return s + parseFloat(g.monto || 0); }, 0);
+}
+
+function recaudadoPorPeriodo(periodo, GASTOS) {
+  return (GASTOS || []).filter(function(g) { return g.periodo === periodo && isPagado(g); })
+    .reduce(function(s, g) { return s + parseFloat(g.monto || 0); }, 0);
+}
+
+function pctRecaudado(periodo, GASTOS) {
+  var esp = esperadoPorPeriodo(periodo, GASTOS);
+  if (!esp) return 0;
+  return Math.round((recaudadoPorPeriodo(periodo, GASTOS) / esp) * 100);
+}
+
+function pendientesDeParcela(parcela_id, GASTOS) {
+  return (GASTOS || []).filter(function(g) { return g.parcela_id === parcela_id && !isPagado(g); });
+}
+
+function periodosPendientes(parcela_id, GASTOS) {
+  var set = {};
+  (GASTOS || []).forEach(function(g) {
+    if (g.parcela_id === parcela_id && !isPagado(g) && g.periodo) {
+      set[g.periodo] = true;
+    }
+  });
+  return Object.keys(set);
+}
+
+function deudaPorPeriodo(parcela_id, GASTOS) {
+  var sums = {};
+  var sinPeriodo = 0;
+  (GASTOS || []).forEach(function(g) {
+    if (g.parcela_id === parcela_id && !isPagado(g)) {
+      if (g.periodo) {
+        sums[g.periodo] = (sums[g.periodo] || 0) + parseFloat(g.monto || 0);
+      } else {
+        sinPeriodo += parseFloat(g.monto || 0);
+      }
+    }
+  });
+  var res = Object.keys(sums).sort().map(function(p) {
+    return { periodo: p, monto: sums[p] };
+  });
+  if (sinPeriodo > 0) {
+    res.push({ periodo: '', monto: sinPeriodo });
+  }
+  return res;
+}
+
+function deudaParcela(parcela_id, GASTOS) {
+  return pendientesDeParcela(parcela_id, GASTOS)
+    .reduce(function(s, g) { return s + parseFloat(g.monto || 0); }, 0);
+}
+
+function estadoParcelaPago(parcela_id, GASTOS) {
+  return pendientesDeParcela(parcela_id, GASTOS).length === 0 ? 'Al día' : 'Deudor';
+}
+
+function morosos(GASTOS, PARCELAS) {
+  var deudas = {};
+  (GASTOS || []).forEach(function(g) {
+    if (!isPagado(g) && g.parcela_id) {
+      deudas[g.parcela_id] = (deudas[g.parcela_id] || 0) + parseFloat(g.monto || 0);
+    }
+  });
+  return Object.keys(deudas).map(function(pid) {
+    var p = (PARCELAS || []).find(function(x) { return x.id === pid; });
+    return { parcela_id: pid, numero: p ? p.numero : pid, deuda: deudas[pid] };
+  }).filter(function(m) { return m.deuda > 0; })
+    .sort(function(a, b) {
+      var numA = parseInt((a.numero || '').replace(/\D/g, '')) || 0;
+      var numB = parseInt((b.numero || '').replace(/\D/g, '')) || 0;
+      return numA - numB;
+    });
+}
+
 var _snackbarTimer = null;
 function showSnackbar(message, type) {
   type = type || 'info';
