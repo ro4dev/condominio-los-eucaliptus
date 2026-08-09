@@ -4,6 +4,7 @@
 
 ### 08/08/2026 - Fix: espaciado en Home
 - **Fix**: `.stats` con `margin-bottom: 1rem` (antes 1.5rem) para que el espacio sobre las cards "Recaudación del periodo" y "Cómo pagar" quede igual que el resto de los gaps del tab
+- **Fix**: En el modal "Cómo pagar", las filas de datos (`.pago-row`) son más compactas: label a la izquierda y valor alineado a la derecha en una sola línea (hace wrap con `word-break: break-all`, sin sobreponerse); se quitaron los botones copiar individuales, queda solo "Copiar datos" del footer
 
 ### 08/08/2026 - Finanzas: pestaña unificada (reemplaza Gastos Comunes + Ingresos/Egresos)
 - **Feat**: Nueva pestaña **Finanzas** (`tab-finanzas`, tab `finanzas`) que reemplaza a "Gastos Comunes" y "Ingresos/Egresos" (`index.html`, `data.js`). Dos botones admin: "Agregar Cuota" (`formGastos`) y "Agregar Movimiento" (`formFlujo`)

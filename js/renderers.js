@@ -198,13 +198,12 @@ function openComoPagar(parcelaId) {
       ['Número de cuenta', d.numero_cuenta],
       ['RUT', d.rut],
       ['Titular', d.titular],
-      ['Email tesorería', d.email]
+      ['Email', d.email]
     ];
     body += campos.filter(function(c) { return c[1]; }).map(function(c) {
       return '<div class="pago-row">' +
         '<span class="pago-label">' + c[0] + '</span>' +
-        '<span class="value">' + escHtml(c[1]) + '</span>' +
-        '<md-icon-button title="Copiar" aria-label="Copiar" style="flex-shrink:0;color:var(--md-sys-color-primary)" data-value="' + escHtml(c[1]) + '" onclick="copiarDato(this)"><md-icon>content_copy</md-icon></md-icon-button>' +
+        '<span class="value" onclick="copiarValor(this)" title="Tocar para copiar">' + escHtml(c[1]) + '</span>' +
         '</div>';
     }).join('');
     if (d.qr) {
@@ -215,7 +214,7 @@ function openComoPagar(parcelaId) {
   var allText = campos.filter(function(c) { return c[1]; }).map(function(c) { return c[0] + ': ' + c[1]; }).join('\n');
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
   if (allText) {
-    footer += '<md-filled-button onclick="copiarTodosDatos()"><md-icon slot="icon">content_copy</md-icon>Copiar todos los datos</md-filled-button>';
+    footer += '<md-filled-button onclick="copiarTodosDatos()"><md-icon slot="icon">content_copy</md-icon>Copiar datos</md-filled-button>';
   }
   openModal('Cómo pagar tu cuota', body, footer);
 }
@@ -228,9 +227,13 @@ function copiarTodosDatos() {
     ['Número de cuenta', d.numero_cuenta],
     ['RUT', d.rut],
     ['Titular', d.titular],
-    ['Email tesorería', d.email]
+    ['Email', d.email]
   ].filter(function(c) { return c[1]; }).map(function(c) { return c[0] + ': ' + c[1]; });
   copiarTexto(lineas.join('\n'));
+}
+
+function copiarValor(el) {
+  copiarTexto(el.textContent || '');
 }
 
 function copiarTexto(texto) {
@@ -257,11 +260,6 @@ function copiarTexto(texto) {
   } else {
     fallback();
   }
-}
-
-function copiarDato(btn) {
-  var val = btn.getAttribute('data-value');
-  copiarTexto(val || '');
 }
 
 // FINANZAS / BALANCE
