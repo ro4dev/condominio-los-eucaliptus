@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 09/08/2026 - Fix cards de documentos en mobile
+- **Fix**: En mobile los cards de documentos ya no se desbordan del borde: `.doc-item` permite wrap, los botones (editar/eliminar/ver) bajan a su propia fila alineados a la derecha, y el nombre se trunca con elipsis (`css/sections.css`)
+
 ### 09/08/2026 - Espaciado de cards unificado
 - **Fix**: Escala única de espaciado en todo el sitio: **1rem** entre cards apiladas y contenedores (stats, charts, tablas, filtros, home, config) y en gaps de grids; **1.2rem** de padding interno en cards. Se eliminó la mezcla de `0.5rem`/`1rem`/`1.5rem`
 - **Changed**: Encuestas y Asambleas (`.item-card`), Reclamos (`.reclamo-item`) y Documentos en lista (`.doc-item`) pasan de `margin-bottom: 0.5rem` a `1rem` (antes se veían más compactos que Noticias); su padding interno pasa a `1.2rem`
