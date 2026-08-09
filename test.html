@@ -145,6 +145,35 @@
     ], [{ id: 'B', numero: 'Parcela 10' }, { id: 'Z', numero: 'Parcela 2' }]);
     assert('morosos orden natural (Parcela 2 antes que Parcela 10)', morNat[0].parcela_id, 'Z');
 
+    // ── Finanzas / Balance ──
+    assert('mesDeFecha dd/mm/yyyy', mesDeFecha('15/07/2025'), '2025-07');
+    assert('mesDeFecha d/mm/yyyy (día de 1 dígito)', mesDeFecha('2/08/2024'), '2024-08');
+    assert('mesDeFecha yyyy-mm-dd', mesDeFecha('2025-07-15'), '2025-07');
+    assert('mesDeFecha iso con hora', mesDeFecha('2025-07-15T12:00:00'), '2025-07');
+    assert('mesDeFecha vacío', mesDeFecha(''), '');
+    assert('mesDeFecha null', mesDeFecha(null), '');
+    assert('mesDeFecha sin mes válido', mesDeFecha('2025'), '');
+
+    var TF = [
+      { id: 'f1', tipo: 'Ingreso', concepto: 'Multa', fecha: '12/07/2026', monto: '30' },
+      { id: 'f2', tipo: 'Egreso', concepto: 'Electricidad', fecha: '5/07/2026', monto: '40' },
+      { id: 'f3', tipo: 'Egreso', concepto: 'Agua', fecha: '02/08/2026', monto: '60' },
+      { id: 'f4', tipo: 'Ingreso', concepto: 'Multa', fecha: '2026-07-03', monto: '20' }
+    ];
+
+    assert('ingresosDerivados 2026-07', ingresosDerivados('2026-07', TG), 100);
+    assert('ingresosDerivados sin datos', ingresosDerivados('2026-07', []), 0);
+
+    assert('egresosMes 2026-07', egresosMes('2026-07', TF), 40);
+    assert('egresosMes 2026-08', egresosMes('2026-08', TF), 60);
+    assert('egresosMes sin egresos', egresosMes('2026-09', TF), 0);
+    assert('egresosMes sin datos', egresosMes('2026-07', []), 0);
+
+    assert('ingresosMes 2026-07 (cuotas + manuales)', ingresosMes('2026-07', TG, TF), 150);
+    assert('ingresosMes 2026-06', ingresosMes('2026-06', TG, TF), 50);
+    assert('ingresosMes 2026-08', ingresosMes('2026-08', TG, TF), 0);
+    assert('ingresosMes sin datos', ingresosMes('2026-07', [], []), 0);
+
     // Summary
     var summary = document.getElementById('summary');
     var total = passed + failed;

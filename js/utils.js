@@ -97,6 +97,42 @@ function pctRecaudado(periodo, GASTOS) {
   return Math.round((recaudadoPorPeriodo(periodo, GASTOS) / esp) * 100);
 }
 
+// ── Finanzas / Balance (funciones puras) ──
+function mesDeFecha(fecha) {
+  if (!fecha) return '';
+  var s = String(fecha);
+  if (s.indexOf('T') !== -1) {
+    s = s.split('T')[0];
+  }
+  var m = s.split('-');
+  if (m.length === 3 && m[0].length === 4) {
+    return m[0] + '-' + m[1];
+  }
+  var p = s.split('/');
+  if (p.length === 3) {
+    return p[2] + '-' + (p[1].length === 1 ? '0' + p[1] : p[1]);
+  }
+  return '';
+}
+
+function ingresosDerivados(periodo, GASTOS) {
+  return recaudadoPorPeriodo(periodo, GASTOS);
+}
+
+function egresosMes(periodo, FLUJO) {
+  return (FLUJO || []).filter(function(f) {
+    return f.tipo === 'Egreso' && mesDeFecha(f.fecha) === periodo;
+  }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
+}
+
+function ingresosMes(periodo, GASTOS, FLUJO) {
+  var cuotas = recaudadoPorPeriodo(periodo, GASTOS);
+  var manual = (FLUJO || []).filter(function(f) {
+    return f.tipo === 'Ingreso' && mesDeFecha(f.fecha) === periodo;
+  }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
+  return cuotas + manual;
+}
+
 function pendientesDeParcela(parcela_id, GASTOS) {
   return (GASTOS || []).filter(function(g) { return g.parcela_id === parcela_id && !isPagado(g); });
 }

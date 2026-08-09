@@ -43,10 +43,9 @@ async function loadInitialData() {
 async function loadTabData(tab) {
   var configs = {
     home: function() { return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]).then(function() { renderHome(); }); },
-    cuenta: function() { return loadJson('GASTOS').then(function() { fillFilters(); applyFilters(); }); },
+    finanzas: function() { return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS')]).then(function() { fillFinanzasFilters(); renderFinanzas(); }); },
     parcelas: function() { return Promise.all([loadJson('PARCELAS'), loadJson('PROPIETARIOS')]).then(function() { renderParcelas(); }); },
     noticias: function() { return loadJson('NOTICIAS').then(function() { renderNoticias(); }); },
-    flujo: function() { return loadJson('FLUJO').then(function() { renderFlujo(); }); },
     documentos: function() { return loadJson('DOCUMENTOS').then(function() { renderDocumentos(); }); },
     reclamos: function() { return loadJson('RECLAMOS').then(function() { renderReclamos(); }); },
     proveedores: function() { return loadJson('PROVEEDORES').then(function() { renderProveedores(); }); },
@@ -74,10 +73,9 @@ async function switchTab(tab) {
 function showSkeletons(tab) {
   var skeletons = {
     home: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
-    cuenta: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
+    finanzas: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
     parcelas: '<div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>',
     noticias: '<div class="skeleton skeleton-news"></div><div class="skeleton skeleton-news"></div><div class="skeleton skeleton-news"></div>',
-    flujo: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
     documentos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     reclamos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
     proveedores: '<div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>',
@@ -94,17 +92,15 @@ function showSkeletons(tab) {
   if (content) {
     content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
   }
-  if (tab === 'flujo') {
+  if (tab === 'finanzas') {
     var fl = document.getElementById('flujoList');
     if (fl) {
       fl.innerHTML = '<div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>';
     }
-  }
-  if (tab === 'cuenta') {
-    var tl = document.getElementById('tableLoading');
+    var cu = document.getElementById('cuotasLoading');
     var tg = document.getElementById('tableGastos');
-    if (tl) {
-      tl.style.display = '';
+    if (cu) {
+      cu.style.display = '';
     }
     if (tg) {
       tg.style.display = 'none';

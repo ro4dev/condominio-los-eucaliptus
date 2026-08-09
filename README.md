@@ -7,10 +7,9 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | Pestaña | Descripción |
 |---------|-------------|
 | **Home** | Vista resumen: balance del periodo vigente (% de recaudación con barra de progreso), listado de parcelas morosas (admin ve todas, el propietario su parcela) y card "Cómo pagar" con datos de transferencia. Es la pestaña inicial. |
-| **Gastos Comunes** | Gráficos y tabla de expensas por período y parcela. Filtros por periodo y parcela. |
+| **Finanzas** | Balance unificado (reemplaza a Gastos Comunes e Ingresos/Egresos): stats por periodo (recaudado, esperado, % recaudación, egresos), gráfico "Recaudado vs Esperado", gráfico de ingresos vs egresos por mes, tabla de cuotas por parcela con estado Pagado/Pendiente y tabla de movimientos. Los ingresos por cuotas se derivan de los gastos pagados. Filtro por periodo + chips por tipo en movimientos. |
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
-| **Ingresos/Egresos** | Flujo de caja con tabla de movimientos, comprobantes y balance. Filtros por tipo. |
 | **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. Filtros por categoría. |
 | **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
@@ -110,8 +109,7 @@ Los formularios modales funcionan en ambos modos. En modo demo los cambios se gu
 
 - **Gráficos interactivos**: línea de montos por período, doughnut por parcela, y línea de ingresos vs egresos por mes (responde al filtro de chips)
 - **Home / Cobranza**: balance del periodo vigente, % de recaudación, listado de morosos con deuda acumulada y modal "Cómo pagar" con datos de transferencia copiables
-- **Filtros**: por periodo y parcela en la pestaña de gastos
-- **Chips de filtro**: en Reclamos, Ingresos/Egresos, Documentos y Asambleas
+- **Finanzas**: stats de balance por periodo, gráfico "Recaudado vs Esperado por período", cuotas derivadas de gastos pagados, tabla de cuotas con estado y movimientos de caja (filtro por periodo + chips Todos/Ingresos/Egresos)
 - **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *

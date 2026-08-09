@@ -49,6 +49,8 @@
 .chart-box h3 { font: var(--md-sys-typescale-title-medium); margin: 0 0 0.8rem; color: var(--text); }
 .chart-box canvas { max-height: 280px; }
 
+.section-title { font: var(--md-sys-typescale-title-medium); color: var(--text); margin: 1.5rem 0 0.8rem; }
+
 @media (max-width: 700px) {
   .charts { grid-template-columns: 1fr; }
   .chart-box canvas { max-height: 200px; }
