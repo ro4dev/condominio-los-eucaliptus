@@ -473,7 +473,7 @@ function tableToArray(table) {
 function getCurrentTab() {
   var active = document.querySelector('.tab-content.active');
   if (!active) {
-    return 'cuenta';
+    return 'finanzas';
   }
   return active.id.replace('tab-', '');
 }
@@ -639,12 +639,15 @@ function formNoticias(data) {
 }
 
 function formFlujo(data) {
-  var conceptos = CONFIG.conceptos_flujo || [];
+  var isEdit = !!data;
+  var conceptos = (CONFIG.conceptos_flujo || []).filter(function(c) { return c !== 'Cuotas' && c !== 'Fondo reserva'; });
   if (!conceptos.length) {
     showSnackbar('Primero debes configurar los conceptos en la pestaña Configuración.', 'warning');
     return;
   }
-  var isEdit = !!data;
+  if (isEdit && data.concepto && conceptos.indexOf(data.concepto) === -1) {
+    conceptos.push(data.concepto);
+  }
   var opts = conceptos.map(function(c) { return '<md-select-option value="' + c + '"' + (isEdit && data.concepto === c ? ' selected' : '') + '><span slot="headline">' + c + '</span></md-select-option>'; }).join('');
   openModal(isEdit ? 'Editar Movimiento' : 'Agregar Movimiento',
     '<form id="modalForm" data-table="flujo" data-bucket="ingresos_egresos" onsubmit="handleForm(event)">' +

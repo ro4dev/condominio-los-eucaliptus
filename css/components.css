@@ -1,9 +1,10 @@
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
 .stat-card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); text-align: center; }
 .stat-card .label { font: var(--md-sys-typescale-label-small); color: var(--text-2); text-transform: uppercase; letter-spacing: 0.5px; }
 .stat-card .value { font: var(--md-sys-typescale-headline-small); margin-top: 0.3rem; }
 .stat-card .value.blue { color: var(--md-sys-color-primary); }
 .stat-card .value.green { color: var(--color-positive); }
+.stat-card .value.amber { color: var(--color-extraordinaria-text); }
 .stat-card .value.red { color: var(--md-sys-color-error); }
 .table-wrap { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); overflow-x: auto; margin-bottom: 1.5rem; }
 

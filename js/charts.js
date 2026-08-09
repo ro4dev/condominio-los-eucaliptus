@@ -1,36 +1,47 @@
-var chartPeriodos, chartParcelas, chartFlujo;
+var chartRecaudado, chartParcelas, chartFlujo;
 
 function getCSS(name) {
   return getComputedStyle(document.body).getPropertyValue(name).trim();
 }
 
-function renderCharts(data) {
-  renderPeriodChart(data);
-  renderParcelaChart(data);
-}
-
-function renderPeriodChart(data) {
-  var groups = {};
-  data.forEach(function(r) {
+function renderRecaudadoChart() {
+  var grupos = {};
+  GASTOS.forEach(function(r) {
     var p = r.periodo || 'Sin periodo';
-    groups[p] = (groups[p] || 0) + parseFloat(r.monto || 0);
+    grupos[p] = grupos[p] || { esp: 0, rec: 0 };
+    grupos[p].esp += parseFloat(r.monto || 0);
+    if (isPagado(r)) {
+      grupos[p].rec += parseFloat(r.monto || 0);
+    }
   });
-  var labels = Object.keys(groups).map(formatPeriodo);
-  var values = Object.values(groups);
+  var periodos = Object.keys(grupos).sort();
+  var labels = periodos.map(formatPeriodo);
+  var datosEsp = periodos.map(function(p) { return grupos[p].esp; });
+  var datosRec = periodos.map(function(p) { return grupos[p].rec; });
   var textColor = getCSS('--text');
   var gridColor = getCSS('--border');
   var primary = getCSS('--md-sys-color-primary');
+  var muted = getCSS('--text-muted');
 
-  var ctx = document.getElementById('chartPeriodos').getContext('2d');
-  if (chartPeriodos) {
-    chartPeriodos.destroy();
+  var ctx = document.getElementById('chartRecaudado').getContext('2d');
+  if (chartRecaudado) {
+    chartRecaudado.destroy();
   }
-  chartPeriodos = new Chart(ctx, {
+  chartRecaudado = new Chart(ctx, {
     type: 'line',
-    data: { labels: labels, datasets: [{ label: 'Monto', data: values, borderColor: primary, borderWidth: 2, pointBackgroundColor: primary, pointRadius: 3, pointHoverRadius: 5, tension: 0.3, fill: false }] },
+    data: {
+      labels: labels,
+      datasets: [
+        { label: 'Esperado', data: datosEsp, borderColor: muted, borderWidth: 2, borderDash: [5, 5], pointBackgroundColor: muted, pointRadius: 3, pointHoverRadius: 5, tension: 0.3, fill: false },
+        { label: 'Recaudado', data: datosRec, borderColor: primary, borderWidth: 2, pointBackgroundColor: primary, pointRadius: 3, pointHoverRadius: 5, tension: 0.3, fill: '-1' }
+      ]
+    },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
+      plugins: {
+        legend: { labels: { color: textColor, boxWidth: 12, padding: 12, font: { size: 11 } } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': $' + formatMoney(ctx.parsed.y); } } }
+      },
       scales: {
         x: { ticks: { color: textColor }, grid: { color: gridColor } },
         y: { beginAtZero: true, ticks: { color: textColor, callback: function(v) { return '$' + formatMoney(v); } }, grid: { color: gridColor } }
@@ -66,35 +77,22 @@ function renderParcelaChart(data) {
 }
 
 function renderFlujoChart() {
-  var grupos = {};
+  var meses = {};
   FLUJO.forEach(function(f) {
-    var s = String(f.fecha || '');
-    var y, m;
-    if (s.indexOf('/') !== -1) {
-      var parts = s.split('/');
-      y = parseInt(parts[2], 10);
-      m = parseInt(parts[1], 10);
-    } else {
-      var iso = s.indexOf('T') !== -1 ? s.split('T')[0] : s;
-      var p = iso.split('-');
-      y = parseInt(p[0], 10);
-      m = parseInt(p[1], 10);
-    }
-    if (!y || !m) {
-      return;
-    }
-    var key = y + '-' + String(m).padStart(2, '0');
-    grupos[key] = grupos[key] || { ing: 0, egr: 0 };
-    if (f.tipo === 'Ingreso') {
-      grupos[key].ing += parseFloat(f.monto || 0);
-    } else {
-      grupos[key].egr += parseFloat(f.monto || 0);
+    var m = mesDeFecha(f.fecha);
+    if (m) {
+      meses[m] = true;
     }
   });
-  var keys = Object.keys(grupos).sort();
+  GASTOS.forEach(function(g) {
+    if (g.periodo) {
+      meses[g.periodo] = true;
+    }
+  });
+  var keys = Object.keys(meses).sort();
   var labels = keys.map(formatPeriodo);
-  var datosIng = keys.map(function(k) { return grupos[k].ing; });
-  var datosEgr = keys.map(function(k) { return grupos[k].egr; });
+  var datosIng = keys.map(function(k) { return ingresosMes(k, GASTOS, FLUJO); });
+  var datosEgr = keys.map(function(k) { return egresosMes(k, FLUJO); });
   var textColor = getCSS('--text');
   var gridColor = getCSS('--border');
   var colorIng = getCSS('--color-positive');
@@ -130,14 +128,18 @@ function updateChartTheme() {
   var textColor = getCSS('--text');
   var gridColor = getCSS('--border');
   var primary = getCSS('--md-sys-color-primary');
-  if (chartPeriodos) {
-    chartPeriodos.data.datasets[0].borderColor = primary;
-    chartPeriodos.data.datasets[0].pointBackgroundColor = primary;
-    chartPeriodos.options.scales.x.ticks.color = textColor;
-    chartPeriodos.options.scales.y.ticks.color = textColor;
-    chartPeriodos.options.scales.x.grid.color = gridColor;
-    chartPeriodos.options.scales.y.grid.color = gridColor;
-    chartPeriodos.update();
+  var muted = getCSS('--text-muted');
+  if (chartRecaudado) {
+    chartRecaudado.data.datasets[0].borderColor = muted;
+    chartRecaudado.data.datasets[0].pointBackgroundColor = muted;
+    chartRecaudado.data.datasets[1].borderColor = primary;
+    chartRecaudado.data.datasets[1].pointBackgroundColor = primary;
+    chartRecaudado.options.plugins.legend.labels.color = textColor;
+    chartRecaudado.options.scales.x.ticks.color = textColor;
+    chartRecaudado.options.scales.y.ticks.color = textColor;
+    chartRecaudado.options.scales.x.grid.color = gridColor;
+    chartRecaudado.options.scales.y.grid.color = gridColor;
+    chartRecaudado.update();
   }
   if (chartParcelas) {
     chartParcelas.options.plugins.legend.labels.color = textColor;

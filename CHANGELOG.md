@@ -2,6 +2,19 @@
 
 ## Registro de cambios
 
+### 08/08/2026 - Fix: espaciado en Home
+- **Fix**: `.stats` con `margin-bottom: 1rem` (antes 1.5rem) para que el espacio sobre las cards "Recaudación del periodo" y "Cómo pagar" quede igual que el resto de los gaps del tab
+
+### 08/08/2026 - Finanzas: pestaña unificada (reemplaza Gastos Comunes + Ingresos/Egresos)
+- **Feat**: Nueva pestaña **Finanzas** (`tab-finanzas`, tab `finanzas`) que reemplaza a "Gastos Comunes" y "Ingresos/Egresos" (`index.html`, `data.js`). Dos botones admin: "Agregar Cuota" (`formGastos`) y "Agregar Movimiento" (`formFlujo`)
+- **Feat**: Los ingresos por cuotas y fondo de reserva ahora se **derivan** de los gastos pagados (`recaudadoPorPeriodo`), no se cargan a mano: `data/ingresos_egresos.json` pierde los 162 ingresos de concepto `Cuotas`/`Fondo reserva` (quedan solo `Multa` y manuales) y `CONFIG.conceptos_flujo` deja de incluir esos conceptos; `formFlujo()` los filtra (mantiene el concepto actual al editar registros legacy)
+- **Feat**: Stats de balance por periodo (`renderFinanzasStats`): Recaudado, Esperado, Recaudación % (verde ≥90, ámbar ≥60, rojo <60 — nuevo `.value.amber`) y Egresos; con filtro "Todos" acumula todo el historial
+- **Feat**: Filtro único `#finanzasPeriodoFilter` controla stats, gráficos, tabla de cuotas y movimientos (los movimientos se filtran por el mes del periodo); `renderMovimientos()` mantiene los chips Todos/Ingresos/Egresos dentro del periodo
+- **Feat**: Gráfico **"Recaudado vs Esperado por período"** (`renderRecaudadoChart` en `charts.js`): dos líneas por periodo (Esperado gris punteado, Recaudado primario) con relleno entre ambas; reemplaza el viejo "Monto por período". El gráfico "Ingresos vs Egresos por mes" ahora suma las cuotas derivadas + ingresos manuales por mes (`ingresosMes`) y cubre todos los periodos de gastos
+- **Feat**: Tabla "Cuotas por parcela" con columna **Estado** (chip verde "Pagado" / ámbar "Pendiente", `estadoChip`) — el form de gastos ya marcaba el pago con su switch "Cuota pagada"
+- **Feat**: Funciones puras nuevas en `utils.js`: `mesDeFecha` (normaliza DD/MM/YYYY e ISO a YYYY-MM), `ingresosDerivados`, `egresosMes`, `ingresosMes`; `egresosDelMes` ahora delega en `egresosMes`
+- **Docs**: `test.html` con asserts de `mesDeFecha`, `ingresosDerivados`, `egresosMes`, `ingresosMes`
+
 ### 08/08/2026 - Home: listado de morosos rediseñado
 - **Changed**: El card "Parcelas morosas" deja de repetir un botón "Cómo pagar" por fila. Ahora es un **grid de cards compactas** (`.morosos-grid`/`.moroso-card` en `components.css`, auto-fill con mínimo 135px: 2 cards por fila en mobile/iPhone, más en desktop) que aprovecha el ancho; ordenado por **número de parcela** (`morosos()` en `utils.js` ordena por el número extraído de `numero`). Cada card clicable muestra parcela, deuda total y cantidad de periodos adeudados
 - **Changed**: Las cards "Recaudación del periodo" y "Cómo pagar" quedan **lado a lado en desktop** (`.home-duo`, 2 columnas) y apiladas en mobile; "Cómo pagar" se muestra arriba del listado de morosos, que ocupa todo el ancho

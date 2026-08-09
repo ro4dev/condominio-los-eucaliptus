@@ -5,7 +5,7 @@
   },
   "categorias_documentos": ["Estatuto", "Actas", "Contratos", "Seguros", "Planos"],
   "rubros_proveedores": ["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"],
-  "conceptos_flujo": ["Cuotas", "Fondo reserva", "Multa", "Mantenimiento", "Servicios", "Jardinería", "Limpieza", "Seguros"],
+  "conceptos_flujo": ["Multa", "Mantenimiento", "Servicios", "Jardinería", "Limpieza", "Seguros"],
   "datos_pago": {
     "banco": "Banco Estado",
     "tipo_cuenta": "CuentaRut",
