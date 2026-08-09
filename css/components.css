@@ -6,7 +6,7 @@
 .stat-card .value.green { color: var(--color-positive); }
 .stat-card .value.amber { color: var(--color-extraordinaria-text); }
 .stat-card .value.red { color: var(--md-sys-color-error); }
-.table-wrap { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); overflow-x: auto; margin-bottom: 1.5rem; }
+.table-wrap { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); overflow-x: auto; margin-bottom: 1rem; }
 
 .table-wrap h3 { font: var(--md-sys-typescale-title-medium); margin: 0 0 0.8rem; color: var(--text); }
 table { width: 100%; border-collapse: collapse; font: var(--md-sys-typescale-body-small); }
@@ -27,7 +27,7 @@ tr:hover td { background: var(--surface-hover); }
 .empty-state .material-symbols-outlined { font-size: 3rem; color: var(--md-sys-color-outline); }
 .empty-state p { font: var(--md-sys-typescale-body-medium); margin: 0; max-width: 28rem; }
 
-.morosos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 0.6rem; }
+.morosos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 1rem; }
 .moroso-card { background: var(--surface-hover); border: 1px solid var(--border-light); border-radius: var(--md-sys-shape-corner-medium); padding: 0.8rem; cursor: pointer; transition: border-color 0.15s; }
 .moroso-card:hover { border-color: var(--md-sys-color-outline); }
 .moroso-card-num { font: var(--md-sys-typescale-title-small); color: var(--text); }
@@ -45,7 +45,7 @@ tr:hover td { background: var(--surface-hover); }
 .skeleton-row { height: 40px; margin-bottom: 0.5rem; }
 .skeleton-stat { height: 100px; }
 .skeleton-news { height: 120px; margin-bottom: 1rem; }
-.skeleton-doc { height: 60px; margin-bottom: 0.5rem; }
+.skeleton-doc { height: 60px; margin-bottom: 1rem; }
 @keyframes skeleton { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 .form-group { margin-bottom: 1rem; }

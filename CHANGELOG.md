@@ -2,7 +2,12 @@
 
 ## Registro de cambios
 
-### 08/08/2026 - Fix: espaciado en Home
+### 09/08/2026 - Espaciado de cards unificado
+- **Fix**: Escala única de espaciado en todo el sitio: **1rem** entre cards apiladas y contenedores (stats, charts, tablas, filtros, home, config) y en gaps de grids; **1.2rem** de padding interno en cards. Se eliminó la mezcla de `0.5rem`/`1rem`/`1.5rem`
+- **Changed**: Encuestas y Asambleas (`.item-card`), Reclamos (`.reclamo-item`) y Documentos en lista (`.doc-item`) pasan de `margin-bottom: 0.5rem` a `1rem` (antes se veían más compactos que Noticias); su padding interno pasa a `1.2rem`
+- **Changed**: Gráficos y tablas de Finanzas unifican su ritmo a `1rem` (`.charts` gap y `margin-bottom`, chart full-width en `index.html`, `.table-wrap`) — antes usaban `1.5rem`, distinto a los indicadores (`css/sections.css`, `css/components.css`)
+- **Changed**: Gaps de grids a `1rem`: Documentos (`.docs-grid` 0.5→1rem), morosos del Home (`.morosos-grid` 0.6→1rem); Proveedores (`.cards-grid`) ya usaba 1rem
+- **Changed**: `margin-bottom` de `.news-card` se mueve del inline de `renderers.js` al CSS (mantiene 1rem) y `.skeleton-doc` pasa a `1rem` para igualar el nuevo ritmo de lista
 - **Fix**: `.stats` con `margin-bottom: 1rem` (antes 1.5rem) para que el espacio sobre las cards "Recaudación del periodo" y "Cómo pagar" quede igual que el resto de los gaps del tab
 - **Fix**: En el modal "Cómo pagar", las filas de datos (`.pago-row`) son más compactas: label a la izquierda y valor alineado a la derecha en una sola línea (hace wrap con `word-break: break-all`, sin sobreponerse); se quitaron los botones copiar individuales, queda solo "Copiar datos" del footer
 

@@ -542,7 +542,7 @@ function renderNoticias() {
 
 function renderNoticiaCard(n, old) {
   var fecha = formatDate(n.fecha || n.created_at);
-  return '<div class="news-card" style="margin-bottom:1rem">' +
+  return '<div class="news-card">' +
     '<div style="display:flex;justify-content:space-between;align-items:center">' +
       '<h4 style="margin:0;flex:1">' + escHtml(n.titulo) + '</h4>' +
       '<span class="dates" style="margin:0">' + fecha + '</span>' +
