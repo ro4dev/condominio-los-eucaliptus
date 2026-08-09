@@ -11,7 +11,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
 | **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. Filtros por categoría. |
-| **Reclamos/Sugerencias** | Registro de reclamos y sugerencias de los residentes. |
+| **Comentarios** | Registro de comentarios, reclamos y sugerencias de los residentes (filtros por tipo). |
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 | **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |

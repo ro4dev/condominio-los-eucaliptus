@@ -75,7 +75,7 @@
       <md-primary-tab class="tab-btn" data-tab="parcelas" onclick="switchTab('parcelas')">Parcelas</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="noticias" onclick="switchTab('noticias')">Noticias</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="documentos" onclick="switchTab('documentos')">Documentos</md-primary-tab>
-      <md-primary-tab class="tab-btn" data-tab="reclamos" onclick="switchTab('reclamos')">Reclamos/Sugerencias</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="reclamos" onclick="switchTab('reclamos')">Comentarios</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="proveedores" onclick="switchTab('proveedores')">Proveedores</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="asambleas" onclick="switchTab('asambleas')">Asambleas</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="encuestas" onclick="switchTab('encuestas')">Encuestas</md-primary-tab>
@@ -217,8 +217,8 @@
     </div>
 
     <!-- RECLAMOS/SUGERENCIAS -->
-    <div id="tab-reclamos" class="tab-content" role="region" aria-label="Reclamos/Sugerencias">
-      <md-filled-button id="formReclamos" onclick="formReclamos()"><md-icon slot="icon">add</md-icon>Agregar Reclamo/Sugerencia</md-filled-button>
+    <div id="tab-reclamos" class="tab-content" role="region" aria-label="Comentarios">
+      <md-filled-button id="formReclamos" onclick="formReclamos()"><md-icon slot="icon">add</md-icon>Agregar Comentario</md-filled-button>
       <div class="filter-chips" id="reclamosFilter">
         <md-filter-chip label="Todos" selected onclick="filterReclamos('todos')"></md-filter-chip>
         <md-filter-chip label="Reclamos" onclick="filterReclamos('Reclamo')"></md-filter-chip>

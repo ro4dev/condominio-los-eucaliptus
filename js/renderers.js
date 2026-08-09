@@ -639,7 +639,7 @@ function renderReclamos() {
       '</div>';
   }).join('');
   if (filtered.length === 0) {
-    list.innerHTML = emptyState('No hay reclamos ni sugerencias.');
+    list.innerHTML = emptyState('No hay comentarios.');
   }
 }
 
