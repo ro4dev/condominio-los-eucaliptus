@@ -689,7 +689,7 @@ function formDocumentos(data) {
 
 function formReclamos() {
   var parcelas = PARCELAS.map(function(p) { return '<md-select-option value="' + p.id + '"><span slot="headline">' + p.numero + '</span></md-select-option>'; }).join('');
-  openModal('Agregar Reclamo/Sugerencia', '<form id="modalForm" data-table="reclamos" onsubmit="handleForm(event)">' +
+  openModal('Agregar Comentario', '<form id="modalForm" data-table="reclamos" onsubmit="handleForm(event)">' +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-select label="Tipo" name="tipo" required style="width:100%"><md-select-option value="Reclamo"><span slot="headline">Reclamo</span></md-select-option><md-select-option value="Sugerencia"><span slot="headline">Sugerencia</span></md-select-option></md-filled-select></div>' +
       '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" required style="width:100%">' + parcelas + '</md-filled-select></div>' +

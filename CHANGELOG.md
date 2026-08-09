@@ -2,6 +2,9 @@
 
 ## Registro de cambios
 
+### 09/08/2026 - Pestaña Reclamos/Sugerencias renombrada a Comentarios
+- **Changed**: La pestaña "Reclamos/Sugerencias" ahora se llama **Comentarios** (tab, aria-label, botón "Agregar Comentario", modal y empty state). Los chips internos de filtro (Reclamos/Sugerencias) se mantienen igual
+
 ### 09/08/2026 - Fix cards de documentos en mobile
 - **Fix**: En mobile los cards de documentos ya no se desbordan del borde: `.doc-item` permite wrap, los botones (editar/eliminar/ver) bajan a su propia fila alineados a la derecha, y el nombre se trunca con elipsis (`css/sections.css`)
 
