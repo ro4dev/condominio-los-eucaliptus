@@ -14,6 +14,7 @@ function updateDemoMenu() {
 updateDemoMenu();
 
 var GASTOS = [];
+var PAGOS = [];
 var PARCELAS = [];
 var PROPIETARIOS = [];
 var NOTICIAS = [];
@@ -30,6 +31,7 @@ var loaded = { GASTOS: false };
 
 var DEMO_FILES = {
   GASTOS: 'data/gastos.json',
+  PAGOS: 'data/pagos.json',
   PARCELAS: 'data/parcelas.json',
   PROPIETARIOS: 'data/propietarios.json',
   NOTICIAS: 'data/noticias.json',

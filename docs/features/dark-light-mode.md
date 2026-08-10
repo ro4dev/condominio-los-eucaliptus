@@ -97,15 +97,18 @@ En `renderers.js` se usan variables CSS para colores dinámicos en los templates
 ```
 
 ## Charts
-La función `updateChartTheme()` se ejecuta al togglear el tema:
+La función `updateChartTheme()` se ejecuta al togglear el tema. Los gráficos actuales son `chartRecaudado` (Recaudado vs Esperado, Finanzas) y `chartFlujo` (Ingresos vs Egresos, Finanzas):
 ```js
 function updateChartTheme() {
   var textColor = getCSS('--text');
   var gridColor = getCSS('--border');
-  var primary = getCSS('--md-sys-color-primary');
-  // actualiza colores de chartPeriodos y chartParcelas
+  // chartRecaudado: recalculan colores de escalas y líneas
+  // chartFlujo: color de líneas según --color-positive (ingresos) y --md-sys-color-error (egresos)
+  // si (chartRecaudado) chartRecaudado.update();
+  // si (chartFlujo) chartFlujo.update();
 }
 ```
+El gráfico "Monto por parcela" (`chartParcelas`/`renderParcelaChart`) y `chartPeriodos` fueron **eliminados** con el rediseño de Finanzas.
 
 `getCSS()` obtiene el valor actual de una variable CSS:
 ```js

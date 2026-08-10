@@ -76,9 +76,42 @@ function getTimeRemaining(fechaStr) {
   return horas + 'h ' + minutos + 'm';
 }
 
-// ── Deudores / estado de pago (funciones puras) ──
+// ── Pagos / estado de pago (funciones puras) ──
+function getPagos() {
+  return (typeof PAGOS !== 'undefined') ? PAGOS : [];
+}
+
+function pagosDeGasto(gastoId) {
+  return getPagos().filter(function(p) { return p.gasto_id === gastoId; });
+}
+
+function sumPagosGasto(gastoId) {
+  return pagosDeGasto(gastoId).reduce(function(s, p) { return s + parseFloat(p.monto || 0); }, 0);
+}
+
+function pagosDeParcela(parcelaId) {
+  return getPagos().filter(function(p) { return p.parcela_id === parcelaId; });
+}
+
+// Cuota marcada como pagada sin pagos registrados (legado pre-pagos)
+function pagoLegado(g) {
+  return !!(g && g.pagado === 'Sí' && !pagosDeGasto(g.id).length);
+}
+
 function isPagado(gasto) {
-  return !!(gasto && gasto.pagado === 'Sí');
+  if (!gasto) return false;
+  if (pagoLegado(gasto)) return true;
+  var monto = parseFloat(gasto.monto || 0);
+  if (!monto) return false;
+  return sumPagosGasto(gasto.id) >= monto;
+}
+
+// Monto efectivamente cobrado de una cuota (nunca supera el monto de la cuota)
+function recaudadoGasto(gasto) {
+  if (!gasto) return 0;
+  var monto = parseFloat(gasto.monto || 0);
+  if (pagoLegado(gasto)) return monto;
+  return Math.min(monto, sumPagosGasto(gasto.id));
 }
 
 function esperadoPorPeriodo(periodo, GASTOS) {
@@ -87,14 +120,77 @@ function esperadoPorPeriodo(periodo, GASTOS) {
 }
 
 function recaudadoPorPeriodo(periodo, GASTOS) {
-  return (GASTOS || []).filter(function(g) { return g.periodo === periodo && isPagado(g); })
-    .reduce(function(s, g) { return s + parseFloat(g.monto || 0); }, 0);
+  return (GASTOS || []).filter(function(g) { return g.periodo === periodo; })
+    .reduce(function(s, g) { return s + recaudadoGasto(g); }, 0);
 }
 
 function pctRecaudado(periodo, GASTOS) {
   var esp = esperadoPorPeriodo(periodo, GASTOS);
   if (!esp) return 0;
   return Math.round((recaudadoPorPeriodo(periodo, GASTOS) / esp) * 100);
+}
+
+// ── Config de cuota por periodo ──
+function configPeriodos() {
+  return (typeof CONFIG !== 'undefined' && CONFIG.periodos) ? CONFIG.periodos : [];
+}
+
+function periodoConfig(periodo) {
+  return configPeriodos().find(function(p) { return p.periodo === periodo; }) || null;
+}
+
+function montosBase() {
+  var m = (typeof CONFIG !== 'undefined' && CONFIG.montos) ? CONFIG.montos : {};
+  return {
+    monto: parseFloat(m.gasto_comun_base) || 0,
+    fondo_reserva: parseFloat(m.fondo_reserva) || 0
+  };
+}
+
+// Cuota del periodo (gasto común + fondo reserva). Si no hay config para el periodo, usa Monto Base.
+function cuotaDelPeriodo(periodo) {
+  var base = montosBase();
+  var conf = periodoConfig(periodo);
+  if (conf) {
+    if (conf.monto != null && conf.monto !== '') base.monto = parseFloat(conf.monto) || 0;
+    if (conf.fondo_reserva != null && conf.fondo_reserva !== '') base.fondo_reserva = parseFloat(conf.fondo_reserva) || 0;
+  }
+  return { monto: base.monto, fondo_reserva: base.fondo_reserva, total: base.monto + base.fondo_reserva };
+}
+
+// Siguiente periodo posterior al último con cuotas registradas
+function siguientePeriodo() {
+  var last = null;
+  (typeof GASTOS !== 'undefined' ? GASTOS : []).forEach(function(g) {
+    if (g.periodo && (!last || g.periodo > last)) last = g.periodo;
+  });
+  var parts = last ? last.split('-') : null;
+  var y, m;
+  if (!parts || parts.length !== 2) {
+    var now = new Date();
+    y = now.getFullYear();
+    m = now.getMonth() + 1;
+  } else {
+    y = parseInt(parts[0]);
+    m = parseInt(parts[1]);
+  }
+  m++;
+  if (m > 12) { m = 1; y++; }
+  return y + '-' + String(m).padStart(2, '0');
+}
+
+// Aviso de aumento de cuota para el próximo periodo (si está configurado más alto)
+function avisoAumento() {
+  var vigente = null;
+  (typeof GASTOS !== 'undefined' ? GASTOS : []).forEach(function(g) {
+    if (g.periodo && (!vigente || g.periodo > vigente)) vigente = g.periodo;
+  });
+  if (!vigente) return null;
+  var actual = cuotaDelPeriodo(vigente);
+  var futuro = cuotaDelPeriodo(siguientePeriodo());
+  if (!futuro.total || futuro.total <= actual.total) return null;
+  var pct = actual.total ? Math.round(((futuro.total - actual.total) / actual.total) * 100) : 100;
+  return { periodo: siguientePeriodo(), anterior: actual.total, nuevo: futuro.total, pct: pct };
 }
 
 // ── Finanzas / Balance (funciones puras) ──
@@ -133,60 +229,80 @@ function ingresosMes(periodo, GASTOS, FLUJO) {
   return cuotas + manual;
 }
 
-function pendientesDeParcela(parcela_id, GASTOS) {
-  return (GASTOS || []).filter(function(g) { return g.parcela_id === parcela_id && !isPagado(g); });
+// Periodos con datos (cuotas o movimientos), ordenados del más reciente al más antiguo
+function periodosFinanzas(GASTOS, FLUJO) {
+  var set = {};
+  (GASTOS || []).forEach(function(g) { if (g.periodo) set[g.periodo] = true; });
+  (FLUJO || []).forEach(function(f) { var m = mesDeFecha(f.fecha); if (m) set[m] = true; });
+  return Object.keys(set).sort().reverse();
+}
+
+// Saldo del periodo: ingresos totales (cuotas + manuales) menos egresos
+function saldoPeriodo(periodo, GASTOS, FLUJO) {
+  return ingresosMes(periodo, GASTOS, FLUJO) - egresosMes(periodo, FLUJO);
+}
+
+// Deuda total de una parcela: nunca negativa (el saldo a favor no se cobra)
+function deudaParcela(parcela_id, GASTOS) {
+  var cuotas = 0, pagado = 0;
+  (GASTOS || []).forEach(function(g) {
+    if (g.parcela_id !== parcela_id) return;
+    cuotas += parseFloat(g.monto || 0);
+    if (pagoLegado(g)) pagado += parseFloat(g.monto || 0);
+  });
+  pagado += pagosDeParcela(parcela_id).reduce(function(s, p) { return s + parseFloat(p.monto || 0); }, 0);
+  return Math.max(0, cuotas - pagado);
+}
+
+// Desglose por periodo de la deuda de una parcela (monto = déficit del periodo).
+// El excedente (saldo a favor) se absorbe primero en los periodos más recientes.
+function deudaPorPeriodo(parcela_id, GASTOS) {
+  var cuotas = {}, pagado = {};
+  (GASTOS || []).forEach(function(g) {
+    if (g.parcela_id !== parcela_id) return;
+    var p = g.periodo || '';
+    cuotas[p] = (cuotas[p] || 0) + parseFloat(g.monto || 0);
+    if (pagoLegado(g)) pagado[p] = (pagado[p] || 0) + parseFloat(g.monto || 0);
+  });
+  pagosDeParcela(parcela_id).forEach(function(pg) {
+    var p = pg.periodo || '';
+    pagado[p] = (pagado[p] || 0) + parseFloat(pg.monto || 0);
+  });
+
+  var excedente = 0;
+  var res = [];
+  Object.keys(cuotas).sort().forEach(function(p) {
+    var saldo = cuotas[p] - (pagado[p] || 0);
+    if (saldo < 0) {
+      excedente += -saldo;
+    } else if (saldo > 0) {
+      res.push({ periodo: p, monto: saldo });
+    }
+  });
+  for (var i = res.length - 1; i >= 0 && excedente > 0; i--) {
+    var ab = Math.min(res[i].monto, excedente);
+    res[i].monto -= ab;
+    excedente -= ab;
+  }
+  return res.filter(function(d) { return d.monto > 0; });
 }
 
 function periodosPendientes(parcela_id, GASTOS) {
-  var set = {};
-  (GASTOS || []).forEach(function(g) {
-    if (g.parcela_id === parcela_id && !isPagado(g) && g.periodo) {
-      set[g.periodo] = true;
-    }
-  });
-  return Object.keys(set);
-}
-
-function deudaPorPeriodo(parcela_id, GASTOS) {
-  var sums = {};
-  var sinPeriodo = 0;
-  (GASTOS || []).forEach(function(g) {
-    if (g.parcela_id === parcela_id && !isPagado(g)) {
-      if (g.periodo) {
-        sums[g.periodo] = (sums[g.periodo] || 0) + parseFloat(g.monto || 0);
-      } else {
-        sinPeriodo += parseFloat(g.monto || 0);
-      }
-    }
-  });
-  var res = Object.keys(sums).sort().map(function(p) {
-    return { periodo: p, monto: sums[p] };
-  });
-  if (sinPeriodo > 0) {
-    res.push({ periodo: '', monto: sinPeriodo });
-  }
-  return res;
-}
-
-function deudaParcela(parcela_id, GASTOS) {
-  return pendientesDeParcela(parcela_id, GASTOS)
-    .reduce(function(s, g) { return s + parseFloat(g.monto || 0); }, 0);
+  return deudaPorPeriodo(parcela_id, GASTOS).map(function(d) { return d.periodo; });
 }
 
 function estadoParcelaPago(parcela_id, GASTOS) {
-  return pendientesDeParcela(parcela_id, GASTOS).length === 0 ? 'Al día' : 'Deudor';
+  return deudaParcela(parcela_id, GASTOS) <= 0 ? 'Al día' : 'Deudor';
 }
 
 function morosos(GASTOS, PARCELAS) {
-  var deudas = {};
+  var seen = {};
   (GASTOS || []).forEach(function(g) {
-    if (!isPagado(g) && g.parcela_id) {
-      deudas[g.parcela_id] = (deudas[g.parcela_id] || 0) + parseFloat(g.monto || 0);
-    }
+    if (g.parcela_id) seen[g.parcela_id] = true;
   });
-  return Object.keys(deudas).map(function(pid) {
+  return Object.keys(seen).map(function(pid) {
     var p = (PARCELAS || []).find(function(x) { return x.id === pid; });
-    return { parcela_id: pid, numero: p ? p.numero : pid, deuda: deudas[pid] };
+    return { parcela_id: pid, numero: p ? p.numero : pid, deuda: deudaParcela(pid, GASTOS) };
   }).filter(function(m) { return m.deuda > 0; })
     .sort(function(a, b) {
       var numA = parseInt((a.numero || '').replace(/\D/g, '')) || 0;

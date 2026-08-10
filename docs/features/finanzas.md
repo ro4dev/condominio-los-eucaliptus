@@ -2,12 +2,12 @@
 
 ## 1. Descripción general
 
-Pestaña unificada que reemplaza a **Gastos Comunes** y **Ingresos/Egresos**. Distingue dos flujos que hoy se registran duplicados:
+Pestaña unificada que reemplaza a **Gastos Comunes** y **Ingresos/Egresos**. Muestra el **balance por periodo** del condominio. Distingue dos flujos:
 
-- **Ingresos por cuotas**: se **derivan** de `gastos` con `pagado === 'Sí'` (mensualidad + fondo reserva). Ya no se cargan a mano como movimiento "Cuotas"/"Fondo reserva" en el flujo.
+- **Ingresos por cuotas**: se **derivan** de los pagos registrados (tabla `pagos`) contra las cuotas emitidas (`gastos`). Ya no se cargan a mano como movimiento en el flujo.
 - **Egresos y otros ingresos**: movimientos reales de la cuenta del condominio (servicios, jardinería, seguros, multas, etc.) desde `flujo`.
 
-La pestaña muestra el balance por periodo, el % de recaudación, los gráficos y las dos tablas de detalle (cuotas por parcela y movimientos).
+La pestaña muestra: una card "Periodo en curso", dos gráficos, una tabla resumen por periodo (con popups de detalle de cuotas y de movimientos) y los botones admin de carga.
 
 ID del tab: `finanzas`
 Contenedor: `<div id="tab-finanzas">`
@@ -15,173 +15,219 @@ Reemplaza a: `tab-cuenta` (Gastos Comunes) y `tab-flujo` (Ingresos/Egresos)
 
 ## 2. Modelo de datos
 
-### Cambio de datos (migración nueva + demo)
+### Cuotas (`gastos`) y pagos (`pagos`)
 
-1. **`gastos.pagado`**: columna ya existe en prod. Se agrega a `data/gastos.json` (backfill: "pendiente" en descripción → `"No"`, resto → `"Sí"`). Ver `deudores.md` §2.
-2. **`flujo`**: se eliminan del demo los movimientos tipo `Ingreso` con concepto `Cuotas` y `Fondo reserva` (quedan duplicados). Se conservan `Multa` y otros ingresos manuales no derivables.
-3. **Regla de código**: `formFlujo()` ya no ofrece los conceptos `Cuotas`/`Fondo reserva` como opción de ingreso. `CONFIG.conceptos_flujo` deja de incluir `"Cuotas"` y `"Fondo reserva"`.
+- **Cuota** = registro en `gastos` (una por parcela por periodo y concepto: gasto común `GC_MM_AAAA`, fondo reserva `GC_FR_MM_AAAA`).
+- **Pago** = registro en `pagos` asociado a una cuota (`gasto_id`). Una cuota puede tener **varios pagos parciales** (con `monto`, `fecha` y `comprobante` opcional).
 
-Sin cambio de schema SQL: ni `gastos` ni `flujo` necesitan columnas nuevas.
-
-### Ingresos derivados
-
-```js
-// Ingreso derivado por periodo: cuotas pagadas de gastos
-function ingresosDerivados(periodo, GASTOS) {
-  return recaudadoPorPeriodo(periodo, GASTOS);
-}
+```sql
+CREATE TABLE pagos (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  gasto_id UUID REFERENCES gastos(id) ON DELETE CASCADE,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE CASCADE,
+  periodo TEXT NOT NULL,        -- denormalizado (YYYY-MM), copia del de la cuota
+  monto NUMERIC(12,2) NOT NULL,
+  fecha DATE NOT NULL,
+  comprobante TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
 ```
 
-Los egresos e ingresos manuales vienen de `FLUJO` tal cual.
+Migración SQL: `supabase/migrations/003_pagos.sql` (incluye backfill idempotente: los `gastos` con `pagado='Sí'` y sin pagos se convierten en cuota + 1 pago). Demo: `data/pagos.json`.
 
-## 3. HTML structure (index.html — reemplaza tab-cuenta y tab-flujo)
+### `gastos.pagado` (legado)
+
+La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` devuelve `true` si la cuota tiene `pagado === 'Sí'` pero **no tiene pagos registrados**: en ese caso se trata como pagada completa. Las cuotas nuevas (por "Generar Cuotas" o "Agregar Cuota") se crean con `pagado: 'No'` y su estado se resuelve por pagos.
+
+### Regla de código
+
+`formFlujo()` no ofrece los conceptos `Cuotas`/`Fondo reserva` como ingreso manual (quedan duplicados con los derivados).
+
+## 3. HTML structure (index.html)
 
 ```html
-<div id="tab-finanzas" class="tab-content active" role="region" aria-label="Finanzas" aria-busy="true">
-  <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+<div id="tab-finanzas" class="tab-content" role="region" aria-label="Finanzas" aria-busy="true">
+  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
     <md-filled-button class="admin-only" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Cuota</md-filled-button>
+    <md-filled-button class="admin-only" onclick="formGenerarCuotas()"><md-icon slot="icon">add</md-icon>Generar Cuotas</md-filled-button>
     <md-filled-button class="admin-only" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
   </div>
 
-  <!-- Balance del periodo -->
-  <section class="stats" id="finanzasStats">
-    <div class="skeleton skeleton-stat"></div>
-    <div class="skeleton skeleton-stat"></div>
-    <div class="skeleton skeleton-stat"></div>
-    <div class="skeleton skeleton-stat"></div>
-  </section>
-
-  <!-- Filtros -->
-  <div class="filters">
-    <md-filled-select id="finanzasPeriodoFilter" label="Periodo"></md-filled-select>
-  </div>
-
-  <!-- Charts -->
   <section class="charts">
     <div class="chart-box"><h3>Recaudado vs Esperado por período</h3><canvas id="chartRecaudado"></canvas></div>
-    <div class="chart-box"><h3>Monto por parcela</h3><canvas id="chartParcelas"></canvas></div>
+    <div class="chart-box"><h3>Ingresos vs Egresos por mes</h3><canvas id="chartFlujo"></canvas></div>
   </section>
-  <div class="chart-box" style="margin-bottom:1.5rem">
-    <h3>Ingresos vs Egresos por mes</h3>
-    <canvas id="chartFlujo"></canvas>
-  </div>
 
-  <!-- Cuotas por parcela -->
-  <h3 class="section-title">Cuotas por parcela</h3>
-  <div class="table-wrap">
-    <div id="cuotasLoading"><div class="skeleton skeleton-row"></div></div>
-    <table style="display:none" id="tableGastos">
+  <div id="finanzasPeriodoEnCurso" style="margin-bottom:1rem"></div>
+
+  <h3 class="section-title">Resumen por periodo</h3>
+  <div class="table-wrap" id="resumenPeriodosWrap">
+    <div id="resumenPeriodosSkeleton">...</div>
+    <div id="resumenPeriodosEmpty" style="display:none"></div>
+    <table style="display:none" id="tableResumenPeriodos">
       <thead>
         <tr>
-          <th>Parcela</th><th>Periodo</th><th>Monto</th><th>Estado</th><th>Comprobante</th>
-          <th style="width:1%;white-space:nowrap"></th>
+          <th>Periodo</th><th>Esperado</th><th>Recaudado</th><th>%</th>
+          <th>Egresos</th><th>Saldo</th>
+          <th title="Ver cuotas del periodo">Cuotas</th>
+          <th title="Ver movimientos del periodo">Mov.</th>
         </tr>
       </thead>
-      <tbody id="tableBody"></tbody>
+      <tbody id="resumenPeriodosBody"></tbody>
     </table>
-  </div>
-
-  <!-- Movimientos -->
-  <h3 class="section-title">Movimientos</h3>
-  <div class="filter-chips" id="flujoFilter">
-    <md-filter-chip label="Todos" selected onclick="filterFlujo('todos')"></md-filter-chip>
-    <md-filter-chip label="Ingresos" onclick="filterFlujo('Ingreso')"></md-filter-chip>
-    <md-filter-chip label="Egresos" onclick="filterFlujo('Egreso')"></md-filter-chip>
-  </div>
-  <div class="table-wrap" id="flujoList">
-    <div class="skeleton skeleton-row"></div>
   </div>
 </div>
 ```
 
-## 4. Stats de balance (`renderFinanzasStats`)
+Nota: skeleton, empty-state y tabla viven en contenedores **separados** (`#resumenPeriodosSkeleton`, `#resumenPeriodosEmpty`, `#tableResumenPeriodos`) que se muestran/ocultan sin destruir el DOM. `showSkeletons('finanzas')` muestra el skeleton de la card "Periodo en curso" (`#finanzasPeriodoEnCurso`) y el de la tabla, sin reemplazar el contenido (js/data.js).
 
-4 cards (con `filterPeriod` = periodo seleccionado en `#finanzasPeriodoFilter`, default el más reciente):
-
-| Label | Valor |
-|-------|-------|
-| Recaudado | `recaudadoPorPeriodo(periodo)` — color azul |
-| Esperado | `esperadoPorPeriodo(periodo)` |
-| Recaudación | `pctRecaudado(periodo)`% — con color: ≥90 verde, ≥60 ámbar, <60 rojo |
-| Egresos | suma `FLUJO` tipo Egreso del mes del periodo (o del periodo completo si el filtro es "Todos") |
-
-Con filtro "Todos": Recaudado/Esperado/Recaudación/Egresos acumulados de todo el historial.
-
-## 5. Gráficos
-
-### 5.1 `renderRecaudadoChart()` (reemplaza `renderPeriodChart`)
-
-Dos líneas por periodo: **Esperado** (gris, `--text-muted`) y **Recaudado** (primario azul). El área entre ambas visualiza lo no recaudado. Reusa el patrón de `renderPeriodChart` de charts.js (línea con puntos, tooltip con `formatMoney`). Agrupa por `periodo` de `GASTOS`.
-
-### 5.2 `renderParcelaChart()`
-
-Sin cambios (doughnut monto por parcela, mismo código actual).
-
-### 5.3 `renderFlujoChart()`
-
-Gráfico de dos líneas por mes (mantiene el formato actual). Los **ingresos** suman las cuotas derivadas más los ingresos manuales:
+## 4. Render (`renderFinanzas`)
 
 ```js
-// Ingresos del mes M = cuotas pagadas del periodo M + ingresos manuales (flujo) con fecha en M
+function renderFinanzas() {
+  renderRecaudadoChart();
+  renderFlujoChart();
+  renderPeriodoEnCurso();
+  renderResumenPeriodos();
+}
+```
+
+### 4.1 Card "Periodo en curso" (`renderPeriodoEnCurso`)
+
+- Periodo vigente = el más reciente de `periodosFinanzas(GASTOS, FLUJO)`.
+- 4 stats: **Esperado**, **Recaudado** (azul), **Egresos** (rojo), **Saldo** (verde/rojo según signo).
+- Barra de progreso con el % de recaudación (verde ≥90, ámbar ≥60, rojo <60).
+- 2 íconos junto al título: 🧾 `verCuotasPeriodo(p)` y ⇅ `verMovimientosPeriodo(p)`.
+
+### 4.2 Tabla "Resumen por periodo" (`renderResumenPeriodos`)
+
+Una fila por periodo (más reciente primero), columnas:
+
+| Columna | Cálculo |
+|---------|---------|
+| Esperado | `esperadoPorPeriodo(p, GASTOS)` — suma de montos emitidos |
+| Recaudado | `recaudadoPorPeriodo(p, GASTOS)` — suma de `recaudadoGasto` |
+| % | `pctRecaudado(p, GASTOS)` con color según umbrales |
+| Egresos | `egresosMes(p, FLUJO)` |
+| Saldo | `saldoPeriodo(p, GASTOS, FLUJO)` con color por signo |
+| Cuotas | ícono → `verCuotasPeriodo(p)` |
+| Mov. | ícono → `verMovimientosPeriodo(p)` |
+
+Última fila `.resumen-totales` con los totales acumulados. Sin periodos con datos: empty state.
+
+## 5. Popups de detalle del periodo
+
+### 5.1 `verCuotasPeriodo(periodo)` — cuotas del periodo
+
+Resumen: **Esperado / Recaudado / %** del periodo. Tabla de cuotas con columnas Parcela, Monto, Pagado (`sumPagosGasto`), Estado (chip `estadoChip`: **Pagado / Parcial / Pendiente**) y acciones admin: `verPagos(gastoId)` (listado de pagos, comprobante, registrar pago y eliminar pago) y editar cuota.
+
+### 5.2 `verMovimientosPeriodo(periodo)` — movimientos del periodo
+
+Resumen: **Ingresos / Egresos / Saldo** del periodo. Tabla de movimientos (`FLUJO`) filtrados por mes del periodo (tipo, concepto, fecha, monto, comprobante), con acciones admin (editar/eliminar).
+
+## 6. Gráficos (charts.js)
+
+### 6.1 `renderRecaudadoChart()` (`#chartRecaudado`)
+
+Dos líneas por periodo: **Esperado** (gris `--text-muted`) y **Recaudado** (primario azul). Agrupa por `periodo` de `GASTOS`. El valor Recaudado usa `recaudadoGasto(r)` (pagos registrados, nunca mayor que el monto de la cuota; cuotas legacy `pagado='Sí'` cuentan completas).
+
+### 6.2 `renderFlujoChart()` (`#chartFlujo`)
+
+Dos líneas por mes: **Ingresos** (`--color-positive`) y **Egresos** (`--md-sys-color-error`). Muestra **siempre ambas series** (ya no responde a chips). Los ingresos suman las cuotas recaudadas del mes más los ingresos manuales de `FLUJO`:
+
+```js
 function ingresosMes(periodo, GASTOS, FLUJO) {
   var cuotas = recaudadoPorPeriodo(periodo, GASTOS);
   var manual = FLUJO.filter(function(f) {
-    return f.tipo === 'Ingreso' && (f.fecha || '').slice(0, 7) === periodo;
+    return f.tipo === 'Ingreso' && mesDeFecha(f.fecha) === periodo;
   }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
   return cuotas + manual;
 }
 ```
 
-- Egresos del mes: suma de `FLUJO` tipo Egreso con fecha en el mes.
-- Nota de doble conteo: no existe porque el demo elimina los ingresos manuales de concepto `Cuotas`/`Fondo reserva` (quedan solo derivados) y en prod `formFlujo` ya no ofrece esos conceptos.
+### 6.3 `updateChartTheme()`
 
-### 5.4 `updateChartTheme()`
+Actualiza los colores de `chartRecaudado` y `chartFlujo` en dark mode. `renderParcelaChart`/`chartParcelas` fueron **eliminados**.
 
-Se extiende para actualizar también `chartRecaudado` en dark mode.
+## 7. Funciones puras de apoyo (utils.js)
 
-## 6. Tabla de cuotas por parcela (sección dentro de Finanzas)
+- `getPagos()`, `pagosDeGasto(id)`, `sumPagosGasto(id)`, `pagosDeParcela(pid)` — acceso a `PAGOS`
+- `pagoLegado(g)`, `isPagado(g)` (`sumPagosGasto >= monto` con fallback a legado), `recaudadoGasto(g)` (mínimo entre monto y pagos)
+- `esperadoPorPeriodo`, `recaudadoPorPeriodo`, `pctRecaudado`
+- `mesDeFecha`, `egresosMes`, `ingresosMes`, `ingresosDerivados` (alias de `recaudadoPorPeriodo`)
+- `periodosFinanzas(GASTOS, FLUJO)` — union de periodos con cuotas o movimientos, orden desc
+- `saldoPeriodo(periodo, GASTOS, FLUJO)` — `ingresosMes − egresosMes`
+- Cobranza: `deudaParcela`, `deudaPorPeriodo`, `periodosPendientes`, `estadoParcelaPago`, `morosos` (ver `deudores.md`)
+- Cuota configurada: `configPeriodos`, `periodoConfig`, `montosBase`, `cuotaDelPeriodo` (ver §9)
 
-Es la tabla actual de gastos con una columna nueva **Estado** (chip):
+## 8. Acciones admin
+
+### 8.1 Agregar Cuota (`formGastos`)
+
+- Al elegir periodo, muestra un **hint** con la cuota configurada del periodo (`cuotaDelPeriodo`) y **prefill del monto** (`updateGastoMontoPrefill`).
+- Excluye parcelas que ya tienen cuota en el periodo (`updateGastoParcelas`).
+
+### 8.2 Generar Cuotas (`formGenerarCuotas`)
+
+Crea una cuota por parcela para el periodo elegido (y fondo reserva si aplica), sin duplicar parcelas que ya tienen cuota:
+
+- `buildCuotasRows(data)` → filas `{parcela_id, periodo, concepto, monto, descripcion, pagado:'No'}` (conceptos `GC_MM_AAAA` y `GC_FR_MM_AAAA`).
+- Demo: `generarCuotasDemo(data)` agrega a `GASTOS` (con `id`/`created_at`). Prod: insert a `gastos`.
+- Prefill desde el configurador de periodos (`updateGenCuotasPrefill`).
+
+### 8.3 Registrar pago (`formPago`)
+
+- Monto prefilled con el saldo pendiente (`monto − sumPagosGasto`), fecha y comprobante opcional.
+- En demo agrega a `PAGOS`; en prod inserta a `pagos`.
+- `formPagoParcela(parcelaId)`: abre el pago del **periodo más antiguo adeudado** desde el modal de deuda de Home.
+- `verPagos(gastoId)`: modal con los pagos de la cuota, comprobante, eliminar (admin) y registrar pago (admin).
+
+### 8.4 Editar / eliminar
+
+- Cuotas: `editGasto` / `deleteGasto` (tabla `gastos`).
+- Movimientos: editar/eliminar de `flujo`.
+- Pagos: `deletePago` (tabla `pagos`).
+
+## 9. Configurador de periodos (Cuota por periodo)
+
+Card "Periodos de Cuota" en Configuración (ver `config-admin.md`). Define el **monto por periodo** (gasto común + fondo reserva). Los periodos sin config usan el **Monto Base**.
 
 ```js
-// en renderTable de cuotas
-function estadoChip(g) {
-  return isPagado(g)
-    ? '<span class="chip-chip pagado">Pagado</span>'
-    : '<span class="chip-chip pendiente">Pendiente</span>';
+function cuotaDelPeriodo(periodo) {
+  var base = montosBase();
+  var conf = periodoConfig(periodo);
+  if (conf) {
+    if (conf.monto != null && conf.monto !== '') base.monto = parseFloat(conf.monto) || 0;
+    if (conf.fondo_reserva != null && conf.fondo_reserva !== '') base.fondo_reserva = parseFloat(conf.fondo_reserva) || 0;
+  }
+  return { monto: base.monto, fondo_reserva: base.fondo_reserva, total: base.monto + base.fondo_reserva };
 }
 ```
 
-- Chip `Pagado`: verde (`--color-positive`), chip `Pendiente`: ámbar (`--color-extraordinaria-*`), siguiendo el patrón de chips de estado de Parcelas (sections.css).
-- El form de edición de cuota (`formGastos`) agrega el campo **Estado** (select Pagado/Pendiente) para que el admin marque el pago.
-- Filtros: la tabla de cuotas se filtra por `#finanzasPeriodoFilter` (periodo único de la pestaña) y por parcela (select de parcela, que aplica también a stats y gráficos).
+- `montosBase()` lee `CONFIG.montos` (`gasto_comun_base`, `fondo_reserva`).
+- `periodoConfig(periodo)` busca en `CONFIG.periodos`.
+- `siguientePeriodo()` devuelve el periodo posterior al último con cuotas registradas (o el actual si no hay).
+- `avisoAumento()` detecta si la cuota del próximo periodo configurado sube respecto al vigente → card de aviso en **Home** con botón "Generar cuotas" (solo admin).
 
-## 7. Tabla de movimientos (egresos + ingresos manuales)
-
-Es la tabla actual de Ingresos/Egresos con una condición nueva: **se filtra por el mes del periodo seleccionado** en `#finanzasPeriodoFilter` (si el filtro es un periodo concreto, `(f.fecha || '').slice(0, 7) === periodo`; si es "Todos", sin filtro de fecha). Los chips Todos/Ingresos/Egresos se mantienen y filtran por tipo **dentro** del mes/periodo elegido.
-
-## 8. Decisiones abiertas
-
-- **Filtro de periodo unificado**: **resuelto** — el `#finanzasPeriodoFilter` controla todo: stats, gráficos, tabla de cuotas y tabla de movimientos (por mes). Las cuotas conservan además su filtro de parcela y los movimientos sus chips de tipo dentro del periodo.
-- **Ingreso total del gráfico flujo**: **resuelto** — incluye cuotas derivadas + ingresos manuales (`ingresosMes`, §5.3). Las cuotas son un tipo de ingreso.
-
-## 9. Carga de datos
+## 10. Carga de datos (data.js)
 
 ```js
 finanzas: function() {
-  return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS')])
+  return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS')])
     .then(function() { renderFinanzas(); });
 }
 ```
 
-## 10. RLS / Seguridad
+`PAGOS` se agrega a `TABLE_MAP` (prod: tabla `pagos`) y a `DEMO_FILES` (demo: `data/pagos.json`). Home también carga `PAGOS` (para morosos y balance).
 
-- Sin cambios: `gastos` y `flujo` mantienen sus políticas (SELECT autenticado, escritura admin).
-- La columna `pagado` se rige por las políticas de `gastos` (solo admin la actualiza).
+## 11. RLS / Seguridad
 
-## 11. Migraciones
+- `gastos` y `flujo`: SELECT autenticado, escritura admin (políticas existentes).
+- `pagos`: SELECT autenticado; INSERT/UPDATE/DELETE solo admin (migración 003).
+- `pagado` se rige por las políticas de `gastos` (solo admin lo actualiza).
 
-No se requiere migración SQL para `finanzas` (columnas existentes). El cambio de datos es:
-- `data/gastos.json`: agregar `pagado` a cada registro
-- `data/ingresos_egresos.json`: eliminar ingresos de concepto `Cuotas` y `Fondo reserva`
-- `data/config.json`: quitar `Cuotas` y `Fondo reserva` de `conceptos_flujo`
+## 12. Migraciones
+
+- `supabase/migrations/003_pagos.sql`: tabla `pagos` + índices + RLS + backfill idempotente.
+- Demo: `data/pagos.json` (pagos por cuota) y `data/config.json` (campo `periodos`).
+- No se modifican las migraciones existentes.

@@ -49,6 +49,11 @@
       catch (e) { passed++; var div = document.createElement('div'); div.className = 'test pass'; div.textContent = '✓ ' + name + ' — threw: ' + e.message; results.appendChild(div); }
     }
 
+    // Globals que leen las funciones de utils
+    var PAGOS = [];
+    var CONFIG = {};
+    var GASTOS = [];
+
     // ── formatMoney ──
     assert('formatMoney(0)', formatMoney(0), '0');
     assert('formatMoney(100)', formatMoney(100), '100');
@@ -145,6 +150,104 @@
     ], [{ id: 'B', numero: 'Parcela 10' }, { id: 'Z', numero: 'Parcela 2' }]);
     assert('morosos orden natural (Parcela 2 antes que Parcela 10)', morNat[0].parcela_id, 'Z');
 
+    // ── Pagos (nuevo modelo) ──
+    var TPG = [
+      { id: 'g1', periodo: '2026-07', monto: '100', parcela_id: 'A' },
+      { id: 'g2', periodo: '2026-07', monto: '100', parcela_id: 'B' },
+      { id: 'g3', periodo: '2026-06', monto: '50', parcela_id: 'B' }
+    ];
+    var TPP = [
+      { id: 'p1', gasto_id: 'g1', parcela_id: 'A', periodo: '2026-07', monto: '40' },
+      { id: 'p2', gasto_id: 'g1', parcela_id: 'A', periodo: '2026-07', monto: '60' },
+      { id: 'p3', gasto_id: 'g2', parcela_id: 'B', periodo: '2026-07', monto: '30' }
+    ];
+    PAGOS = TPP;
+
+    assert('getPagos devuelve PAGOS', getPagos().length, 3);
+    assert('pagosDeGasto g1 (2 pagos)', pagosDeGasto('g1').length, 2);
+    assert('pagosDeGasto inexistente', pagosDeGasto('zzz').length, 0);
+    assert('sumPagosGasto g1 (40+60)', sumPagosGasto('g1'), 100);
+    assert('sumPagosGasto g3 (sin pagos)', sumPagosGasto('g3'), 0);
+    assert('pagosDeParcela A', pagosDeParcela('A').length, 2);
+
+    assert('pagoLegado con pagos registrados es false', pagoLegado({ id: 'g1', pagado: 'Sí' }), false);
+    assert('pagoLegado sin pagos es true', pagoLegado({ id: 'g3', pagado: 'Sí' }), true);
+
+    assert('isPagado por pagos completos (g1)', isPagado({ id: 'g1', monto: '100' }), true);
+    assert('isPagado por pagos parciales (g2)', isPagado({ id: 'g2', monto: '100' }), false);
+    assert('isPagado por pagos parciales exacto (30 de 30)', isPagado({ id: 'g2', monto: '30' }), true);
+
+    assert('recaudadoGasto g1 (completo)', recaudadoGasto({ id: 'g1', monto: '100' }), 100);
+    assert('recaudadoGasto g2 (parcial)', recaudadoGasto({ id: 'g2', monto: '100' }), 30);
+    assert('recaudadoGasto no supera monto', recaudadoGasto({ id: 'g1', monto: '50' }), 50);
+
+    assert('deudaParcela A (cuota pagada con pagos)', deudaParcela('A', TPG), 0);
+    assert('deudaParcela B (parcial)', deudaParcela('B', TPG), 120);
+    assert('estadoParcelaPago B (parcial) es Deudor', estadoParcelaPago('B', TPG), 'Deudor');
+
+    assert('deudaPorPeriodo B desglosa por periodo', JSON.stringify(deudaPorPeriodo('B', TPG)), JSON.stringify([{ periodo: '2026-06', monto: 50 }, { periodo: '2026-07', monto: 70 }]));
+    assert('periodosPendientes B', periodosPendientes('B', TPG).join(','), '2026-06,2026-07');
+
+    // Saldo a favor: pago mayor a la cuota absorbe deudas de otros periodos
+    PAGOS = [{ id: 'p4', gasto_id: 'g4', parcela_id: 'A', periodo: '2026-07', monto: '150' }];
+    assert('deudaParcela con saldo a favor', deudaParcela('A', [
+      { id: 'g4', periodo: '2026-07', monto: '100', parcela_id: 'A' },
+      { id: 'g5', periodo: '2026-06', monto: '100', parcela_id: 'A' }
+    ]), 50);
+    assert('deudaPorPeriodo absorbe excedente en recientes', JSON.stringify(deudaPorPeriodo('A', [
+      { id: 'g4', periodo: '2026-07', monto: '100', parcela_id: 'A' },
+      { id: 'g5', periodo: '2026-06', monto: '100', parcela_id: 'A' }
+    ])), JSON.stringify([{ periodo: '2026-06', monto: 50 }]));
+
+    // ── Config de periodos / cuota del periodo ──
+    CONFIG = {
+      montos: { gasto_comun_base: '100', fondo_reserva: '20' },
+      periodos: [
+        { periodo: '2026-07', monto: '120', fondo_reserva: '30' },
+        { periodo: '2026-08', monto: '150', fondo_reserva: '30' }
+      ]
+    };
+    assert('configPeriodos length', configPeriodos().length, 2);
+    assert('periodoConfig 2026-07 existe', !!periodoConfig('2026-07'), true);
+    assert('periodoConfig sin config es null', periodoConfig('2026-09'), null);
+    assert('montosBase', JSON.stringify(montosBase()), JSON.stringify({ monto: 100, fondo_reserva: 20 }));
+    assert('cuotaDelPeriodo con config', JSON.stringify(cuotaDelPeriodo('2026-07')), JSON.stringify({ monto: 120, fondo_reserva: 30, total: 150 }));
+    assert('cuotaDelPeriodo fallback a base', JSON.stringify(cuotaDelPeriodo('2026-09')), JSON.stringify({ monto: 100, fondo_reserva: 20, total: 120 }));
+    assert('cuotaDelPeriodo fondo reserva no configurado en periodo', cuotaDelPeriodo('2026-08').total, 180);
+
+    CONFIG = { montos: { gasto_comun_base: '100', fondo_reserva: '20' } };
+    assert('cuotaDelPeriodo sin periodos usa base', cuotaDelPeriodo('2026-07').total, 120);
+
+    // ── siguientePeriodo / aviso de aumento ──
+    CONFIG = {
+      montos: { gasto_comun_base: '100', fondo_reserva: '20' },
+      periodos: [
+        { periodo: '2026-07', monto: '120', fondo_reserva: '30' },
+        { periodo: '2026-08', monto: '150', fondo_reserva: '30' }
+      ]
+    };
+    GASTOS = [
+      { id: 'x', periodo: '2026-07', monto: '100', parcela_id: 'A', pagado: 'Sí' },
+      { id: 'y', periodo: '2026-07', monto: '100', parcela_id: 'B', pagado: 'No' }
+    ];
+    assert('siguientePeriodo tras 2026-07', siguientePeriodo(), '2026-08');
+    var aviso = avisoAumento();
+    assert('avisoAumento periodo', aviso.periodo, '2026-08');
+    assert('avisoAumento anterior', aviso.anterior, 150);
+    assert('avisoAumento nuevo', aviso.nuevo, 180);
+    assert('avisoAumento pct', aviso.pct, 20);
+
+    CONFIG = { montos: { gasto_comun_base: '100', fondo_reserva: '20' }, periodos: [{ periodo: '2026-07', monto: '120', fondo_reserva: '30' }] };
+    GASTOS = [{ id: 'x', periodo: '2026-07', monto: '100', parcela_id: 'A', pagado: 'Sí' }];
+    assert('avisoAumento sin aumento es null', avisoAumento(), null);
+    GASTOS = [];
+    assert('avisoAumento sin cuotas es null', avisoAumento(), null);
+
+    // Restablecer globals
+    PAGOS = [];
+    CONFIG = {};
+    GASTOS = [];
+
     // ── Finanzas / Balance ──
     assert('mesDeFecha dd/mm/yyyy', mesDeFecha('15/07/2025'), '2025-07');
     assert('mesDeFecha d/mm/yyyy (día de 1 dígito)', mesDeFecha('2/08/2024'), '2024-08');
@@ -173,6 +276,11 @@
     assert('ingresosMes 2026-06', ingresosMes('2026-06', TG, TF), 50);
     assert('ingresosMes 2026-08', ingresosMes('2026-08', TG, TF), 0);
     assert('ingresosMes sin datos', ingresosMes('2026-07', [], []), 0);
+
+    assert('periodosFinanzas union cuotas+movimientos', JSON.stringify(periodosFinanzas(TG, TF)), JSON.stringify(['2026-08', '2026-07', '2026-06']));
+    assert('periodosFinanzas sin datos', periodosFinanzas([], []).length, 0);
+    assert('saldoPeriodo 2026-07 (ingresos 150 - egresos 40)', saldoPeriodo('2026-07', TG, TF), 110);
+    assert('saldoPeriodo sin datos', saldoPeriodo('2026-07', [], []), 0);
 
     // Summary
     var summary = document.getElementById('summary');

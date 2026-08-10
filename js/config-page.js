@@ -52,6 +52,93 @@ async function saveMontos() {
   btn.textContent = 'Guardar';
 }
 
+// --- PERIODOS DE CUOTA ---
+function renderPeriodos() {
+  var el = document.getElementById('cfgPeriodosList');
+  if (!el) return;
+  var periodos = (CONFIG.periodos || []).slice().sort(function(a, b) { return a.periodo < b.periodo ? -1 : 1; });
+  if (!periodos.length) {
+    el.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;margin:0">No hay periodos configurados. Se usará el Monto Base para todos los periodos.</p>';
+    return;
+  }
+  el.innerHTML = periodos.map(function(p) {
+    return '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid var(--divider)">' +
+      '<md-icon style="color:var(--text-muted);font-size:1.1rem;flex-shrink:0">calendar_month</md-icon>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div style="font-weight:600;color:var(--text)">' + formatPeriodo(p.periodo) + '</div>' +
+        '<div style="font-size:0.8rem;color:var(--text-2)">Gasto común $' + formatMoney(p.monto || 0) + (p.fondo_reserva ? ' · Fondo reserva $' + formatMoney(p.fondo_reserva) : '') + '</div>' +
+      '</div>' +
+      '<md-icon-button onclick="openModalPeriodo(\'' + p.periodo + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+      '<md-icon-button onclick="removePeriodo(\'' + p.periodo + '\')" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
+    '</div>';
+  }).join('');
+}
+
+function openModalPeriodo(periodo) {
+  var periodos = CONFIG.periodos || [];
+  var conf = periodos.find(function(p) { return p.periodo === periodo; }) || {};
+  var isEdit = !!periodo;
+  var sugerido = isEdit ? periodo : siguientePeriodo();
+  var now = new Date();
+  var meses = [];
+  for (var i = -6; i <= 12; i++) {
+    var d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    var val = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    var label = d.toLocaleDateString('es-CL', { year: 'numeric', month: 'long' });
+    meses.push('<md-select-option value="' + val + '"' + (val === sugerido ? ' selected' : '') + '><span slot="headline">' + label + '</span></md-select-option>');
+  }
+  openModal(isEdit ? 'Editar periodo' : 'Agregar periodo', '<form id="modalForm" onsubmit="savePeriodoForm(event,' + (isEdit ? 'true' : 'false') + ')">' +
+    (isEdit ? '<input type="hidden" name="periodo_original" value="' + periodo + '">' : '') +
+    '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required' + (isEdit ? ' disabled' : '') + ' style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-text-field label="Gasto común" type="number" name="monto" min="0" required value="' + (conf.monto != null ? conf.monto : '') + '" style="width:100%"></md-filled-text-field></div>' +
+      '<div class="form-group"><md-filled-text-field label="Fondo reserva" type="number" name="fondo_reserva" min="0" value="' + (conf.fondo_reserva != null ? conf.fondo_reserva : '') + '" style="width:100%"></md-filled-text-field></div>' +
+    '</div>' +
+  '</form>',
+    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Guardar</md-filled-button>');
+}
+
+async function savePeriodoForm(e, isEdit) {
+  e.preventDefault();
+  var form = e.target;
+  var data = {};
+  form.querySelectorAll('input, md-filled-text-field, md-filled-select').forEach(function(el) { if (el.name && !el.disabled) data[el.name] = el.value; });
+  var periodos = (CONFIG.periodos || []).slice();
+  if (isEdit) {
+    var original = form.querySelector('[name="periodo_original"]').value;
+    var idx = periodos.findIndex(function(p) { return p.periodo === original; });
+    if (idx === -1) return;
+    periodos[idx] = { periodo: original, monto: parseFloat(data.monto) || 0, fondo_reserva: parseFloat(data.fondo_reserva) || 0 };
+  } else {
+    var periodo = data.periodo;
+    if (!periodo) {
+      showSnackbar('Seleccioná un periodo.', 'warning');
+      return;
+    }
+    if (periodos.some(function(p) { return p.periodo === periodo; })) {
+      showSnackbar('Ese periodo ya está configurado.', 'warning');
+      return;
+    }
+    periodos.push({ periodo: periodo, monto: parseFloat(data.monto) || 0, fondo_reserva: parseFloat(data.fondo_reserva) || 0 });
+  }
+  periodos.sort(function(a, b) { return a.periodo < b.periodo ? -1 : 1; });
+  if (await saveConfig('periodos', periodos)) {
+    showSnackbar(isEdit ? 'Periodo actualizado.' : 'Periodo agregado.', 'success');
+    closeModal();
+    renderPeriodos();
+  }
+}
+
+function removePeriodo(periodo) {
+  showConfirm('¿Eliminar la configuración del periodo ' + formatPeriodo(periodo) + '? Se usará el Monto Base.', async function() {
+    var periodos = (CONFIG.periodos || []).filter(function(p) { return p.periodo !== periodo; });
+    if (await saveConfig('periodos', periodos)) {
+      showSnackbar('Periodo eliminado.', 'success');
+      renderPeriodos();
+    }
+  });
+}
+
 // --- DATOS DE PAGO (Home → Cómo pagar) ---
 function renderDatosPago() {
   var d = CONFIG.datos_pago || {};
@@ -400,6 +487,7 @@ async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO')]);
   renderMontos();
+  renderPeriodos();
   renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();

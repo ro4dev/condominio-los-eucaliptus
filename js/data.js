@@ -1,5 +1,6 @@
 var TABLE_MAP = {
   GASTOS: 'gastos',
+  PAGOS: 'pagos',
   PARCELAS: 'parcelas',
   PROPIETARIOS: 'propietarios',
   NOTICIAS: 'noticias',
@@ -34,7 +35,7 @@ async function loadJson(target) {
 }
 
 async function loadInitialData() {
-  await Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]);
+  await Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]);
   renderHome();
   var tabEl = document.getElementById('tab-home');
   if (tabEl) tabEl.setAttribute('aria-busy', 'false');
@@ -42,8 +43,8 @@ async function loadInitialData() {
 
 async function loadTabData(tab) {
   var configs = {
-    home: function() { return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]).then(function() { renderHome(); }); },
-    finanzas: function() { return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS')]).then(function() { fillFinanzasFilters(); renderFinanzas(); }); },
+    home: function() { return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]).then(function() { renderHome(); }); },
+    finanzas: function() { return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS')]).then(function() { renderFinanzas(); }); },
     parcelas: function() { return Promise.all([loadJson('PARCELAS'), loadJson('PROPIETARIOS')]).then(function() { renderParcelas(); }); },
     noticias: function() { return loadJson('NOTICIAS').then(function() { renderNoticias(); }); },
     documentos: function() { return loadJson('DOCUMENTOS').then(function() { renderDocumentos(); }); },
@@ -73,7 +74,6 @@ async function switchTab(tab) {
 function showSkeletons(tab) {
   var skeletons = {
     home: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
-    finanzas: '<div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div><div class="skeleton skeleton-stat"></div>',
     parcelas: '<div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>',
     noticias: '<div class="skeleton skeleton-news"></div><div class="skeleton skeleton-news"></div><div class="skeleton skeleton-news"></div>',
     documentos: '<div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div><div class="skeleton skeleton-doc"></div>',
@@ -88,22 +88,26 @@ function showSkeletons(tab) {
     return;
   }
   tabEl.setAttribute('aria-busy', 'true');
-  var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList, #flujoList');
-  if (content) {
+  var content = tabEl.querySelector('.cards-grid, .timeline, .table-wrap, .stats, #reclamosList, #noticiasList');
+  if (content && tab !== 'finanzas') {
     content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
   }
   if (tab === 'finanzas') {
-    var fl = document.getElementById('flujoList');
-    if (fl) {
-      fl.innerHTML = '<div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div><div class="skeleton skeleton-row"></div>';
+    var sk = document.getElementById('resumenPeriodosSkeleton');
+    if (sk) {
+      sk.style.display = '';
     }
-    var cu = document.getElementById('cuotasLoading');
-    var tg = document.getElementById('tableGastos');
-    if (cu) {
-      cu.style.display = '';
+    var emptyEl = document.getElementById('resumenPeriodosEmpty');
+    if (emptyEl) {
+      emptyEl.style.display = 'none';
     }
-    if (tg) {
-      tg.style.display = 'none';
+    var tbl = document.getElementById('tableResumenPeriodos');
+    if (tbl) {
+      tbl.style.display = 'none';
+    }
+    var vig = document.getElementById('finanzasPeriodoEnCurso');
+    if (vig) {
+      vig.innerHTML = '<div class="skeleton skeleton-card"></div>';
     }
   }
 }

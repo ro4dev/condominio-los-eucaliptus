@@ -301,7 +301,22 @@ function handleForm(e) {
     }
 
     if (DEMO_MODE) {
-      if (table === 'encuestas') {
+      if (table === 'pagos') {
+        data.monto = parseFloat(data.monto) || 0;
+        data.id = generateUUID();
+        data.created_at = new Date().toISOString();
+        PAGOS.push(data);
+        hideLoading();
+        showSnackbar('Pago registrado (demo).', 'success');
+        closeModal();
+        reloadTab(getCurrentTab());
+      } else if (table === 'generar_cuotas') {
+        var count = generarCuotasDemo(data);
+        hideLoading();
+        showSnackbar(count ? 'Se generaron ' + count + ' cuotas (demo).' : 'Todas las parcelas ya tienen cuota para este periodo.', count ? 'success' : 'warning');
+        closeModal();
+        reloadTab(getCurrentTab());
+      } else if (table === 'encuestas') {
         if (!isEdit) {
           var altInputs = document.querySelectorAll('.encuesta-alt-input');
           var alternativas = [];
@@ -370,6 +385,38 @@ function handleForm(e) {
             afterSave();
           }
         });
+      } else if (table === 'pagos') {
+        data.monto = parseFloat(data.monto) || 0;
+        doUpdate(table, data).then(function(result) {
+          if (result) {
+            afterSave();
+          } else {
+            submitError();
+          }
+        });
+      } else if (table === 'generar_cuotas') {
+        var rows = buildCuotasRows(data);
+        if (rows.length === 0) {
+          hideLoading();
+          showSnackbar('Todas las parcelas ya tienen cuota para este periodo.', 'warning');
+          closeModal();
+          reloadTab(getCurrentTab());
+        } else {
+          supabaseClient.from('gastos').insert(rows).then(function(res) {
+            hideLoading();
+            if (res.error) {
+              showSnackbar(res.error.message || 'Error al generar cuotas.', 'error');
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Generar';
+              }
+            } else {
+              showSnackbar('Se generaron ' + rows.length + ' cuotas.', 'success');
+              closeModal();
+              reloadTab(getCurrentTab());
+            }
+          });
+        }
       } else if (table === 'asambleas') {
         var asistentesStr = data.asistentes || '';
         var asistentesIds = asistentesStr ? asistentesStr.split(', ') : [];
@@ -465,7 +512,8 @@ function tableToArray(table) {
     asambleas: 'ASAMBLEAS',
     encuestas: 'ENCUESTAS',
     parcelas: 'PARCELAS',
-    propietarios: 'PROPIETARIOS'
+    propietarios: 'PROPIETARIOS',
+    pagos: 'PAGOS'
   };
   return map[table] || null;
 }
@@ -507,6 +555,7 @@ function formGastos(opt) {
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
     '<input type="hidden" name="concepto" id="gastoConcepto">' +
     '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required id="gastoPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
+    '<div id="gastoCuotaHint" style="font-size:0.8rem;color:var(--text-muted);margin:-0.4rem 0 0.6rem"></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" required id="gastoParcela" style="width:100%">' + parcelas + '</md-filled-select></div>' +
       '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" placeholder="Ej: 0" required style="width:100%"' + (isEdit ? ' value="' + data.monto + '"' : '') + '></md-filled-text-field></div>' +
@@ -527,9 +576,26 @@ function formGastos(opt) {
     '</div>' +
   '</form>',
     '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
-  document.getElementById('gastoPeriodo').addEventListener('change', updateGastoParcelas);
+  document.getElementById('gastoPeriodo').addEventListener('change', function() { updateGastoParcelas(); updateGastoMontoPrefill(); });
   document.getElementById('gastoParcela').addEventListener('change', updateGastoConcepto);
   updateGastoConcepto();
+  updateGastoMontoPrefill();
+}
+
+function updateGastoMontoPrefill() {
+  var periodo = document.getElementById('gastoPeriodo').value;
+  var hint = document.getElementById('gastoCuotaHint');
+  var montoEl = document.querySelector('#modalForm md-filled-text-field[name="monto"]');
+  if (!hint) return;
+  var cuota = cuotaDelPeriodo(periodo);
+  if (cuota.total) {
+    hint.innerHTML = 'Cuota de <strong>' + formatPeriodo(periodo) + '</strong>: $' + formatMoney(cuota.monto) + (cuota.fondo_reserva ? ' + fondo reserva $' + formatMoney(cuota.fondo_reserva) + ' = <strong>$' + formatMoney(cuota.total) + '</strong>' : '');
+    if (montoEl && !montoEl.value) {
+      montoEl.value = cuota.monto || '';
+    }
+  } else {
+    hint.innerHTML = '';
+  }
 }
 
 function updateGastoParcelas() {
@@ -564,6 +630,170 @@ function updateGastoConcepto() {
   } else {
     conceptoEl.value = '';
   }
+}
+
+function formPago(data) {
+  if (!data || !data.gasto_id) return;
+  var montoCuota = parseFloat(data.monto) || 0;
+  var pagado = sumPagosGasto(data.gasto_id);
+  var restante = Math.max(0, montoCuota - pagado);
+  var info = 'Cuota de <strong>' + escHtml(parcelName(data.parcela_id)) + '</strong> — ' + formatPeriodo(data.periodo) + ': <strong>$' + formatMoney(montoCuota) + '</strong>';
+  if (pagado > 0) info += ' · Pagado <strong>$' + formatMoney(pagado) + '</strong>';
+  if (restante > 0) info += ' · Falta <strong style="color:var(--md-sys-color-error)">$' + formatMoney(restante) + '</strong>';
+  openModal('Registrar pago', '<form id="modalForm" data-table="pagos" onsubmit="handleForm(event)">' +
+    '<input type="hidden" name="gasto_id" value="' + data.gasto_id + '">' +
+    '<input type="hidden" name="parcela_id" value="' + data.parcela_id + '">' +
+    '<input type="hidden" name="periodo" value="' + data.periodo + '">' +
+    '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">' + info + '</div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-text-field label="Monto" type="number" name="monto" min="0" required value="' + (restante || '') + '" style="width:100%"></md-filled-text-field></div>' +
+      dateFieldHtml('fecha', 'Fecha*', new Date().toISOString().slice(0, 10)) +
+    '</div>' +
+    '<div class="form-group"><label>Comprobante (foto)</label><div class="comprobante-row"><input type="file" name="comprobante" accept="image/*"></div></div>' +
+  '</form>',
+    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Guardar</md-filled-button>');
+}
+
+function formPagoParcela(parcelaId) {
+  var detalle = deudaPorPeriodo(parcelaId, GASTOS);
+  if (!detalle.length) {
+    showSnackbar('Esta parcela no tiene deuda.', 'info');
+    return;
+  }
+  var periodo = detalle[0].periodo;
+  var restos = GASTOS
+    .filter(function(g) { return g.parcela_id === parcelaId && g.periodo === periodo; })
+    .map(function(g) { return { g: g, restante: Math.max(0, parseFloat(g.monto || 0) - sumPagosGasto(g.id)) }; });
+  if (!restos.length) {
+    showSnackbar('No se encontró cuota para el periodo más antiguo.', 'info');
+    return;
+  }
+  var target = restos.reduce(function(a, b) { return (b.restante > a.restante) ? b : a; });
+  if (target.restante <= 0) {
+    showSnackbar('Esta parcela está al día.', 'info');
+    return;
+  }
+  formPago({ gasto_id: target.g.id, parcela_id: parcelaId, periodo: periodo, monto: parseFloat(target.g.monto || 0) });
+}
+
+function verPagos(gastoId) {
+  var gasto = GASTOS.find(function(g) { return g.id === gastoId; });
+  if (!gasto) return;
+  var pagos = pagosDeGasto(gastoId);
+  var nombre = escHtml(parcelName(gasto.parcela_id)) + ' — ' + formatPeriodo(gasto.periodo);
+  var body;
+  if (!pagos.length) {
+    body = '<p style="color:var(--text-muted);margin:0">Sin pagos registrados para la cuota de ' + nombre + '.</p>';
+  } else {
+    body = '<p style="font-size:0.85rem;color:var(--text-2);margin:0 0 0.4rem">' + nombre + ' · Cuota <strong>$' + formatMoney(parseFloat(gasto.monto || 0)) + '</strong> · Total pagado <strong>$' + formatMoney(sumPagosGasto(gastoId)) + '</strong></p>' +
+      pagos.map(function(p) {
+        return '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0;border-bottom:1px solid var(--divider)">' +
+          '<div style="flex:1;min-width:0">' +
+            '<div style="font-weight:600;color:var(--text)">$' + formatMoney(parseFloat(p.monto)) + '</div>' +
+            '<div style="font-size:0.8rem;color:var(--text-2)">' + formatDate(p.fecha) + '</div>' +
+          '</div>' +
+          (p.comprobante ? '<a href="' + p.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+          (IS_ADMIN ? '<md-icon-button onclick="deletePago(\'' + p.id + '\')" title="Eliminar pago"><md-icon>delete</md-icon></md-icon-button>' : '') +
+        '</div>';
+      }).join('');
+  }
+  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  if (IS_ADMIN && parseFloat(gasto.monto || 0) - sumPagosGasto(gastoId) > 0) {
+    footer += '<md-filled-button onclick="formPago({gasto_id:\'' + gasto.id + '\',parcela_id:\'' + gasto.parcela_id + '\',periodo:\'' + gasto.periodo + '\',monto:' + parseFloat(gasto.monto || 0) + '})"><md-icon slot="icon">payments</md-icon>Registrar pago</md-filled-button>';
+  }
+  openModal('Pagos de la cuota', body, footer);
+}
+
+function deletePago(pagoId) {
+  showConfirm('¿Eliminar este pago?', function() {
+    if (DEMO_MODE) {
+      PAGOS = PAGOS.filter(function(p) { return p.id !== pagoId; });
+      showSnackbar('Pago eliminado (demo).', 'success');
+      closeModal();
+      reloadTab(getCurrentTab());
+    } else {
+      showLoading();
+      supabaseDelete('pagos', pagoId).then(function(result) {
+        hideLoading();
+        if (result) {
+          showSnackbar('Pago eliminado.', 'success');
+          closeModal();
+          reloadTab(getCurrentTab());
+        }
+      });
+    }
+  });
+}
+
+function formGenerarCuotas(prefillPeriodo) {
+  if (PARCELAS.length === 0) {
+    loadJson('PARCELAS').then(function() { formGenerarCuotas(prefillPeriodo); });
+    return;
+  }
+  var periodo = prefillPeriodo || siguientePeriodo();
+  var now = new Date();
+  var meses = [];
+  for (var i = -6; i <= 12; i++) {
+    var d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    var val = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    var label = d.toLocaleDateString('es-CL', { year: 'numeric', month: 'long' });
+    meses.push('<md-select-option value="' + val + '"' + (val === periodo ? ' selected' : '') + '><span slot="headline">' + label + '</span></md-select-option>');
+  }
+  openModal('Generar cuotas', '<form id="modalForm" data-table="generar_cuotas" onsubmit="handleForm(event)">' +
+    '<p style="margin:0 0 0.8rem;font-size:0.85rem;color:var(--text-muted)">Crea una cuota por parcela para el periodo seleccionado. Las parcelas que ya tengan cuota en ese periodo no se modifican.</p>' +
+    '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required id="genCuotasPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-text-field label="Gasto común" type="number" name="monto" min="0" required id="genCuotasMonto" style="width:100%"></md-filled-text-field></div>' +
+      '<div class="form-group"><md-filled-text-field label="Fondo reserva" type="number" name="fondo_reserva" min="0" id="genCuotasFondo" style="width:100%"></md-filled-text-field></div>' +
+    '</div>' +
+    '<div id="genCuotasHint" style="font-size:0.85rem;color:var(--text-muted)"></div>' +
+  '</form>',
+    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Generar</md-filled-button>');
+  document.getElementById('genCuotasPeriodo').addEventListener('change', updateGenCuotasPrefill);
+  updateGenCuotasPrefill();
+}
+
+function updateGenCuotasPrefill() {
+  var periodo = document.getElementById('genCuotasPeriodo').value;
+  var cuota = cuotaDelPeriodo(periodo);
+  var montoEl = document.getElementById('genCuotasMonto');
+  var fondoEl = document.getElementById('genCuotasFondo');
+  var hintEl = document.getElementById('genCuotasHint');
+  if (montoEl) montoEl.value = cuota.monto || '';
+  if (fondoEl) fondoEl.value = cuota.fondo_reserva || '';
+  if (hintEl) {
+    hintEl.innerHTML = cuota.total ? 'Total por parcela: <strong>$' + formatMoney(cuota.total) + '</strong>' : '';
+  }
+}
+
+function buildCuotasRows(data) {
+  var periodo = data.periodo;
+  var monto = parseFloat(data.monto) || 0;
+  var fondo = parseFloat(data.fondo_reserva) || 0;
+  var parts = String(periodo).split('-');
+  var usadas = {};
+  GASTOS.forEach(function(g) { if (g.periodo === periodo) usadas[g.parcela_id] = true; });
+  var rows = [];
+  PARCELAS.forEach(function(p) {
+    if (usadas[p.id]) return;
+    if (monto > 0) {
+      rows.push({ parcela_id: p.id, periodo: periodo, concepto: 'GC_' + parts[1] + '_' + parts[0], monto: monto, descripcion: 'Cuota ' + formatPeriodo(periodo), pagado: 'No' });
+    }
+    if (fondo > 0) {
+      rows.push({ parcela_id: p.id, periodo: periodo, concepto: 'GC_FR_' + parts[1] + '_' + parts[0], monto: fondo, descripcion: 'Fondo reserva ' + formatPeriodo(periodo), pagado: 'No' });
+    }
+  });
+  return rows;
+}
+
+function generarCuotasDemo(data) {
+  var rows = buildCuotasRows(data);
+  rows.forEach(function(r) {
+    r.id = generateUUID();
+    r.created_at = new Date().toISOString();
+    GASTOS.push(r);
+  });
+  return rows.length;
 }
 
 function syncGastoPagado() {

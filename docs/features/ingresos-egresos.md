@@ -1,6 +1,6 @@
 # Ingresos/Egresos (Flujo de Caja)
 
-> **Deprecado**: este módulo se fusiona en [`docs/features/finanzas.md`](./finanzas.md). Los ingresos por cuotas y fondo reserva se **derivan** de los gastos pagados (ya no se cargan a mano); la tabla de movimientos pasa a ser una sección de la pestaña Finanzas (egresos e ingresos manuales). Este documento se conserva como referencia histórica del render y funciones originales.
+> **Deprecado**: este módulo se fusiona en [`docs/features/finanzas.md`](./finanzas.md). Los ingresos por cuotas se **derivan** de los pagos registrados (tabla `pagos`, ver [`deudores.md`](./deudores.md)); la tabla de movimientos pasa a ser el popup de movimientos de la pestaña Finanzas (egresos e ingresos manuales). Este documento se conserva como referencia histórica: el código que describe (tab `flujo`, chips `filterFlujo`/`flujoFilter`, tabla `flujoList`) **ya no existe en el código actual**.
 
 ## 1. Descripción general
 

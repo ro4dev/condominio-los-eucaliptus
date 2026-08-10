@@ -91,6 +91,8 @@
         <div class="skeleton skeleton-stat"></div>
       </section>
 
+      <div id="homeAviso" style="margin-bottom:1rem"></div>
+
       <div class="home-duo">
         <div class="card" id="homeRecaudacion">
           <h4>Recaudación del periodo</h4>
@@ -115,16 +117,8 @@
     <div id="tab-finanzas" class="tab-content" role="region" aria-label="Finanzas" aria-busy="true">
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
         <md-filled-button class="admin-only" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Cuota</md-filled-button>
+        <md-filled-button class="admin-only" onclick="formGenerarCuotas()"><md-icon slot="icon">add</md-icon>Generar Cuotas</md-filled-button>
         <md-filled-button class="admin-only" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
-      </div>
-      <section class="stats" id="finanzasStats">
-        <div class="skeleton skeleton-stat"></div>
-        <div class="skeleton skeleton-stat"></div>
-        <div class="skeleton skeleton-stat"></div>
-        <div class="skeleton skeleton-stat"></div>
-      </section>
-      <div class="filters">
-        <md-filled-select id="finanzasPeriodoFilter" label="Periodo"></md-filled-select>
       </div>
       <section class="charts">
         <div class="chart-box">
@@ -132,43 +126,34 @@
           <canvas id="chartRecaudado"></canvas>
         </div>
         <div class="chart-box">
-          <h3>Monto por parcela</h3>
-          <canvas id="chartParcelas"></canvas>
+          <h3>Ingresos vs Egresos por mes</h3>
+          <canvas id="chartFlujo"></canvas>
         </div>
       </section>
-      <div class="chart-box" style="margin-bottom:1rem">
-        <h3>Ingresos vs Egresos por mes</h3>
-        <canvas id="chartFlujo"></canvas>
-      </div>
-      <h3 class="section-title">Cuotas por parcela</h3>
-      <div class="table-wrap">
-        <div id="cuotasLoading">
+      <div id="finanzasPeriodoEnCurso" style="margin-bottom:1rem"></div>
+      <h3 class="section-title">Resumen por periodo</h3>
+      <div class="table-wrap" id="resumenPeriodosWrap">
+        <div id="resumenPeriodosSkeleton">
+          <div class="skeleton skeleton-row"></div>
+          <div class="skeleton skeleton-row"></div>
           <div class="skeleton skeleton-row"></div>
         </div>
-        <table style="display:none" id="tableGastos">
+        <div id="resumenPeriodosEmpty" style="display:none"></div>
+        <table style="display:none" id="tableResumenPeriodos">
           <thead>
             <tr>
-              <th>Parcela</th>
               <th>Periodo</th>
-              <th>Monto</th>
-              <th>Estado</th>
-              <th>Comprobante</th>
-              <th style="width:1%;white-space:nowrap"></th>
+              <th>Esperado</th>
+              <th>Recaudado</th>
+              <th>%</th>
+              <th>Egresos</th>
+              <th>Saldo</th>
+              <th style="width:1%;white-space:nowrap" title="Ver cuotas del periodo">Cuotas</th>
+              <th style="width:1%;white-space:nowrap" title="Ver movimientos del periodo">Mov.</th>
             </tr>
           </thead>
-          <tbody id="tableBody"></tbody>
+          <tbody id="resumenPeriodosBody"></tbody>
         </table>
-      </div>
-      <h3 class="section-title">Movimientos</h3>
-      <div class="filter-chips" id="flujoFilter">
-        <md-filter-chip label="Todos" selected onclick="filterFlujo('todos')"></md-filter-chip>
-        <md-filter-chip label="Ingresos" onclick="filterFlujo('Ingreso')"></md-filter-chip>
-        <md-filter-chip label="Egresos" onclick="filterFlujo('Egreso')"></md-filter-chip>
-      </div>
-      <div class="table-wrap" id="flujoList">
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
-        <div class="skeleton skeleton-row"></div>
       </div>
     </div>
 
@@ -295,6 +280,14 @@
           </div>
           <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
         </div>
+      </div>
+
+      <!-- Periodos de cuota -->
+      <div class="card" style="margin-bottom:1rem">
+        <h4>Periodos de Cuota</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos por periodo. Los periodos sin config usarán el Monto Base</p>
+        <div id="cfgPeriodosList"></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar periodo</md-filled-button></div>
       </div>
 
       <!-- Datos de pago (Home → Cómo pagar) -->

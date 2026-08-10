@@ -7,7 +7,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | Pestaña | Descripción |
 |---------|-------------|
 | **Home** | Vista resumen: balance del periodo vigente (% de recaudación con barra de progreso), listado de parcelas morosas (admin ve todas, el propietario su parcela) y card "Cómo pagar" con datos de transferencia. Es la pestaña inicial. |
-| **Finanzas** | Balance unificado (reemplaza a Gastos Comunes e Ingresos/Egresos): stats por periodo (recaudado, esperado, % recaudación, egresos), gráfico "Recaudado vs Esperado", gráfico de ingresos vs egresos por mes, tabla de cuotas por parcela con estado Pagado/Pendiente y tabla de movimientos. Los ingresos por cuotas se derivan de los gastos pagados. Filtro por periodo + chips por tipo en movimientos. |
+| **Finanzas** | Balance por periodo (reemplaza a Gastos Comunes e Ingresos/Egresos): card "Periodo en curso" (recaudado, esperado, egresos, saldo y % de recaudación con barra de progreso, con íconos 🧾/⇅ para abrir cuotas y movimientos del periodo), gráfico "Recaudado vs Esperado", gráfico de ingresos vs egresos por mes y una tabla resumen por periodo (Esperado/Recaudado/%/Egresos/Saldo) con 2 íconos que abren popups por separado: 🧾 cuotas (monto, pagado, estado Pagado/Parcial/Pendiente, pagos) y ⇅ movimientos del periodo. Los ingresos por cuotas se derivan de los pagos registrados. Botón "Generar Cuotas" para crear una cuota por parcela en un periodo. |
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
 | **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. Filtros por categoría. |
@@ -15,7 +15,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 | **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |
-| **Configuración** | Panel admin: montos base, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
+| **Configuración** | Panel admin: montos base, periodos de cuota, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
 
 ## Stack
 
@@ -45,6 +45,7 @@ condominio-los-eucaliptus/
 │   └── sections.css               # Estilos por sección
 ├── data/                          # JSON demo (modo demo)
 │   ├── gastos.json
+│   ├── pagos.json
 │   ├── parcelas.json
 │   ├── propietarios.json
 │   ├── noticias.json
@@ -61,7 +62,8 @@ condominio-los-eucaliptus/
 │   ├── config.toml                # Configuración proyecto Supabase
 │   └── migrations/                # Migraciones SQL
 │       ├── 001_tables.sql
-│       └── 002_rls_policies.sql
+│       ├── 002_rls_policies.sql
+│       └── 003_pagos.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -107,9 +109,9 @@ Los formularios modales funcionan en ambos modos. En modo demo los cambios se gu
 
 ## Funcionalidades
 
-- **Gráficos interactivos**: línea de montos por período, doughnut por parcela, y línea de ingresos vs egresos por mes (responde al filtro de chips)
-- **Home / Cobranza**: balance del periodo vigente, % de recaudación, listado de morosos con deuda acumulada y modal "Cómo pagar" con datos de transferencia copiables
-- **Finanzas**: stats de balance por periodo, gráfico "Recaudado vs Esperado por período", cuotas derivadas de gastos pagados, tabla de cuotas con estado y movimientos de caja (filtro por periodo + chips Todos/Ingresos/Egresos)
+- **Gráficos interactivos**: línea de recaudado vs esperado por período y línea de ingresos vs egresos por mes
+- **Home / Cobranza**: balance del periodo vigente, % de recaudación, listado de morosos con deuda acumulada (saldo a favor aplicado automáticamente), aviso de aumento de cuota y modal "Cómo pagar" con datos de transferencia copiables
+- **Finanzas**: balance por periodo — card "Periodo en curso" (recaudado, esperado, egresos, saldo, % de recaudación con barra de progreso), gráfico "Recaudado vs Esperado por período", ingresos derivados de los pagos registrados, tabla resumen por periodo con 2 íconos que abren popups separados: cuotas (monto/pagado/estado y botón "Ver pagos") y movimientos de caja del periodo; registro de pagos por cuota (monto, fecha, comprobante) y generación masiva de cuotas por periodo
 - **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso
 - **Skeletons**: estados de carga animados en todas las pestañas
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *

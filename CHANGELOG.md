@@ -2,6 +2,37 @@
 
 ## Registro de cambios
 
+### 09/08/2026 - Fix separadores de tablas + acceso rápido en Periodo en curso
+- **Fix**: Las filas de las tablas (incluidos los popups de Cuotas/Movimientos) usaban `border-bottom: 1px solid var(--border-light)` (casi invisible: `#f5f7fa` light, `#111827` dark). Ahora usan `var(--divider)` (= `--md-sys-color-outline`: `#9ca3af` light, `#6b7280` dark), el mismo separador que ya usaba `.pago-row`, visible en ambos modos. Se aplica también al separador de la fila de totales (`css/components.css`)
+- **Feat**: La card "Periodo en curso" ahora tiene los mismos 2 íconos 🧾 Cuotas / ⇅ Movimientos junto al título, para abrir el detalle del periodo vigente sin buscar la fila en la tabla resumen (`js/renderers.js`)
+
+### 09/08/2026 - Finanzas: detalle del periodo en 2 popups (cuotas / movimientos)
+- **Changed**: En la tabla "Resumen por periodo" cada fila ahora tiene **2 íconos**: 🧾 Cuotas (`verCuotasPeriodo`, icono `receipt_long`) y ⇅ Movimientos (`verMovimientosPeriodo`, icono `swap_vert`). Reemplazan al ícono único que abría el detalle combinado (`verPeriodo`/`resumenPeriodoDetail`). Cada popup muestra su resumen propio (Cuotas: esperado/recaudado/% — Movimientos: ingresos/egresos) y su tabla con acciones admin (`js/renderers.js`, `index.html`)
+
+### 09/08/2026 - Fix Finanzas: contraste de sub-cards y loader que no desaparecía
+- **Fix**: Los sub-cards de la card "Periodo en curso" usaban el mismo fondo que el card (`--md-sys-color-surface`); ahora usan `--surface-hover` y sin sombra, así se distinguen en light y dark (`css/components.css`)
+- **Fix**: El loader de "Resumen por periodo" nunca desaparecía: `showSkeletons` destruía la `<table>` al reemplazar el contenedor, y en el primer render los skeletons quedaban como hermanos visibles de la tabla. Ahora skeleton, empty-state y tabla viven en contenedores separados (`#resumenPeriodosSkeleton`, `#resumenPeriodosEmpty`) que se muestran/ocultan sin destruir el DOM (`index.html`, `js/data.js`, `js/renderers.js`)
+
+### 09/08/2026 - Finanzas: balance por periodo (rediseño del tab)
+- **Changed**: El tab Finanzas pasa de "stats globales + filtro por periodo + tabla de cuotas + lista de movimientos" a un **balance por periodo**: una card "Periodo en curso" (recaudado, esperado, egresos, saldo y % de recaudación con barra de progreso) y una tabla resumen por periodo (Esperado / Recaudado / % / Egresos / Saldo) con un ícono 👁 que abre el **detalle del periodo en popup** (`verPeriodo`): resumen de montos + tablas de cuotas (con estado, pagos y acciones admin) y movimientos del periodo (`js/renderers.js`, `index.html`)
+- **Removed**: Filtro de periodo `#finanzasPeriodoFilter`, chips Todos/Ingresos/Egresos de movimientos (`filterFlujo`/`flujoFilter`) y el gráfico "Monto por parcela" (`chartParcelas`/`renderParcelaChart`)
+- **Changed**: "Ingresos vs Egresos por mes" ahora siempre muestra ambas líneas (sin filtrado por chips) (`js/charts.js`)
+- **Feat**: Funciones puras nuevas en `utils.js`: `periodosFinanzas` (periodos con cuotas o movimientos, orden desc) y `saldoPeriodo` (ingresos − egresos del periodo)
+- **Docs**: `test.html` con asserts de `periodosFinanzas` y `saldoPeriodo`
+
+### 09/08/2026 - Cuotas y pagos: modelo de cobranza completo
+- **Feat**: Nueva tabla `pagos` (`supabase/migrations/003_pagos.sql`): `gasto_id`, `parcela_id`, `periodo` (denormalizado), `monto`, `fecha`, `comprobante` + RLS (SELECT autenticado, INSERT/UPDATE/DELETE admin) y migración idempotente que convierte los `gastos` con `pagado='Sí'` en cuota + 1 pago
+- **Feat**: Motor de pagos en `utils.js` (funciones puras): `getPagos`, `pagosDeGasto`, `sumPagosGasto`, `pagosDeParcela`, `pagoLegado`, `recaudadoGasto` y nueva semántica de `isPagado` (pagos registrados ≥ monto, con fallback a `pagado='Sí'` si no hay pagos). `recaudadoPorPeriodo` suma por `gasto_id` (funciona también en la vista de propietario)
+- **Feat**: Saldo a favor: `deudaParcela` = `max(0, Σcuotas − Σpagos)` y `deudaPorPeriodo` absorbe el excedente de los periodos más recientes hacia atrás
+- **Feat**: Tabla "Cuotas por parcela" con columna **Pagado** (`sumPagosGasto`), botón `verPagos` (modal con listado de pagos, comprobante y eliminar admin) y chip de estado en 3 niveles: **Pagado / Parcial / Pendiente** (`estadoChip`)
+- **Feat**: Modal `formPago` (monto, fecha, comprobante) con prefill del saldo pendiente; `formPagoParcela` abre el pago del periodo más antiguo adeudado desde el modal de deuda de Home; botón "Registrar pago" solo admin (`modals.js`)
+- **Feat**: "Generar Cuotas" (`formGenerarCuotas`): crea una cuota (y fondo reserva si aplica) por parcela para un periodo, respetando el configurador de periodos y sin duplicar parcelas que ya tienen cuota (`modals.js`, botón en pestaña Finanzas)
+- **Feat**: Configurador de periodos en Configuración: card "Periodos de Cuota" con agregar/editar/eliminar (auto-save en `CONFIG.periodos`); periodos sin config usan el Monto Base (`config-page.js`)
+- **Feat**: Aviso de aumento de cuota en Home (`renderAvisoAumento`): banner ámbar cuando el próximo periodo configura un total mayor que el vigente, con botón "Generar cuotas" para admin
+- **Feat**: `formGastos` muestra hint con la cuota del periodo configurada y prefill automático del monto al crear (`modals.js`); gráfico "Recaudado vs Esperado" usa `recaudadoGasto`
+- **Feat**: `data/pagos.json` generado (1.491 pagos para las cuotas `pagado='Sí'` del demo); `data/config.json` agrega `periodos` (incluye `2026-08` más alto para disparar el aviso de aumento)
+- **Docs**: `test.html` ampliado a 116 asserts (pagos, saldo a favor, config de periodos, `siguientePeriodo`, `avisoAumento`)
+
 ### 09/08/2026 - Fix alineación de votos/porcentaje en Encuestas
 - **Fix**: El conteo y porcentaje de cada opción se centran verticalmente junto al botón "Votar" (`inline-flex` + `align-items:center`), ya que antes el texto quedaba desalineado por la altura del `md-filled-button` (`js/renderers.js`)
 

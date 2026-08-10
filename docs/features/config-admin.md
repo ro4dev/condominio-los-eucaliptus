@@ -2,7 +2,7 @@
 
 ## 1. Descripción general
 
-Pestaña de administración visible solo para usuarios con role admin. Centraliza la configuración de parámetros del sistema: montos base, creación masiva de parcelas, categorías de documentos, rubros de proveedores y conceptos de flujo. Los chips se guardan automáticamente al agregar/eliminar.
+Pestaña de administración visible solo para usuarios con role admin. Centraliza la configuración de parámetros del sistema: montos base, periodos de cuota, datos de pago, creación masiva de parcelas, categorías de documentos, rubros de proveedores y conceptos de flujo. Los chips se guardan automáticamente al agregar/eliminar.
 
 ID del tab: `config`
 Contenedor: `<div id="tab-config">`
@@ -24,6 +24,8 @@ CREATE TABLE config (
 var CONFIG = {};  // en config-page.js
 // Keys posibles:
 //   CONFIG.montos → { gasto_comun_base: N, fondo_reserva: N }
+//   CONFIG.periodos → [{ periodo: "YYYY-MM", monto: N, fondo_reserva: N }, ...]
+//     (cuota del periodo; los periodos sin config usan Monto Base — ver finanzas.md §9)
 //   CONFIG.categorias_documentos → ["Estatuto", "Actas", ...]
 //   CONFIG.rubros_proveedores → ["Jardinería", "Limpieza", ...]
 //   CONFIG.conceptos_flujo → ["Mantención", "Cuotas", ...]
@@ -33,7 +35,7 @@ var CONFIG = {};  // en config-page.js
 //     (consume la pestaña Home → card "Cómo pagar")
 ```
 
-## 4. HTML structure (index.html lines 229-277)
+## 4. HTML structure (index.html)
 
 ```html
 <div id="tab-config" class="tab-content" role="region" aria-label="Configuración">
@@ -61,6 +63,14 @@ var CONFIG = {};  // en config-page.js
       </div>
       <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
     </div>
+  </div>
+
+  <!-- Periodos de cuota -->
+  <div class="card" style="margin-bottom:1rem">
+    <h4>Periodos de Cuota</h4>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos por periodo. Los periodos sin config usarán el Monto Base</p>
+    <div id="cfgPeriodosList"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar periodo</md-filled-button></div>
   </div>
 
   <!-- Datos de pago (Home → Cómo pagar) -->
@@ -151,6 +161,7 @@ async function renderConfig() {
     loadJson('FLUJO')
   ]);
   renderMontos();
+  renderPeriodos();
   renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();
@@ -184,7 +195,43 @@ async function saveMontos() {
 }
 ```
 
-### 5.4b Datos de Pago
+### 5.4b Periodos de Cuota
+
+Card "Periodos de Cuota" con la lista de periodos configurados (`#cfgPeriodosList`). Los chips/cards se guardan **automáticamente** al agregar/editar/eliminar (no hay botón "Guardar" separado). Un periodo configurado fija el monto de la cuota (gasto común + fondo reserva) para ese mes; los periodos sin config usan el Monto Base. `cuotaDelPeriodo()` (utils.js) resuelve el total (ver `finanzas.md` §9).
+
+Funciones en `config-page.js`:
+
+- `renderPeriodos()`: lista `CONFIG.periodos` ordenados asc, cada uno con editar (`openModalPeriodo(periodo)`) y eliminar (`removePeriodo(periodo)`). Sin periodos → mensaje "se usará el Monto Base".
+- `openModalPeriodo(periodo?)`: modal con select de periodo (disabled en edición, ±6 meses con `siguientePeriodo()` sugerido), monto y fondo reserva.
+- `savePeriodoForm(e, isEdit)`: agrega/actualiza el periodo en `CONFIG.periodos`, ordena asc y persiste con `saveConfig('periodos', periodos)`. Valida periodo no duplicado.
+- `removePeriodo(periodo)`: confirmación + elimina y persiste.
+
+```js
+function renderPeriodos() {
+  var el = document.getElementById('cfgPeriodosList');
+  if (!el) return;
+  var periodos = (CONFIG.periodos || []).slice().sort(function(a, b) { return a.periodo < b.periodo ? -1 : 1; });
+  if (!periodos.length) {
+    el.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;margin:0">No hay periodos configurados. Se usará el Monto Base para todos los periodos.</p>';
+    return;
+  }
+  el.innerHTML = periodos.map(function(p) {
+    return '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid var(--divider)">' +
+      '<md-icon style="color:var(--text-muted);font-size:1.1rem;flex-shrink:0">calendar_month</md-icon>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div style="font-weight:600;color:var(--text)">' + formatPeriodo(p.periodo) + '</div>' +
+        '<div style="font-size:0.8rem;color:var(--text-2)">Gasto común $' + formatMoney(p.monto || 0) + (p.fondo_reserva ? ' · Fondo reserva $' + formatMoney(p.fondo_reserva) : '') + '</div>' +
+      '</div>' +
+      '<md-icon-button onclick="openModalPeriodo(\'' + p.periodo + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+      '<md-icon-button onclick="removePeriodo(\'' + p.periodo + '\')" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
+    '</div>';
+  }).join('');
+}
+```
+
+El estado de `renderConfig()` llama a `renderPeriodos()` entre `renderMontos()` y `renderDatosPago()`.
+
+### 5.4c Datos de Pago
 
 ```js
 function renderDatosPago() {

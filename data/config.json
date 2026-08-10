@@ -3,9 +3,30 @@
     "gasto_comun_base": 50000,
     "fondo_reserva": 15000
   },
-  "categorias_documentos": ["Estatuto", "Actas", "Contratos", "Seguros", "Planos"],
-  "rubros_proveedores": ["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"],
-  "conceptos_flujo": ["Multa", "Mantenimiento", "Servicios", "Jardinería", "Limpieza", "Seguros"],
+  "categorias_documentos": [
+    "Estatuto",
+    "Actas",
+    "Contratos",
+    "Seguros",
+    "Planos"
+  ],
+  "rubros_proveedores": [
+    "Jardinería",
+    "Limpieza",
+    "Electricidad",
+    "Plomería",
+    "Seguridad",
+    "Mantenimiento",
+    "Otro"
+  ],
+  "conceptos_flujo": [
+    "Multa",
+    "Mantenimiento",
+    "Servicios",
+    "Jardinería",
+    "Limpieza",
+    "Seguros"
+  ],
   "datos_pago": {
     "banco": "Banco Estado",
     "tipo_cuenta": "CuentaRut",
@@ -14,5 +35,132 @@
     "titular": "Comunidad Condominio Eucaliptus",
     "email": "tesoreria@eucaliptus.cl",
     "qr": ""
-  }
+  },
+  "periodos": [
+    {
+      "periodo": "2024-08",
+      "monto": 42000,
+      "fondo_reserva": 12000
+    },
+    {
+      "periodo": "2024-09",
+      "monto": 42000,
+      "fondo_reserva": 12000
+    },
+    {
+      "periodo": "2024-10",
+      "monto": 42000,
+      "fondo_reserva": 12000
+    },
+    {
+      "periodo": "2024-11",
+      "monto": 42000,
+      "fondo_reserva": 12000
+    },
+    {
+      "periodo": "2024-12",
+      "monto": 42000,
+      "fondo_reserva": 12000
+    },
+    {
+      "periodo": "2025-01",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-02",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-03",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-04",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-05",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-06",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-07",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-08",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-09",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-10",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-11",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2025-12",
+      "monto": 46000,
+      "fondo_reserva": 13000
+    },
+    {
+      "periodo": "2026-01",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-02",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-03",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-04",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-05",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-06",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-07",
+      "monto": 50000,
+      "fondo_reserva": 15000
+    },
+    {
+      "periodo": "2026-08",
+      "monto": 52000,
+      "fondo_reserva": 15000
+    }
+  ]
 }

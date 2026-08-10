@@ -4,15 +4,17 @@
 .stat-card .value { font: var(--md-sys-typescale-headline-small); margin-top: 0.3rem; }
 .stat-card .value.blue { color: var(--md-sys-color-primary); }
 .stat-card .value.green { color: var(--color-positive); }
-.stat-card .value.amber { color: var(--color-extraordinaria-text); }
 .stat-card .value.red { color: var(--md-sys-color-error); }
 .table-wrap { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); overflow-x: auto; margin-bottom: 1rem; }
 
 .table-wrap h3 { font: var(--md-sys-typescale-title-medium); margin: 0 0 0.8rem; color: var(--text); }
 table { width: 100%; border-collapse: collapse; font: var(--md-sys-typescale-body-small); }
 th { background: var(--surface-hover); text-align: left; padding: 0.6rem 0.8rem; font-weight: 600; color: var(--text-2); border-bottom: 2px solid var(--border); }
-td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border-light); color: var(--text-2); }
+td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--divider); color: var(--text-2); }
 tr:hover td { background: var(--surface-hover); }
+
+/* Finanzas: resumen por periodo */
+.resumen-totales td { background: var(--surface-hover); border-top: 2px solid var(--divider); font-weight: 600; }
 
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 .card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
@@ -20,6 +22,7 @@ tr:hover td { background: var(--surface-hover); }
 .card .field { font: var(--md-sys-typescale-body-medium); display: flex; justify-content: space-between; padding: 0.3rem 0; }
 .card .field-label { color: var(--text-muted); }
 .card .field-value { font-weight: 500; color: var(--text-2); }
+.card .stat-card { background: var(--surface-hover); box-shadow: none; }
 
 .filter-chips { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
 
@@ -67,3 +70,8 @@ textarea::placeholder { color: var(--md-sys-color-on-surface-variant); }
 .pago-row .value { flex: 1; min-width: 0; text-align: right; font-weight: 500; color: var(--text); user-select: all; word-break: normal; overflow-wrap: anywhere; cursor: pointer; }
 .pago-row md-icon-button { flex-shrink: 0; }
 .pago-qr { max-width: 180px; width: 100%; height: auto; margin-top: 0.8rem; border-radius: var(--md-sys-shape-corner-small); }
+
+/* Home: aviso de aumento de cuota */
+.aviso-card { background: color-mix(in srgb, #f59e0b 12%, var(--md-sys-color-surface)); border: 1px solid color-mix(in srgb, #f59e0b 45%, transparent); border-radius: var(--md-sys-shape-corner-medium); padding: 0.9rem 1rem; box-shadow: var(--md-sys-elevation-level1); }
+.aviso-card strong { color: var(--text); }
+.aviso-card md-icon-button, .aviso-card md-filled-button { flex-shrink: 0; }

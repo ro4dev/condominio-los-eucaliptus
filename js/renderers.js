@@ -109,6 +109,27 @@ function renderHome() {
     pct + '% de las cuotas del periodo pagadas' + (esPropietario ? ' (tu parcela)' : '') + '.';
 
   renderMorosos();
+  renderAvisoAumento();
+}
+
+function renderAvisoAumento() {
+  var el = document.getElementById('homeAviso');
+  if (!el) return;
+  var aviso = avisoAumento();
+  if (!aviso) {
+    el.style.display = 'none';
+    return;
+  }
+  el.style.display = '';
+  el.innerHTML =
+    '<div class="aviso-card" style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">' +
+      '<md-icon style="color:#f59e0b">trending_up</md-icon>' +
+      '<div style="flex:1;min-width:200px">' +
+        '<strong>Cuota ' + formatPeriodo(aviso.periodo) + ' subirá a $' + formatMoney(aviso.nuevo) + '</strong>' +
+        '<div style="font-size:0.8rem;color:var(--text-2)">Actualmente $' + formatMoney(aviso.anterior) + ' (+' + aviso.pct + '%)</div>' +
+      '</div>' +
+      (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Generar cuotas</md-filled-button>' : '') +
+    '</div>';
 }
 
 function renderMorosos() {
@@ -151,14 +172,18 @@ function renderMorosos() {
 
 function openDeudaParcela(parcelaId) {
   var detalle = deudaPorPeriodo(parcelaId, GASTOS);
+  var total = deudaParcela(parcelaId, GASTOS);
+  var nombre = escHtml(parcelName(parcelaId));
   if (!detalle.length) {
-    openModal('Deuda de ' + escHtml(parcelName(parcelaId)), '<p style="color:var(--text-muted);margin:0">Esta parcela no tiene deuda.</p>');
+    openModal('Deuda de ' + nombre,
+      '<p style="color:var(--text-muted);margin:0">Esta parcela está al día.</p>' +
+      (total === 0 ? '' : '<p style="color:var(--text-muted);margin:0.5rem 0 0">Tiene saldo a favor que se aplicará a futuros periodos.</p>'),
+      footerDeuda(parcelaId));
     return;
   }
-  var total = detalle.reduce(function(s, d) { return s + d.monto; }, 0);
   var body =
     '<div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-muted);padding-bottom:0.4rem;border-bottom:1px solid var(--divider)">' +
-      '<span>Periodo</span><span>Monto</span>' +
+      '<span>Periodo</span><span>Deuda</span>' +
     '</div>' +
     detalle.map(function(d) {
       return '<div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--divider)">' +
@@ -169,7 +194,15 @@ function openDeudaParcela(parcelaId) {
     '<div style="display:flex;justify-content:space-between;padding-top:0.7rem;font-weight:700;color:var(--text)">' +
       '<span>Total</span><span style="color:var(--md-sys-color-error)">$' + formatMoney(total) + '</span>' +
     '</div>';
-  openModal('Deuda de ' + escHtml(parcelName(parcelaId)), body);
+  openModal('Deuda de ' + nombre, body, footerDeuda(parcelaId));
+}
+
+function footerDeuda(parcelaId) {
+  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  if (IS_ADMIN) {
+    footer += '<md-filled-button onclick="formPagoParcela(\'' + parcelaId + '\')"><md-icon slot="icon">payments</md-icon>Registrar pago</md-filled-button>';
+  }
+  return footer;
 }
 
 function openComoPagar(parcelaId) {
@@ -263,119 +296,194 @@ function copiarTexto(texto) {
 }
 
 // FINANZAS / BALANCE
-var finanzasPeriodo = '';
-
-function fillFinanzasFilters() {
-  var periodos = [];
-  GASTOS.forEach(function(r) {
-    if (r.periodo && periodos.indexOf(r.periodo) === -1) {
-      periodos.push(r.periodo);
-    }
-  });
-  periodos.sort().reverse();
-
-  var pf = document.getElementById('finanzasPeriodoFilter');
-  if (!pf) return;
-  pf.innerHTML = '<md-select-option value=""><span slot="headline">Todos</span></md-select-option>' + periodos.map(function(p) { return '<md-select-option value="' + p + '"><span slot="headline">' + formatPeriodo(p) + '</span></md-select-option>'; }).join('');
-  pf.onchange = renderFinanzas;
-}
-
-function finanzasFilteredData() {
-  var p = document.getElementById('finanzasPeriodoFilter').value;
-  finanzasPeriodo = p;
-  return GASTOS.filter(function(r) { return !p || r.periodo == p; });
-}
-
 function renderFinanzas() {
-  var data = finanzasFilteredData();
-  renderFinanzasStats(data);
   renderRecaudadoChart();
-  renderParcelaChart(data);
   renderFlujoChart();
-  renderFinanzasTable(data);
-  renderMovimientos();
+  renderPeriodoEnCurso();
+  renderResumenPeriodos();
 }
 
-function renderFinanzasStats(data) {
-  var p = finanzasPeriodo;
-  var esperado, recaudado, pct, egresos;
-  if (p) {
-    esperado = esperadoPorPeriodo(p, GASTOS);
-    recaudado = recaudadoPorPeriodo(p, GASTOS);
-    pct = pctRecaudado(p, GASTOS);
-    egresos = egresosMes(p, FLUJO);
-  } else {
-    esperado = data.reduce(function(s, r) { return s + parseFloat(r.monto || 0); }, 0);
-    recaudado = data.filter(isPagado).reduce(function(s, r) { return s + parseFloat(r.monto || 0); }, 0);
-    pct = esperado ? Math.round((recaudado / esperado) * 100) : 0;
-    egresos = FLUJO.filter(function(f) { return f.tipo === 'Egreso'; }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
-  }
-  var pctClass = pct >= 90 ? 'green' : (pct >= 60 ? 'amber' : 'red');
+function periodoVigente() {
+  var periodos = periodosFinanzas(GASTOS, FLUJO);
+  return periodos.length ? periodos[0] : null;
+}
 
-  document.getElementById('finanzasStats').innerHTML =
-    '<div class="stat-card"><div class="label">Recaudado</div><div class="value blue">$' + formatMoney(recaudado) + '</div></div>' +
-    '<div class="stat-card"><div class="label">Esperado</div><div class="value">$' + formatMoney(esperado) + '</div></div>' +
-    '<div class="stat-card"><div class="label">Recaudación</div><div class="value ' + pctClass + '">' + pct + '%</div></div>' +
-    '<div class="stat-card"><div class="label">Egresos</div><div class="value red">$' + formatMoney(egresos) + '</div></div>';
+function renderPeriodoEnCurso() {
+  var el = document.getElementById('finanzasPeriodoEnCurso');
+  if (!el) return;
+  var p = periodoVigente();
+  if (!p) {
+    el.innerHTML = '';
+    return;
+  }
+  var esp = esperadoPorPeriodo(p, GASTOS);
+  var rec = recaudadoPorPeriodo(p, GASTOS);
+  var pct = esp ? Math.round((rec / esp) * 100) : 0;
+  var eg = egresosMes(p, FLUJO);
+  var sal = saldoPeriodo(p, GASTOS, FLUJO);
+  var fillColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
+  el.innerHTML =
+    '<div class="card">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;margin-bottom:0.4rem">' +
+        '<h4 style="margin:0">Periodo en curso</h4>' +
+        '<div style="display:flex;gap:0.25rem;flex-shrink:0">' +
+          '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas del periodo"><md-icon>receipt_long</md-icon></md-icon-button>' +
+          '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
+        '</div>' +
+      '</div>' +
+      '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">Periodo <strong style="color:var(--text)">' + formatPeriodo(p) + '</strong></div>' +
+      '<section class="stats" style="margin-bottom:0.8rem">' +
+        '<div class="stat-card"><div class="label">Esperado</div><div class="value">$' + formatMoney(esp) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Recaudado</div><div class="value blue">$' + formatMoney(rec) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Egresos</div><div class="value red">$' + formatMoney(eg) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Saldo</div><div class="value ' + (sal >= 0 ? 'green' : 'red') + '">$' + formatMoney(sal) + '</div></div>' +
+      '</section>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + Math.min(100, pct) + '%;background:' + fillColor + '"></div></div>' +
+      '<p class="progress-label">' + pct + '% de las cuotas del periodo pagadas</p>' +
+    '</div>';
 }
 
 function estadoChip(g) {
-  var bg = isPagado(g) ? 'var(--color-positive-bg)' : 'var(--color-extraordinaria-bg)';
-  var color = isPagado(g) ? 'var(--color-positive-text)' : 'var(--color-extraordinaria-text)';
-  return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + (isPagado(g) ? 'Pagado' : 'Pendiente') + '</span>';
+  var pagado = sumPagosGasto(g.id);
+  var monto = parseFloat(g.monto || 0);
+  var estado, bg, color;
+  if (isPagado(g)) {
+    estado = 'Pagado';
+    bg = 'var(--color-positive-bg)';
+    color = 'var(--color-positive-text)';
+  } else if (pagado > 0 && pagado < monto) {
+    estado = 'Parcial';
+    bg = 'var(--color-extraordinaria-bg)';
+    color = 'var(--color-extraordinaria-text)';
+  } else {
+    estado = 'Pendiente';
+    bg = 'var(--md-sys-color-surface-container-highest)';
+    color = 'var(--md-sys-color-on-surface-variant)';
+  }
+  return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + estado + '</span>';
 }
 
-function renderFinanzasTable(data) {
-  var loading = document.getElementById('cuotasLoading');
-  var table = document.getElementById('tableGastos');
-  if (loading) {
-    loading.style.display = 'none';
+function renderResumenPeriodos() {
+  var wrap = document.getElementById('resumenPeriodosWrap');
+  var table = document.getElementById('tableResumenPeriodos');
+  var tbody = document.getElementById('resumenPeriodosBody');
+  if (!wrap || !table || !tbody) return;
+  var sk = document.getElementById('resumenPeriodosSkeleton');
+  if (sk) {
+    sk.style.display = 'none';
   }
-  if (table) {
-    table.style.display = 'table';
+  var emptyEl = document.getElementById('resumenPeriodosEmpty');
+  if (emptyEl) {
+    emptyEl.style.display = 'none';
+    emptyEl.innerHTML = '';
   }
-  var tbody = document.getElementById('tableBody');
-  if (!tbody) return;
-  if (data.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6">' + emptyState('Sin cuotas para este filtro.') + '</td></tr>';
+  var periodos = periodosFinanzas(GASTOS, FLUJO);
+  if (!periodos.length) {
+    table.style.display = 'none';
+    if (emptyEl) {
+      emptyEl.style.display = '';
+      emptyEl.innerHTML = emptyState('Sin datos para mostrar.');
+    }
     return;
   }
-  tbody.innerHTML = data.map(function(r) {
+  table.style.display = 'table';
+  var totals = { esp: 0, rec: 0, eg: 0, sal: 0 };
+  var rows = periodos.map(function(p) {
+    var esp = esperadoPorPeriodo(p, GASTOS);
+    var rec = recaudadoPorPeriodo(p, GASTOS);
+    var eg = egresosMes(p, FLUJO);
+    var sal = saldoPeriodo(p, GASTOS, FLUJO);
+    totals.esp += esp;
+    totals.rec += rec;
+    totals.eg += eg;
+    totals.sal += sal;
+    var pct = esp ? Math.round((rec / esp) * 100) : 0;
+    var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
     return '<tr>' +
-      '<td>' + parcelName(r.parcela_id) + '</td>' +
-      '<td>' + formatPeriodo(r.periodo) + '</td>' +
-      '<td>$' + formatMoney(parseFloat(r.monto || 0)) + '</td>' +
-      '<td>' + estadoChip(r) + '</td>' +
-      '<td>' + (r.archivo ? '<a href="' + r.archivo + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
-      '<td style="width:1%;white-space:nowrap">' + adminActions("editGasto('" + r.id + "')", "deleteGasto('" + r.id + "')") + '</td>' +
+      '<td style="font-weight:600;color:var(--text);white-space:nowrap">' + formatPeriodo(p) + '</td>' +
+      '<td>$' + formatMoney(esp) + '</td>' +
+      '<td>$' + formatMoney(rec) + '</td>' +
+      '<td style="font-weight:600;color:' + pctColor + '">' + pct + '%</td>' +
+      '<td>$' + formatMoney(eg) + '</td>' +
+      '<td style="font-weight:600;white-space:nowrap;color:' + (sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">$' + formatMoney(sal) + '</td>' +
+      '<td style="width:1%;white-space:nowrap">' +
+        '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas del periodo"><md-icon>receipt_long</md-icon></md-icon-button>' +
+      '</td>' +
+      '<td style="width:1%;white-space:nowrap">' +
+        '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
+      '</td>' +
       '</tr>';
   }).join('');
+  var pctTotal = totals.esp ? Math.round((totals.rec / totals.esp) * 100) : 0;
+  var pctTotalColor = pctTotal >= 90 ? 'var(--color-positive)' : (pctTotal >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
+  var totalsRow =
+    '<tr class="resumen-totales">' +
+      '<td style="font-weight:700;color:var(--text)">Totales</td>' +
+      '<td style="font-weight:600">$' + formatMoney(totals.esp) + '</td>' +
+      '<td style="font-weight:600">$' + formatMoney(totals.rec) + '</td>' +
+      '<td style="font-weight:600;color:' + pctTotalColor + '">' + pctTotal + '%</td>' +
+      '<td style="font-weight:600">$' + formatMoney(totals.eg) + '</td>' +
+      '<td style="font-weight:700;color:' + (totals.sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">$' + formatMoney(totals.sal) + '</td>' +
+      '<td></td>' +
+      '<td></td>' +
+    '</tr>';
+  tbody.innerHTML = rows + totalsRow;
 }
 
-function renderMovimientos() {
-  var filtered = flujoFilter === 'todos' ? FLUJO : FLUJO.filter(function(f) { return f.tipo === flujoFilter; });
-  if (finanzasPeriodo) {
-    filtered = filtered.filter(function(f) { return mesDeFecha(f.fecha) === finanzasPeriodo; });
+function verCuotasPeriodo(periodo) {
+  var esp = esperadoPorPeriodo(periodo, GASTOS);
+  var rec = recaudadoPorPeriodo(periodo, GASTOS);
+  var pct = esp ? Math.round((rec / esp) * 100) : 0;
+  var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
+  var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
+    '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--surface-hover);color:var(--text-2)">Periodo ' + formatPeriodo(periodo) + '</span>' +
+    '<span style="font-size:0.85rem;color:var(--text-2)">Esperado <strong style="color:var(--text)">$' + formatMoney(esp) + '</strong> · Recaudado <strong style="color:var(--md-sys-color-primary)">$' + formatMoney(rec) + '</strong> · <strong style="color:' + pctColor + '">' + pct + '%</strong></span>' +
+    '</div>';
+  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  openModal('Cuotas del periodo', head + resumenCuotasDetalle(periodo), footer);
+}
+
+function verMovimientosPeriodo(periodo) {
+  var ing = FLUJO.filter(function(f) { return f.tipo === 'Ingreso' && mesDeFecha(f.fecha) === periodo; }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
+  var eg = egresosMes(periodo, FLUJO);
+  var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
+    '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--surface-hover);color:var(--text-2)">Periodo ' + formatPeriodo(periodo) + '</span>' +
+    '<span style="font-size:0.85rem;color:var(--text-2)">Ingresos <strong style="color:var(--color-positive)">$' + formatMoney(ing) + '</strong> · Egresos <strong style="color:var(--md-sys-color-error)">$' + formatMoney(eg) + '</strong></span>' +
+    '</div>';
+  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  openModal('Movimientos del periodo', head + resumenMovimientosDetalle(periodo), footer);
+}
+
+function resumenCuotasDetalle(periodo) {
+  var cuotas = GASTOS.filter(function(g) { return g.periodo === periodo; });
+  if (!cuotas.length) {
+    return '<p style="margin:0;color:var(--text-muted);font-size:0.85rem">Sin cuotas para este periodo.</p>';
   }
-  var list = document.getElementById('flujoList');
-  var sorted = filtered.slice().sort(function(a, b) {
+  return '<div style="overflow-x:auto"><table style="min-width:420px">' +
+    '<thead><tr><th>Parcela</th><th>Monto</th><th>Pagado</th><th>Estado</th><th></th></tr></thead>' +
+    '<tbody>' + cuotas.map(function(g) {
+      return '<tr>' +
+        '<td>' + parcelName(g.parcela_id) + '</td>' +
+        '<td>$' + formatMoney(parseFloat(g.monto || 0)) + '</td>' +
+        '<td>$' + formatMoney(sumPagosGasto(g.id)) + '</td>' +
+        '<td>' + estadoChip(g) + '</td>' +
+        '<td style="width:1%;white-space:nowrap">' +
+          '<md-icon-button onclick="verPagos(\'' + g.id + '\')" title="Ver pagos"><md-icon>payments</md-icon></md-icon-button>' +
+          adminActions("editGasto('" + g.id + "')", "deleteGasto('" + g.id + "')") +
+        '</td></tr>';
+    }).join('') + '</tbody></table></div>';
+}
+
+function resumenMovimientosDetalle(periodo) {
+  var movs = FLUJO.filter(function(f) { return mesDeFecha(f.fecha) === periodo; }).slice().sort(function(a, b) {
     return new Date(b.fecha) - new Date(a.fecha);
   });
-
-  var head = '<thead><tr>' +
-    '<th>Fecha</th>' +
-    '<th>Tipo</th>' +
-    '<th>Concepto</th>' +
-    '<th>Comprobante</th>' +
-    '<th style="text-align:right">Monto</th>' +
-    '<th style="width:1%;white-space:nowrap"></th>' +
-    '</tr></thead>';
-
-  var body;
-  if (!sorted.length) {
-    body = '<tbody><tr><td colspan="6">' + emptyState('Sin movimientos para este filtro.') + '</td></tr></tbody>';
-  } else {
-    body = '<tbody>' + sorted.map(function(f) {
+  if (!movs.length) {
+    return '<p style="margin:0;color:var(--text-muted);font-size:0.85rem">Sin movimientos para este periodo.</p>';
+  }
+  return '<div style="overflow-x:auto"><table style="min-width:420px">' +
+    '<thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Monto</th><th></th></tr></thead>' +
+    '<tbody>' + movs.map(function(f) {
       var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
       var bgColor = f.tipo === 'Ingreso' ? 'var(--color-positive-bg)' : 'var(--md-sys-color-error-container)';
       var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
@@ -383,14 +491,9 @@ function renderMovimientos() {
         '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>' +
         '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + escHtml(f.tipo) + '</span></td>' +
         '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
-        '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
         '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
-        '<td style="width:1%;white-space:nowrap">' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td>' +
-        '</tr>';
-    }).join('') + '</tbody>';
-  }
-
-  list.innerHTML = '<table style="min-width:640px">' + head + body + '</table>';
+        '<td style="width:1%;white-space:nowrap">' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td></tr>';
+    }).join('') + '</tbody></table></div>';
 }
 
 // PARCELAS
@@ -551,16 +654,6 @@ function renderNoticiaCard(n, old) {
     '<div class="desc">' + nl2br(n.descripcion) + '</div>' +
     (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>' : '') +
     '</div>';
-}
-
-// MOVIMIENTOS (dentro de Finanzas)
-var flujoFilter = 'todos';
-
-function filterFlujo(tipo) {
-  flujoFilter = tipo;
-  document.querySelectorAll('#flujoFilter md-filter-chip').forEach(function(c) { c.selected = false; });
-  event.target.closest('md-filter-chip').selected = true;
-  renderMovimientos();
 }
 
 // DOCUMENTOS

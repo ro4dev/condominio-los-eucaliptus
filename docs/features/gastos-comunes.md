@@ -1,6 +1,6 @@
 # Gastos Comunes
 
-> **Deprecado**: este módulo se fusiona en [`docs/features/finanzas.md`](./finanzas.md). La tabla de cuotas por parcela pasa a ser una sección de la pestaña Finanzas, con columna de estado de pago (ver [`deudores.md`](./deudores.md)). Este documento se conserva como referencia histórica del render y funciones originales.
+> **Deprecado**: este módulo se fusiona en [`docs/features/finanzas.md`](./finanzas.md). La tabla de cuotas por parcela pasa a ser parte de la pestaña Finanzas (balance por periodo, con popups de cuotas/movimientos). Este documento se conserva como referencia histórica: el código que describe (tab `cuenta`, `chartParcelas`, `tableGastos`, etc.) **ya no existe en el código actual**.
 
 ## 1. Descripción general
 
