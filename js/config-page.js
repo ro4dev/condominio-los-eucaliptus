@@ -501,8 +501,8 @@ async function renderAuditLog() {
 async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO')]);
+  if (DEMO_MODE) await loadJson('AUDIT_LOG');
   renderMontos();
-  renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();
   renderRubrosProveedores();

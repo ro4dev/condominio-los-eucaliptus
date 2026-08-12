@@ -2,6 +2,14 @@
 
 ## Registro de cambios
 
+### 11/08/2026 - Auditoría de cambios (Configuración → Actividad reciente)
+- **Feat**: Nueva migración `003_audit_log.sql` con tabla `audit_log` (tabla, accion INSERT/UPDATE/DELETE, registro_id, datos jsonb, usuario, created_at) y RLS: SELECT solo admin, INSERT usuarios autenticados
+- **Feat**: API `logAudit(tabla, accion, registro, usuario)` en `js/audit.js` con `sanitizeAudit()` que oculta PII (rut, telefono, email) del payload auditado; los INSERT/UPDATE se loguean en `handleForm` (`auditSave`) y los DELETE en `deleteItem`
+- **Feat**: Sección "Actividad reciente" en Configuración (`renderAuditLog`) con chips de filtro por tabla, fecha/hora, usuario, acción y botón ⓘ para ver los datos del cambio (UPDATE/DELETE)
+- **Feat**: Demo seed en `data/audit_log.json` (11 entradas de ejemplo) que se carga en modo demo al abrir Configuración
+- **Feat**: Se loguean también cambios de la propia configuración (`saveConfig`, `bulkCreateParcelas`) y encuestas en producción
+- **Docs**: `test.html` con asserts de `sanitizeAudit`
+
 ### 09/08/2026 - Fix alineación de votos/porcentaje en Encuestas
 - **Fix**: El conteo y porcentaje de cada opción se centran verticalmente junto al botón "Votar" (`inline-flex` + `align-items:center`), ya que antes el texto quedaba desalineado por la altura del `md-filled-button` (`js/renderers.js`)
 

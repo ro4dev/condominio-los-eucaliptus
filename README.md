@@ -15,7 +15,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 | **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |
-| **Configuración** | Panel admin: montos base, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores y conceptos de ingreso/egreso. Solo visible para administradores. |
+| **Configuración** | Panel admin: montos base, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores, conceptos de ingreso/egreso y **actividad reciente** (auditoría de cambios). Solo visible para administradores. |
 
 ## Stack
 
@@ -37,6 +37,7 @@ condominio-los-eucaliptus/
 │   ├── charts.js                  # Gráficos Chart.js
 │   ├── modals.js                  # Formularios modales
 │   ├── config-page.js             # Pestaña de configuración admin
+│   ├── audit.js                   # Auditoría de cambios (logAudit, sanitizeAudit)
 │   └── utils.js                   # Utilidades (formatMoney, etc.)
 ├── css/
 │   ├── base.css                   # Reset y tipografía
@@ -56,12 +57,14 @@ condominio-los-eucaliptus/
 │   ├── asamblea_asistentes.json
 │   ├── encuestas.json
 │   ├── encuestas_votos.json
+│   ├── audit_log.json
 │   └── config.json
 ├── supabase/
 │   ├── config.toml                # Configuración proyecto Supabase
 │   └── migrations/                # Migraciones SQL
 │       ├── 001_tables.sql
-│       └── 002_rls_policies.sql
+│       ├── 002_rls_policies.sql
+│       └── 003_audit_log.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -112,6 +115,7 @@ Los formularios modales funcionan en ambos modos. En modo demo los cambios se gu
 - **Finanzas**: stats de balance por periodo, gráfico "Recaudado vs Esperado por período", cuotas derivadas de gastos pagados, tabla de cuotas con estado y movimientos de caja (filtro por periodo + chips Todos/Ingresos/Egresos)
 - **Chips de config**: gestión de categorías, rubros y conceptos con modal, guardado automático, indicador de uso
 - **Skeletons**: estados de carga animados en todas las pestañas
+- **Auditoría de cambios**: Configuración → "Actividad reciente" registra INSERT/UPDATE/DELETE de todos los módulos (tabla, fecha, usuario, datos del cambio sanitizados), con filtros por tabla. Los datos quedan en memoria en modo demo y en la tabla `audit_log` en producción
 - **Modal forms**: formularios de carga para cada módulo, con placeholders y campos obligatorios marcados con *
 - **CRUD admin**: iconos ✏️ editar y 🗑️ eliminar en tablas/cards (Gastos, Parcelas, Noticias, Flujo, Documentos, Proveedores, Asambleas, Encuestas) — solo visible para admin
 - **Confirmación modal**: todas las eliminaciones y cierre de formularios usan modal HTML en vez de `confirm()` nativo
