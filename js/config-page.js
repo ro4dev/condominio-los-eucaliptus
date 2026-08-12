@@ -17,6 +17,7 @@ async function loadConfig() {
 }
 
 async function saveConfig(key, value) {
+  var existed = Object.prototype.hasOwnProperty.call(CONFIG, key);
   CONFIG[key] = value;
   if (!DEMO_MODE && supabaseClient) {
     showLoading();
@@ -27,6 +28,7 @@ async function saveConfig(key, value) {
       return false;
     }
   }
+  logAudit('config', existed ? 'UPDATE' : 'INSERT', { key: key, value: value });
   return true;
 }
 
@@ -357,6 +359,7 @@ async function bulkCreateParcelas() {
     nuevas.forEach(function(p) {
       if (!PARCELAS.some(function(x) { return x.numero === p.numero; })) {
         PARCELAS.push(p);
+        logAudit('parcelas', 'INSERT', p);
       }
     });
   } else if (supabaseClient) {
@@ -370,7 +373,7 @@ async function bulkCreateParcelas() {
     var nuevasReales = nuevas.filter(function(p) { return nombresExistentes.indexOf(p.numero) === -1; });
     console.log('Nuevas reales:', nuevasReales.map(function(p) { return p.numero; }));
     if (nuevasReales.length) {
-      var { error } = await supabaseClient.from('parcelas').insert(nuevasReales);
+      var { data: insertedRows, error } = await supabaseClient.from('parcelas').insert(nuevasReales).select();
       if (error) {
         hideLoading();
         showSnackbar('Error al crear parcelas: ' + error.message, 'error');
@@ -378,6 +381,7 @@ async function bulkCreateParcelas() {
         btn.textContent = 'Crear parcelas';
         return;
       }
+      (insertedRows || []).forEach(function(p) { logAudit('parcelas', 'INSERT', p); });
       await loadJson('PARCELAS');
     }
     hideLoading();
