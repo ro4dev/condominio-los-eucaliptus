@@ -1,5 +1,13 @@
 [
   {
+    "tabla": "publicaciones",
+    "accion": "INSERT",
+    "registro_id": "8f0a3d4b-9c6e-4f2a-9b3e-1d2c4f6a8b0c",
+    "datos": { "titulo": "Mesa de comedor de madera", "categoria": "Producto", "precio": 45000, "estado": "Disponible" },
+    "usuario": "vecino1@eucaliptus.cl",
+    "created_at": "2026-08-11T10:30:00.000Z"
+  },
+  {
     "tabla": "gastos",
     "accion": "INSERT",
     "registro_id": "4f2b8c1a-6d9e-4a3b-8c5d-1e2f3a4b5c6d",

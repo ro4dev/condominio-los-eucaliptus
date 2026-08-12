@@ -26,6 +26,7 @@ var ASAMBLEA_ASISTENTES = [];
 var ENCUESTAS = [];
 var ENCUESTAS_VOTOS = [];
 var AUDIT_LOG = [];
+var PUBLICACIONES = [];
 
 var loaded = { GASTOS: false };
 
@@ -43,7 +44,8 @@ var DEMO_FILES = {
   ENCUESTAS: 'data/encuestas.json',
   ENCUESTAS_VOTOS: 'data/encuestas_votos.json',
   CONFIG: 'data/config.json',
-  AUDIT_LOG: 'data/audit_log.json'
+  AUDIT_LOG: 'data/audit_log.json',
+  PUBLICACIONES: 'data/publicaciones.json'
 };
 
 function toggleDemoMode() {
