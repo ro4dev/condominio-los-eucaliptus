@@ -21,7 +21,9 @@ function deleteItem(table, id, arrayName, renderFn) {
   var nombre = nombres[table] || 'este registro';
   showConfirm('¿Estás seguro de eliminar ' + nombre + '? Esta acción no se puede deshacer.', function() {
     if (DEMO_MODE) {
+      var removed = (window[arrayName] || []).find(function(item) { return item.id === id; });
       window[arrayName] = window[arrayName].filter(function(item) { return item.id !== id; });
+      logAudit(table, 'DELETE', removed || { id: id });
       showSnackbar('Eliminado (demo).', 'success');
       renderFn();
     } else {
@@ -32,6 +34,7 @@ function deleteItem(table, id, arrayName, renderFn) {
           if (res.error) {
             showSnackbar(res.error.message || 'Error al eliminar', 'error');
           } else {
+            logAudit(table, 'DELETE', { id: id });
             showSnackbar('Eliminado correctamente.', 'success');
             reloadTab(getCurrentTab());
           }
@@ -40,6 +43,7 @@ function deleteItem(table, id, arrayName, renderFn) {
         supabaseDelete(table, id).then(function(result) {
           hideLoading();
           if (result) {
+            logAudit(table, 'DELETE', { id: id });
             showSnackbar('Eliminado correctamente.', 'success');
             reloadTab(getCurrentTab());
           }

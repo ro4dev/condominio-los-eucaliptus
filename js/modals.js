@@ -275,8 +275,13 @@ function handleForm(e) {
     }
   }
 
+  function auditSave() {
+    logAudit(table, isEdit ? 'UPDATE' : 'INSERT', data);
+  }
+
   function afterSave() {
     hideLoading();
+    auditSave();
     showSnackbar(isEdit ? 'Actualizado correctamente.' : 'Guardado correctamente.', 'success');
     closeModal();
     reloadTab(getCurrentTab());
@@ -376,6 +381,7 @@ function handleForm(e) {
         delete data.asistentes;
         doUpdate(table, data).then(function(result) {
           if (!result) { submitError(); return; }
+          if (!isEdit && result[0]) data.id = result[0].id;
           var asambleaId = isEdit ? data.id : result[0] && result[0].id;
           if (isEdit) {
             supabaseClient.from('asamblea_asistentes').delete().eq('asamblea_id', asambleaId).then(function() {
@@ -416,6 +422,8 @@ function handleForm(e) {
         doUpdate(table, data).then(function(result) {
           hideLoading();
           if (result) {
+            if (!isEdit && result[0]) data.id = result[0].id;
+            auditSave();
             showSnackbar(isEdit ? 'Encuesta actualizada.' : 'Encuesta creada.', 'success');
             closeModal();
             reloadTab(getCurrentTab());
@@ -429,6 +437,7 @@ function handleForm(e) {
       } else {
         doUpdate(table, data).then(function(result) {
           if (result) {
+            if (!isEdit && result[0]) data.id = result[0].id;
             afterSave();
           } else {
             submitError();
