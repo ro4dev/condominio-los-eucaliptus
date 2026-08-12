@@ -175,6 +175,21 @@
     assert('ingresosMes 2026-08', ingresosMes('2026-08', TG, TF), 0);
     assert('ingresosMes sin datos', ingresosMes('2026-07', [], []), 0);
 
+    // ── Publicaciones de venta ──
+    var TPUB = [
+      { id: 'p1', categoria: 'Producto', estado: 'Disponible' },
+      { id: 'p2', categoria: 'Servicio', estado: 'Vendido' },
+      { id: 'p3', categoria: 'Producto', estado: 'Vendido' },
+      { id: 'p4', categoria: 'Servicio', estado: 'Disponible' }
+    ];
+    assert('filtrarPublicaciones todas/todos', filtrarPublicaciones(TPUB, 'todas', 'todos').length, 4);
+    assert('filtrarPublicaciones Producto/todos', filtrarPublicaciones(TPUB, 'Producto', 'todos').length, 2);
+    assert('filtrarPublicaciones todas/Disponible', filtrarPublicaciones(TPUB, 'todas', 'Disponible').length, 2);
+    assert('filtrarPublicaciones Servicio/Vendido', filtrarPublicaciones(TPUB, 'Servicio', 'Vendido').length, 1);
+    assert('filtrarPublicaciones sin resultados', filtrarPublicaciones(TPUB, 'Producto', 'Vendido')[0].id, 'p3');
+    assert('filtrarPublicaciones lista vacía', filtrarPublicaciones([], 'todas', 'todos').length, 0);
+    assert('filtrarPublicaciones null', filtrarPublicaciones(null, 'todas', 'todos').length, 0);
+
     // ── sanitizeAudit ──
     var sa = sanitizeAudit({ nombre: 'A', rut: '1-9', email: 'a@b.cl' });
     assert('sanitizeAudit oculta rut', sa.rut, '[oculto]');

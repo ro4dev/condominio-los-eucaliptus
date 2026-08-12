@@ -15,6 +15,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Proveedores** | Directorio de proveedores por rubro con datos de contacto. |
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 | **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |
+| **Ventas** | Publicaciones de productos/servicios entre vecinos: foto opcional, precio, contacto, estado Disponible/Vendido. Cualquier usuario autenticado publica; edita/elimina solo el autor o admin. |
 | **Configuración** | Panel admin: montos base, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores, conceptos de ingreso/egreso y **actividad reciente** (auditoría de cambios). Solo visible para administradores. |
 
 ## Stack
@@ -38,8 +39,7 @@ condominio-los-eucaliptus/
 │   ├── modals.js                  # Formularios modales
 │   ├── config-page.js             # Pestaña de configuración admin
 │   ├── audit.js                   # Auditoría de cambios (logAudit, sanitizeAudit)
-│   └── utils.js                   # Utilidades (formatMoney, etc.)
-├── css/
+│   └── utils.js                   # Utilidades (formatMoney, etc.)├── css/
 │   ├── base.css                   # Reset y tipografía
 │   ├── layout.css                 # Layout general
 │   ├── components.css             # Componentes reutilizables
@@ -57,6 +57,7 @@ condominio-los-eucaliptus/
 │   ├── asamblea_asistentes.json
 │   ├── encuestas.json
 │   ├── encuestas_votos.json
+│   ├── publicaciones.json
 │   ├── audit_log.json
 │   └── config.json
 ├── supabase/
@@ -64,7 +65,8 @@ condominio-los-eucaliptus/
 │   └── migrations/                # Migraciones SQL
 │       ├── 001_tables.sql
 │       ├── 002_rls_policies.sql
-│       └── 003_audit_log.sql
+│       ├── 003_audit_log.sql
+│       └── 004_publicaciones.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -86,13 +88,14 @@ Crear los siguientes buckets en **Supabase → Storage**, todos públicos:
 | `gastos_comunes` | Comprobantes de gastos |
 | `ingresos_egresos` | Comprobantes de ingresos/egresos |
 | `documentos` | Archivos adjuntos de documentos |
+| `publicaciones` | Fotos de publicaciones de venta |
 
 Luego ejecutar en **Supabase → SQL Editor** para habilitar subida/lectura:
 
 ```sql
 CREATE POLICY "storage_select" ON storage.objects
   FOR SELECT TO authenticated
-  USING (bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos'));
+  USING (bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos', 'publicaciones'));
 
 CREATE POLICY "storage_insert" ON storage.objects
   FOR INSERT TO authenticated
@@ -100,6 +103,10 @@ CREATE POLICY "storage_insert" ON storage.objects
     bucket_id IN ('gastos_comunes', 'ingresos_egresos', 'documentos')
     AND auth.jwt() -> 'app_metadata' ->> 'role' = 'admin'
   );
+
+CREATE POLICY "storage_insert_publicaciones" ON storage.objects
+  FOR INSERT TO authenticated
+  WITH CHECK (bucket_id = 'publicaciones');
 ```
 
 > Los buckets deben ser **no públicos** en el Dashboard (desmarcar "Public bucket").

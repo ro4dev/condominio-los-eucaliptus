@@ -2,6 +2,15 @@
 
 ## Registro de cambios
 
+### 11/08/2026 - Pestaña Ventas: publicaciones de productos/servicios
+- **Feat**: Nueva pestaña **Ventas** (`tab-publicaciones`, tab `publicaciones`) para que los vecinos publiquen ventas de productos y servicios dentro del condominio (`index.html`, `data.js`)
+- **Feat**: Migración `004_publicaciones.sql` con tabla `publicaciones` (titulo, descripcion, categoria Producto/Servicio, precio, contacto, parcela_id, estado Disponible/Vendido, foto, usuario, created_at) y RLS: SELECT cualquier autenticado, INSERT cualquier autenticado (autor forzado por email), **UPDATE/DELETE el autor o admin**
+- **Feat**: `renderPublicaciones()` en cards (`.publicacion-card`) con foto opcional, chips de categoría (Producto/Servicio) y estado (Disponible/Vendido), precio, parcela y contacto; ordenadas por `created_at` desc
+- **Feat**: Doble filtro por chips: categoría (Todas/Productos/Servicios) y estado (Disponibles/Vendidos) — función pura `filtrarPublicaciones()` en `utils.js`
+- **Feat**: Botón "Publicar Venta" para cualquier usuario autenticado; editar/eliminar **solo el autor o admin** (helper `ownActions`); modal `formPublicaciones` con foto opcional (storage bucket `publicaciones` en prod, blob URL en demo)
+- **Feat**: `handleForm` registra `usuario` (email del autor) y audita INSERT/UPDATE vía `logAudit`; DELETE audita en `deletePublicacion`; tabla `publicaciones` agregada al filtro de "Actividad reciente"
+- **Docs**: demo seed en `data/publicaciones.json` (5 entradas), entrada de ejemplo en `data/audit_log.json`, `test.html` con 7 asserts de `filtrarPublicaciones`
+
 ### 11/08/2026 - Auditoría de cambios (Configuración → Actividad reciente)
 - **Feat**: Nueva migración `003_audit_log.sql` con tabla `audit_log` (tabla, accion INSERT/UPDATE/DELETE, registro_id, datos jsonb, usuario, created_at) y RLS: SELECT solo admin, INSERT usuarios autenticados
 - **Feat**: API `logAudit(tabla, accion, registro, usuario)` en `js/audit.js` con `sanitizeAudit()` que oculta PII (rut, telefono, email) del payload auditado; los INSERT/UPDATE se loguean en `handleForm` (`auditSave`) y los DELETE en `deleteItem`
