@@ -21,6 +21,7 @@
   <div id="summary" class="summary"></div>
 
   <script src="js/utils.js"></script>
+  <script src="js/audit.js"></script>
 
   <script>
     var results = document.getElementById('results');
@@ -173,6 +174,15 @@
     assert('ingresosMes 2026-06', ingresosMes('2026-06', TG, TF), 50);
     assert('ingresosMes 2026-08', ingresosMes('2026-08', TG, TF), 0);
     assert('ingresosMes sin datos', ingresosMes('2026-07', [], []), 0);
+
+    // ── sanitizeAudit ──
+    var sa = sanitizeAudit({ nombre: 'A', rut: '1-9', email: 'a@b.cl' });
+    assert('sanitizeAudit oculta rut', sa.rut, '[oculto]');
+    assert('sanitizeAudit oculta email', sa.email, '[oculto]');
+    assert('sanitizeAudit mantiene nombre', sa.nombre, 'A');
+    assert('sanitizeAudit no muta original', sa === null ? true : JSON.stringify(sa) !== JSON.stringify({ nombre: 'A', rut: '1-9', email: 'a@b.cl' }), true);
+    assert('sanitizeAudit oculta telefono', sanitizeAudit({ telefono: '9 1234' }).telefono, '[oculto]');
+    assert('sanitizeAudit registro vacío', JSON.stringify(sanitizeAudit({})), '{}');
 
     // Summary
     var summary = document.getElementById('summary');
