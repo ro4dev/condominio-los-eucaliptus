@@ -25,6 +25,7 @@ var ASAMBLEAS = [];
 var ASAMBLEA_ASISTENTES = [];
 var ENCUESTAS = [];
 var ENCUESTAS_VOTOS = [];
+var AUDIT_LOG = [];
 
 var loaded = { GASTOS: false };
 
