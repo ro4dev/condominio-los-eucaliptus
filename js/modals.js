@@ -246,6 +246,12 @@ function handleForm(e) {
   if (table === 'flujo' && currentUser && !data.registrado_por) {
     data.registrado_por = currentUser.email;
   }
+  if (table === 'publicaciones' && !isEdit) {
+    data.usuario = currentUser ? currentUser.email : 'anónimo';
+  }
+  if (table === 'publicaciones' && (data.precio === '' || data.precio === undefined || data.precio === null)) {
+    delete data.precio;
+  }
   if (table === 'proveedores' && data.web_instagram && data.web_instagram.indexOf('http') !== 0) {
     data.web_instagram = 'https://' + data.web_instagram;
   }
@@ -474,7 +480,8 @@ function tableToArray(table) {
     asambleas: 'ASAMBLEAS',
     encuestas: 'ENCUESTAS',
     parcelas: 'PARCELAS',
-    propietarios: 'PROPIETARIOS'
+    propietarios: 'PROPIETARIOS',
+    publicaciones: 'PUBLICACIONES'
   };
   return map[table] || null;
 }
@@ -707,6 +714,51 @@ function formReclamos() {
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Describa el problema o sugerencia..." type="textarea" rows="3" required style="width:100%"></md-filled-text-field></div>' +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Guardar</md-filled-button>');
+}
+
+function formPublicaciones(data) {
+  var isEdit = !!data;
+  if (PARCELAS.length === 0) {
+    loadJson('PARCELAS').then(function() { formPublicaciones(data); });
+    return;
+  }
+  var sorted = PARCELAS.slice().sort(function(a, b) {
+    var numA = parseInt((a['numero'] || '').replace(/\D/g, '')) || 0;
+    var numB = parseInt((b['numero'] || '').replace(/\D/g, '')) || 0;
+    return numA - numB;
+  });
+  var parcelas = '<md-select-option value=""><span slot="headline">Sin especificar</span></md-select-option>' + sorted.map(function(p) {
+    var sel = isEdit && data.parcela_id === p.id ? ' selected' : '';
+    return '<md-select-option value="' + p.id + '"' + sel + '><span slot="headline">' + p.numero + '</span></md-select-option>';
+  }).join('');
+  var estados = [
+    { v: 'Disponible', sel: !isEdit || data.estado === 'Disponible' },
+    { v: 'Vendido', sel: isEdit && data.estado === 'Vendido' }
+  ];
+  openModal(isEdit ? 'Editar Publicación' : 'Publicar Venta',
+    '<form id="modalForm" data-table="publicaciones" data-bucket="publicaciones" onsubmit="handleForm(event)">' +
+    (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Mesa de comedor en venta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
+    '</div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-select label="Categoría" name="categoria" required style="width:100%"><md-select-option value="Producto"' + (isEdit && data.categoria === 'Producto' ? ' selected' : '') + '><span slot="headline">Producto</span></md-select-option><md-select-option value="Servicio"' + (isEdit && data.categoria === 'Servicio' ? ' selected' : '') + '><span slot="headline">Servicio</span></md-select-option></md-filled-select></div>' +
+      '<div class="form-group"><md-filled-text-field label="Precio ($)" type="number" name="precio" min="0" placeholder="Ej: 45000" style="width:100%"' + (isEdit && data.precio !== null && data.precio !== undefined ? ' value="' + data.precio + '"' : '') + '></md-filled-text-field></div>' +
+    '</div>' +
+    '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalles del producto o servicio..." type="textarea" rows="3" style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-row">' +
+      '<div class="form-group"><md-filled-select label="Parcela" name="parcela_id" style="width:100%">' + parcelas + '</md-filled-select></div>' +
+      '<div class="form-group"><md-filled-select label="Estado" name="estado" style="width:100%">' + estados.map(function(e) { return '<md-select-option value="' + e.v + '"' + (e.sel ? ' selected' : '') + '><span slot="headline">' + e.v + '</span></md-select-option>'; }).join('') + '</md-filled-select></div>' +
+    '</div>' +
+    '<div class="form-group"><md-filled-text-field label="Contacto" name="contacto" placeholder="Ej: Parcela 12 - llamar por la tarde" style="width:100%"' + (isEdit ? ' value="' + escHtml(data.contacto || '') + '"' : '') + '></md-filled-text-field></div>' +
+    '<div class="form-group"><label>Foto (opcional)</label>' +
+      '<div class="comprobante-row">' +
+        '<input type="file" name="foto" accept="image/*">' +
+        (isEdit && data.foto ? '<a href="' + data.foto + '" target="_blank" title="Ver foto" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>image</md-icon></md-icon-button></a>' : '') +
+      '</div>' +
+    '</div>' +
+  '</form>',
+  '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Publicar') + '</md-filled-button>');
 }
 
 function formProveedores(data) {

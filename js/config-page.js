@@ -413,6 +413,7 @@ var AUDIT_TABLES = [
   { value: 'encuestas', label: 'Encuestas' },
   { value: 'parcelas', label: 'Parcelas' },
   { value: 'propietarios', label: 'Propietarios' },
+  { value: 'publicaciones', label: 'Ventas' },
   { value: 'config', label: 'Configuración' }
 ];
 
