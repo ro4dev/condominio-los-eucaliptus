@@ -399,6 +399,104 @@ async function bulkCreateParcelas() {
   btn.textContent = 'Crear parcelas';
 }
 
+// --- AUDITORÍA DE ACTIVIDAD ---
+var auditFilter = 'todas';
+
+var AUDIT_TABLES = [
+  { value: 'gastos', label: 'Gastos' },
+  { value: 'flujo', label: 'Flujo' },
+  { value: 'noticias', label: 'Noticias' },
+  { value: 'documentos', label: 'Documentos' },
+  { value: 'reclamos', label: 'Reclamos' },
+  { value: 'proveedores', label: 'Proveedores' },
+  { value: 'asambleas', label: 'Asambleas' },
+  { value: 'encuestas', label: 'Encuestas' },
+  { value: 'parcelas', label: 'Parcelas' },
+  { value: 'propietarios', label: 'Propietarios' },
+  { value: 'config', label: 'Configuración' }
+];
+
+function filterAudit(filtro) {
+  auditFilter = filtro;
+  document.querySelectorAll('#auditFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
+  renderAuditLog();
+}
+
+function formatAuditDate(iso) {
+  if (!iso) return '';
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  var dd = String(d.getDate()).padStart(2, '0');
+  var mm = String(d.getMonth() + 1).padStart(2, '0');
+  var hh = String(d.getHours()).padStart(2, '0');
+  var mi = String(d.getMinutes()).padStart(2, '0');
+  return dd + '/' + mm + '/' + d.getFullYear() + ' ' + hh + ':' + mi;
+}
+
+var AUDIT_ACCIONES = { INSERT: 'Creó', UPDATE: 'Actualizó', DELETE: 'Eliminó' };
+
+function showAuditDatos(idx) {
+  var e = window._auditRows[idx];
+  if (!e || !e.datos) return;
+  openModal('Detalle de actividad',
+    '<pre style="font-size:0.8rem;white-space:pre-wrap;word-break:break-word;background:var(--md-sys-color-surface-container-low);padding:0.8rem;border-radius:var(--md-sys-shape-corner-small);max-height:60vh;overflow:auto;margin:0">' + escHtml(JSON.stringify(e.datos, null, 2)) + '</pre>');
+}
+
+async function renderAuditLog() {
+  var wrap = document.getElementById('cfgAuditLog');
+  if (!wrap) return;
+  var chips = '<div class="filter-chips" id="auditFilter">' +
+    '<md-filter-chip label="Todas" selected onclick="filterAudit(\'todas\')"></md-filter-chip>' +
+    AUDIT_TABLES.map(function(t) {
+      return '<md-filter-chip label="' + t.label + '" onclick="filterAudit(\'' + t.value + '\')"></md-filter-chip>';
+    }).join('') +
+    '</div>';
+  wrap.innerHTML = chips + '<div id="auditList" style="margin-top:0.8rem"></div>';
+  var listEl = document.getElementById('auditList');
+
+  var rows;
+  if (DEMO_MODE) {
+    rows = AUDIT_LOG.slice();
+  } else if (supabaseClient) {
+    listEl.innerHTML = '<div style="padding:0.8rem 0;color:var(--text-muted);font-size:0.85rem">Cargando actividad...</div>';
+    var { data, error } = await supabaseClient.from('audit_log').select('*').order('created_at', { ascending: false }).limit(50);
+    if (error) {
+      listEl.innerHTML = emptyState('No se pudo cargar la actividad.');
+      return;
+    }
+    rows = data || [];
+  } else {
+    rows = [];
+  }
+
+  rows = rows.filter(function(e) { return auditFilter === 'todas' || e.tabla === auditFilter; });
+  window._auditRows = rows;
+
+  if (!rows.length) {
+    listEl.innerHTML = emptyState('Sin actividad registrada.');
+    return;
+  }
+
+  listEl.innerHTML = rows.map(function(e, i) {
+    var accion = AUDIT_ACCIONES[e.accion] || e.accion;
+    var idTxt = e.registro_id ? String(e.registro_id).slice(0, 8) : '—';
+    var infoBtn = (e.accion === 'UPDATE' || e.accion === 'DELETE') && e.datos && Object.keys(e.datos).length
+      ? '<md-icon-button title="Ver datos" onclick="showAuditDatos(' + i + ')" style="--md-icon-button-icon-size:20px"><md-icon>info</md-icon></md-icon-button>'
+      : '';
+    return '<div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0;border-bottom:1px solid var(--border-light);font-size:0.85rem">' +
+      '<span style="color:var(--text-muted);white-space:nowrap">' + escHtml(formatAuditDate(e.created_at)) + '</span>' +
+      '<span style="color:var(--text-2)">' + escHtml(e.usuario || 'anónimo') + '</span>' +
+      '<span style="color:var(--text);font-weight:500">' + escHtml(accion) + '</span>' +
+      '<span style="color:var(--text-muted)">en</span>' +
+      '<span style="color:var(--text);font-weight:600">' + escHtml(e.tabla) + '</span>' +
+      '<span style="color:var(--text-muted)">· registro</span>' +
+      '<code style="font-size:0.75rem;color:var(--text-2)">' + escHtml(idTxt) + '</code>' +
+      infoBtn +
+      '</div>';
+  }).join('');
+}
+
 // --- INIT CONFIG TAB ---
 async function renderConfig() {
   showSkeletons('config');
@@ -409,6 +507,7 @@ async function renderConfig() {
   renderCategoriasDocs();
   renderRubrosProveedores();
   renderConceptosFlujo();
+  await renderAuditLog();
   var tabEl = document.getElementById('tab-config');
   if (tabEl) tabEl.setAttribute('aria-busy', 'false');
 }
