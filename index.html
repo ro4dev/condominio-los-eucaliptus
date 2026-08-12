@@ -79,6 +79,7 @@
       <md-primary-tab class="tab-btn" data-tab="proveedores" onclick="switchTab('proveedores')">Proveedores</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="asambleas" onclick="switchTab('asambleas')">Asambleas</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="encuestas" onclick="switchTab('encuestas')">Encuestas</md-primary-tab>
+      <md-primary-tab class="tab-btn" data-tab="publicaciones" onclick="switchTab('publicaciones')">Ventas</md-primary-tab>
       <md-primary-tab class="tab-btn" data-tab="config" id="configTabBtn" onclick="switchTab('config')" style="display:none">Configuración</md-primary-tab>
     </md-tabs>
 
@@ -264,6 +265,25 @@
         <md-filter-chip label="Todas" onclick="filterEncuestas('Todos')"></md-filter-chip>
       </div>
       <div id="encuestasList">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </div>
+
+    <!-- PUBLICACIONES DE VENTA -->
+    <div id="tab-publicaciones" class="tab-content" role="region" aria-label="Ventas">
+      <md-filled-button id="formPublicaciones" onclick="formPublicaciones()"><md-icon slot="icon">add</md-icon>Publicar Venta</md-filled-button>
+      <div class="filter-chips" id="publicacionesCategoriaFilter">
+        <md-filter-chip label="Todas" selected onclick="filterPublicacionesCategoria('todas')"></md-filter-chip>
+        <md-filter-chip label="Productos" onclick="filterPublicacionesCategoria('Producto')"></md-filter-chip>
+        <md-filter-chip label="Servicios" onclick="filterPublicacionesCategoria('Servicio')"></md-filter-chip>
+      </div>
+      <div class="filter-chips" id="publicacionesEstadoFilter">
+        <md-filter-chip label="Disponibles" selected onclick="filterPublicacionesEstado('Disponible')"></md-filter-chip>
+        <md-filter-chip label="Vendidos" onclick="filterPublicacionesEstado('Vendido')"></md-filter-chip>
+      </div>
+      <div class="cards-grid" id="publicacionesGrid">
+        <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
       </div>

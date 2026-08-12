@@ -195,6 +195,15 @@ function morosos(GASTOS, PARCELAS) {
     });
 }
 
+// ── Publicaciones de venta (funciones puras) ──
+function filtrarPublicaciones(PUBLICACIONES, categoria, estado) {
+  return (PUBLICACIONES || []).filter(function(p) {
+    var okCategoria = categoria === 'todas' || p.categoria === categoria;
+    var okEstado = estado === 'todos' || p.estado === estado;
+    return okCategoria && okEstado;
+  });
+}
+
 var _snackbarTimer = null;
 function showSnackbar(message, type) {
   type = type || 'info';

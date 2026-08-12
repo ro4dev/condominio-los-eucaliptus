@@ -30,6 +30,20 @@
 .proveedor-contacto { font: var(--md-sys-typescale-body-medium); color: var(--text-2); }
 .proveedor-contacto div { padding: 0.2rem 0; }
 
+.publicacion-card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
+.publicacion-card.vendido { opacity: 0.65; }
+.publicacion-foto { margin: -1.2rem -1.2rem 0.8rem; border-radius: var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium) 0 0; overflow: hidden; }
+.publicacion-foto img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.publicacion-chip { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; display: inline-block; }
+.publicacion-producto { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+.publicacion-servicio { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.publicacion-disponible { background: var(--color-positive-bg); color: var(--color-positive-text); }
+.publicacion-vendido { background: var(--border); color: var(--text-muted); }
+.publicacion-titulo { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.4rem; color: var(--text); }
+.publicacion-desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.4; margin-bottom: 0.6rem; }
+.publicacion-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.15rem; }
+.publicacion-precio { font-weight: 700; color: var(--md-sys-color-primary); font-size: 1rem; }
+
 .timeline { position: relative; padding-left: 2rem; }
 .timeline::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: var(--border); }
 .timeline-item { position: relative; margin-bottom: 1rem; background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
