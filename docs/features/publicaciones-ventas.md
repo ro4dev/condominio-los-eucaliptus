@@ -44,8 +44,7 @@ RLS: SELECT cualquier autenticado; INSERT cualquier autenticado con `auth.jwt() 
 
 ## 5. Demo mode
 
-- `data/publicaciones.json` con 5 entradas de ejemplo.
-- Fotos: blob URL (igual que el resto del demo).
+- `data/publicaciones.json` con 5 entradas de ejemplo, cada una con foto placeholder en `assets/demo_venta_*.svg` (nuevas subidas en demo generan blob URL).
 - Auditoría: se loguea INSERT/UPDATE/DELETE en `AUDIT_LOG`.
 
 ## 6. Storage

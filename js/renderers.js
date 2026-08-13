@@ -1069,7 +1069,7 @@ function renderPublicaciones() {
     var estadoClass = p.estado === 'Vendido' ? 'publicacion-vendido' : 'publicacion-disponible';
     var categoriaClass = p.categoria === 'Servicio' ? 'publicacion-servicio' : 'publicacion-producto';
     return '<div class="publicacion-card' + (p.estado === 'Vendido' ? ' vendido' : '') + '">' +
-      (p.foto ? '<div class="publicacion-foto"><img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" loading="lazy"></div>' : '') +
+      (p.foto ? '<div class="publicacion-foto"><img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" loading="lazy" onclick="verFotoPublicacion(\'' + p.id + '\')" title="Ver imagen completa" style="cursor:pointer"></div>' : '') +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">' +
         '<div style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap">' +
           '<span class="publicacion-chip ' + categoriaClass + '">' + escHtml(p.categoria) + '</span>' +
@@ -1090,6 +1090,15 @@ function renderPublicaciones() {
   if (!sorted.length) {
     grid.innerHTML = emptyState('No hay publicaciones con estos filtros.');
   }
+}
+
+function verFotoPublicacion(id) {
+  var p = PUBLICACIONES.find(function(x) { return x.id === id; });
+  if (!p || !p.foto) return;
+  openModal(p.titulo,
+    '<div style="display:flex;justify-content:center">' +
+      '<img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" style="max-width:100%;max-height:70vh;border-radius:var(--md-sys-shape-corner-medium);object-fit:contain">' +
+    '</div>');
 }
 
 function editPublicacion(id) {

@@ -8,7 +8,7 @@
     "contacto": "Parcela 12 - llamar por la tarde",
     "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
     "estado": "Disponible",
-    "foto": "",
+    "foto": "assets/demo_venta_mesa.svg",
     "usuario": "vecino1@eucaliptus.cl",
     "created_at": "2026-08-11T10:30:00.000Z"
   },
@@ -21,7 +21,7 @@
     "contacto": "Parcela 7 - martes y jueves",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
     "estado": "Disponible",
-    "foto": "",
+    "foto": "assets/demo_venta_clases_ingles.svg",
     "usuario": "vecino2@eucaliptus.cl",
     "created_at": "2026-08-10T16:45:00.000Z"
   },
@@ -34,7 +34,7 @@
     "contacto": "Parcela 5 - WhatsApp",
     "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
     "estado": "Vendido",
-    "foto": "",
+    "foto": "assets/demo_venta_bicicleta.svg",
     "usuario": "vecino3@eucaliptus.cl",
     "created_at": "2026-08-08T09:20:00.000Z"
   },
@@ -47,7 +47,7 @@
     "contacto": "Parcela 3 - mañana",
     "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
     "estado": "Disponible",
-    "foto": "",
+    "foto": "assets/demo_venta_jardinero.svg",
     "usuario": "vecino4@eucaliptus.cl",
     "created_at": "2026-08-07T14:10:00.000Z"
   },
@@ -60,7 +60,7 @@
     "contacto": "Parcela 9 - noche",
     "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
     "estado": "Disponible",
-    "foto": "",
+    "foto": "assets/demo_venta_sillon.svg",
     "usuario": "vecino5@eucaliptus.cl",
     "created_at": "2026-08-06T18:35:00.000Z"
   }

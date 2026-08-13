@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 12/08/2026 - Demo Ventas con fotos de ejemplo
+- **Feat**: Las 5 publicaciones demo en `data/publicaciones.json` ahora llevan foto con placeholders locales (`assets/demo_venta_mesa.svg`, `demo_venta_clases_ingles.svg`, `demo_venta_bicicleta.svg`, `demo_venta_jardinero.svg`, `demo_venta_sillon.svg`)
+- **Feat**: La foto de cada card de Ventas ahora es clicable y abre un popup (`verFotoPublicacion`) con la imagen completa — reutiliza `openModal`, título de la publicación como encabezado
+
 ### 11/08/2026 - Pestaña Ventas: publicaciones de productos/servicios
 - **Feat**: Nueva pestaña **Ventas** (`tab-publicaciones`, tab `publicaciones`) para que los vecinos publiquen ventas de productos y servicios dentro del condominio (`index.html`, `data.js`)
 - **Feat**: Migración `004_publicaciones.sql` con tabla `publicaciones` (titulo, descripcion, categoria Producto/Servicio, precio, contacto, parcela_id, estado Disponible/Vendido, foto, usuario, created_at) y RLS: SELECT cualquier autenticado, INSERT cualquier autenticado (autor forzado por email), **UPDATE/DELETE el autor o admin**
