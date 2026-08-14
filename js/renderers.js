@@ -1085,8 +1085,8 @@ function renderPublicaciones() {
       (p.descripcion ? '<div class="publicacion-desc">' + nl2br(p.descripcion) + '</div>' : '') +
       '<div class="publicacion-meta">' +
         (p.precio !== null && p.precio !== undefined && p.precio !== '' ? '<span class="publicacion-precio">$' + formatMoney(p.precio) + '</span>' : '') +
-        (p.parcela_id ? '<span>📍 ' + escHtml(parcelName(p.parcela_id)) + '</span>' : '') +
-        (p.contacto ? '<span>📞 ' + escHtml(p.contacto) + '</span>' : '') +
+        (p.parcela_id ? '<span class="publicacion-meta-row"><md-icon>location_on</md-icon>' + escHtml(parcelName(p.parcela_id)) + '</span>' : '') +
+        (p.contacto ? '<span class="publicacion-meta-row"><md-icon>phone</md-icon>' + escHtml(p.contacto) + '</span>' : '') +
       '</div>' +
       '</div>';
   }).join('');

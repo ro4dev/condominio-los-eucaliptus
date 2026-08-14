@@ -45,6 +45,8 @@
 .publicacion-desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.4; margin-bottom: 0.6rem; }
 .publicacion-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.15rem; }
 .publicacion-precio { font-weight: 700; color: var(--md-sys-color-primary); font-size: 1rem; }
+.publicacion-meta-row { display: flex; align-items: center; gap: 0.3rem; }
+.publicacion-meta-row md-icon { font-size: 1rem; width: 1rem; height: 1rem; color: var(--text-muted); flex-shrink: 0; }
 
 .audit-timeline { position: relative; margin-top: 0.8rem; }
 .audit-timeline::before { content: ''; position: absolute; left: 10px; top: 10px; bottom: 10px; width: 2px; background: var(--border); }
