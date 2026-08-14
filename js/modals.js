@@ -738,9 +738,7 @@ function formPublicaciones(data) {
   openModal(isEdit ? 'Editar Publicación' : 'Publicar Venta',
     '<form id="modalForm" data-table="publicaciones" data-bucket="publicaciones" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
-    '<div class="form-row">' +
-      '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Mesa de comedor en venta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
-    '</div>' +
+    '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Mesa de comedor en venta" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-select label="Categoría" name="categoria" required style="width:100%"><md-select-option value="Producto"' + (isEdit && data.categoria === 'Producto' ? ' selected' : '') + '><span slot="headline">Producto</span></md-select-option><md-select-option value="Servicio"' + (isEdit && data.categoria === 'Servicio' ? ' selected' : '') + '><span slot="headline">Servicio</span></md-select-option></md-filled-select></div>' +
       '<div class="form-group"><md-filled-text-field label="Precio ($)" type="number" name="precio" min="0" placeholder="Ej: 45000" style="width:100%"' + (isEdit && data.precio !== null && data.precio !== undefined ? ' value="' + data.precio + '"' : '') + '></md-filled-text-field></div>' +
