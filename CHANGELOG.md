@@ -64,7 +64,7 @@
 - **Docs**: `test.html` con asserts de `periodosFinanzas` y `saldoPeriodo`
 
 ### 09/08/2026 - Cuotas y pagos: modelo de cobranza completo
-- **Feat**: Nueva tabla `pagos` (`supabase/migrations/003_pagos.sql`): `gasto_id`, `parcela_id`, `periodo` (denormalizado), `monto`, `fecha`, `comprobante` + RLS (SELECT autenticado, INSERT/UPDATE/DELETE admin) y migración idempotente que convierte los `gastos` con `pagado='Sí'` en cuota + 1 pago
+- **Feat**: Nueva tabla `pagos` (`supabase/migrations/005_pagos.sql`): `gasto_id`, `parcela_id`, `periodo` (denormalizado), `monto`, `fecha`, `comprobante` + RLS (SELECT autenticado, INSERT/UPDATE/DELETE admin) y migración idempotente que convierte los `gastos` con `pagado='Sí'` en cuota + 1 pago
 - **Feat**: Motor de pagos en `utils.js` (funciones puras): `getPagos`, `pagosDeGasto`, `sumPagosGasto`, `pagosDeParcela`, `pagoLegado`, `recaudadoGasto` y nueva semántica de `isPagado` (pagos registrados ≥ monto, con fallback a `pagado='Sí'` si no hay pagos). `recaudadoPorPeriodo` suma por `gasto_id` (funciona también en la vista de propietario)
 - **Feat**: Saldo a favor: `deudaParcela` = `max(0, Σcuotas − Σpagos)` y `deudaPorPeriodo` absorbe el excedente de los periodos más recientes hacia atrás
 - **Feat**: Tabla "Cuotas por parcela" con columna **Pagado** (`sumPagosGasto`), botón `verPagos` (modal con listado de pagos, comprobante y eliminar admin) y chip de estado en 3 niveles: **Pagado / Parcial / Pendiente** (`estadoChip`)

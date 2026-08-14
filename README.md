@@ -66,9 +66,9 @@ condominio-los-eucaliptus/
 │   └── migrations/                # Migraciones SQL
 │       ├── 001_tables.sql
 │       ├── 002_rls_policies.sql
-│       ├── 003_pagos.sql
 │       ├── 003_audit_log.sql
-│       └── 004_publicaciones.sql
+│       ├── 004_publicaciones.sql
+│       └── 005_pagos.sql
 └── test.html                      # Tests unitarios
 ```
 

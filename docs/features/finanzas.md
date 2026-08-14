@@ -33,7 +33,7 @@ CREATE TABLE pagos (
 );
 ```
 
-Migración SQL: `supabase/migrations/003_pagos.sql` (incluye backfill idempotente: los `gastos` con `pagado='Sí'` y sin pagos se convierten en cuota + 1 pago). Demo: `data/pagos.json`.
+Migración SQL: `supabase/migrations/005_pagos.sql` (incluye backfill idempotente: los `gastos` con `pagado='Sí'` y sin pagos se convierten en cuota + 1 pago). Demo: `data/pagos.json`.
 
 ### `gastos.pagado` (legado)
 
@@ -228,6 +228,6 @@ finanzas: function() {
 
 ## 12. Migraciones
 
-- `supabase/migrations/003_pagos.sql`: tabla `pagos` + índices + RLS + backfill idempotente.
+- `supabase/migrations/005_pagos.sql`: tabla `pagos` + índices + RLS + backfill idempotente.
 - Demo: `data/pagos.json` (pagos por cuota) y `data/config.json` (campo `periodos`).
 - No se modifican las migraciones existentes.
