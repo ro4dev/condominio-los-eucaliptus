@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 13/08/2026 - Placeholder "Sin imagen" en Ventas
+- **Feat**: Las publicaciones sin foto ahora muestran un placeholder (ícono `image_not_supported` + "Sin imagen") al mismo alto de 180px, manteniendo la grilla alineada y uniforme (`js/renderers.js`, `css/sections.css`)
+- **Feat**: 2 publicaciones demo sin foto agregadas a `data/publicaciones.json` (Reparaciones de gasfitería y Maceteros de greda) para probar el placeholder
+- **Docs**: decisión documentada en `docs/features/publicaciones-ventas.md` junto con la alternativa descartada (nunca mostrar foto en card, verla solo por ícono)
+
 ### 12/08/2026 - Demo Ventas con fotos de ejemplo
 - **Feat**: Las 5 publicaciones demo en `data/publicaciones.json` ahora llevan foto con placeholders locales (`assets/demo_venta_mesa.svg`, `demo_venta_clases_ingles.svg`, `demo_venta_bicicleta.svg`, `demo_venta_jardinero.svg`, `demo_venta_sillon.svg`)
 - **Feat**: La foto de cada card de Ventas ahora es clicable y abre un popup (`verFotoPublicacion`) con la imagen completa — reutiliza `openModal`, título de la publicación como encabezado

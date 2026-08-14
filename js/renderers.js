@@ -1069,7 +1069,11 @@ function renderPublicaciones() {
     var estadoClass = p.estado === 'Vendido' ? 'publicacion-vendido' : 'publicacion-disponible';
     var categoriaClass = p.categoria === 'Servicio' ? 'publicacion-servicio' : 'publicacion-producto';
     return '<div class="publicacion-card' + (p.estado === 'Vendido' ? ' vendido' : '') + '">' +
-      (p.foto ? '<div class="publicacion-foto"><img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" loading="lazy" onclick="verFotoPublicacion(\'' + p.id + '\')" title="Ver imagen completa" style="cursor:pointer"></div>' : '') +
+      '<div class="publicacion-foto">' +
+        (p.foto
+          ? '<img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" loading="lazy" onclick="verFotoPublicacion(\'' + p.id + '\')" title="Ver imagen completa" style="cursor:pointer">'
+          : '<div class="publicacion-foto-placeholder"><md-icon>image_not_supported</md-icon><span>Sin imagen</span></div>') +
+      '</div>' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">' +
         '<div style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap">' +
           '<span class="publicacion-chip ' + categoriaClass + '">' + escHtml(p.categoria) + '</span>' +

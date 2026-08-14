@@ -1,5 +1,29 @@
 [
   {
+    "id": "1e8a7c2d-3f4b-4a5e-9d6c-8b7a2f4e9d3c",
+    "titulo": "Reparaciones de gasfitería",
+    "descripcion": "Reparaciones menores de gasfitería: llaves, cañerías y sanitarios. Presupuesto sin costo.",
+    "categoria": "Servicio",
+    "precio": "25000",
+    "contacto": "Parcela 6 - WhatsApp",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "estado": "Disponible",
+    "usuario": "vecino6@eucaliptus.cl",
+    "created_at": "2026-08-13T09:00:00.000Z"
+  },
+  {
+    "id": "5c2e9b7a-1f3d-4a8b-9e4c-7d6a3b2f8c5e",
+    "titulo": "Maceteros de greda (varios tamaños)",
+    "descripcion": "Lote de maceteros de greda en buen estado. Se venden por unidad o por lote completo.",
+    "categoria": "Producto",
+    "precio": "8000",
+    "contacto": "Parcela 5 - llamar al atardecer",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "estado": "Disponible",
+    "usuario": "vecino3@eucaliptus.cl",
+    "created_at": "2026-08-12T12:00:00.000Z"
+  },
+  {
     "id": "8f0a3d4b-9c6e-4f2a-9b3e-1d2c4f6a8b0c",
     "titulo": "Mesa de comedor de madera",
     "descripcion": "Mesa de 6 personas, madera de pino, buen estado. Se entrega en la parcela.",

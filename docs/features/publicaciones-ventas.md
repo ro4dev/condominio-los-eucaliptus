@@ -11,9 +11,13 @@ Sección para que los vecinos publiquen ventas de productos o servicios dentro d
 - **Pestaña propia "Ventas"** (Opción C): reutiliza el patrón de cards + chips + modal, con schema y contenedor propios.
 - **Quién publica**: cualquier usuario autenticado (como Comentarios).
 - **Edición/eliminación**: **el autor o admin** (columna `usuario` = email del autor; RLS con `auth.jwt() ->> 'email'`).
-- **Foto**: opcional, subida a Supabase Storage bucket `publicaciones` (blob URL en demo).
+- **Foto**: opcional, subida a Supabase Storage bucket `publicaciones` (blob URL en demo). **Cuando la publicación no tiene foto, la card muestra un placeholder** (fondo `--md-sys-color-surface-container-highest` + ícono `image_not_supported` + texto "Sin imagen") al mismo alto de 180px, para mantener la grilla alineada y uniforme.
 - **Estado**: Disponible / Vendido, con chips de filtro.
 - **Contacto**: campo libre del publicador (parcela + forma de contacto).
+
+### Alternativas evaluadas (no usadas)
+
+- **Ocultar la foto de todas las cards y verla solo con un ícono**: se descartó porque en un módulo de ventas la imagen es lo que más atrae (patrón de MercadoLibre/Facebook Marketplace) y las cards quedarían sin jerarquía visual.
 
 ## 3. Schema SQL (migración 004_publicaciones.sql)
 

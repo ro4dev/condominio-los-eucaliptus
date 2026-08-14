@@ -34,6 +34,8 @@
 .publicacion-card.vendido { opacity: 0.65; }
 .publicacion-foto { margin: -1.2rem -1.2rem 0.8rem; border-radius: var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium) 0 0; overflow: hidden; }
 .publicacion-foto img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.publicacion-foto-placeholder { width: 100%; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface-variant); font-size: 0.8rem; }
+.publicacion-foto-placeholder md-icon { font-size: 2.4rem; width: 2.4rem; height: 2.4rem; opacity: 0.6; }
 .publicacion-chip { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; display: inline-block; }
 .publicacion-producto { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
 .publicacion-servicio { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
