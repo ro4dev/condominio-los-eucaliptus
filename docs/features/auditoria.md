@@ -99,11 +99,16 @@ Card nueva al final de `tab-config` (solo admin, como el resto de la pestaña):
 ```
 
 `renderAuditLog()`:
-- Carga `audit_log` (prod) o usa `AUDIT_LOG` (demo), ordenado por `created_at` desc, últimos 50.
-- Filtro por tabla (chips o select): Todas / gastos / flujo / noticias / documentos / reclamos / proveedores / asambleas / encuestas / parcelas.
-- Cada fila: `<fecha> · <usuario> · <ACCION> en <tabla> · registro <id>`.
-- En UPDATE/DELETE, un ícono `info` abre modal con el `datos` (JSON formateado, sin PII — ya sanitizado).
+- Carga `audit_log` (prod) o usa `AUDIT_LOG` (demo), ordenado por `created_at` desc.
+- **Timeline con infinite scroll**: cada actividad es un item con ícono de acción (creó/actualizó/eliminó), usuario, tabla y fecha. Al hacer scroll hasta el final se cargan más registros antiguos en chunks de 20 (`IntersectionObserver` sobre un sentinel `#auditSentinel`); en prod usa `range()` de Supabase.
+- Filtro por tabla (chips): Todas / gastos / flujo / noticias / documentos / reclamos / proveedores / asambleas / encuestas / parcelas / ventas / configuración. En prod el filtro se aplica server-side (`.eq('tabla', ...)`) para que la paginación sea correcta.
+- Cada item: `<usuario> · <ACCION> · <tabla>` + `<fecha> · registro <id>`.
+- El ícono `info` (presente en todas las acciones con `datos` no vacío) abre modal con el `datos` (JSON formateado, sin PII — ya sanitizado).
 - Empty state: `emptyState('Sin actividad registrada.')`.
+
+### Alternativas evaluadas (no usadas)
+
+- **Tabla con paginación**: se descartó porque en mobile las tablas desbordan o requieren scroll horizontal, y el timeline se ve igual de bien en desktop. Si el log crece mucho en el futuro, la paginación con `range()` de Supabase sigue siendo viable.
 
 ## 5. Demo mode
 
@@ -130,4 +135,4 @@ assert(s.rut === '[oculto]' && s.email === '[oculto]' && s.nombre === 'A', 'sani
 ## 8. Decisiones abiertas
 
 - **Votos de encuestas**: **resueltos** — no se loguean. Son acciones masivas y el voto es anónimo respecto a la selección (una parcela = un voto, sin registro del contenido en el log). Si algún día se requiere comprobación de voto, se audita en la propia tabla `encuestas_votos` con RLS, no en `audit_log`.
-- **¿Mostrar `datos` completos en la UI de actividad o solo un resumen?** Recomendado: solo el `datos` del UPDATE/DELETE tras el ícono `info` (el INSERT ya está en la tabla de origen).
+- **¿Mostrar `datos` completos en la UI de actividad o solo un resumen?** **Resuelto** — el ícono `info` muestra los `datos` de **cualquier** acción (INSERT incluido).

@@ -444,58 +444,113 @@ function showAuditDatos(idx) {
     '<pre style="font-size:0.8rem;white-space:pre-wrap;word-break:break-word;background:var(--md-sys-color-surface-container-low);padding:0.8rem;border-radius:var(--md-sys-shape-corner-small);max-height:60vh;overflow:auto;margin:0">' + escHtml(JSON.stringify(e.datos, null, 2)) + '</pre>');
 }
 
+var AUDIT_CHUNK = 20;
+var auditState = { rows: [], offset: 0, done: false, loading: false };
+var auditObserver = null;
+
+function auditAccionMeta(accion) {
+  if (accion === 'INSERT') return { icon: 'add', cls: 'insert', label: 'Creó' };
+  if (accion === 'DELETE') return { icon: 'delete', cls: 'delete', label: 'Eliminó' };
+  return { icon: 'edit', cls: 'update', label: 'Actualizó' };
+}
+
+function auditTablaLabel(tabla) {
+  var t = AUDIT_TABLES.find(function(x) { return x.value === tabla; });
+  return t ? t.label : tabla;
+}
+
+function auditItemHtml(e, i) {
+  var meta = auditAccionMeta(e.accion);
+  var accion = AUDIT_ACCIONES[e.accion] || e.accion;
+  var idTxt = e.registro_id ? String(e.registro_id).slice(0, 8) : '—';
+  var infoBtn = e.datos && Object.keys(e.datos).length
+    ? '<md-icon-button title="Ver datos" onclick="showAuditDatos(' + i + ')" style="--md-icon-button-icon-size:20px"><md-icon>info</md-icon></md-icon-button>'
+    : '';
+  return '<div class="audit-item">' +
+    '<span class="audit-dot ' + meta.cls + '"><md-icon>' + meta.icon + '</md-icon></span>' +
+    '<div class="audit-content">' +
+      '<div class="audit-line1">' +
+        '<span class="audit-user">' + escHtml(e.usuario || 'anónimo') + '</span>' +
+        '<span class="audit-accion ' + meta.cls + '">' + escHtml(accion) + '</span>' +
+        '<span class="audit-tabla">' + escHtml(auditTablaLabel(e.tabla)) + '</span>' +
+      '</div>' +
+      '<div class="audit-meta">' + escHtml(formatAuditDate(e.created_at)) + ' · registro <code>' + escHtml(idTxt) + '</code></div>' +
+    '</div>' +
+    (infoBtn ? '<span class="audit-info">' + infoBtn + '</span>' : '') +
+  '</div>';
+}
+
+function setupAuditObserver() {
+  if (auditObserver) auditObserver.disconnect();
+  auditObserver = new IntersectionObserver(function(entries) {
+    if (entries[0] && entries[0].isIntersecting) loadAuditChunk();
+  }, { rootMargin: '200px 0px' });
+  var sentinel = document.getElementById('auditSentinel');
+  if (sentinel) auditObserver.observe(sentinel);
+}
+
+async function loadAuditChunk() {
+  if (auditState.done || auditState.loading) return;
+  auditState.loading = true;
+  var listEl = document.getElementById('auditList');
+  var sentinel = document.getElementById('auditSentinel');
+  if (!listEl) { auditState.loading = false; return; }
+
+  var wasEmpty = !auditState.rows.length;
+  if (wasEmpty) listEl.innerHTML = '<div style="padding:0.8rem 0;color:var(--text-muted);font-size:0.85rem">Cargando actividad...</div>';
+
+  var chunk;
+  if (DEMO_MODE) {
+    var all = AUDIT_LOG.filter(function(e) { return auditFilter === 'todas' || e.tabla === auditFilter; });
+    chunk = all.slice(auditState.offset, auditState.offset + AUDIT_CHUNK);
+    auditState.done = auditState.offset + chunk.length >= all.length;
+  } else if (supabaseClient) {
+    var q = supabaseClient.from('audit_log').select('*').order('created_at', { ascending: false });
+    if (auditFilter !== 'todas') q = q.eq('tabla', auditFilter);
+    var res = await q.range(auditState.offset, auditState.offset + AUDIT_CHUNK - 1);
+    if (res.error) {
+      listEl.innerHTML = emptyState('No se pudo cargar la actividad.');
+      if (sentinel) sentinel.innerHTML = '';
+      auditState.done = true;
+      auditState.loading = false;
+      return;
+    }
+    chunk = res.data || [];
+    auditState.done = chunk.length < AUDIT_CHUNK;
+  } else {
+    chunk = [];
+    auditState.done = true;
+  }
+
+  auditState.loading = false;
+  auditState.rows = auditState.rows.concat(chunk);
+  auditState.offset += chunk.length;
+  window._auditRows = auditState.rows;
+
+  if (!auditState.rows.length) {
+    listEl.innerHTML = emptyState('Sin actividad registrada.');
+    if (sentinel) sentinel.innerHTML = '';
+    return;
+  }
+  listEl.innerHTML = auditState.rows.map(function(e, i) { return auditItemHtml(e, i); }).join('');
+  if (auditState.done && sentinel) sentinel.innerHTML = '';
+}
+
 async function renderAuditLog() {
   var wrap = document.getElementById('cfgAuditLog');
   if (!wrap) return;
   var chips = '<div class="filter-chips" id="auditFilter">' +
-    '<md-filter-chip label="Todas" selected onclick="filterAudit(\'todas\')"></md-filter-chip>' +
+    '<md-filter-chip label="Todas"' + (auditFilter === 'todas' ? ' selected' : '') + ' onclick="filterAudit(\'todas\')"></md-filter-chip>' +
     AUDIT_TABLES.map(function(t) {
-      return '<md-filter-chip label="' + t.label + '" onclick="filterAudit(\'' + t.value + '\')"></md-filter-chip>';
+      return '<md-filter-chip label="' + t.label + '"' + (auditFilter === t.value ? ' selected' : '') + ' onclick="filterAudit(\'' + t.value + '\')"></md-filter-chip>';
     }).join('') +
     '</div>';
-  wrap.innerHTML = chips + '<div id="auditList" style="margin-top:0.8rem"></div>';
-  var listEl = document.getElementById('auditList');
-
-  var rows;
-  if (DEMO_MODE) {
-    rows = AUDIT_LOG.slice();
-  } else if (supabaseClient) {
-    listEl.innerHTML = '<div style="padding:0.8rem 0;color:var(--text-muted);font-size:0.85rem">Cargando actividad...</div>';
-    var { data, error } = await supabaseClient.from('audit_log').select('*').order('created_at', { ascending: false }).limit(50);
-    if (error) {
-      listEl.innerHTML = emptyState('No se pudo cargar la actividad.');
-      return;
-    }
-    rows = data || [];
-  } else {
-    rows = [];
-  }
-
-  rows = rows.filter(function(e) { return auditFilter === 'todas' || e.tabla === auditFilter; });
-  window._auditRows = rows;
-
-  if (!rows.length) {
-    listEl.innerHTML = emptyState('Sin actividad registrada.');
-    return;
-  }
-
-  listEl.innerHTML = rows.map(function(e, i) {
-    var accion = AUDIT_ACCIONES[e.accion] || e.accion;
-    var idTxt = e.registro_id ? String(e.registro_id).slice(0, 8) : '—';
-    var infoBtn = (e.accion === 'UPDATE' || e.accion === 'DELETE') && e.datos && Object.keys(e.datos).length
-      ? '<md-icon-button title="Ver datos" onclick="showAuditDatos(' + i + ')" style="--md-icon-button-icon-size:20px"><md-icon>info</md-icon></md-icon-button>'
-      : '';
-    return '<div style="display:flex;align-items:center;gap:0.4rem;padding:0.4rem 0;border-bottom:1px solid var(--border-light);font-size:0.85rem">' +
-      '<span style="color:var(--text-muted);white-space:nowrap">' + escHtml(formatAuditDate(e.created_at)) + '</span>' +
-      '<span style="color:var(--text-2)">' + escHtml(e.usuario || 'anónimo') + '</span>' +
-      '<span style="color:var(--text);font-weight:500">' + escHtml(accion) + '</span>' +
-      '<span style="color:var(--text-muted)">en</span>' +
-      '<span style="color:var(--text);font-weight:600">' + escHtml(e.tabla) + '</span>' +
-      '<span style="color:var(--text-muted)">· registro</span>' +
-      '<code style="font-size:0.75rem;color:var(--text-2)">' + escHtml(idTxt) + '</code>' +
-      infoBtn +
-      '</div>';
-  }).join('');
+  wrap.innerHTML = chips +
+    '<div class="audit-timeline" id="auditList"></div>' +
+    '<div id="auditSentinel"></div>';
+  auditState = { rows: [], offset: 0, done: false, loading: false };
+  setupAuditObserver();
+  await loadAuditChunk();
 }
 
 // --- INIT CONFIG TAB ---

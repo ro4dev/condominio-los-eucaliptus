@@ -94,5 +94,205 @@
     "datos": { "nombre_completo": "Jardinería Verde", "rubro": "Jardinería", "web_instagram": "https://instagram.com/jardverde" },
     "usuario": "admin@eucaliptus.cl",
     "created_at": "2026-08-03T09:25:00.000Z"
+  },
+  {
+    "tabla": "gastos",
+    "accion": "INSERT",
+    "registro_id": "e1f2a3b4-5c6d-4e7f-8a9b-0c1d2e3f4a5b",
+    "datos": { "parcela_id": "p3", "periodo": "2026-08", "monto": 50000, "pagado": "No", "concepto": "Cuota común" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-08-02T14:40:00.000Z"
+  },
+  {
+    "tabla": "flujo",
+    "accion": "INSERT",
+    "registro_id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+    "datos": { "tipo": "Ingreso", "concepto": "Arriendo quincho", "fecha": "2026-08-01", "monto": 25000, "descripcion": "Arriendo fin de semana" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-08-02T11:15:00.000Z"
+  },
+  {
+    "tabla": "noticias",
+    "accion": "UPDATE",
+    "registro_id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+    "datos": { "titulo": "Corte de agua programado", "fecha_hasta": "2026-08-02", "descripcion": "[oculto]" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-08-01T18:05:00.000Z"
+  },
+  {
+    "tabla": "documentos",
+    "accion": "INSERT",
+    "registro_id": "c4d5e6f7-8a9b-4c0d-1e2f-3a4b5c6d7e8f",
+    "datos": { "nombre": "Presupuesto 2027", "categoria": "Planos" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-08-01T10:30:00.000Z"
+  },
+  {
+    "tabla": "reclamos",
+    "accion": "UPDATE",
+    "registro_id": "8d7c6b5a-4f3e-2d1c-0b9a-8f7e6d5c4b3a",
+    "datos": { "tipo": "Reclamo", "descripcion": "Ruidos molestos en parcela 8", "estado": "Resuelto" },
+    "usuario": "vecino@eucaliptus.cl",
+    "created_at": "2026-07-31T20:50:00.000Z"
+  },
+  {
+    "tabla": "proveedores",
+    "accion": "INSERT",
+    "registro_id": "d5e6f7a8-9b0c-4d1e-2f3a-4b5c6d7e8f9a",
+    "datos": { "rubro": "Electricidad", "nombre": "ElectroParque" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-31T09:45:00.000Z"
+  },
+  {
+    "tabla": "asambleas",
+    "accion": "UPDATE",
+    "registro_id": "5e4f3a2b-1c0d-9e8f-7a6b-5c4d3e2f1a0b",
+    "datos": { "fecha": "2026-08-22", "tipo": "Ordinaria", "temario": "Presupuesto 2027", "acuerdos": "Aprobado" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-30T16:20:00.000Z"
+  },
+  {
+    "tabla": "encuestas",
+    "accion": "DELETE",
+    "registro_id": "3d4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f8a",
+    "datos": { "titulo": "Instalación de cámaras (borrador)", "descripcion": "[oculto]", "quorum": 30 },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-30T12:10:00.000Z"
+  },
+  {
+    "tabla": "parcelas",
+    "accion": "UPDATE",
+    "registro_id": "6b5a4c3d-2e1f-0a9b-8c7d-6e5f4a3b2c1d",
+    "datos": { "numero": "Terreno 41", "metros": 0, "estado": "Vendido" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-29T15:35:00.000Z"
+  },
+  {
+    "tabla": "propietarios",
+    "accion": "UPDATE",
+    "registro_id": "9f8e7d6c-5b4a-3c2d-1e0f-9a8b7c6d5e4f",
+    "datos": { "nombre_completo": "María López", "rut": "[oculto]", "telefono": "[oculto]", "tipo": "Arrendatario" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-29T09:00:00.000Z"
+  },
+  {
+    "tabla": "publicaciones",
+    "accion": "UPDATE",
+    "registro_id": "8f0a3d4b-9c6e-4f2a-9b3e-1d2c4f6a8b0c",
+    "datos": { "titulo": "Mesa de comedor de madera", "precio": 40000, "estado": "Vendido" },
+    "usuario": "vecino1@eucaliptus.cl",
+    "created_at": "2026-07-28T19:30:00.000Z"
+  },
+  {
+    "tabla": "config",
+    "accion": "UPDATE",
+    "registro_id": "montos",
+    "datos": { "key": "montos", "value": { "gasto_comun_base": 48000, "fondo_reserva": 15000 } },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-28T10:25:00.000Z"
+  },
+  {
+    "tabla": "gastos",
+    "accion": "DELETE",
+    "registro_id": "f1e2d3c4-5b6a-4c7d-8e9f-0a1b2c3d4e5f",
+    "datos": { "parcela_id": "p9", "periodo": "2026-07", "monto": 50000, "pagado": "No", "concepto": "Cuota común (duplicado)" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-27T17:55:00.000Z"
+  },
+  {
+    "tabla": "flujo",
+    "accion": "UPDATE",
+    "registro_id": "a1b2c3d4-5e6f-4a7b-8c9d-0e1f2a3b4c5d",
+    "datos": { "tipo": "Egreso", "concepto": "Mantenciones", "monto": 120000 },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-26T13:40:00.000Z"
+  },
+  {
+    "tabla": "noticias",
+    "accion": "DELETE",
+    "registro_id": "9a8b7c6d-5e4f-3a2b-1c0d-9e8f7a6b5c4d",
+    "datos": { "titulo": "Aviso antiguo (borrador)", "fecha_hasta": "2026-06-30" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-25T15:10:00.000Z"
+  },
+  {
+    "tabla": "documentos",
+    "accion": "UPDATE",
+    "registro_id": "c4d5e6f7-8a9b-4c0d-1e2f-3a4b5c6d7e8f",
+    "datos": { "nombre": "Presupuesto 2027 v2", "categoria": "Actas" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-24T11:00:00.000Z"
+  },
+  {
+    "tabla": "reclamos",
+    "accion": "INSERT",
+    "registro_id": "7e6f5a4b-3c2d-4e1f-0a9b-8c7d6e5f4a3b",
+    "datos": { "tipo": "Sugerencia", "descripcion": "Mejorar iluminación del portón", "parcela_id": "p5" },
+    "usuario": "vecino2@eucaliptus.cl",
+    "created_at": "2026-07-23T21:20:00.000Z"
+  },
+  {
+    "tabla": "proveedores",
+    "accion": "DELETE",
+    "registro_id": "6d5e4f3a-2b1c-4d0e-9f8a-7b6c5d4e3f2a",
+    "datos": { "rubro": "Pintura", "nombre": "Pinturas Rápidas (retirado)" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-22T10:45:00.000Z"
+  },
+  {
+    "tabla": "asambleas",
+    "accion": "INSERT",
+    "registro_id": "5c4d3e2f-1a0b-4c9d-8e7f-6a5b4c3d2e1f",
+    "datos": { "fecha": "2026-09-05", "tipo": "Extraordinaria", "temario": "Reglamento de piscina", "acuerdos": "" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-21T14:30:00.000Z"
+  },
+  {
+    "tabla": "encuestas",
+    "accion": "INSERT",
+    "registro_id": "4b3c2d1e-0f9a-4b8c-7d6e-5f4a3b2c1d0e",
+    "datos": { "titulo": "Horario de piscina", "descripcion": "¿Qué horario prefieres?", "quorum": 25 },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-20T09:50:00.000Z"
+  },
+  {
+    "tabla": "parcelas",
+    "accion": "INSERT",
+    "registro_id": "3a2b1c0d-9e8f-4a7b-6c5d-4e3f2a1b0c9d",
+    "datos": { "numero": "Terreno 42", "metros": 0, "estado": "Sin asignar" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-19T16:15:00.000Z"
+  },
+  {
+    "tabla": "propietarios",
+    "accion": "INSERT",
+    "registro_id": "2f1e0d9c-8b7a-4c6d-5e4f-3a2b1c0d9e8f",
+    "datos": { "nombre_completo": "Juan Pérez", "rut": "[oculto]", "email": "[oculto]", "telefono": "[oculto]", "parcela_id": "p8", "tipo": "Propietario" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-18T12:05:00.000Z"
+  },
+  {
+    "tabla": "publicaciones",
+    "accion": "INSERT",
+    "registro_id": "1e0f9a8b-7c6d-4e5f-3a2b-1c0d9e8f7a6b",
+    "datos": { "titulo": "Horno eléctrico", "categoria": "Producto", "precio": 35000, "estado": "Disponible" },
+    "usuario": "vecino4@eucaliptus.cl",
+    "created_at": "2026-07-17T18:35:00.000Z"
+  },
+  {
+    "tabla": "gastos",
+    "accion": "UPDATE",
+    "registro_id": "e1f2a3b4-5c6d-4e7f-8a9b-0c1d2e3f4a5b",
+    "datos": { "parcela_id": "p3", "periodo": "2026-08", "monto": 50000, "pagado": "Sí", "concepto": "Cuota común" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-16T08:40:00.000Z"
+  },
+  {
+    "tabla": "flujo",
+    "accion": "INSERT",
+    "registro_id": "9f8e7d6c-5b4a-4c3d-2e1f-0a9b8c7d6e5f",
+    "datos": { "tipo": "Egreso", "concepto": "Jardinería", "fecha": "2026-07-15", "monto": 90000, "descripcion": "Mantencion mensual" },
+    "usuario": "admin@eucaliptus.cl",
+    "created_at": "2026-07-15T13:15:00.000Z"
   }
 ]

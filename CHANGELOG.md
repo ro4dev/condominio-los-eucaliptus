@@ -2,6 +2,17 @@
 
 ## Registro de cambios
 
+### 13/08/2026 - Ícono info en INSERT + demo auditable para infinite scroll
+- **Changed**: El ícono `info` ahora aparece en **todas** las acciones (INSERT incluido) si tienen `datos` no vacíos (`js/config-page.js`)
+- **Feat**: `data/audit_log.json` pasa de 11 a **37 entradas** para poder probar el infinite scroll en demo (2 chunks de 20)
+- **Docs**: actualizado `docs/features/auditoria.md` (§8 resuelto: el `info` muestra datos de cualquier acción)
+
+### 13/08/2026 - Actividad reciente en timeline con infinite scroll
+- **Changed**: "Actividad reciente" (Configuración) deja de ser una fila de texto que se desbordaba en mobile y pasa a un **timeline** con ícono por acción (creó/actualizó/eliminó), usuario, tabla y fecha — funciona igual en desktop y mobile (`js/config-page.js`, `css/sections.css`)
+- **Feat**: **Infinite scroll**: se cargan chunks de 20 registros al llegar al final (`IntersectionObserver` + sentinel); en prod usa `range()` de Supabase con filtro server-side, en demo se corta el array de `AUDIT_LOG`
+- **Changed**: La tabla ahora muestra la etiqueta legible del módulo (ej: "Ventas") en vez del nombre interno (`publicaciones`)
+- **Docs**: actualizado `docs/features/auditoria.md` con la decisión y la alternativa descartada (tabla con paginación)
+
 ### 13/08/2026 - Placeholder "Sin imagen" en Ventas
 - **Feat**: Las publicaciones sin foto ahora muestran un placeholder (ícono `image_not_supported` + "Sin imagen") al mismo alto de 180px, manteniendo la grilla alineada y uniforme (`js/renderers.js`, `css/sections.css`)
 - **Feat**: 2 publicaciones demo sin foto agregadas a `data/publicaciones.json` (Reparaciones de gasfitería y Maceteros de greda) para probar el placeholder
