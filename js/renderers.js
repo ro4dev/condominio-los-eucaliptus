@@ -7,6 +7,15 @@ function adminActions(editFn, deleteFn) {
     '</div>';
 }
 
+// Helper: acciones para admin o autor del registro
+function ownActions(editFn, deleteFn, autorEmail) {
+  var puede = IS_ADMIN || (currentUser && autorEmail && currentUser.email === autorEmail);
+  if (!puede) return '';
+  return '<div style="display:flex;gap:0rem;flex-shrink:0;align-items:center">' +
+    '<md-icon-button onclick="' + editFn + '" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
+    '<md-icon-button onclick="' + deleteFn + '" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
+    '</div>';
+}
 // Helper: empty state
 function emptyState(texto) {
   return '<div class="empty-state">' +
@@ -1115,6 +1124,99 @@ function deleteEncuesta(id) {
             reloadTab(getCurrentTab());
           }
         });
+      });
+    }
+  });
+}
+
+// PUBLICACIONES DE VENTA
+var publicacionesCategoriaFilter = 'todas';
+var publicacionesEstadoFilter = 'Disponible';
+
+function filterPublicacionesCategoria(filtro) {
+  publicacionesCategoriaFilter = filtro;
+  document.querySelectorAll('#publicacionesCategoriaFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
+  renderPublicaciones();
+}
+
+function filterPublicacionesEstado(filtro) {
+  publicacionesEstadoFilter = filtro;
+  document.querySelectorAll('#publicacionesEstadoFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
+  renderPublicaciones();
+}
+
+function renderPublicaciones() {
+  var grid = document.getElementById('publicacionesGrid');
+  var filtered = filtrarPublicaciones(PUBLICACIONES, publicacionesCategoriaFilter, publicacionesEstadoFilter);
+  var sorted = filtered.slice().sort(function(a, b) {
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
+  grid.innerHTML = sorted.map(function(p) {
+    var estadoClass = p.estado === 'Vendido' ? 'chip-neutral' : 'chip-positive';
+    var categoriaClass = p.categoria === 'Servicio' ? 'chip-secondary' : 'chip-primary';
+    return '<div class="publicacion-card' + (p.estado === 'Vendido' ? ' vendido' : '') + '">' +
+      '<div class="publicacion-foto">' +
+        (p.foto
+          ? '<img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" loading="lazy" onclick="verFotoPublicacion(\'' + p.id + '\')" title="Ver imagen completa" style="cursor:pointer">'
+          : '<div class="publicacion-foto-placeholder"><md-icon>image_not_supported</md-icon><span>Sin imagen</span></div>') +
+      '</div>' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">' +
+        '<div style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap">' +
+          '<span class="chip ' + categoriaClass + '">' + escHtml(p.categoria) + '</span>' +
+          '<span class="chip ' + estadoClass + '">' + escHtml(p.estado) + '</span>' +
+        '</div>' +
+        ownActions("editPublicacion('" + p.id + "')", "deletePublicacion('" + p.id + "')", p.usuario) +
+      '</div>' +
+      '<div class="publicacion-titulo">' + escHtml(p.titulo) + '</div>' +
+      (p.descripcion ? '<div class="publicacion-desc">' + nl2br(p.descripcion) + '</div>' : '') +
+      '<div class="publicacion-meta">' +
+        (p.precio !== null && p.precio !== undefined && p.precio !== '' ? '<span class="publicacion-precio">$' + formatMoney(p.precio) + '</span>' : '') +
+        (p.parcela_id ? '<span class="publicacion-meta-row"><md-icon>location_on</md-icon>' + escHtml(parcelName(p.parcela_id)) + '</span>' : '') +
+        (p.contacto ? '<span class="publicacion-meta-row"><md-icon>phone</md-icon>' + escHtml(p.contacto) + '</span>' : '') +
+      '</div>' +
+      '</div>';
+  }).join('');
+
+  if (!sorted.length) {
+    grid.innerHTML = emptyState('No hay publicaciones con estos filtros.');
+  }
+}
+
+function verFotoPublicacion(id) {
+  var p = PUBLICACIONES.find(function(x) { return x.id === id; });
+  if (!p || !p.foto) return;
+  openModal(p.titulo,
+    '<div style="display:flex;justify-content:center">' +
+      '<img src="' + escHtml(p.foto) + '" alt="' + escHtml(p.titulo) + '" style="max-width:100%;max-height:70vh;border-radius:var(--md-sys-shape-corner-medium);object-fit:contain">' +
+    '</div>');
+}
+
+function editPublicacion(id) {
+  var item = PUBLICACIONES.find(function(p) { return p.id === id; });
+  if (item) formPublicaciones(item);
+}
+
+function deletePublicacion(id) {
+  var item = PUBLICACIONES.find(function(p) { return p.id === id; });
+  var puede = IS_ADMIN || (item && currentUser && item.usuario && currentUser.email === item.usuario);
+  if (!puede) return;
+  showConfirm('¿Estás seguro de eliminar esta publicación? Esta acción no se puede deshacer.', function() {
+    if (DEMO_MODE) {
+      PUBLICACIONES = PUBLICACIONES.filter(function(p) { return p.id !== id; });
+      logAudit('publicaciones', 'DELETE', item || { id: id });
+      showSnackbar('Eliminado (demo).', 'success');
+      renderPublicaciones();
+    } else {
+      showLoading();
+      supabaseDelete('publicaciones', id).then(function(result) {
+        hideLoading();
+        if (result) {
+          logAudit('publicaciones', 'DELETE', { id: id });
+          showSnackbar('Eliminado correctamente.', 'success');
+          reloadTab(getCurrentTab());
+        }
       });
     }
   });

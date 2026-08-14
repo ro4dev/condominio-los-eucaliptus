@@ -17,6 +17,7 @@ async function loadConfig() {
 }
 
 async function saveConfig(key, value) {
+  var existed = Object.prototype.hasOwnProperty.call(CONFIG, key);
   CONFIG[key] = value;
   if (!DEMO_MODE && supabaseClient) {
     showLoading();
@@ -27,6 +28,7 @@ async function saveConfig(key, value) {
       return false;
     }
   }
+  logAudit('config', existed ? 'UPDATE' : 'INSERT', { key: key, value: value });
   return true;
 }
 
@@ -444,6 +446,7 @@ async function bulkCreateParcelas() {
     nuevas.forEach(function(p) {
       if (!PARCELAS.some(function(x) { return x.numero === p.numero; })) {
         PARCELAS.push(p);
+        logAudit('parcelas', 'INSERT', p);
       }
     });
   } else if (supabaseClient) {
@@ -457,7 +460,7 @@ async function bulkCreateParcelas() {
     var nuevasReales = nuevas.filter(function(p) { return nombresExistentes.indexOf(p.numero) === -1; });
     console.log('Nuevas reales:', nuevasReales.map(function(p) { return p.numero; }));
     if (nuevasReales.length) {
-      var { error } = await supabaseClient.from('parcelas').insert(nuevasReales);
+      var { data: insertedRows, error } = await supabaseClient.from('parcelas').insert(nuevasReales).select();
       if (error) {
         hideLoading();
         showSnackbar('Error al crear parcelas: ' + error.message, 'error');
@@ -465,6 +468,7 @@ async function bulkCreateParcelas() {
         btn.textContent = 'Crear parcelas';
         return;
       }
+      (insertedRows || []).forEach(function(p) { logAudit('parcelas', 'INSERT', p); });
       await loadJson('PARCELAS');
     }
     hideLoading();
@@ -482,10 +486,165 @@ async function bulkCreateParcelas() {
   btn.textContent = 'Crear parcelas';
 }
 
+// --- AUDITORÍA DE ACTIVIDAD ---
+var auditFilter = 'todas';
+
+var AUDIT_TABLES = [
+  { value: 'gastos', label: 'Gastos' },
+  { value: 'flujo', label: 'Flujo' },
+  { value: 'noticias', label: 'Noticias' },
+  { value: 'documentos', label: 'Documentos' },
+  { value: 'reclamos', label: 'Reclamos' },
+  { value: 'proveedores', label: 'Proveedores' },
+  { value: 'asambleas', label: 'Asambleas' },
+  { value: 'encuestas', label: 'Encuestas' },
+  { value: 'parcelas', label: 'Parcelas' },
+  { value: 'propietarios', label: 'Propietarios' },
+  { value: 'publicaciones', label: 'Ventas' },
+  { value: 'config', label: 'Configuración' }
+];
+
+function filterAudit(filtro) {
+  auditFilter = filtro;
+  document.querySelectorAll('#auditFilter md-filter-chip').forEach(function(c) { c.selected = false; });
+  event.target.closest('md-filter-chip').selected = true;
+  renderAuditLog();
+}
+
+function formatAuditDate(iso) {
+  if (!iso) return '';
+  var d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  var dd = String(d.getDate()).padStart(2, '0');
+  var mm = String(d.getMonth() + 1).padStart(2, '0');
+  var hh = String(d.getHours()).padStart(2, '0');
+  var mi = String(d.getMinutes()).padStart(2, '0');
+  return dd + '/' + mm + '/' + d.getFullYear() + ' ' + hh + ':' + mi;
+}
+
+var AUDIT_ACCIONES = { INSERT: 'Creó', UPDATE: 'Actualizó', DELETE: 'Eliminó' };
+
+function showAuditDatos(idx) {
+  var e = window._auditRows[idx];
+  if (!e || !e.datos) return;
+  openModal('Detalle de actividad',
+    '<pre style="font-size:0.8rem;white-space:pre-wrap;word-break:break-word;background:var(--md-sys-color-surface-container-low);padding:0.8rem;border-radius:var(--md-sys-shape-corner-small);max-height:60vh;overflow:auto;margin:0">' + escHtml(JSON.stringify(e.datos, null, 2)) + '</pre>');
+}
+
+var AUDIT_CHUNK = 20;
+var auditState = { rows: [], offset: 0, done: false, loading: false };
+var auditObserver = null;
+
+function auditAccionMeta(accion) {
+  if (accion === 'INSERT') return { icon: 'add', cls: 'insert', label: 'Creó' };
+  if (accion === 'DELETE') return { icon: 'delete', cls: 'delete', label: 'Eliminó' };
+  return { icon: 'edit', cls: 'update', label: 'Actualizó' };
+}
+
+function auditTablaLabel(tabla) {
+  var t = AUDIT_TABLES.find(function(x) { return x.value === tabla; });
+  return t ? t.label : tabla;
+}
+
+function auditItemHtml(e, i) {
+  var meta = auditAccionMeta(e.accion);
+  var accion = AUDIT_ACCIONES[e.accion] || e.accion;
+  var idTxt = e.registro_id ? String(e.registro_id).slice(0, 8) : '—';
+  var infoBtn = e.datos && Object.keys(e.datos).length
+    ? '<md-icon-button title="Ver datos" onclick="showAuditDatos(' + i + ')" style="--md-icon-button-icon-size:20px"><md-icon>info</md-icon></md-icon-button>'
+    : '';
+  return '<div class="audit-item">' +
+    '<span class="audit-dot ' + meta.cls + '"><md-icon>' + meta.icon + '</md-icon></span>' +
+    '<div class="audit-content">' +
+      '<div class="audit-line1">' +
+        '<span class="audit-user">' + escHtml(e.usuario || 'anónimo') + '</span>' +
+        '<span class="audit-accion ' + meta.cls + '">' + escHtml(accion) + '</span>' +
+        '<span class="audit-tabla">' + escHtml(auditTablaLabel(e.tabla)) + '</span>' +
+      '</div>' +
+      '<div class="audit-meta">' + escHtml(formatAuditDate(e.created_at)) + ' · registro <code>' + escHtml(idTxt) + '</code></div>' +
+    '</div>' +
+    (infoBtn ? '<span class="audit-info">' + infoBtn + '</span>' : '') +
+  '</div>';
+}
+
+function setupAuditObserver() {
+  if (auditObserver) auditObserver.disconnect();
+  auditObserver = new IntersectionObserver(function(entries) {
+    if (entries[0] && entries[0].isIntersecting) loadAuditChunk();
+  }, { rootMargin: '200px 0px' });
+  var sentinel = document.getElementById('auditSentinel');
+  if (sentinel) auditObserver.observe(sentinel);
+}
+
+async function loadAuditChunk() {
+  if (auditState.done || auditState.loading) return;
+  auditState.loading = true;
+  var listEl = document.getElementById('auditList');
+  var sentinel = document.getElementById('auditSentinel');
+  if (!listEl) { auditState.loading = false; return; }
+
+  var wasEmpty = !auditState.rows.length;
+  if (wasEmpty) listEl.innerHTML = '<div style="padding:0.8rem 0;color:var(--text-muted);font-size:0.85rem">Cargando actividad...</div>';
+
+  var chunk;
+  if (DEMO_MODE) {
+    var all = AUDIT_LOG.filter(function(e) { return auditFilter === 'todas' || e.tabla === auditFilter; });
+    chunk = all.slice(auditState.offset, auditState.offset + AUDIT_CHUNK);
+    auditState.done = auditState.offset + chunk.length >= all.length;
+  } else if (supabaseClient) {
+    var q = supabaseClient.from('audit_log').select('*').order('created_at', { ascending: false });
+    if (auditFilter !== 'todas') q = q.eq('tabla', auditFilter);
+    var res = await q.range(auditState.offset, auditState.offset + AUDIT_CHUNK - 1);
+    if (res.error) {
+      listEl.innerHTML = emptyState('No se pudo cargar la actividad.');
+      if (sentinel) sentinel.innerHTML = '';
+      auditState.done = true;
+      auditState.loading = false;
+      return;
+    }
+    chunk = res.data || [];
+    auditState.done = chunk.length < AUDIT_CHUNK;
+  } else {
+    chunk = [];
+    auditState.done = true;
+  }
+
+  auditState.loading = false;
+  auditState.rows = auditState.rows.concat(chunk);
+  auditState.offset += chunk.length;
+  window._auditRows = auditState.rows;
+
+  if (!auditState.rows.length) {
+    listEl.innerHTML = emptyState('Sin actividad registrada.');
+    if (sentinel) sentinel.innerHTML = '';
+    return;
+  }
+  listEl.innerHTML = auditState.rows.map(function(e, i) { return auditItemHtml(e, i); }).join('');
+  if (auditState.done && sentinel) sentinel.innerHTML = '';
+}
+
+async function renderAuditLog() {
+  var wrap = document.getElementById('cfgAuditLog');
+  if (!wrap) return;
+  var chips = '<div class="filter-chips" id="auditFilter">' +
+    '<md-filter-chip label="Todas"' + (auditFilter === 'todas' ? ' selected' : '') + ' onclick="filterAudit(\'todas\')"></md-filter-chip>' +
+    AUDIT_TABLES.map(function(t) {
+      return '<md-filter-chip label="' + t.label + '"' + (auditFilter === t.value ? ' selected' : '') + ' onclick="filterAudit(\'' + t.value + '\')"></md-filter-chip>';
+    }).join('') +
+    '</div>';
+  wrap.innerHTML = chips +
+    '<div class="audit-timeline" id="auditList"></div>' +
+    '<div id="auditSentinel"></div>';
+  auditState = { rows: [], offset: 0, done: false, loading: false };
+  setupAuditObserver();
+  await loadAuditChunk();
+}
+
 // --- INIT CONFIG TAB ---
 async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO')]);
+  if (DEMO_MODE) await loadJson('AUDIT_LOG');
   renderMontos();
   renderPeriodos();
   renderDatosPago();
@@ -493,6 +652,7 @@ async function renderConfig() {
   renderCategoriasDocs();
   renderRubrosProveedores();
   renderConceptosFlujo();
+  await renderAuditLog();
   var tabEl = document.getElementById('tab-config');
   if (tabEl) tabEl.setAttribute('aria-busy', 'false');
 }

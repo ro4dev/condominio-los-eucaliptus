@@ -1,42 +1,56 @@
-# Publicaciones de Venta de Productos/Servicios (idea)
+# Publicaciones de Venta de Productos/Servicios
 
-> **Estado**: Idea / backlog — sin implementar. A revisar.
+> **Estado**: Implementado — pestaña "Ventas" (Opción C: pestaña propia que reutiliza componentes).
 
 ## 1. Descripción general
 
-Sección para que los vecinos publiquen ventas de productos o servicios dentro del condominio (ej: muebles en venta, clases particulares, flete, etc.). Cada publicación sería un post con título, descripción, foto opcional y datos de contacto del publicador.
+Sección para que los vecinos publiquen ventas de productos o servicios dentro del condominio (ej: muebles en venta, clases particulares, flete, etc.). Cada publicación es un post con título, descripción, foto opcional, precio, estado, parcela y datos de contacto del publicador.
 
-## 2. Decisión pendiente: ¿pestaña propia o categoría en Comentarios?
+## 2. Decisiones tomadas
 
-### Opción A — Pestaña propia (ej. "Ventas" / "Anuncios")
-- **Pros**: Enfoque claro del módulo; filtros dedicados (categoría: Productos/Servicios); lugar visible en la barra de navegación; no contamina el feed de Comentarios.
-- **Contras**: Una pestaña más en un navbar que ya tiene muchos módulos; más código/UI nueva de cero.
+- **Pestaña propia "Ventas"** (Opción C): reutiliza el patrón de cards + chips + modal, con schema y contenedor propios.
+- **Quién publica**: cualquier usuario autenticado (como Comentarios).
+- **Edición/eliminación**: **el autor o admin** (columna `usuario` = email del autor; RLS con `auth.jwt() ->> 'email'`).
+- **Foto**: opcional, subida a Supabase Storage bucket `publicaciones` (blob URL en demo). **Cuando la publicación no tiene foto, la card muestra un placeholder** (fondo `--md-sys-color-surface-container-highest` + ícono `image_not_supported` + texto "Sin imagen") al mismo alto de 180px, para mantener la grilla alineada y uniforme.
+- **Estado**: Disponible / Vendido, con chips de filtro.
+- **Contacto**: campo libre del publicador (parcela + forma de contacto).
 
-### Opción B — Categoría dentro de Comentarios (reclamos.json o tabla nueva tipo "anuncios")
-- **Pros**: Cero pestañas nuevas; reutiliza el patrón de chips de filtro existente (como Reclamos/Sugerencias); menos código y mantenimiento.
-- **Contras**: Mezcla "comentarios/comunicación" con "transacciones"; el chip de filtro de categoría quedaría más recargado; el contexto de compra/venta se pierde.
+### Alternativas evaluadas (no usadas)
 
-### Opción C (híbrida) — Pestaña propia que reutiliza componentes
-- Reutilizar el patrón de Comentarios (card + chips + modal) pero con schema y contenedor propios. Misma experiencia, pestaña dedicada.
+- **Ocultar la foto de todas las cards y verla solo con un ícono**: se descartó porque en un módulo de ventas la imagen es lo que más atrae (patrón de MercadoLibre/Facebook Marketplace) y las cards quedarían sin jerarquía visual.
 
-## 3. Preguntas abiertas
+## 3. Schema SQL (migración 004_publicaciones.sql)
 
-- ¿Quién puede publicar? (cualquier usuario autenticado, como Comentarios, o solo admin)
-- ¿Se necesita foto? → subida a Supabase Storage
-- ¿Cómo contactar al vendedor? (teléfono, email, mensaje interno)
-- ¿El post expira o se marca como "Vendido"?
-- ¿Filtros por categoría (Producto / Servicio) y por estado (Disponible / Vendido)?
-- ¿Notificar a los vecinos al publicar algo nuevo?
+```sql
+CREATE TABLE publicaciones (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  titulo TEXT NOT NULL,
+  descripcion TEXT,
+  categoria TEXT NOT NULL CHECK (categoria IN ('Producto', 'Servicio')),
+  precio NUMERIC,
+  contacto TEXT,
+  parcela_id UUID REFERENCES parcelas(id) ON DELETE SET NULL,
+  estado TEXT NOT NULL DEFAULT 'Disponible' CHECK (estado IN ('Disponible', 'Vendido')),
+  foto TEXT,
+  usuario TEXT,               -- email del autor
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+```
 
-## 4. Alcance aproximado si se implementa
+RLS: SELECT cualquier autenticado; INSERT cualquier autenticado con `auth.jwt() ->> 'email' = usuario`; UPDATE/DELETE el autor o admin.
 
-- Tabla nueva (ej. `publicaciones`) con `titulo`, `descripcion`, `categoria`, `precio?`, `contacto`, `parcela_id`, `estado`, `created_at`
-- Mock data en `data/` para demo
-- Renderer + modal (patrón de `renderEncuestas`/`renderReclamos`)
-- Supabase migration + RLS
+## 4. UI
 
-## 5. Referencias de patrones existentes
+- Tab `publicaciones` ("Ventas") con botón "Publicar Venta" (no admin-only).
+- Filtros por chips: categoría (Todas/Productos/Servicios) y estado (Disponibles/Vendidos).
+- Cards `.publicacion-card` con foto, chips de categoría/estado, título, descripción, precio, parcela y contacto.
+- Acciones editar/eliminar solo visibles para el autor o admin (helper `ownActions`).
 
-- Comentarios: `docs/features/reclamos.md` — patrón de chips y permisos (cualquier user autenticado)
-- Fotos: `docs/features/file-upload.md` — subida a Storage
-- Tabs: `index.html` — cómo se agrega una pestaña nueva
+## 5. Demo mode
+
+- `data/publicaciones.json` con 5 entradas de ejemplo, cada una con foto placeholder en `assets/demo_venta_*.svg` (nuevas subidas en demo generan blob URL).
+- Auditoría: se loguea INSERT/UPDATE/DELETE en `AUDIT_LOG`.
+
+## 6. Storage
+
+- Bucket `publicaciones` (público) + política `storage_insert_publicaciones` para cualquier autenticado.

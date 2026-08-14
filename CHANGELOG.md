@@ -2,6 +2,49 @@
 
 ## Registro de cambios
 
+### 13/08/2026 - Chips de estado/etiqueta estandarizados
+- **Changed**: Nuevo sistema de chips `.chip` + variantes de color (`.chip-positive`, `.chip-warning`, `.chip-error`, `.chip-primary`, `.chip-secondary`, `.chip-tertiary`, `.chip-neutral`) con tamaño uniforme (12px, padding 0.2rem 0.6rem) en **todas** las pestañas
+- **Changed**: Reemplazados ~11 chips inline/duplicados por la clase estándar: Comentarios (reclamo/sugerencia), Proveedores (rubro), Ventas (producto/servicio y disponible/vendido), Asambleas (ordinaria/extraordinaria), Encuestas (abierta/cerrada, quorum, total), Gastos (pagado/pendiente), Flujo (ingreso/egreso), Parcelas (estado)
+- **Changed**: Comentarios pasa de 11px (label-small) a 12px como el resto; quorum/total de Encuestas y tipo de Asambleas normalizan su padding (0.15/0.5 → 0.2/0.6)
+- **Refactor**: Se eliminan clases sueltas y bloques inline de `renderers.js` (menos CSS duplicado); se borra `.timeline-tipo` que era código muerto
+
+### 13/08/2026 - Ícono info en INSERT + demo auditable para infinite scroll
+- **Changed**: El ícono `info` ahora aparece en **todas** las acciones (INSERT incluido) si tienen `datos` no vacíos (`js/config-page.js`)
+- **Feat**: `data/audit_log.json` pasa de 11 a **37 entradas** para poder probar el infinite scroll en demo (2 chunks de 20)
+- **Docs**: actualizado `docs/features/auditoria.md` (§8 resuelto: el `info` muestra datos de cualquier acción)
+
+### 13/08/2026 - Actividad reciente en timeline con infinite scroll
+- **Changed**: "Actividad reciente" (Configuración) deja de ser una fila de texto que se desbordaba en mobile y pasa a un **timeline** con ícono por acción (creó/actualizó/eliminó), usuario, tabla y fecha — funciona igual en desktop y mobile (`js/config-page.js`, `css/sections.css`)
+- **Feat**: **Infinite scroll**: se cargan chunks de 20 registros al llegar al final (`IntersectionObserver` + sentinel); en prod usa `range()` de Supabase con filtro server-side, en demo se corta el array de `AUDIT_LOG`
+- **Changed**: La tabla ahora muestra la etiqueta legible del módulo (ej: "Ventas") en vez del nombre interno (`publicaciones`)
+- **Docs**: actualizado `docs/features/auditoria.md` con la decisión y la alternativa descartada (tabla con paginación)
+
+### 13/08/2026 - Placeholder "Sin imagen" en Ventas
+- **Feat**: Las publicaciones sin foto ahora muestran un placeholder (ícono `image_not_supported` + "Sin imagen") al mismo alto de 180px, manteniendo la grilla alineada y uniforme (`js/renderers.js`, `css/sections.css`)
+- **Feat**: 2 publicaciones demo sin foto agregadas a `data/publicaciones.json` (Reparaciones de gasfitería y Maceteros de greda) para probar el placeholder
+- **Docs**: decisión documentada en `docs/features/publicaciones-ventas.md` junto con la alternativa descartada (nunca mostrar foto en card, verla solo por ícono)
+
+### 12/08/2026 - Demo Ventas con fotos de ejemplo
+- **Feat**: Las 5 publicaciones demo en `data/publicaciones.json` ahora llevan foto con placeholders locales (`assets/demo_venta_mesa.svg`, `demo_venta_clases_ingles.svg`, `demo_venta_bicicleta.svg`, `demo_venta_jardinero.svg`, `demo_venta_sillon.svg`)
+- **Feat**: La foto de cada card de Ventas ahora es clicable y abre un popup (`verFotoPublicacion`) con la imagen completa — reutiliza `openModal`, título de la publicación como encabezado
+
+### 11/08/2026 - Pestaña Ventas: publicaciones de productos/servicios
+- **Feat**: Nueva pestaña **Ventas** (`tab-publicaciones`, tab `publicaciones`) para que los vecinos publiquen ventas de productos y servicios dentro del condominio (`index.html`, `data.js`)
+- **Feat**: Migración `004_publicaciones.sql` con tabla `publicaciones` (titulo, descripcion, categoria Producto/Servicio, precio, contacto, parcela_id, estado Disponible/Vendido, foto, usuario, created_at) y RLS: SELECT cualquier autenticado, INSERT cualquier autenticado (autor forzado por email), **UPDATE/DELETE el autor o admin**
+- **Feat**: `renderPublicaciones()` en cards (`.publicacion-card`) con foto opcional, chips de categoría (Producto/Servicio) y estado (Disponible/Vendido), precio, parcela y contacto; ordenadas por `created_at` desc
+- **Feat**: Doble filtro por chips: categoría (Todas/Productos/Servicios) y estado (Disponibles/Vendidos) — función pura `filtrarPublicaciones()` en `utils.js`
+- **Feat**: Botón "Publicar Venta" para cualquier usuario autenticado; editar/eliminar **solo el autor o admin** (helper `ownActions`); modal `formPublicaciones` con foto opcional (storage bucket `publicaciones` en prod, blob URL en demo)
+- **Feat**: `handleForm` registra `usuario` (email del autor) y audita INSERT/UPDATE vía `logAudit`; DELETE audita en `deletePublicacion`; tabla `publicaciones` agregada al filtro de "Actividad reciente"
+- **Docs**: demo seed en `data/publicaciones.json` (5 entradas), entrada de ejemplo en `data/audit_log.json`, `test.html` con 7 asserts de `filtrarPublicaciones`
+
+### 11/08/2026 - Auditoría de cambios (Configuración → Actividad reciente)
+- **Feat**: Nueva migración `003_audit_log.sql` con tabla `audit_log` (tabla, accion INSERT/UPDATE/DELETE, registro_id, datos jsonb, usuario, created_at) y RLS: SELECT solo admin, INSERT usuarios autenticados
+- **Feat**: API `logAudit(tabla, accion, registro, usuario)` en `js/audit.js` con `sanitizeAudit()` que oculta PII (rut, telefono, email) del payload auditado; los INSERT/UPDATE se loguean en `handleForm` (`auditSave`) y los DELETE en `deleteItem`
+- **Feat**: Sección "Actividad reciente" en Configuración (`renderAuditLog`) con chips de filtro por tabla, fecha/hora, usuario, acción y botón ⓘ para ver los datos del cambio (UPDATE/DELETE)
+- **Feat**: Demo seed en `data/audit_log.json` (11 entradas de ejemplo) que se carga en modo demo al abrir Configuración
+- **Feat**: Se loguean también cambios de la propia configuración (`saveConfig`, `bulkCreateParcelas`) y encuestas en producción
+- **Docs**: `test.html` con asserts de `sanitizeAudit`
+
 ### 09/08/2026 - Fix separadores de tablas + acceso rápido en Periodo en curso
 - **Fix**: Las filas de las tablas (incluidos los popups de Cuotas/Movimientos) usaban `border-bottom: 1px solid var(--border-light)` (casi invisible: `#f5f7fa` light, `#111827` dark). Ahora usan `var(--divider)` (= `--md-sys-color-outline`: `#9ca3af` light, `#6b7280` dark), el mismo separador que ya usaba `.pago-row`, visible en ambos modos. Se aplica también al separador de la fila de totales (`css/components.css`)
 - **Feat**: La card "Periodo en curso" ahora tiene los mismos 2 íconos 🧾 Cuotas / ⇅ Movimientos junto al título, para abrir el detalle del periodo vigente sin buscar la fila en la tabla resumen (`js/renderers.js`)
@@ -32,6 +75,7 @@
 - **Feat**: `formGastos` muestra hint con la cuota del periodo configurada y prefill automático del monto al crear (`modals.js`); gráfico "Recaudado vs Esperado" usa `recaudadoGasto`
 - **Feat**: `data/pagos.json` generado (1.491 pagos para las cuotas `pagado='Sí'` del demo); `data/config.json` agrega `periodos` (incluye `2026-08` más alto para disparar el aviso de aumento)
 - **Docs**: `test.html` ampliado a 116 asserts (pagos, saldo a favor, config de periodos, `siguientePeriodo`, `avisoAumento`)
+
 
 ### 09/08/2026 - Fix alineación de votos/porcentaje en Encuestas
 - **Fix**: El conteo y porcentaje de cada opción se centran verticalmente junto al botón "Votar" (`inline-flex` + `align-items:center`), ya que antes el texto quedaba desalineado por la altura del `md-filled-button` (`js/renderers.js`)
