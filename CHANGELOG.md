@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 13/08/2026 - Chips de estado/etiqueta estandarizados
+- **Changed**: Nuevo sistema de chips `.chip` + variantes de color (`.chip-positive`, `.chip-warning`, `.chip-error`, `.chip-primary`, `.chip-secondary`, `.chip-tertiary`, `.chip-neutral`) con tamaño uniforme (12px, padding 0.2rem 0.6rem) en **todas** las pestañas
+- **Changed**: Reemplazados ~11 chips inline/duplicados por la clase estándar: Comentarios (reclamo/sugerencia), Proveedores (rubro), Ventas (producto/servicio y disponible/vendido), Asambleas (ordinaria/extraordinaria), Encuestas (abierta/cerrada, quorum, total), Gastos (pagado/pendiente), Flujo (ingreso/egreso), Parcelas (estado)
+- **Changed**: Comentarios pasa de 11px (label-small) a 12px como el resto; quorum/total de Encuestas y tipo de Asambleas normalizan su padding (0.15/0.5 → 0.2/0.6)
+- **Refactor**: Se eliminan clases sueltas y bloques inline de `renderers.js` (menos CSS duplicado); se borra `.timeline-tipo` que era código muerto
+
 ### 13/08/2026 - Ícono info en INSERT + demo auditable para infinite scroll
 - **Changed**: El ícono `info` ahora aparece en **todas** las acciones (INSERT incluido) si tienen `datos` no vacíos (`js/config-page.js`)
 - **Feat**: `data/audit_log.json` pasa de 11 a **37 entradas** para poder probar el infinite scroll en demo (2 chunks de 20)

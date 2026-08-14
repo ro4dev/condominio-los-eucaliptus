@@ -334,9 +334,7 @@ function renderFinanzasStats(data) {
 }
 
 function estadoChip(g) {
-  var bg = isPagado(g) ? 'var(--color-positive-bg)' : 'var(--color-extraordinaria-bg)';
-  var color = isPagado(g) ? 'var(--color-positive-text)' : 'var(--color-extraordinaria-text)';
-  return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + (isPagado(g) ? 'Pagado' : 'Pendiente') + '</span>';
+  return '<span class="chip ' + (isPagado(g) ? 'chip-positive' : 'chip-warning') + '">' + (isPagado(g) ? 'Pagado' : 'Pendiente') + '</span>';
 }
 
 function renderFinanzasTable(data) {
@@ -391,11 +389,9 @@ function renderMovimientos() {
   } else {
     body = '<tbody>' + sorted.map(function(f) {
       var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
-      var bgColor = f.tipo === 'Ingreso' ? 'var(--color-positive-bg)' : 'var(--md-sys-color-error-container)';
-      var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
       return '<tr>' +
         '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>' +
-        '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + escHtml(f.tipo) + '</span></td>' +
+        '<td><span class="chip ' + (f.tipo === 'Ingreso' ? 'chip-positive' : 'chip-error') + '">' + escHtml(f.tipo) + '</span></td>' +
         '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
         '<td>' + (f.comprobante ? '<a href="' + f.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') + '</td>' +
         '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
@@ -424,18 +420,15 @@ function renderParcelas() {
 
   var estadoChip = function(estado) {
     var st = String(estado || '').toLowerCase();
-    var bg, color;
+    var chip;
     if (st.indexOf('habit') !== -1) {
-      bg = 'var(--color-positive-bg)';
-      color = 'var(--color-positive-text)';
+      chip = 'chip-positive';
     } else if (st.indexOf('construc') !== -1) {
-      bg = 'var(--color-extraordinaria-bg)';
-      color = 'var(--color-extraordinaria-text)';
+      chip = 'chip-warning';
     } else {
-      bg = 'var(--md-sys-color-surface-container-highest)';
-      color = 'var(--md-sys-color-on-surface-variant)';
+      chip = 'chip-neutral';
     }
-    return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + escHtml(estado) + '</span>';
+    return '<span class="chip ' + chip + '">' + escHtml(estado) + '</span>';
   };
 
   var rows = sorted.map(function(p) {
@@ -644,7 +637,7 @@ function renderReclamos() {
     var tipoClass = String(r.tipo || '').toLowerCase().replace(/[^a-z0-9-]/g, '') || 'reclamo';
     return '<div class="reclamo-item ' + tipoClass + '">' +
       '<div class="reclamo-header">' +
-        '<span class="reclamo-tipo ' + tipoClass + '">' + escHtml(r.tipo) + '</span>' +
+        '<span class="chip ' + (tipoClass === 'sugerencia' ? 'chip-positive' : 'chip-error') + '">' + escHtml(r.tipo) + '</span>' +
         '<span class="reclamo-fecha">' + formatDate(r.fecha || r.created_at) + '</span>' +
       '</div>' +
       '<div class="reclamo-title">' + escHtml(r.asunto) + '</div>' +
@@ -663,7 +656,7 @@ function renderProveedores() {
   grid.innerHTML = PROVEEDORES.map(function(p) {
     return '<div class="proveedor-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<div class="proveedor-rubro" style="margin:0">' + escHtml(p.rubro) + '</div>' +
+        '<div class="chip chip-primary" style="margin:0">' + escHtml(p.rubro) + '</div>' +
         adminActions("editProveedor('" + p.id + "')", "deleteProveedor('" + p.id + "')") +
       '</div>' +
       '<div class="proveedor-nombre">' + escHtml(p.nombre) + '</div>' +
@@ -708,7 +701,7 @@ function renderAsambleas() {
     }).join('') : '';
     return '<div class="item-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-bg)' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-text)' : 'var(--md-sys-color-on-primary-container)') + '">' + escHtml(a.tipo) + '</span>' +
+        '<span class="chip ' + (a.tipo === 'Extraordinaria' ? 'chip-warning' : 'chip-primary') + '">' + escHtml(a.tipo) + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
@@ -801,8 +794,7 @@ function renderEncuestas() {
   container.innerHTML = data.map(function(d) {
     var e = d.encuesta;
     var quorumAlcanzado = e.quorum ? d.total >= e.quorum : true;
-    var estadoBg = d.cerrada ? 'var(--md-sys-color-surface-container)' : 'var(--md-sys-color-tertiary-container)';
-    var estadoText = d.cerrada ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-tertiary-container)';
+    var estadoBg = d.cerrada ? 'chip-neutral' : 'chip-tertiary';
 
     var infoExtra = '';
     if (e.fecha_termino && !d.cerrada) {
@@ -819,7 +811,7 @@ function renderEncuestas() {
 
     var quorumHtml = '';
     if (e.quorum) {
-      quorumHtml = '<span style="padding:0.15rem 0.5rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--md-sys-color-surface-container);color:' + (quorumAlcanzado ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+      quorumHtml = '<span class="chip ' + (quorumAlcanzado ? 'chip-tertiary' : 'chip-error') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
     var opcionesHtml = '<div style="position:relative">' +
@@ -858,7 +850,7 @@ function renderEncuestas() {
 
     return '<div class="item-card' + (d.cerrada ? ' cerrada' : '') + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
+        '<span class="chip ' + estadoBg + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fechaPub + '</span>' +
           adminActions("editEncuesta('" + e.id + "')", "deleteEncuesta('" + e.id + "')") +
@@ -870,7 +862,7 @@ function renderEncuestas() {
       opcionesHtml + accion +
       '<div style="display:flex;justify-content:flex-end;align-items:center;gap:0.4rem;margin-top:0.3rem">' +
         quorumHtml +
-        '<span style="padding:0.15rem 0.5rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--md-sys-color-surface-container);color:var(--text-2)">Total: ' + d.total + ' votos</span>' +
+        '<span class="chip chip-neutral">Total: ' + d.total + ' votos</span>' +
       '</div>' +
     '</div>';
   }).join('');
@@ -1066,8 +1058,8 @@ function renderPublicaciones() {
     return new Date(b.created_at) - new Date(a.created_at);
   });
   grid.innerHTML = sorted.map(function(p) {
-    var estadoClass = p.estado === 'Vendido' ? 'publicacion-vendido' : 'publicacion-disponible';
-    var categoriaClass = p.categoria === 'Servicio' ? 'publicacion-servicio' : 'publicacion-producto';
+    var estadoClass = p.estado === 'Vendido' ? 'chip-neutral' : 'chip-positive';
+    var categoriaClass = p.categoria === 'Servicio' ? 'chip-secondary' : 'chip-primary';
     return '<div class="publicacion-card' + (p.estado === 'Vendido' ? ' vendido' : '') + '">' +
       '<div class="publicacion-foto">' +
         (p.foto
@@ -1076,8 +1068,8 @@ function renderPublicaciones() {
       '</div>' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem">' +
         '<div style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap">' +
-          '<span class="publicacion-chip ' + categoriaClass + '">' + escHtml(p.categoria) + '</span>' +
-          '<span class="publicacion-chip ' + estadoClass + '">' + escHtml(p.estado) + '</span>' +
+          '<span class="chip ' + categoriaClass + '">' + escHtml(p.categoria) + '</span>' +
+          '<span class="chip ' + estadoClass + '">' + escHtml(p.estado) + '</span>' +
         '</div>' +
         ownActions("editPublicacion('" + p.id + "')", "deletePublicacion('" + p.id + "')", p.usuario) +
       '</div>' +

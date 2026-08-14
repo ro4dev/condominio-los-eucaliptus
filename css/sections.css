@@ -16,16 +16,21 @@
 
 .reclamo-item { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); margin-bottom: 1rem; }
 .reclamo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-.reclamo-tipo { font: var(--md-sys-typescale-label-small); padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; }
-.reclamo-tipo.reclamo { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
-.reclamo-tipo.sugerencia { background: var(--color-positive-bg); color: var(--color-positive-text); }
+/* Chip estándar de etiqueta/estado (todas las pestañas) */
+.chip { display: inline-block; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.chip-positive { background: var(--color-positive-bg); color: var(--color-positive-text); }
+.chip-warning { background: var(--color-extraordinaria-bg); color: var(--color-extraordinaria-text); }
+.chip-error { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
+.chip-primary { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+.chip-secondary { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.chip-tertiary { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+.chip-neutral { background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface-variant); }
 .reclamo-fecha { font-size: 0.8rem; color: var(--text-muted); }
 .reclamo-title { font: var(--md-sys-typescale-title-small); margin-bottom: 0.3rem; color: var(--text); }
 .reclamo-desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.4; }
 .reclamo-parcela { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
 
 .proveedor-card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
-.proveedor-rubro { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); display: inline-block; margin-bottom: 0.5rem; }
 .proveedor-nombre { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.5rem; color: var(--text); }
 .proveedor-contacto { font: var(--md-sys-typescale-body-medium); color: var(--text-2); }
 .proveedor-contacto div { padding: 0.2rem 0; }
@@ -36,11 +41,6 @@
 .publicacion-foto img { width: 100%; height: 180px; object-fit: cover; display: block; }
 .publicacion-foto-placeholder { width: 100%; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; background: var(--md-sys-color-surface-container-highest); color: var(--md-sys-color-on-surface-variant); font-size: 0.8rem; }
 .publicacion-foto-placeholder md-icon { font-size: 2.4rem; width: 2.4rem; height: 2.4rem; opacity: 0.6; }
-.publicacion-chip { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; display: inline-block; }
-.publicacion-producto { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
-.publicacion-servicio { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
-.publicacion-disponible { background: var(--color-positive-bg); color: var(--color-positive-text); }
-.publicacion-vendido { background: var(--border); color: var(--text-muted); }
 .publicacion-titulo { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.4rem; color: var(--text); }
 .publicacion-desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.4; margin-bottom: 0.6rem; }
 .publicacion-meta { font-size: 0.85rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.15rem; }
@@ -74,8 +74,6 @@
 .timeline-item::before { content: ''; position: absolute; left: -1.65rem; top: 1.5rem; width: 12px; height: 12px; border-radius: var(--md-sys-shape-corner-full); background: var(--md-sys-color-primary); border: 2px solid var(--md-sys-color-surface); }
 .timeline-item.extra::before { background: var(--md-sys-color-tertiary); }
 .timeline-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-.timeline-tipo { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); display: inline-block; margin-bottom: 0.5rem; }
-.timeline-tipo.extra { background: #fef3c7; color: #92400e; }
 .timeline-title { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.5rem; color: var(--text); }
 .timeline-section { font-size: 0.85rem; margin-bottom: 0.5rem; }
 .timeline-section strong { color: var(--text-2); }
