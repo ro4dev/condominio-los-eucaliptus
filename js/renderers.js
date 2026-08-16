@@ -919,7 +919,7 @@ function renderEncuestas() {
 
       var boton = '';
       if (!d.cerrada && currentUser && !d.miVoto) {
-        boton = ' <md-filled-button onclick="votarEncuesta(\'' + e.id + '\', ' + i + ')" style="font-size:0.75rem;padding:0.2rem 0.6rem;--md-filled-button-container-color:' + color + '">Votar</md-filled-button>';
+        boton = ' <md-filled-button onclick="votarEncuesta(\'' + e.id + '\', ' + i + ')" style="--md-filled-button-container-color:' + color + ';--md-filled-button-container-height:28px;--md-filled-button-label-text-font-size:0.75rem">Votar</md-filled-button>';
       }
 
       return '<div style="margin-bottom:0.4rem;' + (esMiVoto ? 'background:var(--skeleton-1);padding:0.3rem 0.5rem;border-radius:var(--md-sys-shape-corner-extra-small);' : '') + '">' +
