@@ -339,9 +339,18 @@ El modelo de acceso es una decisión de producto. Opciones:
 
 > ⚠️ Requiere definir con el usuario qué ven los vecinos. No implementar sin confirmación.
 
+### Decisión (15/08/2026) — A: cerrar signup público
+El usuario confirmó que **los propietarios deben seguir viendo los datos de contacto de los demás** (RUT, teléfono, email) para poder contactarse. Por eso NO se restringe `propietarios_select` ni `showPropietarios()`; la protección es impedir que personas ajenas se autoregistren:
+
+- "Crear cuenta" eliminado del login dialog (`index.html`).
+- Trigger server-side `006_block_public_signup.sql`: rechaza cualquier INSERT en `auth.users` sin `app_metadata.role` (el signup vía API pública no lo setea).
+- `create-user/index.ts` setea `app_metadata.role = 'propietario'` para que la creación por admin pase el trigger.
+- `showSignupForm()`/`handleSignup()` en `supabase-config.js` quedan como código muerto (no se toca el archivo por regla de credenciales); el vector está cerrado igual por el trigger.
+
 ### Verificación Fase 4
 - Con una cuenta nueva (o no-admin) el botón "Crear cuenta" no existe.
-- SELECT de `propietarios` desde un usuario no-admin no devuelve filas de otras parcelas (o sin campos sensibles).
+- POST a `/auth/v1/signup` con la anon key → error del trigger (cuenta no se crea).
+- `create-user` sigue creando cuentas correctamente.
 
 ## Fase 5 — Storage (M2)
 
@@ -466,10 +475,12 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [x] Asserts de `safeUrl` en `test.html`
 - [x] Verificación: documento con `<img onerror>` y `javascript:` en noticia/documento/proveedor → no ejecutan ni generan link (149/149 asserts; modals verificados con harness: `javascript:` sin link, `assets/`/`https://`/`blob:` conservan link)
 
-### FASE 4 — PII y signup abierto (A2) — requiere decisión
-- [ ] Definir con el usuario el modelo de acceso (A cerrar signup / B limitar lectura / C ambas)
-- [ ] Aplicar según decisión
-- [ ] Verificación: no-admin no ve PII ajena; "Crear cuenta" oculto (si aplica)
+### FASE 4 — PII y signup abierto (A2)
+- [x] Decisión (15/08/2026): **A — cerrar signup público** (usuario: propietarios deben seguir viendo contactos)
+- [x] "Crear cuenta" eliminado del login dialog (`index.html`); `showSignupForm`/`handleSignup` inalcanzables
+- [x] Trigger `006_block_public_signup.sql` bloquea INSERT en `auth.users` sin `app_metadata.role` (signup vía API falla server-side)
+- [x] `create-user/index.ts` setea `app_metadata.role = 'propietario'`
+- [ ] Verificación en prod: signup API rechazado; `create-user` funciona; directorio de contactos intacto (pendiente deploy/CLI)
 
 ### FASE 5 — Storage (M2)
 - [ ] `supabaseUpload` devuelve `{ path }` en vez de URL firmada de 7 días

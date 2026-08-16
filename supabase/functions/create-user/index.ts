@@ -29,6 +29,7 @@ serve(async (req) => {
     email,
     password,
     email_confirm: true,
+    app_metadata: { role: 'propietario' },
     user_metadata: { nombre_completo, tipo, parcela_id },
   })
   if (authError) {

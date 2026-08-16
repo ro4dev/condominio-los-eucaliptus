@@ -2,6 +2,13 @@
 
 ## Registro de cambios
 
+### 15/08/2026 - Fase 4 auditoría: signup público cerrado (A2)
+- **Security**: Se cierra el signup público (decisión de producto: los propietarios **siguen viendo** el directorio de contactos — RUT/teléfono/email — para poder contactarse; la protección es impedir que terceros se autoregistren). Botón "Crear cuenta" eliminado del login dialog (`index.html`)
+- **Security**: Nueva migración `supabase/migrations/006_block_public_signup.sql` — trigger `BEFORE INSERT ON auth.users` que rechaza cualquier cuenta sin `app_metadata.role`. El signup vía API pública (anon key) no setea ese campo y falla server-side; ya no depende solo de ocultar el botón
+- **Security**: `supabase/functions/create-user/index.ts` ahora setea `app_metadata.role = 'propietario'` al crear usuarios, requisito para que pasen el trigger
+- **Note**: `showSignupForm()`/`handleSignup()` quedan como código muerto en `js/supabase-config.js` (archivo intocable por regla de credenciales); el vector queda cerrado igual por el trigger
+- **Docs**: decisión y checklist Fase 4 actualizados en `docs/audit/security.md`
+
 ### 15/08/2026 - Fase 3 auditoría: stored XSS mitigado (A3)
 - **Security**: Nuevo helper `safeUrl()` en `js/utils.js` para sanitizar URLs antes de ponerlas en `href`. En vez de la allowlist original del doc de auditoría (que rompía el demo con rutas relativas `assets/...` y URLs `blob:` del upload), **bloquea esquemas peligrosos**: `javascript:`, `vbscript:`, `file:` y `data:` no-imagen; permite http(s), rutas relativas, `#`, `data:image/` y `blob:`. Elimina caracteres de control/espacios antes de detectar el esquema (evita obfuscación tipo `java\nscript:`)
 - **Security**: Todos los `href` de `js/renderers.js` con datos de usuario pasan por `safeUrl()`: `n.archivo` (noticias) y `d.archivo` (documentos) no renderizan el link si no es segura; `p.web_instagram` (proveedores) renderiza solo el texto escapado si no es segura
