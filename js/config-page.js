@@ -58,7 +58,7 @@ async function saveMontos() {
 function renderPeriodos() {
   var el = document.getElementById('cfgPeriodosList');
   if (!el) return;
-  var periodos = (CONFIG.periodos || []).slice().sort(function(a, b) { return a.periodo < b.periodo ? -1 : 1; });
+  var periodos = (CONFIG.periodos || []).slice().sort(function(a, b) { return a.periodo < b.periodo ? 1 : -1; });
   if (!periodos.length) {
     el.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;margin:0">No hay periodos configurados. Se usará el Monto Base para todos los periodos.</p>';
     return;
@@ -123,7 +123,7 @@ async function savePeriodoForm(e, isEdit) {
     }
     periodos.push({ periodo: periodo, monto: parseFloat(data.monto) || 0, fondo_reserva: parseFloat(data.fondo_reserva) || 0 });
   }
-  periodos.sort(function(a, b) { return a.periodo < b.periodo ? -1 : 1; });
+  periodos.sort(function(a, b) { return a.periodo < b.periodo ? 1 : -1; });
   if (await saveConfig('periodos', periodos)) {
     showSnackbar(isEdit ? 'Periodo actualizado.' : 'Periodo agregado.', 'success');
     closeModal();
