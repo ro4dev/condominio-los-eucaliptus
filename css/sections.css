@@ -16,11 +16,8 @@
 
 .reclamo-item { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); margin-bottom: 1rem; }
 .reclamo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-.reclamo-tipo { font: var(--md-sys-typescale-label-small); padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; }
-.reclamo-tipo.reclamo { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
-.reclamo-tipo.sugerencia { background: var(--color-positive-bg); color: var(--color-positive-text); }
 /* Chip estándar de etiqueta/estado (todas las pestañas) */
-.chip { display: inline-block; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.chip { display: inline-block; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-size: 0.75rem; font-weight: 600; line-height: 1.25rem; white-space: nowrap; }
 .chip-positive { background: var(--color-positive-bg); color: var(--color-positive-text); }
 .chip-warning { background: var(--color-extraordinaria-bg); color: var(--color-extraordinaria-text); }
 .chip-error { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
@@ -34,7 +31,6 @@
 .reclamo-parcela { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
 
 .proveedor-card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
-.proveedor-rubro { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: var(--md-sys-shape-corner-full); font-weight: 600; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-primary); display: inline-block; margin-bottom: 0.5rem; }
 .proveedor-nombre { font: var(--md-sys-typescale-title-medium); margin-bottom: 0.5rem; color: var(--text); }
 .proveedor-contacto { font: var(--md-sys-typescale-body-medium); color: var(--text-2); }
 .proveedor-contacto div { padding: 0.2rem 0; }

@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 15/08/2026 - Fix: chips estandarizados de nuevo en todas las pestañas
+- **Fix**: El merge `1d121ee` con origin/main había revertido parte del refactor de chips en `js/renderers.js` (volvieron `.reclamo-tipo`, `.proveedor-rubro` y pills inline), dejando chips con **2 alturas**: 22px (Comentarios, por `label-small`) y 26.39px (resto). Se re-aplica la estandarización en todo `renderers.js`
+- **Changed**: `.chip` ahora fija `line-height: 1.25rem` (antes heredaba de `body`), así el alto es uniforme (~26.4px) sin depender del contexto (`css/sections.css`)
+- **Refactor**: Se eliminan las clases muertas `.reclamo-tipo` y `.proveedor-rubro`; los pills "Periodo" de los modales de Finanzas pasan a `.chip chip-neutral`
+- **Changed**: Los chips de estado de Parcelas/Gastos agregan variante neutra (`.chip-neutral`) para el caso "Pendiente" que antes usaba `surface-container-highest`
+
 ### 13/08/2026 - Chips de estado/etiqueta estandarizados
 - **Changed**: Nuevo sistema de chips `.chip` + variantes de color (`.chip-positive`, `.chip-warning`, `.chip-error`, `.chip-primary`, `.chip-secondary`, `.chip-tertiary`, `.chip-neutral`) con tamaño uniforme (12px, padding 0.2rem 0.6rem) en **todas** las pestañas
 - **Changed**: Reemplazados ~11 chips inline/duplicados por la clase estándar: Comentarios (reclamo/sugerencia), Proveedores (rubro), Ventas (producto/servicio y disponible/vendido), Asambleas (ordinaria/extraordinaria), Encuestas (abierta/cerrada, quorum, total), Gastos (pagado/pendiente), Flujo (ingreso/egreso), Parcelas (estado)

@@ -355,21 +355,18 @@ function renderPeriodoEnCurso() {
 function estadoChip(g) {
   var pagado = sumPagosGasto(g.id);
   var monto = parseFloat(g.monto || 0);
-  var estado, bg, color;
+  var estado, cls;
   if (isPagado(g)) {
     estado = 'Pagado';
-    bg = 'var(--color-positive-bg)';
-    color = 'var(--color-positive-text)';
+    cls = 'chip-positive';
   } else if (pagado > 0 && pagado < monto) {
     estado = 'Parcial';
-    bg = 'var(--color-extraordinaria-bg)';
-    color = 'var(--color-extraordinaria-text)';
+    cls = 'chip-warning';
   } else {
     estado = 'Pendiente';
-    bg = 'var(--md-sys-color-surface-container-highest)';
-    color = 'var(--md-sys-color-on-surface-variant)';
+    cls = 'chip-neutral';
   }
-  return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + estado + '</span>';
+  return '<span class="chip ' + cls + '">' + estado + '</span>';
 }
 
 function renderResumenPeriodos() {
@@ -445,7 +442,7 @@ function verCuotasPeriodo(periodo) {
   var pct = esp ? Math.round((rec / esp) * 100) : 0;
   var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
   var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
-    '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--surface-hover);color:var(--text-2)">Periodo ' + formatPeriodo(periodo) + '</span>' +
+    '<span class="chip chip-neutral">Periodo ' + formatPeriodo(periodo) + '</span>' +
     '<span style="font-size:0.85rem;color:var(--text-2)">Esperado <strong style="color:var(--text)">$' + formatMoney(esp) + '</strong> · Recaudado <strong style="color:var(--md-sys-color-primary)">$' + formatMoney(rec) + '</strong> · <strong style="color:' + pctColor + '">' + pct + '%</strong></span>' +
     '</div>';
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
@@ -456,7 +453,7 @@ function verMovimientosPeriodo(periodo) {
   var ing = FLUJO.filter(function(f) { return f.tipo === 'Ingreso' && mesDeFecha(f.fecha) === periodo; }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
   var eg = egresosMes(periodo, FLUJO);
   var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
-    '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--surface-hover);color:var(--text-2)">Periodo ' + formatPeriodo(periodo) + '</span>' +
+    '<span class="chip chip-neutral">Periodo ' + formatPeriodo(periodo) + '</span>' +
     '<span style="font-size:0.85rem;color:var(--text-2)">Ingresos <strong style="color:var(--color-positive)">$' + formatMoney(ing) + '</strong> · Egresos <strong style="color:var(--md-sys-color-error)">$' + formatMoney(eg) + '</strong></span>' +
     '</div>';
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
@@ -494,11 +491,9 @@ function resumenMovimientosDetalle(periodo) {
     '<thead><tr><th>Fecha</th><th>Tipo</th><th>Concepto</th><th>Monto</th><th></th></tr></thead>' +
     '<tbody>' + movs.map(function(f) {
       var color = f.tipo === 'Ingreso' ? 'var(--color-positive)' : 'var(--md-sys-color-error)';
-      var bgColor = f.tipo === 'Ingreso' ? 'var(--color-positive-bg)' : 'var(--md-sys-color-error-container)';
-      var textColor = f.tipo === 'Ingreso' ? 'var(--color-positive-text)' : 'var(--md-sys-color-on-error-container)';
       return '<tr>' +
         '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>' +
-        '<td><span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + bgColor + ';color:' + textColor + '">' + escHtml(f.tipo) + '</span></td>' +
+        '<td><span class="chip ' + (f.tipo === 'Ingreso' ? 'chip-positive' : 'chip-error') + '">' + escHtml(f.tipo) + '</span></td>' +
         '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
         '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
         '<td style="width:1%;white-space:nowrap">' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td></tr>';
@@ -522,18 +517,15 @@ function renderParcelas() {
 
   var estadoChip = function(estado) {
     var st = String(estado || '').toLowerCase();
-    var bg, color;
+    var cls;
     if (st.indexOf('habit') !== -1) {
-      bg = 'var(--color-positive-bg)';
-      color = 'var(--color-positive-text)';
+      cls = 'chip-positive';
     } else if (st.indexOf('construc') !== -1) {
-      bg = 'var(--color-extraordinaria-bg)';
-      color = 'var(--color-extraordinaria-text)';
+      cls = 'chip-warning';
     } else {
-      bg = 'var(--md-sys-color-surface-container-highest)';
-      color = 'var(--md-sys-color-on-surface-variant)';
+      cls = 'chip-neutral';
     }
-    return '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;white-space:nowrap;background:' + bg + ';color:' + color + '">' + escHtml(estado) + '</span>';
+    return '<span class="chip ' + cls + '">' + escHtml(estado) + '</span>';
   };
 
   var rows = sorted.map(function(p) {
@@ -732,7 +724,7 @@ function renderReclamos() {
     var tipoClass = String(r.tipo || '').toLowerCase().replace(/[^a-z0-9-]/g, '') || 'reclamo';
     return '<div class="reclamo-item ' + tipoClass + '">' +
       '<div class="reclamo-header">' +
-        '<span class="reclamo-tipo ' + tipoClass + '">' + escHtml(r.tipo) + '</span>' +
+        '<span class="chip ' + (tipoClass === 'sugerencia' ? 'chip-positive' : 'chip-error') + '">' + escHtml(r.tipo) + '</span>' +
         '<span class="reclamo-fecha">' + formatDate(r.fecha || r.created_at) + '</span>' +
       '</div>' +
       '<div class="reclamo-title">' + escHtml(r.asunto) + '</div>' +
@@ -751,7 +743,7 @@ function renderProveedores() {
   grid.innerHTML = PROVEEDORES.map(function(p) {
     return '<div class="proveedor-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<div class="proveedor-rubro" style="margin:0">' + escHtml(p.rubro) + '</div>' +
+        '<div class="chip chip-primary" style="margin:0">' + escHtml(p.rubro) + '</div>' +
         adminActions("editProveedor('" + p.id + "')", "deleteProveedor('" + p.id + "')") +
       '</div>' +
       '<div class="proveedor-nombre">' + escHtml(p.nombre) + '</div>' +
@@ -796,7 +788,7 @@ function renderAsambleas() {
     }).join('') : '';
     return '<div class="item-card">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-bg)' : 'var(--md-sys-color-primary-container)') + ';color:' + (a.tipo === 'Extraordinaria' ? 'var(--color-extraordinaria-text)' : 'var(--md-sys-color-on-primary-container)') + '">' + escHtml(a.tipo) + '</span>' +
+        '<span class="chip ' + (a.tipo === 'Extraordinaria' ? 'chip-warning' : 'chip-primary') + '">' + escHtml(a.tipo) + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fecha + '</span>' +
           adminActions("editAsamblea('" + a.id + "')", "deleteAsamblea('" + a.id + "')") +
@@ -889,8 +881,7 @@ function renderEncuestas() {
   container.innerHTML = data.map(function(d) {
     var e = d.encuesta;
     var quorumAlcanzado = e.quorum ? d.total >= e.quorum : true;
-    var estadoBg = d.cerrada ? 'var(--md-sys-color-surface-container)' : 'var(--md-sys-color-tertiary-container)';
-    var estadoText = d.cerrada ? 'var(--md-sys-color-on-surface-variant)' : 'var(--md-sys-color-on-tertiary-container)';
+    var estadoCls = d.cerrada ? 'chip-neutral' : 'chip-tertiary';
 
     var infoExtra = '';
     if (e.fecha_termino && !d.cerrada) {
@@ -907,7 +898,7 @@ function renderEncuestas() {
 
     var quorumHtml = '';
     if (e.quorum) {
-      quorumHtml = '<span style="padding:0.15rem 0.5rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--md-sys-color-surface-container);color:' + (quorumAlcanzado ? 'var(--md-sys-color-tertiary)' : 'var(--md-sys-color-error)') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
+      quorumHtml = '<span class="chip ' + (quorumAlcanzado ? 'chip-tertiary' : 'chip-error') + '">Quorum: ' + d.total + '/' + e.quorum + (quorumAlcanzado ? ' ✓' : '') + '</span>';
     }
 
     var opcionesHtml = '<div style="position:relative">' +
@@ -946,7 +937,7 @@ function renderEncuestas() {
 
     return '<div class="item-card' + (d.cerrada ? ' cerrada' : '') + '">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">' +
-        '<span style="padding:0.2rem 0.6rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:' + estadoBg + ';color:' + estadoText + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
+        '<span class="chip ' + estadoCls + '">' + (d.cerrada ? 'Cerrada' : 'Abierta') + '</span>' +
         '<div style="display:flex;gap:0.3rem;align-items:center">' +
           '<span style="font-size:0.8rem;color:var(--text-muted)">' + fechaPub + '</span>' +
           adminActions("editEncuesta('" + e.id + "')", "deleteEncuesta('" + e.id + "')") +
@@ -958,7 +949,7 @@ function renderEncuestas() {
       opcionesHtml + accion +
       '<div style="display:flex;justify-content:flex-end;align-items:center;gap:0.4rem;margin-top:0.3rem">' +
         quorumHtml +
-        '<span style="padding:0.15rem 0.5rem;border-radius:var(--md-sys-shape-corner-full);font-size:0.75rem;font-weight:600;background:var(--md-sys-color-surface-container);color:var(--text-2)">Total: ' + d.total + ' votos</span>' +
+        '<span class="chip chip-neutral">Total: ' + d.total + ' votos</span>' +
       '</div>' +
     '</div>';
   }).join('');
