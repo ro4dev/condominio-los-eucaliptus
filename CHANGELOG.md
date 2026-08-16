@@ -2,6 +2,15 @@
 
 ## Registro de cambios
 
+### 15/08/2026 - Fase 3 auditoría: stored XSS mitigado (A3)
+- **Security**: Nuevo helper `safeUrl()` en `js/utils.js` para sanitizar URLs antes de ponerlas en `href`. En vez de la allowlist original del doc de auditoría (que rompía el demo con rutas relativas `assets/...` y URLs `blob:` del upload), **bloquea esquemas peligrosos**: `javascript:`, `vbscript:`, `file:` y `data:` no-imagen; permite http(s), rutas relativas, `#`, `data:image/` y `blob:`. Elimina caracteres de control/espacios antes de detectar el esquema (evita obfuscación tipo `java\nscript:`)
+- **Security**: Todos los `href` de `js/renderers.js` con datos de usuario pasan por `safeUrl()`: `n.archivo` (noticias) y `d.archivo` (documentos) no renderizan el link si no es segura; `p.web_instagram` (proveedores) renderiza solo el texto escapado si no es segura
+- **Security**: Los `href` de `js/modals.js` también pasan por `safeUrl()`: `data.archivo` (formGastos), `data.comprobante` (formFlujo), `data.archivo` (formDocumentos), `data.foto` (formPublicaciones), `p.comprobante` (popup de pagos) y `d.qr` de "Cómo pagar" (`safeUrl` + `escHtml` para el atributo `src`)
+- **Security**: Escapados con `escHtml()` los campos que faltaban: `d.categoria` de documentos (`aria-label`, `title` y `doc-meta`) y `formatPeriodo(...)` en todos los renders de `renderers.js` (tabla resumen, popups de cuotas/movimientos, deuda y aviso de aumento) — `formatPeriodo` se mantiene puro, se escapa en el punto de render
+- **Note**: `p.numero`/`p.rol`/`p.estado` de Parcelas ya estaban escapados; `r.archivo`/`f.comprobante` ya no existen (tabs fusionados en Finanzas)
+- **Docs**: checklist Fase 3 marcado en `docs/audit/security.md` con la decisión de `safeUrl` documentada
+- **Tests**: `test.html` suma 16 asserts de `safeUrl` → **149/149** (verificados en harness con los renderers reales: documento con `<img onerror>` sale escapado, `javascript:` no genera link, `assets/` y `https://` conservan link)
+
 ### 15/08/2026 - Fix: chips estandarizados de nuevo en todas las pestañas
 - **Fix**: El merge `1d121ee` con origin/main había revertido parte del refactor de chips en `js/renderers.js` (volvieron `.reclamo-tipo`, `.proveedor-rubro` y pills inline), dejando chips con **2 alturas**: 22px (Comentarios, por `label-small`) y 26.39px (resto). Se re-aplica la estandarización en todo `renderers.js`
 - **Changed**: `.chip` ahora fija `line-height: 1.25rem` (antes heredaba de `body`), así el alto es uniforme (~26.4px) sin depender del contexto (`css/sections.css`)

@@ -94,6 +94,24 @@
     assert('nl2br escapa y convierte \\n', nl2br('<b>x</b>\nlinea'), '&lt;b&gt;x&lt;/b&gt;<br>linea');
     assert('nl2br(null)', nl2br(null), '');
 
+    // ── safeUrl ──
+    assert('safeUrl("https://x")', safeUrl('https://x'), 'https://x');
+    assert('safeUrl("http://x")', safeUrl('http://x'), 'http://x');
+    assert('safeUrl("/ruta")', safeUrl('/ruta'), '/ruta');
+    assert('safeUrl("../docs/x.pdf")', safeUrl('../docs/x.pdf'), '../docs/x.pdf');
+    assert('safeUrl("assets/demo_x.png")', safeUrl('assets/demo_x.png'), 'assets/demo_x.png');
+    assert('safeUrl("blob:https://app/uuid")', safeUrl('blob:https://app/uuid'), 'blob:https://app/uuid');
+    assert('safeUrl("data:image/png;base64,x")', safeUrl('data:image/png;base64,x'), 'data:image/png;base64,x');
+    assert('safeUrl("javascript:alert(1)")', safeUrl('javascript:alert(1)'), '');
+    assert('safeUrl("JaVaScRiPt:alert(1)")', safeUrl('JaVaScRiPt:alert(1)'), '');
+    assert('safeUrl("java\\nscript:alert(1)")', safeUrl('java\nscript:alert(1)'), '');
+    assert('safeUrl("vbscript:x")', safeUrl('vbscript:x'), '');
+    assert('safeUrl("file:///etc/passwd")', safeUrl('file:///etc/passwd'), '');
+    assert('safeUrl("data:text/html,x")', safeUrl('data:text/html,x'), '');
+    assert('safeUrl("  javascript:alert(1)  ")', safeUrl('  javascript:alert(1)  '), '');
+    assert('safeUrl(null)', safeUrl(null), '');
+    assert('safeUrl("")', safeUrl(''), '');
+
     // ── Deudores / estado de pago ──
     var TG = [
       { id: '1', periodo: '2026-07', monto: '100', parcela_id: 'A', pagado: 'Sí' },

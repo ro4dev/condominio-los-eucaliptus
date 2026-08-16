@@ -287,33 +287,38 @@ CREATE POLICY "reclamos_insert" ON reclamos
 
 ### 3.1 Helper `safeUrl()` en `js/utils.js`
 
-Permitir solo protocolos seguros:
+> **Implementado (15/08/2026)** — con una variante a la versión original del doc: en vez de allowlist, se **bloquean esquemas peligrosos** (`javascript:`, `vbscript:`, `file:` y `data:` no-imagen), porque la allowlist original rompía el demo (rutas relativas `assets/...` y URLs `blob:` del upload demo). Se eliminan caracteres de control/espacios antes de detectar el esquema (evita obfuscación tipo `java\nscript:`).
 
 ```js
+// Solo URLs sin esquema peligroso (para hrefs). Devuelve '' si no es segura.
+// Permite http(s), rutas relativas (assets/...), #, data:image/ y blob: (demo upload).
+// Bloquea javascript:, vbscript:, file: y data: no-imagen.
 function safeUrl(u) {
   if (!u) return '';
-  var s = String(u).trim();
-  if (/^(https?:|#|\.\.?\/|\/|data:image\/)/i.test(s)) return s;
-  return '';
+  var s = String(u).replace(/[\u0000-\u0020]/g, '').trim();
+  if (/^(javascript|vbscript|file):/i.test(s)) return '';
+  if (/^data:/i.test(s) && !/^data:image\//i.test(s)) return '';
+  return s;
 }
 ```
 
 ### 3.2 Aplicar en `js/renderers.js`
 
+> **Implementado (15/08/2026)** — los tabs Gastos/Ingresos-Egresos ya no existen (se fusionaron en Finanzas), así que `r.archivo` y `f.comprobante` ya no aplican. Los `p.numero`/`p.rol`/`p.estado` de parcelas ya estaban escapados. Se aplicó sobre el código actual:
+
 - Envolver **todas** las URLs en `href` con `safeUrl()`:
-  - `renderers.js:121` `r.archivo`
-  - `renderers.js:264` `n.archivo`
-  - `renderers.js:318` `f.comprobante`
-  - `renderers.js:354` `d.archivo`
-  - `renderers.js:422` `p.web_instagram` (y renderizar solo el texto si `safeUrl` devuelve vacío)
-- Escapar campos faltantes con `escHtml()`:
-  - `renderers.js:146` `p.numero`, `:153` `p.rol`, `:155` `p.estado`
-  - `renderers.js:358-361` `d.categoria` (aria-label, title y `doc-meta`)
-  - `formatPeriodo(r.periodo)` en la tabla de gastos: escapar la salida o hacer que `formatPeriodo` escape (cuidado: también se usa en selects/options; verificar que no rompa `fillFilters`).
+  - `n.archivo` (noticias) — si no es segura, no se renderiza el link
+  - `d.archivo` (documentos) — idem
+  - `p.web_instagram` (proveedores) — si no es segura, se renderiza solo el texto escapado, sin anchor
+- Escapar campos con `escHtml()`:
+  - `d.categoria` (documentos) en `aria-label`, `title` y `doc-meta`
+  - `formatPeriodo(...)` en todos los renders de renderers.js (tabla resumen, popups de cuotas/movimientos, deuda, aviso de aumento) — se escapa en el punto de render, `formatPeriodo` se mantiene puro
 
 ### Verificación Fase 3
 - En `test.html` agregar asserts de `safeUrl` (`javascript:alert(1)` → `''`, `https://x` → `https://x`).
 - Insertar en modo demo un documento con `categoria = "<img src=x onerror=alert(1)>"` y una noticia con `archivo = "javascript:alert(1)"` → render sin ejecutar nada.
+
+> **Verificado (15/08/2026)**: `test.html` 149/149 asserts (16 de `safeUrl`), y los renderers reales ejecutados en harness: documento con `categoria` XSS sale escapado y sin `<img` crudo; noticia/proveedor con `javascript:` no generan link; rutas `assets/` y `https://` conservan el link.
 
 ## Fase 4 — PII y signup abierto (A2) — requiere decisión
 
@@ -454,11 +459,12 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [ ] Verificación: voto con parcela ajena → violación de política; con la propia → OK
 
 ### FASE 3 — Stored XSS (A3)
-- [ ] Helper `safeUrl()` en `js/utils.js`
-- [ ] `href` envueltos con `safeUrl()`: `r.archivo`, `n.archivo`, `f.comprobante`, `d.archivo`, `p.web_instagram`
-- [ ] Escapados con `escHtml()`: `p.numero`, `p.rol`, `p.estado`, `d.categoria`, `formatPeriodo(r.periodo)`
-- [ ] Asserts de `safeUrl` en `test.html`
-- [ ] Verificación demo: `<img onerror>` y `javascript:` en documento/noticia → no ejecutan
+- [x] Helper `safeUrl()` en `js/utils.js` (variante: bloquea esquemas peligrosos, no rompe rutas relativas/blob del demo)
+- [x] `href` envueltos con `safeUrl()`: `n.archivo`, `d.archivo`, `p.web_instagram` (`r.archivo`/`f.comprobante` ya no existen: tabs fusionados en Finanzas)
+- [x] `href` de `js/modals.js` también con `safeUrl()`: `data.archivo` (gastos), `data.comprobante` (flujo), `data.archivo` (documentos), `data.foto` (publicaciones), `p.comprobante` (popup de pagos) y `d.qr` (Cómo pagar, `safeUrl`+`escHtml`)
+- [x] Escapados con `escHtml()`: `d.categoria` (aria-label/title/doc-meta) y `formatPeriodo(...)` en renderers.js (`p.numero`/`p.rol`/`p.estado` ya estaban escapados)
+- [x] Asserts de `safeUrl` en `test.html`
+- [x] Verificación: documento con `<img onerror>` y `javascript:` en noticia/documento/proveedor → no ejecutan ni generan link (149/149 asserts; modals verificados con harness: `javascript:` sin link, `assets/`/`https://`/`blob:` conservan link)
 
 ### FASE 4 — PII y signup abierto (A2) — requiere decisión
 - [ ] Definir con el usuario el modelo de acceso (A cerrar signup / B limitar lectura / C ambas)

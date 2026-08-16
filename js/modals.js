@@ -587,7 +587,7 @@ function formGastos(opt) {
     '<div class="form-group"><label>Comprobante (foto)</label>' +
       '<div class="comprobante-row">' +
         '<input type="file" name="archivo" accept="image/*">' +
-        (isEdit && data.archivo ? '<a href="' + data.archivo + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+        (isEdit && safeUrl(data.archivo) ? '<a href="' + safeUrl(data.archivo) + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
       '</div>' +
     '</div>' +
   '</form>',
@@ -708,7 +708,7 @@ function verPagos(gastoId) {
             '<div style="font-weight:600;color:var(--text)">$' + formatMoney(parseFloat(p.monto)) + '</div>' +
             '<div style="font-size:0.8rem;color:var(--text-2)">' + formatDate(p.fecha) + '</div>' +
           '</div>' +
-          (p.comprobante ? '<a href="' + p.comprobante + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+          (safeUrl(p.comprobante) ? '<a href="' + safeUrl(p.comprobante) + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
           (IS_ADMIN ? '<md-icon-button onclick="deletePago(\'' + p.id + '\')" title="Eliminar pago"><md-icon>delete</md-icon></md-icon-button>' : '') +
         '</div>';
       }).join('');
@@ -908,7 +908,7 @@ function formFlujo(data) {
     '<div class="form-group"><label>Comprobante (foto)</label>' +
       '<div class="comprobante-row">' +
         '<input type="file" name="comprobante" accept="image/*">' +
-        (isEdit && data.comprobante ? '<a href="' + data.comprobante + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
+        (isEdit && safeUrl(data.comprobante) ? '<a href="' + safeUrl(data.comprobante) + '" target="_blank" title="Ver comprobante" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
       '</div>' +
     '</div>' +
   '</form>',
@@ -928,7 +928,7 @@ function formDocumentos(data) {
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Resumen del documento..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion || '') + '"' : '') + '></md-filled-text-field></div>' +
     '<div class="form-group"><label>Archivo</label><input type="file" name="archivo"></div>' +
-    (isEdit && data.archivo ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + data.archivo + '" target="_blank">ver</a></div>' : '') +
+    (isEdit && safeUrl(data.archivo) ? '<div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.5rem">Archivo actual: <a href="' + safeUrl(data.archivo) + '" target="_blank">ver</a></div>' : '') +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }
@@ -982,7 +982,7 @@ function formPublicaciones(data) {
     '<div class="form-group"><label>Foto (opcional)</label>' +
       '<div class="comprobante-row">' +
         '<input type="file" name="foto" accept="image/*">' +
-        (isEdit && data.foto ? '<a href="' + data.foto + '" target="_blank" title="Ver foto" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>image</md-icon></md-icon-button></a>' : '') +
+        (isEdit && safeUrl(data.foto) ? '<a href="' + safeUrl(data.foto) + '" target="_blank" title="Ver foto" style="text-decoration:none;flex-shrink:0"><md-icon-button style="color:var(--md-sys-color-primary)"><md-icon>image</md-icon></md-icon-button></a>' : '') +
       '</div>' +
     '</div>' +
   '</form>',

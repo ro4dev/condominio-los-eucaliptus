@@ -63,6 +63,17 @@ function escHtml(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+// Solo URLs sin esquema peligroso (para hrefs). Devuelve '' si no es segura.
+// Permite http(s), rutas relativas (assets/...), #, data:image/ y blob: (demo upload).
+// Bloquea javascript:, vbscript:, file: y data: no-imagen.
+function safeUrl(u) {
+  if (!u) return '';
+  var s = String(u).replace(/[\u0000-\u0020]/g, '').trim();
+  if (/^(javascript|vbscript|file):/i.test(s)) return '';
+  if (/^data:/i.test(s) && !/^data:image\//i.test(s)) return '';
+  return s;
+}
+
 function getTimeRemaining(fechaStr) {
   if (!fechaStr) return null;
   var parts = fechaStr.split('T')[0].split('-');

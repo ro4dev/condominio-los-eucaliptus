@@ -138,7 +138,7 @@ function renderAvisoAumento() {
     '<div class="aviso-card" style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">' +
       '<md-icon style="color:#f59e0b">trending_up</md-icon>' +
       '<div style="flex:1;min-width:200px">' +
-        '<strong>Cuota ' + formatPeriodo(aviso.periodo) + ' subirá a $' + formatMoney(aviso.nuevo) + '</strong>' +
+        '<strong>Cuota ' + escHtml(formatPeriodo(aviso.periodo)) + ' subirá a $' + formatMoney(aviso.nuevo) + '</strong>' +
         '<div style="font-size:0.8rem;color:var(--text-2)">Actualmente $' + formatMoney(aviso.anterior) + ' (+' + aviso.pct + '%)</div>' +
       '</div>' +
       (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Generar cuotas</md-filled-button>' : '') +
@@ -200,7 +200,7 @@ function openDeudaParcela(parcelaId) {
     '</div>' +
     detalle.map(function(d) {
       return '<div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--divider)">' +
-        '<span style="color:var(--text)">' + (d.periodo ? formatPeriodo(d.periodo) : 'Sin periodo') + '</span>' +
+        '<span style="color:var(--text)">' + (d.periodo ? escHtml(formatPeriodo(d.periodo)) : 'Sin periodo') + '</span>' +
         '<span style="color:var(--text-2)">$' + formatMoney(d.monto) + '</span>' +
       '</div>';
     }).join('') +
@@ -252,8 +252,8 @@ function openComoPagar(parcelaId) {
         '<span class="value" onclick="copiarValor(this)" title="Tocar para copiar">' + escHtml(c[1]) + '</span>' +
         '</div>';
     }).join('');
-    if (d.qr) {
-      body += '<img src="' + d.qr + '" alt="Código QR de pago" class="pago-qr">';
+    if (safeUrl(d.qr)) {
+      body += '<img src="' + escHtml(safeUrl(d.qr)) + '" alt="Código QR de pago" class="pago-qr">';
     }
   }
 
@@ -344,7 +344,7 @@ function renderPeriodoEnCurso() {
           '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
         '</div>' +
       '</div>' +
-      '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">Periodo <strong style="color:var(--text)">' + formatPeriodo(p) + '</strong></div>' +
+      '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">Periodo <strong style="color:var(--text)">' + escHtml(formatPeriodo(p)) + '</strong></div>' +
       '<section class="stats" style="margin-bottom:0.8rem">' +
         '<div class="stat-card"><div class="label">Esperado</div><div class="value">$' + formatMoney(esp) + '</div></div>' +
         '<div class="stat-card"><div class="label">Recaudado</div><div class="value blue">$' + formatMoney(rec) + '</div></div>' +
@@ -410,7 +410,7 @@ function renderResumenPeriodos() {
     var pct = esp ? Math.round((rec / esp) * 100) : 0;
     var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
     return '<tr>' +
-      '<td style="font-weight:600;color:var(--text);white-space:nowrap">' + formatPeriodo(p) + '</td>' +
+      '<td style="font-weight:600;color:var(--text);white-space:nowrap">' + escHtml(formatPeriodo(p)) + '</td>' +
       '<td>$' + formatMoney(esp) + '</td>' +
       '<td>$' + formatMoney(rec) + '</td>' +
       '<td style="font-weight:600;color:' + pctColor + '">' + pct + '%</td>' +
@@ -446,7 +446,7 @@ function verCuotasPeriodo(periodo) {
   var pct = esp ? Math.round((rec / esp) * 100) : 0;
   var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
   var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
-    '<span class="chip chip-neutral">Periodo ' + formatPeriodo(periodo) + '</span>' +
+    '<span class="chip chip-neutral">Periodo ' + escHtml(formatPeriodo(periodo)) + '</span>' +
     '<span style="font-size:0.85rem;color:var(--text-2)">Esperado <strong style="color:var(--text)">$' + formatMoney(esp) + '</strong> · Recaudado <strong style="color:var(--md-sys-color-primary)">$' + formatMoney(rec) + '</strong> · <strong style="color:' + pctColor + '">' + pct + '%</strong></span>' +
     '</div>';
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
@@ -457,7 +457,7 @@ function verMovimientosPeriodo(periodo) {
   var ing = FLUJO.filter(function(f) { return f.tipo === 'Ingreso' && mesDeFecha(f.fecha) === periodo; }).reduce(function(s, f) { return s + parseFloat(f.monto || 0); }, 0);
   var eg = egresosMes(periodo, FLUJO);
   var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
-    '<span class="chip chip-neutral">Periodo ' + formatPeriodo(periodo) + '</span>' +
+    '<span class="chip chip-neutral">Periodo ' + escHtml(formatPeriodo(periodo)) + '</span>' +
     '<span style="font-size:0.85rem;color:var(--text-2)">Ingresos <strong style="color:var(--color-positive)">$' + formatMoney(ing) + '</strong> · Egresos <strong style="color:var(--md-sys-color-error)">$' + formatMoney(eg) + '</strong></span>' +
     '</div>';
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
@@ -657,7 +657,7 @@ function renderNoticiaCard(n, old) {
       adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')") +
     '</div>' +
     '<div class="desc">' + nl2br(n.descripcion) + '</div>' +
-    (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>' : '') +
+    (safeUrl(n.archivo) ? '<a href="' + safeUrl(n.archivo) + '" target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>' : '') +
     '</div>';
 }
 
@@ -686,15 +686,15 @@ function renderDocumentos() {
     if (d.descripcion) {
       btns += '<md-icon-button onclick="showDescripcion(\'' + d.id + '\')" title="Ver descripción"><md-icon>info</md-icon></md-icon-button>';
     }
-    if (d.archivo) {
-      btns += '<a href="' + d.archivo + '" title="Ver documento" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--text-2)"><md-icon>description</md-icon></md-icon-button></a>';
+    if (safeUrl(d.archivo)) {
+      btns += '<a href="' + safeUrl(d.archivo) + '" title="Ver documento" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--text-2)"><md-icon>description</md-icon></md-icon-button></a>';
     }
     btns += '</div>';
     return '<div class="doc-item">' +
-      '<div class="doc-icon"><md-icon aria-label="' + (d.categoria || 'Documento') + '" title="' + (d.categoria || 'Documento') + '">' + icon + '</md-icon></div>' +
+      '<div class="doc-icon"><md-icon aria-label="' + escHtml(d.categoria || 'Documento') + '" title="' + escHtml(d.categoria || 'Documento') + '">' + icon + '</md-icon></div>' +
       '<div class="doc-info" style="flex:1">' +
         '<div class="doc-name">' + escHtml(d.nombre) + '</div>' +
-        '<div class="doc-meta">' + d.categoria + ' · ' + fecha + '</div>' +
+        '<div class="doc-meta">' + escHtml(d.categoria || '') + ' · ' + fecha + '</div>' +
       '</div>' +
       btns +
       '</div>';
@@ -755,7 +755,7 @@ function renderProveedores() {
         '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Contacto" title="Contacto">person</md-icon> ' + escHtml(p.contacto) + '</div>' +
         (p.telefono ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Teléfono" title="Teléfono">phone</md-icon> <a href="tel:' + escHtml(p.telefono) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.telefono) + '</a></div>' : '') +
         (p.email ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Correo" title="Correo">mail</md-icon> <a href="mailto:' + escHtml(p.email) + '" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.email) + '</a></div>' : '') +
-        (p.web_instagram ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Sitio web" title="Sitio web">language</md-icon> <a href="' + escHtml(p.web_instagram) + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.web_instagram) + '</a></div>' : '') +
+        (p.web_instagram ? '<div><md-icon style="vertical-align:middle;font-size:1.1rem" aria-label="Sitio web" title="Sitio web">language</md-icon> ' + (safeUrl(p.web_instagram) ? '<a href="' + safeUrl(p.web_instagram) + '" target="_blank" style="color:var(--md-sys-color-primary);text-decoration:none">' + escHtml(p.web_instagram) + '</a>' : escHtml(p.web_instagram)) + '</div>' : '') +
         '<div style="color:var(--text-muted);font-size:0.8rem;margin-top:0.3rem">' + escHtml(p.observaciones) + '</div>' +
       '</div>' +
       '</div>';
