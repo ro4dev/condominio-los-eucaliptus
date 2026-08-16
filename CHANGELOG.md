@@ -7,6 +7,7 @@
 - **Changed**: `.chip` ahora fija `line-height: 1.25rem` (antes heredaba de `body`), así el alto es uniforme (~26.4px) sin depender del contexto (`css/sections.css`)
 - **Refactor**: Se eliminan las clases muertas `.reclamo-tipo` y `.proveedor-rubro`; los pills "Periodo" de los modales de Finanzas pasan a `.chip chip-neutral`
 - **Changed**: Los chips de estado de Parcelas/Gastos agregan variante neutra (`.chip-neutral`) para el caso "Pendiente" que antes usaba `surface-container-highest`
+- **Fix**: El merge `1d121ee` también había revertido la **auditoría de DELETE** en `deleteItem` (`js/renderers.js`): borrar gastos, movimientos, parcelas, noticias, documentos, comentarios, asambleas, encuestas o proveedores ya no se registraba en "Actividad reciente". Se restaura `logAudit(table, 'DELETE', ...)` en los 3 caminos (demo, prod, delete-user de propietarios), igual que lo tenía la rama local
 
 ### 13/08/2026 - Chips de estado/etiqueta estandarizados
 - **Changed**: Nuevo sistema de chips `.chip` + variantes de color (`.chip-positive`, `.chip-warning`, `.chip-error`, `.chip-primary`, `.chip-secondary`, `.chip-tertiary`, `.chip-neutral`) con tamaño uniforme (12px, padding 0.2rem 0.6rem) en **todas** las pestañas
