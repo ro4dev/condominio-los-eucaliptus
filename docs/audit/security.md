@@ -398,21 +398,21 @@ El usuario confirmó que **los propietarios deben seguir viendo los datos de con
 ## Fase 7 — Hardening (M3, M4, M5, M6, M7)
 
 ### 7.1 `WITH CHECK` en UPDATE policies (M3)
-En `003_security_fixes.sql`, agregar `WITH CHECK (auth.jwt() -> 'app_metadata' ->> 'role' = 'admin')` a todos los UPDATE admin (parcelas, propietarios, gastos, flujo, noticias, documentos, reclamos, proveedores, asambleas, asamblea_asistentes, encuestas, encuestas_votos, config).
+Migración `007_update_with_check.sql`: agrega `WITH CHECK (auth.jwt() -> 'app_metadata' ->> 'role' = 'admin')` a las 11 UPDATE policies (parcelas, propietarios, gastos, flujo, noticias, documentos, reclamos, proveedores, asambleas, encuestas, config). Se re-crean con `drop + create` (mismo nombre). `asamblea_asistentes` y `encuestas_votos` no tienen UPDATE policy.
 
 ### 7.2 Rol stale (M4)
-Documentar (aceptable). Opcional: `checkAdmin()` puede validar con `getUser()` al detectar la pestaña config, o re-login al cambiar rol.
+**Decisión (15/08/2026): documentar (aceptable).** El rol se lee del JWT (`currentUser.app_metadata.role`); si el admin cambia el rol por SQL, el usuario debe re-loguear para ver el cambio. Se documenta en README ("re-loguear después"). No se agrega `checkAdmin()` con `getUser()` para no añadir latencia al flujo normal.
 
 ### 7.3 `Code.gs` (M5)
-Eliminar el archivo (es un prototipo descartado, `FOLDER_ID = 'TU_FOLDER_ID'`) o moverlo a `docs/legacy/` con nota "no desplegar sin auth".
+**Eliminado** (decisión del usuario 15/08/2026): es un prototipo descartado (`FOLDER_ID = 'TU_FOLDER_ID'`), reemplazado por Supabase. No se conserva en `docs/legacy/`.
 
 ### 7.4 Password policy (M6)
-- En `handleSignup` (`supabase-config.js:124`): validar min 8 caracteres + al menos un número antes de llamar a Supabase.
+Con el signup público cerrado (Fase 4), `handleSignup` quedó como código muerto. La política vive ahora en `create-user/index.ts`: la contraseña derivada del RUT debe tener **mín. 8 caracteres y al menos un número**; si no, la función responde 400. (El derivar del RUT en sí es el hallazgo C2, se corrige en Fase 1.)
 
 ### 7.5 Docs y repo hygiene (M7)
-- `README.md:156-157`: corregir `raw_user_meta_data.role` → `raw_app_meta_data`.
-- `README.md:63-88`: alinear la lista de migraciones con la carpeta real (001, 002, 003) o regenerarla.
-- `.gitignore`: agregar `js/supabase-config.local.js` como patrón de respaldo (sin mover la key actual, que es pública por diseño).
+- `README.md`: corregido `raw_user_meta_data.role` → `raw_app_meta_data` (descripción y SQL de asignación de admin).
+- `README.md`: lista de migraciones alineada con la carpeta real (001 → 007).
+- `.gitignore`: agregado `js/supabase-config.local.js` como patrón de respaldo (sin mover la anon key actual, que es pública por diseño).
 
 ## Orden de ejecución sugerido
 
@@ -497,13 +497,14 @@ Instrucciones: marcar `[x]` cuando el cambio esté commiteado y verificado en de
 - [ ] Verificación: incógnito light/dark sin bloqueos; Chart.js y `md-*` funcionan
 
 ### FASE 7 — Hardening (M3, M4, M5, M6, M7)
-- [ ] `WITH CHECK (admin)` en todos los UPDATE policies (en `003_security_fixes.sql`)
-- [ ] Rol stale: documentado (aceptable) u opcional `checkAdmin()` con `getUser()`
-- [ ] `Code.gs` eliminado o movido a `docs/legacy/` con nota "no desplegar sin auth"
-- [ ] Password policy: min 8 caracteres + un número en `handleSignup`
-- [ ] `README.md:156-157`: `raw_user_meta_data.role` → `raw_app_meta_data`
-- [ ] `README.md:63-88`: alinear lista de migraciones (001, 002, 003)
-- [ ] `.gitignore`: agregar `js/supabase-config.local.js`
+- [x] `WITH CHECK (admin)` en las 11 UPDATE policies (`007_update_with_check.sql`)
+- [x] Rol stale: documentado (aceptable) — el admin re-loguea tras cambiar rol por SQL
+- [x] `Code.gs` eliminado (prototipo descartado, fuera del repo)
+- [x] Password policy (mín. 8 + un número) en `create-user/index.ts` (signup cerrado, `handleSignup` es código muerto)
+- [x] `README.md`: `raw_user_meta_data.role` → `raw_app_meta_data`
+- [x] `README.md`: lista de migraciones alineada (001 → 007)
+- [x] `.gitignore`: agregado `js/supabase-config.local.js`
+- [ ] Verificación en prod: migración 007 aplicada; `create-user` valida password (pendiente deploy/CLI)
 
 ### Verificación global (antes de cerrar)
 - [ ] `supabase db advisors` sin issues

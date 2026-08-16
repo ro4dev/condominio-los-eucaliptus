@@ -68,7 +68,9 @@ condominio-los-eucaliptus/
 │       ├── 002_rls_policies.sql
 │       ├── 003_audit_log.sql
 │       ├── 004_publicaciones.sql
-│       └── 005_pagos.sql
+│       ├── 005_pagos.sql
+│       ├── 006_block_public_signup.sql
+│       └── 007_update_with_check.sql
 └── test.html                      # Tests unitarios
 ```
 
@@ -142,8 +144,8 @@ Los formularios modales funcionan en ambos modos. En modo demo los cambios se gu
 - SELECT: requiere autenticación
 - INSERT: solo admin (excepto reclamos y votos encuestas = usuario autenticado)
 - UPDATE/DELETE: solo admin
-- Roles via JWT: `raw_user_meta_data.role = 'admin'`
-- Asignar admin: `UPDATE auth.users SET raw_user_meta_data = raw_user_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';`
+- Roles via JWT: `raw_app_meta_data.role = 'admin'`
+- Asignar admin: `UPDATE auth.users SET raw_app_meta_data = raw_app_meta_data || '{"role": "admin"}'::jsonb WHERE email = 'email';` (re-loguear después)
 - Auth via Supabase Auth (email/password)
 
 ## Notas

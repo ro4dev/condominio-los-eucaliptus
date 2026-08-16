@@ -19,6 +19,10 @@ serve(async (req) => {
 
   const password = rut.replace(/[\.\-]/g, '')
 
+  if (password.length < 8 || !/\d/.test(password)) {
+    return new Response(JSON.stringify({ error: 'La contraseña derivada del RUT no cumple la política (mín. 8 caracteres y al menos un número)' }), { status: 400 })
+  }
+
   const { data: existingUsers } = await supabase.auth.admin.listUsers()
   const existing = existingUsers?.users.find(u => u.email === email)
   if (existing) {

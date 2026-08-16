@@ -2,6 +2,14 @@
 
 ## Registro de cambios
 
+### 15/08/2026 - Fase 7 auditoría: hardening (M3, M4, M5, M6, M7)
+- **Security**: Nueva migración `supabase/migrations/007_update_with_check.sql` — las 11 UPDATE policies admin (parcelas, propietarios, gastos, flujo, noticias, documentos, reclamos, proveedores, asambleas, encuestas, config) ahora tienen `WITH CHECK (admin)` además del `USING`, cerrando la manipulación vía UPDATE (`asamblea_asistentes`/`encuestas_votos` no tienen UPDATE policy)
+- **Security**: `Code.gs` (prototipo de Apps Script sin auth) **eliminado** del repo a pedido del usuario (M5)
+- **Security**: Password policy en `create-user/index.ts`: la contraseña derivada del RUT debe cumplir mín. 8 caracteres + un número, si no responde 400. Con el signup cerrado (Fase 4), `handleSignup` quedó como código muerto y la validación vive server-side (M6)
+- **Docs**: `README.md` corregido `raw_user_meta_data.role` → `raw_app_meta_data` y lista de migraciones alineada con la carpeta real (001 → 007)
+- **Chore**: `.gitignore` agrega `js/supabase-config.local.js` como respaldo
+- **Note**: Rol stale (M4) documentado como aceptable — el admin re-loguea tras asignar rol por SQL
+
 ### 15/08/2026 - Fase 4 auditoría: signup público cerrado (A2)
 - **Security**: Se cierra el signup público (decisión de producto: los propietarios **siguen viendo** el directorio de contactos — RUT/teléfono/email — para poder contactarse; la protección es impedir que terceros se autoregistren). Botón "Crear cuenta" eliminado del login dialog (`index.html`)
 - **Security**: Nueva migración `supabase/migrations/006_block_public_signup.sql` — trigger `BEFORE INSERT ON auth.users` que rechaza cualquier cuenta sin `app_metadata.role`. El signup vía API pública (anon key) no setea ese campo y falla server-side; ya no depende solo de ocultar el botón
