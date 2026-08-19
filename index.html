@@ -132,36 +132,30 @@
         </div>
       </section>
       <div id="finanzasPeriodoEnCurso" style="margin-bottom:1rem"></div>
-      <div class="table-wrap" id="resumenPeriodosWrap">
-        <h4 style="margin:0 0 0.8rem">Resumen por periodo</h4>
-        <div id="resumenPeriodosSkeleton">
+      <div class="table-wrap" id="historicoPeriodosWrap">
+        <h4 style="margin:0 0 0.8rem">Histórico de períodos</h4>
+        <div id="historicoPeriodosSkeleton">
           <div class="skeleton skeleton-row"></div>
           <div class="skeleton skeleton-row"></div>
           <div class="skeleton skeleton-row"></div>
         </div>
-        <div id="resumenPeriodosEmpty" style="display:none"></div>
-        <table style="display:none" id="tableResumenPeriodos">
+        <div id="historicoPeriodosEmpty" style="display:none"></div>
+        <table style="display:none" id="tableHistoricoPeriodos">
           <thead>
             <tr>
-              <th>Periodo</th>
+              <th>Período</th>
+              <th class="admin-only">Monto</th>
               <th>Esperado</th>
               <th>Recaudado</th>
               <th>%</th>
-              <th>Egresos</th>
               <th>Saldo</th>
-              <th style="width:1%;white-space:nowrap" title="Ver cuotas del periodo">Cuotas</th>
-              <th style="width:1%;white-space:nowrap" title="Ver movimientos del periodo">Mov.</th>
+              <th style="width:1%;white-space:nowrap"></th>
             </tr>
           </thead>
-          <tbody id="resumenPeriodosBody"></tbody>
+          <tbody id="historicoPeriodosBody"></tbody>
         </table>
       </div>
-      <div class="card admin-only" style="margin-bottom:1rem">
-        <h4 style="margin:0 0 0.4rem">Configuración de períodos</h4>
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos por período. Los períodos sin config usarán el Monto Base.</p>
-        <div id="cfgPeriodosList"></div>
-        <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar período</md-filled-button></div>
-      </div>
+      <md-filled-button class="admin-only" onclick="openModalPeriodo()" style="margin-top:0.5rem"><md-icon slot="icon">add</md-icon>Agregar período</md-filled-button>
     </div>
 
     <!-- PARCELAS -->

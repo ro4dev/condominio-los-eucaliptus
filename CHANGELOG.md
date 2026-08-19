@@ -2,6 +2,16 @@
 
 ## Registro de cambios
 
+### 18/08/2026 - Vista unificada de períodos: card periodo en curso + tabla histórica
+- **Refactor**: La pestaña Finanzas ahora muestra el período vigente como card destacada (con stats, progress bar y acciones) y el resto de períodos en una tabla compacta dentro de un `.table-wrap`. Se elimina la tabla resumen anterior y la card separada de config
+- **Changed**: Nueva función `renderHistoricoPeriodos()` que renderiza la tabla histórica (excluye el período vigente ya mostrado en la card)
+- **Changed**: Eliminadas `renderResumenPeriodos()` y `renderListaPeriodos()`; la config de períodos (monto, fondo reserva) se muestra inline en la tabla (columna "Monto", solo admin)
+- **Changed**: Acciones por fila: ver cuotas, ver movimientos, editar config (admin). Botón "Generar Cuotas" por período
+- **Changed**: `showSkeletons('finanzas')` usa los nuevos IDs (`#historicoPeriodosSkeleton`, `#tableHistoricoPeriodos`, `#historicoPeriodosEmpty`)
+- **Changed**: Títulos "Resumen por periodo" y "Configuración de períodos" movidos dentro de sus cards como `<h4>`
+- **Removed**: Fila de totales de la tabla resumen (cada mes es independiente), CSS muerto `.resumen-totales`
+- **Docs**: `README.md`, `docs/features/finanzas.md` y `docs/features/config-admin.md` actualizados
+
 ### 18/08/2026 - Unificación de períodos: config migrada de Configuración a Finanzas
 - **Refactor**: La sección "Periodos de Cuota" (configuración de montos por período) se mueve de la pestaña **Configuración** a la pestaña **Finanzas**, debajo de la tabla resumen por período. El admin ahora configura montos y ve el resultado financiero en el mismo lugar, sin saltar entre pestañas
 - **Changed**: Funciones `renderPeriodos`, `openModalPeriodo`, `savePeriodoForm` y `removePeriodo` migradas de `config-page.js` a `renderers.js`

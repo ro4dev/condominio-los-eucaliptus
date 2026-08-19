@@ -60,26 +60,26 @@ La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` dev
 
   <div id="finanzasPeriodoEnCurso" style="margin-bottom:1rem"></div>
 
-  <h3 class="section-title">Resumen por periodo</h3>
-  <div class="table-wrap" id="resumenPeriodosWrap">
-    <div id="resumenPeriodosSkeleton">...</div>
-    <div id="resumenPeriodosEmpty" style="display:none"></div>
-    <table style="display:none" id="tableResumenPeriodos">
+  <div class="table-wrap" id="historicoPeriodosWrap">
+    <h4 style="margin:0 0 0.8rem">Histórico de períodos</h4>
+    <div id="historicoPeriodosSkeleton">...</div>
+    <div id="historicoPeriodosEmpty" style="display:none"></div>
+    <table style="display:none" id="tableHistoricoPeriodos">
       <thead>
         <tr>
-          <th>Periodo</th><th>Esperado</th><th>Recaudado</th><th>%</th>
-          <th>Egresos</th><th>Saldo</th>
-          <th title="Ver cuotas del periodo">Cuotas</th>
-          <th title="Ver movimientos del periodo">Mov.</th>
+          <th>Período</th><th class="admin-only">Monto</th>
+          <th>Esperado</th><th>Recaudado</th><th>%</th><th>Saldo</th>
+          <th></th>
         </tr>
       </thead>
-      <tbody id="resumenPeriodosBody"></tbody>
+      <tbody id="historicoPeriodosBody"></tbody>
     </table>
   </div>
+  <md-filled-button class="admin-only" onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar período</md-filled-button>
 </div>
 ```
 
-Nota: skeleton, empty-state y tabla viven en contenedores **separados** (`#resumenPeriodosSkeleton`, `#resumenPeriodosEmpty`, `#tableResumenPeriodos`) que se muestran/ocultan sin destruir el DOM. `showSkeletons('finanzas')` muestra el skeleton de la card "Periodo en curso" (`#finanzasPeriodoEnCurso`) y el de la tabla, sin reemplazar el contenido (js/data.js).
+Nota: skeleton, empty-state y tabla viven en contenedores **separados** (`#historicoPeriodosSkeleton`, `#historicoPeriodosEmpty`, `#tableHistoricoPeriodos`) que se muestran/ocultan sin destruir el DOM. `showSkeletons('finanzas')` muestra el skeleton de la card "Periodo en curso" (`#finanzasPeriodoEnCurso`) y el de la tabla histórica, sin reemplazar el contenido (js/data.js).
 
 ## 4. Render (`renderFinanzas`)
 
@@ -88,7 +88,7 @@ function renderFinanzas() {
   renderRecaudadoChart();
   renderFlujoChart();
   renderPeriodoEnCurso();
-  renderResumenPeriodos();
+  renderHistoricoPeriodos();
 }
 ```
 
@@ -99,19 +99,19 @@ function renderFinanzas() {
 - Barra de progreso con el % de recaudación (verde ≥90, ámbar ≥60, rojo <60).
 - 2 íconos junto al título: 🧾 `verCuotasPeriodo(p)` y ⇅ `verMovimientosPeriodo(p)`.
 
-### 4.2 Tabla "Resumen por periodo" (`renderResumenPeriodos`)
+### 4.2 Tabla "Histórico de períodos" (`renderHistoricoPeriodos`)
 
-Una fila por periodo (más reciente primero), columnas:
+Tabla dentro de `.table-wrap`, una fila por período (excluye el vigente), columnas:
 
 | Columna | Cálculo |
 |---------|---------|
+| Período | `formatPeriodo(p)` escapado |
+| Monto | `$` + `formatMoney(conf.monto)` (solo admin, `—` si sin config) |
 | Esperado | `esperadoPorPeriodo(p, GASTOS)` — suma de montos emitidos |
 | Recaudado | `recaudadoPorPeriodo(p, GASTOS)` — suma de `recaudadoGasto` |
 | % | `pctRecaudado(p, GASTOS)` con color según umbrales |
-| Egresos | `egresosMes(p, FLUJO)` |
 | Saldo | `saldoPeriodo(p, GASTOS, FLUJO)` con color por signo |
-| Cuotas | ícono → `verCuotasPeriodo(p)` |
-| Mov. | ícono → `verMovimientosPeriodo(p)` |
+| Acciones | 3 íconos: cuotas, movimientos, editar config (admin) |
 
 Sin periodos con datos: empty state.
 

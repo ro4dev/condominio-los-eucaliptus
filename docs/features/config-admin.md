@@ -153,7 +153,6 @@ async function renderConfig() {
     loadJson('FLUJO')
   ]);
   renderMontos();
-  renderPeriodos();
   renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();

@@ -313,8 +313,7 @@ function renderFinanzas() {
   renderRecaudadoChart();
   renderFlujoChart();
   renderPeriodoEnCurso();
-  renderResumenPeriodos();
-  renderPeriodos();
+  renderHistoricoPeriodos();
 }
 
 function periodoVigente() {
@@ -374,75 +373,47 @@ function estadoChip(g) {
   return '<span class="chip ' + cls + '">' + estado + '</span>';
 }
 
-function renderResumenPeriodos() {
-  var wrap = document.getElementById('resumenPeriodosWrap');
-  var table = document.getElementById('tableResumenPeriodos');
-  var tbody = document.getElementById('resumenPeriodosBody');
+// --- HISTORICO DE PERIODOS (tabla) ---
+function renderHistoricoPeriodos() {
+  var wrap = document.getElementById('historicoPeriodosWrap');
+  var table = document.getElementById('tableHistoricoPeriodos');
+  var tbody = document.getElementById('historicoPeriodosBody');
   if (!wrap || !table || !tbody) return;
-  var sk = document.getElementById('resumenPeriodosSkeleton');
-  if (sk) {
-    sk.style.display = 'none';
-  }
-  var emptyEl = document.getElementById('resumenPeriodosEmpty');
-  if (emptyEl) {
-    emptyEl.style.display = 'none';
-    emptyEl.innerHTML = '';
-  }
-  var periodos = periodosFinanzas(GASTOS, FLUJO);
+  var sk = document.getElementById('historicoPeriodosSkeleton');
+  if (sk) sk.style.display = 'none';
+  var emptyEl = document.getElementById('historicoPeriodosEmpty');
+  if (emptyEl) { emptyEl.style.display = 'none'; emptyEl.innerHTML = ''; }
+  var vig = periodoVigente();
+  var periodos = periodosFinanzas(GASTOS, FLUJO).filter(function(p) { return p !== vig; });
   if (!periodos.length) {
     table.style.display = 'none';
-    if (emptyEl) {
-      emptyEl.style.display = '';
-      emptyEl.innerHTML = emptyState('Sin datos para mostrar.');
-    }
+    if (emptyEl) { emptyEl.style.display = ''; emptyEl.innerHTML = emptyState('Sin otros períodos.'); }
     return;
   }
   table.style.display = 'table';
+  var periodosConfig = CONFIG.periodos || [];
   var rows = periodos.map(function(p) {
+    var conf = periodosConfig.find(function(c) { return c.periodo === p; }) || {};
     var esp = esperadoPorPeriodo(p, GASTOS);
     var rec = recaudadoPorPeriodo(p, GASTOS);
-    var eg = egresosMes(p, FLUJO);
-    var sal = saldoPeriodo(p, GASTOS, FLUJO);
     var pct = esp ? Math.round((rec / esp) * 100) : 0;
+    var sal = saldoPeriodo(p, GASTOS, FLUJO);
     var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
     return '<tr>' +
       '<td style="font-weight:600;color:var(--text);white-space:nowrap">' + escHtml(formatPeriodo(p)) + '</td>' +
+      (IS_ADMIN ? '<td style="white-space:nowrap">' + (conf.periodo ? '$' + formatMoney(conf.monto || 0) : '<span style="color:var(--text-muted)">—</span>') + '</td>' : '') +
       '<td>$' + formatMoney(esp) + '</td>' +
       '<td>$' + formatMoney(rec) + '</td>' +
       '<td style="font-weight:600;color:' + pctColor + '">' + pct + '%</td>' +
-      '<td>$' + formatMoney(eg) + '</td>' +
       '<td style="font-weight:600;white-space:nowrap;color:' + (sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">$' + formatMoney(sal) + '</td>' +
       '<td style="width:1%;white-space:nowrap">' +
-        '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas del periodo"><md-icon>receipt_long</md-icon></md-icon-button>' +
-      '</td>' +
-      '<td style="width:1%;white-space:nowrap">' +
-        '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
+        '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas"><md-icon>receipt_long</md-icon></md-icon-button>' +
+        '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos"><md-icon>swap_vert</md-icon></md-icon-button>' +
+        (IS_ADMIN ? '<md-icon-button onclick="openModalPeriodo(\'' + p + '\')" title="Editar config"><md-icon>edit</md-icon></md-icon-button>' : '') +
       '</td>' +
       '</tr>';
   }).join('');
   tbody.innerHTML = rows;
-}
-
-// --- CONFIGURACION DE PERIODOS (movido desde config-page.js) ---
-function renderPeriodos() {
-  var el = document.getElementById('cfgPeriodosList');
-  if (!el) return;
-  var periodos = (CONFIG.periodos || []).slice().sort(function(a, b) { return a.periodo < b.periodo ? 1 : -1; });
-  if (!periodos.length) {
-    el.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;margin:0">No hay periodos configurados. Se usará el Monto Base para todos los periodos.</p>';
-    return;
-  }
-  el.innerHTML = periodos.map(function(p) {
-    return '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0;border-bottom:1px solid var(--divider)">' +
-      '<md-icon style="color:var(--text-muted);font-size:1.1rem;flex-shrink:0">calendar_month</md-icon>' +
-      '<div style="flex:1;min-width:0">' +
-        '<div style="font-weight:600;color:var(--text)">' + formatPeriodo(p.periodo) + '</div>' +
-        '<div style="font-size:0.8rem;color:var(--text-2)">Gasto común $' + formatMoney(p.monto || 0) + (p.fondo_reserva ? ' · Fondo reserva $' + formatMoney(p.fondo_reserva) : '') + '</div>' +
-      '</div>' +
-      '<md-icon-button onclick="openModalPeriodo(\'' + p.periodo + '\')" title="Editar"><md-icon>edit</md-icon></md-icon-button>' +
-      '<md-icon-button onclick="removePeriodo(\'' + p.periodo + '\')" title="Eliminar"><md-icon>delete</md-icon></md-icon-button>' +
-    '</div>';
-  }).join('');
 }
 
 function openModalPeriodo(periodo) {
@@ -496,7 +467,7 @@ async function savePeriodoForm(e, isEdit) {
   if (await saveConfig('periodos', periodos)) {
     showSnackbar(isEdit ? 'Periodo actualizado.' : 'Periodo agregado.', 'success');
     closeModal();
-    renderPeriodos();
+    renderHistoricoPeriodos();
   }
 }
 
@@ -505,7 +476,7 @@ function removePeriodo(periodo) {
     var periodos = (CONFIG.periodos || []).filter(function(p) { return p.periodo !== periodo; });
     if (await saveConfig('periodos', periodos)) {
       showSnackbar('Periodo eliminado.', 'success');
-      renderPeriodos();
+      renderHistoricoPeriodos();
     }
   });
 }

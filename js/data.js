@@ -96,22 +96,14 @@ function showSkeletons(tab) {
     content.innerHTML = skeletons[tab] || '<div class="skeleton skeleton-card"></div>';
   }
   if (tab === 'finanzas') {
-    var sk = document.getElementById('resumenPeriodosSkeleton');
-    if (sk) {
-      sk.style.display = '';
-    }
-    var emptyEl = document.getElementById('resumenPeriodosEmpty');
-    if (emptyEl) {
-      emptyEl.style.display = 'none';
-    }
-    var tbl = document.getElementById('tableResumenPeriodos');
-    if (tbl) {
-      tbl.style.display = 'none';
-    }
+    var sk = document.getElementById('historicoPeriodosSkeleton');
+    if (sk) sk.style.display = '';
+    var tbl = document.getElementById('tableHistoricoPeriodos');
+    if (tbl) tbl.style.display = 'none';
+    var emptyEl = document.getElementById('historicoPeriodosEmpty');
+    if (emptyEl) { emptyEl.style.display = 'none'; emptyEl.innerHTML = ''; }
     var vig = document.getElementById('finanzasPeriodoEnCurso');
-    if (vig) {
-      vig.innerHTML = '<div class="skeleton skeleton-card"></div>';
-    }
+    if (vig) vig.innerHTML = '<div class="skeleton skeleton-card"></div>';
   }
 }
 
