@@ -106,8 +106,8 @@ function renderHome() {
     var egresos = egresosDelMes(periodo);
     var cantidadMorosos = morosos(GASTOS, PARCELAS).length;
     statsEl.innerHTML =
-      '<div class="stat-card"><div class="label">Recaudado (periodo)</div><div class="value blue">' + formatMoney(recaudado) + '</div></div>' +
       '<div class="stat-card"><div class="label">Esperado (periodo)</div><div class="value">' + formatMoney(esperado) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Recaudado (periodo)</div><div class="value blue">' + formatMoney(recaudado) + '</div></div>' +
       '<div class="stat-card"><div class="label">Egresos (periodo)</div><div class="value red">' + formatMoney(egresos) + '</div></div>' +
       '<div class="stat-card"><div class="label">Morosos</div><div class="value ' + (cantidadMorosos > 0 ? 'red' : 'green') + '">' + cantidadMorosos + '</div></div>';
   }
@@ -405,8 +405,8 @@ function renderHistoricoPeriodos() {
       (IS_ADMIN ? '<td style="white-space:nowrap">' + (conf.periodo ? formatMoney(conf.monto || 0) : '<span style="color:var(--text-muted)">—</span>') + '</td>' : '') +
       '<td>' + formatMoney(esp) + '</td>' +
       '<td>' + formatMoney(rec) + '</td>' +
-      '<td style="font-weight:600;color:' + pctColor + '">' + pct + '%</td>' +
       '<td style="font-weight:600;white-space:nowrap;color:' + (sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">' + formatMoney(sal) + '</td>' +
+      '<td style="font-weight:600;color:' + pctColor + '">' + pct + '%</td>' +
       '<td style="width:1%;white-space:nowrap">' +
         '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas"><md-icon>receipt_long</md-icon></md-icon-button>' +
         '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos"><md-icon>swap_vert</md-icon></md-icon-button>' +
