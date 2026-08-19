@@ -50,8 +50,8 @@ Periodo vigente = el `periodo` más reciente en `GASTOS`. Si el usuario logueado
 
 | Label | Valor |
 |-------|-------|
-| Recaudado (periodo) | `recaudadoPorPeriodo(periodoVigente, GASTOS)` |
 | Esperado (periodo) | `esperadoPorPeriodo(periodoVigente, GASTOS)` |
+| Recaudado (periodo) | `recaudadoPorPeriodo(periodoVigente, GASTOS)` |
 | Egresos (periodo) | suma `FLUJO` tipo Egreso del mes del periodo vigente |
 | Morosos | `morosos(GASTOS, PARCELAS).length` (o "Al día"/deuda propia para propietario) |
 

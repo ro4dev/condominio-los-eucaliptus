@@ -7,7 +7,7 @@ Pestaña unificada que reemplaza a **Gastos Comunes** y **Ingresos/Egresos**. Mu
 - **Ingresos por cuotas**: se **derivan** de los pagos registrados (tabla `pagos`) contra las cuotas emitidas (`gastos`). Ya no se cargan a mano como movimiento en el flujo.
 - **Egresos y otros ingresos**: movimientos reales de la cuenta del condominio (servicios, jardinería, seguros, multas, etc.) desde `flujo`.
 
-La pestaña muestra: una card "Periodo en curso" (con stats, progress bar, íconos de cuotas/movimientos y editar config), dos gráficos, una tabla "Histórico de períodos" (Período, Monto config, Esperado, Recaudado, %, Saldo) con popups de detalle y los botones admin de carga.
+La pestaña muestra: una card "Periodo en curso" (con stats, progress bar, íconos de cuotas/movimientos y editar config), dos gráficos, una tabla "Histórico de períodos" (Período, Monto config, Esperado, Recaudado, Saldo, %) con popups de detalle y los botones admin de carga.
 
 ID del tab: `finanzas`
 Contenedor: `<div id="tab-finanzas">`
