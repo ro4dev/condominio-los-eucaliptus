@@ -156,6 +156,12 @@
           <tbody id="resumenPeriodosBody"></tbody>
         </table>
       </div>
+      <h3 class="section-title admin-only">Configuración de períodos</h3>
+      <div class="card admin-only" style="margin-bottom:1rem">
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos por período. Los períodos sin config usarán el Monto Base.</p>
+        <div id="cfgPeriodosList"></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar período</md-filled-button></div>
+      </div>
     </div>
 
     <!-- PARCELAS -->
@@ -300,14 +306,6 @@
           </div>
           <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
         </div>
-      </div>
-
-      <!-- Periodos de cuota -->
-      <div class="card" style="margin-bottom:1rem">
-        <h4>Periodos de Cuota</h4>
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos por periodo. Los periodos sin config usarán el Monto Base</p>
-        <div id="cfgPeriodosList"></div>
-        <div style="display:flex;justify-content:flex-end;margin-top:0.8rem"><md-filled-button onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar periodo</md-filled-button></div>
       </div>
 
       <!-- Datos de pago (Home → Cómo pagar) -->

@@ -7,7 +7,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | Pestaña | Descripción |
 |---------|-------------|
 | **Home** | Vista resumen: balance del periodo vigente (% de recaudación con barra de progreso), listado de parcelas morosas (admin ve todas, el propietario su parcela) y card "Cómo pagar" con datos de transferencia. Es la pestaña inicial. |
-| **Finanzas** | Balance por periodo (reemplaza a Gastos Comunes e Ingresos/Egresos): card "Periodo en curso" (recaudado, esperado, egresos, saldo y % de recaudación con barra de progreso, con íconos 🧾/⇅ para abrir cuotas y movimientos del periodo), gráfico "Recaudado vs Esperado", gráfico de ingresos vs egresos por mes y una tabla resumen por periodo (Esperado/Recaudado/%/Egresos/Saldo) con 2 íconos que abren popups por separado: 🧾 cuotas (monto, pagado, estado Pagado/Parcial/Pendiente, pagos) y ⇅ movimientos del periodo. Los ingresos por cuotas se derivan de los pagos registrados. Botón "Generar Cuotas" para crear una cuota por parcela en un periodo. |
+| **Finanzas** | Balance por periodo (reemplaza a Gastos Comunes e Ingresos/Egresos): card "Periodo en curso" (recaudado, esperado, egresos, saldo y % de recaudación con barra de progreso, con íconos 🧾/⇅ para abrir cuotas y movimientos del periodo), gráfico "Recaudado vs Esperado", gráfico de ingresos vs egresos por mes y una tabla resumen por periodo (Esperado/Recaudado/%/Egresos/Saldo) con 2 íconos que abren popups por separado: 🧾 cuotas (monto, pagado, estado Pagado/Parcial/Pendiente, pagos) y ⇅ movimientos del periodo. Los ingresos por cuotas se derivan de los pagos registrados. Botón "Generar Cuotas" para crear una cuota por parcela en un periodo. Sección admin de configuración de períodos (monto por período, fondo reserva). |
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
 | **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. Filtros por categoría. |
@@ -16,7 +16,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | **Asambleas** | Timeline de asambleas ordinarias y extraordinarias con temario, acuerdos y asistentes. Filtros por tipo. |
 | **Encuestas** | Sistema de votación: propuestas con votos a favor/en contra, quorum opcional y fecha de término. |
 | **Ventas** | Publicaciones de productos/servicios entre vecinos: foto opcional, precio, contacto, estado Disponible/Vendido. Cualquier usuario autenticado publica; edita/elimina solo el autor o admin. |
-| **Configuración** | Panel admin: montos base, periodos de cuota, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores, conceptos de ingreso/egreso y **actividad reciente** (auditoría de cambios). Solo visible para administradores. |
+| **Configuración** | Panel admin: montos base, datos de pago (Home → "Cómo pagar"), creación masiva de parcelas, categorías de docs, rubros de proveedores, conceptos de ingreso/egreso y **actividad reciente** (auditoría de cambios). Solo visible para administradores. |
 
 ## Stack
 

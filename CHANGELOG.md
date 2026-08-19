@@ -2,6 +2,14 @@
 
 ## Registro de cambios
 
+### 18/08/2026 - Unificación de períodos: config migrada de Configuración a Finanzas
+- **Refactor**: La sección "Periodos de Cuota" (configuración de montos por período) se mueve de la pestaña **Configuración** a la pestaña **Finanzas**, debajo de la tabla resumen por período. El admin ahora configura montos y ve el resultado financiero en el mismo lugar, sin saltar entre pestañas
+- **Changed**: Funciones `renderPeriodos`, `openModalPeriodo`, `savePeriodoForm` y `removePeriodo` migradas de `config-page.js` a `renderers.js`
+- **Changed**: `renderFinanzas()` ahora llama `renderPeriodos()` al final
+- **Changed**: `renderConfig()` ya no llama `renderPeriodos()`
+- **Changed**: Card "Periodos de Cuota" eliminada del HTML de Configuración; nueva sección "Configuración de períodos" con clase `admin-only` en Finanzas
+- **Docs**: `README.md`, `docs/features/config-admin.md` y `docs/features/finanzas.md` actualizados
+
 ### 15/08/2026 - Fase 7 auditoría: hardening (M3, M4, M5, M6, M7)
 - **Security**: Nueva migración `supabase/migrations/007_update_with_check.sql` — las 11 UPDATE policies admin (parcelas, propietarios, gastos, flujo, noticias, documentos, reclamos, proveedores, asambleas, encuestas, config) ahora tienen `WITH CHECK (admin)` además del `USING`, cerrando la manipulación vía UPDATE (`asamblea_asistentes`/`encuestas_votos` no tienen UPDATE policy)
 - **Security**: `Code.gs` (prototipo de Apps Script sin auth) **eliminado** del repo a pedido del usuario (M5)

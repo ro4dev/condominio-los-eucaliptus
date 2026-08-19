@@ -190,7 +190,9 @@ Crea una cuota por parcela para el periodo elegido (y fondo reserva si aplica), 
 
 ## 9. Configurador de periodos (Cuota por periodo)
 
-Card "Periodos de Cuota" en Configuración (ver `config-admin.md`). Define el **monto por periodo** (gasto común + fondo reserva). Los periodos sin config usan el **Monto Base**.
+Sección "Configuración de períodos" en la pestaña Finanzas (clase `admin-only`), debajo de la tabla resumen. Define el **monto por periodo** (gasto común + fondo reserva). Los periodos sin config usan el **Monto Base**.
+
+Funciones en `renderers.js`:
 
 ```js
 function cuotaDelPeriodo(periodo) {
