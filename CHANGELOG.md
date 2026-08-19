@@ -7,6 +7,7 @@
 - **Changed**: Nueva función `renderHistoricoPeriodos()` que renderiza la tabla histórica (excluye el período vigente ya mostrado en la card)
 - **Changed**: Eliminadas `renderResumenPeriodos()` y `renderListaPeriodos()`; la config de períodos (monto, fondo reserva) se muestra inline en la tabla (columna "Monto", solo admin)
 - **Changed**: Acciones por fila: ver cuotas, ver movimientos, editar config (admin). Botón "Generar Cuotas" por período
+- **Fix**: Card "Periodo en curso" ahora tiene botón ✏️ editar config (admin), faltaba desde la implementación original
 - **Changed**: `showSkeletons('finanzas')` usa los nuevos IDs (`#historicoPeriodosSkeleton`, `#tableHistoricoPeriodos`, `#historicoPeriodosEmpty`)
 - **Changed**: Títulos "Resumen por periodo" y "Configuración de períodos" movidos dentro de sus cards como `<h4>`
 - **Removed**: Fila de totales de la tabla resumen (cada mes es independiente), CSS muerto `.resumen-totales`

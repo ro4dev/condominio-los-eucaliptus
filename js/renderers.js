@@ -342,6 +342,7 @@ function renderPeriodoEnCurso() {
         '<div style="display:flex;gap:0.25rem;flex-shrink:0">' +
           '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas del periodo"><md-icon>receipt_long</md-icon></md-icon-button>' +
           '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
+          (IS_ADMIN ? '<md-icon-button onclick="openModalPeriodo(\'' + p + '\')" title="Editar config del período"><md-icon>edit</md-icon></md-icon-button>' : '') +
         '</div>' +
       '</div>' +
       '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">Periodo <strong style="color:var(--text)">' + escHtml(formatPeriodo(p)) + '</strong></div>' +
