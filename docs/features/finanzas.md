@@ -113,7 +113,7 @@ Una fila por periodo (más reciente primero), columnas:
 | Cuotas | ícono → `verCuotasPeriodo(p)` |
 | Mov. | ícono → `verMovimientosPeriodo(p)` |
 
-Última fila `.resumen-totales` con los totales acumulados. Sin periodos con datos: empty state.
+Sin periodos con datos: empty state.
 
 ## 5. Popups de detalle del periodo
 

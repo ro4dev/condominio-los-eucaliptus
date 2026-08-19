@@ -13,9 +13,6 @@ th { background: var(--surface-hover); text-align: left; padding: 0.6rem 0.8rem;
 td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--divider); color: var(--text-2); }
 tr:hover td { background: var(--surface-hover); }
 
-/* Finanzas: resumen por periodo */
-.resumen-totales td { background: var(--surface-hover); border-top: 2px solid var(--divider); font-weight: 600; }
-
 .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 .card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); }
 .card h4 { font: var(--md-sys-typescale-title-medium); color: var(--text); margin: 0 0 0.8rem; }

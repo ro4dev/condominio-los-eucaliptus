@@ -398,16 +398,11 @@ function renderResumenPeriodos() {
     return;
   }
   table.style.display = 'table';
-  var totals = { esp: 0, rec: 0, eg: 0, sal: 0 };
   var rows = periodos.map(function(p) {
     var esp = esperadoPorPeriodo(p, GASTOS);
     var rec = recaudadoPorPeriodo(p, GASTOS);
     var eg = egresosMes(p, FLUJO);
     var sal = saldoPeriodo(p, GASTOS, FLUJO);
-    totals.esp += esp;
-    totals.rec += rec;
-    totals.eg += eg;
-    totals.sal += sal;
     var pct = esp ? Math.round((rec / esp) * 100) : 0;
     var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
     return '<tr>' +
@@ -425,20 +420,7 @@ function renderResumenPeriodos() {
       '</td>' +
       '</tr>';
   }).join('');
-  var pctTotal = totals.esp ? Math.round((totals.rec / totals.esp) * 100) : 0;
-  var pctTotalColor = pctTotal >= 90 ? 'var(--color-positive)' : (pctTotal >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
-  var totalsRow =
-    '<tr class="resumen-totales">' +
-      '<td style="font-weight:700;color:var(--text)">Totales</td>' +
-      '<td style="font-weight:600">$' + formatMoney(totals.esp) + '</td>' +
-      '<td style="font-weight:600">$' + formatMoney(totals.rec) + '</td>' +
-      '<td style="font-weight:600;color:' + pctTotalColor + '">' + pctTotal + '%</td>' +
-      '<td style="font-weight:600">$' + formatMoney(totals.eg) + '</td>' +
-      '<td style="font-weight:700;color:' + (totals.sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">$' + formatMoney(totals.sal) + '</td>' +
-      '<td></td>' +
-      '<td></td>' +
-    '</tr>';
-  tbody.innerHTML = rows + totalsRow;
+  tbody.innerHTML = rows;
 }
 
 // --- CONFIGURACION DE PERIODOS (movido desde config-page.js) ---
