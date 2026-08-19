@@ -7,7 +7,7 @@ Pestaña unificada que reemplaza a **Gastos Comunes** y **Ingresos/Egresos**. Mu
 - **Ingresos por cuotas**: se **derivan** de los pagos registrados (tabla `pagos`) contra las cuotas emitidas (`gastos`). Ya no se cargan a mano como movimiento en el flujo.
 - **Egresos y otros ingresos**: movimientos reales de la cuenta del condominio (servicios, jardinería, seguros, multas, etc.) desde `flujo`.
 
-La pestaña muestra: una card "Periodo en curso", dos gráficos, una tabla resumen por periodo (con popups de detalle de cuotas y de movimientos) y los botones admin de carga.
+La pestaña muestra: una card "Periodo en curso" (con stats, progress bar, íconos de cuotas/movimientos y editar config), dos gráficos, una tabla "Histórico de períodos" (Período, Monto config, Esperado, Recaudado, %, Saldo) con popups de detalle y los botones admin de carga.
 
 ID del tab: `finanzas`
 Contenedor: `<div id="tab-finanzas">`
@@ -190,7 +190,7 @@ Crea una cuota por parcela para el periodo elegido (y fondo reserva si aplica), 
 
 ## 9. Configurador de periodos (Cuota por periodo)
 
-Sección "Configuración de períodos" en la pestaña Finanzas (clase `admin-only`), debajo de la tabla resumen. Define el **monto por periodo** (gasto común + fondo reserva). Los periodos sin config usan el **Monto Base**.
+La config de períodos (monto por período, fondo reserva) se muestra **inline** en la tabla histórica (columna "Monto", solo admin) y en el card del período vigente. Los períodos sin config usan el **Monto Base**. El admin edita/elimina config desde los íconos de cada fila y desde el card del período en curso; agrega nuevos períodos con el botón "Agregar período" debajo de la tabla.
 
 Funciones en `renderers.js`:
 
