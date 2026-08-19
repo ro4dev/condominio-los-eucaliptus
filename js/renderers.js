@@ -96,19 +96,19 @@ function renderHome() {
     var estado = estadoParcelaPago(miParcela, GASTOS);
     var deuda = deudaParcela(miParcela, GASTOS);
     statsEl.innerHTML =
-      '<div class="stat-card"><div class="label">Pagado (periodo)</div><div class="value blue">$' + formatMoney(rec) + '</div></div>' +
-      '<div class="stat-card"><div class="label">Cuota (periodo)</div><div class="value">$' + formatMoney(esp) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Pagado (periodo)</div><div class="value blue">' + formatMoney(rec) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Cuota (periodo)</div><div class="value">' + formatMoney(esp) + '</div></div>' +
       '<div class="stat-card"><div class="label">Estado</div><div class="value ' + (estado === 'Al día' ? 'green' : 'red') + '">' + estado + '</div></div>' +
-      '<div class="stat-card"><div class="label">Deuda acumulada</div><div class="value ' + (deuda > 0 ? 'red' : 'green') + '">$' + formatMoney(deuda) + '</div></div>';
+      '<div class="stat-card"><div class="label">Deuda acumulada</div><div class="value ' + (deuda > 0 ? 'red' : 'green') + '">' + formatMoney(deuda) + '</div></div>';
   } else {
     var recaudado = recaudadoPorPeriodo(periodo, GASTOS);
     var esperado = esperadoPorPeriodo(periodo, GASTOS);
     var egresos = egresosDelMes(periodo);
     var cantidadMorosos = morosos(GASTOS, PARCELAS).length;
     statsEl.innerHTML =
-      '<div class="stat-card"><div class="label">Recaudado (periodo)</div><div class="value blue">$' + formatMoney(recaudado) + '</div></div>' +
-      '<div class="stat-card"><div class="label">Esperado (periodo)</div><div class="value">$' + formatMoney(esperado) + '</div></div>' +
-      '<div class="stat-card"><div class="label">Egresos (periodo)</div><div class="value red">$' + formatMoney(egresos) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Recaudado (periodo)</div><div class="value blue">' + formatMoney(recaudado) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Esperado (periodo)</div><div class="value">' + formatMoney(esperado) + '</div></div>' +
+      '<div class="stat-card"><div class="label">Egresos (periodo)</div><div class="value red">' + formatMoney(egresos) + '</div></div>' +
       '<div class="stat-card"><div class="label">Morosos</div><div class="value ' + (cantidadMorosos > 0 ? 'red' : 'green') + '">' + cantidadMorosos + '</div></div>';
   }
 
@@ -138,8 +138,8 @@ function renderAvisoAumento() {
     '<div class="aviso-card" style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">' +
       '<md-icon style="color:#f59e0b">trending_up</md-icon>' +
       '<div style="flex:1;min-width:200px">' +
-        '<strong>Cuota ' + escHtml(formatPeriodo(aviso.periodo)) + ' subirá a $' + formatMoney(aviso.nuevo) + '</strong>' +
-        '<div style="font-size:0.8rem;color:var(--text-2)">Actualmente $' + formatMoney(aviso.anterior) + ' (+' + aviso.pct + '%)</div>' +
+        '<strong>Cuota ' + escHtml(formatPeriodo(aviso.periodo)) + ' subirá a ' + formatMoney(aviso.nuevo) + '</strong>' +
+        '<div style="font-size:0.8rem;color:var(--text-2)">Actualmente ' + formatMoney(aviso.anterior) + ' (+' + aviso.pct + '%)</div>' +
       '</div>' +
       (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Generar cuotas</md-filled-button>' : '') +
     '</div>';
@@ -159,7 +159,7 @@ function renderMorosos() {
     var periodos = periodosPendientes(m.parcela_id, GASTOS).length;
     return '<div class="moroso-card" onclick="openDeudaParcela(\'' + m.parcela_id + '\')">' +
       '<div class="moroso-card-num">' + escHtml(m.numero) + (isPropia ? ' <span class="moroso-card-propia">(tu parcela)</span>' : '') + '</div>' +
-      '<div class="moroso-card-deuda">$' + formatMoney(m.deuda) + '</div>' +
+      '<div class="moroso-card-deuda">' + formatMoney(m.deuda) + '</div>' +
       '<div class="moroso-card-periodos">' + (periodos ? periodos + ' periodo' + (periodos > 1 ? 's' : '') : '') + '</div>' +
     '</div>';
   };
@@ -201,11 +201,11 @@ function openDeudaParcela(parcelaId) {
     detalle.map(function(d) {
       return '<div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--divider)">' +
         '<span style="color:var(--text)">' + (d.periodo ? escHtml(formatPeriodo(d.periodo)) : 'Sin periodo') + '</span>' +
-        '<span style="color:var(--text-2)">$' + formatMoney(d.monto) + '</span>' +
+        '<span style="color:var(--text-2)">' + formatMoney(d.monto) + '</span>' +
       '</div>';
     }).join('') +
     '<div style="display:flex;justify-content:space-between;padding-top:0.7rem;font-weight:700;color:var(--text)">' +
-      '<span>Total</span><span style="color:var(--md-sys-color-error)">$' + formatMoney(total) + '</span>' +
+      '<span>Total</span><span style="color:var(--md-sys-color-error)">' + formatMoney(total) + '</span>' +
     '</div>';
   openModal('Deuda de ' + nombre, body, footerDeuda(parcelaId));
 }
@@ -225,12 +225,12 @@ function openComoPagar(parcelaId) {
   var body = '';
   if (parcelaId) {
     var monto = deudaParcela(parcelaId, GASTOS);
-    body += '<p style="margin:0 0 0.8rem;font-weight:600;color:var(--text)">Deuda de ' + escHtml(parcelName(parcelaId)) + ': $' + formatMoney(monto) + '</p>';
+    body += '<p style="margin:0 0 0.8rem;font-weight:600;color:var(--text)">Deuda de ' + escHtml(parcelName(parcelaId)) + ': ' + formatMoney(monto) + '</p>';
   } else if (currentUser) {
     var mp = miParcelaId();
     if (mp) {
       var montoPropia = deudaParcela(mp, GASTOS);
-      body += '<p style="margin:0 0 0.8rem;font-weight:600;color:var(--text)">Tu deuda: $' + formatMoney(montoPropia) + '</p>';
+      body += '<p style="margin:0 0 0.8rem;font-weight:600;color:var(--text)">Tu deuda: ' + formatMoney(montoPropia) + '</p>';
     }
   }
 
@@ -347,10 +347,10 @@ function renderPeriodoEnCurso() {
       '</div>' +
       '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">Periodo <strong style="color:var(--text)">' + escHtml(formatPeriodo(p)) + '</strong></div>' +
       '<section class="stats" style="margin-bottom:0.8rem">' +
-        '<div class="stat-card"><div class="label">Esperado</div><div class="value">$' + formatMoney(esp) + '</div></div>' +
-        '<div class="stat-card"><div class="label">Recaudado</div><div class="value blue">$' + formatMoney(rec) + '</div></div>' +
-        '<div class="stat-card"><div class="label">Egresos</div><div class="value red">$' + formatMoney(eg) + '</div></div>' +
-        '<div class="stat-card"><div class="label">Saldo</div><div class="value ' + (sal >= 0 ? 'green' : 'red') + '">$' + formatMoney(sal) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Esperado</div><div class="value">' + formatMoney(esp) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Recaudado</div><div class="value blue">' + formatMoney(rec) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Egresos</div><div class="value red">' + formatMoney(eg) + '</div></div>' +
+        '<div class="stat-card"><div class="label">Saldo</div><div class="value ' + (sal >= 0 ? 'green' : 'red') + '">' + formatMoney(sal) + '</div></div>' +
       '</section>' +
       '<div class="progress-track"><div class="progress-fill" style="width:' + Math.min(100, pct) + '%;background:' + fillColor + '"></div></div>' +
       '<p class="progress-label">' + pct + '% de las cuotas del periodo pagadas</p>' +
@@ -402,11 +402,11 @@ function renderHistoricoPeriodos() {
     var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
     return '<tr>' +
       '<td style="font-weight:600;color:var(--text);white-space:nowrap">' + escHtml(formatPeriodo(p)) + '</td>' +
-      (IS_ADMIN ? '<td style="white-space:nowrap">' + (conf.periodo ? '$' + formatMoney(conf.monto || 0) : '<span style="color:var(--text-muted)">—</span>') + '</td>' : '') +
-      '<td>$' + formatMoney(esp) + '</td>' +
-      '<td>$' + formatMoney(rec) + '</td>' +
+      (IS_ADMIN ? '<td style="white-space:nowrap">' + (conf.periodo ? formatMoney(conf.monto || 0) : '<span style="color:var(--text-muted)">—</span>') + '</td>' : '') +
+      '<td>' + formatMoney(esp) + '</td>' +
+      '<td>' + formatMoney(rec) + '</td>' +
       '<td style="font-weight:600;color:' + pctColor + '">' + pct + '%</td>' +
-      '<td style="font-weight:600;white-space:nowrap;color:' + (sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">$' + formatMoney(sal) + '</td>' +
+      '<td style="font-weight:600;white-space:nowrap;color:' + (sal >= 0 ? 'var(--color-positive)' : 'var(--md-sys-color-error)') + '">' + formatMoney(sal) + '</td>' +
       '<td style="width:1%;white-space:nowrap">' +
         '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas"><md-icon>receipt_long</md-icon></md-icon-button>' +
         '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos"><md-icon>swap_vert</md-icon></md-icon-button>' +
@@ -489,7 +489,7 @@ function verCuotasPeriodo(periodo) {
   var pctColor = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
   var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
     '<span class="chip chip-neutral">Periodo ' + escHtml(formatPeriodo(periodo)) + '</span>' +
-    '<span style="font-size:0.85rem;color:var(--text-2)">Esperado <strong style="color:var(--text)">$' + formatMoney(esp) + '</strong> · Recaudado <strong style="color:var(--md-sys-color-primary)">$' + formatMoney(rec) + '</strong> · <strong style="color:' + pctColor + '">' + pct + '%</strong></span>' +
+    '<span style="font-size:0.85rem;color:var(--text-2)">Esperado <strong style="color:var(--text)">' + formatMoney(esp) + '</strong> · Recaudado <strong style="color:var(--md-sys-color-primary)">' + formatMoney(rec) + '</strong> · <strong style="color:' + pctColor + '">' + pct + '%</strong></span>' +
     '</div>';
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
   openModal('Cuotas del periodo', head + resumenCuotasDetalle(periodo), footer);
@@ -500,7 +500,7 @@ function verMovimientosPeriodo(periodo) {
   var eg = egresosMes(periodo, FLUJO);
   var head = '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.8rem">' +
     '<span class="chip chip-neutral">Periodo ' + escHtml(formatPeriodo(periodo)) + '</span>' +
-    '<span style="font-size:0.85rem;color:var(--text-2)">Ingresos <strong style="color:var(--color-positive)">$' + formatMoney(ing) + '</strong> · Egresos <strong style="color:var(--md-sys-color-error)">$' + formatMoney(eg) + '</strong></span>' +
+    '<span style="font-size:0.85rem;color:var(--text-2)">Ingresos <strong style="color:var(--color-positive)">' + formatMoney(ing) + '</strong> · Egresos <strong style="color:var(--md-sys-color-error)">' + formatMoney(eg) + '</strong></span>' +
     '</div>';
   var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
   openModal('Movimientos del periodo', head + resumenMovimientosDetalle(periodo), footer);
@@ -516,8 +516,8 @@ function resumenCuotasDetalle(periodo) {
     '<tbody>' + cuotas.map(function(g) {
       return '<tr>' +
         '<td>' + parcelName(g.parcela_id) + '</td>' +
-        '<td>$' + formatMoney(parseFloat(g.monto || 0)) + '</td>' +
-        '<td>$' + formatMoney(sumPagosGasto(g.id)) + '</td>' +
+        '<td>' + formatMoney(parseFloat(g.monto || 0)) + '</td>' +
+        '<td>' + formatMoney(sumPagosGasto(g.id)) + '</td>' +
         '<td>' + estadoChip(g) + '</td>' +
         '<td style="width:1%;white-space:nowrap">' +
           '<md-icon-button onclick="verPagos(\'' + g.id + '\')" title="Ver pagos"><md-icon>payments</md-icon></md-icon-button>' +
@@ -541,7 +541,7 @@ function resumenMovimientosDetalle(periodo) {
         '<td style="white-space:nowrap">' + formatDate(f.fecha) + '</td>' +
         '<td><span class="chip ' + (f.tipo === 'Ingreso' ? 'chip-positive' : 'chip-error') + '">' + escHtml(f.tipo) + '</span></td>' +
         '<td>' + escHtml(f.concepto) + (f.descripcion ? '<div style="font-size:0.8rem;color:var(--text-muted)">' + nl2br(f.descripcion) + '</div>' : '') + '</td>' +
-        '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">$' + formatMoney(parseFloat(f.monto)) + '</td>' +
+        '<td style="text-align:right;font-weight:600;white-space:nowrap;color:' + color + '">' + formatMoney(parseFloat(f.monto)) + '</td>' +
         '<td style="width:1%;white-space:nowrap">' + adminActions("editFlujo('" + f.id + "')", "deleteFlujo('" + f.id + "')") + '</td></tr>';
     }).join('') + '</tbody></table></div>';
 }
@@ -1209,7 +1209,7 @@ function renderPublicaciones() {
       '<div class="publicacion-titulo">' + escHtml(p.titulo) + '</div>' +
       (p.descripcion ? '<div class="publicacion-desc">' + nl2br(p.descripcion) + '</div>' : '') +
       '<div class="publicacion-meta">' +
-        (p.precio !== null && p.precio !== undefined && p.precio !== '' ? '<span class="publicacion-precio">$' + formatMoney(p.precio) + '</span>' : '') +
+        (p.precio !== null && p.precio !== undefined && p.precio !== '' ? '<span class="publicacion-precio">' + formatMoney(p.precio) + '</span>' : '') +
         (p.parcela_id ? '<span class="publicacion-meta-row"><md-icon>location_on</md-icon>' + escHtml(parcelName(p.parcela_id)) + '</span>' : '') +
         (p.contacto ? '<span class="publicacion-meta-row"><md-icon>phone</md-icon>' + escHtml(p.contacto) + '</span>' : '') +
       '</div>' +

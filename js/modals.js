@@ -605,7 +605,7 @@ function updateGastoMontoPrefill() {
   if (!hint) return;
   var cuota = cuotaDelPeriodo(periodo);
   if (cuota.total) {
-    hint.innerHTML = 'Cuota de <strong>' + formatPeriodo(periodo) + '</strong>: $' + formatMoney(cuota.monto) + (cuota.fondo_reserva ? ' + fondo reserva $' + formatMoney(cuota.fondo_reserva) + ' = <strong>$' + formatMoney(cuota.total) + '</strong>' : '');
+    hint.innerHTML = 'Cuota de <strong>' + formatPeriodo(periodo) + '</strong>: ' + formatMoney(cuota.monto) + (cuota.fondo_reserva ? ' + fondo reserva ' + formatMoney(cuota.fondo_reserva) + ' = <strong>' + formatMoney(cuota.total) + '</strong>' : '');
     if (montoEl && !montoEl.value) {
       montoEl.value = cuota.monto || '';
     }
@@ -653,9 +653,9 @@ function formPago(data) {
   var montoCuota = parseFloat(data.monto) || 0;
   var pagado = sumPagosGasto(data.gasto_id);
   var restante = Math.max(0, montoCuota - pagado);
-  var info = 'Cuota de <strong>' + escHtml(parcelName(data.parcela_id)) + '</strong> — ' + formatPeriodo(data.periodo) + ': <strong>$' + formatMoney(montoCuota) + '</strong>';
-  if (pagado > 0) info += ' · Pagado <strong>$' + formatMoney(pagado) + '</strong>';
-  if (restante > 0) info += ' · Falta <strong style="color:var(--md-sys-color-error)">$' + formatMoney(restante) + '</strong>';
+  var info = 'Cuota de <strong>' + escHtml(parcelName(data.parcela_id)) + '</strong> — ' + formatPeriodo(data.periodo) + ': <strong>' + formatMoney(montoCuota) + '</strong>';
+  if (pagado > 0) info += ' · Pagado <strong>' + formatMoney(pagado) + '</strong>';
+  if (restante > 0) info += ' · Falta <strong style="color:var(--md-sys-color-error)">' + formatMoney(restante) + '</strong>';
   openModal('Registrar pago', '<form id="modalForm" data-table="pagos" onsubmit="handleForm(event)">' +
     '<input type="hidden" name="gasto_id" value="' + data.gasto_id + '">' +
     '<input type="hidden" name="parcela_id" value="' + data.parcela_id + '">' +
@@ -701,11 +701,11 @@ function verPagos(gastoId) {
   if (!pagos.length) {
     body = '<p style="color:var(--text-muted);margin:0">Sin pagos registrados para la cuota de ' + nombre + '.</p>';
   } else {
-    body = '<p style="font-size:0.85rem;color:var(--text-2);margin:0 0 0.4rem">' + nombre + ' · Cuota <strong>$' + formatMoney(parseFloat(gasto.monto || 0)) + '</strong> · Total pagado <strong>$' + formatMoney(sumPagosGasto(gastoId)) + '</strong></p>' +
+    body = '<p style="font-size:0.85rem;color:var(--text-2);margin:0 0 0.4rem">' + nombre + ' · Cuota <strong>' + formatMoney(parseFloat(gasto.monto || 0)) + '</strong> · Total pagado <strong>' + formatMoney(sumPagosGasto(gastoId)) + '</strong></p>' +
       pagos.map(function(p) {
         return '<div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0;border-bottom:1px solid var(--divider)">' +
           '<div style="flex:1;min-width:0">' +
-            '<div style="font-weight:600;color:var(--text)">$' + formatMoney(parseFloat(p.monto)) + '</div>' +
+            '<div style="font-weight:600;color:var(--text)">' + formatMoney(parseFloat(p.monto)) + '</div>' +
             '<div style="font-size:0.8rem;color:var(--text-2)">' + formatDate(p.fecha) + '</div>' +
           '</div>' +
           (safeUrl(p.comprobante) ? '<a href="' + safeUrl(p.comprobante) + '" target="_blank" style="text-decoration:none"><md-icon-button style="color:var(--md-sys-color-primary)" title="Ver comprobante"><md-icon>receipt</md-icon></md-icon-button></a>' : '') +
@@ -778,7 +778,7 @@ function updateGenCuotasPrefill() {
   if (montoEl) montoEl.value = cuota.monto || '';
   if (fondoEl) fondoEl.value = cuota.fondo_reserva || '';
   if (hintEl) {
-    hintEl.innerHTML = cuota.total ? 'Total por parcela: <strong>$' + formatMoney(cuota.total) + '</strong>' : '';
+    hintEl.innerHTML = cuota.total ? 'Total por parcela: <strong>' + formatMoney(cuota.total) + '</strong>' : '';
   }
 }
 

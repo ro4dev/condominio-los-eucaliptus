@@ -1,5 +1,6 @@
 function formatMoney(v) {
-  var s = Math.round(v).toString();
+  var negative = v < 0;
+  var s = Math.round(Math.abs(v)).toString();
   var result = '';
   var count = 0;
   for (var i = s.length - 1; i >= 0; i--) {
@@ -9,7 +10,7 @@ function formatMoney(v) {
     result = s.charAt(i) + result;
     count++;
   }
-  return result;
+  return (negative ? '-$' : '$') + result;
 }
 
 function formatPeriodo(p) {

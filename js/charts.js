@@ -38,11 +38,11 @@ function renderRecaudadoChart() {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { labels: { color: textColor, boxWidth: 12, padding: 12, font: { size: 11 } } },
-        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': $' + formatMoney(ctx.parsed.y); } } }
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + formatMoney(ctx.parsed.y); } } }
       },
       scales: {
         x: { ticks: { color: textColor }, grid: { color: gridColor } },
-        y: { beginAtZero: true, ticks: { color: textColor, callback: function(v) { return '$' + formatMoney(v); } }, grid: { color: gridColor } }
+        y: { beginAtZero: true, ticks: { color: textColor, callback: function(v) { return formatMoney(v); } }, grid: { color: gridColor } }
       }
     }
   });
@@ -87,7 +87,7 @@ function renderFlujoChart() {
       plugins: { legend: { labels: { color: textColor, boxWidth: 12, padding: 12, font: { size: 11 } } } },
       scales: {
         x: { ticks: { color: textColor }, grid: { color: gridColor } },
-        y: { beginAtZero: true, ticks: { color: textColor, callback: function(v) { return '$' + formatMoney(v); } }, grid: { color: gridColor } }
+        y: { beginAtZero: true, ticks: { color: textColor, callback: function(v) { return formatMoney(v); } }, grid: { color: gridColor } }
       }
     }
   });
