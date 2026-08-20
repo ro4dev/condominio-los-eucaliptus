@@ -151,23 +151,13 @@ function periodoConfig(periodo) {
   return configPeriodos().find(function(p) { return p.periodo === periodo; }) || null;
 }
 
-function montosBase() {
-  var m = (typeof CONFIG !== 'undefined' && CONFIG.montos) ? CONFIG.montos : {};
-  return {
-    monto: parseFloat(m.gasto_comun_base) || 0,
-    fondo_reserva: parseFloat(m.fondo_reserva) || 0
-  };
-}
-
-// Cuota del periodo (gasto común + fondo reserva). Si no hay config para el periodo, usa Monto Base.
+// Cuota del periodo (gasto común + fondo reserva). Si no hay config, retorna 0.
 function cuotaDelPeriodo(periodo) {
-  var base = montosBase();
   var conf = periodoConfig(periodo);
-  if (conf) {
-    if (conf.monto != null && conf.monto !== '') base.monto = parseFloat(conf.monto) || 0;
-    if (conf.fondo_reserva != null && conf.fondo_reserva !== '') base.fondo_reserva = parseFloat(conf.fondo_reserva) || 0;
-  }
-  return { monto: base.monto, fondo_reserva: base.fondo_reserva, total: base.monto + base.fondo_reserva };
+  if (!conf) return { monto: 0, fondo_reserva: 0, total: 0 };
+  var monto = parseFloat(conf.monto) || 0;
+  var fondo = parseFloat(conf.fondo_reserva) || 0;
+  return { monto: monto, fondo_reserva: fondo, total: monto + fondo };
 }
 
 // Siguiente periodo posterior al último con cuotas registradas

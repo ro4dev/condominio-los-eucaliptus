@@ -142,7 +142,7 @@ function renderAvisoAumento() {
         '<strong>Cuota ' + escHtml(formatPeriodo(aviso.periodo)) + ' subirá a ' + formatMoney(aviso.nuevo) + '</strong>' +
         '<div style="font-size:0.8rem;color:var(--text-2)">Actualmente ' + formatMoney(aviso.anterior) + ' (+' + aviso.pct + '%)</div>' +
       '</div>' +
-      (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Generar cuotas</md-filled-button>' : '') +
+      (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Nuevo periodo</md-filled-button>' : '') +
     '</div>';
 }
 
@@ -384,6 +384,7 @@ function renderPeriodoEnCurso() {
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;margin-bottom:0.4rem">' +
         '<h4 style="margin:0">Periodo en curso</h4>' +
         '<div style="display:flex;gap:0.25rem;flex-shrink:0">' +
+          (IS_ADMIN ? '<md-filled-button onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\')"><md-icon slot="icon">add</md-icon>Nuevo periodo</md-filled-button>' : '') +
           '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas del periodo"><md-icon>receipt_long</md-icon></md-icon-button>' +
           '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
           (IS_ADMIN ? '<md-icon-button onclick="openModalPeriodo(\'' + p + '\')" title="Editar config del período"><md-icon>edit</md-icon></md-icon-button>' : '') +

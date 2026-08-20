@@ -1,8 +1,4 @@
 {
-  "montos": {
-    "gasto_comun_base": 50000,
-    "fondo_reserva": 15000
-  },
   "categorias_documentos": [
     "Estatuto",
     "Actas",

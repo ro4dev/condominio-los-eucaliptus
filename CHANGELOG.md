@@ -2,6 +2,15 @@
 
 ## Registro de cambios
 
+### 19/08/2026 - Nuevo periodo: simplificación del flujo de períodos
+- **Changed**: Botón "Generar Cuotas" reemplazado por "Nuevo periodo" en el card del período en curso (admin-only)
+- **Changed**: Modal renombrado de "Generar cuotas" a "Nuevo periodo", botón "Generar" → "Crear"
+- **Removed**: Card "Montos Base" de Configuración (`renderMontos`, `saveMontos`, función `montosBase`)
+- **Changed**: `cuotaDelPeriodo()` ahora retorna `{monto:0, fondo_reserva:0, total:0}` cuando no hay config para el periodo (antes usaba fallback a Montos Base)
+- **Changed**: Prefill del modal "Nuevo periodo" hereda montos del periodo anterior (si el periodo seleccionado no tiene config)
+- **Removed**: `CONFIG.montos` de datos demo (ya no se usa en ningún lado)
+- **Docs**: `finanzas.md`, `config-admin.md` actualizados
+
 ### 19/08/2026 - Noticias pinnables en Home
 - **Feat**: Los admins pueden "pinnear" noticias para que aparezcan destacadas en la pestaña Home. Nuevo campo `pinned` (boolean) en la tabla `noticias` (`supabase/migrations/008_noticias_pinned.sql`)
 - **Feat**: Nueva card "Noticias destacadas" en Home (`#homePinnedNews`) que muestra hasta 3 noticias vigentes pinneadas (las más recientes); se oculta si no hay pinneadas

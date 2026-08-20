@@ -32,28 +32,6 @@ async function saveConfig(key, value) {
   return true;
 }
 
-// --- MONTOS ---
-function renderMontos() {
-  var m = CONFIG.montos || {};
-  document.getElementById('cfgGastoComunBase').value = m.gasto_comun_base || '';
-  document.getElementById('cfgFondoReserva').value = m.fondo_reserva || '';
-}
-
-async function saveMontos() {
-  var btn = document.getElementById('btnGuardarMontos');
-  btn.disabled = true;
-  btn.textContent = 'Guardando...';
-  var value = {
-    gasto_comun_base: parseFloat(document.getElementById('cfgGastoComunBase').value) || 0,
-    fondo_reserva: parseFloat(document.getElementById('cfgFondoReserva').value) || 0
-  };
-  if (await saveConfig('montos', value)) {
-    showSnackbar('Montos guardados.', 'success');
-  }
-  btn.disabled = false;
-  btn.textContent = 'Guardar';
-}
-
 
 
 // --- DATOS DE PAGO (Home → Cómo pagar) ---
@@ -560,7 +538,6 @@ async function renderConfig() {
   showSkeletons('config');
   await Promise.all([loadConfig(), loadJson('PARCELAS'), loadJson('DOCUMENTOS'), loadJson('PROVEEDORES'), loadJson('FLUJO')]);
   if (DEMO_MODE) await loadJson('AUDIT_LOG');
-  renderMontos();
   renderDatosPago();
   renderParcelasConfig();
   renderCategoriasDocs();

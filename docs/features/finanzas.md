@@ -37,7 +37,7 @@ Migración SQL: `supabase/migrations/005_pagos.sql` (incluye backfill idempotent
 
 ### `gastos.pagado` (legado)
 
-La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` devuelve `true` si la cuota tiene `pagado === 'Sí'` pero **no tiene pagos registrados**: en ese caso se trata como pagada completa. Las cuotas nuevas (por "Generar Cuotas" o "Agregar Cuota") se crean con `pagado: 'No'` y su estado se resuelve por pagos.
+La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` devuelve `true` si la cuota tiene `pagado === 'Sí'` pero **no tiene pagos registrados**: en ese caso se trata como pagada completa. Las cuotas nuevas (por "Nuevo periodo" o "Agregar Cuota") se crean con `pagado: 'No'` y su estado se resuelve por pagos.
 
 ### Regla de código
 
@@ -49,7 +49,6 @@ La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` dev
 <div id="tab-finanzas" class="tab-content" role="region" aria-label="Finanzas" aria-busy="true">
   <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
     <md-filled-button class="admin-only" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Cuota</md-filled-button>
-    <md-filled-button class="admin-only" onclick="formGenerarCuotas()"><md-icon slot="icon">add</md-icon>Generar Cuotas</md-filled-button>
     <md-filled-button class="admin-only" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
   </div>
 
@@ -158,7 +157,7 @@ Actualiza los colores de `chartRecaudado` y `chartFlujo` en dark mode. `renderPa
 - `periodosFinanzas(GASTOS, FLUJO)` — union de periodos con cuotas o movimientos, orden desc
 - `saldoPeriodo(periodo, GASTOS, FLUJO)` — `ingresosMes − egresosMes`
 - Cobranza: `deudaParcela`, `deudaPorPeriodo`, `periodosPendientes`, `estadoParcelaPago`, `morosos` (ver `deudores.md`)
-- Cuota configurada: `configPeriodos`, `periodoConfig`, `montosBase`, `cuotaDelPeriodo` (ver §9)
+- Cuota configurada: `configPeriodos`, `periodoConfig`, `cuotaDelPeriodo` (ver §9)
 
 ## 8. Acciones admin
 
@@ -167,9 +166,9 @@ Actualiza los colores de `chartRecaudado` y `chartFlujo` en dark mode. `renderPa
 - Al elegir periodo, muestra un **hint** con la cuota configurada del periodo (`cuotaDelPeriodo`) y **prefill del monto** (`updateGastoMontoPrefill`).
 - Excluye parcelas que ya tienen cuota en el periodo (`updateGastoParcelas`).
 
-### 8.2 Generar Cuotas (`formGenerarCuotas`)
+### 8.2 Nuevo periodo (`formGenerarCuotas`)
 
-Crea una cuota por parcela para el periodo elegido (y fondo reserva si aplica), sin duplicar parcelas que ya tienen cuota:
+Crea una cuota por parcela para el periodo elegido (y fondo reserva si aplica), sin duplicar parcelas que ya tienen cuota. Botón "Nuevo periodo" en el card del período en curso (admin-only).
 
 - `buildCuotasRows(data)` → filas `{parcela_id, periodo, concepto, monto, descripcion, pagado:'No'}` (conceptos `GC_MM_AAAA` y `GC_FR_MM_AAAA`).
 - Demo: `generarCuotasDemo(data)` agrega a `GASTOS` (con `id`/`created_at`). Prod: insert a `gastos`.
@@ -190,26 +189,23 @@ Crea una cuota por parcela para el periodo elegido (y fondo reserva si aplica), 
 
 ## 9. Configurador de periodos (Cuota por periodo)
 
-La config de períodos (monto por período, fondo reserva) se muestra **inline** en la tabla histórica (columna "Monto", solo admin) y en el card del período vigente. Los períodos sin config usan el **Monto Base**. El admin edita/elimina config desde los íconos de cada fila y desde el card del período en curso; agrega nuevos períodos con el botón "Agregar período" debajo de la tabla.
+La config de períodos (monto por período, fondo reserva) se muestra **inline** en la tabla histórica (columna "Monto", solo admin) y en el card del período vigente. Los períodos sin config retornan ceros. El admin edita/elimina config desde los íconos de cada fila y desde el card del período en curso; agrega nuevos períodos con el botón "Nuevo periodo" en el card del período en curso.
 
-Funciones en `renderers.js`:
+Funciones en `utils.js`:
 
 ```js
 function cuotaDelPeriodo(periodo) {
-  var base = montosBase();
   var conf = periodoConfig(periodo);
-  if (conf) {
-    if (conf.monto != null && conf.monto !== '') base.monto = parseFloat(conf.monto) || 0;
-    if (conf.fondo_reserva != null && conf.fondo_reserva !== '') base.fondo_reserva = parseFloat(conf.fondo_reserva) || 0;
-  }
-  return { monto: base.monto, fondo_reserva: base.fondo_reserva, total: base.monto + base.fondo_reserva };
+  if (!conf) return { monto: 0, fondo_reserva: 0, total: 0 };
+  var monto = parseFloat(conf.monto) || 0;
+  var fondo = parseFloat(conf.fondo_reserva) || 0;
+  return { monto: monto, fondo_reserva: fondo, total: monto + fondo };
 }
 ```
 
-- `montosBase()` lee `CONFIG.montos` (`gasto_comun_base`, `fondo_reserva`).
 - `periodoConfig(periodo)` busca en `CONFIG.periodos`.
 - `siguientePeriodo()` devuelve el periodo posterior al último con cuotas registradas (o el actual si no hay).
-- `avisoAumento()` detecta si la cuota del próximo periodo configurado sube respecto al vigente → card de aviso en **Home** con botón "Generar cuotas" (solo admin).
+- `avisoAumento()` detecta si la cuota del próximo periodo configurado sube respecto al vigente → card de aviso en **Home** con botón "Nuevo periodo" (solo admin).
 
 ## 10. Carga de datos (data.js)
 

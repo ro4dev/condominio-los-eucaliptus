@@ -2,7 +2,7 @@
 
 ## 1. Descripción general
 
-Pestaña de administración visible solo para usuarios con role admin. Centraliza la configuración de parámetros del sistema: montos base, datos de pago, creación masiva de parcelas, categorías de documentos, rubros de proveedores y conceptos de flujo. Los chips se guardan automáticamente al agregar/eliminar.
+Pestaña de administración visible solo para usuarios con role admin. Centraliza la configuración de parámetros del sistema: datos de pago, creación masiva de parcelas, categorías de documentos, rubros de proveedores y conceptos de flujo. Los chips se guardan automáticamente al agregar/eliminar.
 
 ID del tab: `config`
 Contenedor: `<div id="tab-config">`
@@ -23,9 +23,8 @@ CREATE TABLE config (
 ```js
 var CONFIG = {};  // en config-page.js
 // Keys posibles:
-//   CONFIG.montos → { gasto_comun_base: N, fondo_reserva: N }
 //   CONFIG.periodos → [{ periodo: "YYYY-MM", monto: N, fondo_reserva: N }, ...]
-//     (cuota del periodo; los periodos sin config usan Monto Base — ver finanzas.md §9)
+//     (cuota del periodo; los periodos sin config retornan ceros — ver finanzas.md §9)
 //   CONFIG.categorias_documentos → ["Estatuto", "Actas", ...]
 //   CONFIG.rubros_proveedores → ["Jardinería", "Limpieza", ...]
 //   CONFIG.conceptos_flujo → ["Mantención", "Cuotas", ...]
@@ -39,30 +38,15 @@ var CONFIG = {};  // en config-page.js
 
 ```html
 <div id="tab-config" class="tab-content" role="region" aria-label="Configuración">
-  <!-- Parcelas + Montos (grid 2 columnas) -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem" class="config-duo">
-
-    <!-- Parcelas bulk -->
-    <div class="card">
-      <h4>Parcelas</h4>
-      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cantidad total y nombre de las parcelas</p>
-      <div class="form-row">
-        <div class="form-group"><md-filled-text-field label="Cantidad" id="cfgParcelasCantidad" type="number" min="1" placeholder="Ej: 40" style="width:100%"></md-filled-text-field></div>
-        <div class="form-group"><md-filled-text-field label="Prefijo" id="cfgParcelasPrefijo" type="text" placeholder="Ej: Terreno" style="width:100%"></md-filled-text-field></div>
-      </div>
-      <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()">Crear parcelas</md-filled-button></div>
+  <!-- Parcelas -->
+  <div class="card" style="margin-bottom:1rem">
+    <h4>Parcelas</h4>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Cantidad total y nombre de las parcelas</p>
+    <div class="form-row">
+      <div class="form-group"><md-filled-text-field label="Cantidad" id="cfgParcelasCantidad" type="number" min="1" placeholder="Ej: 40" style="width:100%"></md-filled-text-field></div>
+      <div class="form-group"><md-filled-text-field label="Prefijo" id="cfgParcelasPrefijo" type="text" placeholder="Ej: Terreno" style="width:100%"></md-filled-text-field></div>
     </div>
-
-    <!-- Montos -->
-    <div class="card">
-      <h4>Montos Base</h4>
-      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.8rem">Montos fijos que se usan para calcular expensas</p>
-      <div class="form-row">
-        <div class="form-group"><md-filled-text-field label="Gasto común base" id="cfgGastoComunBase" type="number" min="0" placeholder="Ej: 50000" style="width:100%"></md-filled-text-field></div>
-        <div class="form-group"><md-filled-text-field label="Fondo reserva" id="cfgFondoReserva" type="number" min="0" placeholder="Ej: 15000" style="width:100%"></md-filled-text-field></div>
-      </div>
-      <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnGuardarMontos" onclick="saveMontos()">Guardar</md-filled-button></div>
-    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:0.5rem"><md-filled-button id="btnAplicarParcelas" onclick="bulkCreateParcelas()">Crear parcelas</md-filled-button></div>
   </div>
 
   <!-- Datos de pago (Home → Cómo pagar) -->
@@ -163,30 +147,7 @@ async function renderConfig() {
 }
 ```
 
-### 5.4 Montos
-
-```js
-function renderMontos() {
-  var m = CONFIG.montos || {};
-  document.getElementById('cfgGastoComunBase').value = m.gasto_comun_base || '';
-  document.getElementById('cfgFondoReserva').value = m.fondo_reserva || '';
-}
-
-async function saveMontos() {
-  var btn = document.getElementById('btnGuardarMontos');
-  btn.disabled = true;
-  btn.textContent = 'Guardando...';
-  var value = {
-    gasto_comun_base: parseFloat(document.getElementById('cfgGastoComunBase').value) || 0,
-    fondo_reserva: parseFloat(document.getElementById('cfgFondoReserva').value) || 0
-  };
-  if (await saveConfig('montos', value)) { showSnackbar('Montos guardados.', 'success'); }
-  btn.disabled = false;
-  btn.textContent = 'Guardar';
-}
-```
-
-### 5.4b Datos de Pago
+### 5.4 Datos de Pago
 
 ```js
 function renderDatosPago() {
@@ -484,7 +445,6 @@ function openConfigModal(title, placeholder, onAdd) {
 
 ```sql
 INSERT INTO config (key, value) VALUES
-  ('montos', '{"gasto_comun_base": 50000, "fondo_reserva": 15000}'),
   ('categorias_documentos', '["Estatuto", "Actas", "Contratos", "Seguros", "Planos"]'),
   ('rubros_proveedores', '["Jardinería", "Limpieza", "Electricidad", "Plomería", "Seguridad", "Mantenimiento", "Otro"]')
 ON CONFLICT (key) DO NOTHING;

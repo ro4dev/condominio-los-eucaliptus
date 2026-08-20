@@ -758,7 +758,7 @@ function formGenerarCuotas(prefillPeriodo) {
     var label = d.toLocaleDateString('es-CL', { year: 'numeric', month: 'long' });
     meses.push('<md-select-option value="' + val + '"' + (val === periodo ? ' selected' : '') + '><span slot="headline">' + label + '</span></md-select-option>');
   }
-  openModal('Generar cuotas', '<form id="modalForm" data-table="generar_cuotas" onsubmit="handleForm(event)">' +
+  openModal('Nuevo periodo', '<form id="modalForm" data-table="generar_cuotas" onsubmit="handleForm(event)">' +
     '<p style="margin:0 0 0.8rem;font-size:0.85rem;color:var(--text-muted)">Crea una cuota por parcela para el periodo seleccionado. Las parcelas que ya tengan cuota en ese periodo no se modifican.</p>' +
     '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required id="genCuotasPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
     '<div class="form-row">' +
@@ -767,7 +767,7 @@ function formGenerarCuotas(prefillPeriodo) {
     '</div>' +
     '<div id="genCuotasHint" style="font-size:0.85rem;color:var(--text-muted)"></div>' +
   '</form>',
-    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Generar</md-filled-button>');
+    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Crear</md-filled-button>');
   document.getElementById('genCuotasPeriodo').addEventListener('change', updateGenCuotasPrefill);
   updateGenCuotasPrefill();
 }
@@ -775,6 +775,13 @@ function formGenerarCuotas(prefillPeriodo) {
 function updateGenCuotasPrefill() {
   var periodo = document.getElementById('genCuotasPeriodo').value;
   var cuota = cuotaDelPeriodo(periodo);
+  if (!cuota.total) {
+    var parts = periodo.split('-');
+    var y = parseInt(parts[0]), m = parseInt(parts[1]) - 1;
+    if (m < 1) { m = 12; y--; }
+    var anterior = y + '-' + String(m).padStart(2, '0');
+    cuota = cuotaDelPeriodo(anterior);
+  }
   var montoEl = document.getElementById('genCuotasMonto');
   var fondoEl = document.getElementById('genCuotasFondo');
   var hintEl = document.getElementById('genCuotasHint');

@@ -220,7 +220,6 @@
 
     // ── Config de periodos / cuota del periodo ──
     CONFIG = {
-      montos: { gasto_comun_base: '100', fondo_reserva: '20' },
       periodos: [
         { periodo: '2026-07', monto: '120', fondo_reserva: '30' },
         { periodo: '2026-08', monto: '150', fondo_reserva: '30' }
@@ -229,17 +228,15 @@
     assert('configPeriodos length', configPeriodos().length, 2);
     assert('periodoConfig 2026-07 existe', !!periodoConfig('2026-07'), true);
     assert('periodoConfig sin config es null', periodoConfig('2026-09'), null);
-    assert('montosBase', JSON.stringify(montosBase()), JSON.stringify({ monto: 100, fondo_reserva: 20 }));
     assert('cuotaDelPeriodo con config', JSON.stringify(cuotaDelPeriodo('2026-07')), JSON.stringify({ monto: 120, fondo_reserva: 30, total: 150 }));
-    assert('cuotaDelPeriodo fallback a base', JSON.stringify(cuotaDelPeriodo('2026-09')), JSON.stringify({ monto: 100, fondo_reserva: 20, total: 120 }));
+    assert('cuotaDelPeriodo sin config retorna ceros', JSON.stringify(cuotaDelPeriodo('2026-09')), JSON.stringify({ monto: 0, fondo_reserva: 0, total: 0 }));
     assert('cuotaDelPeriodo fondo reserva no configurado en periodo', cuotaDelPeriodo('2026-08').total, 180);
 
-    CONFIG = { montos: { gasto_comun_base: '100', fondo_reserva: '20' } };
-    assert('cuotaDelPeriodo sin periodos usa base', cuotaDelPeriodo('2026-07').total, 120);
+    CONFIG = {};
+    assert('cuotaDelPeriodo sin periodos retorna ceros', cuotaDelPeriodo('2026-07').total, 0);
 
     // ── siguientePeriodo / aviso de aumento ──
     CONFIG = {
-      montos: { gasto_comun_base: '100', fondo_reserva: '20' },
       periodos: [
         { periodo: '2026-07', monto: '120', fondo_reserva: '30' },
         { periodo: '2026-08', monto: '150', fondo_reserva: '30' }
@@ -256,7 +253,7 @@
     assert('avisoAumento nuevo', aviso.nuevo, 180);
     assert('avisoAumento pct', aviso.pct, 20);
 
-    CONFIG = { montos: { gasto_comun_base: '100', fondo_reserva: '20' }, periodos: [{ periodo: '2026-07', monto: '120', fondo_reserva: '30' }] };
+    CONFIG = { periodos: [{ periodo: '2026-07', monto: '120', fondo_reserva: '30' }] };
     GASTOS = [{ id: 'x', periodo: '2026-07', monto: '100', parcela_id: 'A', pagado: 'Sí' }];
     assert('avisoAumento sin aumento es null', avisoAumento(), null);
     GASTOS = [];
