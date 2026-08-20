@@ -173,7 +173,7 @@ function renderPinnedNews() {
   list.innerHTML = pinned.slice(0, 3).map(function(n) {
     return '<div class="home-pinned-card">' +
       '<div style="font-weight:600;color:var(--text)">' + escHtml(n.titulo) + '</div>' +
-      '<div style="font-size:0.8rem;color:var(--text-2);margin-top:0.2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(n.descripcion) + '</div>' +
+      '<div style="font-size:0.8rem;color:var(--text-2);margin-top:0.2rem">' + escHtml(n.descripcion) + '</div>' +
     '</div>';
   }).join('');
 }
