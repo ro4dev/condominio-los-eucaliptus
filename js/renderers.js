@@ -123,6 +123,7 @@ function renderHome() {
 
   renderMorosos();
   renderAvisoAumento();
+  renderPinnedNews();
 }
 
 function renderAvisoAumento() {
@@ -143,6 +144,57 @@ function renderAvisoAumento() {
       '</div>' +
       (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Generar cuotas</md-filled-button>' : '') +
     '</div>';
+}
+
+function renderPinnedNews() {
+  var el = document.getElementById('homePinnedNews');
+  var list = document.getElementById('homePinnedNewsList');
+  if (!el || !list) return;
+
+  var hoy = new Date();
+  var hoyStr = hoy.getFullYear() + '-' + String(hoy.getMonth() + 1).padStart(2, '0') + '-' + String(hoy.getDate()).padStart(2, '0');
+
+  var pinned = NOTICIAS.filter(function(n) {
+    if (!n.pinned) return false;
+    if (n.fecha_hasta && n.fecha_hasta < hoyStr) return false;
+    return true;
+  });
+
+  pinned.sort(function(a, b) {
+    return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
+  });
+
+  if (!pinned.length) {
+    el.style.display = 'none';
+    return;
+  }
+
+  el.style.display = '';
+  list.innerHTML = pinned.slice(0, 3).map(function(n) {
+    return '<div class="home-pinned-card">' +
+      '<div style="font-weight:600;color:var(--text)">' + escHtml(n.titulo) + '</div>' +
+      '<div style="font-size:0.8rem;color:var(--text-2);margin-top:0.2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escHtml(n.descripcion) + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function verNoticiaPinneada(id) {
+  switchTab('noticias');
+  setTimeout(function() {
+    var card = document.querySelector('.news-card[data-id="' + id + '"]');
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 300);
+}
+
+function togglePinned(id) {
+  var noticia = NOTICIAS.find(function(n) { return n.id === id; });
+  if (!noticia) return;
+  noticia.pinned = !noticia.pinned;
+  if (!DEMO_MODE) {
+    supabase.from('noticias').update({ pinned: noticia.pinned }).eq('id', id);
+  }
+  renderNoticias();
+  renderPinnedNews();
 }
 
 function renderMorosos() {
@@ -692,9 +744,13 @@ function renderNoticias() {
 
 function renderNoticiaCard(n, old) {
   var fecha = formatDate(n.fecha || n.created_at);
+  var pinIcon = IS_ADMIN
+    ? '<md-icon-button onclick="togglePinned(\'' + n.id + '\')" title="' + (n.pinned ? 'Despinneear' : 'Pinneear en Home') + '"><md-icon style="' + (n.pinned ? 'color:var(--md-sys-color-primary)' : 'color:var(--text-muted)') + '">push_pin</md-icon></md-icon-button>'
+    : '';
   return '<div class="news-card">' +
     '<div style="display:flex;justify-content:space-between;align-items:center">' +
       '<h4 style="margin:0;flex:1">' + escHtml(n.titulo) + '</h4>' +
+      pinIcon +
       '<span class="dates" style="margin:0">' + fecha + '</span>' +
       adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')") +
     '</div>' +

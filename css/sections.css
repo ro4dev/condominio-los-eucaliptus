@@ -3,6 +3,9 @@
 .news-card .dates { font: var(--md-sys-typescale-body-small); color: var(--text-muted); margin-bottom: 0.5rem; }
 .news-card .desc { font: var(--md-sys-typescale-body-medium); color: var(--text-2); line-height: 1.5; }
 
+.home-pinned-card { padding: 0.6rem 0; border-bottom: 1px solid var(--divider); }
+.home-pinned-card:last-child { border-bottom: none; }
+
 .item-card { background: var(--md-sys-color-surface); border-radius: var(--md-sys-shape-corner-medium); padding: 1.2rem; box-shadow: var(--md-sys-elevation-level1); margin-bottom: 1rem; position: relative; overflow: hidden; }
 .item-card.cerrada .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-25deg); font-size: 1.2rem; font-weight: 900; color: var(--md-sys-color-error); opacity: 0.7; pointer-events: none; text-align: center; z-index: 2; white-space: nowrap; letter-spacing: 0.25em; padding: 0.2rem 1rem; border: 3px solid var(--md-sys-color-error); border-radius: var(--md-sys-shape-corner-small); background: rgba(156, 163, 175, 0.15); }
 

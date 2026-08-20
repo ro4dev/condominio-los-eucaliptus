@@ -36,7 +36,7 @@ async function loadJson(target) {
 }
 
 async function loadInitialData() {
-  await Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]);
+  await Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadJson('NOTICIAS'), loadConfig()]);
   renderHome();
   var tabEl = document.getElementById('tab-home');
   if (tabEl) tabEl.setAttribute('aria-busy', 'false');
@@ -44,7 +44,7 @@ async function loadInitialData() {
 
 async function loadTabData(tab) {
   var configs = {
-    home: function() { return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadConfig()]).then(function() { renderHome(); }); },
+    home: function() { return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadJson('NOTICIAS'), loadConfig()]).then(function() { renderHome(); }); },
     finanzas: function() { return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS')]).then(function() { renderFinanzas(); }); },
     parcelas: function() { return Promise.all([loadJson('PARCELAS'), loadJson('PROPIETARIOS')]).then(function() { renderParcelas(); }); },
     noticias: function() { return loadJson('NOTICIAS').then(function() { renderNoticias(); }); },

@@ -2,7 +2,7 @@
 
 ## 1. Descripción general
 
-Nueva pestaña inicial (primer tab, activa por defecto). Es la vista resumen del condominio: balance del periodo vigente con % de recaudación, listado de morosos y la card "Cómo pagar" con datos de transferencia + QR. Reemplaza a Gastos Comunes como punto de entrada; la información de detalle vive en Finanzas.
+Nueva pestaña inicial (primer tab, activa por defecto). Es la vista resumen del condominio: noticias destacadas (pinneadas), balance del periodo vigente con % de recaudación, listado de morosos y la card "Cómo pagar" con datos de transferencia + QR. Reemplaza a Gastos Comunes como punto de entrada; la información de detalle vive en Finanzas.
 
 ID del tab: `home`
 Contenedor: `<div id="tab-home">`
@@ -22,24 +22,34 @@ Clase: `tab-content active` (pasa de `tab-cuenta` a `tab-home` el rol de tab ini
     <div class="skeleton skeleton-stat"></div>
   </section>
 
-  <!-- Progreso de recaudación -->
-  <div class="card" id="homeRecaudacion">
-    <h4>Recaudación del periodo</h4>
-    <div class="progress-track"><div class="progress-fill" id="homeRecaudacionFill"></div></div>
-    <p class="progress-label" id="homeRecaudacionLabel"></p>
+  <!-- Noticias pinneadas -->
+  <div id="homePinnedNews" class="card" style="display:none;margin-bottom:1rem">
+    <h4>Noticias destacadas</h4>
+    <div id="homePinnedNewsList"></div>
+  </div>
+
+  <!-- Aviso de aumento -->
+  <div id="homeAviso" style="margin-bottom:1rem"></div>
+
+  <!-- Progreso de recaudación + Cómo pagar -->
+  <div class="home-duo">
+    <div class="card" id="homeRecaudacion">
+      <h4>Recaudación del periodo</h4>
+      <div class="progress-track"><div class="progress-fill" id="homeRecaudacionFill"></div></div>
+      <p class="progress-label" id="homeRecaudacionLabel"></p>
+    </div>
+
+    <div class="card" id="homeComoPagar">
+      <h4>Cómo pagar</h4>
+      <p id="homePagoResumen"></p>
+      <md-filled-button onclick="openComoPagar()">Ver datos de pago</md-filled-button>
+    </div>
   </div>
 
   <!-- Morosos -->
   <div class="card" id="homeMorosos">
     <h4>Parcelas morosas</h4>
     <div id="homeMorososList"></div>
-  </div>
-
-  <!-- Cómo pagar -->
-  <div class="card" id="homeComoPagar">
-    <h4>Cómo pagar</h4>
-    <p id="homePagoResumen"></p>
-    <md-filled-button onclick="openComoPagar()">Ver datos de pago</md-filled-button>
   </div>
 </div>
 ```
@@ -103,7 +113,7 @@ Modal "Cómo pagar tu cuota" (`openModal`, mismo patrón de ancho 560px) con:
 
 ```js
 home: function() {
-  return Promise.all([loadJson('GASTOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadConfig()])
+  return Promise.all([loadJson('GASTOS'), loadJson('PAGOS'), loadJson('FLUJO'), loadJson('PARCELAS'), loadJson('PROPIETARIOS'), loadJson('NOTICIAS'), loadConfig()])
     .then(function() { renderHome(); });
 }
 ```
@@ -118,6 +128,7 @@ home: function() {
 | `.progress-fill` | div interno | height 100%, border-radius full, transición width 0.3s, color por pct |
 | `.pago-row` | fila de dato de pago | flex, gap 0.5rem, padding, border-bottom `--border-light` |
 | `.pago-row .value` | dato | `--text`, selectable (user-select: all) |
+| `.home-pinned-card` | fila de noticia pinneada | padding, border-bottom `--border-light`, cursor pointer, hover `--surface-hover` |
 
 ## 8. Reglas de negocio
 

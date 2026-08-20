@@ -243,6 +243,9 @@ function handleForm(e) {
   if (autoDateTables.indexOf(table) !== -1 && !data.fecha) {
     data.fecha = new Date().toISOString().slice(0, 10);
   }
+  if (table === 'noticias' && data.pinned !== undefined) {
+    data.pinned = data.pinned === 'true';
+  }
   if (table === 'flujo' && currentUser && !data.registrado_por) {
     data.registrado_por = currentUser.email;
   }
@@ -817,6 +820,11 @@ function syncGastoPagado() {
   document.getElementById('gastoPagadoHidden').value = sw.selected ? 'Sí' : 'No';
 }
 
+function syncNoticiaPinned() {
+  var sw = document.getElementById('noticiaPinned');
+  document.getElementById('noticiaPinnedHidden').value = sw.selected ? 'true' : 'false';
+}
+
 function formParcelas(data) {
   var isEdit = !!data;
   openModal(isEdit ? 'Editar Parcela' : 'Agregar Parcela',
@@ -872,6 +880,15 @@ function formPropietarios(opt) {
 
 function formNoticias(data) {
   var isEdit = !!data;
+  var pinSwitch = IS_ADMIN
+    ? '<div class="form-group"><div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">' +
+      '<label for="noticiaPinned" style="margin:0">Destacar en Home</label>' +
+      '<div style="display:flex;align-items:center;gap:0.5rem">' +
+        '<md-switch id="noticiaPinned"' + (isEdit && data.pinned ? ' selected' : '') + ' onchange="syncNoticiaPinned()"></md-switch>' +
+        '<input type="hidden" name="pinned" id="noticiaPinnedHidden" value="' + (isEdit && data.pinned ? 'true' : 'false') + '">' +
+      '</div>' +
+    '</div></div>'
+    : '';
   openModal(isEdit ? 'Editar Noticia' : 'Agregar Noticia',
     '<form id="modalForm" data-table="noticias" onsubmit="handleForm(event)">' +
     (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '') +
@@ -880,6 +897,7 @@ function formNoticias(data) {
     dateFieldHtml('fecha_hasta', 'Vigente hasta*', isEdit ? data.fecha_hasta : '') +
     '</div>' +
     '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalle de la noticia..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion) + '"' : '') + '></md-filled-text-field></div>' +
+    pinSwitch +
   '</form>',
   '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
 }

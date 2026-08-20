@@ -18,6 +18,7 @@
     "descripcion": "Se instalaron 4 cámaras de seguridad en las entradas del barrio.",
     "fecha": "2026-07-10",
     "fecha_hasta": "2026-12-31",
+    "pinned": true,
     "id": "ef3860e3-6a63-436f-b7ff-14e8866bdf19"
   },
   {
@@ -67,6 +68,7 @@
     "descripcion": "Se aprobó en asamblea extraordinaria la pintura de fachadas. Las obras comenzarán en septiembre.",
     "fecha": "2026-05-12",
     "fecha_hasta": "2026-12-31",
+    "pinned": true,
     "id": "89458b65-fd8b-4ba9-bc96-d26770e82dba"
   },
   {

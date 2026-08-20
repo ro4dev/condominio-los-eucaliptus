@@ -2,6 +2,16 @@
 
 ## Registro de cambios
 
+### 19/08/2026 - Noticias pinnables en Home
+- **Feat**: Los admins pueden "pinnear" noticias para que aparezcan destacadas en la pestaña Home. Nuevo campo `pinned` (boolean) en la tabla `noticias` (`supabase/migrations/008_noticias_pinned.sql`)
+- **Feat**: Nueva card "Noticias destacadas" en Home (`#homePinnedNews`) que muestra hasta 3 noticias vigentes pinneadas (las más recientes); se oculta si no hay pinneadas
+- **Feat**: Click en una noticia pinneada en Home cambia a la pestaña Noticias y scrollea a la card (`verNoticiaPinneada`)
+- **Feat**: Ícono `push_pin` admin-only en cada card de Noticias para pinnear/despinear (`togglePinned`); color primario cuando está pinneada, `--text-muted` cuando no
+- **Feat**: Switch "Destacar en Home" en el form de edición de noticias (admin-only), patrón idéntico a `gastoPagado`
+- **Feat**: `NOTICIAS` ahora se carga junto con el Home (además de en la pestaña Noticias)
+- **Feat**: 2 noticias vigentes de demo pinneadas: "Nueva seguridad nocturna" y "Pintura de fachadas aprobada"
+- **Docs**: `docs/features/noticias-pinneables-home.md` actualizado con estado "Implementado"; `home.md` y `noticias.md` actualizados
+
 ### 18/08/2026 - Vista unificada de períodos: card periodo en curso + tabla histórica
 - **Refactor**: La pestaña Finanzas ahora muestra el período vigente como card destacada (con stats, progress bar y acciones) y el resto de períodos en una tabla compacta dentro de un `.table-wrap`. Se elimina la tabla resumen anterior y la card separada de config
 - **Changed**: Nueva función `renderHistoricoPeriodos()` que renderiza la tabla histórica (excluye el período vigente ya mostrado en la card)

@@ -16,6 +16,7 @@ CREATE TABLE noticias (
   descripcion TEXT NOT NULL,
   fecha DATE,                             -- autogenerada si no se provee
   fecha_hasta DATE,                       -- NULL = siempre vigente
+  pinned BOOLEAN DEFAULT false,           -- destacar en Home (admin only)
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
@@ -152,48 +153,90 @@ function renderNoticias() {
 ```js
 function renderNoticiaCard(n, old) {
   var fecha = formatDate(n.fecha || n.created_at);
-  return '<div class="news-card" style="margin-bottom:1rem;">'
+  var pinIcon = IS_ADMIN
+    ? '<md-icon-button onclick="togglePinned(\'' + n.id + '\')" title="' + (n.pinned ? 'Despinneear' : 'Pinneear en Home') + '"><md-icon style="' + (n.pinned ? 'color:var(--md-sys-color-primary)' : 'color:var(--text-muted)') + '">push_pin</md-icon></md-icon-button>'
+    : '';
+  return '<div class="news-card">'
     + '<div style="display:flex;justify-content:space-between;align-items:center">'
-      + '<h4 style="margin:0;flex:1">' + (n.titulo || '') + '</h4>'
+      + '<h4 style="margin:0;flex:1">' + escHtml(n.titulo) + '</h4>'
+      + pinIcon
       + '<span class="dates" style="margin:0">' + fecha + '</span>'
       + adminActions("editNoticia('" + n.id + "')", "deleteNoticia('" + n.id + "')")
     + '</div>'
     + '<div class="desc">' + nl2br(n.descripcion) + '</div>'
-    + (n.archivo ? '<a href="' + n.archivo + '" target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>' : '')
+    + (safeUrl(n.archivo) ? '<a href="' + safeUrl(n.archivo) + '" target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>' : '')
   + '</div>';
 }
 ```
 
 ### 7.4 formNoticias(data?)
 
+Admin-only: incluye `md-switch` "Destacar en Home" + hidden input `name="pinned"`.
+
 ```js
 function formNoticias(data) {
   var isEdit = !!data;
+  var pinSwitch = IS_ADMIN
+    ? '<div class="form-group"><div style="display:flex;align-items:center;justify-content:space-between;gap:1rem">' +
+      '<label for="noticiaPinned" style="margin:0">Destacar en Home</label>' +
+      '<div style="display:flex;align-items:center;gap:0.5rem">' +
+        '<md-switch id="noticiaPinned"' + (isEdit && data.pinned ? ' selected' : '') + ' onchange="syncNoticiaPinned()"></md-switch>' +
+        '<input type="hidden" name="pinned" id="noticiaPinnedHidden" value="' + (isEdit && data.pinned ? 'true' : 'false') + '">' +
+      '</div>' +
+    '</div></div>'
+    : '';
   openModal(isEdit ? 'Editar Noticia' : 'Agregar Noticia',
     '<form id="modalForm" data-table="noticias" onsubmit="handleForm(event)">'
     + (isEdit ? '<input type="hidden" name="id" value="' + data.id + '">' : '')
     + '<div class="form-row" style="grid-template-columns:1fr 1fr">'
       + '<div class="form-group"><md-filled-text-field label="Título" name="titulo" placeholder="Ej: Corte de agua programado" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.titulo) + '"' : '') + '></md-filled-text-field></div>'
       + dateFieldHtml('fecha_hasta', 'Vigente hasta*', isEdit ? data.fecha_hasta : '')
-      // → Genera el date picker M3 custom (campo display + hidden input ISO + label + error + ícono calendario)
     + '</div>'
     + '<div class="form-group"><md-filled-text-field label="Descripción" name="descripcion" placeholder="Ej: Detalle de la noticia..." type="textarea" rows="3" required style="width:100%"' + (isEdit ? ' value="' + escHtml(data.descripcion) + '"' : '') + '></md-filled-text-field></div>'
+    + pinSwitch
     + '</form>',
-    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>', true);
+    '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">' + (isEdit ? 'Actualizar' : 'Guardar') + '</md-filled-button>');
+}
+```
+
+### 7.5 togglePinned(id)
+
+```js
+function togglePinned(id) {
+  var noticia = NOTICIAS.find(function(n) { return n.id === id; });
+  if (!noticia) return;
+  noticia.pinned = !noticia.pinned;
+  if (!DEMO_MODE) {
+    supabase.from('noticias').update({ pinned: noticia.pinned }).eq('id', id);
+  }
+  renderNoticias();
+  renderPinnedNews();
+}
+```
+
+### 7.6 syncNoticiaPinned()
+
+```js
+function syncNoticiaPinned() {
+  var sw = document.getElementById('noticiaPinned');
+  document.getElementById('noticiaPinnedHidden').value = sw.selected ? 'true' : 'false';
 }
 ```
 
 ## 8. Render output exacto
 
 ```html
-<div class="news-card" style="margin-bottom:1rem;">
+<div class="news-card">
   <div style="display:flex;justify-content:space-between;align-items:center">
     <h4 style="margin:0;flex:1">Corte de agua programado</h4>
+    <!-- admin only: pin icon -->
+    <md-icon-button onclick="togglePinned('...')" title="Pinneear en Home">
+      <md-icon style="color:var(--text-muted)">push_pin</md-icon>
+    </md-icon-button>
     <span class="dates" style="margin:0">10/04/2026</span>
     [edit] [delete]
   </div>
-  <div class="desc">El día sábado 15 de abril se realizará un corte de agua programado desde las 09:00 hasta las 14:00 hrs por mantención de la red.</div>
-  <!-- archivo si existe -->
+  <div class="desc">El día sábado 15 de abril se realizará un corte de agua programado...</div>
   <a href="https://..." target="_blank" style="color:var(--md-sys-color-primary);font-size:0.85rem">Ver archivo adjunto</a>
 </div>
 ```
