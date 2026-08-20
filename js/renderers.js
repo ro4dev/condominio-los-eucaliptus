@@ -382,15 +382,9 @@ function renderPeriodoEnCurso() {
   el.innerHTML =
     '<div class="card">' +
       '<div style="display:flex;align-items:center;justify-content:space-between;gap:0.5rem;margin-bottom:0.4rem">' +
-        '<h4 style="margin:0">Periodo en curso</h4>' +
-        '<div style="display:flex;gap:0.25rem;flex-shrink:0">' +
-          (IS_ADMIN ? '<md-filled-button onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\')"><md-icon slot="icon">add</md-icon>Nuevo periodo</md-filled-button>' : '') +
-          '<md-icon-button onclick="verCuotasPeriodo(\'' + p + '\')" title="Ver cuotas del periodo"><md-icon>receipt_long</md-icon></md-icon-button>' +
-          '<md-icon-button onclick="verMovimientosPeriodo(\'' + p + '\')" title="Ver movimientos del periodo"><md-icon>swap_vert</md-icon></md-icon-button>' +
-          (IS_ADMIN ? '<md-icon-button onclick="openModalPeriodo(\'' + p + '\')" title="Editar config del período"><md-icon>edit</md-icon></md-icon-button>' : '') +
-        '</div>' +
+        '<h4 style="margin:0">Periodo en curso — <span style="font-weight:400;color:var(--text-2)">' + escHtml(formatPeriodo(p)) + '</span></h4>' +
+        (IS_ADMIN ? '<md-icon-button onclick="openModalPeriodo(\'' + p + '\')" title="Editar config del período"><md-icon>edit</md-icon></md-icon-button>' : '') +
       '</div>' +
-      '<div style="font-size:0.85rem;color:var(--text-2);margin-bottom:0.8rem">Periodo <strong style="color:var(--text)">' + escHtml(formatPeriodo(p)) + '</strong></div>' +
       '<section class="stats" style="margin-bottom:0.8rem">' +
         '<div class="stat-card"><div class="label">Esperado</div><div class="value">' + formatMoney(esp) + '</div></div>' +
         '<div class="stat-card"><div class="label">Recaudado</div><div class="value blue">' + formatMoney(rec) + '</div></div>' +
@@ -399,6 +393,11 @@ function renderPeriodoEnCurso() {
       '</section>' +
       '<div class="progress-track"><div class="progress-fill" style="width:' + Math.min(100, pct) + '%;background:' + fillColor + '"></div></div>' +
       '<p class="progress-label">' + pct + '% de las cuotas del periodo pagadas</p>' +
+      '<div style="display:flex;gap:0.5rem;margin-top:0.8rem;justify-content:flex-end;flex-wrap:wrap">' +
+        (IS_ADMIN ? '<md-filled-button onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\')"><md-icon slot="icon">add</md-icon>Nuevo periodo</md-filled-button>' : '') +
+        '<md-filled-button onclick="verCuotasPeriodo(\'' + p + '\')"><md-icon slot="icon">receipt_long</md-icon>Cuotas</md-filled-button>' +
+        '<md-filled-button onclick="verMovimientosPeriodo(\'' + p + '\')"><md-icon slot="icon">swap_vert</md-icon>Movimientos</md-filled-button>' +
+      '</div>' +
     '</div>';
 }
 

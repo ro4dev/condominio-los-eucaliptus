@@ -2,6 +2,11 @@
 
 ## Registro de cambios
 
+### 19/08/2026 - UX: estandarización de botones en cards
+- **Changed**: Botones de acción en cards alineados a la derecha (estándar)
+- **Changed**: Card "Periodo en curso" — período融合ado al título, botones "Cuotas" y "Movimientos" cambiados de `md-icon-button` a `md-filled-button` con `flex-wrap:wrap` para mobile
+- **Fix**: Botón "Ver datos de pago" en Home ahora alineado a la derecha (antes quedaba a la izquierda)
+
 ### 19/08/2026 - Nuevo periodo: simplificación del flujo de períodos
 - **Changed**: Botón "Generar Cuotas" reemplazado por "Nuevo periodo" en el card del período en curso (admin-only)
 - **Changed**: Modal renombrado de "Generar cuotas" a "Nuevo periodo", botón "Generar" → "Crear"

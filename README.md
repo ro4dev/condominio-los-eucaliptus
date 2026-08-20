@@ -7,7 +7,7 @@ Sistema de gestión y visualización de gastos comunes para el condominio. Backe
 | Pestaña | Descripción |
 |---------|-------------|
 | **Home** | Vista resumen: balance del periodo vigente (% de recaudación con barra de progreso), listado de parcelas morosas (admin ve todas, el propietario su parcela) y card "Cómo pagar" con datos de transferencia. Es la pestaña inicial. |
-| **Finanzas** | Balance por periodo: card "Periodo en curso" (stats, progress bar, íconos para cuotas/movimientos), gráficos "Recaudado vs Esperado" e "Ingresos vs Egresos por mes", tabla "Histórico de períodos" (Período, Monto config, Esperado, Recaudado, %, Saldo) con íconos para ver cuotas, movimientos y editar config. Admin: config de períodos (monto/fondo reserva), generar cuotas, agregar cuota/movimiento. Los ingresos por cuotas se derivan de los pagos registrados. |
+| **Finanzas** | Balance por periodo: card "Periodo en curso" (stats, progress bar, botones para cuotas/movimientos), gráficos "Recaudado vs Esperado" e "Ingresos vs Egresos por mes", tabla "Histórico de períodos" (Período, Monto config, Esperado, Recaudado, %, Saldo) con acciones para ver cuotas, movimientos y editar config. Admin: config de períodos (monto/fondo reserva), generar cuotas, agregar cuota/movimiento. Los ingresos por cuotas se derivan de los pagos registrados. |
 | **Parcelas** | Listado de parcelas con datos catastrales, metros², estado y propietarios/asociados. |
 | **Noticias** | Avisos activos del condominio con fechas de vigencia. |
 | **Documentos** | Repositorio de estatutos, actas, contratos, seguros y planos. Filtros por categoría. |
