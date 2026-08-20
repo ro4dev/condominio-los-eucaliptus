@@ -78,7 +78,7 @@ supabase/migrations/    # Migraciones SQL
 | Módulo | Filtros |
 |--------|---------|
 | Gastos | Periodo, Parcela (selects) |
-| Noticias | Vigentes / No vigentes / Todas; admin pinnea con ícono push_pin |
+| Noticias | Vigentes / Destacadas / No vigentes / Todas; admin pinnea con ícono push_pin |
 | Ingresos/Egresos | Todos / Ingresos / Egresos |
 | Documentos | Todos / Estatuto / Actas / Contratos / Seguros / Planos |
 | Reclamos | Todos / Reclamos / Sugerencias |

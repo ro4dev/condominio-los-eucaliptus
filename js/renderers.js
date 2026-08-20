@@ -727,6 +727,8 @@ function renderNoticias() {
     mostrar = activas;
   } else if (noticiasFilter === 'no_vigentes') {
     mostrar = vencidas;
+  } else if (noticiasFilter === 'destacadas') {
+    mostrar = NOTICIAS.filter(function(n) { return n.pinned; });
   } else {
     mostrar = activas.concat(vencidas);
   }

@@ -54,6 +54,7 @@ CREATE TABLE noticias (
 
   <div class="filter-chips" id="noticiasFilter">
     <md-filter-chip label="Vigentes" selected onclick="filterNoticias('vigentes')"></md-filter-chip>
+    <md-filter-chip label="Destacadas" onclick="filterNoticias('destacadas')"></md-filter-chip>
     <md-filter-chip label="No vigentes" onclick="filterNoticias('no_vigentes')"></md-filter-chip>
     <md-filter-chip label="Todas" onclick="filterNoticias('todas')"></md-filter-chip>
   </div>
@@ -134,6 +135,7 @@ function renderNoticias() {
   var mostrar = [];
   if (noticiasFilter === 'vigentes') mostrar = activas;
   else if (noticiasFilter === 'no_vigentes') mostrar = vencidas;
+  else if (noticiasFilter === 'destacadas') mostrar = NOTICIAS.filter(function(n) { return n.pinned; });
   else mostrar = activas.concat(vencidas);
 
   if (mostrar.length === 0) {
@@ -275,6 +277,7 @@ function syncNoticiaPinned() {
 | Chip | Filtro | Default |
 |------|--------|---------|
 | Vigentes | `!n.fecha_hasta \|\| n.fecha_hasta >= hoyStr` | ✅ Sí |
+| Destacadas | `n.pinned` (incluye vigentes y vencidas) | No |
 | No vigentes | `n.fecha_hasta && n.fecha_hasta < hoyStr` | No |
 | Todas | Sin filtro | No |
 
