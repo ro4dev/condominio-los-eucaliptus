@@ -128,7 +128,7 @@ home: function() {
 | `.progress-fill` | div interno | height 100%, border-radius full, transición width 0.3s, color por pct |
 | `.pago-row` | fila de dato de pago | flex, gap 0.5rem, padding, border-bottom `--border-light` |
 | `.pago-row .value` | dato | `--text`, selectable (user-select: all) |
-| `.home-pinned-card` | fila de noticia pinneada | padding, border-bottom `--border-light`, cursor pointer, hover `--surface-hover` |
+| `.home-pinned-card` | fila de noticia pinneada | padding, border-bottom `--divider` |
 
 ## 8. Reglas de negocio
 

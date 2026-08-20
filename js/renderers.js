@@ -178,14 +178,6 @@ function renderPinnedNews() {
   }).join('');
 }
 
-function verNoticiaPinneada(id) {
-  switchTab('noticias');
-  setTimeout(function() {
-    var card = document.querySelector('.news-card[data-id="' + id + '"]');
-    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 300);
-}
-
 function togglePinned(id) {
   var noticia = NOTICIAS.find(function(n) { return n.id === id; });
   if (!noticia) return;

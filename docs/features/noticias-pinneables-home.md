@@ -13,7 +13,7 @@ Las noticias del módulo Noticias pueden ser "pinnadas" por el admin para que ap
 - En Home se muestra una card "Noticias destacadas" con las noticias pinneadas, debajo de las stat cards y antes del aviso de aumento
 - Si no hay noticias pinneadas, la card no se muestra (no mostrar empty state)
 - Máximo visible en Home: 3 noticias pinneadas (las más recientes); en Noticias se puede pinnear más, pero Home muestra solo las 3 más nuevas
-- Click en una noticia pinneada en Home → cambia a la pestaña Noticias y scrollea a la card
+- Click en una noticia pinneada en Home → sin acción (solo informativo)
 
 ## 3. Schema SQL
 
@@ -50,11 +50,7 @@ Filtra `NOTICIAS` por `pinned === true` y `fecha_hasta >= hoy`, ordena por fecha
 
 Función admin para cambiar el estado `pinned` de una noticia. En prod: `supabase.from('noticias').update({ pinned: ... }).eq('id', id)`.
 
-### 6.3 verNoticiaPinneada(id)
-
-Cambia a la pestaña Noticias y scrollea a la card de la noticia pinneada.
-
-### 6.4 Integración en renderHome()
+### 6.3 Integración en renderHome()
 
 `renderPinnedNews()` se llama al final de `renderHome()`, junto con `renderMorosos()` y `renderAvisoAumento()`.
 
@@ -73,9 +69,8 @@ Admin-only: `md-switch` "Destacar en Home" + hidden input `name="pinned"`. Patr�
 ## 8. CSS
 
 ```css
-.home-pinned-card { padding: 0.6rem 0; border-bottom: 1px solid var(--border-light); cursor: pointer; }
+.home-pinned-card { padding: 0.6rem 0; border-bottom: 1px solid var(--divider); }
 .home-pinned-card:last-child { border-bottom: none; }
-.home-pinned-card:hover { background: var(--surface-hover); border-radius: var(--md-sys-shape-corner-small); }
 ```
 
 ## 9. Orden de secciones en Home
@@ -102,7 +97,6 @@ Admin-only: `md-switch` "Destacar en Home" + hidden input `name="pinned"`. Patr�
 - [x] Actualizar `renderHome()` para incluir `renderPinnedNews()`
 - [x] Agregar `renderPinnedNews()` en renderers.js
 - [x] Agregar `togglePinned()` en renderers.js
-- [x] Agregar `verNoticiaPinneada()` en renderers.js
 - [x] Actualizar `renderNoticiaCard()` con ícono de pin (admin-only)
 - [x] Agregar HTML contenedor en index.html (sección Home)
 - [x] Agregar CSS `.home-pinned-card` en sections.css
