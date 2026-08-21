@@ -394,7 +394,7 @@ function renderPeriodoEnCurso() {
       '<div class="progress-track"><div class="progress-fill" style="width:' + Math.min(100, pct) + '%;background:' + fillColor + '"></div></div>' +
       '<p class="progress-label">' + pct + '% de las cuotas del periodo pagadas</p>' +
       '<div style="display:flex;gap:0.5rem;margin-top:0.8rem;justify-content:flex-end;flex-wrap:wrap">' +
-        (IS_ADMIN ? '<md-filled-button onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\')"><md-icon slot="icon">add</md-icon>Nuevo periodo</md-filled-button>' : '') +
+        (IS_ADMIN ? '<md-filled-button onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\', \'Cerrar periodo\', true)"><md-icon slot="icon">check_circle</md-icon>Cerrar periodo</md-filled-button>' : '') +
         '<md-filled-button onclick="verCuotasPeriodo(\'' + p + '\')"><md-icon slot="icon">receipt_long</md-icon>Cuotas</md-filled-button>' +
         '<md-filled-button onclick="verMovimientosPeriodo(\'' + p + '\')"><md-icon slot="icon">swap_vert</md-icon>Movimientos</md-filled-button>' +
       '</div>' +

@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 20/08/2026 - Finanzas: botón "Nuevo periodo" renombrado a "Cerrar periodo"
+- **Changed**: En el card "Periodo en curso" de Finanzas, el botón admin "Nuevo periodo" ahora dice "Cerrar periodo" con ícono `check_circle` (solo texto/ícono; la acción sigue siendo `formGenerarCuotas` — crea las cuotas del periodo siguiente)
+- **Changed**: `formGenerarCuotas(prefillPeriodo, titulo, fijo)` acepta título y modo fijo opcionales; desde Finanzas el modal no muestra selector de periodo e indica explícitamente "Se cierra X y se generan las cuotas de Y" (periodo va como hidden input); desde el aviso de aumento de Home mantiene el selector con título "Nuevo periodo"
+
 ### 20/08/2026 - Tests: fix expectativas de formatMoney + casos negativos
 - **Fix**: Las 10 expectativas de `formatMoney` en `test.html` no incluían el símbolo `$` (la función siempre lo incluye); ahora todas pasan
 - **Test**: Nuevos 5 tests de montos negativos: `formatMoney(-100)`, `(-1500)`, `(-1234567)`, `(-1500.5)` y el caso límite `(-0.4)` que redondea a 0 conservando el signo (`-$0`, comportamiento actual documentado)

@@ -744,9 +744,9 @@ function deletePago(pagoId) {
   });
 }
 
-function formGenerarCuotas(prefillPeriodo) {
+function formGenerarCuotas(prefillPeriodo, titulo, fijo) {
   if (PARCELAS.length === 0) {
-    loadJson('PARCELAS').then(function() { formGenerarCuotas(prefillPeriodo); });
+    loadJson('PARCELAS').then(function() { formGenerarCuotas(prefillPeriodo, titulo, fijo); });
     return;
   }
   var periodo = prefillPeriodo || siguientePeriodo();
@@ -758,9 +758,20 @@ function formGenerarCuotas(prefillPeriodo) {
     var label = d.toLocaleDateString('es-CL', { year: 'numeric', month: 'long' });
     meses.push('<md-select-option value="' + val + '"' + (val === periodo ? ' selected' : '') + '><span slot="headline">' + label + '</span></md-select-option>');
   }
-  openModal('Nuevo periodo', '<form id="modalForm" data-table="generar_cuotas" onsubmit="handleForm(event)">' +
-    '<p style="margin:0 0 0.8rem;font-size:0.85rem;color:var(--text-muted)">Crea una cuota por parcela para el periodo seleccionado. Las parcelas que ya tengan cuota en ese periodo no se modifican.</p>' +
-    '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required id="genCuotasPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>' +
+  var intro, periodoField;
+  if (fijo) {
+    var cerrado = typeof periodoVigente === 'function' ? periodoVigente() : null;
+    intro = '<p style="margin:0 0 0.8rem;font-size:0.85rem;color:var(--text-muted)">' +
+      (cerrado && cerrado !== periodo ? 'Se cierra <strong style="color:var(--text)">' + escHtml(formatPeriodo(cerrado)) + '</strong> y se generan las cuotas de <strong style="color:var(--text)">' + escHtml(formatPeriodo(periodo)) + '</strong>. ' : '') +
+      'Las parcelas que ya tengan cuota en ese periodo no se modifican.</p>';
+    periodoField = '<input type="hidden" name="periodo" id="genCuotasPeriodo" value="' + periodo + '">';
+  } else {
+    intro = '<p style="margin:0 0 0.8rem;font-size:0.85rem;color:var(--text-muted)">Crea una cuota por parcela para el periodo seleccionado. Las parcelas que ya tengan cuota en ese periodo no se modifican.</p>';
+    periodoField = '<div class="form-group"><md-filled-select label="Periodo" name="periodo" required id="genCuotasPeriodo" style="width:100%">' + meses.join('') + '</md-filled-select></div>';
+  }
+  openModal(titulo || 'Nuevo periodo', '<form id="modalForm" data-table="generar_cuotas" onsubmit="handleForm(event)">' +
+    intro +
+    periodoField +
     '<div class="form-row">' +
       '<div class="form-group"><md-filled-text-field label="Gasto común" type="number" name="monto" min="0" required id="genCuotasMonto" style="width:100%"></md-filled-text-field></div>' +
       '<div class="form-group"><md-filled-text-field label="Fondo reserva" type="number" name="fondo_reserva" min="0" id="genCuotasFondo" style="width:100%"></md-filled-text-field></div>' +
@@ -768,7 +779,9 @@ function formGenerarCuotas(prefillPeriodo) {
     '<div id="genCuotasHint" style="font-size:0.85rem;color:var(--text-muted)"></div>' +
   '</form>',
     '<md-text-button onclick="closeModal()">Cancelar</md-text-button><md-filled-button type="submit" form="modalForm">Crear</md-filled-button>');
-  document.getElementById('genCuotasPeriodo').addEventListener('change', updateGenCuotasPrefill);
+  if (!fijo) {
+    document.getElementById('genCuotasPeriodo').addEventListener('change', updateGenCuotasPrefill);
+  }
   updateGenCuotasPrefill();
 }
 
