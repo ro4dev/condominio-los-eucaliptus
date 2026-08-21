@@ -56,16 +56,21 @@
     var GASTOS = [];
 
     // ── formatMoney ──
-    assert('formatMoney(0)', formatMoney(0), '0');
-    assert('formatMoney(100)', formatMoney(100), '100');
-    assert('formatMoney(1000)', formatMoney(1000), '1.000');
-    assert('formatMoney(1234567)', formatMoney(1234567), '1.234.567');
-    assert('formatMoney(999)', formatMoney(999), '999');
-    assert('formatMoney(1000000)', formatMoney(1000000), '1.000.000');
-    assert('formatMoney(1500)', formatMoney(1500), '1.500');
-    assert('formatMoney(1234567890)', formatMoney(1234567890), '1.234.567.890');
-    assert('formatMoney(1500.4)', formatMoney(1500.4), '1.500');
-    assert('formatMoney(1500.5)', formatMoney(1500.5), '1.501');
+    assert('formatMoney(0)', formatMoney(0), '$0');
+    assert('formatMoney(100)', formatMoney(100), '$100');
+    assert('formatMoney(1000)', formatMoney(1000), '$1.000');
+    assert('formatMoney(1234567)', formatMoney(1234567), '$1.234.567');
+    assert('formatMoney(999)', formatMoney(999), '$999');
+    assert('formatMoney(1000000)', formatMoney(1000000), '$1.000.000');
+    assert('formatMoney(1500)', formatMoney(1500), '$1.500');
+    assert('formatMoney(1234567890)', formatMoney(1234567890), '$1.234.567.890');
+    assert('formatMoney(1500.4)', formatMoney(1500.4), '$1.500');
+    assert('formatMoney(1500.5)', formatMoney(1500.5), '$1.501');
+    assert('formatMoney(-100)', formatMoney(-100), '-$100');
+    assert('formatMoney(-1500)', formatMoney(-1500), '-$1.500');
+    assert('formatMoney(-1234567)', formatMoney(-1234567), '-$1.234.567');
+    assert('formatMoney(-1500.5)', formatMoney(-1500.5), '-$1.501');
+    assert('formatMoney(-0.4) redondea a 0 con signo', formatMoney(-0.4), '-$0');
 
     // ── formatPeriodo ──
     assert('formatPeriodo("2025-07")', formatPeriodo('2025-07'), '07/2025');

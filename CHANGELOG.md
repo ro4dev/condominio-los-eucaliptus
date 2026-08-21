@@ -2,6 +2,10 @@
 
 ## Registro de cambios
 
+### 20/08/2026 - Tests: fix expectativas de formatMoney + casos negativos
+- **Fix**: Las 10 expectativas de `formatMoney` en `test.html` no incluían el símbolo `$` (la función siempre lo incluye); ahora todas pasan
+- **Test**: Nuevos 5 tests de montos negativos: `formatMoney(-100)`, `(-1500)`, `(-1234567)`, `(-1500.5)` y el caso límite `(-0.4)` que redondea a 0 conservando el signo (`-$0`, comportamiento actual documentado)
+
 ### 19/08/2026 - UX: estandarización de botones en cards
 - **Changed**: Botones de acción en cards alineados a la derecha (estándar)
 - **Changed**: Card "Periodo en curso" — período融合ado al título, botones "Cuotas" y "Movimientos" cambiados de `md-icon-button` a `md-filled-button` con `flex-wrap:wrap` para mobile
