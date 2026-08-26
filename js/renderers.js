@@ -551,7 +551,11 @@ function verMovimientosPeriodo(periodo) {
 }
 
 function resumenCuotasDetalle(periodo) {
-  var cuotas = GASTOS.filter(function(g) { return g.periodo === periodo; });
+  var cuotas = GASTOS.filter(function(g) { return g.periodo === periodo; }).sort(function(a, b) {
+    var na = (PARCELAS.find(function(p) { return p.id === a.parcela_id; }) || {}).numero || '';
+    var nb = (PARCELAS.find(function(p) { return p.id === b.parcela_id; }) || {}).numero || '';
+    return na.localeCompare(nb, undefined, {numeric: true});
+  });
   if (!cuotas.length) {
     return '<p style="margin:0;color:var(--text-muted);font-size:0.85rem">Sin cuotas para este periodo.</p>';
   }
