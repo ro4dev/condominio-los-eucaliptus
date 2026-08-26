@@ -566,7 +566,7 @@ function resumenCuotasDetalle(periodo) {
       var monto = parseFloat(g.monto || 0);
       var color = isPagado(g) ? 'var(--color-positive)' : (pagado > 0 ? 'var(--color-warning, #f59e0b)' : 'var(--text-muted)');
       return '<tr>' +
-        '<td>' + parcelName(g.parcela_id) + '</td>' +
+        '<td style="white-space:nowrap">' + parcelName(g.parcela_id) + '</td>' +
         '<td style="font-weight:600;color:' + color + '">' + formatMoney(pagado) + '/' + formatMoney(monto) + '</td>' +
         '<td style="width:1%;white-space:nowrap">' +
           '<div style="display:flex;gap:0rem;align-items:center">' +
