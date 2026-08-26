@@ -559,14 +559,15 @@ function resumenCuotasDetalle(periodo) {
   if (!cuotas.length) {
     return '<p style="margin:0;color:var(--text-muted);font-size:0.85rem">Sin cuotas para este periodo.</p>';
   }
-  return '<div style="overflow-x:auto"><table style="min-width:420px">' +
-    '<thead><tr><th>Parcela</th><th>Monto</th><th>Pagado</th><th>Estado</th><th></th></tr></thead>' +
+  return '<div style="overflow-x:auto"><table style="min-width:300px">' +
+    '<thead><tr><th>Parcela</th><th>Importe</th><th></th></tr></thead>' +
     '<tbody>' + cuotas.map(function(g) {
+      var pagado = sumPagosGasto(g.id);
+      var monto = parseFloat(g.monto || 0);
+      var color = isPagado(g) ? 'var(--color-positive)' : (pagado > 0 ? 'var(--color-warning, #f59e0b)' : 'var(--text-muted)');
       return '<tr>' +
         '<td>' + parcelName(g.parcela_id) + '</td>' +
-        '<td>' + formatMoney(parseFloat(g.monto || 0)) + '</td>' +
-        '<td>' + formatMoney(sumPagosGasto(g.id)) + '</td>' +
-        '<td>' + estadoChip(g) + '</td>' +
+        '<td style="font-weight:600;color:' + color + '">' + formatMoney(pagado) + '/' + formatMoney(monto) + '</td>' +
         '<td style="width:1%;white-space:nowrap">' +
           '<md-icon-button onclick="verPagos(\'' + g.id + '\')" title="Ver pagos"><md-icon>payments</md-icon></md-icon-button>' +
           adminActions("editGasto('" + g.id + "')", "deleteGasto('" + g.id + "')") +
