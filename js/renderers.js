@@ -393,10 +393,18 @@ function renderPeriodoEnCurso() {
       '</section>' +
       '<div class="progress-track"><div class="progress-fill" style="width:' + Math.min(100, pct) + '%;background:' + fillColor + '"></div></div>' +
       '<p class="progress-label">' + pct + '% de las cuotas del periodo pagadas</p>' +
-      '<div style="display:flex;gap:0.5rem;margin-top:0.8rem;justify-content:flex-end;flex-wrap:wrap">' +
+      '<div class="periodo-actions-desktop" style="margin-top:0.8rem">' +
         (IS_ADMIN ? '<md-filled-button onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\', \'Cerrar periodo\', true)"><md-icon slot="icon">check_circle</md-icon>Cerrar periodo</md-filled-button>' : '') +
         '<md-filled-button onclick="verCuotasPeriodo(\'' + p + '\')"><md-icon slot="icon">receipt_long</md-icon>Cuotas</md-filled-button>' +
         '<md-filled-button onclick="verMovimientosPeriodo(\'' + p + '\')"><md-icon slot="icon">swap_vert</md-icon>Movimientos</md-filled-button>' +
+      '</div>' +
+      '<div class="periodo-actions-mobile" style="margin-top:0.8rem">' +
+        '<md-icon-button id="periodoMenuBtn" onclick="var m=document.getElementById(\'periodoMenu\');if(m)m.open=!m.open" title="Acciones"><md-icon>more_vert</md-icon></md-icon-button>' +
+        '<md-menu id="periodoMenu" anchor="periodoMenuBtn" anchor-corner="end-end" menu-corner="start-end" positioning="fixed">' +
+          (IS_ADMIN ? '<md-menu-item onclick="formGenerarCuotas(\'' + siguientePeriodo() + '\', \'Cerrar periodo\', true)"><md-icon slot="start">check_circle</md-icon>Cerrar periodo</md-menu-item>' : '') +
+          '<md-menu-item onclick="verCuotasPeriodo(\'' + p + '\')"><md-icon slot="start">receipt_long</md-icon>Cuotas</md-menu-item>' +
+          '<md-menu-item onclick="verMovimientosPeriodo(\'' + p + '\')"><md-icon slot="start">swap_vert</md-icon>Movimientos</md-menu-item>' +
+        '</md-menu>' +
       '</div>' +
     '</div>';
 }
