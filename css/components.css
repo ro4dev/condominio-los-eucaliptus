@@ -73,10 +73,3 @@ textarea::placeholder { color: var(--md-sys-color-on-surface-variant); }
 .aviso-card strong { color: var(--text); }
 .aviso-card md-icon-button, .aviso-card md-filled-button { flex-shrink: 0; }
 
-/* Periodo en curso: acciones responsive */
-.periodo-actions-mobile { display: none; }
-.periodo-actions-desktop { display: flex; gap: 0.5rem; justify-content: flex-end; flex-wrap: wrap; }
-@media (max-width: 700px) {
-  .periodo-actions-desktop { display: none; }
-  .periodo-actions-mobile { display: flex; justify-content: flex-end; }
-}
