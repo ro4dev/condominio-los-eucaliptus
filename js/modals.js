@@ -716,7 +716,7 @@ function verPagos(gastoId) {
         '</div>';
       }).join('');
   }
-  var footer = '<md-text-button onclick="closeModal()">Cerrar</md-text-button>';
+  var footer = '<md-text-button onclick="verCuotasPeriodo(\'' + gasto.periodo + '\')">← Volver</md-text-button>';
   if (IS_ADMIN && parseFloat(gasto.monto || 0) - sumPagosGasto(gastoId) > 0) {
     footer += '<md-filled-button onclick="formPago({gasto_id:\'' + gasto.id + '\',parcela_id:\'' + gasto.parcela_id + '\',periodo:\'' + gasto.periodo + '\',monto:' + parseFloat(gasto.monto || 0) + '})"><md-icon slot="icon">payments</md-icon>Registrar pago</md-filled-button>';
   }
