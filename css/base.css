@@ -323,7 +323,7 @@ body.dark .m3-date-group .m3-date {
   border: none;
 }
 #modalBody {
-  padding: 24px;
+  padding: 24px 0;
   overflow-y: auto;
 }
 #modalFooter {
