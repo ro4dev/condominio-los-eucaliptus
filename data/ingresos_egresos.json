@@ -50,8 +50,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "75bb989b-8d0b-496a-b05e-a85680c79f0d",
+    "id": "8dbb2297-4578-4e70-a1fe-c8533011bf9d",
     "fecha": "7/08/2024",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Eduardo Navarrete",
+    "monto": "200000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "75bb989b-8d0b-496a-b05e-a85680c79f0d",
+    "fecha": "8/08/2024",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático agosto",
@@ -61,7 +71,7 @@
   },
   {
     "id": "1b98ce5e-98b6-4a16-845c-c4b5cc9d0462",
-    "fecha": "8/08/2024",
+    "fecha": "9/08/2024",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes agosto",
@@ -71,7 +81,7 @@
   },
   {
     "id": "2d2ab0e2-6e72-4a7a-a233-e6bb23a097a2",
-    "fecha": "9/08/2024",
+    "fecha": "10/08/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Pintura fachada salón común",
@@ -81,21 +91,11 @@
   },
   {
     "id": "5090564c-ca50-448b-83a7-b6e4e371695a",
-    "fecha": "10/08/2024",
+    "fecha": "11/08/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Mantención techos pasillos",
     "monto": "420000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "8dbb2297-4578-4e70-a1fe-c8533011bf9d",
-    "fecha": "16/08/2024",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa obra sin permiso Eduardo Navarrete",
-    "monto": "200000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -250,8 +250,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "e491c876-ac5a-43c2-84f2-9c63e4822e71",
+    "id": "8ea1790d-05e9-49d3-b2cd-52e4523aefaa",
     "fecha": "7/10/2024",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa uso piscina fuera de horario Carlos Silva",
+    "monto": "180000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "e491c876-ac5a-43c2-84f2-9c63e4822e71",
+    "fecha": "8/10/2024",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped octubre",
@@ -261,7 +271,7 @@
   },
   {
     "id": "e13173b0-e78a-4a89-b557-0bfca86c78c3",
-    "fecha": "8/10/2024",
+    "fecha": "9/10/2024",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes octubre",
@@ -271,7 +281,7 @@
   },
   {
     "id": "e3dc0f4c-29e7-40fa-8cc2-2f27b8f0f9f0",
-    "fecha": "9/10/2024",
+    "fecha": "10/10/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de agua",
@@ -281,7 +291,7 @@
   },
   {
     "id": "75b07aa9-63d9-492d-ad1a-3eaf59af52e8",
-    "fecha": "10/10/2024",
+    "fecha": "11/10/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo cerradura acceso principal",
@@ -291,21 +301,11 @@
   },
   {
     "id": "7a0cedab-32b0-4608-9fb7-da5f6c2c4c8b",
-    "fecha": "11/10/2024",
+    "fecha": "12/10/2024",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "694516",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "8ea1790d-05e9-49d3-b2cd-52e4523aefaa",
-    "fecha": "18/10/2024",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa uso piscina fuera de horario Carlos Silva",
-    "monto": "180000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -360,8 +360,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "e88a4606-4371-44c3-8808-d9fab9453c88",
+    "id": "c759f47a-46bd-4355-83da-d179b65f0e57",
     "fecha": "7/11/2024",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Patricia Ortiz",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "e88a4606-4371-44c3-8808-d9fab9453c88",
+    "fecha": "8/11/2024",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped noviembre",
@@ -371,7 +381,7 @@
   },
   {
     "id": "8899cbef-3953-46d1-b952-0e7d423c65a3",
-    "fecha": "8/11/2024",
+    "fecha": "9/11/2024",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes noviembre",
@@ -381,7 +391,7 @@
   },
   {
     "id": "7b1b66b2-0115-44b2-bc23-230f8f08da65",
-    "fecha": "9/11/2024",
+    "fecha": "10/11/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Cambio grifería baño común",
@@ -391,21 +401,11 @@
   },
   {
     "id": "e65f69be-e17c-4ae6-8b99-5608975b6b82",
-    "fecha": "10/11/2024",
+    "fecha": "11/11/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación iluminación pasillo",
     "monto": "750000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "c759f47a-46bd-4355-83da-d179b65f0e57",
-    "fecha": "17/11/2024",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa estacionamiento indebido Patricia Ortiz",
-    "monto": "75000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -440,8 +440,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "646ba1e2-0abb-4456-ae33-05f1c10a93d4",
+    "id": "55151260-a975-40f6-9f56-8a3d364b75fe",
     "fecha": "5/12/2024",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Isabel Fernández",
+    "monto": "100000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "646ba1e2-0abb-4456-ae33-05f1c10a93d4",
+    "fecha": "6/12/2024",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura luz diciembre",
@@ -451,7 +461,7 @@
   },
   {
     "id": "1ffed8ca-7adb-404a-8786-c03b630ac8d2",
-    "fecha": "6/12/2024",
+    "fecha": "7/12/2024",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático diciembre",
@@ -460,8 +470,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "34b79078-a6b0-4972-a5fd-0bf91cefbf60",
+    "fecha": "8/12/2024",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa uso piscina fuera de horario Santiago Vega",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "adfe5962-8b21-4aed-926f-940fb020f514",
-    "fecha": "7/12/2024",
+    "fecha": "9/12/2024",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza espacios comunes diciembre",
@@ -471,31 +491,11 @@
   },
   {
     "id": "299104fe-0af1-458b-aa7f-c57f047c0027",
-    "fecha": "8/12/2024",
+    "fecha": "10/12/2024",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de presión",
     "monto": "420000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "55151260-a975-40f6-9f56-8a3d364b75fe",
-    "fecha": "17/12/2024",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Isabel Fernández",
-    "monto": "100000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "34b79078-a6b0-4972-a5fd-0bf91cefbf60",
-    "fecha": "18/12/2024",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa uso piscina fuera de horario Santiago Vega",
-    "monto": "75000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -640,8 +640,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "4d8006ae-14a4-4b86-a1b9-254f6b135031",
+    "id": "eda2ee29-f63e-42e4-abe6-3f395c94c7b2",
     "fecha": "5/02/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Vicente Urrutia",
+    "monto": "180000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "4d8006ae-14a4-4b86-a1b9-254f6b135031",
+    "fecha": "6/02/2025",
     "tipo": "Egreso",
     "concepto": "Agua",
     "descripcion": "Factura agua febrero",
@@ -651,7 +661,7 @@
   },
   {
     "id": "1d66d1bc-888b-4a29-aa91-39aa565bcf11",
-    "fecha": "6/02/2025",
+    "fecha": "7/02/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Fertilización jardines febrero",
@@ -660,8 +670,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "12659bcd-cdd3-4e27-89aa-b177017d52f0",
+    "fecha": "8/02/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Leonardo Gallardo",
+    "monto": "150000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "78ad0514-2d81-4726-8314-689b475322a2",
-    "fecha": "7/02/2025",
+    "fecha": "9/02/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza piscina febrero",
@@ -671,7 +691,7 @@
   },
   {
     "id": "8d9d4b22-85b2-481e-835d-10fe7b8a0df8",
-    "fecha": "8/02/2025",
+    "fecha": "10/02/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de agua",
@@ -681,31 +701,11 @@
   },
   {
     "id": "c24573e7-be24-4085-b97a-ec4f9c147c4a",
-    "fecha": "9/02/2025",
+    "fecha": "11/02/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Mantención portón automático",
     "monto": "180000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "eda2ee29-f63e-42e4-abe6-3f395c94c7b2",
-    "fecha": "15/02/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Vicente Urrutia",
-    "monto": "180000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "12659bcd-cdd3-4e27-89aa-b177017d52f0",
-    "fecha": "16/02/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Leonardo Gallardo",
-    "monto": "150000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -850,8 +850,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "360a4777-a870-4825-8429-51c5967b3445",
+    "id": "dfff3b73-4cff-4b50-adbf-de7538ce8f66",
     "fecha": "5/04/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Silvia Carvajal",
+    "monto": "300000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "360a4777-a870-4825-8429-51c5967b3445",
+    "fecha": "6/04/2025",
     "tipo": "Egreso",
     "concepto": "Cable",
     "descripcion": "Cable comunitario abril",
@@ -861,7 +871,7 @@
   },
   {
     "id": "39071fca-1cc0-41c5-b1a5-479bccc56adf",
-    "fecha": "6/04/2025",
+    "fecha": "7/04/2025",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura luz abril",
@@ -871,7 +881,7 @@
   },
   {
     "id": "bdb022a3-8028-42f1-920d-c2db40607b9b",
-    "fecha": "7/04/2025",
+    "fecha": "8/04/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Poda de árboles mes abril",
@@ -880,8 +890,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "b16fc7ae-208e-4004-b637-e1b6efad5e83",
+    "fecha": "9/04/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Silvia Carvajal",
+    "monto": "300000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "73e0ac5f-0da2-42a2-b81f-8aeb341a9214",
-    "fecha": "8/04/2025",
+    "fecha": "10/04/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes abril",
@@ -891,7 +911,7 @@
   },
   {
     "id": "86ac2f8d-3684-46a4-8c85-6da0f92b6590",
-    "fecha": "9/04/2025",
+    "fecha": "11/04/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Pintura portón ingreso",
@@ -901,31 +921,11 @@
   },
   {
     "id": "93742085-c279-4358-89b9-74f47ea2d7c1",
-    "fecha": "10/04/2025",
+    "fecha": "12/04/2025",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "765781",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "dfff3b73-4cff-4b50-adbf-de7538ce8f66",
-    "fecha": "20/04/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa obra sin permiso Silvia Carvajal",
-    "monto": "300000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "b16fc7ae-208e-4004-b637-e1b6efad5e83",
-    "fecha": "21/04/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Silvia Carvajal",
-    "monto": "300000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -970,8 +970,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "61f3e9be-cbf9-448f-bb59-e73404d0ed77",
+    "id": "380b501c-d0bc-432b-9592-75a67a63ec5b",
     "fecha": "6/05/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Helena Ulloa",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "61f3e9be-cbf9-448f-bb59-e73404d0ed77",
+    "fecha": "7/05/2025",
     "tipo": "Egreso",
     "concepto": "Cable",
     "descripcion": "Cable comunitario mayo",
@@ -981,7 +991,7 @@
   },
   {
     "id": "3e1d44ac-fb6f-4212-9ea7-1a6173d513e7",
-    "fecha": "7/05/2025",
+    "fecha": "8/05/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático mayo",
@@ -991,7 +1001,7 @@
   },
   {
     "id": "5bab79f9-c9af-48e3-9b9b-9551b8e5bb7b",
-    "fecha": "8/05/2025",
+    "fecha": "9/05/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Fertilización jardines mayo",
@@ -1000,8 +1010,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "eeb8b1f2-78e2-4f31-9bfd-d91f78e53590",
+    "fecha": "10/05/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Vicente Quintana",
+    "monto": "180000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "8e589be7-21e3-41e4-a879-ba68eb0f395e",
-    "fecha": "9/05/2025",
+    "fecha": "11/05/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Service limpieza común mayo",
@@ -1011,7 +1031,7 @@
   },
   {
     "id": "8c92df75-c378-48de-9a1e-1ed9bb3754a1",
-    "fecha": "10/05/2025",
+    "fecha": "12/05/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Pintura fachada salón común",
@@ -1021,31 +1041,11 @@
   },
   {
     "id": "a0845adb-6352-4eaf-a395-be06e6261b48",
-    "fecha": "11/05/2025",
+    "fecha": "13/05/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Mantención portón automático",
     "monto": "150000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "380b501c-d0bc-432b-9592-75a67a63ec5b",
-    "fecha": "19/05/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa estacionamiento indebido Helena Ulloa",
-    "monto": "75000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "eeb8b1f2-78e2-4f31-9bfd-d91f78e53590",
-    "fecha": "20/05/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa estacionamiento indebido Vicente Quintana",
-    "monto": "180000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -1080,8 +1080,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "6245bcec-f318-4bae-a53a-6a4a55dc19d8",
+    "id": "bbec5bee-5607-474c-a6fc-27fab1de872e",
     "fecha": "5/06/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa basura en zona común Vicente Quintana",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "6245bcec-f318-4bae-a53a-6a4a55dc19d8",
+    "fecha": "6/06/2025",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura luz junio",
@@ -1091,7 +1101,7 @@
   },
   {
     "id": "41052ebd-f3e0-45e5-a017-80f29f2976a4",
-    "fecha": "6/06/2025",
+    "fecha": "7/06/2025",
     "tipo": "Egreso",
     "concepto": "Agua",
     "descripcion": "Factura agua junio",
@@ -1101,7 +1111,7 @@
   },
   {
     "id": "9dd4ffc7-588f-4a5f-86ef-e81125be7fe2",
-    "fecha": "7/06/2025",
+    "fecha": "8/06/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped junio",
@@ -1110,8 +1120,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "3da96aa4-5b86-4ade-b72c-2c8056eae204",
+    "fecha": "9/06/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Hernán Zamora",
+    "monto": "300000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "6c1bdb4a-850a-4a1a-aabb-d3406b61383d",
-    "fecha": "8/06/2025",
+    "fecha": "10/06/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped junio",
@@ -1121,7 +1141,7 @@
   },
   {
     "id": "617af928-fc68-42c6-aa3e-981a2fc87b8d",
-    "fecha": "9/06/2025",
+    "fecha": "11/06/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes junio",
@@ -1131,31 +1151,11 @@
   },
   {
     "id": "8c617b03-7065-4758-8236-c0cfbd058083",
-    "fecha": "10/06/2025",
+    "fecha": "12/06/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación cámara de seguridad",
     "monto": "200000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "bbec5bee-5607-474c-a6fc-27fab1de872e",
-    "fecha": "16/06/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa basura en zona común Vicente Quintana",
-    "monto": "75000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "3da96aa4-5b86-4ade-b72c-2c8056eae204",
-    "fecha": "17/06/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Hernán Zamora",
-    "monto": "300000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -1200,8 +1200,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "9d8cdd25-f7c7-4451-ad00-9f7f914c5f37",
+    "id": "71c106e4-b053-4bab-91ff-7674caec3565",
     "fecha": "6/07/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa ruido excesivo Daniela Toledo",
+    "monto": "180000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "9d8cdd25-f7c7-4451-ad00-9f7f914c5f37",
+    "fecha": "7/07/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático julio",
@@ -1211,7 +1221,7 @@
   },
   {
     "id": "df4b851b-752b-4b31-a5c4-cb856e768483",
-    "fecha": "7/07/2025",
+    "fecha": "8/07/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza piscina julio",
@@ -1221,7 +1231,7 @@
   },
   {
     "id": "ae7fea4e-4f60-42b9-9af0-f74f91207da3",
-    "fecha": "8/07/2025",
+    "fecha": "9/07/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Cambio grifería baño común",
@@ -1230,8 +1240,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "fb9a0dd0-d375-4f02-b5a2-9663de895ef6",
+    "fecha": "10/07/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa ruido excesivo Diego Ramírez",
+    "monto": "90000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "5061c653-0b15-4e02-bc0c-36276d9ff94b",
-    "fecha": "9/07/2025",
+    "fecha": "11/07/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación cámara de seguridad",
@@ -1241,7 +1261,7 @@
   },
   {
     "id": "e16e8cc8-bc39-4505-acbf-4d40d361101f",
-    "fecha": "10/07/2025",
+    "fecha": "12/07/2025",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro RC anual condominio",
@@ -1251,31 +1271,11 @@
   },
   {
     "id": "820356ab-3700-4d69-a7f3-803b58b8059c",
-    "fecha": "11/07/2025",
+    "fecha": "13/07/2025",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "663551",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "71c106e4-b053-4bab-91ff-7674caec3565",
-    "fecha": "19/07/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa ruido excesivo Daniela Toledo",
-    "monto": "180000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "fb9a0dd0-d375-4f02-b5a2-9663de895ef6",
-    "fecha": "20/07/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa ruido excesivo Diego Ramírez",
-    "monto": "90000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -1330,8 +1330,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "240fa562-0d03-4ac0-80a5-4c74beae1c78",
+    "id": "ad9b52c9-abe3-47a6-88c3-bd3e5e8eb2d8",
     "fecha": "7/08/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Patricia Ortiz",
+    "monto": "250000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "240fa562-0d03-4ac0-80a5-4c74beae1c78",
+    "fecha": "8/08/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Poda de árboles mes agosto",
@@ -1341,7 +1351,7 @@
   },
   {
     "id": "51abfd43-f0e6-4426-ad2b-0a7072e49d8d",
-    "fecha": "8/08/2025",
+    "fecha": "9/08/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Control plagas mes agosto",
@@ -1351,7 +1361,7 @@
   },
   {
     "id": "77dbed08-b1b4-4eba-975e-9cd52fe6d106",
-    "fecha": "9/08/2025",
+    "fecha": "10/08/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Service limpieza común agosto",
@@ -1361,7 +1371,7 @@
   },
   {
     "id": "b4feee3b-0a8f-4930-a620-39cf5755e5d1",
-    "fecha": "10/08/2025",
+    "fecha": "11/08/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Pintura portón ingreso",
@@ -1371,21 +1381,11 @@
   },
   {
     "id": "8a243062-54a2-41ed-a9a6-e351908f866c",
-    "fecha": "11/08/2025",
+    "fecha": "12/08/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Cambio grifería baño común",
     "monto": "350000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "ad9b52c9-abe3-47a6-88c3-bd3e5e8eb2d8",
-    "fecha": "19/08/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Patricia Ortiz",
-    "monto": "250000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -1550,8 +1550,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "4c6e9450-096d-464b-bcd9-5caece16ddbf",
+    "id": "64e92d84-246a-4e6b-b11b-e23e47a197aa",
     "fecha": "8/10/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Vicente Quintana",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "4c6e9450-096d-464b-bcd9-5caece16ddbf",
+    "fecha": "9/10/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza espacios comunes octubre",
@@ -1561,7 +1571,7 @@
   },
   {
     "id": "ec516a3c-e2fc-4812-81de-89c000801d8c",
-    "fecha": "9/10/2025",
+    "fecha": "10/10/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes octubre",
@@ -1571,7 +1581,7 @@
   },
   {
     "id": "86a01ba0-eda8-4797-aeab-625ef38f4eb6",
-    "fecha": "10/10/2025",
+    "fecha": "11/10/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo rejilla desagüe",
@@ -1581,7 +1591,7 @@
   },
   {
     "id": "50968ad2-4a54-4b53-8269-e4ca976ddf8e",
-    "fecha": "11/10/2025",
+    "fecha": "12/10/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación cámara de seguridad",
@@ -1591,21 +1601,11 @@
   },
   {
     "id": "81e08f28-e60a-446a-ba74-52bffa132dba",
-    "fecha": "12/10/2025",
+    "fecha": "13/10/2025",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "681494",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "64e92d84-246a-4e6b-b11b-e23e47a197aa",
-    "fecha": "20/10/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa estacionamiento indebido Vicente Quintana",
-    "monto": "75000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -1650,8 +1650,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "c2a73ded-11f4-47b2-873a-54f605fbb1ff",
+    "id": "f6c79cd4-1f7d-43dc-a426-0973b45eb346",
     "fecha": "6/11/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Álvaro Sepúlveda",
+    "monto": "100000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "c2a73ded-11f4-47b2-873a-54f605fbb1ff",
+    "fecha": "7/11/2025",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura luz noviembre",
@@ -1661,7 +1671,7 @@
   },
   {
     "id": "e18b0216-80e4-45a7-8d34-d8eb1443d0a3",
-    "fecha": "7/11/2025",
+    "fecha": "8/11/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático noviembre",
@@ -1671,7 +1681,7 @@
   },
   {
     "id": "557e57b2-295c-4a23-b9c4-cb43a548f3b8",
-    "fecha": "8/11/2025",
+    "fecha": "9/11/2025",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped noviembre",
@@ -1680,8 +1690,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "c65f5147-d307-41a4-99ff-2bc24e329515",
+    "fecha": "10/11/2025",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Isidora Urrutia",
+    "monto": "150000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "252f4a75-ae37-44dc-bc98-dd07257b73d1",
-    "fecha": "9/11/2025",
+    "fecha": "11/11/2025",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Service limpieza común noviembre",
@@ -1691,7 +1711,7 @@
   },
   {
     "id": "c9613372-272b-4d28-9373-bbc1eee03788",
-    "fecha": "10/11/2025",
+    "fecha": "12/11/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Pintura portón ingreso",
@@ -1701,31 +1721,11 @@
   },
   {
     "id": "20afa49d-0634-45d2-89e1-d38174ffad95",
-    "fecha": "11/11/2025",
+    "fecha": "13/11/2025",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación bomba de presión",
     "monto": "250000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "f6c79cd4-1f7d-43dc-a426-0973b45eb346",
-    "fecha": "20/11/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Álvaro Sepúlveda",
-    "monto": "100000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "c65f5147-d307-41a4-99ff-2bc24e329515",
-    "fecha": "21/11/2025",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa estacionamiento indebido Isidora Urrutia",
-    "monto": "150000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -1840,8 +1840,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "d72f231f-ba0d-4faa-b7bb-bb89831b4b46",
+    "id": "64d2dba6-fd76-4deb-aaee-02ae62293f0d",
     "fecha": "5/01/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Pablo Castillo",
+    "monto": "200000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "d72f231f-ba0d-4faa-b7bb-bb89831b4b46",
+    "fecha": "6/01/2026",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura electricidad enero",
@@ -1851,7 +1861,7 @@
   },
   {
     "id": "7046ce4d-2acb-43c5-8d1c-e5935ac32242",
-    "fecha": "6/01/2026",
+    "fecha": "7/01/2026",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped enero",
@@ -1861,7 +1871,7 @@
   },
   {
     "id": "4e39894f-678b-4b97-afaf-e46fe9caa9a8",
-    "fecha": "7/01/2026",
+    "fecha": "8/01/2026",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Fertilización jardines enero",
@@ -1870,8 +1880,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "ec269003-1dc5-4c3e-8b7f-460c1151493a",
+    "fecha": "9/01/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Paola Cabrera",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "cba8fe75-84f7-4e30-ae08-d02b53dfc533",
-    "fecha": "8/01/2026",
+    "fecha": "10/01/2026",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza espacios comunes enero",
@@ -1881,7 +1901,7 @@
   },
   {
     "id": "1a3ba44f-0e5c-427d-a4bb-251934c87070",
-    "fecha": "9/01/2026",
+    "fecha": "11/01/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Reparación iluminación pasillo",
@@ -1891,31 +1911,11 @@
   },
   {
     "id": "7f55ae9a-8480-43c1-8186-4907919273b9",
-    "fecha": "10/01/2026",
+    "fecha": "12/01/2026",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "740032",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "64d2dba6-fd76-4deb-aaee-02ae62293f0d",
-    "fecha": "16/01/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Pablo Castillo",
-    "monto": "200000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "ec269003-1dc5-4c3e-8b7f-460c1151493a",
-    "fecha": "17/01/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa obra sin permiso Paola Cabrera",
-    "monto": "75000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -2040,8 +2040,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "64b9b8d6-7ace-4fa9-b7cf-3728a23a212b",
+    "id": "cde57f6e-656b-47c6-baf1-38aac62ec57b",
     "fecha": "5/03/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa basura en zona común Leonardo Mendoza",
+    "monto": "90000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "64b9b8d6-7ace-4fa9-b7cf-3728a23a212b",
+    "fecha": "6/03/2026",
     "tipo": "Egreso",
     "concepto": "Gas",
     "descripcion": "Factura gas marzo",
@@ -2051,7 +2061,7 @@
   },
   {
     "id": "f77579d9-32a9-457b-a653-6f7f1588d7f0",
-    "fecha": "6/03/2026",
+    "fecha": "7/03/2026",
     "tipo": "Egreso",
     "concepto": "Agua",
     "descripcion": "Factura agua marzo",
@@ -2061,7 +2071,7 @@
   },
   {
     "id": "6fff261b-649d-4750-9e47-c0fe107fa142",
-    "fecha": "7/03/2026",
+    "fecha": "8/03/2026",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Control plagas mes marzo",
@@ -2070,8 +2080,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "4cebed50-baf7-4ef8-b874-4861ad852f27",
+    "fecha": "9/03/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa mascota sin correa Denise Bravo",
+    "monto": "100000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "8489f8aa-1efc-449a-8d21-63d9f687a633",
-    "fecha": "8/03/2026",
+    "fecha": "10/03/2026",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza piscina marzo",
@@ -2081,7 +2101,7 @@
   },
   {
     "id": "377b512c-11ad-427d-a1d9-1addeff5ecee",
-    "fecha": "9/03/2026",
+    "fecha": "11/03/2026",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza espacios comunes marzo",
@@ -2091,31 +2111,11 @@
   },
   {
     "id": "a5ca179c-2a7b-42cc-b9ab-a9f8c3193329",
-    "fecha": "10/03/2026",
+    "fecha": "12/03/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Pintura portón ingreso",
     "monto": "150000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "cde57f6e-656b-47c6-baf1-38aac62ec57b",
-    "fecha": "17/03/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa basura en zona común Leonardo Mendoza",
-    "monto": "90000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "4cebed50-baf7-4ef8-b874-4861ad852f27",
-    "fecha": "18/03/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa mascota sin correa Denise Bravo",
-    "monto": "100000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -2180,8 +2180,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "2e9d2af2-8176-4907-99bd-30625602ec9b",
+    "id": "f0e82cbf-8861-46bd-a263-4ca74e1e4b3e",
     "fecha": "8/04/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa uso piscina fuera de horario Isidora Urrutia",
+    "monto": "75000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "2e9d2af2-8176-4907-99bd-30625602ec9b",
+    "fecha": "9/04/2026",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Mantención césped abril",
@@ -2191,7 +2201,7 @@
   },
   {
     "id": "af90bd88-769b-49e1-b462-b89efd4561a3",
-    "fecha": "9/04/2026",
+    "fecha": "10/04/2026",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Desinfección áreas comunes abril",
@@ -2201,7 +2211,7 @@
   },
   {
     "id": "c7af6ef1-89b8-473e-991d-c54f25ff2cd4",
-    "fecha": "10/04/2026",
+    "fecha": "11/04/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Mantención portón automático",
@@ -2211,7 +2221,7 @@
   },
   {
     "id": "c49ecfd3-ba10-41ac-a000-e42c6ef9bb7b",
-    "fecha": "11/04/2026",
+    "fecha": "12/04/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo rejilla desagüe",
@@ -2221,21 +2231,11 @@
   },
   {
     "id": "4d02807e-3caf-41b3-a71c-1ac3ab6c8e61",
-    "fecha": "12/04/2026",
+    "fecha": "13/04/2026",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "703359",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "f0e82cbf-8861-46bd-a263-4ca74e1e4b3e",
-    "fecha": "21/04/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa uso piscina fuera de horario Isidora Urrutia",
-    "monto": "75000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -2270,8 +2270,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "3b9379cf-a026-4312-834b-bd0cd76ecdb9",
+    "id": "a30578bb-4508-4ad2-a6ea-79e59ded581c",
     "fecha": "5/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Silvia Carvajal",
+    "monto": "100000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "3b9379cf-a026-4312-834b-bd0cd76ecdb9",
+    "fecha": "6/05/2026",
     "tipo": "Egreso",
     "concepto": "Internet",
     "descripcion": "Internet comunitario mayo",
@@ -2281,7 +2291,7 @@
   },
   {
     "id": "bae53a98-7c71-43b2-93d9-333cec794e15",
-    "fecha": "6/05/2026",
+    "fecha": "7/05/2026",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura electricidad mayo",
@@ -2291,7 +2301,7 @@
   },
   {
     "id": "db770a11-479a-4536-b454-481282433722",
-    "fecha": "7/05/2026",
+    "fecha": "8/05/2026",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático mayo",
@@ -2300,8 +2310,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "5b023749-66ef-49d3-b5fa-37be685032d8",
+    "fecha": "9/05/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Isidora Urrutia",
+    "monto": "300000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "d36ff9c2-d0c2-4d70-bf48-4b193374bcc4",
-    "fecha": "8/05/2026",
+    "fecha": "10/05/2026",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Service limpieza común mayo",
@@ -2311,7 +2331,7 @@
   },
   {
     "id": "c37dfd8a-0a94-4334-88f6-f4ef5487f9dc",
-    "fecha": "9/05/2026",
+    "fecha": "11/05/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Cambio grifería baño común",
@@ -2321,31 +2341,11 @@
   },
   {
     "id": "719b38c4-05d6-4f47-bfee-52d5422993f6",
-    "fecha": "10/05/2026",
+    "fecha": "12/05/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Mantención portón automático",
     "monto": "200000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "a30578bb-4508-4ad2-a6ea-79e59ded581c",
-    "fecha": "18/05/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa obra sin permiso Silvia Carvajal",
-    "monto": "100000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "5b023749-66ef-49d3-b5fa-37be685032d8",
-    "fecha": "19/05/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa obra sin permiso Isidora Urrutia",
-    "monto": "300000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   },
@@ -2470,8 +2470,18 @@
     "registrado_por": "Admin"
   },
   {
-    "id": "3cf117d6-8a47-400d-8d97-35b456e1895c",
+    "id": "b6a712a7-b50a-4bf3-aa54-f3c07887c3cc",
     "fecha": "6/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa obra sin permiso Fernanda Escobar",
+    "monto": "180000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
+    "id": "3cf117d6-8a47-400d-8d97-35b456e1895c",
+    "fecha": "7/07/2026",
     "tipo": "Egreso",
     "concepto": "Electricidad",
     "descripcion": "Factura luz julio",
@@ -2481,7 +2491,7 @@
   },
   {
     "id": "61d43261-c902-4c8c-a2df-6947dbb3b9cf",
-    "fecha": "7/07/2026",
+    "fecha": "8/07/2026",
     "tipo": "Egreso",
     "concepto": "Jardinería",
     "descripcion": "Riego sistema automático julio",
@@ -2491,7 +2501,7 @@
   },
   {
     "id": "9559dbde-b2c3-4e9f-a5cc-271f04375cfc",
-    "fecha": "8/07/2026",
+    "fecha": "9/07/2026",
     "tipo": "Egreso",
     "concepto": "Limpieza",
     "descripcion": "Limpieza piscina julio",
@@ -2500,8 +2510,18 @@
     "registrado_por": "Admin"
   },
   {
+    "id": "0cef0a1f-6276-4e18-a09d-40983f338c74",
+    "fecha": "10/07/2026",
+    "tipo": "Ingreso",
+    "concepto": "Multa",
+    "descripcion": "Multa estacionamiento indebido Florencia Lagos",
+    "monto": "200000",
+    "comprobante": "assets/demo_comprobante_transferencia.png",
+    "registrado_por": "Admin"
+  },
+  {
     "id": "01fcd907-e97f-427e-8af9-e35ba1accc93",
-    "fecha": "9/07/2026",
+    "fecha": "11/07/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Arreglo cerradura acceso principal",
@@ -2511,7 +2531,7 @@
   },
   {
     "id": "50a1161c-fd0f-4110-a315-b03fa0fb0ae2",
-    "fecha": "10/07/2026",
+    "fecha": "12/07/2026",
     "tipo": "Egreso",
     "concepto": "Mantenimiento",
     "descripcion": "Mantención portón automático",
@@ -2521,7 +2541,7 @@
   },
   {
     "id": "975c5bec-8514-41bf-8a07-9dda3ef79388",
-    "fecha": "11/07/2026",
+    "fecha": "13/07/2026",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro RC anual condominio",
@@ -2531,31 +2551,11 @@
   },
   {
     "id": "5ed14e20-c261-48b7-9224-51ec58a9769c",
-    "fecha": "12/07/2026",
+    "fecha": "14/07/2026",
     "tipo": "Egreso",
     "concepto": "Seguros",
     "descripcion": "Seguro incendio trimestral",
     "monto": "664142",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "b6a712a7-b50a-4bf3-aa54-f3c07887c3cc",
-    "fecha": "18/07/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa obra sin permiso Fernanda Escobar",
-    "monto": "180000",
-    "comprobante": "assets/demo_comprobante_transferencia.png",
-    "registrado_por": "Admin"
-  },
-  {
-    "id": "0cef0a1f-6276-4e18-a09d-40983f338c74",
-    "fecha": "19/07/2026",
-    "tipo": "Ingreso",
-    "concepto": "Multa",
-    "descripcion": "Multa estacionamiento indebido Florencia Lagos",
-    "monto": "200000",
     "comprobante": "assets/demo_comprobante_transferencia.png",
     "registrado_por": "Admin"
   }

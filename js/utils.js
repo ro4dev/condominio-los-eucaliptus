@@ -1,3 +1,14 @@
+function parseFecha(s) {
+  if (!s) return 0;
+  s = String(s);
+  if (s.indexOf('T') !== -1) s = s.split('T')[0];
+  var p = s.split('-');
+  if (p.length === 3 && p[0].length === 4) return new Date(p[0], p[1] - 1, p[2]).getTime();
+  var q = s.split('/');
+  if (q.length === 3) return new Date(q[2], q[1] - 1, q[0]).getTime();
+  return 0;
+}
+
 function formatMoney(v) {
   var negative = v < 0;
   var s = Math.round(Math.abs(v)).toString();

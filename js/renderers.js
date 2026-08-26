@@ -161,7 +161,7 @@ function renderPinnedNews() {
   });
 
   pinned.sort(function(a, b) {
-    return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
+    return parseFecha(b.fecha || b.created_at) - parseFecha(a.fecha || a.created_at);
   });
 
   if (!pinned.length) {
@@ -578,7 +578,7 @@ function resumenCuotasDetalle(periodo) {
 
 function resumenMovimientosDetalle(periodo) {
   var movs = FLUJO.filter(function(f) { return mesDeFecha(f.fecha) === periodo; }).slice().sort(function(a, b) {
-    return new Date(b.fecha) - new Date(a.fecha);
+    return parseFecha(b.fecha) - parseFecha(a.fecha);
   });
   if (!movs.length) {
     return '<p style="margin:0;color:var(--text-muted);font-size:0.85rem">Sin movimientos para este periodo.</p>';
@@ -714,10 +714,10 @@ function renderNoticias() {
   });
 
   activas.sort(function(a, b) {
-    return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
+    return parseFecha(b.fecha || b.created_at) - parseFecha(a.fecha || a.created_at);
   });
   vencidas.sort(function(a, b) {
-    return new Date(b.fecha || b.created_at) - new Date(a.fecha || a.created_at);
+    return parseFecha(b.fecha || b.created_at) - parseFecha(a.fecha || a.created_at);
   });
 
   var mostrar = [];
@@ -880,7 +880,7 @@ function renderAsambleas() {
     return asambleasFilter === 'Todos' || a.tipo === asambleasFilter;
   });
   var sorted = filtered.slice().sort(function(a, b) {
-    return new Date(b.fecha) - new Date(a.fecha);
+    return parseFecha(b.fecha) - parseFecha(a.fecha);
   });
   timeline.innerHTML = sorted.map(function(a) {
     var fecha = formatDate(a.fecha);
