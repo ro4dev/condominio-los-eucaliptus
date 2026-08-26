@@ -569,9 +569,10 @@ function resumenCuotasDetalle(periodo) {
         '<td>' + parcelName(g.parcela_id) + '</td>' +
         '<td style="font-weight:600;color:' + color + '">' + formatMoney(pagado) + '/' + formatMoney(monto) + '</td>' +
         '<td style="width:1%;white-space:nowrap">' +
+          '<div style="display:flex;gap:0rem;align-items:center">' +
           '<md-icon-button onclick="verPagos(\'' + g.id + '\')" title="Ver pagos"><md-icon>payments</md-icon></md-icon-button>' +
           adminActions("editGasto('" + g.id + "')", "deleteGasto('" + g.id + "')") +
-        '</td></tr>';
+          '</div></td></tr>';
     }).join('') + '</tbody></table></div>';
 }
 
