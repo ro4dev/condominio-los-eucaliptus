@@ -325,18 +325,21 @@ body.dark .m3-date-group .m3-date {
 #modalBody {
   padding: 24px 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 #modalFooter {
   padding: 8px 24px 24px;
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 md-dialog [slot="headline"] {
   padding: 24px 24px 0;
 }
 md-dialog [slot="content"] {
   padding: 0 24px;
+  overflow-x: hidden;
 }
 md-dialog [slot="actions"] {
   padding: 0 24px 24px;
