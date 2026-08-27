@@ -69,7 +69,6 @@ La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` dev
       <tbody id="historicoPeriodosBody"></tbody>
     </table>
   </div>
-  <md-filled-button class="admin-only" onclick="openModalPeriodo()"><md-icon slot="icon">add</md-icon>Agregar período</md-filled-button>
 </div>
 ```
 

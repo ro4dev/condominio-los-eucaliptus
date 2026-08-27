@@ -3,7 +3,7 @@
 ## Registro de cambios
 
 ### 26/08/2026 - Finanzas: limpieza de acciones + fix modales + pagos parciales
-- **Removed**: Botones "Agregar Cuota" y "Agregar Movimiento" del header de Finanzas (ya existen dentro del detalle de cada periodo)
+- **Removed**: Botones "Agregar Cuota", "Agregar Movimiento" y "Agregar período" del header y footer de Finanzas (la creación se hace desde el detalle de cada periodo)
 - **Changed**: Popup "Pagos de la cuota" ahora tiene botón "← Volver" en vez de "Cerrar" — regresa al listado de cuotas del periodo (`verCuotasPeriodo`)
 - **Fix**: Eliminado scroll horizontal en todos los popups del modal (`overflow-x: hidden` en `md-dialog [slot="content"]` y `#modalBody`, `flex-wrap: wrap` en `#modalFooter`)
 - **Data**: Datos demo ahora incluyen pagos parciales en ~60% de los periodos (14 de 24) — cuotas con chip "Parcial" visibles en el listado de cuotas del periodo
