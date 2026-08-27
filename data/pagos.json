@@ -1,17 +1,116 @@
 [
   {
-    "id": "13b1e785-be2f-45c2-a58c-480edd47e117",
-    "gasto_id": "f97346e9-0a8a-4ac1-a15e-76d11c549224",
-    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
+    "id": "b349bd33-7021-4acb-b3e2-a1a8e0337473",
+    "gasto_id": "dbf0d304-6e79-4b63-9aac-a2a10bed2454",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
     "periodo": "2024-08",
-    "monto": "42000",
-    "fecha": "2024-08-10",
+    "monto": "27300",
+    "fecha": "2024-08-11",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "4ed51dde-7a0e-411c-902f-3a3dcb20db95",
+    "id": "7ec18712-e30c-4cdf-88ff-021f4a9c8970",
+    "gasto_id": "dbf0d304-6e79-4b63-9aac-a2a10bed2454",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "periodo": "2024-08",
+    "monto": "12400",
+    "fecha": "2024-08-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "bc40e84e-0c46-4223-a5ed-c4e36481e12d",
+    "gasto_id": "c270e76e-a505-4c69-b196-7c364364d470",
+    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "periodo": "2024-08",
+    "monto": "23400",
+    "fecha": "2024-08-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "95c4560b-4e75-4ed3-9850-8cfd7e1a951b",
+    "gasto_id": "c270e76e-a505-4c69-b196-7c364364d470",
+    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "periodo": "2024-08",
+    "monto": "17400",
+    "fecha": "2024-08-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "81da5cfd-7a21-4070-99d6-ebae1f1bd8bb",
+    "gasto_id": "cb55f846-f962-41c7-981b-aa9e9b9de21d",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2024-08",
+    "monto": "27100",
+    "fecha": "2024-08-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "999bc8a9-fc7d-4219-be4a-d64004ac7312",
+    "gasto_id": "cb55f846-f962-41c7-981b-aa9e9b9de21d",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2024-08",
+    "monto": "13500",
+    "fecha": "2024-08-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5ccbaa85-3c89-4ed5-9530-b82d93d2e6e1",
     "gasto_id": "96f55964-dafb-46ef-9a87-d4971b247c8b",
     "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
+    "periodo": "2024-08",
+    "monto": "30900",
+    "fecha": "2024-08-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "7a6ae95f-fbaf-45fb-9d59-8dfe769426aa",
+    "gasto_id": "96f55964-dafb-46ef-9a87-d4971b247c8b",
+    "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
+    "periodo": "2024-08",
+    "monto": "9800",
+    "fecha": "2024-08-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "37e43248-431a-43ab-beb1-28eebe98f746",
+    "gasto_id": "440878a6-56b4-468c-8053-5cb6dc670c11",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-08",
+    "monto": "18200",
+    "fecha": "2024-08-14",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "60088a91-ac4d-410b-ae2d-1c0331d6ca0f",
+    "gasto_id": "440878a6-56b4-468c-8053-5cb6dc670c11",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-08",
+    "monto": "21200",
+    "fecha": "2024-08-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a32d2996-1ec8-4162-a639-7ae9ad5e4617",
+    "gasto_id": "2e5bbba9-dab2-43d5-9142-6087f935dfb4",
+    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
+    "periodo": "2024-08",
+    "monto": "28700",
+    "fecha": "2024-08-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "94e83ea4-bde8-40a4-8d09-b36797058bdb",
+    "gasto_id": "2e5bbba9-dab2-43d5-9142-6087f935dfb4",
+    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
+    "periodo": "2024-08",
+    "monto": "11000",
+    "fecha": "2024-08-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "13b1e785-be2f-45c2-a58c-480edd47e117",
+    "gasto_id": "f97346e9-0a8a-4ac1-a15e-76d11c549224",
+    "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
     "periodo": "2024-08",
     "monto": "42000",
     "fecha": "2024-08-10",
@@ -108,27 +207,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "964dff75-7325-410c-9a3e-6a8b872c81b9",
-    "gasto_id": "2e5bbba9-dab2-43d5-9142-6087f935dfb4",
-    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
-    "periodo": "2024-08",
-    "monto": "42000",
-    "fecha": "2024-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "7b135108-428b-46c5-aef1-f7e64b25fea4",
     "gasto_id": "19a3adbb-1400-41b8-b9dc-9f174d8771eb",
     "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
-    "periodo": "2024-08",
-    "monto": "42000",
-    "fecha": "2024-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "19f41525-e229-494b-8f03-dae156480ec9",
-    "gasto_id": "dbf0d304-6e79-4b63-9aac-a2a10bed2454",
-    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
     "periodo": "2024-08",
     "monto": "42000",
     "fecha": "2024-08-10",
@@ -288,15 +369,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "533218ea-b4b3-4810-9b4c-929e2206fe8e",
-    "gasto_id": "c270e76e-a505-4c69-b196-7c364364d470",
-    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
-    "periodo": "2024-08",
-    "monto": "42000",
-    "fecha": "2024-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "8e586815-7eab-4666-bba7-36de0c357e28",
     "gasto_id": "a2c81cdb-50c5-4a50-94b3-ea2271653fd6",
     "parcela_id": "20d1f8f9-9d56-41ae-9669-807e8241fe47",
@@ -315,15 +387,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "81d9f0f7-ba50-49f8-8d11-97e6b10ad290",
-    "gasto_id": "440878a6-56b4-468c-8053-5cb6dc670c11",
-    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
-    "periodo": "2024-08",
-    "monto": "42000",
-    "fecha": "2024-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "8520a13f-5ecb-4445-a7a6-d4c488fc5dc2",
     "gasto_id": "2c025912-32c4-46e5-99a1-bf61ac86110e",
     "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
@@ -336,15 +399,6 @@
     "id": "19f4e4af-ce91-4e48-9ac5-90d0814d418c",
     "gasto_id": "10f59a72-d8ad-42ec-8be6-151078887507",
     "parcela_id": "1111aa1e-1773-4c94-b112-64147a72848c",
-    "periodo": "2024-08",
-    "monto": "42000",
-    "fecha": "2024-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "06e82e59-1e91-43b9-a7bb-9c9b277cc2cf",
-    "gasto_id": "cb55f846-f962-41c7-981b-aa9e9b9de21d",
-    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
     "periodo": "2024-08",
     "monto": "42000",
     "fecha": "2024-08-10",
@@ -567,6 +621,150 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "eebbb163-69b9-4095-8b2d-943bb666dfbe",
+    "gasto_id": "42d8f7a7-f8ea-4b5a-9b98-7a251b5f895e",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "periodo": "2024-09",
+    "monto": "22100",
+    "fecha": "2024-09-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "e6008fd2-ba47-4e72-8367-f4c32b77ae7c",
+    "gasto_id": "42d8f7a7-f8ea-4b5a-9b98-7a251b5f895e",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "periodo": "2024-09",
+    "monto": "18900",
+    "fecha": "2024-09-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "68e29856-33b1-4229-b165-c9898a1ffd23",
+    "gasto_id": "61a36339-fc70-4993-a88f-6960a55cfde5",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-09",
+    "monto": "26500",
+    "fecha": "2024-09-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "3a996fc2-da86-4ada-acd1-77880e91f19f",
+    "gasto_id": "61a36339-fc70-4993-a88f-6960a55cfde5",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-09",
+    "monto": "13100",
+    "fecha": "2024-09-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5342594b-6dad-4e81-82e4-07684067ca08",
+    "gasto_id": "06a11d21-29d4-4e8b-9089-13965e751c58",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "periodo": "2024-09",
+    "monto": "29500",
+    "fecha": "2024-09-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ead38310-dadb-4e3c-8b13-32470594f66a",
+    "gasto_id": "06a11d21-29d4-4e8b-9089-13965e751c58",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "periodo": "2024-09",
+    "monto": "11000",
+    "fecha": "2024-09-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "93861bad-1e8a-46dd-93eb-f1dbf3af0a1e",
+    "gasto_id": "12969af3-d33d-4ff3-8533-22a34980afc0",
+    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "periodo": "2024-09",
+    "monto": "29100",
+    "fecha": "2024-09-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "60242855-7c38-4971-9f84-bc991cfa920a",
+    "gasto_id": "12969af3-d33d-4ff3-8533-22a34980afc0",
+    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "periodo": "2024-09",
+    "monto": "12000",
+    "fecha": "2024-09-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "75ddb8c2-55af-43f1-803f-7457962f64ea",
+    "gasto_id": "804e75a5-b3d7-4087-b43b-1f12ee6a637d",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "periodo": "2024-09",
+    "monto": "26700",
+    "fecha": "2024-09-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0735ef2d-c1ab-4991-a774-ad894de6a88c",
+    "gasto_id": "804e75a5-b3d7-4087-b43b-1f12ee6a637d",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "periodo": "2024-09",
+    "monto": "13000",
+    "fecha": "2024-09-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "7192bdd4-9268-4d63-bb1a-dc9f720762d3",
+    "gasto_id": "f86e4320-e249-4f59-a39d-a2d9376a77dd",
+    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
+    "periodo": "2024-09",
+    "monto": "17800",
+    "fecha": "2024-09-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5d0f3d1e-663c-4e43-95fa-fee79a0cb7d5",
+    "gasto_id": "f86e4320-e249-4f59-a39d-a2d9376a77dd",
+    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
+    "periodo": "2024-09",
+    "monto": "22100",
+    "fecha": "2024-09-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "daef7a26-af67-4825-9853-c450a7f48922",
+    "gasto_id": "82718911-8f1c-4e44-9ebd-b693d34719b0",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-09",
+    "monto": "5500",
+    "fecha": "2024-09-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "661c3537-1b28-4797-bfa4-0f47cd094607",
+    "gasto_id": "82718911-8f1c-4e44-9ebd-b693d34719b0",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-09",
+    "monto": "5100",
+    "fecha": "2024-09-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c54d013e-a69f-444c-b8c6-39980a8bd338",
+    "gasto_id": "2d67a73d-2cb7-4382-9fff-f5e8b0d5b5fb",
+    "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
+    "periodo": "2024-09",
+    "monto": "5700",
+    "fecha": "2024-09-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "fbc6f88f-6ecb-43af-a067-06c5ca365a09",
+    "gasto_id": "2d67a73d-2cb7-4382-9fff-f5e8b0d5b5fb",
+    "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
+    "periodo": "2024-09",
+    "monto": "5000",
+    "fecha": "2024-09-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "9fba7164-b27f-46b5-b1a2-b7ec2b20b718",
     "gasto_id": "cf2ceae9-b281-4ecc-b2c4-ea8976aa8954",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -606,15 +804,6 @@
     "id": "ccfc44d9-aa7a-4174-b005-24bbcf582748",
     "gasto_id": "18db8517-66ce-47c3-b8cd-f9771cdc1f4c",
     "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
-    "periodo": "2024-09",
-    "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "05e51a1b-40c2-4a6c-9808-4d36c705fed2",
-    "gasto_id": "42d8f7a7-f8ea-4b5a-9b98-7a251b5f895e",
-    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
     "periodo": "2024-09",
     "monto": "42000",
     "fecha": "2024-09-10",
@@ -723,15 +912,6 @@
     "id": "20615a26-12eb-47a9-95e5-1c771f26fe1a",
     "gasto_id": "6c8fa7db-0c1c-478e-afb1-75cff86aee8c",
     "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
-    "periodo": "2024-09",
-    "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "e59452a7-5d47-4225-89b5-0f6637b6c204",
-    "gasto_id": "06a11d21-29d4-4e8b-9089-13965e751c58",
-    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
     "periodo": "2024-09",
     "monto": "42000",
     "fecha": "2024-09-10",
@@ -882,15 +1062,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "e921f407-0c33-4354-bd27-cac5d8c618c8",
-    "gasto_id": "61a36339-fc70-4993-a88f-6960a55cfde5",
-    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
-    "periodo": "2024-09",
-    "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "2454fd34-4ee0-4ffb-9183-1a9f9c26e94d",
     "gasto_id": "4a89f7bb-3609-4aa2-9a1e-8529a1ae5334",
     "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
@@ -912,24 +1083,6 @@
     "id": "825aec3f-afec-423a-8a09-8337fd1d2a70",
     "gasto_id": "af51d658-18f3-4683-866f-6c8b7f2c55e9",
     "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
-    "periodo": "2024-09",
-    "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "1a405df8-0115-45ec-8689-51ef6f991a9c",
-    "gasto_id": "f86e4320-e249-4f59-a39d-a2d9376a77dd",
-    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
-    "periodo": "2024-09",
-    "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "993f6c2b-d369-4c3a-a4ba-7198178dd97f",
-    "gasto_id": "804e75a5-b3d7-4087-b43b-1f12ee6a637d",
-    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
     "periodo": "2024-09",
     "monto": "42000",
     "fecha": "2024-09-10",
@@ -1044,38 +1197,11 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "3a9a9eed-210e-4697-aaa7-1241e132b047",
-    "gasto_id": "12969af3-d33d-4ff3-8533-22a34980afc0",
-    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
-    "periodo": "2024-09",
-    "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "6db32f14-4556-4d39-9a01-7f13b5272c0a",
     "gasto_id": "76b83442-70cc-49df-94b0-92b0f0afef95",
     "parcela_id": "739e2202-1565-4ef3-909c-0ca856d53392",
     "periodo": "2024-09",
     "monto": "42000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "6a8f65df-6e41-44a0-ad4c-fb67e7220150",
-    "gasto_id": "2d67a73d-2cb7-4382-9fff-f5e8b0d5b5fb",
-    "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
-    "periodo": "2024-09",
-    "monto": "12000",
-    "fecha": "2024-09-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "92b85ddc-67dd-4369-b302-fcf691650282",
-    "gasto_id": "82718911-8f1c-4e44-9ebd-b693d34719b0",
-    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
-    "periodo": "2024-09",
-    "monto": "12000",
     "fecha": "2024-09-10",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
@@ -1134,6 +1260,96 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "dda3cd38-5e77-4694-831b-8f073ad5f6ec",
+    "gasto_id": "fc50fc56-294a-4354-93df-334d16f2f54d",
+    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "periodo": "2024-10",
+    "monto": "19900",
+    "fecha": "2024-10-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b47670f5-d316-4d9c-b141-711defc7c160",
+    "gasto_id": "fc50fc56-294a-4354-93df-334d16f2f54d",
+    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
+    "periodo": "2024-10",
+    "monto": "19200",
+    "fecha": "2024-10-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "88d58ff2-9cee-40d9-89a9-9bd86731d81d",
+    "gasto_id": "bdd9cc6b-d69b-4088-aa14-c7c65bc70d2d",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2024-10",
+    "monto": "26400",
+    "fecha": "2024-10-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "cd7f2a1e-6048-4693-97f6-caf801c7c1c0",
+    "gasto_id": "bdd9cc6b-d69b-4088-aa14-c7c65bc70d2d",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2024-10",
+    "monto": "14100",
+    "fecha": "2024-10-25",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0b0b8834-406f-40df-b32f-9ad5a9553e8e",
+    "gasto_id": "5c7e4f78-fb78-4f2f-93a3-d0cc5e89a718",
+    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
+    "periodo": "2024-10",
+    "monto": "18900",
+    "fecha": "2024-10-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "df1d11e0-7421-43a6-ab75-c28e34c4cae9",
+    "gasto_id": "5c7e4f78-fb78-4f2f-93a3-d0cc5e89a718",
+    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
+    "periodo": "2024-10",
+    "monto": "22300",
+    "fecha": "2024-10-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "6c096944-2bbc-41c3-bdeb-2d002793b32c",
+    "gasto_id": "042c6815-5559-4144-a218-ac011c3776e6",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "periodo": "2024-10",
+    "monto": "20700",
+    "fecha": "2024-10-14",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "d348d5af-9638-4a54-9892-aa98b816d64e",
+    "gasto_id": "042c6815-5559-4144-a218-ac011c3776e6",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "periodo": "2024-10",
+    "monto": "19300",
+    "fecha": "2024-10-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b75cf9cd-1d91-4c52-bfdb-720a957b41b7",
+    "gasto_id": "3372d73a-88fb-437b-ba22-a6818f5d1720",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "periodo": "2024-10",
+    "monto": "22100",
+    "fecha": "2024-10-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "4e732c74-1d11-44ce-9d06-aca460ca0bbc",
+    "gasto_id": "3372d73a-88fb-437b-ba22-a6818f5d1720",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "periodo": "2024-10",
+    "monto": "16900",
+    "fecha": "2024-10-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "8c07344d-8b8f-4b6e-ae26-c021a3df9a65",
     "gasto_id": "d366ea87-583f-4ae1-b0a5-3058933883c1",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -1164,15 +1380,6 @@
     "id": "bede22d7-7e95-4582-9f9b-3e6e9ea17123",
     "gasto_id": "e6eea5bc-4968-4cd1-b4bd-81e52750b093",
     "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
-    "periodo": "2024-10",
-    "monto": "42000",
-    "fecha": "2024-10-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "221db53a-84f8-4fac-b91c-a5272017788c",
-    "gasto_id": "3372d73a-88fb-437b-ba22-a6818f5d1720",
-    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
     "periodo": "2024-10",
     "monto": "42000",
     "fecha": "2024-10-10",
@@ -1287,15 +1494,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "0818b56c-0281-4468-b288-3f12b054379e",
-    "gasto_id": "042c6815-5559-4144-a218-ac011c3776e6",
-    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
-    "periodo": "2024-10",
-    "monto": "42000",
-    "fecha": "2024-10-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "470e185f-3f6d-46e5-a5f1-e5d3534cc4a0",
     "gasto_id": "8f516253-3fa0-4d5e-8f32-84ede16367c3",
     "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
@@ -1308,15 +1506,6 @@
     "id": "b58e5647-005e-4dcc-90fe-810a1c13ee05",
     "gasto_id": "f76eb46a-7c02-4d03-a86e-f0b2633145da",
     "parcela_id": "ccc37411-1c19-4571-8ee3-0512925695c6",
-    "periodo": "2024-10",
-    "monto": "42000",
-    "fecha": "2024-10-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "19baad15-31f8-42c0-8a35-9aba5ba3275b",
-    "gasto_id": "bdd9cc6b-d69b-4088-aa14-c7c65bc70d2d",
-    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
     "periodo": "2024-10",
     "monto": "42000",
     "fecha": "2024-10-10",
@@ -1353,15 +1542,6 @@
     "id": "bbb7340d-1a9b-4eaa-bc5b-b5ed71d79dcf",
     "gasto_id": "9b32afd4-196a-4b99-a7a3-24f4d9087bb0",
     "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
-    "periodo": "2024-10",
-    "monto": "42000",
-    "fecha": "2024-10-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "595d3a12-ccb3-42c3-bad3-dae8b61150c6",
-    "gasto_id": "5c7e4f78-fb78-4f2f-93a3-d0cc5e89a718",
-    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
     "periodo": "2024-10",
     "monto": "42000",
     "fecha": "2024-10-10",
@@ -1593,15 +1773,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "3ba29a80-b71e-429f-bba6-a2c4f6f94912",
-    "gasto_id": "fc50fc56-294a-4354-93df-334d16f2f54d",
-    "parcela_id": "7e9923b2-54ae-4175-aba6-571607fc1450",
-    "periodo": "2024-10",
-    "monto": "42000",
-    "fecha": "2024-10-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "e4bd3928-6c45-488b-a93b-b72f24d4b77e",
     "gasto_id": "a3f55ac0-b3db-4ec8-b49f-fbb98938c00b",
     "parcela_id": "739e2202-1565-4ef3-909c-0ca856d53392",
@@ -1683,6 +1854,150 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "394d4f24-a786-4642-a9d6-dacdb685c171",
+    "gasto_id": "ca80140e-71fc-4cf0-97fb-dac38dcc6319",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "periodo": "2024-11",
+    "monto": "28400",
+    "fecha": "2024-11-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "12cc7cb5-658a-49ee-a74d-55ead9b93d28",
+    "gasto_id": "ca80140e-71fc-4cf0-97fb-dac38dcc6319",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "periodo": "2024-11",
+    "monto": "12000",
+    "fecha": "2024-11-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ebfd0143-a8ca-482f-8981-7aee98b269f1",
+    "gasto_id": "a32dbaa2-abda-41f7-b7b1-ff6cc3bcbc4e",
+    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
+    "periodo": "2024-11",
+    "monto": "22400",
+    "fecha": "2024-11-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "aa62f3f0-f2cc-4223-95aa-194e6f455239",
+    "gasto_id": "a32dbaa2-abda-41f7-b7b1-ff6cc3bcbc4e",
+    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
+    "periodo": "2024-11",
+    "monto": "16600",
+    "fecha": "2024-11-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "97e299b0-af9e-4b57-9d2e-e01cba626d55",
+    "gasto_id": "33f49ced-7828-484c-83ac-72cce807a269",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
+    "periodo": "2024-11",
+    "monto": "31100",
+    "fecha": "2024-11-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "de62654b-e786-4786-bf98-0ebaf65ee2b5",
+    "gasto_id": "33f49ced-7828-484c-83ac-72cce807a269",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
+    "periodo": "2024-11",
+    "monto": "8200",
+    "fecha": "2024-11-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "655f89e1-5440-45ba-bf62-cf4faecaa8f5",
+    "gasto_id": "caa2792d-4c2d-477e-84b4-758e58bc6bab",
+    "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
+    "periodo": "2024-11",
+    "monto": "7800",
+    "fecha": "2024-11-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a3bd8aa3-5572-4e74-9c21-508e1917eccd",
+    "gasto_id": "caa2792d-4c2d-477e-84b4-758e58bc6bab",
+    "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
+    "periodo": "2024-11",
+    "monto": "2000",
+    "fecha": "2024-11-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "434ce36e-d568-44c9-bd3b-0a849ac364fd",
+    "gasto_id": "75a1cba3-44c0-48f9-ae7c-71f1f7e72cf5",
+    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
+    "periodo": "2024-11",
+    "monto": "28100",
+    "fecha": "2024-11-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "e0b58c28-c1a4-491b-b87c-ace3175b64a0",
+    "gasto_id": "75a1cba3-44c0-48f9-ae7c-71f1f7e72cf5",
+    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
+    "periodo": "2024-11",
+    "monto": "12500",
+    "fecha": "2024-11-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "85072b45-23f8-4b42-9666-73e16eceb0c9",
+    "gasto_id": "bce1cd26-bda1-41f8-ae25-72f5d8abe383",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "periodo": "2024-11",
+    "monto": "19100",
+    "fecha": "2024-11-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c849b6a1-f0b7-469a-ae63-83b6eec28111",
+    "gasto_id": "bce1cd26-bda1-41f8-ae25-72f5d8abe383",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "periodo": "2024-11",
+    "monto": "22400",
+    "fecha": "2024-11-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0f616181-34d2-42cb-b25b-b8b0b7504eb5",
+    "gasto_id": "5ae45ce5-39be-4bee-b7d5-d347d5fedf51",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "periodo": "2024-11",
+    "monto": "28000",
+    "fecha": "2024-11-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "52cb0a83-b2fd-46ff-b800-37fcab26569f",
+    "gasto_id": "5ae45ce5-39be-4bee-b7d5-d347d5fedf51",
+    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
+    "periodo": "2024-11",
+    "monto": "12200",
+    "fecha": "2024-11-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b10f725e-e702-4aea-812e-7186df3878b1",
+    "gasto_id": "8ca2ba76-e28c-499a-9e6a-1195e74eb031",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "periodo": "2024-11",
+    "monto": "21200",
+    "fecha": "2024-11-14",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2befd330-59a8-42cd-9a69-b2839ebaa32d",
+    "gasto_id": "8ca2ba76-e28c-499a-9e6a-1195e74eb031",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "periodo": "2024-11",
+    "monto": "18700",
+    "fecha": "2024-11-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "7c18455c-8340-470f-aa4f-da5595ea4cbf",
     "gasto_id": "0635f35c-fa29-42ee-8fb8-0ab53122f3ba",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -1710,27 +2025,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "bb8fa6fb-1450-46aa-b6d2-e34e937723a3",
-    "gasto_id": "33f49ced-7828-484c-83ac-72cce807a269",
-    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "646568f9-6d57-47a5-a5fc-980fbf56910e",
     "gasto_id": "1defb304-3bd1-4606-9b94-525552a69fda",
     "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "1ee2b51a-fec6-4a7d-a3d7-c182d02febf5",
-    "gasto_id": "ca80140e-71fc-4cf0-97fb-dac38dcc6319",
-    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
     "periodo": "2024-11",
     "monto": "42000",
     "fecha": "2024-11-10",
@@ -1746,36 +2043,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "df1706f5-920b-4382-a2cd-2beee74a9cd6",
-    "gasto_id": "75a1cba3-44c0-48f9-ae7c-71f1f7e72cf5",
-    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "722f344d-0d50-47df-a84d-82dd6fb073da",
     "gasto_id": "2c2a2866-e1db-42c0-a68b-46cd0715bb93",
     "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "4608f648-512f-4868-9b79-999c51b9746a",
-    "gasto_id": "bce1cd26-bda1-41f8-ae25-72f5d8abe383",
-    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "ccc7b363-7297-4c9c-b25d-ccd872fbe712",
-    "gasto_id": "8ca2ba76-e28c-499a-9e6a-1195e74eb031",
-    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
     "periodo": "2024-11",
     "monto": "42000",
     "fecha": "2024-11-10",
@@ -2043,15 +2313,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "ef0cc983-b464-465f-999d-f84ed8b05f49",
-    "gasto_id": "5ae45ce5-39be-4bee-b7d5-d347d5fedf51",
-    "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "1e6ec21b-1e56-4fab-9bc5-e964ecdecae6",
     "gasto_id": "8ffe0c3b-290a-4e26-8914-5c5b0dbb0b18",
     "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
@@ -2115,15 +2376,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "65eaa137-574f-4d33-abb1-0f84a7828f7e",
-    "gasto_id": "a32dbaa2-abda-41f7-b7b1-ff6cc3bcbc4e",
-    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
-    "periodo": "2024-11",
-    "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "94a5e665-0e15-48f1-8096-819da0534e13",
     "gasto_id": "edde1438-bc07-4a9d-a1e0-bc30f25aea57",
     "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
@@ -2174,15 +2426,6 @@
     "parcela_id": "739e2202-1565-4ef3-909c-0ca856d53392",
     "periodo": "2024-11",
     "monto": "42000",
-    "fecha": "2024-11-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "2312441c-b18b-44ab-a82d-267307181453",
-    "gasto_id": "caa2792d-4c2d-477e-84b4-758e58bc6bab",
-    "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
-    "periodo": "2024-11",
-    "monto": "12000",
     "fecha": "2024-11-10",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
@@ -2247,6 +2490,114 @@
     "periodo": "2024-11",
     "monto": "12000",
     "fecha": "2024-11-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2fdfeb06-0c39-41b7-9e5c-1d06aaff7546",
+    "gasto_id": "915ff1f0-952c-4e60-b355-02929aa0abff",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2024-12",
+    "monto": "30300",
+    "fecha": "2024-12-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "8691977e-6824-4b4d-9a7d-b261f4779ae0",
+    "gasto_id": "915ff1f0-952c-4e60-b355-02929aa0abff",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2024-12",
+    "monto": "9700",
+    "fecha": "2024-12-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "9bdcc316-02f0-4f52-b030-37fdc0e82c98",
+    "gasto_id": "6d5c54e1-56a5-4918-99b5-ca7a24d4541c",
+    "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
+    "periodo": "2024-12",
+    "monto": "18400",
+    "fecha": "2024-12-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "24ff91fb-f86e-4501-867e-1fdb9257dc20",
+    "gasto_id": "6d5c54e1-56a5-4918-99b5-ca7a24d4541c",
+    "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
+    "periodo": "2024-12",
+    "monto": "22200",
+    "fecha": "2024-12-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "fcc8e58a-11a1-42f9-8199-cbe0a9223d99",
+    "gasto_id": "333fee71-5dc9-4ee1-850d-67b39f537af6",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "periodo": "2024-12",
+    "monto": "17700",
+    "fecha": "2024-12-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5418195d-278d-45f3-9144-05499a2a5851",
+    "gasto_id": "333fee71-5dc9-4ee1-850d-67b39f537af6",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "periodo": "2024-12",
+    "monto": "21600",
+    "fecha": "2024-12-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "55dfc99d-78e8-42b0-aafa-fcbe36b78bc7",
+    "gasto_id": "a33cfca6-5e0a-489e-a5fa-5b1a3c0bf33d",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-12",
+    "monto": "27600",
+    "fecha": "2024-12-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ece192d7-77f1-4e2b-b696-e5e394f82b41",
+    "gasto_id": "a33cfca6-5e0a-489e-a5fa-5b1a3c0bf33d",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2024-12",
+    "monto": "11900",
+    "fecha": "2024-12-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "fd62d3f3-d156-4185-9129-bf0e3fabdeea",
+    "gasto_id": "d6b71869-40c2-43a1-a7de-f7a9d6a820dd",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2024-12",
+    "monto": "18700",
+    "fecha": "2024-12-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a97cf4f3-baff-47be-86a3-2b284f2f8685",
+    "gasto_id": "d6b71869-40c2-43a1-a7de-f7a9d6a820dd",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2024-12",
+    "monto": "21600",
+    "fecha": "2024-12-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "76b2e974-361a-480e-a05c-0cd8df45276e",
+    "gasto_id": "424b6ee8-e1cc-409a-94d2-12fdce8070a6",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2024-12",
+    "monto": "20700",
+    "fecha": "2024-12-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "08bc4f63-53d6-41b5-a6c9-b42dd2f32237",
+    "gasto_id": "424b6ee8-e1cc-409a-94d2-12fdce8070a6",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2024-12",
+    "monto": "18600",
+    "fecha": "2024-12-21",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
@@ -2334,15 +2685,6 @@
     "id": "333ea7c0-ec06-4e06-9c65-99cecb3fe58d",
     "gasto_id": "5261be34-f635-4e10-86cf-9271a119324c",
     "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
-    "periodo": "2024-12",
-    "monto": "42000",
-    "fecha": "2024-12-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "d3967ed1-ac2b-44a9-b023-ba990125c61b",
-    "gasto_id": "333fee71-5dc9-4ee1-850d-67b39f537af6",
-    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
     "periodo": "2024-12",
     "monto": "42000",
     "fecha": "2024-12-10",
@@ -2457,15 +2799,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "75e4973d-724f-4b54-943d-373a57673e76",
-    "gasto_id": "915ff1f0-952c-4e60-b355-02929aa0abff",
-    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
-    "periodo": "2024-12",
-    "monto": "42000",
-    "fecha": "2024-12-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "c131471e-9aeb-4b42-93c8-30699f358f8b",
     "gasto_id": "da1882c0-4422-44f4-bfa1-1a54a34b62a4",
     "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
@@ -2541,24 +2874,6 @@
     "id": "2159e426-e3c0-4e01-a973-202c6e4fbeaa",
     "gasto_id": "e969edba-09fb-4a02-95e8-60874be606d0",
     "parcela_id": "20d1f8f9-9d56-41ae-9669-807e8241fe47",
-    "periodo": "2024-12",
-    "monto": "42000",
-    "fecha": "2024-12-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "14c6f7d1-23da-4b63-93ba-b96f2c4f8ac1",
-    "gasto_id": "424b6ee8-e1cc-409a-94d2-12fdce8070a6",
-    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
-    "periodo": "2024-12",
-    "monto": "42000",
-    "fecha": "2024-12-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "94fa6d1c-e717-43f5-bd5b-4bf2567c7edd",
-    "gasto_id": "a33cfca6-5e0a-489e-a5fa-5b1a3c0bf33d",
-    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
     "periodo": "2024-12",
     "monto": "42000",
     "fecha": "2024-12-10",
@@ -2676,24 +2991,6 @@
     "id": "0cbf9349-3533-47c1-8e70-04688c4e971f",
     "gasto_id": "64896d61-8425-43a4-ad15-8008dd54eef0",
     "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
-    "periodo": "2024-12",
-    "monto": "42000",
-    "fecha": "2024-12-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "aad5a9da-0120-4172-b42f-8125300bf351",
-    "gasto_id": "6d5c54e1-56a5-4918-99b5-ca7a24d4541c",
-    "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
-    "periodo": "2024-12",
-    "monto": "42000",
-    "fecha": "2024-12-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "4af10c5f-d972-474d-9735-c686954234e2",
-    "gasto_id": "d6b71869-40c2-43a1-a7de-f7a9d6a820dd",
-    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
     "periodo": "2024-12",
     "monto": "42000",
     "fecha": "2024-12-10",
@@ -3375,6 +3672,168 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "6f587085-8763-410b-a222-488a22637300",
+    "gasto_id": "ef0aaf04-298b-40d5-a339-feeaaaf2e49b",
+    "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
+    "periodo": "2025-02",
+    "monto": "24400",
+    "fecha": "2025-02-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "6658134a-944c-4eca-8df0-5fbd125d4d03",
+    "gasto_id": "ef0aaf04-298b-40d5-a339-feeaaaf2e49b",
+    "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
+    "periodo": "2025-02",
+    "monto": "18900",
+    "fecha": "2025-02-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5ba83e89-e9ed-4b06-91cf-15aede04f094",
+    "gasto_id": "85b72fed-6830-4d21-9326-21d64bed2390",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "periodo": "2025-02",
+    "monto": "22400",
+    "fecha": "2025-02-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "4dda404e-9af9-4abb-9ef6-a33a748d8910",
+    "gasto_id": "85b72fed-6830-4d21-9326-21d64bed2390",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "periodo": "2025-02",
+    "monto": "22900",
+    "fecha": "2025-02-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "da570ce0-869a-458d-83be-93a7f94d5803",
+    "gasto_id": "26d45aca-f86d-44fe-9d3f-a95839d42539",
+    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "periodo": "2025-02",
+    "monto": "27300",
+    "fecha": "2025-02-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "aa27e568-383f-4f0b-8b73-9232a8cb1bb4",
+    "gasto_id": "26d45aca-f86d-44fe-9d3f-a95839d42539",
+    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "periodo": "2025-02",
+    "monto": "16700",
+    "fecha": "2025-02-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "d21a8731-687b-422e-8e1d-353513e13905",
+    "gasto_id": "0792f8db-092e-40da-91b0-b7e946fbca19",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "periodo": "2025-02",
+    "monto": "29800",
+    "fecha": "2025-02-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ee08f3f3-ba15-4d81-a4bb-2dcf4ca77acf",
+    "gasto_id": "0792f8db-092e-40da-91b0-b7e946fbca19",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "periodo": "2025-02",
+    "monto": "15600",
+    "fecha": "2025-02-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2ae37e9c-1151-4aaf-96b2-8435ce12b986",
+    "gasto_id": "f0623257-dd8f-4f62-aec3-5410020dd00c",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-02",
+    "monto": "32200",
+    "fecha": "2025-02-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c78c9541-06d7-49e9-8aba-938295f3dda7",
+    "gasto_id": "f0623257-dd8f-4f62-aec3-5410020dd00c",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-02",
+    "monto": "13100",
+    "fecha": "2025-02-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "56dc0fb5-42b8-4d39-9b7b-37790caef0de",
+    "gasto_id": "c255a393-af60-4fc5-9330-ddf2e361a705",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2025-02",
+    "monto": "29200",
+    "fecha": "2025-02-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "517cadd5-0db5-4180-b3d8-43517e6f2eb0",
+    "gasto_id": "c255a393-af60-4fc5-9330-ddf2e361a705",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2025-02",
+    "monto": "15800",
+    "fecha": "2025-02-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ec9a2a90-8945-4188-83de-13e7af53a44d",
+    "gasto_id": "633d97d1-7913-49dd-814d-98c254afa02f",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "periodo": "2025-02",
+    "monto": "27700",
+    "fecha": "2025-02-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "fd4a8dfa-6ed4-4191-8693-bdf8ccc01864",
+    "gasto_id": "633d97d1-7913-49dd-814d-98c254afa02f",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "periodo": "2025-02",
+    "monto": "17200",
+    "fecha": "2025-02-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ecb6f82d-97c8-43dd-a237-622ac36f7aa1",
+    "gasto_id": "365f7b8f-83e0-4d33-84dc-a38ca08212cd",
+    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
+    "periodo": "2025-02",
+    "monto": "21500",
+    "fecha": "2025-02-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ecb8b79c-e3ab-4e9c-a586-ceadc5c103a9",
+    "gasto_id": "365f7b8f-83e0-4d33-84dc-a38ca08212cd",
+    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
+    "periodo": "2025-02",
+    "monto": "23800",
+    "fecha": "2025-02-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ca520892-3a18-40e6-b025-b0a384d54d05",
+    "gasto_id": "f21e4ca0-52d1-4063-a5a2-febeca2d1c0f",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "periodo": "2025-02",
+    "monto": "25200",
+    "fecha": "2025-02-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "f35e9e70-4e42-46ae-a636-f4eb5d980aac",
+    "gasto_id": "f21e4ca0-52d1-4063-a5a2-febeca2d1c0f",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "periodo": "2025-02",
+    "monto": "19100",
+    "fecha": "2025-02-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "560adfe5-692c-4da6-aa48-b633d6620a28",
     "gasto_id": "be26ec85-1475-4e2f-bc6c-c993459a392f",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -3483,15 +3942,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "fe8812b2-babc-4e2a-b62b-6fbcd8f3bdd8",
-    "gasto_id": "0792f8db-092e-40da-91b0-b7e946fbca19",
-    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "44e3e1cc-eaea-45c6-8005-67b9d96ad671",
     "gasto_id": "ac05a2c4-8843-4305-a0d0-98571b1ab9c9",
     "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
@@ -3546,15 +3996,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "afb8f9e9-1b42-4253-931a-96d38feeff02",
-    "gasto_id": "c255a393-af60-4fc5-9330-ddf2e361a705",
-    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "2ee8da7b-7bee-4e49-aea2-fc27dcfcfe25",
     "gasto_id": "ce6f9052-7f03-456d-b73e-637fc2db002b",
     "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
@@ -3594,15 +4035,6 @@
     "id": "0249a748-e4be-4fd2-95b4-5b8a75cd9474",
     "gasto_id": "61e23a0f-8299-490e-be9f-ecc27a4631fd",
     "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "7bda9cf8-6f9e-4377-909b-d2323ec11036",
-    "gasto_id": "633d97d1-7913-49dd-814d-98c254afa02f",
-    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
     "periodo": "2025-02",
     "monto": "46000",
     "fecha": "2025-02-10",
@@ -3744,24 +4176,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "20ca6ab0-ec27-473a-8d7f-c7806c961482",
-    "gasto_id": "f21e4ca0-52d1-4063-a5a2-febeca2d1c0f",
-    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "4f7bafa6-504f-4df9-8e0f-754685782a7a",
-    "gasto_id": "365f7b8f-83e0-4d33-84dc-a38ca08212cd",
-    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "a6b7dc43-d8cd-457e-808c-601f1ad0b2e6",
     "gasto_id": "605ad82b-5c93-43b7-8c9a-a2a98da3a3a0",
     "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
@@ -3771,45 +4185,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "0ccb9548-2ea3-4e44-b74a-159d335ce107",
-    "gasto_id": "26d45aca-f86d-44fe-9d3f-a95839d42539",
-    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "15a7787f-3d00-49fb-807b-91d31676c352",
-    "gasto_id": "f0623257-dd8f-4f62-aec3-5410020dd00c",
-    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "22b99d7b-0b3f-4756-b097-eee8d3a2244a",
-    "gasto_id": "85b72fed-6830-4d21-9326-21d64bed2390",
-    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "259de2b8-7b8f-43b1-83bf-b3e223edf1b5",
     "gasto_id": "108aafc5-7062-42d2-8925-98524b52bc7b",
     "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
-    "periodo": "2025-02",
-    "monto": "46000",
-    "fecha": "2025-02-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "bc4915c9-e1c8-4bd2-83a2-3ee96ae53b1f",
-    "gasto_id": "ef0aaf04-298b-40d5-a339-feeaaaf2e49b",
-    "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
     "periodo": "2025-02",
     "monto": "46000",
     "fecha": "2025-02-10",
@@ -3933,6 +4311,186 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "634c1f23-ce93-4977-a69f-b04a532af950",
+    "gasto_id": "a7f35cd7-53ed-4e4e-85d7-3f0d299f4c4b",
+    "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
+    "periodo": "2025-03",
+    "monto": "21500",
+    "fecha": "2025-03-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "65d3d91b-2458-4509-bd6b-651f13a8c556",
+    "gasto_id": "a7f35cd7-53ed-4e4e-85d7-3f0d299f4c4b",
+    "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
+    "periodo": "2025-03",
+    "monto": "22900",
+    "fecha": "2025-03-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "56f77a7e-f010-4b97-bcce-79f2c7ddfb92",
+    "gasto_id": "82a33422-adab-496e-861c-2276f926dfa5",
+    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
+    "periodo": "2025-03",
+    "monto": "22900",
+    "fecha": "2025-03-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "97ba6914-422f-492e-b978-ef1ec8ad716e",
+    "gasto_id": "82a33422-adab-496e-861c-2276f926dfa5",
+    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
+    "periodo": "2025-03",
+    "monto": "22000",
+    "fecha": "2025-03-25",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a01e9825-52d3-458b-bcbf-05077ab41178",
+    "gasto_id": "5918d4f3-eff5-4a26-8780-19d91f0778b1",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
+    "periodo": "2025-03",
+    "monto": "31400",
+    "fecha": "2025-03-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "eec105ed-6a1f-494d-8a5a-be3e2a8d22bf",
+    "gasto_id": "5918d4f3-eff5-4a26-8780-19d91f0778b1",
+    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
+    "periodo": "2025-03",
+    "monto": "12000",
+    "fecha": "2025-03-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "e22b2bd0-7c87-48de-a3f7-0e5e5482ab56",
+    "gasto_id": "c6af6f7e-6bd5-49af-a5e9-76ea5e717eb7",
+    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
+    "periodo": "2025-03",
+    "monto": "28900",
+    "fecha": "2025-03-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b2a87303-b274-4908-9519-1e4432be13b3",
+    "gasto_id": "c6af6f7e-6bd5-49af-a5e9-76ea5e717eb7",
+    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
+    "periodo": "2025-03",
+    "monto": "15200",
+    "fecha": "2025-03-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "d589d201-d109-4b63-8fa4-8510a367b254",
+    "gasto_id": "2b19ab41-2e5a-4a4b-a490-49ebdbd67e00",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-03",
+    "monto": "33300",
+    "fecha": "2025-03-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "bdbb4169-de14-41d7-b53b-5e02c03b219f",
+    "gasto_id": "2b19ab41-2e5a-4a4b-a490-49ebdbd67e00",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-03",
+    "monto": "10100",
+    "fecha": "2025-03-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "6d969a8a-9be1-441e-b0cb-3279cd8bebcc",
+    "gasto_id": "6cf8eb79-b2d0-4601-bfe4-5d71eea897cf",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "periodo": "2025-03",
+    "monto": "26200",
+    "fecha": "2025-03-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b3c564a8-9b28-4ae9-8296-3cb6d22cd188",
+    "gasto_id": "6cf8eb79-b2d0-4601-bfe4-5d71eea897cf",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "periodo": "2025-03",
+    "monto": "18800",
+    "fecha": "2025-03-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "fcf19580-abfb-4c53-b3a0-ecf94d69faf5",
+    "gasto_id": "2b7caaeb-50ff-41e0-8aa3-345b49f278f8",
+    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
+    "periodo": "2025-03",
+    "monto": "21100",
+    "fecha": "2025-03-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "7b0b26e9-5fe8-4d65-b8ea-a91baf0e1f2c",
+    "gasto_id": "2b7caaeb-50ff-41e0-8aa3-345b49f278f8",
+    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
+    "periodo": "2025-03",
+    "monto": "24400",
+    "fecha": "2025-03-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "87687d7b-fb41-4ce1-a16d-5ed8eb84c2a6",
+    "gasto_id": "f1c35286-83db-47ff-a065-509e0d4b2bf3",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-03",
+    "monto": "9400",
+    "fecha": "2025-03-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ad968b08-fd68-4469-82ba-05f9723118f6",
+    "gasto_id": "f1c35286-83db-47ff-a065-509e0d4b2bf3",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-03",
+    "monto": "1100",
+    "fecha": "2025-03-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "db0e9f62-4d6a-45ed-b661-9c07c6e2d06a",
+    "gasto_id": "4ba94eea-c33c-4477-bdc7-c07306cb8e2c",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2025-03",
+    "monto": "29600",
+    "fecha": "2025-03-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "d910eff1-7b64-4800-96cc-a9c9b58da985",
+    "gasto_id": "4ba94eea-c33c-4477-bdc7-c07306cb8e2c",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2025-03",
+    "monto": "14100",
+    "fecha": "2025-03-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5cf22221-9411-4fac-82cf-3cbe8cb208b5",
+    "gasto_id": "97d5e800-107b-49f4-8b36-affe93d6583a",
+    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
+    "periodo": "2025-03",
+    "monto": "30000",
+    "fecha": "2025-03-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "f8842082-dc41-4e43-bcf7-e2fc9c824519",
+    "gasto_id": "97d5e800-107b-49f4-8b36-affe93d6583a",
+    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
+    "periodo": "2025-03",
+    "monto": "15100",
+    "fecha": "2025-03-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "619e7752-fadc-43b3-87cd-fdd570982190",
     "gasto_id": "291c476f-0b85-422a-b24c-c14553ff906a",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -3960,15 +4518,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "3c30c85e-c1b6-4592-b89b-cd0eb976fb0c",
-    "gasto_id": "5918d4f3-eff5-4a26-8780-19d91f0778b1",
-    "parcela_id": "f52f5736-2eae-4ce9-b38b-a448966960f6",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "179f4d5d-7af6-4342-b0f3-51f33de8dce5",
     "gasto_id": "d4943d99-4680-4c9d-9b28-98d9e2b743eb",
     "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
@@ -3981,15 +4530,6 @@
     "id": "4d24cbe6-72b6-4377-a8a4-89fc7c385e64",
     "gasto_id": "1d2cd97e-a19b-4feb-8ffa-4eb7e6eba927",
     "parcela_id": "a9285211-14e4-4f97-81cb-bc2a749626f2",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "8c92f47d-a7e2-409d-81eb-f28d58dd8250",
-    "gasto_id": "82a33422-adab-496e-861c-2276f926dfa5",
-    "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
     "periodo": "2025-03",
     "monto": "46000",
     "fecha": "2025-03-10",
@@ -4041,15 +4581,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "37151f07-9b6f-4956-aa5c-e8de966d491e",
-    "gasto_id": "97d5e800-107b-49f4-8b36-affe93d6583a",
-    "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "78dd5fcc-4ecb-4ef9-a341-30b32801128b",
     "gasto_id": "e8b42d71-142d-4a47-a045-fea8dac23b30",
     "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
@@ -4062,15 +4593,6 @@
     "id": "b44255bf-a948-410f-9779-83eacf80d0fa",
     "gasto_id": "abae5dfd-3c00-4360-b921-0e658d1661cd",
     "parcela_id": "ff748fb0-5348-455e-99c1-cf825a247258",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "a36bdfa1-9189-40cb-84c2-3d1b4d852b10",
-    "gasto_id": "4ba94eea-c33c-4477-bdc7-c07306cb8e2c",
-    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
     "periodo": "2025-03",
     "monto": "46000",
     "fecha": "2025-03-10",
@@ -4122,15 +4644,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "5f17e9b4-02ac-4f6d-9ceb-1757ea8a024c",
-    "gasto_id": "6cf8eb79-b2d0-4601-bfe4-5d71eea897cf",
-    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "c6da98bf-6485-41c8-bc79-f694067fcd2f",
     "gasto_id": "b90d7a91-1f90-41c4-ae48-b26b3e8e75ac",
     "parcela_id": "a48de3b6-7c3e-4257-bfbd-a03dff7d7e8c",
@@ -4152,15 +4665,6 @@
     "id": "37832679-ef7e-443c-9ba2-6401abbcf732",
     "gasto_id": "92072963-a815-4efa-806d-284ab85d9464",
     "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "7a8aa683-4388-4f08-8615-58c4266464da",
-    "gasto_id": "c6af6f7e-6bd5-49af-a5e9-76ea5e717eb7",
-    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
     "periodo": "2025-03",
     "monto": "46000",
     "fecha": "2025-03-10",
@@ -4302,15 +4806,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "608067c0-dc48-428d-bb3a-92c82c33d834",
-    "gasto_id": "a7f35cd7-53ed-4e4e-85d7-3f0d299f4c4b",
-    "parcela_id": "020d14e7-372f-4a84-898e-000d97e8682c",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "4af1c66f-948c-49cb-b8da-096fc9c2151b",
     "gasto_id": "f196d14f-6cc6-4573-b7cb-0033d66eb311",
     "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
@@ -4347,15 +4842,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "12da79f7-be33-49e7-9434-062e34dc21ed",
-    "gasto_id": "2b19ab41-2e5a-4a4b-a490-49ebdbd67e00",
-    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "9e5404af-bfca-419d-aea2-fa750995c7ac",
     "gasto_id": "f404a1d0-0539-44ee-8cd0-07051dcdfa42",
     "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
@@ -4386,15 +4872,6 @@
     "id": "d729e2ff-96b9-4642-9a63-253513d67f49",
     "gasto_id": "32def2f5-5705-426c-8936-6654057fc3b2",
     "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
-    "periodo": "2025-03",
-    "monto": "46000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "fb38f42f-af87-4382-8d81-1df0fd33d0ba",
-    "gasto_id": "2b7caaeb-50ff-41e0-8aa3-345b49f278f8",
-    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
     "periodo": "2025-03",
     "monto": "46000",
     "fecha": "2025-03-10",
@@ -4473,21 +4950,102 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "80cb174f-d341-481e-aed4-d757ef60d8c3",
-    "gasto_id": "f1c35286-83db-47ff-a065-509e0d4b2bf3",
-    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
-    "periodo": "2025-03",
-    "monto": "13000",
-    "fecha": "2025-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "36c25b93-85be-458f-97f1-70249e8fb8c6",
     "gasto_id": "64723d4e-fb24-4857-bf5d-78f588f11d8a",
     "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
     "periodo": "2025-03",
     "monto": "13000",
     "fecha": "2025-03-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "cd11699b-b7ce-42c8-92c1-0f2914a89968",
+    "gasto_id": "14de262c-1ee6-4f77-93fe-8b7c19e2b2f4",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2025-04",
+    "monto": "19300",
+    "fecha": "2025-04-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b1fd6ff5-2344-42a8-b2c8-8c24853b9be6",
+    "gasto_id": "14de262c-1ee6-4f77-93fe-8b7c19e2b2f4",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2025-04",
+    "monto": "24700",
+    "fecha": "2025-04-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ca25d536-6d05-4d01-9457-b647ebb7cf64",
+    "gasto_id": "3e13b138-6acd-415a-9fde-7f99b8fa4e58",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "periodo": "2025-04",
+    "monto": "20900",
+    "fecha": "2025-04-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a9356cba-92fa-4871-8785-4490b9100a9a",
+    "gasto_id": "3e13b138-6acd-415a-9fde-7f99b8fa4e58",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "periodo": "2025-04",
+    "monto": "22200",
+    "fecha": "2025-04-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "6bd9e613-785f-4daa-b2e9-501c89ade2fe",
+    "gasto_id": "9162276b-a006-4113-9dd7-67f3ccdcfb47",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2025-04",
+    "monto": "19500",
+    "fecha": "2025-04-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "f0cc4214-1262-4174-824e-233c561e973f",
+    "gasto_id": "9162276b-a006-4113-9dd7-67f3ccdcfb47",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2025-04",
+    "monto": "25800",
+    "fecha": "2025-04-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "9b761aff-e692-46d6-a287-be0e8af2dcbf",
+    "gasto_id": "77d78bb1-cc70-4884-afee-7497d2313d8f",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "periodo": "2025-04",
+    "monto": "20300",
+    "fecha": "2025-04-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "f2bf85d7-a366-4ac3-a642-1d47308c568c",
+    "gasto_id": "77d78bb1-cc70-4884-afee-7497d2313d8f",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "periodo": "2025-04",
+    "monto": "23000",
+    "fecha": "2025-04-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "646b935e-d717-4c27-a311-7755430ff764",
+    "gasto_id": "45948dca-306c-4276-8fc0-f3a4a1dc2e74",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2025-04",
+    "monto": "28000",
+    "fecha": "2025-04-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "4e30bf71-6764-4b11-8a67-0b0e32244c0c",
+    "gasto_id": "45948dca-306c-4276-8fc0-f3a4a1dc2e74",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2025-04",
+    "monto": "16000",
+    "fecha": "2025-04-28",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
@@ -4512,15 +5070,6 @@
     "id": "c07b3e99-e465-4e43-b60e-394115b113bd",
     "gasto_id": "f76357c8-002c-4432-aaed-e9ee14134674",
     "parcela_id": "74eaa0b9-7572-48da-b07b-09567ce2167d",
-    "periodo": "2025-04",
-    "monto": "46000",
-    "fecha": "2025-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "7762a7ca-9057-42d3-9847-b389cb1a2d39",
-    "gasto_id": "77d78bb1-cc70-4884-afee-7497d2313d8f",
-    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
     "periodo": "2025-04",
     "monto": "46000",
     "fecha": "2025-04-10",
@@ -4671,15 +5220,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "70c1db16-fabf-416e-b14e-3600e02c9551",
-    "gasto_id": "45948dca-306c-4276-8fc0-f3a4a1dc2e74",
-    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
-    "periodo": "2025-04",
-    "monto": "46000",
-    "fecha": "2025-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "ad30462e-657a-4961-82df-c894518c9230",
     "gasto_id": "19af7bbe-b505-4c49-9b17-22bae25cd066",
     "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
@@ -4797,15 +5337,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "1724167b-6cc5-46e2-8613-cd5d7462662c",
-    "gasto_id": "9162276b-a006-4113-9dd7-67f3ccdcfb47",
-    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
-    "periodo": "2025-04",
-    "monto": "46000",
-    "fecha": "2025-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "059b8d76-49ee-4d6e-bae3-620ae4021d0d",
     "gasto_id": "4e8b4433-e664-4f30-a221-f76a8aa56cae",
     "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
@@ -4818,15 +5349,6 @@
     "id": "9913892e-c4e6-4975-9da0-88aef4ba0777",
     "gasto_id": "7646bf73-5f32-410e-8c2a-d9dcdc6d3082",
     "parcela_id": "1111aa1e-1773-4c94-b112-64147a72848c",
-    "periodo": "2025-04",
-    "monto": "46000",
-    "fecha": "2025-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "58c6968b-86bb-4540-9e71-df9311dcedfd",
-    "gasto_id": "14de262c-1ee6-4f77-93fe-8b7c19e2b2f4",
-    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
     "periodo": "2025-04",
     "monto": "46000",
     "fecha": "2025-04-10",
@@ -4908,15 +5430,6 @@
     "id": "2480e6f0-3b36-4a8d-8c57-56c12a20ecba",
     "gasto_id": "154b484d-faa5-4b35-8edd-0a26d518df99",
     "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
-    "periodo": "2025-04",
-    "monto": "46000",
-    "fecha": "2025-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "fa439433-75a5-415b-81cb-59195d33ae7f",
-    "gasto_id": "3e13b138-6acd-415a-9fde-7f99b8fa4e58",
-    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
     "periodo": "2025-04",
     "monto": "46000",
     "fecha": "2025-04-10",
@@ -5049,6 +5562,168 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "9d508ea0-ffff-4778-b7d3-9b8f6622e2eb",
+    "gasto_id": "fe45eaad-5864-4b46-a444-1c33a5e9cab7",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2025-05",
+    "monto": "22700",
+    "fecha": "2025-05-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b08a57fa-5d55-4ea4-9318-0e3d97f7d2c6",
+    "gasto_id": "fe45eaad-5864-4b46-a444-1c33a5e9cab7",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2025-05",
+    "monto": "22500",
+    "fecha": "2025-05-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2787f448-fd2f-4f03-a4db-429e5c182149",
+    "gasto_id": "89071f1e-108f-49f1-87f8-3fa50e252628",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2025-05",
+    "monto": "25800",
+    "fecha": "2025-05-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5a7b8dd3-3aa4-4204-b73b-54ec879e7dd3",
+    "gasto_id": "89071f1e-108f-49f1-87f8-3fa50e252628",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2025-05",
+    "monto": "17400",
+    "fecha": "2025-05-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "479ce2c5-2c16-4df9-8f6a-7230dae736d7",
+    "gasto_id": "1b89b598-fc92-4921-92b9-238ad479fd35",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2025-05",
+    "monto": "25800",
+    "fecha": "2025-05-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "bb0815b6-cb07-446d-bfe0-dac2a8cf5863",
+    "gasto_id": "1b89b598-fc92-4921-92b9-238ad479fd35",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2025-05",
+    "monto": "17200",
+    "fecha": "2025-05-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b493ffdf-8421-4def-a8ba-f631bad51248",
+    "gasto_id": "05eba049-4507-4821-b2fd-d0bdb9d970ec",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "periodo": "2025-05",
+    "monto": "27100",
+    "fecha": "2025-05-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "6c2e2c8a-d7cb-41c7-84c2-cf582fada136",
+    "gasto_id": "05eba049-4507-4821-b2fd-d0bdb9d970ec",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "periodo": "2025-05",
+    "monto": "17100",
+    "fecha": "2025-05-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "cc5ee325-b4a3-4a25-9491-60aeef06a3fc",
+    "gasto_id": "d49da438-2460-4427-bd98-731d3b8afada",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "periodo": "2025-05",
+    "monto": "32600",
+    "fecha": "2025-05-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5b5b88c0-28b4-46db-9cc2-4e760a7593d4",
+    "gasto_id": "d49da438-2460-4427-bd98-731d3b8afada",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "periodo": "2025-05",
+    "monto": "10700",
+    "fecha": "2025-05-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "9453e9e8-2c3d-4ee6-b38c-35236a36ce29",
+    "gasto_id": "e6210aab-152e-4772-8f8d-a95b11867e4f",
+    "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
+    "periodo": "2025-05",
+    "monto": "20900",
+    "fecha": "2025-05-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "595bb975-2f32-4e0a-b9d0-53c6db51c05a",
+    "gasto_id": "e6210aab-152e-4772-8f8d-a95b11867e4f",
+    "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
+    "periodo": "2025-05",
+    "monto": "22500",
+    "fecha": "2025-05-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "457a07c5-9741-439c-9995-9f9927da6381",
+    "gasto_id": "c35cf588-8141-4f4b-a6fc-d78241e9fcee",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-05",
+    "monto": "34200",
+    "fecha": "2025-05-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "651fa694-bbf6-4b46-be1e-5ec0b0a68918",
+    "gasto_id": "c35cf588-8141-4f4b-a6fc-d78241e9fcee",
+    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
+    "periodo": "2025-05",
+    "monto": "9300",
+    "fecha": "2025-05-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5af91560-05a2-42cf-a24a-e236bc5f0be3",
+    "gasto_id": "44adde12-c2e8-4c23-b868-321997bc7aa7",
+    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "periodo": "2025-05",
+    "monto": "8200",
+    "fecha": "2025-05-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "8d6020f3-7edf-4a8a-be57-78e70c195a5b",
+    "gasto_id": "44adde12-c2e8-4c23-b868-321997bc7aa7",
+    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
+    "periodo": "2025-05",
+    "monto": "2900",
+    "fecha": "2025-05-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ac3bc560-8de8-48f2-921a-a715970d648d",
+    "gasto_id": "1341698b-7d31-4b77-ae88-5d42aa5207c9",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2025-05",
+    "monto": "33500",
+    "fecha": "2025-05-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5c6f1f07-cdb4-40b9-a2c0-db34369cda9c",
+    "gasto_id": "1341698b-7d31-4b77-ae88-5d42aa5207c9",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2025-05",
+    "monto": "11700",
+    "fecha": "2025-05-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "963368c3-2bb0-4f98-959b-99ced35b4f21",
     "gasto_id": "3615d52a-5074-4851-9032-cbe4245b57d9",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -5166,36 +5841,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "5adb21b9-9d73-4bd1-bce0-2eb31e34fc6d",
-    "gasto_id": "d49da438-2460-4427-bd98-731d3b8afada",
-    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "a514ece4-de97-4ed0-8003-8f335c7a2dde",
     "gasto_id": "b3f02d38-c21f-4ff4-a59e-61ec061fb510",
     "parcela_id": "ff748fb0-5348-455e-99c1-cf825a247258",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "f6d11583-9d98-46fa-92b0-9a7bc4243cbb",
-    "gasto_id": "1341698b-7d31-4b77-ae88-5d42aa5207c9",
-    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "02730b2d-cb99-4bf1-9504-9c53aabcf5bc",
-    "gasto_id": "05eba049-4507-4821-b2fd-d0bdb9d970ec",
-    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
     "periodo": "2025-05",
     "monto": "46000",
     "fecha": "2025-05-10",
@@ -5223,15 +5871,6 @@
     "id": "e2d0b62b-9037-4698-8f05-dcb62650569c",
     "gasto_id": "7e934fdb-005f-456a-88c7-bf1ee9d7aae5",
     "parcela_id": "ccc37411-1c19-4571-8ee3-0512925695c6",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "700630d3-1427-4723-9bf9-035ba2103314",
-    "gasto_id": "1b89b598-fc92-4921-92b9-238ad479fd35",
-    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
     "periodo": "2025-05",
     "monto": "46000",
     "fecha": "2025-05-10",
@@ -5346,15 +5985,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "b744f124-e08e-4100-8fa4-f93dc7903975",
-    "gasto_id": "89071f1e-108f-49f1-87f8-3fa50e252628",
-    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "6af1a91f-6a31-4e82-92c7-92d4328b7c53",
     "gasto_id": "1c708681-95be-4de6-8657-ead2d1880a36",
     "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
@@ -5367,15 +5997,6 @@
     "id": "41ef0902-9012-41c4-bf1e-00b6c046a3ac",
     "gasto_id": "d559561f-9214-4139-8222-c92f00202c2d",
     "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "47476e51-677a-4d79-80a9-a9ef47d29524",
-    "gasto_id": "fe45eaad-5864-4b46-a444-1c33a5e9cab7",
-    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
     "periodo": "2025-05",
     "monto": "46000",
     "fecha": "2025-05-10",
@@ -5427,15 +6048,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "349c66f7-ff65-4fe2-b4b0-7e7c413c14ac",
-    "gasto_id": "e6210aab-152e-4772-8f8d-a95b11867e4f",
-    "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "a22758a1-70a1-43f6-9d97-bd0a2c092df0",
     "gasto_id": "91bf09b6-cb26-4452-9a78-64703c7f690e",
     "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
@@ -5448,15 +6060,6 @@
     "id": "9409cfe3-7e46-488f-ad31-4aff4a1f9d6f",
     "gasto_id": "37e3353a-3fc9-4237-95f9-2119e0c95694",
     "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
-    "periodo": "2025-05",
-    "monto": "46000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "aaa8f124-589e-4d0e-bd51-ccec49b081eb",
-    "gasto_id": "c35cf588-8141-4f4b-a6fc-d78241e9fcee",
-    "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
     "periodo": "2025-05",
     "monto": "46000",
     "fecha": "2025-05-10",
@@ -5565,15 +6168,6 @@
     "id": "a20e25f5-dc67-4664-a26b-32552ed7505b",
     "gasto_id": "94354185-2ccf-4fc8-bbac-d791f7eb4db8",
     "parcela_id": "eea8519e-0cbf-4f7e-ad82-44e17b8e108b",
-    "periodo": "2025-05",
-    "monto": "13000",
-    "fecha": "2025-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "b8533ca0-b8d0-4e02-b74a-d04bd074b760",
-    "gasto_id": "44adde12-c2e8-4c23-b868-321997bc7aa7",
-    "parcela_id": "dc3b0724-3d8c-4f63-820d-b2edd4e85c27",
     "periodo": "2025-05",
     "monto": "13000",
     "fecha": "2025-05-10",
@@ -6705,6 +7299,186 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "1708261d-01fe-4a21-994d-af884566b00b",
+    "gasto_id": "50cf061b-e766-4433-b799-3b5dacc09db4",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2025-08",
+    "monto": "28600",
+    "fecha": "2025-08-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "01ecd55c-6906-4e8c-a5ad-9d711b1c0127",
+    "gasto_id": "50cf061b-e766-4433-b799-3b5dacc09db4",
+    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
+    "periodo": "2025-08",
+    "monto": "16200",
+    "fecha": "2025-08-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b2e2ee48-d783-47bd-bc76-0d141ad2bf46",
+    "gasto_id": "25b7dcc4-2945-4c85-8a4e-53e727f3a7f6",
+    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
+    "periodo": "2025-08",
+    "monto": "33000",
+    "fecha": "2025-08-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "54efeb37-52a0-469e-abda-215858312708",
+    "gasto_id": "25b7dcc4-2945-4c85-8a4e-53e727f3a7f6",
+    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
+    "periodo": "2025-08",
+    "monto": "10400",
+    "fecha": "2025-08-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "aff27eda-18e6-4325-9819-07c693e81919",
+    "gasto_id": "d121df84-c63d-40be-b2a7-aa8202a399f9",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "periodo": "2025-08",
+    "monto": "25200",
+    "fecha": "2025-08-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c8765839-bdc7-45d6-97ec-85165f89bc2e",
+    "gasto_id": "d121df84-c63d-40be-b2a7-aa8202a399f9",
+    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
+    "periodo": "2025-08",
+    "monto": "19600",
+    "fecha": "2025-08-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2fc70c00-4550-43b5-afc3-7049986c752d",
+    "gasto_id": "7f25be18-214e-4061-a278-f4aff3100759",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "periodo": "2025-08",
+    "monto": "30800",
+    "fecha": "2025-08-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "23534c4f-54da-4226-bbfb-5d5bb751296b",
+    "gasto_id": "7f25be18-214e-4061-a278-f4aff3100759",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "periodo": "2025-08",
+    "monto": "13100",
+    "fecha": "2025-08-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "47bad980-c28b-4761-a815-b16cdd30e8b1",
+    "gasto_id": "c6913599-2110-4ea5-9a62-8da65fd8e42e",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2025-08",
+    "monto": "30300",
+    "fecha": "2025-08-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c3288885-5834-4f49-af91-f05a404b9271",
+    "gasto_id": "c6913599-2110-4ea5-9a62-8da65fd8e42e",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2025-08",
+    "monto": "13800",
+    "fecha": "2025-08-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b69f7dc8-a595-496e-b7fc-a73b8d5a3653",
+    "gasto_id": "b2b8f7b9-4949-4a31-8d30-c579c6b0123c",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "periodo": "2025-08",
+    "monto": "18600",
+    "fecha": "2025-08-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "000230b1-61bf-44f0-be22-6e3e24cfebfb",
+    "gasto_id": "b2b8f7b9-4949-4a31-8d30-c579c6b0123c",
+    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
+    "periodo": "2025-08",
+    "monto": "26700",
+    "fecha": "2025-08-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "7ae2b7d8-5b75-4542-bd0e-83b963a87774",
+    "gasto_id": "fab7a727-29aa-489a-8560-459a9d441077",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "periodo": "2025-08",
+    "monto": "19000",
+    "fecha": "2025-08-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "414c1a01-0d65-4baa-b95b-3ded81a7b666",
+    "gasto_id": "fab7a727-29aa-489a-8560-459a9d441077",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "periodo": "2025-08",
+    "monto": "25600",
+    "fecha": "2025-08-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "f247ed88-2cb4-44f1-8a37-bad1cb75ef6b",
+    "gasto_id": "13b2c3be-e684-42ca-bcb1-af695c1eedca",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "periodo": "2025-08",
+    "monto": "25300",
+    "fecha": "2025-08-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5977e71e-f8a0-42d7-810c-e3c083f231d8",
+    "gasto_id": "13b2c3be-e684-42ca-bcb1-af695c1eedca",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "periodo": "2025-08",
+    "monto": "20100",
+    "fecha": "2025-08-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "42ee61d3-50ef-4750-863c-54c9a88fb1ed",
+    "gasto_id": "2ebb5994-52ee-407a-b926-65e6026f7b60",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2025-08",
+    "monto": "9300",
+    "fecha": "2025-08-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "f16d3d54-5e5e-4372-a936-1a760cc1ac9c",
+    "gasto_id": "2ebb5994-52ee-407a-b926-65e6026f7b60",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2025-08",
+    "monto": "2700",
+    "fecha": "2025-08-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2ba36578-52e0-488b-94c0-f0f8f5a2a8c6",
+    "gasto_id": "b6996901-11b8-4a70-80e6-644120dd7b55",
+    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
+    "periodo": "2025-08",
+    "monto": "20100",
+    "fecha": "2025-08-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b9d75564-b6d3-4c5b-85ac-0930ad83b02f",
+    "gasto_id": "b6996901-11b8-4a70-80e6-644120dd7b55",
+    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
+    "periodo": "2025-08",
+    "monto": "23400",
+    "fecha": "2025-08-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "6fe5fcea-530f-4dc3-a287-cedde74b4269",
     "gasto_id": "44c9ab79-81e5-4332-ad83-fa630965bffe",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -6786,15 +7560,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "0f637d27-86e7-480f-9b15-6dfb01b89024",
-    "gasto_id": "25b7dcc4-2945-4c85-8a4e-53e727f3a7f6",
-    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "34df69ca-dcf9-4173-bcb5-1b4de3b2aebd",
     "gasto_id": "b9e2308c-cf56-4b88-98b5-8013a60f0fe9",
     "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
@@ -6816,15 +7581,6 @@
     "id": "71f374fc-9bdd-4b46-9d17-68f64b6052da",
     "gasto_id": "52abf287-7a11-499f-85d8-2403425e77f5",
     "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "7c6fbcf1-969f-46d8-844b-51f0b999045e",
-    "gasto_id": "b2b8f7b9-4949-4a31-8d30-c579c6b0123c",
-    "parcela_id": "390ceadb-c2b9-4141-9fe4-3b407fe4c26e",
     "periodo": "2025-08",
     "monto": "46000",
     "fecha": "2025-08-10",
@@ -6858,24 +7614,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "691092ff-05c9-4c6f-8141-5ea96fc09eeb",
-    "gasto_id": "d121df84-c63d-40be-b2a7-aa8202a399f9",
-    "parcela_id": "3aba82fc-4207-4014-8414-2ab99071107a",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "1e2fb284-f978-4f0e-b4dc-69311fe6ae15",
-    "gasto_id": "7f25be18-214e-4061-a278-f4aff3100759",
-    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "17629171-29ff-4913-bf4b-2dec36b54417",
     "gasto_id": "771692ae-d59d-4a27-b086-2d07ccdbd02a",
     "parcela_id": "a596d12a-c465-4093-ab95-c04564f94b25",
@@ -6888,15 +7626,6 @@
     "id": "e1b97bb4-8d80-4c2c-9b43-71c82d4cf093",
     "gasto_id": "c2511890-7875-4c35-aee1-172e4ff0deb3",
     "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "cea5662e-2b5e-4da8-9aab-b83ff0bf6e6f",
-    "gasto_id": "13b2c3be-e684-42ca-bcb1-af695c1eedca",
-    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
     "periodo": "2025-08",
     "monto": "46000",
     "fecha": "2025-08-10",
@@ -7020,15 +7749,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "4615391a-f8ad-4083-8350-53b6eb40901e",
-    "gasto_id": "50cf061b-e766-4433-b799-3b5dacc09db4",
-    "parcela_id": "5634d740-9661-42c1-bf3b-905ac3878bb9",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "aa374044-8c4e-49a2-aa1e-07ab32b13c62",
     "gasto_id": "e37adeb6-b0e5-4d30-a4c9-2582634190a4",
     "parcela_id": "3ad1013d-afb8-47c0-958b-28722d000e9b",
@@ -7041,15 +7761,6 @@
     "id": "53e4fa20-dea8-4055-af63-7843868e3ad1",
     "gasto_id": "b3b5c0a5-8abc-4bcd-ac76-ac825160d2f4",
     "parcela_id": "1111aa1e-1773-4c94-b112-64147a72848c",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "879e2623-952a-4259-af7d-30a4c9e3d47a",
-    "gasto_id": "c6913599-2110-4ea5-9a62-8da65fd8e42e",
-    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
     "periodo": "2025-08",
     "monto": "46000",
     "fecha": "2025-08-10",
@@ -7092,27 +7803,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "b8de556a-9d08-4dce-9ca4-6abc4071c7ae",
-    "gasto_id": "b6996901-11b8-4a70-80e6-644120dd7b55",
-    "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "29eaa6ea-c5b8-41c2-b9fc-0dd2b488c3ef",
     "gasto_id": "743e08b4-64d9-44ad-8749-a9f83487352d",
     "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
-    "periodo": "2025-08",
-    "monto": "46000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "bbdfe827-6249-4624-84fa-38dfe2c9a1ae",
-    "gasto_id": "fab7a727-29aa-489a-8560-459a9d441077",
-    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
     "periodo": "2025-08",
     "monto": "46000",
     "fecha": "2025-08-10",
@@ -7212,15 +7905,6 @@
     "id": "41657960-0101-419e-8b3b-c4e599c5ca48",
     "gasto_id": "fc21ee92-530d-40c0-9c78-188fe8e40e44",
     "parcela_id": "ccc37411-1c19-4571-8ee3-0512925695c6",
-    "periodo": "2025-08",
-    "monto": "13000",
-    "fecha": "2025-08-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "209edfe6-5090-4b87-bf52-67763724fdaf",
-    "gasto_id": "2ebb5994-52ee-407a-b926-65e6026f7b60",
-    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
     "periodo": "2025-08",
     "monto": "13000",
     "fecha": "2025-08-10",
@@ -10629,6 +11313,186 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
+    "id": "db6a33e5-94e9-4ad9-abac-c83711b66d66",
+    "gasto_id": "1154cb4e-1996-4a3c-a985-7e952474d494",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "periodo": "2026-03",
+    "monto": "20400",
+    "fecha": "2026-03-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b4b7c1f9-fafa-472f-afea-3c3907e3b289",
+    "gasto_id": "1154cb4e-1996-4a3c-a985-7e952474d494",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "periodo": "2026-03",
+    "monto": "27300",
+    "fecha": "2026-03-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0c7522dc-3481-43c0-86f5-064e8178b1bc",
+    "gasto_id": "5c918453-995b-418a-879d-eeabad42890a",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2026-03",
+    "monto": "10200",
+    "fecha": "2026-03-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5ca8ab0f-187f-4f85-ac9a-6cbb7d504e74",
+    "gasto_id": "5c918453-995b-418a-879d-eeabad42890a",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2026-03",
+    "monto": "2100",
+    "fecha": "2026-03-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "87a27647-c508-4fe9-b4ac-e11e600ac19b",
+    "gasto_id": "e219babf-cc9a-4aba-b54b-1696cb6649ee",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "periodo": "2026-03",
+    "monto": "6800",
+    "fecha": "2026-03-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "8aeeef3f-8023-4853-b570-115467a72e00",
+    "gasto_id": "e219babf-cc9a-4aba-b54b-1696cb6649ee",
+    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
+    "periodo": "2026-03",
+    "monto": "5900",
+    "fecha": "2026-03-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "1ff35583-3123-4ff0-9b66-f759b3f6c152",
+    "gasto_id": "dfde29d5-96b1-45cd-9e5b-3a2fea47a7c6",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2026-03",
+    "monto": "35000",
+    "fecha": "2026-03-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "aac5710c-9fbc-4bee-be30-cdecc0397fa5",
+    "gasto_id": "dfde29d5-96b1-45cd-9e5b-3a2fea47a7c6",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2026-03",
+    "monto": "13900",
+    "fecha": "2026-03-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "1cfee12f-6905-4b28-ac1a-8979b0118933",
+    "gasto_id": "2280520c-b743-4088-9210-7299288bf80c",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2026-03",
+    "monto": "7600",
+    "fecha": "2026-03-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0e465f1c-61dd-458e-9cf4-bce76b925155",
+    "gasto_id": "2280520c-b743-4088-9210-7299288bf80c",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2026-03",
+    "monto": "4900",
+    "fecha": "2026-03-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "7d8f4d50-47e0-466b-955d-e6064efeb342",
+    "gasto_id": "c209a5c3-f6b0-4a6f-8cb1-3ad8574c2012",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "periodo": "2026-03",
+    "monto": "20400",
+    "fecha": "2026-03-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "dab12f66-89a7-45a0-931e-77bcb68d2cc3",
+    "gasto_id": "c209a5c3-f6b0-4a6f-8cb1-3ad8574c2012",
+    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
+    "periodo": "2026-03",
+    "monto": "28600",
+    "fecha": "2026-03-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "3f8f88c8-567d-4109-9186-4cabef4e86f5",
+    "gasto_id": "68f1c8c4-5a51-41ac-bc44-786243c1fd3d",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2026-03",
+    "monto": "35100",
+    "fecha": "2026-03-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "86846b97-f6d0-4dda-9e06-a9be31b21c23",
+    "gasto_id": "68f1c8c4-5a51-41ac-bc44-786243c1fd3d",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2026-03",
+    "monto": "12000",
+    "fecha": "2026-03-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "6d5c008c-85e5-4f66-b4e4-40720a731eed",
+    "gasto_id": "470f04be-8d9d-4d2c-87c9-42d9f63a96f8",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "periodo": "2026-03",
+    "monto": "9400",
+    "fecha": "2026-03-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "1a5a85e0-0399-4119-9f2c-c0bafdd9e2a1",
+    "gasto_id": "470f04be-8d9d-4d2c-87c9-42d9f63a96f8",
+    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
+    "periodo": "2026-03",
+    "monto": "4100",
+    "fecha": "2026-03-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a0fb0f47-75bd-44d4-8b0a-2bbd1596190e",
+    "gasto_id": "90776369-8301-4ea2-ba60-c7d4290f855d",
+    "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
+    "periodo": "2026-03",
+    "monto": "36400",
+    "fecha": "2026-03-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b650d7f9-f137-4bc6-9d8b-c8113e7bf37e",
+    "gasto_id": "90776369-8301-4ea2-ba60-c7d4290f855d",
+    "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
+    "periodo": "2026-03",
+    "monto": "12800",
+    "fecha": "2026-03-20",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c25997e4-da81-4e15-b36d-9122d0859339",
+    "gasto_id": "a7248729-5492-4205-8678-9491949fadec",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "periodo": "2026-03",
+    "monto": "30200",
+    "fecha": "2026-03-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "15146c6a-3bbd-4f24-a334-f5b5c504bc5a",
+    "gasto_id": "a7248729-5492-4205-8678-9491949fadec",
+    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
+    "periodo": "2026-03",
+    "monto": "16800",
+    "fecha": "2026-03-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
     "id": "4c94f757-cc40-4f9e-8f10-5f7c28be3580",
     "gasto_id": "17be2fe2-a0ed-4e04-b7a1-63873e772b93",
     "parcela_id": "6c26d188-8f57-4ac6-8057-ceea44694dd4",
@@ -10710,33 +11574,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "3e096ea4-2279-4210-b6fc-b7faa1560749",
-    "gasto_id": "1154cb4e-1996-4a3c-a985-7e952474d494",
-    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
-    "periodo": "2026-03",
-    "monto": "50000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "fb703ebb-cf1a-44a9-b251-ca05d4a530d3",
-    "gasto_id": "c209a5c3-f6b0-4a6f-8cb1-3ad8574c2012",
-    "parcela_id": "ba2fce15-547c-446a-9cdc-908de58d79a3",
-    "periodo": "2026-03",
-    "monto": "50000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "9fac9aca-7044-418d-b6aa-62d041c7b623",
-    "gasto_id": "90776369-8301-4ea2-ba60-c7d4290f855d",
-    "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
-    "periodo": "2026-03",
-    "monto": "50000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "d708f63d-f5df-4524-b992-727ca06fa53b",
     "gasto_id": "eda423cc-c01f-498b-8064-436aecd7a086",
     "parcela_id": "1f042348-ab04-4067-bc74-da4f7049147f",
@@ -10758,15 +11595,6 @@
     "id": "95e3eddf-f3a5-469f-bf8c-f09e01ba382b",
     "gasto_id": "f0f55195-b17b-4b80-a38f-8b1ede9a58fc",
     "parcela_id": "ff748fb0-5348-455e-99c1-cf825a247258",
-    "periodo": "2026-03",
-    "monto": "50000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "ca0cbeea-3133-43a2-92fa-3c71932eb277",
-    "gasto_id": "dfde29d5-96b1-45cd-9e5b-3a2fea47a7c6",
-    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
     "periodo": "2026-03",
     "monto": "50000",
     "fecha": "2026-03-10",
@@ -10857,15 +11685,6 @@
     "id": "2052da90-6d07-4566-a7c7-257d4f42ed73",
     "gasto_id": "b475fb72-d53a-4a5a-ac31-d8acba0174c8",
     "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
-    "periodo": "2026-03",
-    "monto": "50000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "20c7879a-c69e-4d99-9687-9081d91bb02c",
-    "gasto_id": "a7248729-5492-4205-8678-9491949fadec",
-    "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
     "periodo": "2026-03",
     "monto": "50000",
     "fecha": "2026-03-10",
@@ -11088,15 +11907,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "bcabdedc-bab6-40f9-b283-68172fda39e6",
-    "gasto_id": "68f1c8c4-5a51-41ac-bc44-786243c1fd3d",
-    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
-    "periodo": "2026-03",
-    "monto": "50000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "5cfe87fe-e75c-4589-9554-80da793b70f0",
     "gasto_id": "4c70d933-c269-4efa-8416-44fd883529f7",
     "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
@@ -11124,24 +11934,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "67a33e3d-6e84-4b22-b08b-6da39318f1fd",
-    "gasto_id": "2280520c-b743-4088-9210-7299288bf80c",
-    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
-    "periodo": "2026-03",
-    "monto": "15000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "64acb6df-4fbc-407b-b46e-65ba1cfbf567",
-    "gasto_id": "470f04be-8d9d-4d2c-87c9-42d9f63a96f8",
-    "parcela_id": "a55aed58-5052-4df1-82a6-e41668167d21",
-    "periodo": "2026-03",
-    "monto": "15000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "27811491-5fae-4ce2-83ad-a8419b6dd530",
     "gasto_id": "1994a661-f175-431a-9bed-c10749f3b8e8",
     "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
@@ -11160,27 +11952,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "1232d987-cc00-4cc5-8ca6-285d6950ec22",
-    "gasto_id": "5c918453-995b-418a-879d-eeabad42890a",
-    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
-    "periodo": "2026-03",
-    "monto": "15000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "57f63181-6f15-4215-97b0-4bd854f24973",
     "gasto_id": "4666f13d-b38c-4595-a682-1a5794ce47e0",
     "parcela_id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
-    "periodo": "2026-03",
-    "monto": "15000",
-    "fecha": "2026-03-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "e6504ddc-9417-4f3e-8fb2-1f02bb9baa5c",
-    "gasto_id": "e219babf-cc9a-4aba-b54b-1696cb6649ee",
-    "parcela_id": "779a2000-43a1-4db2-a443-b17791d8cd2c",
     "periodo": "2026-03",
     "monto": "15000",
     "fecha": "2026-03-10",
@@ -11193,6 +11967,168 @@
     "periodo": "2026-03",
     "monto": "15000",
     "fecha": "2026-03-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "091ad307-965f-4c13-b7fe-fb04a38daeb3",
+    "gasto_id": "30692eaf-09ce-45e7-8e9e-9f67339b95f7",
+    "parcela_id": "1cc57544-3a87-43c7-8925-623195d7fdfc",
+    "periodo": "2026-04",
+    "monto": "26700",
+    "fecha": "2026-04-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "147aad0b-4b95-4c2e-ad65-9606a3b9489b",
+    "gasto_id": "30692eaf-09ce-45e7-8e9e-9f67339b95f7",
+    "parcela_id": "1cc57544-3a87-43c7-8925-623195d7fdfc",
+    "periodo": "2026-04",
+    "monto": "21400",
+    "fecha": "2026-04-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "903c6f08-7bdd-40fa-bb59-8b39facc34a2",
+    "gasto_id": "32f0cb0c-ad95-4dc9-9cf4-a380bf1e7494",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2026-04",
+    "monto": "32400",
+    "fecha": "2026-04-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "aa5ce26e-da64-4461-a137-636f10d5f07b",
+    "gasto_id": "32f0cb0c-ad95-4dc9-9cf4-a380bf1e7494",
+    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
+    "periodo": "2026-04",
+    "monto": "17100",
+    "fecha": "2026-04-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "afb95c48-3eb8-46f6-aafc-314c20dc5f4a",
+    "gasto_id": "a402122a-7086-44f2-bc2f-350b4f7b998b",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "periodo": "2026-04",
+    "monto": "32600",
+    "fecha": "2026-04-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "65ac083e-cfde-4b7f-9560-d37775a8bfce",
+    "gasto_id": "a402122a-7086-44f2-bc2f-350b4f7b998b",
+    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
+    "periodo": "2026-04",
+    "monto": "15000",
+    "fecha": "2026-04-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5cb61ac3-942d-4369-9df9-42492777dcbe",
+    "gasto_id": "9d484f19-64d5-47c7-94f0-34f820b22f7b",
+    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
+    "periodo": "2026-04",
+    "monto": "26400",
+    "fecha": "2026-04-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ff8dc465-a457-4f0b-a5e7-d7d7abed8fb9",
+    "gasto_id": "9d484f19-64d5-47c7-94f0-34f820b22f7b",
+    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
+    "periodo": "2026-04",
+    "monto": "22900",
+    "fecha": "2026-04-23",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "73277d8c-c600-4d0b-b8e5-569f568eaf78",
+    "gasto_id": "ce4392fa-2bb9-4b0a-911a-720d23d51544",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "periodo": "2026-04",
+    "monto": "30900",
+    "fecha": "2026-04-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "a0f43ec0-3920-49d3-ab65-b99883d9b513",
+    "gasto_id": "ce4392fa-2bb9-4b0a-911a-720d23d51544",
+    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
+    "periodo": "2026-04",
+    "monto": "16900",
+    "fecha": "2026-04-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "9899a0b7-c3ba-4fee-832d-362b95289780",
+    "gasto_id": "3d48f1db-5506-4459-ab6e-335a8e809e9c",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "periodo": "2026-04",
+    "monto": "8700",
+    "fecha": "2026-04-10",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b40d9052-1bdb-4ce9-9e58-1f0ed7c95be6",
+    "gasto_id": "3d48f1db-5506-4459-ab6e-335a8e809e9c",
+    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
+    "periodo": "2026-04",
+    "monto": "4100",
+    "fecha": "2026-04-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "78c3e6d3-9b36-4c1f-94bf-3000e4610a67",
+    "gasto_id": "cf499391-96fa-4e16-b0b5-9efbcbef4371",
+    "parcela_id": "f14db3c5-b240-48c5-98ea-8973ac1af542",
+    "periodo": "2026-04",
+    "monto": "32200",
+    "fecha": "2026-04-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0731f741-90e8-4ba0-901f-b3395499862b",
+    "gasto_id": "cf499391-96fa-4e16-b0b5-9efbcbef4371",
+    "parcela_id": "f14db3c5-b240-48c5-98ea-8973ac1af542",
+    "periodo": "2026-04",
+    "monto": "15900",
+    "fecha": "2026-04-24",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "dcb62083-b0d1-4e41-ae37-e4cadadf3580",
+    "gasto_id": "db197990-724a-449f-9351-e989202d6d85",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2026-04",
+    "monto": "31600",
+    "fecha": "2026-04-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b7707545-25a9-4349-9550-84c68615e7ee",
+    "gasto_id": "db197990-724a-449f-9351-e989202d6d85",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2026-04",
+    "monto": "17000",
+    "fecha": "2026-04-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "36d661fe-602a-4f7f-aa36-2db3dd8306a9",
+    "gasto_id": "4b82b744-d94c-46e5-a757-6bf9d7271cbb",
+    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
+    "periodo": "2026-04",
+    "monto": "30000",
+    "fecha": "2026-04-05",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "048b910e-aaa7-4d41-883e-1fe6c8ba528c",
+    "gasto_id": "4b82b744-d94c-46e5-a757-6bf9d7271cbb",
+    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
+    "periodo": "2026-04",
+    "monto": "18500",
+    "fecha": "2026-04-22",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
@@ -11253,15 +12189,6 @@
     "id": "50eb1bf4-172e-472a-a6aa-0e520ef0049d",
     "gasto_id": "3a8c20f6-4f7b-4a0c-983b-9cc9f5207e91",
     "parcela_id": "139f7b49-6d8c-47e5-b60a-316787c4e38d",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "08ec0068-7689-4fac-8c57-171bac109015",
-    "gasto_id": "4b82b744-d94c-46e5-a757-6bf9d7271cbb",
-    "parcela_id": "91391efe-da6b-423e-9977-53fd2d9266bf",
     "periodo": "2026-04",
     "monto": "50000",
     "fecha": "2026-04-10",
@@ -11376,27 +12303,9 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "66a2664a-020d-465e-ae69-306aad8f8b36",
-    "gasto_id": "ce4392fa-2bb9-4b0a-911a-720d23d51544",
-    "parcela_id": "a8e84ab1-fea3-4c11-ab41-bc9b05a8b94c",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "f7cd0711-3e9f-4442-92a4-3f15c9d38ab9",
     "gasto_id": "7f6b8cbb-009d-4c55-a70c-df8894453742",
     "parcela_id": "25bd78fc-9969-4735-bc4a-e88381c87d1a",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "256fbf72-0d52-41ca-b31b-25cc0c139ad3",
-    "gasto_id": "32f0cb0c-ad95-4dc9-9cf4-a380bf1e7494",
-    "parcela_id": "6c4f9d2a-fa31-43e7-b6ac-8fe1c760938a",
     "periodo": "2026-04",
     "monto": "50000",
     "fecha": "2026-04-10",
@@ -11439,15 +12348,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "d11d2fa8-ab7f-419c-996d-433f34911c8d",
-    "gasto_id": "30692eaf-09ce-45e7-8e9e-9f67339b95f7",
-    "parcela_id": "1cc57544-3a87-43c7-8925-623195d7fdfc",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "2e9870ca-b6f9-4b2d-8c21-39d3c64840b9",
     "gasto_id": "628762c7-7ac3-4ad3-9d25-923d02b34600",
     "parcela_id": "a93dd0d0-c625-4956-bb04-9ca5eeb38f95",
@@ -11478,15 +12378,6 @@
     "id": "4bf58a52-f687-4291-bc7e-5b4bdda7b32b",
     "gasto_id": "64de4812-b796-45c4-b343-8734271588f9",
     "parcela_id": "20d1f8f9-9d56-41ae-9669-807e8241fe47",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "1891e8fd-d5fb-4420-adc9-bd9ea45b3529",
-    "gasto_id": "db197990-724a-449f-9351-e989202d6d85",
-    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
     "periodo": "2026-04",
     "monto": "50000",
     "fecha": "2026-04-10",
@@ -11532,15 +12423,6 @@
     "id": "ccd779e9-ec90-4896-9cca-6543175e1f8c",
     "gasto_id": "de6fd8cb-47e8-4cf8-aaa5-b7081b0e1826",
     "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "173e3b7c-adfe-4bc2-9b8a-46b5e16b8af1",
-    "gasto_id": "cf499391-96fa-4e16-b0b5-9efbcbef4371",
-    "parcela_id": "f14db3c5-b240-48c5-98ea-8973ac1af542",
     "periodo": "2026-04",
     "monto": "50000",
     "fecha": "2026-04-10",
@@ -11610,15 +12492,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "fe2739bf-baeb-45fe-a330-01918e5f173c",
-    "gasto_id": "a402122a-7086-44f2-bc2f-350b4f7b998b",
-    "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "b074a302-a861-487b-9ba5-b63557c80870",
     "gasto_id": "c923d01a-f2c9-4a64-a601-d4e1584bde58",
     "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
@@ -11640,15 +12513,6 @@
     "id": "e6724c09-3eca-4ef8-ad9b-6fb88d9f11df",
     "gasto_id": "8bbb78b3-fe9c-42bb-aaa5-84a10efd25e9",
     "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
-    "periodo": "2026-04",
-    "monto": "50000",
-    "fecha": "2026-04-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "2b706879-22a1-4ba6-bbd8-56439f68a601",
-    "gasto_id": "9d484f19-64d5-47c7-94f0-34f820b22f7b",
-    "parcela_id": "31cddcb7-afac-4716-b08d-eac968745d50",
     "periodo": "2026-04",
     "monto": "50000",
     "fecha": "2026-04-10",
@@ -11736,12 +12600,129 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "58231402-db71-4241-89c8-d91427559417",
-    "gasto_id": "3d48f1db-5506-4459-ab6e-335a8e809e9c",
-    "parcela_id": "162ba5cb-425f-4f7f-97e2-686e38fd0559",
-    "periodo": "2026-04",
-    "monto": "15000",
-    "fecha": "2026-04-10",
+    "id": "6baae076-19ee-444f-93ca-202a95a61e10",
+    "gasto_id": "74e0eedf-dcc9-4b7e-a08c-6aa8adb4a919",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "periodo": "2026-05",
+    "monto": "28100",
+    "fecha": "2026-05-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b22073df-e780-4331-b6b9-05383f76b78a",
+    "gasto_id": "74e0eedf-dcc9-4b7e-a08c-6aa8adb4a919",
+    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
+    "periodo": "2026-05",
+    "monto": "20300",
+    "fecha": "2026-05-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c30c9f56-b40d-479d-a86c-cf0f87f27d09",
+    "gasto_id": "1fa9cd09-0afa-4137-aedb-2829b05220ef",
+    "parcela_id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
+    "periodo": "2026-05",
+    "monto": "28300",
+    "fecha": "2026-05-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "178ce180-ddc4-42d3-9b71-d5e51ba8ad19",
+    "gasto_id": "1fa9cd09-0afa-4137-aedb-2829b05220ef",
+    "parcela_id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
+    "periodo": "2026-05",
+    "monto": "18900",
+    "fecha": "2026-05-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "e3010bd6-294d-4ce8-b589-0427ba6afac1",
+    "gasto_id": "2c9a2b8b-39a3-4cf8-80b3-1ff1bb082258",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2026-05",
+    "monto": "21500",
+    "fecha": "2026-05-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "caafd918-3c86-47cf-9237-ef0c9876d0a1",
+    "gasto_id": "2c9a2b8b-39a3-4cf8-80b3-1ff1bb082258",
+    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
+    "periodo": "2026-05",
+    "monto": "26700",
+    "fecha": "2026-05-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2b878daa-ea77-4f1a-a98d-f2d402d2bd16",
+    "gasto_id": "5f053adf-65e2-4e37-9a3b-5781f6a56d97",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2026-05",
+    "monto": "25900",
+    "fecha": "2026-05-08",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "121d35d1-5812-490d-a83e-fd81bf671a7b",
+    "gasto_id": "5f053adf-65e2-4e37-9a3b-5781f6a56d97",
+    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
+    "periodo": "2026-05",
+    "monto": "21600",
+    "fecha": "2026-05-28",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "856fd45f-3d41-44d8-87f6-9740527a3613",
+    "gasto_id": "1ed50475-b473-42eb-ae29-1882b44703c6",
+    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
+    "periodo": "2026-05",
+    "monto": "25400",
+    "fecha": "2026-05-07",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2b637155-a6d6-473f-b536-64b193ded345",
+    "gasto_id": "1ed50475-b473-42eb-ae29-1882b44703c6",
+    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
+    "periodo": "2026-05",
+    "monto": "22100",
+    "fecha": "2026-05-18",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "d8b0818c-fe0b-40bc-922d-525ae99390dc",
+    "gasto_id": "c8aafd95-d6f7-4ef7-ae7a-ddd9ae867252",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "periodo": "2026-05",
+    "monto": "20800",
+    "fecha": "2026-05-14",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b8d4f537-2cbd-4702-b28a-a8c4a6dfdb6c",
+    "gasto_id": "c8aafd95-d6f7-4ef7-ae7a-ddd9ae867252",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "periodo": "2026-05",
+    "monto": "26200",
+    "fecha": "2026-05-19",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "5e38bf93-6f91-4c5e-a46d-0207f1e37bbe",
+    "gasto_id": "341b1bde-cfe2-48de-a135-470f2beac041",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2026-05",
+    "monto": "28000",
+    "fecha": "2026-05-14",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "fbd6c18d-f48a-4197-9b83-96769bd54e06",
+    "gasto_id": "341b1bde-cfe2-48de-a135-470f2beac041",
+    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
+    "periodo": "2026-05",
+    "monto": "19300",
+    "fecha": "2026-05-21",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
@@ -11862,15 +12843,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "3cd6dc79-be24-48e1-89f3-2e781f40f507",
-    "gasto_id": "74e0eedf-dcc9-4b7e-a08c-6aa8adb4a919",
-    "parcela_id": "f088ec55-93dd-4c06-bac5-fb8131c982fc",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "1b3ac898-4e23-4931-8384-8641aee187d8",
     "gasto_id": "f4d2568b-f0d8-48e7-82f1-1017b889d955",
     "parcela_id": "ff748fb0-5348-455e-99c1-cf825a247258",
@@ -11925,15 +12897,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "cc5b4288-786a-4ad8-a9b6-d02151773def",
-    "gasto_id": "341b1bde-cfe2-48de-a135-470f2beac041",
-    "parcela_id": "67be4acf-857a-4fec-9cd6-8685e54a5ead",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "0eeeef70-b0cb-4ce1-88fb-d98e7887726b",
     "gasto_id": "9ebbc1ef-37ce-4570-807b-9a7025b0e914",
     "parcela_id": "a48de3b6-7c3e-4257-bfbd-a03dff7d7e8c",
@@ -11982,15 +12945,6 @@
     "id": "79b0ecb8-0e5f-4122-90a8-fea8a35bf22a",
     "gasto_id": "a5121e67-c0b2-42de-bab1-39fbef926fc1",
     "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "1a6969e3-eef9-4e9b-abaf-aa14c35ce10c",
-    "gasto_id": "1fa9cd09-0afa-4137-aedb-2829b05220ef",
-    "parcela_id": "73d755ee-fa69-474a-8bce-98806dbbf19c",
     "periodo": "2026-05",
     "monto": "50000",
     "fecha": "2026-05-10",
@@ -12078,24 +13032,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "7e6bbe9a-a393-42d6-b27d-b1a58b51d399",
-    "gasto_id": "5f053adf-65e2-4e37-9a3b-5781f6a56d97",
-    "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "8a993fdf-1e96-4e29-8351-e52383eb6d59",
-    "gasto_id": "1ed50475-b473-42eb-ae29-1882b44703c6",
-    "parcela_id": "0d39cdc9-0465-4329-84d2-544ff62d5774",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "076505c1-1dc6-4c06-9fe4-bf2723bb4f42",
     "gasto_id": "0313383c-d43c-4316-8150-0fe4b3d0d61b",
     "parcela_id": "f14db3c5-b240-48c5-98ea-8973ac1af542",
@@ -12108,15 +13044,6 @@
     "id": "68747ee1-0d3a-4f38-84d0-acf0609e0d9c",
     "gasto_id": "41b3c631-a4c9-457b-a5db-581f595d0752",
     "parcela_id": "477a32f5-14f6-4f1d-94fe-6d4ca7b26338",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "7164e990-d9b5-452c-aeb6-109c8af75971",
-    "gasto_id": "c8aafd95-d6f7-4ef7-ae7a-ddd9ae867252",
-    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
     "periodo": "2026-05",
     "monto": "50000",
     "fecha": "2026-05-10",
@@ -12189,15 +13116,6 @@
     "id": "191c14ca-6908-4302-9ec2-00add3a21112",
     "gasto_id": "b602c212-5310-4b1c-a730-dcafb214a38a",
     "parcela_id": "5147beae-4704-4b7f-ae8d-0ae662f9d757",
-    "periodo": "2026-05",
-    "monto": "50000",
-    "fecha": "2026-05-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "dfd7e1e5-1f0c-48d8-ba6a-e72bb31fadb5",
-    "gasto_id": "2c9a2b8b-39a3-4cf8-80b3-1ff1bb082258",
-    "parcela_id": "80db5c80-3a35-49c3-ae9e-da162b1c7732",
     "periodo": "2026-05",
     "monto": "50000",
     "fecha": "2026-05-10",
@@ -12303,12 +13221,183 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "0e6fa0eb-a952-466e-ada4-29fa9ab35453",
+    "id": "1c9047fa-25cd-4015-88a0-e27745ffb0cf",
+    "gasto_id": "045683b5-89bd-4947-82d3-7a9caa2e1936",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "periodo": "2026-06",
+    "monto": "35100",
+    "fecha": "2026-06-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "641313c6-11e3-479e-991b-3da965e62248",
+    "gasto_id": "045683b5-89bd-4947-82d3-7a9caa2e1936",
+    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
+    "periodo": "2026-06",
+    "monto": "12200",
+    "fecha": "2026-06-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0b192476-a062-4683-86a6-11b33675fe46",
+    "gasto_id": "33dc6403-fb4c-43ba-9c34-08a3d7ba027f",
+    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
+    "periodo": "2026-06",
+    "monto": "23100",
+    "fecha": "2026-06-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "55c89701-97cc-4738-8e7d-50150833113c",
+    "gasto_id": "33dc6403-fb4c-43ba-9c34-08a3d7ba027f",
+    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
+    "periodo": "2026-06",
+    "monto": "24000",
+    "fecha": "2026-06-25",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "c1699c89-5783-4e7f-ac27-e6eb5d46bffc",
+    "gasto_id": "e783f3b1-ec5c-4e52-9b31-213c4ecf18fc",
+    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "periodo": "2026-06",
+    "monto": "20900",
+    "fecha": "2026-06-06",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "005a0540-a929-44db-afb5-1ecece9d5a32",
+    "gasto_id": "e783f3b1-ec5c-4e52-9b31-213c4ecf18fc",
+    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
+    "periodo": "2026-06",
+    "monto": "28000",
+    "fecha": "2026-06-25",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "879c950b-6f8e-44af-9704-2e44c3e4e33d",
+    "gasto_id": "98a41274-95c4-44a8-9eef-ee86379d2420",
+    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
+    "periodo": "2026-06",
+    "monto": "22300",
+    "fecha": "2026-06-13",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "59830ffa-eb11-487a-9a57-d580186b96bc",
+    "gasto_id": "98a41274-95c4-44a8-9eef-ee86379d2420",
+    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
+    "periodo": "2026-06",
+    "monto": "26000",
+    "fecha": "2026-06-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "24810cdc-837c-47c7-a61b-2b88fbb7b438",
+    "gasto_id": "d7fe9304-8a2f-4377-abb7-ba75039f85ba",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2026-06",
+    "monto": "30400",
+    "fecha": "2026-06-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "3759c01a-4497-44f8-813c-2f028591af63",
+    "gasto_id": "d7fe9304-8a2f-4377-abb7-ba75039f85ba",
+    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
+    "periodo": "2026-06",
+    "monto": "16700",
+    "fecha": "2026-06-27",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2868ce86-0872-4db1-ae88-e975e93c5581",
+    "gasto_id": "c62bff6b-e6b9-4b95-a313-e5b8a038df76",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "periodo": "2026-06",
+    "monto": "34300",
+    "fecha": "2026-06-11",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "397c846f-4e90-4733-9562-cab2d94ed7dc",
+    "gasto_id": "c62bff6b-e6b9-4b95-a313-e5b8a038df76",
+    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
+    "periodo": "2026-06",
+    "monto": "13000",
+    "fecha": "2026-06-26",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0f77d92d-9dc8-4bf3-919b-3ad8c64ecfb5",
+    "gasto_id": "5e0d2fe9-bfc6-47b4-b2a8-b05b11c06c89",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "periodo": "2026-06",
+    "monto": "27800",
+    "fecha": "2026-06-12",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0ea0257d-5517-4023-abf1-7f372301350d",
+    "gasto_id": "5e0d2fe9-bfc6-47b4-b2a8-b05b11c06c89",
+    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
+    "periodo": "2026-06",
+    "monto": "21300",
+    "fecha": "2026-06-25",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "ef2b8ca8-c652-4252-b21a-439b663fa86d",
+    "gasto_id": "42c3fd9e-dc66-49da-b4bc-a6fab796162c",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2026-06",
+    "monto": "7400",
+    "fecha": "2026-06-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "19997c8d-1f50-4846-8893-83247f128fa4",
+    "gasto_id": "42c3fd9e-dc66-49da-b4bc-a6fab796162c",
+    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
+    "periodo": "2026-06",
+    "monto": "6500",
+    "fecha": "2026-06-22",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "0656bfab-ddf7-4351-b6d8-0893726a4bf2",
     "gasto_id": "d16eaf6b-6e68-40df-9807-655aba9e7b1c",
     "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
     "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
+    "monto": "33400",
+    "fecha": "2026-06-15",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "2702cf18-0211-4964-93c3-1185c891e57f",
+    "gasto_id": "d16eaf6b-6e68-40df-9807-655aba9e7b1c",
+    "parcela_id": "b5a83343-a7e6-4503-8548-1656e473421c",
+    "periodo": "2026-06",
+    "monto": "14800",
+    "fecha": "2026-06-21",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "aee0c474-ceee-4f63-ba52-7e18e39a340c",
+    "gasto_id": "78e019ca-3640-4525-a94b-23cef5ea25c4",
+    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
+    "periodo": "2026-06",
+    "monto": "24800",
+    "fecha": "2026-06-09",
+    "comprobante": "assets/demo_comprobante_transferencia.png"
+  },
+  {
+    "id": "b810eb1c-54d0-4d5e-a150-ff2d8f933404",
+    "gasto_id": "78e019ca-3640-4525-a94b-23cef5ea25c4",
+    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
+    "periodo": "2026-06",
+    "monto": "24500",
+    "fecha": "2026-06-21",
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
@@ -12384,15 +13473,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "9a32f03b-020d-4a7d-be67-fd27a5370850",
-    "gasto_id": "c62bff6b-e6b9-4b95-a313-e5b8a038df76",
-    "parcela_id": "adbd4059-fc7c-419c-b4aa-39a53ab58bd3",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "2a3b65fd-692d-46f5-8ed3-9f2b21e32e26",
     "gasto_id": "b63af131-dc07-4a31-b86c-4274696414a3",
     "parcela_id": "4846156f-c303-4f8a-99a0-46537c90185a",
@@ -12432,15 +13512,6 @@
     "id": "e3cf391e-3626-4b1b-867b-aad8b966d152",
     "gasto_id": "bf9a036d-6bf3-4dfb-86f3-4cff0169642a",
     "parcela_id": "ff748fb0-5348-455e-99c1-cf825a247258",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "a56d1f49-7b3c-44e6-8074-f7790f819e7f",
-    "gasto_id": "d7fe9304-8a2f-4377-abb7-ba75039f85ba",
-    "parcela_id": "e6077a03-b416-48c8-a4af-80386442add2",
     "periodo": "2026-06",
     "monto": "50000",
     "fecha": "2026-06-10",
@@ -12519,24 +13590,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "cc827d86-a0bd-4d6f-a127-a1b0babb4924",
-    "gasto_id": "33dc6403-fb4c-43ba-9c34-08a3d7ba027f",
-    "parcela_id": "ce0f3980-ed3f-482d-9e98-8335d452ccba",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "a9b62bae-1531-48ea-ad39-5404f4537848",
-    "gasto_id": "98a41274-95c4-44a8-9eef-ee86379d2420",
-    "parcela_id": "5d75b92f-213a-42b4-8af6-5c4580860712",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "837513d3-2ed2-4afb-b30a-076a008bf54d",
     "gasto_id": "c3f88d93-ad44-4bc8-a45d-3f859639d94c",
     "parcela_id": "0986a76b-c310-4396-aa33-a85b5f24357e",
@@ -12576,15 +13629,6 @@
     "id": "fa53e886-1cfa-4aee-92af-bd683df1fb16",
     "gasto_id": "a28ac0d4-91c6-401f-b14a-d579dd57b687",
     "parcela_id": "c2674b52-b175-491e-90b8-daf145b527b9",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "6433d77c-0aa0-4442-b405-f5afb9fe78f7",
-    "gasto_id": "e783f3b1-ec5c-4e52-9b31-213c4ecf18fc",
-    "parcela_id": "9945d92a-ab9c-45ca-ae86-7c9d669b2b05",
     "periodo": "2026-06",
     "monto": "50000",
     "fecha": "2026-06-10",
@@ -12672,15 +13716,6 @@
     "comprobante": "assets/demo_comprobante_transferencia.png"
   },
   {
-    "id": "ea396182-a321-4c56-9517-16b38f7c1c08",
-    "gasto_id": "5e0d2fe9-bfc6-47b4-b2a8-b05b11c06c89",
-    "parcela_id": "2e958bba-c8d3-4391-ac89-5b750112d62b",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
     "id": "04a74213-ee30-4dcf-9647-a805823e6da3",
     "gasto_id": "a90ccd44-56f2-4867-811b-2b0dfaa29510",
     "parcela_id": "cc79f1b7-9aa8-457f-89e8-c91352358335",
@@ -12693,15 +13728,6 @@
     "id": "c1eac1e7-cd43-424c-90e3-c9d783321b51",
     "gasto_id": "293f87b2-1731-4658-9ca9-4ae0bca8f970",
     "parcela_id": "c4943718-d377-498f-8b9e-4ad7d990b2f6",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "24d1fe72-085c-4650-84af-652fbadad0a2",
-    "gasto_id": "045683b5-89bd-4947-82d3-7a9caa2e1936",
-    "parcela_id": "0a293677-f78c-42b8-8ebe-fb40ce4bc013",
     "periodo": "2026-06",
     "monto": "50000",
     "fecha": "2026-06-10",
@@ -12729,15 +13755,6 @@
     "id": "fc2598b5-1ae0-4809-9afe-73f4548aaad9",
     "gasto_id": "a82576cc-54b4-4195-924b-167facb31ffd",
     "parcela_id": "5f20fb0a-4459-44da-bc72-4c8ae8f5d27b",
-    "periodo": "2026-06",
-    "monto": "50000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "7ae13491-786f-48dd-8870-c050d02ed77f",
-    "gasto_id": "78e019ca-3640-4525-a94b-23cef5ea25c4",
-    "parcela_id": "424b59e6-89d9-4294-87a0-d3433e2eea0b",
     "periodo": "2026-06",
     "monto": "50000",
     "fecha": "2026-06-10",
@@ -12846,15 +13863,6 @@
     "id": "d9d8947d-b70e-4e3a-95d6-595d7890c9e8",
     "gasto_id": "5667f970-b91c-46fd-89e1-84777e9973d4",
     "parcela_id": "9dde6a97-0bdd-4181-a5d7-ae240501578c",
-    "periodo": "2026-06",
-    "monto": "15000",
-    "fecha": "2026-06-10",
-    "comprobante": "assets/demo_comprobante_transferencia.png"
-  },
-  {
-    "id": "1924b034-ccd5-4557-9adb-bb36e5686d20",
-    "gasto_id": "42c3fd9e-dc66-49da-b4bc-a6fab796162c",
-    "parcela_id": "b6475e87-4cc6-4aa6-9c86-2bb3bcb42978",
     "periodo": "2026-06",
     "monto": "15000",
     "fecha": "2026-06-10",
