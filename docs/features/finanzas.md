@@ -47,11 +47,6 @@ La columna `pagado` sigue existiendo para datos históricos. `pagoLegado(g)` dev
 
 ```html
 <div id="tab-finanzas" class="tab-content" role="region" aria-label="Finanzas" aria-busy="true">
-  <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
-    <md-filled-button class="admin-only" onclick="formGastos()"><md-icon slot="icon">add</md-icon>Agregar Cuota</md-filled-button>
-    <md-filled-button class="admin-only" onclick="formFlujo()"><md-icon slot="icon">add</md-icon>Agregar Movimiento</md-filled-button>
-  </div>
-
   <section class="charts">
     <div class="chart-box"><h3>Recaudado vs Esperado por período</h3><canvas id="chartRecaudado"></canvas></div>
     <div class="chart-box"><h3>Ingresos vs Egresos por mes</h3><canvas id="chartFlujo"></canvas></div>
@@ -120,6 +115,10 @@ Sin periodos con datos: empty state.
 
 Resumen: **Esperado / Recaudado / %** del periodo. Tabla de cuotas con columnas Parcela, Monto, Pagado (`sumPagosGasto`), Estado (chip `estadoChip`: **Pagado / Parcial / Pendiente**) y acciones admin: `verPagos(gastoId)` (listado de pagos, comprobante, registrar pago y eliminar pago) y editar cuota.
 
+### 5.1.1 `verPagos(gastoId)` — pagos de una cuota
+
+Resumen: **Monto cuota / Pagado / Saldo** con chip `estadoChip`. Tabla de pagos con columnas Fecha, Monto, Comprobante y acciones admin (eliminar pago). Botón **"+ Registrar pago"** y botón **"← Volver"** que regresa al listado de cuotas del periodo (`verCuotasPeriodo`).
+
 ### 5.2 `verMovimientosPeriodo(periodo)` — movimientos del periodo
 
 Resumen: **Ingresos / Egresos / Saldo** del periodo. Tabla de movimientos (`FLUJO`) filtrados por mes del periodo (tipo, concepto, fecha, monto, comprobante), con acciones admin (editar/eliminar).
@@ -161,8 +160,9 @@ Actualiza los colores de `chartRecaudado` y `chartFlujo` en dark mode. `renderPa
 
 ## 8. Acciones admin
 
-### 8.1 Agregar Cuota (`formGastos`)
+### 8.1 Agregar/editar cuota (`formGastos`)
 
+- Accesible desde el botón editar (✏️) en la tabla de cuotas del periodo (`verCuotasPeriodo`) y desde el listado de deudores en Home.
 - Al elegir periodo, muestra un **hint** con la cuota configurada del periodo (`cuotaDelPeriodo`) y **prefill del monto** (`updateGastoMontoPrefill`).
 - Excluye parcelas que ya tienen cuota en el periodo (`updateGastoParcelas`).
 

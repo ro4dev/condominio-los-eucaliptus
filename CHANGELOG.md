@@ -2,6 +2,12 @@
 
 ## Registro de cambios
 
+### 26/08/2026 - Finanzas: limpieza de acciones + fix modales + pagos parciales
+- **Removed**: Botones "Agregar Cuota" y "Agregar Movimiento" del header de Finanzas (ya existen dentro del detalle de cada periodo)
+- **Changed**: Popup "Pagos de la cuota" ahora tiene botón "← Volver" en vez de "Cerrar" — regresa al listado de cuotas del periodo (`verCuotasPeriodo`)
+- **Fix**: Eliminado scroll horizontal en todos los popups del modal (`overflow-x: hidden` en `md-dialog [slot="content"]` y `#modalBody`, `flex-wrap: wrap` en `#modalFooter`)
+- **Data**: Datos demo ahora incluyen pagos parciales en ~60% de los periodos (14 de 24) — cuotas con chip "Parcial" visibles en el listado de cuotas del periodo
+
 ### 20/08/2026 - Finanzas: botón "Nuevo periodo" renombrado a "Cerrar periodo"
 - **Changed**: En el card "Periodo en curso" de Finanzas, el botón admin "Nuevo periodo" ahora dice "Cerrar periodo" con ícono `check_circle` (solo texto/ícono; la acción sigue siendo `formGenerarCuotas` — crea las cuotas del periodo siguiente)
 - **Changed**: `formGenerarCuotas(prefillPeriodo, titulo, fijo)` acepta título y modo fijo opcionales; desde Finanzas el modal no muestra selector de periodo e indica explícitamente "Se cierra X y se generan las cuotas de Y" (periodo va como hidden input); desde el aviso de aumento de Home mantiene el selector con título "Nuevo periodo"
