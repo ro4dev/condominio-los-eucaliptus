@@ -116,17 +116,16 @@ function renderHome() {
   var cuotaEl = document.getElementById('homeCuotaActual');
   if (cuotaEl) {
     cuotaEl.innerHTML = '<strong style="color:var(--text)">Cuota de gasto común:</strong> <strong style="color:var(--text)">' + formatMoney(cuota) + '</strong>' +
-      (periodo ? ' <span style="color:var(--text-muted)">(' + escHtml(formatPeriodo(periodo)) + ')</span>' : '');
+      (periodo ? ' <span style="color:var(--text-muted)">(' + escHtml(formatPeriodo(periodo)) + ')</span>' : '') +
+      ' &nbsp; <strong style="color:var(--text)">' + formatMoney(recaudadoPorPeriodo(periodo, GASTOS)) + '</strong> <span style="color:var(--text-muted)">de ' + formatMoney(esperadoPorPeriodo(periodo, GASTOS)) + ' recaudados</span>';
   }
 
-  var pct = esPropietario
-    ? pctRecaudado(periodo, GASTOS.filter(function(g) { return g.parcela_id === miParcela; }))
-    : pctRecaudado(periodo, GASTOS);
+  var pct = pctRecaudado(periodo, GASTOS);
   var fill = document.getElementById('homeRecaudacionFill');
   fill.style.width = pct + '%';
   fill.style.background = pct >= 90 ? 'var(--color-positive)' : (pct >= 60 ? '#f59e0b' : 'var(--md-sys-color-error)');
   document.getElementById('homeRecaudacionLabel').textContent =
-    pct + '% de las cuotas del periodo pagadas' + (esPropietario ? ' (tu parcela)' : '') + '.';
+    pct + '% de las cuotas del periodo pagadas.';
 
   renderMorosos();
   renderPinnedNews();

@@ -2,9 +2,9 @@
 
 ## Registro de cambios
 
-### 27/08/2026 - Home: removido card "Nuevo periodo" + cuota en Recaudación
+### 27/08/2026 - Home: removido card "Nuevo periodo" + recaudación en Recaudación
 - **Removed**: Card de aviso de aumento / "Nuevo periodo" (`homeAviso`, `renderAvisoAumento`) de Home. No tenía sentido ahí: no se configura un aumento futuro, solo la cuota actual
-- **Changed**: El card "Recaudación del periodo" ahora muestra el **valor de la cuota de gasto común** del periodo vigente (sin fondo de reserva) en `homeCuotaActual`
+- **Changed**: El card "Recaudación del periodo" ahora muestra, para todos (global): la **cuota de gasto común** del periodo vigente (sin fondo de reserva), cuánto va **recaudado** de cuánto se espera, y el porcentaje de cuotas pagadas (ya no distingue por rol)
 
 ### 26/08/2026 - Finanzas: limpieza de acciones + fix modales + pagos parciales
 - **Removed**: Botones "Agregar Cuota", "Agregar Movimiento" y "Agregar período" del header y footer de Finanzas (la creación se hace desde el detalle de cada periodo)
