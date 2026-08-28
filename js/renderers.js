@@ -112,6 +112,13 @@ function renderHome() {
       '<div class="stat-card"><div class="label">Morosos</div><div class="value ' + (cantidadMorosos > 0 ? 'red' : 'green') + '">' + cantidadMorosos + '</div></div>';
   }
 
+  var cuota = cuotaDelPeriodo(periodo).monto;
+  var cuotaEl = document.getElementById('homeCuotaActual');
+  if (cuotaEl) {
+    cuotaEl.innerHTML = '<strong style="color:var(--text)">Cuota de gasto común:</strong> <strong style="color:var(--text)">' + formatMoney(cuota) + '</strong>' +
+      (periodo ? ' <span style="color:var(--text-muted)">(' + escHtml(formatPeriodo(periodo)) + ')</span>' : '');
+  }
+
   var pct = esPropietario
     ? pctRecaudado(periodo, GASTOS.filter(function(g) { return g.parcela_id === miParcela; }))
     : pctRecaudado(periodo, GASTOS);
@@ -122,28 +129,7 @@ function renderHome() {
     pct + '% de las cuotas del periodo pagadas' + (esPropietario ? ' (tu parcela)' : '') + '.';
 
   renderMorosos();
-  renderAvisoAumento();
   renderPinnedNews();
-}
-
-function renderAvisoAumento() {
-  var el = document.getElementById('homeAviso');
-  if (!el) return;
-  var aviso = avisoAumento();
-  if (!aviso) {
-    el.style.display = 'none';
-    return;
-  }
-  el.style.display = '';
-  el.innerHTML =
-    '<div class="aviso-card" style="display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap">' +
-      '<md-icon style="color:#f59e0b">trending_up</md-icon>' +
-      '<div style="flex:1;min-width:200px">' +
-        '<strong>Cuota ' + escHtml(formatPeriodo(aviso.periodo)) + ' subirá a ' + formatMoney(aviso.nuevo) + '</strong>' +
-        '<div style="font-size:0.8rem;color:var(--text-2)">Actualmente ' + formatMoney(aviso.anterior) + ' (+' + aviso.pct + '%)</div>' +
-      '</div>' +
-      (IS_ADMIN ? '<md-filled-button class="admin-only" onclick="formGenerarCuotas(\'' + aviso.periodo + '\')"><md-icon slot="icon">add</md-icon>Nuevo periodo</md-filled-button>' : '') +
-    '</div>';
 }
 
 function renderPinnedNews() {
